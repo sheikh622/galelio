@@ -44,11 +44,7 @@ const Login = () => {
                                                   Sign in
                                                 </Typography>
                                             </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant="caption" fontSize="16px" textAlign="center">
-                                                Enter Your email and password     
-                                                </Typography>
-                                            </Grid>
+                                           
                                         </Grid>
                                     </Grid>
 
