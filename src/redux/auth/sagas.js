@@ -11,12 +11,13 @@ function* loginUser({ payload }) {
             email: payload.email,
             password: payload.password
         };
-        const response = yield axios.post(`/admin_login/`, data);
+        const response = yield axios.post(`/auth/login`, data);
         yield put(setLoader(false));
         yield setNotification('success', 'Logged in Successfully');
         yield put(loginSuccess(response.data));
         payload.navigate('/dashboard');
     } catch (error) {
+        
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data);
         // console.log("error.response.data",error.response.data)
@@ -45,7 +46,7 @@ function* forgetPasswordRequest({ payload }) {
         let data = {
             email: payload.email
         };
-        const response = yield axios.post(`/forget_password/`, data);
+        const response = yield axios.post(`/auth/forgetPassword`, data);
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         payload.navigate('/dashboard');
@@ -62,7 +63,7 @@ function* resetPasswordRequest({ payload }) {
             password: payload.password,
             token: payload.token
         };
-        const response = yield axios.post(`/rest_password/`, data);
+        const response = yield axios.post(`/auth/resetPassword`, data);
         yield setNotification('success', response.data.message);
         payload.navigate('/dashboard');
     } catch (error) {
