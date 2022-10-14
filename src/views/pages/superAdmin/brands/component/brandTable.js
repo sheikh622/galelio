@@ -13,7 +13,7 @@ const BrandTable = ({  page, limit, search, setOpen, setBrandName, setAddUpdateO
     const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
     const brandsList = useSelector((state) => state.marketPlace.brandsList);
-    console.log(brandsList.brandList,"==========================================>");
+    console.log(brandsList.brands,"========================table==================>");
     return (
         <TableContainer>
             <DeleteBrandDialog
@@ -36,8 +36,8 @@ const BrandTable = ({  page, limit, search, setOpen, setBrandName, setAddUpdateO
                 </TableHead>
                 <TableBody>
                 
-                {brandsList.brandList != undefined &&
-                    brandsList.brandList.map((row, index) => (
+                {brandsList.brands != undefined &&
+                    brandsList.brands.map((row, index) => (
                                <TableRow>
                                     <TableCell align="center" sx={{ padding: '0px' }}>
                                    {row.id}

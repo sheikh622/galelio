@@ -47,7 +47,7 @@ function* forgetPasswordRequest({ payload }) {
         let data = {
             email: payload.email
         };
-        const response = yield axios.post(`/auth/forgetPassword`, data);
+        const response = yield axios.post(`auth/forgetPassword`, data);
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         payload.navigate('/dashboard');
@@ -61,10 +61,12 @@ function* resetPasswordRequest({ payload }) {
     try {
         let data = {
             // id: payload.userId,
-            password: payload.password,
+            // "newPassword":"Password@123",
+            newPassword: payload.newPassword,
             token: payload.token
         };
-        const response = yield axios.post(`/auth/resetPassword`, data);
+        console.log(payload.newPassword);
+        const response = yield axios.put(`auth/resetPassword`, data);
         yield setNotification('success', response.data.message);
         payload.navigate('/dashboard');
     } catch (error) {

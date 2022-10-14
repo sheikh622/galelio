@@ -39,11 +39,11 @@ const ResetPasswordForm = ({ userId, token, ...others }) => {
     return (
         < ><Formik
             initialValues={{
-                password: '',
+                newPassword: '',
                 confirmPassword: ''
             }}
             validationSchema={Yup.object().shape({
-                password: Yup.string().max(255)
+                newPassword: Yup.string().max(255)
                 .required("Password is required!")
                 .matches(
                     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -55,10 +55,11 @@ const ResetPasswordForm = ({ userId, token, ...others }) => {
                 })
             })}
             onSubmit={async (values) => {
-                await dispatch(
+                console.log(values.newPassword);
 
+                await dispatch(
                     resetPassword({
-                        password: values.password,
+                        newPassword: values.newPassword,
                         token: token,
                         // userId: userId,
                         navigate: navigate
@@ -73,8 +74,8 @@ const ResetPasswordForm = ({ userId, token, ...others }) => {
                         <OutlinedInput
                             id="outlined-adornment-password-reset"
                             type={showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            name="password"
+                            value={values.newPassword}
+                            name="newPassword"
                             onBlur={handleBlur}
                             onChange={(e) => {
                                 handleChange(e);

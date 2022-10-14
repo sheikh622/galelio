@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import BrandTable from './component/brandTable';
-import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment } from '@mui/material';
+import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider  } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllBrands } from '../../../../redux/marketPlace/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
@@ -15,7 +15,7 @@ const Brands = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const brandsList = useSelector((state) => state.marketPlace.brandsList);
-    console.log(brandsList.brandList,"==========================================>");
+    console.log(brandsList.pages,"===============brandsList.pages===========================>");
    
     
     const [search, setSearch] = useState('');
@@ -92,7 +92,7 @@ const Brands = () => {
                 }
                 content={false}
             >
-            {brandsList.brandList.length > 0 ? (
+            {brandsList.brands != undefined && brandsList.count > 0 ? (
                     <>
                         <BrandTable
                             brandsList={brandsList}
@@ -113,7 +113,7 @@ const Brands = () => {
                                         showFirstButton
                                         showLastButton
                                         page={page}
-                                        count={brandsList && brandsList.pages}
+                                        count={brandsList.totalPages}
                                         onChange={(event, newPage) => {
                                             setPage(newPage);
                                         }}
