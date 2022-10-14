@@ -26,6 +26,7 @@ const marketPlaceReducer = produce((draft, action) => {
     switch (action.type) {
         case GET_ALL_BRANDS_SUCCESS:
             draft.brandsList = action.payload;
+            console.log(draft.brandsList,"draft.brandsList")
             break;
         case GET_ALL_BRAND_LIST_SUCCESS:
             draft.brandArray = action.payload;

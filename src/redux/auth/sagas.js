@@ -14,7 +14,8 @@ function* loginUser({ payload }) {
         const response = yield axios.post(`/auth/login`, data);
         yield put(setLoader(false));
         yield setNotification('success', 'Logged in Successfully');
-        yield put(loginSuccess(response.data));
+        // console.log("-------------------------------------",response.data);
+        yield put(loginSuccess(response.data.data));
         payload.navigate('/dashboard');
     } catch (error) {
         
@@ -59,7 +60,7 @@ function* forgetPasswordRequest({ payload }) {
 function* resetPasswordRequest({ payload }) {
     try {
         let data = {
-            id: payload.userId,
+            // id: payload.userId,
             password: payload.password,
             token: payload.token
         };

@@ -60,7 +60,7 @@ const ResetPasswordForm = ({ userId, token, ...others }) => {
                     resetPassword({
                         password: values.password,
                         token: token,
-                        userId: userId,
+                        // userId: userId,
                         navigate: navigate
                     })
                 );

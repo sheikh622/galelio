@@ -4,7 +4,7 @@ import { SNACKBAR_OPEN } from 'store/actions';
 import { useNavigate } from 'react-router-dom';
 
 export function* sagaErrorHandler(error) {
-  
+    
     if (error.error === 'Your account has been blocked!' || error.error === 'Your account has not verified yet!') {
         yield put(logout());
     } else {

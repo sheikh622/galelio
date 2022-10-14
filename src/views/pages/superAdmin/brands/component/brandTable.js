@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -7,11 +8,12 @@ import DeleteBrandDialog from './deleteBrandDialog';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-const BrandTable = ({ brandsList, page, limit, search, setOpen, setBrandName, setAddUpdateOpen, brandId, setBrandId }) => {
+const BrandTable = ({  page, limit, search, setOpen, setBrandName, setAddUpdateOpen, brandId, setBrandId }) => {
     const theme = useTheme();
     const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
-
+    const brandsList = useSelector((state) => state.marketPlace.brandsList);
+    console.log(brandsList.brandList,"==========================================>");
     return (
         <TableContainer>
             <DeleteBrandDialog
@@ -25,29 +27,28 @@ const BrandTable = ({ brandsList, page, limit, search, setOpen, setBrandName, se
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">Name</TableCell>
-                        <TableCell align="center">Total NFT'S</TableCell>
+                        <TableCell align="center">Id</TableCell>
+                        <TableCell align="center">Brand Name</TableCell>
                         <TableCell align="center">Created At</TableCell>
                         <TableCell align="center">Updated At</TableCell>
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {brandsList &&
-                        brandsList.brands &&
-                        brandsList.brands.length > 0 &&
-                        brandsList.brands.map((row, index) => (
-                            <>
-                                <TableRow>
+                
+                {brandsList.brandList != undefined &&
+                    brandsList.brandList.map((row, index) => (
+                               <TableRow>
                                     <TableCell align="center" sx={{ padding: '0px' }}>
-                                        {row.name}
+                                   {row.id}
                                     </TableCell>
                                     <TableCell align="center" sx={{ padding: '0px' }}>
-                                        {row.Nfts && row.Nfts.length}
+                                    {row.name}
                                     </TableCell>
                                     <TableCell align="center">{moment(row.createdAt).format('DD-MM-YYYY')}</TableCell>
                                     <TableCell align="center">{moment(row.updatedAt).format('DD-MM-YYYY')}</TableCell>
-                                    <TableCell align="center" sx={{ padding: '0px' }}>
+                                   
+  <TableCell align="center" sx={{ padding: '0px' }}>
                                         <Stack direction="row" justifyContent="center" alignItems="center">
                                             <Tooltip placement="top" title="Edit">
                                                 <IconButton
@@ -82,9 +83,10 @@ const BrandTable = ({ brandsList, page, limit, search, setOpen, setBrandName, se
                                             </Tooltip>
                                         </Stack>
                                     </TableCell>
+                                  
+                                  
                                 </TableRow>
-                            </>
-                        ))}
+                                ))}
                 </TableBody>
             </Table>
         </TableContainer>

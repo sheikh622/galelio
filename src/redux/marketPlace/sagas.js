@@ -1,4 +1,5 @@
-import axios from 'utils/axios';
+import axioss from "axios";
+import axios from "utils/axios";
 import { all, call, fork, put, retry, takeLatest, select } from 'redux-saga/effects';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { makeSelectAuthToken } from 'store/Selector';
@@ -43,10 +44,20 @@ import { setNotification } from 'shared/helperMethods/setNotification';
 
 
 // Brand Module API
+
+
 function* getAllBrandsRequest({ payload }) {
+    const token = yield select(makeSelectAuthToken());
+
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.get(`admin/brand/getAll?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, headers);
+        // const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
+        // const headers = { headers: { 'auth-token': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJnYWxpbGVvLWFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTY2NTY4MTc0OH0.Kxj5W4qsGrsdfb8VL_hHUhv9I90p75a4WdA2VQ0QpzE" } };
+        // console.log("token----------", headers)
+
+        const response = yield axios.get(`brand/getAllBrands?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, {headers : {
+            Authorization: `Bearer ${token}`,
+        }},);
+        console.log(response.data.data, "response")
         yield put(getAllBrandsSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -57,7 +68,9 @@ export function* watchGetAllBrands() {
     yield takeLatest(GET_ALL_BRANDS, getAllBrandsRequest);
 }
 
-function* getAllBrandListRequest({}) {
+
+
+function* getAllBrandListRequest({ }) {
     try {
         const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
         const response = yield axios.get(`admin/brand/getAllBrands`, headers);
@@ -72,22 +85,28 @@ export function* watchGetAllBrandList() {
 }
 
 function* addBrandRequest({ payload }) {
+    
     let data = {
         name: payload.name
     };
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.post(`admin/brand/add`, data, headers);
+        const token = yield select(makeSelectAuthToken());
+       console.log("token adddddddd", token)
+        const response = yield axios.post(`brand/add`,data, {headers : {
+            Authorization: `Bearer ${token}`,
+        }} );
+
         yield put(
             getAllBrands({
-                search: payload.search,
                 page: payload.page,
-                limit: payload.limit
+                limit: payload.limit,
+                search: payload.search
+
             })
         );
         payload.handleClose();
-        payload.setBrandName('');
-        yield put(getAllBrandList());
+        // payload.setBrandName('');
+        // yield put(getAllBrandList());
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -104,18 +123,23 @@ function* updateBrandRequest({ payload }) {
         name: payload.name
     };
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.post(`admin/brand/update`, data, headers);
+        const token = yield select(makeSelectAuthToken());
+        // const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
+        const response = yield axios.put(`brand/update`,data, {headers : {
+            Authorization: `Bearer ${token}`,
+        }} );
+        // const response = yield axios.post(`brand/getAllBrands`, data, headers);
         yield put(
             getAllBrands({
-                search: payload.search,
                 page: payload.page,
-                limit: payload.limit
+                limit: payload.limit,
+                search: payload.search
+
             })
         );
         payload.handleClose();
-        payload.setBrandName('');
-        yield put(getAllBrandList());
+        // payload.setBrandName('');
+        // yield put(getAllBrandList());
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -128,30 +152,34 @@ export function* watchUpdateBrand() {
 
 function* deleteBrandRequest({ payload }) {
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.delete(`/admin/brand/delete/${payload.id}`, headers);
+        const token = yield select(makeSelectAuthToken());
+        // const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
+        const response = yield axios.delete(`brand/delete/${payload.id}`, {headers : {
+            Authorization: `Bearer ${token}`,
+        }},);
         yield put(
             getAllBrands({
-                search: payload.search,
                 page: payload.page,
-                limit: payload.limit
+                limit: payload.limit,
+                search: payload.search
+
             })
         );
         payload.handleClose();
-        yield put(getAllBrandList());
-        yield put(
-            getAllCategories({
-                search: '',
-                page: 1,
-                limit: 10,
-                brandId: ''
-            })
-        );
-        yield put(
-            getAllCategoriesByBrand({
-                brandId: 0
-            })
-        );
+        // yield put(getAllBrandList());
+        // yield put(
+        //     getAllCategories({
+        //         search: '',
+        //         page: 1,
+        //         limit: 10,
+        //         brandId: ''
+        //     })
+        // );
+        // yield put(
+        //     getAllCategoriesByBrand({
+        //         brandId: 0
+        //     })
+        // );
 
         yield setNotification('success', response.data.message);
     } catch (error) {
@@ -299,7 +327,7 @@ function* addSubCategoryRequest({ payload }) {
         nftName: payload.nftName,
         nftDescription: payload.nftDescription,
         nftPrice: payload.nftPrice,
-        currencyType:payload.currencyType,
+        currencyType: payload.currencyType,
         categoryId: payload.categoryId
     };
     try {
@@ -333,7 +361,7 @@ function* updateSubCategoryRequest({ payload }) {
         nftName: payload.nftName,
         nftDescription: payload.nftDescription,
         nftPrice: payload.nftPrice,
-        currencyType:payload.currencyType,
+        currencyType: payload.currencyType,
         subCategoryId: payload.subCategoryId
     };
     try {

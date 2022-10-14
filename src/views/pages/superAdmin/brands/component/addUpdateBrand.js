@@ -40,9 +40,10 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                     updateBrand({
                         brandId: brandId,
                         name: values.name,
-                        search: search,
                         page: page,
                         limit: limit,
+                        search: search,
+
                         handleClose: handleClose,
                         setBrandName: setBrandName
                     })
@@ -68,7 +69,7 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                 aria-describedby="alert-dialog-slide-description1"
             >
                 <DialogTitle id="alert-dialog-slide-title1">{brandName == '' ? 'Add Brand' : 'Update Brand'}</DialogTitle>
-                <Divider/>
+                <Divider />
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <TextField
@@ -85,7 +86,7 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                         />
                     </form>
                 </DialogContent>
-                <Divider/>
+                <Divider />
                 <DialogActions sx={{ pr: 2.5 }}>
                     <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
@@ -104,7 +105,9 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                             formik.handleSubmit();
                         }}
                     >
-                        {brandName == '' ? 'Add' : 'Update'}
+                        {brandName == '' ?
+                            'Add'
+                            : 'Update'}
                     </Button>
                 </DialogActions>
             </Dialog>

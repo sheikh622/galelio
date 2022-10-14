@@ -29,9 +29,9 @@ const rootReducer = combineReducers({
     // ),
     marketPlace: marketPlaceReducer,
     kanban: kanbanReducer,
-    auth:AuthReducer,
-   
-   
+    auth: AuthReducer,
+
+
 });
 
 export default rootReducer;

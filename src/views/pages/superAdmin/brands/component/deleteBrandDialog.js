@@ -41,17 +41,18 @@ export default function DeleteBrandDialog({ deleteOpen, setDeleteOpen, brandId, 
                     <Button
                         variant="contained"
                         size="large"
-                        // onClick={() => {
-                        //     dispatch(
-                        //         deleteBrand({
-                        //             id: brandId,
-                        //             handleClose: handleClose,
-                        //             page: page,
-                        //             limit: limit,
-                        //             search: search
-                        //         })
-                        //     );
-                        // }}
+                        onClick={() => {
+                            dispatch(
+                                deleteBrand({
+                                    id: brandId,
+                                    handleClose: handleClose,
+                                    page: page,
+                                    limit: limit,
+                                    search: search
+                                   
+                                })
+                            );
+                        }}
                     >
                         Yes
                     </Button>

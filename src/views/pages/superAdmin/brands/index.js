@@ -15,6 +15,9 @@ const Brands = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const brandsList = useSelector((state) => state.marketPlace.brandsList);
+    console.log(brandsList.brandList,"==========================================>");
+   
+    
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -31,6 +34,7 @@ const Brands = () => {
     };
 
     useEffect(() => {
+        console.log("run")
         dispatch(
             getAllBrands({
                 search: search,
@@ -88,10 +92,10 @@ const Brands = () => {
                 }
                 content={false}
             >
-                {brandsList && brandsList.brands && brandsList.brands.length > 0 ? (
+            {brandsList.brandList.length > 0 ? (
                     <>
                         <BrandTable
-                            brandsList={brandsList && brandsList}
+                            brandsList={brandsList}
                             page={page}
                             limit={limit}
                             search={search}
@@ -179,13 +183,16 @@ const Brands = () => {
                             </Grid>
                         </Grid>
                     </>
-                ) : (
-                    <>
-                        <Grid item>
-                            <Typography style={{ padding: '20px' }}> No Data Available</Typography>
-                        </Grid>
-                    </>
-                )}
+                    ) : (
+                        <>
+                            <Grid item md={12}>
+                                <Divider />
+                            </Grid>
+                            <Grid item>
+                                <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                            </Grid>
+                        </>
+                    )}
             </MainCard>
         </>
     );
