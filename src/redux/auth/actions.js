@@ -20,8 +20,6 @@ export const setLoader = (data) => {
     };
 };
 
-
-
 export const logout = () => {
     return {
         type: LOGOUT

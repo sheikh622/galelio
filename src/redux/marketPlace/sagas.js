@@ -91,7 +91,7 @@ function* addBrandRequest({ payload }) {
     };
     try {
         const token = yield select(makeSelectAuthToken());
-       console.log("token adddddddd", token)
+    //    console.log("token adddddddd", token)
         const response = yield axios.post(`brand/add`,data, {headers : {
             Authorization: `Bearer ${token}`,
         }} );
