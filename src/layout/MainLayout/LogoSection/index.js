@@ -12,7 +12,7 @@ import Logo from 'ui-component/Logo';
 
 const LogoSection = () => (
     <ButtonBase disableRipple component={Link} to={config.defaultPath}>
-    <p style={{fontSize:'20px'}}>Galileo </p>
+    <p style={{fontSize:'20px', fontWeight:"bolder"}}>Galileo </p>
         {/* <Logo   sx={{ width:" 53px"}}  /> */}
         {/* <img style={{width: '100px' }} src={logo} alt="Sticky Notes" /> */}
         
