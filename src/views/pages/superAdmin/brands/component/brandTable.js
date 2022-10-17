@@ -12,7 +12,7 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
     const theme = useTheme();
     const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
-    const brandsList = useSelector((state) => state.marketPlace.brandsList);
+    const brandsList = useSelector((state) => state.brand.brandsList);
     console.log(brandsList.brands, "========================table==================>");
     return (
         <TableContainer>
@@ -27,9 +27,9 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">Id</TableCell>
+
                         <TableCell align="center">Brand Name</TableCell>
-                      <TableCell align="center">Actions</TableCell>
+                        <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -37,13 +37,11 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
                     {brandsList.brands != undefined &&
                         brandsList.brands.map((row, index) => (
                             <TableRow>
-                                <TableCell align="center" sx={{ padding: '0px' }}>
-                                    {row.id}
-                                </TableCell>
+
                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                     {row.name}
                                 </TableCell>
-                              
+
                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                         <Tooltip placement="top" title="Edit">

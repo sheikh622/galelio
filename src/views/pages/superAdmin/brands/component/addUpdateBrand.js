@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-import { addBrand, updateBrand } from '../../../../../redux/marketPlace/actions';
+import { addBrand, updateBrand } from '../../../../../redux/brand/actions';
 
 export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, page, limit, search, brandName, setBrandName, brandId }) {
     const theme = useTheme();

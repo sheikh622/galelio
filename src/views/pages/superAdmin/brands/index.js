@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import BrandTable from './component/brandTable';
 import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider  } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllBrands } from '../../../../redux/marketPlace/actions';
+import { getAllBrands } from '../../../../redux/brand/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import AddUpdateBrandDialog from './component/addUpdateBrand';
 import MainCard from 'ui-component/cards/MainCard';
@@ -14,7 +14,7 @@ const Brands = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
-    const brandsList = useSelector((state) => state.marketPlace.brandsList);
+    const brandsList = useSelector((state) => state.brand.brandsList);
     console.log(brandsList.pages,"===============brandsList.pages===========================>");
    
     

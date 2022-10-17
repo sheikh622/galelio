@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN,LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD ,SET_LOADER, DASHBOARD,DASHBOARD_SUCCESS} from './constants';
+import { LOGIN_SUCCESS, LOGIN,LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD ,SET_LOADER} from './constants';
 
 export const login = (data) => {
     return {
@@ -38,15 +38,5 @@ export const resetPassword = (data) => {
         payload: data
     };
 };
-export const dash = (data) => {
-    return {
-        type: DASHBOARD,
-        payload: data
-    };
-};
-export const dashboardSuccess = (data) => {
-    return {
-        type: DASHBOARD_SUCCESS,
-        payload: data
-    };
-};
+
+

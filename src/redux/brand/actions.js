@@ -1,0 +1,49 @@
+import {
+    // Brand
+    GET_ALL_BRANDS,
+    GET_ALL_BRANDS_SUCCESS,
+
+    ADD_BRAND,
+    UPDATE_BRAND,
+    DELETE_BRAND,
+
+} from './constants';
+
+// Brands
+
+export const getAllBrands = (data) => {
+    return {
+        type: GET_ALL_BRANDS,
+        payload: data
+    };
+};
+
+export const getAllBrandsSuccess = (data) => {
+    return {
+        type: GET_ALL_BRANDS_SUCCESS,
+        payload: data
+    };
+};
+
+
+export const addBrand = (data) => {
+    return {
+        type: ADD_BRAND,
+        payload: data
+    };
+};
+
+export const updateBrand = (data) => {
+    return {
+        type: UPDATE_BRAND,
+        payload: data
+    };
+};
+
+export const deleteBrand = (data) => {
+    return {
+        type: DELETE_BRAND,
+        payload: data
+    };
+};
+
