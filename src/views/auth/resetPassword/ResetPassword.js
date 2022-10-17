@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -17,12 +17,17 @@ import { FormattedMessage } from 'react-intl';
 
 // ========================|| FIREBASE - RESET PASSWORD ||======================== //
 
-const ResetPasswordForm = ({ userId, token, ...others }) => {
-   
+const ResetPasswordForm = ({ token, ...others }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-  
+    // language customization
+
+    const customization = useSelector((state) => state.customization);
+    const [language, setLanguage] = useState(customization.locale);
+    useEffect(() => {
+        setLanguage(customization.locale);
+    }, [customization]);
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -37,149 +42,151 @@ const ResetPasswordForm = ({ userId, token, ...others }) => {
     };
 
     return (
-        < ><Formik
-            initialValues={{
-                newPassword: '',
-                confirmPassword: ''
-            }}
-            validationSchema={Yup.object().shape({
-                newPassword: Yup.string().max(255)
-                .required("Password is required!")
-                .matches(
-                    /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                    "Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character"
-                ),
-                confirmPassword: Yup.string().when('password', {
-                    is: (val) => !!(val && val.length > 0),
-                    then: Yup.string().oneOf([Yup.ref('password')], 'Both Password must be match!')
-                })
-            })}
-            onSubmit={async (values) => {
-                console.log(values.newPassword);
-
-                await dispatch(
-                    resetPassword({
-                        newPassword: values.newPassword,
-                        token: token,
-                        // userId: userId,
-                        navigate: navigate
+        <>
+            <Formik
+                initialValues={{
+                    password: '',
+                    confirmPassword: ''
+                }}
+                validationSchema={Yup.object().shape({
+                    password: Yup.string()
+                        .max(255)
+                        .required("Password is required!"),
+                    confirmPassword: Yup.string().when('password', {
+                        is: (val) => !!(val && val.length > 0),
+                        then: Yup.string().oneOf([Yup.ref('password')], 'Both Password must be match!')
                     })
-                );
-            }}
-        >
-            {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-                <form noValidate onSubmit={handleSubmit} {...others}>
-                    <FormControl fullWidth error={Boolean(touched.password && errors.password)} sx={{ ...theme.typography.customInput }}>
-                        <InputLabel htmlFor="outlined-adornment-password-reset">Password</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password-reset"
-                            type={showPassword ? 'text' : 'password'}
-                            value={values.newPassword}
-                            name="newPassword"
-                            onBlur={handleBlur}
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                        size="large"
-                                    >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            inputProps={{}}
-                        />
-                    </FormControl>
-                    {touched.password && errors.password && (
-                        <FormControl fullWidth>
-                            <FormHelperText error id="standard-weight-helper-text-reset">
-                                {errors.password}
-                            </FormHelperText>
+                })}
+                onSubmit={async (values) => {
+                    console.log(values,"values")
+                    await dispatch(
+                        resetPassword({
+                            
+                            newPassword: values.password,
+                            token: token,
+                            navigate: navigate
+                        })
+                    );
+                }}
+            >
+                {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+                    <form noValidate onSubmit={handleSubmit} {...others}>
+                        <FormControl
+                            fullWidth
+                            error={Boolean(touched.password && errors.password)}
+                            sx={{ ...theme.typography.customInput }}
+                        >
+                            <InputLabel htmlFor="outlined-adornment-password-reset">Password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password-reset"
+                                type={showPassword ? 'text' : 'password'}
+                                value={values.password}
+                                name="password"
+                                onBlur={handleBlur}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                }}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                            size="large"
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                inputProps={{}}
+                            />
                         </FormControl>
-                    )}
+                        {touched.password && errors.password && (
+                            <FormControl fullWidth>
+                                <FormHelperText error id="standard-weight-helper-text-reset">
+                                    {errors.password}
+                                </FormHelperText>
+                            </FormControl>
+                        )}
 
-                    <FormControl
-                        fullWidth
-                        error={Boolean(touched.confirmPassword && errors.confirmPassword)}
-                        sx={{ ...theme.typography.customInput }}
-                    >
-                        <InputLabel htmlFor="outlined-adornment-password-reset">Confirm Password </InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-confirmpassword-reset"
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            value={values.confirmPassword}
-                            name="confirmPassword"
-                            onBlur={handleBlur}
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowConfirmPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                        size="large"
-                                    >
-                                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            inputProps={{}}
-                        />
-                    </FormControl>
-
-                    {touched.confirmPassword && errors.confirmPassword && (
-                        <FormControl fullWidth>
-                            <FormHelperText error id="standard-weight-helper-text-confirm-password">
-                                {' '}
-                                {errors.confirmPassword}{' '}
-                            </FormHelperText>
+                        <FormControl
+                            fullWidth
+                            error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                            sx={{ ...theme.typography.customInput }}
+                        >
+                            <InputLabel htmlFor="outlined-adornment-password-reset">
+                            Confirm Password
+                            </InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-confirmpassword-reset"
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                value={values.confirmPassword}
+                                name="confirmPassword"
+                                onBlur={handleBlur}
+                                onChange={(e) => {
+                                    handleChange(e);
+                                }}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowConfirmPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                            size="large"
+                                        >
+                                            {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                inputProps={{}}
+                            />
                         </FormControl>
-                    )}
 
-                    {errors.submit && (
+                        {touched.confirmPassword && errors.confirmPassword && (
+                            <FormControl fullWidth>
+                                <FormHelperText error id="standard-weight-helper-text-confirm-password">
+                                    {' '}
+                                    {errors.confirmPassword}{' '}
+                                </FormHelperText>
+                            </FormControl>
+                        )}
+
+                        {errors.submit && (
+                            <Box
+                                sx={{
+                                    mt: 3
+                                }}
+                            >
+                                <FormHelperText error>{errors.submit}</FormHelperText>
+                            </Box>
+                        )}
                         <Box
                             sx={{
-                                mt: 3
+                                mt: 1
                             }}
                         >
-                            <FormHelperText error>{errors.submit}</FormHelperText>
+                            <AnimateButton>
+                                <Button
+                                className='signbutton'
+                                sx={{ background:"#604223"}}
+                                    disableElevation
+                                    disabled={isSubmitting}
+                                    fullWidth
+                                    size="large"
+                                    type="submit"
+                                    variant="contained"
+                                    color="secondary"
+                                >
+                                   Reset Password
+                                </Button>
+                            </AnimateButton>
                         </Box>
-                    )}
-                    <Box
-                        sx={{
-                            mt: 1
-                        }}
-                    >
-                        <AnimateButton>
-                            <Button
-                             className='signbutton'
-                            sx={{background:"#816a51"}}
-                                disableElevation
-                                disabled={isSubmitting}
-                                fullWidth
-                                size="large"
-                                type="submit"
-                                variant="contained"
-                                color="secondary"
-                            >
-                              Reset Password
-                            </Button>
-                        </AnimateButton>
-                    </Box>
-                </form>
-            )}
-        </Formik></>
-      
-       
+                    </form>
+                )}
+            </Formik>
+        </>
     );
 };
 
