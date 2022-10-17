@@ -11,7 +11,7 @@ const INITIAL_STATE = {
  
 };
 
-const brand = produce((draft, action) => {
+const category = produce((draft, action) => {
     switch (action.type) {
         case GET_ALL_CATEGORIES_SUCCESS:
             draft.categoryList = action.payload;
@@ -21,4 +21,4 @@ const brand = produce((draft, action) => {
     }
 }, INITIAL_STATE);
 
-export default brand;
+export default category;

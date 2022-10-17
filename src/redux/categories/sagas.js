@@ -132,7 +132,7 @@ export function* watchGetAllCategoryByBrand() {
 
 
 
-export default function* brandSaga() {
+export default function* categorySaga() {
     yield all([
         fork(watchGetAllCategories),
         fork(watchAddCategory),

@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import CategoryTable from './component/categoryTable';
 import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider  } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllBrands } from '../../../../redux/brand/actions';
+import { getAllCategories } from '../../../../redux/categories/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import AddUpdateBrandDialog from './component/addUpdateCategory';
 import MainCard from 'ui-component/cards/MainCard';
@@ -36,13 +36,15 @@ const Brands = () => {
     useEffect(() => {
         console.log("run")
         dispatch(
-            getAllBrands({
-                search: search,
-                page: page,
-                limit: limit
+            getAllCategories({
+                // search: search,
+                // page: page,
+                // limit: limit
             })
         );
-    }, [search, page, limit]);
+    }, [
+        // search, page, limit
+    ]);
     return (
         <>
             <AddUpdateBrandDialog
