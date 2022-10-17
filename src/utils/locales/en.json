@@ -7,6 +7,9 @@
     "admin.grades":"Grades", 
     "admin.students":"Students",
     "admin.brand":"Brand",
+    "admin.category":"Category",
+    "admin.nftManagement":"NFT Management",
+
     "admin.questions":" Questions",
 
     "dashboard": "Dashboard",

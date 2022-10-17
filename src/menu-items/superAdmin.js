@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconDashboard, IconDeviceAnalytics,IconCash, IconUserCheck,IconBell, IconReceipt2, IconClipboardList } from '@tabler/icons';
+import { IconDashboard, IconCheckbox,IconDeviceAnalytics,IconCash, IconUserCheck,IconBell, IconReceipt2, IconClipboardList } from '@tabler/icons';
 
 // constant
 const icons = {
@@ -12,6 +12,7 @@ const icons = {
     IconReceipt2,
     IconClipboardList,
     IconBell,
+    IconCheckbox,
     IconCash
     
 };
@@ -31,14 +32,43 @@ const superAdminMenu = {
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
-         {
-            id: 'brand',
-            title: <FormattedMessage id="admin.brand" />,
-            type: 'item',
-            url: '/brands',
-            icon: icons.IconUserCheck,
-            breadcrumbs: false
-        },
+        //  {
+        //     id: 'brand',
+        //     title: <FormattedMessage id="admin.brand" />,
+        //     type: 'item',
+        //     url: '/brands',
+        //     icon: icons.IconUserCheck,
+        //     breadcrumbs: false
+        // },
+        {
+            id: 'nftManagement',
+            title: <FormattedMessage id="admin.nftManagement" />,
+            type: 'collapse',
+
+            icon: icons.IconDeviceAnalytics,
+            breadcrumbs: false,
+            children: [
+             
+               
+                {
+                    id: 'brand',
+                    title: <FormattedMessage id="admin.brand" />,
+                    type: 'item',
+                    icon: icons.IconCheckbox,
+                    url: '/brands',
+                    breadcrumbs: false
+                },
+                {
+                    id: 'category',
+                    title: <FormattedMessage id="admin.category" />,
+                    type: 'item',
+                    icon: icons.IconCheckbox,
+                    url: '/categories',
+                    breadcrumbs: false
+                }
+              
+            ]
+        }
     
        
         
