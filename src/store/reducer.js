@@ -10,7 +10,7 @@ import snackbarReducer from './themeReducers/snackbarReducer';
 import cartReducer from './themeReducers/cartReducer';
 import kanbanReducer from './themeReducers/kanbanReducer';
 import AuthReducer from 'redux/auth/reducers';
-
+import brand from 'redux/brand/reducers';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -27,10 +27,11 @@ const rootReducer = combineReducers({
     //     },
     //     cartReducer
     // ),
+    brand: brand,
     kanban: kanbanReducer,
-    auth:AuthReducer,
-   
-   
+    auth: AuthReducer,
+
+
 });
 
 export default rootReducer;
