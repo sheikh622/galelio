@@ -13,15 +13,15 @@ function* loginUser({ payload }) {
         };
         const response = yield axios.post(`/auth/login`, data);
         yield put(setLoader(false));
-        yield setNotification('success', 'Logged in Successfully');
+        yield setNotification('success', response.data.message);
       
         yield put(loginSuccess(response.data.data));
         payload.navigate('/dashboard');
     } catch (error) {
         
         yield put(setLoader(false));
-        yield sagaErrorHandler(error.response.data);
-       
+        yield sagaErrorHandler(error.response.data.data);
+        console.log(error.response.data.data, "error.response.data")
     }
 }
 
@@ -36,7 +36,7 @@ function* forgetPasswordRequest({ payload }) {
         payload.navigate('/dashboard');
     } catch (error) {
         yield put(setLoader(false));
-        yield sagaErrorHandler(error.response.data);
+        yield sagaErrorHandler(error.response.data.data);
     }
 }
 
@@ -52,7 +52,8 @@ function* resetPasswordRequest({ payload }) {
         yield setNotification('success', response.data.message);
         payload.navigate('/dashboard');
     } catch (error) {
-        yield sagaErrorHandler(error.response.data);
+        yield sagaErrorHandler(error.response.data.data);
+        console.log(error.response.data, "error.response.data")
     }
 }
 
