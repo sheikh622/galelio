@@ -24,11 +24,16 @@ import { setNotification } from 'shared/helperMethods/setNotification';
 
 function* getAllCategoriesRequest({ payload }) {
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.get(`/category/getAllCategoriesByBrand/2`,
-            headers
+        const token = yield select(makeSelectAuthToken());
+        const response = yield axios.get(`/category/getAllCategoriesByBrand/${payload.brandId}?size=${payload.limit}&page=${payload.page}&&search=${payload.search}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        },
+            
         );
         yield put(getAllCategoriesSuccess(response.data.data));
+        console.log(response.data.data.categoryList , "response==========cate");
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -40,12 +45,16 @@ export function* watchGetAllCategories() {
 
 function* addCategoryRequest({ payload }) {
     let data = {
-        name: payload.name,
-        brandId: payload.brandId
+        name: "payload.name",
+        brandId: 1
     };
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.post(`admin/category/add`, data, headers);
+        const token = yield select(makeSelectAuthToken());
+        const response = yield axios.post(`/category/add`, data,  {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        },);
         yield put(
             getAllCategories({
                 search: payload.search,
@@ -95,18 +104,22 @@ export function* watchUpdateCategory() {
 
 function* deleteCategoryRequest({ payload }) {
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.delete(`admin/category/delete/${payload.brandId}/${payload.categoryId}`, headers);
+        const token = yield select(makeSelectAuthToken());
+        const response = yield axios.delete(`category/delete/${payload.brandId}/${payload.categoryId}`,  {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        },);
         yield put(
             getAllCategories({
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                brandId: ''
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
-        yield SetNotification('success', response.data.message);
+        yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
