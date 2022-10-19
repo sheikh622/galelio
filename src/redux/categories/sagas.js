@@ -45,8 +45,8 @@ export function* watchGetAllCategories() {
 
 function* addCategoryRequest({ payload }) {
     let data = {
-        name: "payload.name",
-        brandId: 1
+        name: payload.name,
+        brandId: payload.brandId
     };
     try {
         const token = yield select(makeSelectAuthToken());
@@ -60,13 +60,14 @@ function* addCategoryRequest({ payload }) {
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                brandId: payload.mainBrandId == 0 ? '' : payload.mainBrandId
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
-        yield SetNotification('success', response.data.message);
+        yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
+        console.log(error.response.data.data,"error.response.data.data")
     }
 }
 
@@ -81,8 +82,12 @@ function* updateCategoryRequest({ payload }) {
         categoryId: payload.categoryId
     };
     try {
-        const headers = { headers: { 'auth-token': yield select(makeSelectAuthToken()) } };
-        const response = yield axios.post(`admin/category/update`, data, headers);
+        const token = yield select(makeSelectAuthToken());
+        const response = yield axios.post(`/category/update`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        },);
         yield put(
             getAllCategories({
                 search: payload.search,
@@ -92,7 +97,7 @@ function* updateCategoryRequest({ payload }) {
             })
         );
         payload.handleClose();
-        yield SetNotification('success', response.data.message);
+        yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

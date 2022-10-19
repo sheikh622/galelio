@@ -35,7 +35,7 @@ const Categories = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const categoryList = useSelector((state) => state.category.categoryList);
-   
+    const [open, setOpen] = useState(false);
     const [brand, setBrand] = useState(0);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -90,18 +90,9 @@ const Categories = () => {
     }, [search, page, limit, brand]);
     return (
         <>
-            <AddUpdateCategoryDialog
-                mainBrandId={brand}
-               
-                categoryId={categoryId}
-                categoryData={categoryData}
-                setCategoryData={setCategoryData}
-                page={page}
-                limit={limit}
-                search={search}
-                addUpdateOpen={addUpdateOpen}
-                setAddUpdateOpen={setAddUpdateOpen}
-            />
+        <AddUpdateCategoryDialog setOpen={setOpen} open={open}  search= {search}
+        page= {page}
+        limit= {limit} />
             <HeadingCard title="Category Management" />
             <MainCard
                 title={
@@ -146,7 +137,9 @@ const Categories = () => {
                             variant="contained"
                             size="large"
                                 onClick={() => {
-                                    setAddUpdateOpen(true);
+                                  
+                                        setOpen(true);
+                                  
                                     setCategoryData({
                                         name: '',
                                         brandId: 0

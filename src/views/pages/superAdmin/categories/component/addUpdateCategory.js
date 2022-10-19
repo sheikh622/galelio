@@ -1,159 +1,208 @@
-import { forwardRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 import * as Yup from 'yup';
-import { FormattedMessage } from 'react-intl';
-import { useTheme } from '@mui/material/styles';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Grid, MenuItem } from '@mui/material';
-const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-import { addCategory , updateCategory } from 'redux/categories/actions'; 
+import { useFormik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addCategory } from 'redux/categories/actions';
+// material-ui
+import { styled } from '@mui/material/styles';
+import { Button, Dialog, IconButton, Typography, Select, TextField, Grid, CardContent, FormControl, InputLabel, MenuItem, FormHelperText } from '@mui/material';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 
-export default function AddUpdateCategoryDialog({
-    brandArray,
-    addUpdateOpen,
-    setAddUpdateOpen,
-    page,
-    limit,
-    search,
-    categoryData,
-    setCategoryData,
-    categoryId,
-    mainBrandId
-}) {
-    const theme = useTheme();
+// assets
+import CloseIcon from '@mui/icons-material/Close';
+import React from 'react';
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuDialogContent-root': {
+        padding: theme.spacing(2)
+    },
+    '& .MuDialogActions-root': {
+        padding: theme.spacing(1)
+    }
+}));
+
+const BootstrapDialogTitle = ({ children, onClose, ...other }) => (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+        {children}
+        {onClose ? (
+            <IconButton
+                aria-label="close"
+                onClick={onClose}
+                sx={{
+                    position: 'absolute',
+                    right: 10,
+                    top: 10,
+                    color: (theme) => theme.palette.grey[500]
+                }}
+            >
+                <CloseIcon />
+            </IconButton>
+        ) : null}
+    </DialogTitle>
+);
+
+BootstrapDialogTitle.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.node
+};
+
+export default function AddUpdateCategoryDialog({ page, limit, search, open, setOpen }) {
+
+
+
     const dispatch = useDispatch();
-
+    const [brand, setBrand] = useState(0);
+    const brandsList = useSelector((state) => state.brand.brandsList);
     const handleBrandChange = (event) => {
-        setCategoryData({
-            name: categoryData.name,
-            brandId: event.target.value
-        });
+        setBrand(event.target.value);
+        console.log(event.target.value, "setBrand===========");
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        formik.resetForm();
+    };
+
+    const handled = (event) => {
+        // setTeacher(event.target.value);
+        // console.log('ggggg');
     };
 
     const validationSchema = Yup.object({
         name: Yup.string()
             .required('Category Name is required!')
             .max(42, 'Category Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name')
+            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
+        name: Yup.string()
+            .required('Category Name is required!')
+            .max(42, 'Category Name can not exceed 42 characters')
+            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
     });
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            name: categoryData.name
+            name: ''
         },
         validationSchema,
         onSubmit: (values) => {
-            if (categoryData.name == '') {
+          console.log(values,"values")
                 dispatch(
                     addCategory({
-                        name: values.name,
-                        brandId: categoryData.brandId,
-                        search: search,
+                        name:values.name,
+                        brandId:brand,
+                        handleClose: handleClose,
                         page: page,
                         limit: limit,
-                        mainBrandId: mainBrandId,
-                        handleClose: handleClose,
-                        setCategoryData: setCategoryData
-                    })
-                );
-            } else {
-                dispatch(
-                    updateCategory({
-                        categoryId: categoryId,
-                        name: values.name,
-                        brandId: categoryData.brandId,
-                        search: search,
-                        page: page,
-                        limit: limit,
-                        handleClose: handleClose,
-                        setCategoryData: setCategoryData
-                    })
-                );
+                        search: search
+                    }))
+           
+                // dispatch(
+                //     updateCategory({
+                //         categoryId: categoryId,
+                //         name: values.name,
+                //         brandId: categoryData.brandId,
+                //         search: search,
+                //         page: page,
+                //         limit: limit,
+                //         handleClose: handleClose,
+                //         setCategoryData: setCategoryData
+                //     })
+                // );
             }
         }
-    });
-    const handleClose = () => {
-        setAddUpdateOpen(false);
-        setCategoryData({
-            name: '',
-            brandId: 0
-        });
-        formik.resetForm();
-    };
+    );
+    // const handleClose = () => {
+    //     setAddUpdateOpen(false);
+    //     setCategoryData({
+    //         name: '',
+    //         brandId: 0
+    //     });
+    //     formik.resetForm();
+    // };
+
 
     return (
-        <>
-            <Dialog
-                className="responsiveDialog"
-                open={addUpdateOpen}
-                TransitionComponent={Transition}
-                keepMounted
-                // onClose={handleClose}
-                aria-labelledby="alert-dialog-slide-title1"
-                aria-describedby="alert-dialog-slide-description1"
-            >
-                <DialogTitle id="alert-dialog-slide-title1">{categoryData.name == '' ? 'Add Category' : 'Update Category'}</DialogTitle>
-                <DialogContent>
-                    <form autoComplete="off" onSubmit={formik.handleSubmit}>
-                        <Grid item xs={12} pt={4}>
-                            <TextField
-                                id="name"
-                                name="name"
-                                label="Enter Category Name"
-                                value={formik.values.name}
-                                onChange={formik.handleChange}
-                                error={formik.touched.name && Boolean(formik.errors.name)}
-                                helperText={formik.touched.name && formik.errors.name}
-                                fullWidth
-                                autoComplete="given-name"
-                            />
-                        </Grid>
-                        {categoryData.name == '' && (
-                            <Grid item xs={12} pt={4}>
-                                <TextField
-                                    className="brandSelectField"
-                                    id="outlined-select-budget"
-                                    select
-                                    fullWidth
-                                    label="Select Brand"
-                                    value={categoryData.brandId}
-                                    onChange={handleBrandChange}
-                                >
-                                    <MenuItem value={0}>Choose Brand</MenuItem>
-                                    {brandArray &&
-                                        brandArray.brandList &&
-                                        brandArray.brandList.map((option, index) => (
-                                            <MenuItem key={index} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                </TextField>
+        <div>
+            <BootstrapDialog open={open} onClose={handleClose} handled={handled} aria-labelledby="customized-dialog-title">
+                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                    Add Category
+                </BootstrapDialogTitle>
+                <DialogContent dividers>
+                    <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
+                        <CardContent>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        className="selectField"
+                                        id="outlined-select-budget"
+                                        select
+                                        fullWidth
+                                        label="Select Brand"
+                                        defaultValue={formik.values.package}
+                                        // value={brand}
+                                        onChange={handleBrandChange}
+                                    >
+                                        <MenuItem value={0}>All</MenuItem>
+                                        {brandsList != undefined &&
+
+                                            brandsList?.brands?.map((option, index) => (
+                                                <MenuItem key={index} value={option.id}>
+                                                    {option.name}
+                                                </MenuItem>
+                                            ))}
+                                    </TextField>
+                                    <FormHelperText error id="standard-weight-helper-text-email-login">
+                                    {formik.errors.package}
+                                </FormHelperText>
+
+
+                                </Grid>
+
+
+
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        sx={{ width: '100%', margin: '5px', color: 'red' }}
+                                        id="name"
+                                        name="name"
+                                        value={formik.values.name}
+
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.name && Boolean(formik.errors.name)}
+                                        helperText={formik.touched.name && formik.errors.name}
+                                        autoComplete="given-name"
+                                        autoFocus
+                                        label="Name"
+                                        
+                                    />
+                                </Grid>
                             </Grid>
-                        )}
+                        </CardContent>
+                        <DialogActions sx={{ pr: 2.5 }}>
+                            <Button sx={{ color: '#C62828' }} onClick={handleClose} color="secondary">
+                                Cancel
+                            </Button>
+                            <Button
+
+                                type="submit"
+                                size="large"
+                                sx={{ background: '#604223' }}
+                                disableElevation
+                                variant="contained"
+                                size="small"
+
+                            >
+                                Submit
+                            </Button>
+                        </DialogActions>
                     </form>
                 </DialogContent>
-                <DialogActions sx={{ pr: 2.5 }}>
-                    <Button
-                        sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
-                        onClick={() => {
-                            handleClose();
-                        }}
-                        color="secondary"
-                    >
-                        <FormattedMessage id="cancel" />
-                    </Button>
-
-                    <Button
-                        variant="contained"
-                        size="small"
-                        onClick={() => {
-                            formik.handleSubmit();
-                        }}
-                    >
-                        {categoryData.name == '' ? 'Add' : 'Update'}
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </>
+            </BootstrapDialog>
+        </div>
     );
 }
