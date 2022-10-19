@@ -1,10 +1,11 @@
 import produce from 'immer';
-import { LOGIN_SUCCESS, LOGOUT, SET_LOADER} from './constants';
+import { LOGIN_SUCCESS, SET_WALLET_ADDRESS , LOGOUT, SET_LOADER} from './constants';
 
 const INITIAL_STATE = {
     user: null,
     token: '',
     loader: false,
+    walletAddress: null,
   
     
 };
@@ -23,6 +24,9 @@ const AuthReducer = produce((draft, action) => {
                 draft.loader = action.payload;
     
                 break;
+                case SET_WALLET_ADDRESS:
+            draft.walletAddress = action.payload;
+            break;
         case LOGOUT:
             draft.user = "";
             draft.token = "";

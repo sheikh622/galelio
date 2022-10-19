@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN,LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD ,SET_LOADER} from './constants';
+import { LOGIN_SUCCESS, LOGIN,LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD ,SET_WALLET_ADDRESS ,SET_LOADER} from './constants';
 
 export const login = (data) => {
     return {
@@ -38,5 +38,10 @@ export const resetPassword = (data) => {
         payload: data
     };
 };
-
+export const setWallet = (data) => {
+    return {
+        type: SET_WALLET_ADDRESS,
+        payload: data
+    };
+};
 
