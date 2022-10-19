@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, ButtonBase } from '@mui/material';
+import MetaMaskSection from './MetaMaskSection';
 
 // project imports
 import LogoSection from '../LogoSection';
@@ -69,7 +70,9 @@ const Header = ({ handleLeftDrawerToggle }) => {
             {/* <SearchSection /> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
-
+            <Box sx={{ display: { sm: 'block', marginRight: '10px' } }}>
+            <MetaMaskSection />
+        </Box>
             {/* live customization & localization */}
             {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 <LocalizationSection />
