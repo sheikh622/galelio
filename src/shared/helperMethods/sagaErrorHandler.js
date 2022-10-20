@@ -11,7 +11,7 @@ export function* sagaErrorHandler(error) {
         yield put({
             type: SNACKBAR_OPEN,
             open: true,
-            message: error.error,
+            message: error.message,
             variant: 'alert',
             alertSeverity: 'error',
             transition: 'SlideRight',

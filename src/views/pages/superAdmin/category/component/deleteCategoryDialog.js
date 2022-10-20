@@ -2,15 +2,14 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { deleteCategory } from 'redux/categories/actions';
+import { deleteCategory } from '../../../../../redux/marketPlace/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function DeleteCategoryDialog({deleteId,mainBrandId, deleteOpen, setDeleteOpen,page, limit, search }) {
+export default function DeleteCategoryDialog({ deleteOpen, setDeleteOpen,categoryData, categoryId, brandId,page, limit, search }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
         setDeleteOpen(false);
     };
-    // console.log(mainBrandId,"mainBrandId======delete")
     return (
         <>
             <Dialog
@@ -43,8 +42,8 @@ export default function DeleteCategoryDialog({deleteId,mainBrandId, deleteOpen, 
                         onClick={() => {
                             dispatch(
                                 deleteCategory({
-                                    categoryId: deleteId,
-                                    brandId:mainBrandId,
+                                    categoryId: categoryId,
+                                    brandId:categoryData.brandId,
                                     handleClose: handleClose,
                                     page: page,
                                     limit: limit,

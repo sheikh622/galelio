@@ -46,7 +46,8 @@ export function* watchGetAllCategories() {
 function* addCategoryRequest({ payload }) {
     let data = {
         name: payload.name,
-        brandId: payload.brandId
+        brandId: payload.brandId,
+        profitPercentage:payload.profitPercentage
     };
     try {
         const token = yield select(makeSelectAuthToken());
@@ -77,6 +78,8 @@ export function* watchAddCategory() {
 
 function* updateCategoryRequest({ payload }) {
     let data = {
+        
+    profitPercentage:payload.profitPercentage,
         name: payload.name,
         brandId: payload.brandId,
         categoryId: payload.categoryId
@@ -93,7 +96,7 @@ function* updateCategoryRequest({ payload }) {
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                brandId: ''
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
@@ -127,6 +130,7 @@ function* deleteCategoryRequest({ payload }) {
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
+        console.log(error.response.data.data, "error.response.data.data")
     }
 }
 

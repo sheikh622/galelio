@@ -4,67 +4,63 @@ import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHe
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import DeleteCategoryDialog from './deleteCategoryDialog';
-import AddUpdateCategory from '../../categories/component/AddUpdateCategory';
 import moment from 'moment';
 const CategoryTable = ({
     categoryList,
-    mainBrandId,
     page,
     limit,
     search,
-    open, setOpen,
-
-
-
+    categoryData,
+    setCategoryData,
+    setAddUpdateOpen,
+    categoryId,
+    setCategoryId
 }) => {
     const theme = useTheme();
-    const [update, setUpdate] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
-    const [deleteId, setDeleteId] = useState(0);
-console.log(mainBrandId, "brand id================>")
 
     return (
-        <><AddUpdateCategory 
-        mainBrandId={mainBrandId}
-        open={open}
-        deleteId={deleteId}
-        setOpen={setOpen}
-        update={update}
-        setUpdate={setUpdate}
-        categoryList={categoryList}
-        /><TableContainer>
-            {/* delete */}
+        <TableContainer>
             <DeleteCategoryDialog
-                mainBrandId={mainBrandId}
-                deleteId={deleteId}
-
                 deleteOpen={deleteOpen}
                 setDeleteOpen={setDeleteOpen}
-
+                categoryId={categoryId}
+                categoryData={categoryData}
                 page={page}
                 limit={limit}
-                search={search} />
+                search={search}
+            />
             <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">Name</TableCell>
-
+                        <TableCell align="center">Total NFT'S</TableCell>
+                        <TableCell align="center">Brand</TableCell>
+                        <TableCell align="center">Created At</TableCell>
+                        <TableCell align="center">Updated At</TableCell>
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {categoryList.categoryList != undefined &&
-
-
-                        categoryList.categoryList.map((row, index) => (
+                    {categoryList &&
+                        categoryList.categories &&
+                        categoryList.categories.length > 0 &&
+                        categoryList.categories.map((row, index) => (
                             <>
-                                <TableRow onClick={() => {
-                                    console.log('nfts', row);
-                                }}>
+                                <TableRow   onClick={() => {
+                                        console.log('nfts', row);
+                                    }}>
                                     <TableCell align="center" sx={{ padding: '0px' }}>
-                                        {row.label}
+                                        {row.name}
                                     </TableCell>
-
+                                    <TableCell align="center" sx={{ padding: '0px' }}>
+                                        {row.Nfts && row.Nfts.length}
+                                    </TableCell>
+                                    <TableCell align="center" sx={{ padding: '0px' }}>
+                                        {row.Brand.name}
+                                    </TableCell>
+                                    <TableCell align="center">{moment(row.createdAt).format('DD-MM-YYYY')}</TableCell>
+                                    <TableCell align="center">{moment(row.updatedAt).format('DD-MM-YYYY')}</TableCell>
                                     <TableCell align="center" sx={{ padding: '0px' }}>
                                         <Stack direction="row" justifyContent="center" alignItems="center">
                                             <Tooltip placement="top" title="Edit">
@@ -73,9 +69,13 @@ console.log(mainBrandId, "brand id================>")
                                                     aria-label="Edit"
                                                     size="large"
                                                     onClick={() => {
-                                                        setOpen(true);
-                                                        setUpdate(true);
-                                                        setDeleteId(row.value);
+                                                        console.log('row', row);
+                                                        setCategoryData({
+                                                            name: row.name,
+                                                            brandId: row.BrandId
+                                                        });
+                                                        setCategoryId(row.id);
+                                                        setAddUpdateOpen(true);
                                                     }}
                                                 >
                                                     <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
@@ -91,10 +91,12 @@ console.log(mainBrandId, "brand id================>")
                                                     }}
                                                     size="large"
                                                     onClick={() => {
-                                                        setDeleteId(row.value); //categoryid
-                                                        setDeleteOpen(true); //open delete dialoge
-
-
+                                                        setDeleteOpen(true);
+                                                        setCategoryId(row.id);
+                                                        setCategoryData({
+                                                            name: row.name,
+                                                            brandId: row.BrandId
+                                                        });
                                                     }}
                                                 >
                                                     <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
@@ -107,7 +109,7 @@ console.log(mainBrandId, "brand id================>")
                         ))}
                 </TableBody>
             </Table>
-        </TableContainer></>
+        </TableContainer>
     );
 };
 
