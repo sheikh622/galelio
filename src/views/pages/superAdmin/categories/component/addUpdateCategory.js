@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Stack, Dialog, CardContent, DialogContent, FormControl, MenuItem, TextField, Grid, DialogTitle } from '@mui/material';
 import { useFormik } from 'formik';
@@ -12,11 +13,11 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import { addCategory ,updateCategory } from 'redux/categories/actions';
 
 
-export default function AddEditFormDialog({ limit, page, search, open, setOpen ,update,deleteId, setUpdate,mainBrandId, categoryList }) {
+export default function AddEditFormDialog({ limit, page, search, open, setOpen, name ,update,deleteId, profitPercentage, setUpdate,mainBrandId, categoryList }) {
     const theme = useTheme();
-    
+    console.log(profitPercentage,"profitPercentage===========================>");
      const [brand, setBrand] = useState(0);
-     console.log(categoryList.categoryList, "categoryList===========");
+     console.log(mainBrandId, "mainBrandId===========");
      
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,14 +25,11 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen ,
     const brandsList = useSelector((state) => state.brand.brandsList);
     const handleBrandChange = (event) => {
         setBrand(event.target.value);
-        console.log(event.target.value, "setBrand===========");
+        // console.log(event.target.value, "setBrand===========");
     };
     
 
-    const handleClose = () => {
-        setOpen(false);
-        formik.resetForm();
-    };
+   
 
   
 
@@ -40,61 +38,70 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen ,
             .required('Category Name is required!')
             .max(42, 'Category Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
+            profitPercentage: Yup.string()
+            .required('profit Percentage required!')
+            .max(42, 'profit Percentage can not exceed 42 characters')
+            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid profit Percentage'),
             
           
     });
+   
     const formik = useFormik({
         enableReinitialize: true,
+        
         initialValues: {
-            name:'',
+            name:update == false? '': name,
+            profitPercentage: update == false ? '' : profitPercentage,
             
         },
         validationSchema,
         onSubmit: async (values) => {
-            console.log(values);
+            console.log(values.name,"name===table")
             if (update == false) {
                 await dispatch(
                     addCategory({
                         name: values.name,
-                        profitPercentage:5,
+                        profitPercentage:values.profitPercentage,
                         brandId:brand,
-                        
-                        handleClose: handleClose,
                         page: page,
                         limit: limit,
-                        search: search
+                        search: search,
+                       
+                        handleClose: handleClose,
+                     
                        
                     })
                 );
-            } else if (update == true) {
+            } else {
                 dispatch(
                     updateCategory({
                         name: values.name,
                         profitPercentage:5,
-                        brandId:brand,
-                        categoryId:deleteId,
-                        handleClose: handleClose,
+                        brandId:brand!= 0? brand :  mainBrandId,
+                        categoryId:deleteId,                      
                         limit: limit,
                         page: page,
                         search: search,
+                        handleClose: handleClose,
+                        update:update
                         
                    
                        
                     })
                 );
+                
             }
-        }
+           
+        },
+        
     });
+    const handleClose = () => {
+        setOpen(false);
+        setUpdate(false);
+        formik.resetForm();
+    };
 
-    // useEffect(() => {
-    //     if (isUpdate == true) {
-    //         setTeacher(gradeDetail && gradeDetail.teacherId);
-    //     } else if (isUpdate == false) {
-    //         if (teacherAssigned && teacherAssigned.length > 0) {
-    //             setTeacher(teacherAssigned[0].id);
-    //         }
-    //     }
-    // }, [teacherAssigned, gradeDetail]);
+    
 
     return (
            
@@ -122,6 +129,19 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen ,
                                         autoComplete="given-name" />
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <TextField
+                                        id="profitPercentage"
+                                        name="profitPercentage"
+                                        label='Profit Percentage'
+                                        value={formik.values.profitPercentage}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.profitPercentage && Boolean(formik.errors.profitPercentage)}
+                                        helperText={formik.touched.profitPercentage && formik.errors.profitPercentage}
+                                        fullWidth
+                                        autoComplete="given-name" />
+                                </Grid>
+                               { update== false  && (
+                                <Grid item xs={12}>
                                     <FormControl fullWidth>
                                         <TextField
                                             id="outlined-select-currency"
@@ -129,7 +149,7 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen ,
                                             fullWidth
                                             InputLabelProps={{ shrink: true }}
                                             label='Select Brand'
-                                            value={brand}
+                                            // value={mainBrandId}
                                             defaultValue={formik.values.brand}
                                             onChange={handleBrandChange}
                                             error={formik.touched.brand && Boolean(formik.errors.brand)}
@@ -147,12 +167,12 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen ,
                                         </TextField>
                                     </FormControl>
                                 </Grid>
-
+                               )}
                                 <Grid item xs={12}>
                                     <Stack direction="row" justifyContent="flex-end">
                                         <AnimateButton>
                                             <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
-                                            Submit
+                                            {update== true ? 'Update Brand' : 'Add Brand'}
                                             </Button>
                                         </AnimateButton>
                                         <AnimateButton>

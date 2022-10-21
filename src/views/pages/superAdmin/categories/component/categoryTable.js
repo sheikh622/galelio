@@ -21,17 +21,24 @@ const CategoryTable = ({
     const [update, setUpdate] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(0);
+    const [name, setName] = useState();
+    const [profitPercentage, setProfitPercentage] = useState();
 console.log(mainBrandId, "brand id================>")
 
     return (
         <><AddUpdateCategory 
+        profitPercentage={profitPercentage}
         mainBrandId={mainBrandId}
         open={open}
         deleteId={deleteId}
+        name={name}
         setOpen={setOpen}
         update={update}
         setUpdate={setUpdate}
         categoryList={categoryList}
+        page={page}
+        limit={limit}
+        search={search}
         /><TableContainer>
             {/* delete */}
             <DeleteCategoryDialog
@@ -48,6 +55,7 @@ console.log(mainBrandId, "brand id================>")
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">Name</TableCell>
+                        <TableCell align="center">Profit</TableCell>
 
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
@@ -59,10 +67,13 @@ console.log(mainBrandId, "brand id================>")
                         categoryList.categoryList.map((row, index) => (
                             <>
                                 <TableRow onClick={() => {
-                                    console.log('nfts', row);
+                                   
                                 }}>
                                     <TableCell align="center" sx={{ padding: '0px' }}>
                                         {row.label}
+                                    </TableCell>
+                                    <TableCell align="center" sx={{ padding: '0px' }}>
+                                        {row.profit}
                                     </TableCell>
 
                                     <TableCell align="center" sx={{ padding: '0px' }}>
@@ -73,6 +84,8 @@ console.log(mainBrandId, "brand id================>")
                                                     aria-label="Edit"
                                                     size="large"
                                                     onClick={() => {
+                                                        setName(row.label);
+                                                        setProfitPercentage(row.profit);
                                                         setOpen(true);
                                                         setUpdate(true);
                                                         setDeleteId(row.value);

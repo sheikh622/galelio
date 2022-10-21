@@ -7,6 +7,7 @@ import CategoryTable from './component/categoryTable';
 import {
     Button,
     Dialog,
+    Divider,
     DialogActions,
     DialogContent,
     DialogTitle,
@@ -148,7 +149,7 @@ const Categories = () => {
                 }
                 content={false}
             >
-
+            {brand != -1 ? (
                 <>
                     <CategoryTable
                     setOpen={setAddEditModal} open={addEditModal}
@@ -239,7 +240,16 @@ const Categories = () => {
                         </Grid>
                     </Grid>
                 </>
-
+                ) : (
+                    <>
+                        <Grid item md={12}>
+                            <Divider />
+                        </Grid>
+                        <Grid item>
+                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                        </Grid>
+                    </>
+                )}
             </MainCard>
         </>
     );

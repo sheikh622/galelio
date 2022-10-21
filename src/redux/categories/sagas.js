@@ -11,6 +11,7 @@ import {
 
 
 } from './actions';
+import { setLoader } from "redux/auth/actions";
 import {
     GET_ALL_CATEGORIES,
     ADD_CATEGORY,
@@ -65,7 +66,9 @@ function* addCategoryRequest({ payload }) {
             })
         );
         payload.handleClose();
+       
         yield setNotification('success', response.data.message);
+        // payload.navigate('/categories');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
         console.log(error.response.data.data,"error.response.data.data")
@@ -78,15 +81,15 @@ export function* watchAddCategory() {
 
 function* updateCategoryRequest({ payload }) {
     let data = {
+            name:payload.name,
+            brandId:payload.brandId,
+            categoryId:payload.categoryId,
+            profitPercentage:payload.profitPercentage
         
-    profitPercentage:payload.profitPercentage,
-        name: payload.name,
-        brandId: payload.brandId,
-        categoryId: payload.categoryId
     };
     try {
         const token = yield select(makeSelectAuthToken());
-        const response = yield axios.post(`/category/update`, data, {
+        const response = yield axios.put(`/category/update`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -100,9 +103,13 @@ function* updateCategoryRequest({ payload }) {
             })
         );
         payload.handleClose();
+       
         yield setNotification('success', response.data.message);
+       
+        // payload.navigate('/categories');
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+        // yield sagaErrorHandler(error.response.data.data);
+        console.log(error.response);
     }
 }
 
