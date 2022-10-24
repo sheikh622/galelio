@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
+import { IconButton, Stack, Table, TableBody, TableCell, TableContainer,Grid, Divider, Typography, TableHead, TableRow, Tooltip } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import DeleteCategoryDialog from './deleteCategoryDialog';
@@ -23,7 +23,7 @@ const CategoryTable = ({
     const [deleteId, setDeleteId] = useState(0);
     const [name, setName] = useState();
     const [profitPercentage, setProfitPercentage] = useState();
-console.log(mainBrandId, "brand id================>")
+// console.log(mainBrandId, "brand id================>")
 
     return (
         <><AddUpdateCategory 
@@ -54,26 +54,29 @@ console.log(mainBrandId, "brand id================>")
             <Table>
                 <TableHead>
                     <TableRow>
+                       
                         <TableCell align="center">Name</TableCell>
                         <TableCell align="center">Profit</TableCell>
 
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
+                { categoryList.categories?.length > 0 ? (
                 <TableBody>
-                    {categoryList.categoryList != undefined &&
+                    {categoryList.categories != undefined &&
 
 
-                        categoryList.categoryList.map((row, index) => (
+                        categoryList.categories.map((row, index) => (
                             <>
                                 <TableRow onClick={() => {
                                    
                                 }}>
+                                    
                                     <TableCell align="center" sx={{ padding: '0px' }}>
-                                        {row.label}
+                                        {row.name}
                                     </TableCell>
                                     <TableCell align="center" sx={{ padding: '0px' }}>
-                                        {row.profit}
+                                        {row.profitPercentage}%
                                     </TableCell>
 
                                     <TableCell align="center" sx={{ padding: '0px' }}>
@@ -84,11 +87,11 @@ console.log(mainBrandId, "brand id================>")
                                                     aria-label="Edit"
                                                     size="large"
                                                     onClick={() => {
-                                                        setName(row.label);
-                                                        setProfitPercentage(row.profit);
+                                                        setName(row.name);
+                                                        setProfitPercentage(row.profitPercentage);
                                                         setOpen(true);
                                                         setUpdate(true);
-                                                        setDeleteId(row.value);
+                                                        setDeleteId(row.id);
                                                     }}
                                                 >
                                                     <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
@@ -104,7 +107,7 @@ console.log(mainBrandId, "brand id================>")
                                                     }}
                                                     size="large"
                                                     onClick={() => {
-                                                        setDeleteId(row.value); //categoryid
+                                                        setDeleteId(row.id); //categoryid
                                                         setDeleteOpen(true); //open delete dialoge
 
 
@@ -119,7 +122,21 @@ console.log(mainBrandId, "brand id================>")
                             </>
                         ))}
                 </TableBody>
+                 ) : (
+                    <>
+                        <Grid item md={12}>
+                            <Divider />
+                        </Grid>
+                        <Grid item>
+                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                        </Grid>
+                        
+                       
+                    
+                    </>
+                )} 
             </Table>
+            <Divider />
         </TableContainer></>
     );
 };

@@ -35,17 +35,20 @@ const Categories = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const categoryList = useSelector((state) => state.category.categoryList);
-    console.log(categoryList, "categoryList======>")
+    console.log(categoryList.categories?.length, "categoryList======>")
     const [open, setOpen] = useState(false);
     const [brand, setBrand] = useState(-1);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
+    const [searchCategories, setSearchCategories] = useState('');
+    const [pageCategories, setPageCategories] = useState(1);
+    const [limitCategories, setLimitCategories] = useState(10);
     const [addEditModal, setAddEditModal] = useState(false);
 
 
-    
-    
+
+
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -61,11 +64,11 @@ const Categories = () => {
 
     const handleBrandChange = (event) => {
         setBrand(event.target.value);
-        console.log(event.target.value, "setBrand===========");
+        // console.log(event.target.value, "setBrand===========");
     };
 
     useEffect(() => {
-        console.log("cate brand")
+        console.log("cate brand");
         dispatch(
             getAllBrands({
                 search: search,
@@ -76,21 +79,22 @@ const Categories = () => {
     }, [search, page, limit]);
 
     const brandsList = useSelector((state) => state.brand.brandsList);
-    console.log(brandsList, "========================table==================>");
+    // console.log(brandsList, "========================table==================>");
     useEffect(() => {
         dispatch(
             getAllCategories({
                 brandId: brand == 0 ? 0 : brand,
                 // brandId: 2,
-                search: search,
-                page: page,
-                limit: limit
+                search: searchCategories,
+                page: pageCategories,
+                limit: limitCategories
             })
         );
-    }, [search, page, limit, brand]);
+    }, [searchCategories, pageCategories, limitCategories, brand]);
+
     return (
         <>
-           
+
             <HeadingCard title="Category Management" />
             <MainCard
                 title={
@@ -106,7 +110,7 @@ const Categories = () => {
                                 }
                                 size="small"
                                 onChange={(e) => {
-                                    setSearch(e.target.value);
+                                    setSearchCategories(e.target.value);
                                 }}
                             />
                         </Grid>
@@ -137,9 +141,9 @@ const Categories = () => {
                                 onClick={() => {
                                     setAddEditModal(true);
 
-                                    
 
-                                    
+
+
                                 }}
                             >
                                 Add Category
@@ -149,107 +153,99 @@ const Categories = () => {
                 }
                 content={false}
             >
-            {brand != -1 ? (
-                <>
-                    <CategoryTable
+
+                <CategoryTable
                     setOpen={setAddEditModal} open={addEditModal}
-                  
-                        mainBrandId={brand}
-                        categoryList={categoryList}
-                        page={page}
-                        limit={limit}
-                        search={search}
-                      
-                       
-                    />
-                    <Grid item xs={12} sx={{ p: 3 }}>
-                        <Grid container justifyContent="space-between" spacing={gridSpacing}>
-                            <Grid item>
-                                <Pagination
-                                    color="primary"
-                                    showFirstButton
-                                    showLastButton
-                                    page={page}
-                                    count={categoryList && categoryList.pages}
-                                    onChange={(event, newPage) => {
-                                        setPage(newPage);
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <Button
-                                    size="large"
-                                    sx={{ color: theme.palette.grey[900] }}
-                                    color="secondary"
-                                    endIcon={<ExpandMoreRoundedIcon />}
-                                    onClick={handleClick}
-                                >
-                                    {limit} Rows
-                                </Button>
-                                <Menu
-                                    id="menu-user-list-style1"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleCloseMenu}
-                                    variant="selectedMenu"
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right'
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right'
-                                    }}
-                                >
-                                    <MenuItem
-                                        value={10}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        10 Rows
-                                    </MenuItem>
-                                    <MenuItem
-                                        value={25}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        25 Rows
-                                    </MenuItem>
-                                    <MenuItem
-                                        value={50}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        50 Rows{' '}
-                                    </MenuItem>
-                                </Menu>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </>
-                ) : (
+
+                    mainBrandId={brand}
+                    categoryList={categoryList}
+                    page={pageCategories}
+                    limit={limitCategories}
+                    search={searchCategories}
+
+
+                />
+              {/*   {brand != -1  && categoryList.categories?.length > 0 ? ( */}
                     <>
-                        <Grid item md={12}>
-                            <Divider />
-                        </Grid>
-                        <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                        <Grid item xs={12} sx={{ p: 3 }}>
+                            <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                                <Grid item>
+                                    <Pagination
+                                        color="primary"
+                                        showFirstButton
+                                        showLastButton
+                                        page={pageCategories}
+                                        count={categoryList.totalPages}
+                                        onChange={(event, newPage) => {
+                                            setPageCategories(newPage);
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        size="large"
+                                        sx={{ color: theme.palette.grey[900] }}
+                                        color="secondary"
+                                        endIcon={<ExpandMoreRoundedIcon />}
+                                        onClick={handleClick}
+                                    >
+                                        {limitCategories} Rows
+                                    </Button>
+                                    <Menu
+                                        id="menu-user-list-style1"
+                                        anchorEl={anchorEl}
+                                        keepMounted
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleCloseMenu}
+                                        variant="selectedMenu"
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right'
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'right'
+                                        }}
+                                    >
+                                        <MenuItem
+                                            value={10}
+                                            onClick={(e) => {
+                                                setLimitCategories(e.target.value);
+                                                setPageCategories(1);
+                                                handleCloseMenu();
+                                            }}
+                                        >
+                                            {' '}
+                                            10 Rows
+                                        </MenuItem>
+                                        <MenuItem
+                                            value={25}
+                                            onClick={(e) => {
+                                                setLimitCategories(e.target.value);
+                                                setPageCategories(1);
+                                                handleCloseMenu();
+                                            }}
+                                        >
+                                            {' '}
+                                            25 Rows
+                                        </MenuItem>
+                                        <MenuItem
+                                            value={50}
+                                            onClick={(e) => {
+                                                setLimitCategories(e.target.value);
+                                                setPageCategories(1);
+                                                handleCloseMenu();
+                                            }}
+                                        >
+                                            {' '}
+                                            50 Rows{' '}
+                                        </MenuItem>
+                                    </Menu>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </>
-                )}
+           
             </MainCard>
         </>
     );
