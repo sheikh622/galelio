@@ -1,6 +1,6 @@
 const config = {
     basename: '',
-    defaultPath: '/super-admin/dashboard',
+    defaultPath: '/dashboard',
     fontFamily: `'Roboto', sans-serif`,
     borderRadius: 12,
     outlinedFilled: true,

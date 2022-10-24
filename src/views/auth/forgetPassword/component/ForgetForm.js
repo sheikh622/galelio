@@ -36,7 +36,7 @@ const ForgetForm = ({ ...others }) => {
                 email: Yup.string().email("Invalid email").max(255).required("Email is required!")
             })}
             onSubmit={async (values) => {
-                // await console.log("forgot")
+                
                 await dispatch(setLoader(true));
                  dispatch(
                     forgotPassword({

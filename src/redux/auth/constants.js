@@ -4,5 +4,5 @@ export const SET_LOADER = 'SET_LOADER';
 export const LOGOUT = 'logout';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
-
+export const SET_WALLET_ADDRESS = 'set_wallet_address'
 
