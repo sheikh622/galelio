@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconDashboard, IconDeviceAnalytics,IconCash, IconUserCheck,IconBell, IconReceipt2, IconClipboardList } from '@tabler/icons';
+import { IconDashboard, IconDeviceAnalytics, IconUserCheck, IconReceipt2, IconClipboardList } from '@tabler/icons';
 
 // constant
 const icons = {
@@ -10,39 +10,32 @@ const icons = {
     IconDeviceAnalytics,
     IconUserCheck,
     IconReceipt2,
-    IconClipboardList,
-    IconBell,
-    IconCash
-    
+    IconClipboardList
 };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const superAdminMenu = {
-    id: 'admin',
+    id: 'Super Admin',
     // title: <FormattedMessage id="dashboard" />,
     type: 'group',
     children: [
         {
             id: 'dashboard',
-            title: <FormattedMessage id="admin.dashboard" />,
+            title: <FormattedMessage id="Dashboard" />,
             type: 'item',
             url: '/dashboard',
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
-         {
-            id: 'brand',
-            title: <FormattedMessage id="admin.brand" />,
+        {
+            id: 'Brand',
+            title: <FormattedMessage id="Brand" />,
             type: 'item',
             url: '/brands',
-            icon: icons.IconUserCheck,
+            icon: icons.IconDeviceAnalytics,
             breadcrumbs: false
         },
-    
-       
-        
-       
        
        
     ]

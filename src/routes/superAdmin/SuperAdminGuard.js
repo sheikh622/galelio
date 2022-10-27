@@ -10,21 +10,24 @@ import { useSelector } from 'react-redux';
  * Authentication guard for routes
  * @param {PropTypes.node} children children element/node
  */
-const AuthGuard = ({ children }) => {
+const SuperAdminGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (token == '') {
-            navigate('login', { replace: true });
+            navigate('/login', { replace: true });
         }
-    }, [token, navigate]);
+        else{
+            navigate('/dashboard', { replace: true }); 
+        }
+    }, [token]);
 
     return children;
 };
 
-AuthGuard.propTypes = {
+SuperAdminGuard.propTypes = {
     children: PropTypes.node
 };
 
-export default AuthGuard;
+export default SuperAdminGuard;
