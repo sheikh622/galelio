@@ -37,7 +37,7 @@ const Categories = () => {
     const categoryList = useSelector((state) => state.category.categoryList);
     console.log(categoryList.categories?.length, "categoryList======>")
     const [open, setOpen] = useState(false);
-    const [brand, setBrand] = useState(-1);
+    const [brand, setBrand] = useState(0);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -124,7 +124,7 @@ const Categories = () => {
                                 value={brand}
                                 onChange={handleBrandChange}
                             >
-                                <MenuItem value='-1'>Select</MenuItem>
+                                <MenuItem value='0'>Select</MenuItem>
                                 {brandsList != undefined &&
 
                                     brandsList?.brands?.map((option, index) => (

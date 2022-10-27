@@ -42,7 +42,7 @@ const superAdminMenu = {
         // },
         {
             id: 'nftManagement',
-            title: <FormattedMessage id="admin.nftManagement" />,
+            title: <FormattedMessage id="Management" />,
             type: 'collapse',
 
             icon: icons.IconDeviceAnalytics,

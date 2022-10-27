@@ -4,7 +4,8 @@ import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, Grid, D
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import DeleteCategoryDialog from './deleteCategoryDialog';
-import AddUpdateCategory from '../../categories/component/AddUpdateCategory';
+// import AddUpdateCategory from './AddUpdateCategory';
+import AddUpdateCategory from './addUpdateCategory';
 import moment from 'moment';
 const CategoryTable = ({
     categoryList,
@@ -21,14 +22,17 @@ const CategoryTable = ({
     const [update, setUpdate] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(0);
+    const [brandId, setBrandId] = useState(0);
     const [name, setName] = useState();
     const [profitPercentage, setProfitPercentage] = useState();
     // console.log(mainBrandId, "brand id================>")
 
     return (
         <><AddUpdateCategory
+        
             profitPercentage={profitPercentage}
             mainBrandId={mainBrandId}
+            brandId={brandId}
             open={open}
             deleteId={deleteId}
             name={name}
@@ -42,7 +46,7 @@ const CategoryTable = ({
         /><TableContainer>
                 {/* delete */}
                 <DeleteCategoryDialog
-                    mainBrandId={mainBrandId}
+                brandId={brandId}
                     deleteId={deleteId}
 
                     deleteOpen={deleteOpen}
@@ -92,6 +96,8 @@ const CategoryTable = ({
                                                                 setOpen(true);
                                                                 setUpdate(true);
                                                                 setDeleteId(row.id);
+                                                                setBrandId(row.BrandId);
+                                                               
                                                             }}
                                                         >
                                                             <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
@@ -107,6 +113,7 @@ const CategoryTable = ({
                                                             }}
                                                             size="large"
                                                             onClick={() => {
+                                                                setBrandId(row.BrandId);
                                                                 setDeleteId(row.id); //categoryid
                                                                 setDeleteOpen(true); //open delete dialoge
 

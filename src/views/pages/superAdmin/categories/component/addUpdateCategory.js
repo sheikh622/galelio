@@ -13,7 +13,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import { addCategory ,updateCategory } from 'redux/categories/actions';
 
 
-export default function AddEditFormDialog({ limit, page, search, open, setOpen, name ,update,deleteId, profitPercentage, setUpdate,mainBrandId, categoryList }) {
+export default function AddUpdateCategory({brandId, limit, page, search, open, setOpen, name ,update,deleteId, profitPercentage, setUpdate,mainBrandId, categoryList }) {
     const theme = useTheme();
     console.log(profitPercentage,"profitPercentage===========================>");
      const [brand, setBrand] = useState(0);
@@ -62,7 +62,7 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen, 
                     addCategory({
                         name: values.name,
                         profitPercentage:values.profitPercentage,
-                        brandId:brand,
+                        brandId: brand,
                         page: page,
                         limit: limit,
                         search: search,
@@ -77,7 +77,7 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen, 
                     updateCategory({
                         name: values.name,
                         profitPercentage:5,
-                        brandId:brand!= 0? brand :  mainBrandId,
+                        brandId:brand!= 0? brand :  brandId,
                         categoryId:deleteId,                      
                         limit: limit,
                         page: page,
@@ -108,7 +108,7 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen, 
                 <>
                 <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
 
-            <DialogTitle id="form-dialog-title">{update== true ? 'Update Brand' : 'Add Brand'}</DialogTitle>
+            <DialogTitle id="form-dialog-title">{update== true ? 'Update Category ' : ' Add Category '}</DialogTitle>
 
       
 
@@ -172,7 +172,7 @@ export default function AddEditFormDialog({ limit, page, search, open, setOpen, 
                                     <Stack direction="row" justifyContent="flex-end">
                                         <AnimateButton>
                                             <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
-                                            {update== true ? 'Update Brand' : 'Add Brand'}
+                                            {update== true ? 'Update ' : 'Add '}
                                             </Button>
                                         </AnimateButton>
                                         <AnimateButton>

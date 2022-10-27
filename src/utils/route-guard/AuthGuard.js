@@ -12,7 +12,8 @@ import { useSelector } from 'react-redux';
  */
 const AuthGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
-    console.log(token,"token authGuard")
+    const token1 = useSelector((state) => state.auth);
+    console.log(token1.user.role,"token authGuard")
     const navigate = useNavigate();
 
     useEffect(() => {
