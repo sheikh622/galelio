@@ -2,8 +2,8 @@ import axioss from 'axios';
 
 
 // export const API_URL = 'http://192.168.1.191:3000/api/v1/';//zain
-// export const API_URL = 'http://galileoargon.tk/api/v1/';
-export const API_URL = 'http://192.168.1.190:3000/api/v1/';///talha
+export const API_URL = 'https://app.galileoprotocol.io/api/v1/';
+// export const API_URL = 'http://192.168.1.190:3000/api/v1/';///talha
 
 
 const axios = axioss.create({

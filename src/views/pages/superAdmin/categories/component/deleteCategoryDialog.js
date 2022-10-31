@@ -10,7 +10,7 @@ export default function DeleteCategoryDialog({deleteId,brandId, deleteOpen, setD
     const handleClose = () => {
         setDeleteOpen(false);
     };
-    console.log(brandId,"brandId======delete")
+   
     return (
         <>
             <Dialog
