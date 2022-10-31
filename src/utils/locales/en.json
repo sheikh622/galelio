@@ -1,14 +1,13 @@
 {
 
     "admin.dashboard": "Dashboard",
-    "admin.billing":"Billing",
-    "admin.notification": "Notification",
-    "admin.packagePriceUpdate":"Package Price Update",
-    "admin.grades":"Grades", 
-    "admin.students":"Students",
+   
+   
+    
+ 
     "admin.brand":"Brand",
     "admin.adminManagement":"Admin Management",
-    "admin.questions":" Questions",
+    
 
     "dashboard": "Dashboard",
     "default": "Default",

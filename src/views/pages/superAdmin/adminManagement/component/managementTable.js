@@ -25,7 +25,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import moment from 'moment';
 import Chip from 'ui-component/extended/Chip';
 import AddUpdateDialog from './addUpdateManagement';
-import MiniteringDialog from './minitingRole';
+import MiniterDialog from './minitingRole';
 import BlockUnblockDialog from './blockUnblock';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -36,25 +36,21 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     const navigate = useNavigate();
 
     const [deleteOpen, setDeleteOpen] = useState(false);
-    const [minitering, setMinitering] = useState(false);
-    const [isBlock, setIsBlock] = useState('');
+    const [mintRole, setMintRole] = useState(false);
     const [isMenu, setIsMenu] = useState(false);
     const [status, setStatus] = useState(false);
-    const [fname, setFname] = useState();
-    const [lname, setLname] = useState();
-    const [email, setEmail] = useState();
-    const [id, setId] = useState();
-    const [detailId, setDetailId] = useState();
-    const [approve, setApprove] = useState(false);
-    const [update, setUpdate] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const handleClick = (event) => {
-        setAnchorEl(event?.currentTarget);
-    };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const [subCategoryData, setSubCategoryData] = useState({
+        id:'',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+    });
+    const [detailId, setDetailId] = useState();
+
+   
+
     const openDetails = (id) => {
         console.log(id, 'open=');
         if (detailId === id) {
@@ -65,33 +61,32 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     };
 
     const adminList = useSelector((state) => state.adminReducer.adminsList);
-    console.log(adminList, '===============adminList===========================>');
+
     return (
         <TableContainer>
             <AddUpdateDialog
-                fname={fname}
-                lname={lname}
-                email={email}
+                setSubCategoryData={setSubCategoryData}
+                subCategoryData={subCategoryData}
+                adminList={adminList}
                 page={page}
                 limit={limit}
                 setOpen={setOpen}
                 open={open}
-                update={update}
-                setUpdate={setUpdate}
+               
+               
                 search={search}
             />
 
             <DeleteManagementDialog
                 deleteOpen={deleteOpen}
                 setDeleteOpen={setDeleteOpen}
-                id={id}
+                subCategoryData={subCategoryData}
                 page={page}
                 limit={limit}
                 search={search}
             />
             <BlockUnblockDialog
-                isBlock={isBlock}
-                email={email}
+                subCategoryData={subCategoryData}
                 open={status}
                 setOpen={setStatus}
                 brandId={brandId}
@@ -99,13 +94,12 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                 limit={limit}
                 search={search}
             />
-            <MiniteringDialog
+            <MiniterDialog
                 isMenu={isMenu}
                 setIsMenu={setIsMenu}
-                isBlock={isBlock}
-                open={minitering}
-                email={email}
-                setOpen={setMinitering}
+                open={mintRole}
+                subCategoryData={subCategoryData}
+                setOpen={setMintRole}
                 brandId={brandId}
                 page={page}
                 limit={limit}
@@ -134,13 +128,19 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                         <TableCell align="center">{row.email}</TableCell>
 
                                         <TableCell align="center">
-                                            {row.isActive == false && <Chip label="Blocked" size="small" chipcolor="success" />}
-                                            {row.isActive == true && <Chip label="Unblocked" size="small" chipcolor="orange" />}
+                                            {row.isActive == false ? (
+                                                <Chip label="Blocked" size="small" chipcolor="success" />
+                                            ) : (
+                                                <Chip label="Unblocked" size="small" chipcolor="orange" />
+                                            )}
                                         </TableCell>
 
                                         <TableCell align="center">
-                                            {row.hasMintingAccess == true && <Chip label="Allowed" size="small" chipcolor="success" />}
-                                            {row.hasMintingAccess == false && <Chip label="Not Allowed" size="small" chipcolor="orange" />}
+                                            {row.hasMintingAccess == true ? (
+                                                <Chip label="Allowed" size="small" chipcolor="success" />
+                                            ) : (
+                                                <Chip label="Not Allowed" size="small" chipcolor="orange" />
+                                            )}
                                         </TableCell>
                                         <TableCell align="center">
                                             <Tooltip placement="top" title="View">
@@ -167,11 +167,14 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             size="large"
                                                             onClick={() => {
                                                                 setOpen(true);
-                                                                setUpdate(true);
-                                                                setFname(row.firstName);
-                                                                setLname(row.lastName);
-                                                                setEmail(row.email);
-                                                                setAnchorEl(null);
+                                                              
+
+                                                                setSubCategoryData({
+                                                                    email: row.email,
+                                                                    firstName: row.firstName,
+                                                                    lastName: row.lastName,
+                                                                    password: ''
+                                                                });
                                                             }}
                                                         >
                                                             edit
@@ -183,8 +186,10 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             size="large"
                                                             onClick={() => {
                                                                 setDeleteOpen(true);
-                                                                setId(row.id);
-                                                                setAnchorEl(null);
+                                                                setSubCategoryData({
+                                                                   id:row.id,
+                                                                
+                                                                });
                                                             }}
                                                         >
                                                             Delete
@@ -196,7 +201,9 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             size="large"
                                                             onClick={() => {
                                                                 setStatus(true);
-                                                                setEmail(row.email);
+                                                                setSubCategoryData({
+                                                                    email: row.email
+                                                                });
                                                             }}
                                                         >
                                                             block Status
@@ -207,8 +214,10 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
-                                                                setMinitering(true);
-                                                                setEmail(row.email);
+                                                                setMintRole(true);
+                                                                setSubCategoryData({
+                                                                    email: row.email
+                                                                });
                                                             }}
                                                         >
                                                             {' '}

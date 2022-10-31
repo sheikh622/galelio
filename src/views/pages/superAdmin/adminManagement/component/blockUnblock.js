@@ -5,8 +5,8 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Dialo
 import { block } from 'redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function BlockUnblockDialog({
-    open, setOpen, isBlock,
-      page, limit, email,search
+    open, setOpen,
+      page, limit, subCategoryData,search
      }) {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function BlockUnblockDialog({
         setOpen(false);
         
     };
-    console.log(email,"email");
+    
     return (
         <>
             <Dialog
@@ -25,7 +25,7 @@ export default function BlockUnblockDialog({
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1"> {isBlock == ''? 'Block Status' : 'Unblock Status'} </DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1"> Block Status  </DialogTitle>
                 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
@@ -48,7 +48,7 @@ export default function BlockUnblockDialog({
                         onClick={() => {
                             dispatch(
                                 block({
-                                   email:email,
+                                   email:subCategoryData.email,
                                     handleClose: handleClose,
                                     page: page,
                                     limit: limit,

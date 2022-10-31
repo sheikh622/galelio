@@ -6,7 +6,7 @@ import { deleteAdmin } from '../../../../../redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function DeleteManagementDialog({
      deleteOpen, setDeleteOpen,
-       page, limit , id, search,
+       page, limit , subCategoryData, search,
      }) {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function DeleteManagementDialog({
         setDeleteOpen(false);
         
     };
-    console.log(id, "id=======del")
+    
     return (
         <>
             <Dialog
@@ -48,7 +48,7 @@ export default function DeleteManagementDialog({
                         onClick={() => {
                             dispatch(
                                 deleteAdmin({
-                                    id: id,
+                                    id: subCategoryData.id,
                                     handleClose: handleClose,
                                     page: page,
                                     limit: limit,

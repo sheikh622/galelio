@@ -56,22 +56,12 @@ export const block = (data) => {
         payload: data
     };
 };
-export const unblock = (data) => {
-    return {
-        type: UNBLOCK_ADMIN,
-        payload: data
-    };
-};
+
 export const mintRole = (data) => {
     return {
         type: MINT_ROLE,
         payload: data
     };
 };
-export const nonMintRole = (data) => {
-    return {
-        type: NON_MINT_ROLE,
-        payload: data
-    };
-};
+
 

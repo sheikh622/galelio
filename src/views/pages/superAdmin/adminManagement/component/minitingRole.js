@@ -5,9 +5,9 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Dialo
 import { mintRole } from 'redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function MiniteringDialog({
-    open, setOpen, isBlock
-     , page, limit, search, email, minterRole, isMenu,setIsMenu
+export default function MiniterDialog({
+    open, setOpen
+     , page, limit, search, subCategoryData, 
      }){
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export default function MiniteringDialog({
        
         
     };
-    console.log(email,"email");
+   
     return (
         <>
             <Dialog
@@ -50,7 +50,7 @@ export default function MiniteringDialog({
                         onClick={() => {
                             dispatch(
                                 mintRole({
-                                    email:email,
+                                    email:subCategoryData.email,
                                     // mintingAccess:minterRole,
                                     page: page,
                                     limit: limit,

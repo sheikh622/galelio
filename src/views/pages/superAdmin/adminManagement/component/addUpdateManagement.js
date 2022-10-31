@@ -14,7 +14,7 @@ import {
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 
-export default function AddUpdateDialog({ fname, lname, email, open, setOpen, setUpdate, update, page, limit, search, brandName, setBrandName, brandId }) {
+export default function AddUpdateDialog({ subCategoryData,setSubCategoryData, open, setOpen, setUpdate, page, limit, search, brandName, setBrandName, brandId }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
@@ -24,15 +24,13 @@ export default function AddUpdateDialog({ fname, lname, email, open, setOpen, se
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    console.log(fname, "page");
-    console.log(lname, "limit");
-    console.log(email, "limit");
+   
     const validationSchema = Yup.object({
-        fname: Yup.string()
+        firstName: Yup.string()
             .required('First Name is required!')
             .max(42, 'First Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
-        lname: Yup.string()
+        lastName: Yup.string()
             .required('Last Name is required!')
             .max(42, 'Last Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
@@ -42,20 +40,15 @@ export default function AddUpdateDialog({ fname, lname, email, open, setOpen, se
     });
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: {
-            fname: update == false ? '' : fname,
-            lname: update == false ? '' : lname,
-            email: update == false ? '' : email,
-            password: '',
-        },
+        initialValues: subCategoryData,
         validationSchema,
         onSubmit: (values) => {
             console.log(values);
-            if (update == false) {
+            if (subCategoryData.firstName == '') {
                 dispatch(
                     addAdmin({
-                        firstName: values.fname,
-                        lastName: values.lname,
+                        firstName: values.firstName,
+                        lastName: values.lastName,
                         email: values.email,
                         password: values.password,
                         page: page,
@@ -69,7 +62,7 @@ export default function AddUpdateDialog({ fname, lname, email, open, setOpen, se
                 console.log(values, 'values')
                 dispatch(
                     updateAdmin({
-                        email:email,
+                        email: subCategoryData.email,
                         password: values.password,
                         page: page,
                         limit: limit,
@@ -82,8 +75,15 @@ export default function AddUpdateDialog({ fname, lname, email, open, setOpen, se
         }
     });
     const handleClose = () => {
+        setSubCategoryData({
+            email: '',
+            firstName:'',
+            lastName:'',
+            password:'',
+        
+        });
         setOpen(false);
-        setUpdate(false);
+    
         formik.resetForm();
     };
 
@@ -98,23 +98,23 @@ export default function AddUpdateDialog({ fname, lname, email, open, setOpen, se
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">{update == false ? 'Add Admin' : 'Update Admin'}</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1">{subCategoryData.firstName == '' ? 'Add Admin' : 'Update Admin'}</DialogTitle>
                 <Divider />
                 <DialogContent>
-                    {update == false ? (
+                    {subCategoryData.firstName == '' ? (
                         <form autoComplete="off" onSubmit={formik.handleSubmit}>
 
                             <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
                                 First Name</InputLabel>
                             <TextField
 
-                                id="fname"
-                                name="fname"
-                                // label="First fname"
-                                value={formik.values.fname}
+                                id="firstName"
+                                name="firstName"
+                                // label="First firstName"
+                                value={formik.values.firstName}
                                 onChange={formik.handleChange}
-                                error={formik.touched.fname && Boolean(formik.errors.fname)}
-                                helperText={formik.touched.fname && formik.errors.fname}
+                                error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+                                helperText={formik.touched.firstName && formik.errors.firstName}
                                 fullWidth
                                 autoComplete="given-name"
                             />
@@ -122,13 +122,13 @@ export default function AddUpdateDialog({ fname, lname, email, open, setOpen, se
                                 Last Name</InputLabel>
                             <TextField
 
-                                id="lname"
-                                name="lname"
-                                // label="Last lname"
-                                value={formik.values.lname}
+                                id="lastName"
+                                name="lastName"
+                                // label="Last lastName"
+                                value={formik.values.lastName}
                                 onChange={formik.handleChange}
-                                error={formik.touched.lname && Boolean(formik.errors.lname)}
-                                helperText={formik.touched.lname && formik.errors.lname}
+                                error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+                                helperText={formik.touched.lastName && formik.errors.lastName}
                                 fullWidth
                                 autoComplete="given-name"
                             />
@@ -258,7 +258,7 @@ export default function AddUpdateDialog({ fname, lname, email, open, setOpen, se
                             formik.handleSubmit();
                         }}
                     >
-                        {update == false ?
+                        {subCategoryData.firstName == '' ?
                             'Add'
                             : 'Update'}
                     </Button>
