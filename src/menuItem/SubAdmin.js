@@ -24,7 +24,7 @@ const subAdminMenu = {
     children: [
         {
             id: 'dashboard',
-            title: <FormattedMessage id="Admin.dashboard" />,
+            title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
             url: '/dashboard',
             icon: icons.IconDashboard,

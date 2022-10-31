@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 const BrandAdminGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
     const navigate = useNavigate();
-    console.log(token,"token authGuard")
+    // console.log(token,"token authGuard")
     useEffect(() => {
         if (token == '') {
             navigate('/login', { replace: true });

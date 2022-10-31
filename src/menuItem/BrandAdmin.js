@@ -24,7 +24,7 @@ const brandAdminMenu = {
     children: [
         {
             id: 'dashboard',
-            title: <FormattedMessage id="Brand.dashboard" />,
+            title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
             url: '/dashboard',
             icon: icons.IconDashboard,

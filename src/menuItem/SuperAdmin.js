@@ -22,7 +22,7 @@ const superAdminMenu = {
     children: [
         {
             id: 'dashboard',
-            title: <FormattedMessage id="Dashboard" />,
+            title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
             url: '/dashboard',
             icon: icons.IconDashboard,
