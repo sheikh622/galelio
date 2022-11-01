@@ -60,7 +60,7 @@ const superAdminMenu = {
                 },
                 {
                     id: 'category',
-                    title: <FormattedMessage id="admin.category" />,
+                    title: <FormattedMessage id="Category" />,
                     type: 'item',
                     icon: icons.IconCheckbox,
                     url: '/categories',
@@ -69,6 +69,15 @@ const superAdminMenu = {
               
             ]
         }
+         ,
+         {
+            id: 'admin',
+            title: <FormattedMessage id="admin.adminManagement" />,
+            type: 'item',
+            url: '/adminManagement',
+            icon: icons.IconUserCheck,
+            breadcrumbs: false
+        },
     
        
         

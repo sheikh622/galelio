@@ -137,8 +137,8 @@ const Categories = () => {
                                 select
                                 fullWidth
                                 label="Select Brand"
-                                value={deleteOpen== false? 0 : brand}
-                                
+                                value={ brand}
+                                // defaultValue={brand}
                                 onChange={handleBrandChange}
                             >
                                 <MenuItem value="0">Select</MenuItem>

@@ -1,16 +1,13 @@
 {
 
     "admin.dashboard": "Dashboard",
-    "admin.billing":"Billing",
-    "admin.notification": "Notification",
-    "admin.packagePriceUpdate":"Package Price Update",
-    "admin.grades":"Grades", 
-    "admin.students":"Students",
+   
+   
+    
+ 
     "admin.brand":"Brand",
-    "admin.category":"Category",
-    "admin.nftManagement":"NFT Management",
-
-    "admin.questions":" Questions",
+    "admin.adminManagement":"Admin Management",
+    
 
     "dashboard": "Dashboard",
     "default": "Default",
