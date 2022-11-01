@@ -39,6 +39,14 @@ const superAdminMenu = {
             icon: icons.IconUserCheck,
             breadcrumbs: false
         },
+         {
+            id: 'admin',
+            title: <FormattedMessage id="admin.adminManagement" />,
+            type: 'item',
+            url: '/adminManagement',
+            icon: icons.IconUserCheck,
+            breadcrumbs: false
+        },
     
        
         
