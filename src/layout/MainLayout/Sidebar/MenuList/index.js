@@ -3,18 +3,26 @@ import { Typography } from '@mui/material';
 
 // project imports
 import NavGroup from './NavGroup';
-import menuItem from 'menu-items';
+import menuItem from 'menuItem';
+import { useSelector } from 'react-redux';
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
 
+
 const MenuList = () => {
-    const navItems = menuItem.items.map((item) => {
-        switch (item.type) {
+    const role =  useSelector((state) => state.auth.user.role);
+    const navItems =menuItem.items
+    .filter((item) => item.id == role)
+    .map((filteredItem, index) => {
+        switch (filteredItem.type) {
             case 'group':
-                return <NavGroup key={item.id} item={item} />;
+                return  (
+                      <NavGroup key={filteredItem.id} item={filteredItem} />
+                )
+              
             default:
                 return (
-                    <Typography key={item.id} variant="h6" color="error" align="center">
+                    <Typography key={filteredItem.id} variant="h6" color="error" align="center">
                         Menu Items Error
                     </Typography>
                 );
