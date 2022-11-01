@@ -3,58 +3,34 @@ import { useTheme } from '@mui/material/styles';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, Grid, Divider, Typography, TableHead, TableRow, Tooltip } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import DeleteCategoryDialog from './deleteCategoryDialog';
-// import AddUpdateCategory from './AddUpdateCategory';
-import AddUpdateCategory from './addUpdateCategory';
+
+
 import moment from 'moment';
 const CategoryTable = ({
+    setOpen,
+    open,
+    categories,
+    setCategories,
     categoryList,
-    mainBrandId,
-    page,
-    limit,
-    search,
-    open, setOpen,
+    setDeleteOpen,
+   
+   
 
 
 
 }) => {
     const theme = useTheme();
-    const [update, setUpdate] = useState(false);
-    const [deleteOpen, setDeleteOpen] = useState(false);
-    const [deleteId, setDeleteId] = useState(0);
-    const [brandId, setBrandId] = useState(0);
-    const [name, setName] = useState();
-    const [profitPercentage, setProfitPercentage] = useState();
-    // console.log(mainBrandId, "brand id================>")
+   
+    
+   
+
 
     return (
-        <><AddUpdateCategory
-        
-            profitPercentage={profitPercentage}
-            mainBrandId={mainBrandId}
-            brandId={brandId}
-            open={open}
-            deleteId={deleteId}
-            name={name}
-            setOpen={setOpen}
-            update={update}
-            setUpdate={setUpdate}
-            categoryList={categoryList}
-            page={page}
-            limit={limit}
-            search={search}
-        /><TableContainer>
-                {/* delete */}
-                <DeleteCategoryDialog
-                brandId={brandId}
-                    deleteId={deleteId}
-
-                    deleteOpen={deleteOpen}
-                    setDeleteOpen={setDeleteOpen}
-
-                    page={page}
-                    limit={limit}
-                    search={search} />
+        <>
+       
+        <TableContainer>
+              
+               
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -91,12 +67,13 @@ const CategoryTable = ({
                                                             aria-label="Edit"
                                                             size="large"
                                                             onClick={() => {
-                                                                setName(row.name);
-                                                                setProfitPercentage(row.profitPercentage);
+                                                               
                                                                 setOpen(true);
-                                                                setUpdate(true);
-                                                                setDeleteId(row.id);
-                                                                setBrandId(row.BrandId);
+                                                               
+                                                                setCategories({   name: row.name,
+                                                                profitPercentage: row.profitPercentage,
+                                                                brandId:row.BrandId,
+                                                                categoryId:row.id });
                                                                
                                                             }}
                                                         >
@@ -113,8 +90,10 @@ const CategoryTable = ({
                                                             }}
                                                             size="large"
                                                             onClick={() => {
-                                                                setBrandId(row.BrandId);
-                                                                setDeleteId(row.id); //categoryid
+                                                                setCategories({   
+                                                                    brandId:row.BrandId,
+                                                                    categoryId:row.id });
+                                                                
                                                                 setDeleteOpen(true); //open delete dialoge
 
 
