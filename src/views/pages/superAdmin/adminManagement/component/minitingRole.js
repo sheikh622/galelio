@@ -7,7 +7,7 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 export default function MiniterDialog({
     open, setOpen
-     , page, limit, search, subCategoryData, 
+     , page, limit, search, adminManagement, 
      }){
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export default function MiniterDialog({
                         onClick={() => {
                             dispatch(
                                 mintRole({
-                                    email:subCategoryData.email,
+                                    email:adminManagement.email,
                                     // mintingAccess:minterRole,
                                     page: page,
                                     limit: limit,

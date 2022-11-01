@@ -6,7 +6,7 @@ import { block } from 'redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function BlockUnblockDialog({
     open, setOpen,
-      page, limit, subCategoryData,search
+      page, limit, adminManagement,search
      }) {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -48,7 +48,7 @@ export default function BlockUnblockDialog({
                         onClick={() => {
                             dispatch(
                                 block({
-                                   email:subCategoryData.email,
+                                   email:adminManagement.email,
                                     handleClose: handleClose,
                                     page: page,
                                     limit: limit,
