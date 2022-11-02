@@ -40,7 +40,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     const [isMenu, setIsMenu] = useState(false);
     const [status, setStatus] = useState(false);
 
-    const [subCategoryData, setSubCategoryData] = useState({
+    const [adminManagement, setAdminManagement] = useState({
         id:'',
         firstName: '',
         lastName: '',
@@ -65,8 +65,8 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     return (
         <TableContainer>
             <AddUpdateDialog
-                setSubCategoryData={setSubCategoryData}
-                subCategoryData={subCategoryData}
+            setAdminManagement={setAdminManagement}
+                adminManagement={adminManagement}
                 adminList={adminList}
                 page={page}
                 limit={limit}
@@ -80,13 +80,13 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
             <DeleteManagementDialog
                 deleteOpen={deleteOpen}
                 setDeleteOpen={setDeleteOpen}
-                subCategoryData={subCategoryData}
+                adminManagement={adminManagement}
                 page={page}
                 limit={limit}
                 search={search}
             />
             <BlockUnblockDialog
-                subCategoryData={subCategoryData}
+            adminManagement={adminManagement}
                 open={status}
                 setOpen={setStatus}
                 brandId={brandId}
@@ -98,7 +98,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                 isMenu={isMenu}
                 setIsMenu={setIsMenu}
                 open={mintRole}
-                subCategoryData={subCategoryData}
+                adminManagement={adminManagement}
                 setOpen={setMintRole}
                 brandId={brandId}
                 page={page}
@@ -158,7 +158,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                         </TableCell>
                                     </TableRow>
                                     <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
-                                        <TableCell sx={{ pl: 5 }} colSpan={12}>
+                                        <TableCell sx={{ pl: 12 }} colSpan={12}>
                                             <div>
                                                 <Grid container spacing={4}>
                                                     <Grid item xs={3} md={3}>
@@ -169,7 +169,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                                 setOpen(true);
                                                               
 
-                                                                setSubCategoryData({
+                                                                setAdminManagement({
                                                                     email: row.email,
                                                                     firstName: row.firstName,
                                                                     lastName: row.lastName,
@@ -186,7 +186,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             size="large"
                                                             onClick={() => {
                                                                 setDeleteOpen(true);
-                                                                setSubCategoryData({
+                                                                setAdminManagement({
                                                                    id:row.id,
                                                                 
                                                                 });
@@ -201,7 +201,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             size="large"
                                                             onClick={() => {
                                                                 setStatus(true);
-                                                                setSubCategoryData({
+                                                                setAdminManagement({
                                                                     email: row.email
                                                                 });
                                                             }}
@@ -215,7 +215,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             size="large"
                                                             onClick={() => {
                                                                 setMintRole(true);
-                                                                setSubCategoryData({
+                                                                setAdminManagement({
                                                                     email: row.email
                                                                 });
                                                             }}

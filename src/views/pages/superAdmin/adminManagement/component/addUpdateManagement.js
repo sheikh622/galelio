@@ -14,7 +14,7 @@ import {
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 
-export default function AddUpdateDialog({ subCategoryData,setSubCategoryData, open, setOpen, setUpdate, page, limit, search, brandName, setBrandName, brandId }) {
+export default function AddUpdateDialog({ adminManagement,setAdminManagement, open, setOpen, setUpdate, page, limit, search, brandName, setBrandName, brandId }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
@@ -40,11 +40,11 @@ export default function AddUpdateDialog({ subCategoryData,setSubCategoryData, op
     });
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: subCategoryData,
+        initialValues: adminManagement,
         validationSchema,
         onSubmit: (values) => {
             console.log(values);
-            if (subCategoryData.firstName == '') {
+            if (adminManagement.firstName == '') {
                 dispatch(
                     addAdmin({
                         firstName: values.firstName,
@@ -62,7 +62,7 @@ export default function AddUpdateDialog({ subCategoryData,setSubCategoryData, op
                 console.log(values, 'values')
                 dispatch(
                     updateAdmin({
-                        email: subCategoryData.email,
+                        email: adminManagement.email,
                         password: values.password,
                         page: page,
                         limit: limit,
@@ -75,7 +75,7 @@ export default function AddUpdateDialog({ subCategoryData,setSubCategoryData, op
         }
     });
     const handleClose = () => {
-        setSubCategoryData({
+        setAdminManagement({
             email: '',
             firstName:'',
             lastName:'',
@@ -98,10 +98,10 @@ export default function AddUpdateDialog({ subCategoryData,setSubCategoryData, op
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">{subCategoryData.firstName == '' ? 'Add Admin' : 'Update Admin'}</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1">{adminManagement.firstName == '' ? 'Add Admin' : 'Update Admin'}</DialogTitle>
                 <Divider />
                 <DialogContent>
-                    {subCategoryData.firstName == '' ? (
+                    {adminManagement.firstName == '' ? (
                         <form autoComplete="off" onSubmit={formik.handleSubmit}>
 
                             <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
@@ -258,7 +258,7 @@ export default function AddUpdateDialog({ subCategoryData,setSubCategoryData, op
                             formik.handleSubmit();
                         }}
                     >
-                        {subCategoryData.firstName == '' ?
+                        {adminManagement.firstName == '' ?
                             'Add'
                             : 'Update'}
                     </Button>
