@@ -15,7 +15,7 @@ const Brands = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const brandsList = useSelector((state) => state.brand.brandsList);
-    console.log(brandsList.pages,"===============brandsList.pages===========================>");
+    // console.log(brandsList.pages,"===============brandsList.pages===========================>");
    
     
     const [search, setSearch] = useState('');

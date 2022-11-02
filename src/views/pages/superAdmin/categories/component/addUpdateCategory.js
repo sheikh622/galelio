@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Stack, Dialog, CardContent, DialogContent, FormControl, MenuItem, TextField, Grid, DialogTitle } from '@mui/material';
+import { Button, Stack, Dialog, CardContent, DialogContent, FormControl, MenuItem, TextField, Grid, DialogTitle, Divider } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -93,7 +93,7 @@ export default function AddUpdateCategory({
         <>
             <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{categories.name !== '' ? 'Update Category ' : ' Add Category '}</DialogTitle>
-
+<Divider/>
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <CardContent>
@@ -133,7 +133,7 @@ export default function AddUpdateCategory({
                                                 fullWidth
                                                 InputLabelProps={{ shrink: true }}
                                                 label="Select Brand"
-                                                // value={mainBrandId}
+                                                value={brand}
                                                 defaultValue={formik.values.brand}
                                                 onChange={handleBrandChange}
                                                 error={formik.touched.brand && Boolean(formik.errors.brand)}

@@ -16,7 +16,7 @@ const SubAdminGuard = ({ children }) => {
     console.log(token,"token authGuard")
     useEffect(() => {
         if (token == '') {
-            navigate('/login', { replace: true });
+            navigate('/', { replace: true });
         }
         else{
             navigate('/dashboard', { replace: true }); 

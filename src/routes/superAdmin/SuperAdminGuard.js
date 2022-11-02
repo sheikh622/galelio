@@ -16,7 +16,7 @@ const SuperAdminGuard = ({ children }) => {
 
     useEffect(() => {
         if (token == '') {
-            navigate('/login', { replace: true });
+            navigate('/', { replace: true });
         }
         else{
             navigate('/dashboard', { replace: true }); 

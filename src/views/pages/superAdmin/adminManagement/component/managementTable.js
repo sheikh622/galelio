@@ -158,7 +158,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                         </TableCell>
                                     </TableRow>
                                     <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
-                                        <TableCell sx={{ pl: 5 }} colSpan={12}>
+                                        <TableCell sx={{ pl: 12 }} colSpan={12}>
                                             <div>
                                                 <Grid container spacing={4}>
                                                     <Grid item xs={3} md={3}>
