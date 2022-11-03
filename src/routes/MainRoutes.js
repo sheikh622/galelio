@@ -10,6 +10,7 @@ import AuthGuard from 'utils/route-guard/AuthGuard';
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 const AdminManagement = Loadable(lazy(() => import('views/pages/superAdmin/adminManagement')));
+const BrandManagement = Loadable(lazy(() => import('views/pages/superAdmin/brandManagement')));
 
 
 const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
@@ -52,6 +53,10 @@ const MainRoutes = {
         {
             path: '/adminManagement',
             element: <AdminManagement />
+        },
+        {
+            path: '/brandManagement',
+            element: <BrandManagement />
         },
        
     ]

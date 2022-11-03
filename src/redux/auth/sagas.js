@@ -21,7 +21,7 @@ function* loginUser({ payload }) {
         
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
-        console.log(error.response.data.data, "error.response.data")
+       
     }
 }
 
@@ -47,13 +47,13 @@ function* resetPasswordRequest({ payload }) {
             newPassword: payload.newPassword,
             token: payload.token
         };
-        console.log(payload.newPassword);
+        
         const response = yield axios.put(`auth/resetPassword`, data);
         yield setNotification('success', response.data.message);
         payload.navigate('/dashboard');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
-        console.log(error.response.data, "error.response.data")
+        
     }
 }
 

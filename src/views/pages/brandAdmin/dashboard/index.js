@@ -19,7 +19,7 @@ const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
-    // console.log(Dashboard.total_users,"Dashboard")
+    
 
     return (
         <Grid container spacing={gridSpacing}>

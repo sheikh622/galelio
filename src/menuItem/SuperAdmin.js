@@ -35,6 +35,15 @@ const superAdminMenu = {
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
+    
+        {
+            id: 'admin',
+            title: <FormattedMessage id="admin.adminManagement" />,
+            type: 'item',
+            url: '/adminManagement',
+            icon: icons.IconUserCheck,
+            breadcrumbs: false
+         },
         //  {
         //     id: 'brand',
         //     title: <FormattedMessage id="admin.brand" />,
@@ -44,8 +53,8 @@ const superAdminMenu = {
         //     breadcrumbs: false
         // },
         {
-            id: 'nftManagement',
-            title: <FormattedMessage id="Management" />,
+            id: 'Management',
+            title: <FormattedMessage id=" Brand Management" />,
             type: 'collapse',
 
             icon: icons.IconDeviceAnalytics,
@@ -68,19 +77,21 @@ const superAdminMenu = {
                     icon: icons.IconCheckbox,
                     url: '/categories',
                     breadcrumbs: false
-                }
+                },
+                {
+                    id: 'Brand',
+                    title: <FormattedMessage id="Brand Management" />,
+                    type: 'item',
+                    url: '/brandManagement',
+                    icon: icons.IconReceipt2,
+                    breadcrumbs: false
+                },
               
             ]
         }
-         ,
-         {
-            id: 'admin',
-            title: <FormattedMessage id="admin.adminManagement" />,
-            type: 'item',
-            url: '/adminManagement',
-            icon: icons.IconUserCheck,
-            breadcrumbs: false
-         },
+         
+      
+      
        
        
        

@@ -13,7 +13,7 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
     const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
     const brandsList = useSelector((state) => state.brand.brandsList);
-    console.log(brandsList.brands, "========================table==================>");
+   
     return (
         <TableContainer>
             <DeleteBrandDialog

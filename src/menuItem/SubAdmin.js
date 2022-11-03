@@ -33,8 +33,8 @@ const subAdminMenu = {
             breadcrumbs: false
         },
         {
-            id: 'nftManagement',
-            title: <FormattedMessage id="Management" />,
+            id: 'Management',
+            title: <FormattedMessage id=" Brand Management" />,
             type: 'collapse',
 
             icon: icons.IconDeviceAnalytics,
@@ -57,10 +57,19 @@ const subAdminMenu = {
                     icon: icons.IconCheckbox,
                     url: '/categories',
                     breadcrumbs: false
-                }
+                },
+                {
+                    id: 'Brand',
+                    title: <FormattedMessage id="Brand Management" />,
+                    type: 'item',
+                    url: '/brandManagement',
+                    icon: icons.IconReceipt2,
+                    breadcrumbs: false
+                },
               
             ]
         }
+         
          
 
       

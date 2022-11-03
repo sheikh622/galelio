@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Stack, Dialog, CardContent, DialogContent, FormControl, MenuItem, TextField, Grid, DialogTitle, Divider } from '@mui/material';
+import { Button, Stack, Dialog, CardContent, DialogContent,InputLabel, FormControl, MenuItem, TextField, Grid, DialogTitle, Divider } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -43,7 +43,7 @@ export default function AddUpdateCategory({
             .max(42, 'Category Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
         profitPercentage: Yup.string()
-            .required('profit Percentage required!')
+            .required('Profit Percentage required!')
             .max(42, 'profit Percentage can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid profit Percentage')
     });
@@ -96,13 +96,15 @@ export default function AddUpdateCategory({
 <Divider/>
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
-                        <CardContent>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
+                        
+                            <Grid container >
+                                
+                                <InputLabel  htmlFor="outlined-adornment-password-login">
+                                 Name</InputLabel>
                                     <TextField
                                         id="name"
                                         name="name"
-                                        label="Name"
+                                        // label="Name"
                                         value={formik.values.name}
                                         onChange={formik.handleChange}
                                         error={formik.touched.name && Boolean(formik.errors.name)}
@@ -110,12 +112,14 @@ export default function AddUpdateCategory({
                                         fullWidth
                                         autoComplete="given-name"
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
+                              
+                              
+                                <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
+                                Profit Percentage</InputLabel>
                                     <TextField
                                         id="profitPercentage"
                                         name="profitPercentage"
-                                        label="Profit Percentage"
+                                        
                                         value={formik.values.profitPercentage}
                                         onChange={formik.handleChange}
                                         error={formik.touched.profitPercentage && Boolean(formik.errors.profitPercentage)}
@@ -123,16 +127,20 @@ export default function AddUpdateCategory({
                                         fullWidth
                                         autoComplete="given-name"
                                     />
-                                </Grid>
+                               
                                 {categories.name == '' && (
-                                    <Grid item xs={12}>
-                                        <FormControl fullWidth>
+                                   
+                                        <>
+                                       
+                                        
+                                        <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
+                                        Brand Name</InputLabel>
                                             <TextField
                                                 id="outlined-select-currency"
                                                 select
                                                 fullWidth
                                                 InputLabelProps={{ shrink: true }}
-                                                label="Select Brand"
+                                             
                                                 value={brand}
                                                 defaultValue={formik.values.brand}
                                                 onChange={handleBrandChange}
@@ -148,11 +156,11 @@ export default function AddUpdateCategory({
                                                         </MenuItem>
                                                     ))}
                                             </TextField>
-                                        </FormControl>
-                                    </Grid>
+                                            </>
+                                   
                                 )}
-                                <Grid item xs={12}>
-                                    <Stack direction="row" justifyContent="flex-end">
+                            
+                                    
                                         <AnimateButton>
                                             <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
                                                 {categories.name !== '' ? 'Update ' : 'Add '}
@@ -169,10 +177,9 @@ export default function AddUpdateCategory({
                                                 Cancel
                                             </Button>
                                         </AnimateButton>
-                                    </Stack>
-                                </Grid>
+                               
                             </Grid>
-                        </CardContent>
+                        
                     </form>
                 </DialogContent>
             </Dialog>
