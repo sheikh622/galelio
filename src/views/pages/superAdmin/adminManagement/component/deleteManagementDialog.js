@@ -4,23 +4,19 @@ import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { deleteAdmin } from '../../../../../redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function DeleteManagementDialog({
-     deleteOpen, setDeleteOpen,
-       page, limit , adminManagement, search,setAdminManagement
-     }) {
+export default function DeleteManagementDialog({ deleteOpen, setDeleteOpen, page, limit, adminManagement, search, setAdminManagement }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
         setDeleteOpen(false);
         setAdminManagement({
             email: '',
-            firstName:'',
-            lastName:'',
-            password:'',
-        
+            firstName: '',
+            lastName: '',
+            password: ''
         });
     };
-    
+
     return (
         <>
             <Dialog
@@ -32,7 +28,7 @@ export default function DeleteManagementDialog({
                 aria-describedby="alert-dialog-slide-description1"
             >
                 <DialogTitle id="alert-dialog-slide-title1">Delete Admin</DialogTitle>
-                
+
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
@@ -58,9 +54,7 @@ export default function DeleteManagementDialog({
                                     handleClose: handleClose,
                                     page: page,
                                     limit: limit,
-                                    search:search,
-                                    
-                                   
+                                    search: search
                                 })
                             );
                         }}

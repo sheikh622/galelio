@@ -41,7 +41,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     const [status, setStatus] = useState(false);
 
     const [adminManagement, setAdminManagement] = useState({
-        id:'',
+        id: '',
         firstName: '',
         lastName: '',
         email: '',
@@ -49,10 +49,8 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     });
     const [detailId, setDetailId] = useState();
 
-   
-
     const openDetails = (id) => {
-        console.log(id, 'open=');
+       
         if (detailId === id) {
             setDetailId(null);
         } else {
@@ -65,15 +63,13 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     return (
         <TableContainer>
             <AddUpdateDialog
-            setAdminManagement={setAdminManagement}
+                setAdminManagement={setAdminManagement}
                 adminManagement={adminManagement}
                 adminList={adminList}
                 page={page}
                 limit={limit}
                 setOpen={setOpen}
                 open={open}
-               
-               
                 search={search}
             />
 
@@ -87,7 +83,8 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                 search={search}
             />
             <BlockUnblockDialog
-            adminManagement={adminManagement}
+                adminManagement={adminManagement}
+                setAdminManagement={setAdminManagement}
                 open={status}
                 setOpen={setStatus}
                 brandId={brandId}
@@ -100,6 +97,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                 setIsMenu={setIsMenu}
                 open={mintRole}
                 adminManagement={adminManagement}
+                setAdminManagement={setAdminManagement}
                 setOpen={setMintRole}
                 brandId={brandId}
                 page={page}
@@ -168,7 +166,6 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             size="large"
                                                             onClick={() => {
                                                                 setOpen(true);
-                                                              
 
                                                                 setAdminManagement({
                                                                     email: row.email,
@@ -188,8 +185,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             onClick={() => {
                                                                 setDeleteOpen(true);
                                                                 setAdminManagement({
-                                                                   id:row.id,
-                                                                
+                                                                    id: row.id
                                                                 });
                                                             }}
                                                         >

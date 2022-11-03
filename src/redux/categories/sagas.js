@@ -20,7 +20,7 @@ function* getAllCategoriesRequest({ payload }) {
             }
         );
         yield put(getAllCategoriesSuccess(response.data.data));
-        console.log(response.data.data.categoryList, 'response==========cate');
+     
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -94,7 +94,7 @@ function* updateCategoryRequest({ payload }) {
         // payload.navigate('/categories');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
-        console.log(error.response);
+       
     }
 }
 
@@ -122,7 +122,7 @@ function* deleteCategoryRequest({ payload }) {
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
-        console.log(error.response.data.data, 'error.response.data.data');
+      
     }
 }
 

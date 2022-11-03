@@ -29,11 +29,11 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
         event.preventDefault();
     };
     
-    console.log(brandsList, 'brandsList')
+    
 
     const handleBrandChange = (event) => {
         setBrand(event.target.value);
-       console.log(event.target.value, 'valueeeeeeeeeeee')
+       
     };
     const validationSchema = Yup.object({
         firstName: Yup.string()
@@ -53,7 +53,7 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
         initialValues: brandManagement,
         validationSchema,
         onSubmit: (values) => {
-            console.log(values);
+           
             if (brandManagement.firstName == '') {
                 dispatch(
                     addBrandAdmin({
@@ -70,7 +70,7 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                     })
                 );
             } else {
-                console.log(values, 'values')
+               
                 dispatch(
                     updateBrandAdmin({
                         email: brandManagement.email,
@@ -90,7 +90,6 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
             email: '',
             firstName:'',
             lastName:'',
-          
             password:'',
         
         });
@@ -110,112 +109,160 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                 <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                    
                         <Grid container >
-                          {brandManagement.firstName == ''  && ( 
-                    <> 
-                            <InputLabel  htmlFor="outlined-adornment-password-login">
-                                First Name</InputLabel>
-                            <TextField
-
-                                id="firstName"
-                                name="firstName"
-                                // label="First firstName"
-                                value={formik.values.firstName}
-                                onChange={formik.handleChange}
-                                error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-                                helperText={formik.touched.firstName && formik.errors.firstName}
-                                fullWidth
-                                autoComplete="given-name"
-                            />
-                            <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                Last Name</InputLabel>
-                            <TextField
-
-                                id="lastName"
-                                name="lastName"
-                                // label="Last lastName"
-                                value={formik.values.lastName}
-                                onChange={formik.handleChange}
-                                error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-                                helperText={formik.touched.lastName && formik.errors.lastName}
-                                fullWidth
-                                autoComplete="given-name"
-                            /> 
-                            
-                            <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                            Brand Name</InputLabel>
-                            
-                                
-                                    <FormControl fullWidth>
-                                        <TextField
-                                      
-                                            id="outlined-select-currency"
-                                            select
-                                            fullWidth
-                                            InputLabelProps={{ shrink: true }}
-                                            
-                                            value={brand}
-                                            defaultValue={formik.values.brand}
-                                            onChange={handleBrandChange}
-                                            error={formik.touched.brand && Boolean(formik.errors.brand)}
-                                            helperText={formik.touched.brand && formik.errors.brand}
-                                            autoComplete="given-name"
-                                        >
-                                            <MenuItem value={0}>Choose Brand</MenuItem>
-                                            {brandsList != undefined &&
-                                                brandsList?.brands?.map((option, index) => (
-                                                    <MenuItem key={index} value={option.name}>
-                                                        {option.name}
-                                                    </MenuItem>
-                                                ))}
-                                        </TextField>
-                                    </FormControl>
-                                    </> ) } 
+                         
+                   
+                       
+                                    {brandManagement.firstName == ''? (<>
+                                        <InputLabel  htmlFor="outlined-adornment-password-login">
+                                        First Name</InputLabel>
+                                    <TextField
+        
+                                        id="firstName"
+                                        name="firstName"
+                                        // label="First firstName"
+                                        value={formik.values.firstName}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+                                        helperText={formik.touched.firstName && formik.errors.firstName}
+                                        fullWidth
+                                        autoComplete="given-name"
+                                    />
                                     <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                    Email</InputLabel>
-                                <TextField
-    
-                                    id="email"
-                                    name="email"
-                                    // label="Email"
-                                    value={formik.values.email}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.email && Boolean(formik.errors.email)}
-                                    helperText={formik.touched.email && formik.errors.email}
-                                    fullWidth
-                                    autoComplete="given-name"
-                                />
-                                <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                    Password</InputLabel>
-                                <OutlinedInput
-                                    fullWidth
-                                    type={showPassword ? 'text' : 'password'}
-                                    value={formik.values.password}
-    
-                                    name="password"
-                                    onBlur={formik.handleBlur}
-                                    onChange={formik.handleChange}
-    
-                                    autoComplete="given-name"
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                                size="large"
-                                            >
-                                                {showPassword ? <Visibility /> : <VisibilityOff />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-    
-                                />
-                                {formik.touched.password && formik.errors.password && (
-                                    <FormHelperText sx={{ marginLeft: "18px" }} error id="standard-weight-helper-text-password-login">
-                                        {formik.errors.password}
-                                    </FormHelperText>
-                                )}
+                                        Last Name</InputLabel>
+                                    <TextField
+        
+                                        id="lastName"
+                                        name="lastName"
+                                        // label="Last lastName"
+                                        value={formik.values.lastName}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+                                        helperText={formik.touched.lastName && formik.errors.lastName}
+                                        fullWidth
+                                        autoComplete="given-name"
+                                    /> 
+                                    
+                                    <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
+                                    Brand Name</InputLabel>
+                                    
+                                        
+                                            <FormControl fullWidth>
+                                                <TextField
+                                              
+                                                    id="outlined-select-currency"
+                                                    select
+                                                    fullWidth
+                                                    InputLabelProps={{ shrink: true }}
+                                                    
+                                                    value={brand}
+                                                    defaultValue={formik.values.brand}
+                                                    onChange={handleBrandChange}
+                                                    error={formik.touched.brand && Boolean(formik.errors.brand)}
+                                                    helperText={formik.touched.brand && formik.errors.brand}
+                                                    autoComplete="given-name"
+                                                >
+                                                    <MenuItem value={0}>Choose Brand</MenuItem>
+                                                    {brandsList != undefined &&
+                                                        brandsList?.brands?.map((option, index) => (
+                                                            <MenuItem key={index} value={option.name}>
+                                                                {option.name}
+                                                            </MenuItem>
+                                                        ))}
+                                                </TextField>
+                                            </FormControl>
+                                        <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
+                                        Email</InputLabel>
+                                    <TextField
+        
+                                        id="email"
+                                        name="email"
+                                        // label="Email"
+                                        value={formik.values.email}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.email && Boolean(formik.errors.email)}
+                                        helperText={formik.touched.email && formik.errors.email}
+                                        fullWidth
+                                        autoComplete="given-name"
+                                    />
+                                    <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
+                                        Password</InputLabel>
+                                    <OutlinedInput
+                                        fullWidth
+                                        type={showPassword ? 'text' : 'password'}
+                                        value={formik.values.password}
+        
+                                        name="password"
+                                        onBlur={formik.handleBlur}
+                                        onChange={formik.handleChange}
+        
+                                        autoComplete="given-name"
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                    size="large"
+                                                >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+        
+                                    />
+                                    {formik.touched.password && formik.errors.password && (
+                                        <FormHelperText sx={{ marginLeft: "18px" }} error id="standard-weight-helper-text-password-login">
+                                            {formik.errors.password}
+                                        </FormHelperText>
+                                    )}</> ):(<>
+                                        <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
+                                        Email</InputLabel>
+                                    <TextField
+        
+                                        id="email"
+                                        name="email"
+                                        // label="Email"
+                                        value={brandManagement.email}
+                                        // onChange={formik.handleChange}
+                                        error={formik.touched.email && Boolean(formik.errors.email)}
+                                        helperText={formik.touched.email && formik.errors.email}
+                                        fullWidth
+                                        autoComplete="given-name"
+                                    />
+                                    <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
+                                        Password</InputLabel>
+                                    <OutlinedInput
+                                        fullWidth
+                                        type={showPassword ? 'text' : 'password'}
+                                        value={formik.values.password}
+        
+                                        name="password"
+                                        onBlur={formik.handleBlur}
+                                        onChange={formik.handleChange}
+        
+                                        autoComplete="given-name"
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                    size="large"
+                                                >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+        
+                                    />
+                                    {formik.touched.password && formik.errors.password && (
+                                        <FormHelperText sx={{ marginLeft: "18px" }} error id="standard-weight-helper-text-password-login">
+                                            {formik.errors.password}
+                                        </FormHelperText>
+                                    )}</>)}
+                             
                                
                                 
                             

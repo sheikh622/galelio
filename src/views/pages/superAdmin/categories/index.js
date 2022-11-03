@@ -67,7 +67,7 @@ const Categories = () => {
     };
 
     useEffect(() => {
-        console.log('cate brand');
+       
         dispatch(
             getAllBrands({
                 search: search,

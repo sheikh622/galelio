@@ -4,17 +4,19 @@ import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { block } from 'redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function BlockUnblockDialog({
-    open, setOpen,
-      page, limit, adminManagement,search
-     }) {
+export default function BlockUnblockDialog({ open, setOpen, page, limit, adminManagement, search }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
         setOpen(false);
-        
+        setAdminManagement({
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: ''
+        });
     };
-    
+
     return (
         <>
             <Dialog
@@ -25,12 +27,12 @@ export default function BlockUnblockDialog({
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1"> Block Status  </DialogTitle>
-                
+                <DialogTitle id="alert-dialog-slide-title1"> Block Status </DialogTitle>
+
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                          Are you sure you want to change the Block status?
+                            Are you sure you want to change the Block status?
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -48,13 +50,11 @@ export default function BlockUnblockDialog({
                         onClick={() => {
                             dispatch(
                                 block({
-                                   email:adminManagement.email,
+                                    email: adminManagement.email,
                                     handleClose: handleClose,
                                     page: page,
                                     limit: limit,
-                                    search:search,
-                                    
-                                   
+                                    search: search
                                 })
                             );
                         }}

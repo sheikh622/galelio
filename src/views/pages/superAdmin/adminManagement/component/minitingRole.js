@@ -5,18 +5,19 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Dialo
 import { mintRole } from 'redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function MiniterDialog({
-    open, setOpen
-     , page, limit, search, adminManagement, 
-     }){
+export default function MiniterDialog({ open, setOpen, page, limit, search, adminManagement, setAdminManagement }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
         setOpen(false);
-       
-        
+        setAdminManagement({
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: ''
+        });
     };
-   
+
     return (
         <>
             <Dialog
@@ -28,11 +29,11 @@ export default function MiniterDialog({
                 aria-describedby="alert-dialog-slide-description1"
             >
                 <DialogTitle id="alert-dialog-slide-title1"> Miniting Access </DialogTitle>
-                
+
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                          Are you sure you want to change the Miniting status?
+                            Are you sure you want to change the Miniting status?
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -50,15 +51,13 @@ export default function MiniterDialog({
                         onClick={() => {
                             dispatch(
                                 mintRole({
-                                    email:adminManagement.email,
+                                    email: adminManagement.email,
                                     // mintingAccess:minterRole,
                                     page: page,
                                     limit: limit,
-                                    search:search,
-                                    handleClose: handleClose,
-                                   
+                                    search: search,
+                                    handleClose: handleClose
                                 })
-                            
                             );
                         }}
                     >

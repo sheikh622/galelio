@@ -53,7 +53,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
    
 
     const openDetails = (id) => {
-        console.log(id, 'open=');
+        
         if (detailId === id) {
             setDetailId(null);
         } else {
@@ -90,6 +90,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
             />
             <BlockUnblockDialog
             brandManagement={brandManagement}
+            setBrandManagement={setBrandManagement}
                 open={status}
                 setOpen={setStatus}
                 brandId={brandId}

@@ -6,12 +6,19 @@ import { blockBrand } from 'redux/brandManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function BlockUnblockDialog({
     open, setOpen,
-      page, limit, brandManagement,search
+      page, limit, brandManagement,search,setBrandManagement
      }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
         setOpen(false);
+        setBrandManagement({
+            email: '',
+            firstName:'',
+            lastName:'',
+            password:'',
+        
+        });
         
     };
     

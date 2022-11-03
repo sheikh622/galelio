@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 const SubAdminGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
     const navigate = useNavigate();
-    console.log(token,"token authGuard")
+   
     useEffect(() => {
         if (token == '') {
             navigate('/', { replace: true });

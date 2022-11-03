@@ -15,7 +15,7 @@ const Brands = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
-    console.log(brandAdminList,"===============adminList===========================>");
+   
    
     
     const [search, setSearch] = useState('');
@@ -34,7 +34,7 @@ const Brands = () => {
         setAnchorEl(null);
     };
     useEffect(() => {
-        console.log('cate brand');
+        
         dispatch(
             getAllBrands({
                 search: search,
@@ -47,7 +47,7 @@ const Brands = () => {
     const brandsList = useSelector((state) => state.brand.brandsList);
 
     useEffect(() => {
-        console.log("run")
+       
         dispatch(
             getAllBrandAdmin({
                 search:search,
@@ -84,7 +84,7 @@ const Brands = () => {
                                 size="large"
                                 onClick={() => {
                                     setAddEditModal(true);
-                                    console.log('trueeeeeeeeeeee')
+                                   
 
                                    
                                 }}

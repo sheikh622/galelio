@@ -58,7 +58,7 @@ const ResetPasswordForm = ({ token, ...others }) => {
                     })
                 })}
                 onSubmit={async (values) => {
-                    console.log(values,"values")
+                  
                     await dispatch(
                         resetPassword({
                             

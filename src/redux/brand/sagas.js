@@ -36,7 +36,7 @@ function* getAllBrandsRequest({ payload }) {
                 Authorization: `Bearer ${token}`,
             }
         },);
-        console.log(response.data.data, "response")
+
         yield put(getAllBrandsSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
