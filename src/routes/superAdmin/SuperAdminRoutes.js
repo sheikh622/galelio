@@ -8,6 +8,7 @@ import Breadcrumbs from 'ui-component/extended/Breadcrumbs';
 const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const AdminManagement = Loadable(lazy(() => import('views/pages/superAdmin/adminManagement')));
+const BrandManagement = Loadable(lazy(() => import('views/pages/superAdmin/brandManagement')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 
 
@@ -39,6 +40,10 @@ const SuperAdminRoutes = {
         {
             path: '/adminManagement',
             element: <AdminManagement />
+        },
+        {
+            path: '/brandManagement',
+            element: <BrandManagement />
         },
  
     ]

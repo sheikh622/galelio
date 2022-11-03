@@ -6,13 +6,19 @@ import { deleteAdmin } from '../../../../../redux/adminManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function DeleteManagementDialog({
      deleteOpen, setDeleteOpen,
-       page, limit , adminManagement, search,
+       page, limit , adminManagement, search,setAdminManagement
      }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
         setDeleteOpen(false);
+        setAdminManagement({
+            email: '',
+            firstName:'',
+            lastName:'',
+            password:'',
         
+        });
     };
     
     return (

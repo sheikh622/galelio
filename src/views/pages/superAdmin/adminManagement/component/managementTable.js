@@ -81,6 +81,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                 deleteOpen={deleteOpen}
                 setDeleteOpen={setDeleteOpen}
                 adminManagement={adminManagement}
+                setAdminManagement={setAdminManagement}
                 page={page}
                 limit={limit}
                 search={search}

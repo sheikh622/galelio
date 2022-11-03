@@ -14,6 +14,7 @@ import brand from 'redux/brand/reducers';
 import category from 'redux/categories/reducers';
 
 import adminReducer from 'redux/adminManagement/reducers';
+import brandadminReducer from 'redux/brandManagement/reducers';
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const rootReducer = combineReducers({
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
     kanban: kanbanReducer,
     auth: AuthReducer,
     adminReducer: adminReducer,
+    brandadminReducer: brandadminReducer,
 
 
 });

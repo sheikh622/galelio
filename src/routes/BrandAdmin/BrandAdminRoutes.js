@@ -6,8 +6,7 @@ import BrandAdminGuard from './BrandAdminGuard';
 
 const BrandAdmin = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
 
-const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
-const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const BrandAdminRoutes = {
@@ -22,14 +21,7 @@ const BrandAdminRoutes = {
             path: '/dashboard',
             element: <BrandAdmin />
         },
-        {
-            path: '/brands',
-            element: <Brand />
-        },
-        {
-            path: '/categories',
-            element: <Category />
-        },
+   
    
     ]
 };
