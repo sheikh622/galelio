@@ -73,9 +73,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                 page={page}
                 limit={limit}
                 setOpen={setOpen}
-                open={open}
-               
-               
+                open={open}  
                 search={search}
             />
 

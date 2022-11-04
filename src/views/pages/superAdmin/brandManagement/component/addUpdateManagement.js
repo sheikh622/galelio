@@ -5,19 +5,46 @@ import * as Yup from 'yup';
 import { FormattedMessage } from 'react-intl';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 
-
-import {  updateBrandAdmin,addBrandAdmin } from 'redux/brandManagement/actions';
+import { updateBrandAdmin, addBrandAdmin } from 'redux/brandManagement/actions';
 import { useTheme } from '@mui/material/styles';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
-    Button, InputLabel, Dialog, DialogActions, DialogContent, DialogTitle, Slide, IconButton,
-    InputAdornment, TextField, Divider, OutlinedInput, FormHelperText, FormControl , MenuItem, CardContent,Grid,Stack  
+    Button,
+    InputLabel,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Slide,
+    IconButton,
+    InputAdornment,
+    TextField,
+    Divider,
+    OutlinedInput,
+    FormHelperText,
+    FormControl,
+    MenuItem,
+    CardContent,
+    Grid,
+    Stack
 } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-
-export default function AddUpdateDialog({ brandManagement,brandsList,setBrandManagement, open, setOpen, setUpdate, page, limit, search, brandName, setBrandName, brandId }) {
+export default function AddUpdateDialog({
+    brandManagement,
+    brandsList,
+    setBrandManagement,
+    open,
+    setOpen,
+    setUpdate,
+    page,
+    limit,
+    search,
+    brandName,
+    setBrandName,
+    brandId
+}) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
@@ -28,12 +55,9 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    
-    
 
     const handleBrandChange = (event) => {
         setBrand(event.target.value);
-       
     };
     const validationSchema = Yup.object({
         firstName: Yup.string()
@@ -44,8 +68,7 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
             .required('Last Name is required!')
             .max(42, 'Last Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
-        email: Yup.string().email('Enter valid email').max(255).required('Email is required!'
-        ),
+        email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
         password: Yup.string().max(255).required('Password is required!')
     });
     const formik = useFormik({
@@ -53,7 +76,6 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
         initialValues: brandManagement,
         validationSchema,
         onSubmit: (values) => {
-           
             if (brandManagement.firstName == '') {
                 dispatch(
                     addBrandAdmin({
@@ -64,22 +86,19 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                         password: values.password,
                         page: page,
                         limit: limit,
-                        search:search,
-                        handleClose: handleClose,
-
+                        search: search,
+                        handleClose: handleClose
                     })
                 );
             } else {
-               
                 dispatch(
                     updateBrandAdmin({
                         email: brandManagement.email,
                         password: values.password,
                         page: page,
                         limit: limit,
-                        search:search,
-                        handleClose: handleClose,
-
+                        search: search,
+                        handleClose: handleClose
                     })
                 );
             }
@@ -88,35 +107,29 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
     const handleClose = () => {
         setBrandManagement({
             email: '',
-            firstName:'',
-            lastName:'',
-            password:'',
-        
+            firstName: '',
+            lastName: '',
+            password: ''
         });
         setOpen(false);
-    
+
         formik.resetForm();
     };
 
     return (
-       
         <>
-        <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">{brandManagement.firstName !== '' ?  'Update Brand Admin ' : ' Add  Brand Admin '}</DialogTitle>
-<Divider/>
-            <DialogContent>
-           
-                <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
-                   
-                        <Grid container >
-                         
-                   
-                       
-                                    {brandManagement.firstName == ''? (<>
-                                        <InputLabel  htmlFor="outlined-adornment-password-login">
-                                        First Name</InputLabel>
+            <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">
+                    {brandManagement.firstName !== '' ? 'Update Brand Admin ' : ' Add  Brand Admin '}
+                </DialogTitle>
+                <Divider />
+                <DialogContent>
+                    <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
+                        <Grid container>
+                            {brandManagement.firstName == '' ? (
+                                <>
+                                    <InputLabel htmlFor="outlined-adornment-password-login">First Name</InputLabel>
                                     <TextField
-        
                                         id="firstName"
                                         name="firstName"
                                         // label="First firstName"
@@ -128,9 +141,9 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                                         autoComplete="given-name"
                                     />
                                     <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                        Last Name</InputLabel>
+                                        Last Name
+                                    </InputLabel>
                                     <TextField
-        
                                         id="lastName"
                                         name="lastName"
                                         // label="Last lastName"
@@ -140,40 +153,38 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                                         helperText={formik.touched.lastName && formik.errors.lastName}
                                         fullWidth
                                         autoComplete="given-name"
-                                    /> 
-                                    
+                                    />
+
                                     <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                    Brand Name</InputLabel>
-                                    
-                                        
-                                            <FormControl fullWidth>
-                                                <TextField
-                                              
-                                                    id="outlined-select-currency"
-                                                    select
-                                                    fullWidth
-                                                    InputLabelProps={{ shrink: true }}
-                                                    
-                                                    value={brand}
-                                                    defaultValue={formik.values.brand}
-                                                    onChange={handleBrandChange}
-                                                    error={formik.touched.brand && Boolean(formik.errors.brand)}
-                                                    helperText={formik.touched.brand && formik.errors.brand}
-                                                    autoComplete="given-name"
-                                                >
-                                                    <MenuItem value={0}>Choose Brand</MenuItem>
-                                                    {brandsList != undefined &&
-                                                        brandsList?.brands?.map((option, index) => (
-                                                            <MenuItem key={index} value={option.name}>
-                                                                {option.name}
-                                                            </MenuItem>
-                                                        ))}
-                                                </TextField>
-                                            </FormControl>
-                                        <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                        Email</InputLabel>
+                                        Brand Name
+                                    </InputLabel>
+
+                                    <FormControl fullWidth>
+                                        <TextField
+                                            id="outlined-select-currency"
+                                            select
+                                            fullWidth
+                                            InputLabelProps={{ shrink: true }}
+                                            value={brand}
+                                            defaultValue={formik.values.brand}
+                                            onChange={handleBrandChange}
+                                            error={formik.touched.brand && Boolean(formik.errors.brand)}
+                                            helperText={formik.touched.brand && formik.errors.brand}
+                                            autoComplete="given-name"
+                                        >
+                                            <MenuItem value={0}>Choose Brand</MenuItem>
+                                            {brandsList != undefined &&
+                                                brandsList?.brands?.map((option, index) => (
+                                                    <MenuItem key={index} value={option.name}>
+                                                        {option.name}
+                                                    </MenuItem>
+                                                ))}
+                                        </TextField>
+                                    </FormControl>
+                                    <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
+                                        Email
+                                    </InputLabel>
                                     <TextField
-        
                                         id="email"
                                         name="email"
                                         // label="Email"
@@ -185,16 +196,15 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                                         autoComplete="given-name"
                                     />
                                     <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                        Password</InputLabel>
+                                        Password
+                                    </InputLabel>
                                     <OutlinedInput
                                         fullWidth
                                         type={showPassword ? 'text' : 'password'}
                                         value={formik.values.password}
-        
                                         name="password"
                                         onBlur={formik.handleBlur}
                                         onChange={formik.handleChange}
-        
                                         autoComplete="given-name"
                                         endAdornment={
                                             <InputAdornment position="end">
@@ -209,17 +219,19 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                                                 </IconButton>
                                             </InputAdornment>
                                         }
-        
                                     />
                                     {formik.touched.password && formik.errors.password && (
-                                        <FormHelperText sx={{ marginLeft: "18px" }} error id="standard-weight-helper-text-password-login">
+                                        <FormHelperText sx={{ marginLeft: '18px' }} error id="standard-weight-helper-text-password-login">
                                             {formik.errors.password}
                                         </FormHelperText>
-                                    )}</> ):(<>
-                                        <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                        Email</InputLabel>
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
+                                        Email
+                                    </InputLabel>
                                     <TextField
-        
                                         id="email"
                                         name="email"
                                         // label="Email"
@@ -231,16 +243,15 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                                         autoComplete="given-name"
                                     />
                                     <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                        Password</InputLabel>
+                                        Password
+                                    </InputLabel>
                                     <OutlinedInput
                                         fullWidth
                                         type={showPassword ? 'text' : 'password'}
                                         value={formik.values.password}
-        
                                         name="password"
                                         onBlur={formik.handleBlur}
                                         onChange={formik.handleChange}
-        
                                         autoComplete="given-name"
                                         endAdornment={
                                             <InputAdornment position="end">
@@ -255,45 +266,35 @@ export default function AddUpdateDialog({ brandManagement,brandsList,setBrandMan
                                                 </IconButton>
                                             </InputAdornment>
                                         }
-        
                                     />
                                     {formik.touched.password && formik.errors.password && (
-                                        <FormHelperText sx={{ marginLeft: "18px" }} error id="standard-weight-helper-text-password-login">
+                                        <FormHelperText sx={{ marginLeft: '18px' }} error id="standard-weight-helper-text-password-login">
                                             {formik.errors.password}
                                         </FormHelperText>
-                                    )}</>)}
-                             
-                               
-                                
-                            
-                            
-                              
-                                    <AnimateButton >
-                                        <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
-                                            {brandManagement.firstName !== '' ?  'Update ' : 'Add '}
-                                        </Button>
-                                    </AnimateButton>
-                                    <AnimateButton>
-                                        <Button
-                                            variant="contained"
-                                            sx={{ my: 3, ml: 1, color: '#fff' }}
-                                            onClick={handleClose}
-                                            color="secondary"
-                                            size="large"
-                                        >
-                                            Cancel
-                                        </Button>
-                                    </AnimateButton>
-                               
-                        
-                        </Grid>
-                   
-                </form>
-            </DialogContent>
-        </Dialog>
-    </>
+                                    )}
+                                </>
+                            )}
 
-           
-    
+                            <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
+                                    {brandManagement.firstName !== '' ? 'Update ' : 'Add '}
+                                </Button>
+                            </AnimateButton>
+                            <AnimateButton>
+                                <Button
+                                    variant="contained"
+                                    sx={{ my: 3, ml: 1, color: '#fff' }}
+                                    onClick={handleClose}
+                                    color="secondary"
+                                    size="large"
+                                >
+                                    Cancel
+                                </Button>
+                            </AnimateButton>
+                        </Grid>
+                    </form>
+                </DialogContent>
+            </Dialog>
+        </>
     );
 }

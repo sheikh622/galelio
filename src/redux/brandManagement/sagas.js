@@ -15,7 +15,7 @@ import {
     UPDATE_BRAND_ADMINS,
     DELETE_BRAND_ADMIN,
     BLOCK_BRAND_ADMIN,
-    // MINT_ROLE
+  
 } from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
@@ -177,38 +177,7 @@ export function* watchBlockBrandAdmin() {
     yield takeLatest(BLOCK_BRAND_ADMIN, blockBrandAdminRequest);
 }
 
-//minting access
-// function* mintAdminRequest({ payload }) {
-//     try {
-//         const token = yield select(makeSelectAuthToken());
-//         let data = {
-//             email: payload.email
-           
-//         };
 
-//         const response = yield axios.post(`admin/mintingAccess`, data, {
-//             headers: {
-//                 Authorization: `Bearer ${token}`
-//             }
-//         });
-//         yield put(
-//             getAllAdmin({
-//                 page: payload.page,
-//                 limit: payload.limit,
-//                 search: payload.search
-//             })
-//         );
-//         payload.handleClose();
-
-//         yield setNotification('success', response.data.message);
-//     } catch (error) {
-//         yield sagaErrorHandler(error.response.data.data);
-//     }
-// }
-
-// export function* watchMintAdmin() {
-//     yield takeLatest(MINT_ROLE, mintAdminRequest);
-// }
 
 //admin saga==============================>
 export default function* brandadminSaga() {
@@ -220,6 +189,6 @@ export default function* brandadminSaga() {
         fork(watchUpdateBrandAdmin),
         fork(watchBlockBrandAdmin),
 
-        // fork(watchMintAdmin)
+       
     ]);
 }
