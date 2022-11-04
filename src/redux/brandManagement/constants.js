@@ -5,4 +5,4 @@ export const UPDATE_BRAND_ADMINS = 'update_brand_admin';
 export const DELETE_BRAND_ADMIN = 'delete_brand_admin';
 export const BLOCK_BRAND_ADMIN = 'block_brand_admin';
 
-export const MINT_ROLE_BRAND_ADMIN = 'mint_role_brand_admin';
+

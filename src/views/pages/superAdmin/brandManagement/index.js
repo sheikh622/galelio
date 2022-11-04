@@ -58,8 +58,7 @@ const Brands = () => {
     }, [search, page, limit]);
     return (
         <>
-    
-            <HeadingCard title="Brand Management" />
+        <HeadingCard title="Brand Management" />
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>

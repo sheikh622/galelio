@@ -5,7 +5,20 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Stack, Dialog, CardContent, DialogContent,InputLabel, FormControl, MenuItem, TextField, Grid, DialogTitle, Divider } from '@mui/material';
+import {
+    Button,
+    Stack,
+    Dialog,
+    CardContent,
+    DialogContent,
+    InputLabel,
+    FormControl,
+    MenuItem,
+    TextField,
+    Grid,
+    DialogTitle,
+    Divider
+} from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -17,16 +30,14 @@ export default function AddUpdateCategory({
     open,
     categories,
     setCategories,
-  
+
     limit,
     page,
-    search,
-
+    search
 }) {
     const theme = useTheme();
-   
+
     const [brand, setBrand] = useState(0);
-  
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -34,7 +45,6 @@ export default function AddUpdateCategory({
     const brandsList = useSelector((state) => state.brand.brandsList);
     const handleBrandChange = (event) => {
         setBrand(event.target.value);
-       
     };
 
     const validationSchema = Yup.object({
@@ -93,93 +103,82 @@ export default function AddUpdateCategory({
         <>
             <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{categories.name !== '' ? 'Update Category ' : ' Add Category '}</DialogTitle>
-<Divider/>
+                <Divider />
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
-                        
-                            <Grid container >
-                                
-                                <InputLabel  htmlFor="outlined-adornment-password-login">
-                                 Name</InputLabel>
+                        <Grid container>
+                            <InputLabel htmlFor="outlined-adornment-password-login">Name</InputLabel>
+                            <TextField
+                                id="name"
+                                name="name"
+                                // label="Name"
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
+                                error={formik.touched.name && Boolean(formik.errors.name)}
+                                helperText={formik.touched.name && formik.errors.name}
+                                fullWidth
+                                autoComplete="given-name"
+                            />
+
+                            <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
+                                Profit Percentage
+                            </InputLabel>
+                            <TextField
+                                id="profitPercentage"
+                                name="profitPercentage"
+                                value={formik.values.profitPercentage}
+                                onChange={formik.handleChange}
+                                error={formik.touched.profitPercentage && Boolean(formik.errors.profitPercentage)}
+                                helperText={formik.touched.profitPercentage && formik.errors.profitPercentage}
+                                fullWidth
+                                autoComplete="given-name"
+                            />
+
+                            {categories.name == '' && (
+                                <>
+                                    <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
+                                        Brand Name
+                                    </InputLabel>
                                     <TextField
-                                        id="name"
-                                        name="name"
-                                        // label="Name"
-                                        value={formik.values.name}
-                                        onChange={formik.handleChange}
-                                        error={formik.touched.name && Boolean(formik.errors.name)}
-                                        helperText={formik.touched.name && formik.errors.name}
+                                        id="outlined-select-currency"
+                                        select
                                         fullWidth
+                                        InputLabelProps={{ shrink: true }}
+                                        value={brand}
+                                        defaultValue={formik.values.brand}
+                                        onChange={handleBrandChange}
+                                        error={formik.touched.brand && Boolean(formik.errors.brand)}
+                                        helperText={formik.touched.brand && formik.errors.brand}
                                         autoComplete="given-name"
-                                    />
-                              
-                              
-                                <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
-                                Profit Percentage</InputLabel>
-                                    <TextField
-                                        id="profitPercentage"
-                                        name="profitPercentage"
-                                        
-                                        value={formik.values.profitPercentage}
-                                        onChange={formik.handleChange}
-                                        error={formik.touched.profitPercentage && Boolean(formik.errors.profitPercentage)}
-                                        helperText={formik.touched.profitPercentage && formik.errors.profitPercentage}
-                                        fullWidth
-                                        autoComplete="given-name"
-                                    />
-                               
-                                {categories.name == '' && (
-                                   
-                                        <>
-                                       
-                                        
-                                        <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
-                                        Brand Name</InputLabel>
-                                            <TextField
-                                                id="outlined-select-currency"
-                                                select
-                                                fullWidth
-                                                InputLabelProps={{ shrink: true }}
-                                             
-                                                value={brand}
-                                                defaultValue={formik.values.brand}
-                                                onChange={handleBrandChange}
-                                                error={formik.touched.brand && Boolean(formik.errors.brand)}
-                                                helperText={formik.touched.brand && formik.errors.brand}
-                                                autoComplete="given-name"
-                                            >
-                                                <MenuItem value={0}>Choose Brand</MenuItem>
-                                                {brandsList != undefined &&
-                                                    brandsList?.brands?.map((option, index) => (
-                                                        <MenuItem key={index} value={option.id}>
-                                                            {option.name}
-                                                        </MenuItem>
-                                                    ))}
-                                            </TextField>
-                                            </>
-                                   
-                                )}
-                            
-                                    
-                                        <AnimateButton>
-                                            <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
-                                                {categories.name !== '' ? 'Update ' : 'Add '}
-                                            </Button>
-                                        </AnimateButton>
-                                        <AnimateButton>
-                                            <Button
-                                                variant="contained"
-                                                sx={{ my: 3, ml: 1, color: '#fff' }}
-                                                onClick={handleClose}
-                                                color="secondary"
-                                                size="large"
-                                            >
-                                                Cancel
-                                            </Button>
-                                        </AnimateButton>
-                               
-                            </Grid>
-                        
+                                    >
+                                        <MenuItem value={0}>Choose Brand</MenuItem>
+                                        {brandsList != undefined &&
+                                            brandsList?.brands?.map((option, index) => (
+                                                <MenuItem key={index} value={option.id}>
+                                                    {option.name}
+                                                </MenuItem>
+                                            ))}
+                                    </TextField>
+                                </>
+                            )}
+
+                            <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
+                                    {categories.name !== '' ? 'Update ' : 'Add '}
+                                </Button>
+                            </AnimateButton>
+                            <AnimateButton>
+                                <Button
+                                    variant="contained"
+                                    sx={{ my: 3, ml: 1, color: '#fff' }}
+                                    onClick={handleClose}
+                                    color="secondary"
+                                    size="large"
+                                >
+                                    Cancel
+                                </Button>
+                            </AnimateButton>
+                        </Grid>
                     </form>
                 </DialogContent>
             </Dialog>
