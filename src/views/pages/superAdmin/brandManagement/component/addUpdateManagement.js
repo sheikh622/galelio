@@ -120,7 +120,7 @@ export default function AddUpdateDialog({
         <>
             <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
-                    {brandManagement.firstName !== '' ? 'Update Brand Admin ' : ' Add  Brand Admin '}
+                    {brandManagement.firstName !== '' ? 'Update Brand Admin ' : ' Add Brand Admin '}
                 </DialogTitle>
                 <Divider />
                 <DialogContent>

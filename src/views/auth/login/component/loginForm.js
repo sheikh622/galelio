@@ -211,7 +211,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                 )}
             </Formik>
 
-            <Box sx={{ mt: 2, background: '#604223' }}>
+            {/* <Box sx={{ mt: 2, background: '#604223' }}>
                 <AnimateButton>
                     {loader ? (
                         <Button
@@ -278,7 +278,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                         </Button>
                     )}
                 </AnimateButton>
-            </Box>
+            </Box> */}
         </>
     );
 };

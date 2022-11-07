@@ -61,8 +61,9 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
     const adminList = useSelector((state) => state.adminReducer.adminsList);
 
     return (
-        <TableContainer>
+        <TableContainer >
             <AddUpdateDialog
+          
                 setAdminManagement={setAdminManagement}
                 adminManagement={adminManagement}
                 adminList={adminList}
@@ -71,6 +72,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                 setOpen={setOpen}
                 open={open}
                 search={search}
+            
             />
 
             <DeleteManagementDialog
@@ -128,9 +130,9 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
 
                                         <TableCell align="center">
                                             {row.isActive == false ? (
-                                                <Chip label="Blocked" size="small" chipcolor="success" />
+                                                <Chip label="Blocked" size="small" chipcolor="orange" />
                                             ) : (
-                                                <Chip label="Unblocked" size="small" chipcolor="orange" />
+                                                <Chip label="Unblocked" size="small" chipcolor="success" />
                                             )}
                                         </TableCell>
 
@@ -203,7 +205,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                                 });
                                                             }}
                                                         >
-                                                            block Status
+                                                             Change Status
                                                         </Button>
                                                     </Grid>
                                                     <Grid item xs={3} md={3}>

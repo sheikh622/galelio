@@ -27,12 +27,12 @@ export default function BlockUnblockDialog({ open, setOpen, page, limit, adminMa
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1"> Block Status </DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1"> Change Status </DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                            Are you sure you want to change the Block status?
+                            Are you sure you want to change the status?
                         </Typography>
                     </DialogContentText>
                 </DialogContent>

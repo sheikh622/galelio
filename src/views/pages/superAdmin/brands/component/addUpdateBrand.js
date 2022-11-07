@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 import { addBrand, updateBrand } from '../../../../../redux/brand/actions';
-
+import AnimateButton from 'ui-component/extended/AnimateButton';
 export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, page, limit, search, brandName, setBrandName, brandId }) {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -87,7 +87,7 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ pr: 2.5 }}>
+                {/* <DialogActions sx={{ pr: 2.5 }}>
                     <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={() => {
@@ -109,6 +109,29 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                             'Add'
                             : 'Update'}
                     </Button>
+                </DialogActions> */}
+                <DialogActions style={{paddingRight:"3rem"}}>
+                    
+                <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }}   onClick={() => {
+                            formik.handleSubmit();
+                        }} size="large" disableElevation>
+                                {brandName == '' ?
+                            'Add'
+                            : 'Update'}
+                                </Button>
+                            </AnimateButton>
+                            <AnimateButton>
+                                <Button
+                                    variant="contained"
+                                    sx={{ my: 3, ml: 1, color: '#fff' }}
+                                    onClick={handleClose}
+                                    color="secondary"
+                                    size="large"
+                                >
+                                    Cancel
+                                </Button>
+                            </AnimateButton>
                 </DialogActions>
             </Dialog>
         </>

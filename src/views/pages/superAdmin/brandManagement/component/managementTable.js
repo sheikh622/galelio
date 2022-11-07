@@ -193,7 +193,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                                                                 });
                                                             }}
                                                         >
-                                                            block Status
+                                                         Status
                                                         </Button>
                                                     </Grid>
                                                   

@@ -77,7 +77,7 @@ const Brands = () => {
                                    
                                 }}
                             >
-                                Add Admin
+                                Add admin
                             </Button>
                         </Grid>
                     </Grid>
