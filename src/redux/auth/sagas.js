@@ -1,6 +1,6 @@
 import axios from '../../utils/axios';
 import { all, call, fork, put, retry, takeLatest } from 'redux-saga/effects';
-import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, DASHBOARD } from './constants';
+import {LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, DASHBOARD } from './constants';
 import { loginSuccess, setLoader } from './actions';
 import { sagaErrorHandler } from '../../shared/helperMethods/sagaErrorHandler';
 import { setNotification } from '../../shared/helperMethods/setNotification';
@@ -24,6 +24,7 @@ function* loginUser({ payload }) {
         console.log(error.response.data.data, "error.response.data")
     }
 }
+
 
 function* forgetPasswordRequest({ payload }) {
     try {
