@@ -11,7 +11,10 @@ import cartReducer from './themeReducers/cartReducer';
 import kanbanReducer from './themeReducers/kanbanReducer';
 import AuthReducer from 'redux/auth/reducers';
 import brand from 'redux/brand/reducers';
+import category from 'redux/categories/reducers';
 
+import adminReducer from 'redux/adminManagement/reducers';
+import brandadminReducer from 'redux/brandManagement/reducers';
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const rootReducer = combineReducers({
@@ -28,8 +31,11 @@ const rootReducer = combineReducers({
     //     cartReducer
     // ),
     brand: brand,
+    category: category,
     kanban: kanbanReducer,
     auth: AuthReducer,
+    adminReducer: adminReducer,
+    brandadminReducer: brandadminReducer,
 
 
 });

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { FormattedMessage } from 'react-intl';
+
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
@@ -95,7 +95,7 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                         }}
                         color="secondary"
                     >
-                        <FormattedMessage id="cancel" />
+                        Cancel
                     </Button>
 
                     <Button

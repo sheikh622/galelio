@@ -22,6 +22,7 @@ const AuthGuard = ({ children }) => {
     const dispatch = useDispatch();
     console.log("Cookies.get('session')", Cookies.get('session'));
     const token = useSelector((state) => state.auth.token);
+<<<<<<< HEAD
     let socialToken;
 
     if (!token) {
@@ -29,11 +30,14 @@ const AuthGuard = ({ children }) => {
         console.log('socialToken', socialToken);
     }
     console.log(token, 'token authGuard');
+=======
+>>>>>>> d56ebe8e9ccdb1035b99dbea47cbb0cbb74b3f54
     const navigate = useNavigate();
 
     const [user, setUser] = useState([]);
 
     useEffect(() => {
+<<<<<<< HEAD
         const getUser = () => {
             fetch('http://localhost:3000/api/v1/auth/facebook/callback/success', {
                 method: 'GET',
@@ -109,6 +113,13 @@ const AuthGuard = ({ children }) => {
     //     navigate('/dashboard', { replace: true });
     // }
     // }, [token]);
+=======
+        if (token == '') {
+            navigate('login', { replace: true });
+        }
+    }, [token, navigate]);
+
+>>>>>>> d56ebe8e9ccdb1035b99dbea47cbb0cbb74b3f54
     return children;
 };
 

@@ -11,6 +11,7 @@ export default function DeleteBrandDialog({ deleteOpen, setDeleteOpen, brandId, 
         setDeleteOpen(false);
         
     };
+   
     return (
         <>
             <Dialog
