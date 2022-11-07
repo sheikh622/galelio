@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN,LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD ,SET_WALLET_ADDRESS ,SET_LOADER} from './constants';
+import { LOGIN_SUCCESS, LOGIN,LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD ,SET_WALLET_ADDRESS ,SET_LOADER, SOCIAL_LOGIN} from './constants';
 
 export const login = (data) => {
     return {
@@ -7,7 +7,10 @@ export const login = (data) => {
     };
 };
 
+
 export const loginSuccess = (data) => {
+
+    console.log("loginSuccess data", data)
     return {
         type: LOGIN_SUCCESS,
         payload: data
