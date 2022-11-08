@@ -170,8 +170,11 @@ export default function AddUpdateDialog({
                                     autoComplete="given-name"
                                 />
                                 <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                    Password
+                                    Password (should contain 1 Uppercase, 1 Numeric and 1 Special character)
                                 </InputLabel>
+                                
+                               
+                                
                                 <OutlinedInput
                                     fullWidth
                                     type={showPassword ? 'text' : 'password'}
