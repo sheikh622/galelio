@@ -17,7 +17,8 @@ import {
     TextField,
     Grid,
     DialogTitle,
-    Divider
+    Divider,
+    DialogActions
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -162,7 +163,12 @@ export default function AddUpdateCategory({
                                 </>
                             )}
 
-                            <AnimateButton>
+                        </Grid>
+                    </form>
+                </DialogContent>
+                <DialogActions sx={{pr: 3}}>
+
+                <AnimateButton>
                                 <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
                                     {categories.name !== '' ? 'Update ' : 'Add '}
                                 </Button>
@@ -178,9 +184,7 @@ export default function AddUpdateCategory({
                                     Cancel
                                 </Button>
                             </AnimateButton>
-                        </Grid>
-                    </form>
-                </DialogContent>
+                </DialogActions>
             </Dialog>
         </>
     );

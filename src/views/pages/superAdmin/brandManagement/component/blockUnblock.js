@@ -32,7 +32,7 @@ export default function BlockUnblockDialog({
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Status  </DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1">Change Status  </DialogTitle>
                 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">

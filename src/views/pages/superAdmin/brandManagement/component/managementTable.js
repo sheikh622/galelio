@@ -193,7 +193,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                                                                 });
                                                             }}
                                                         >
-                                                         Status
+                                                         Change Status
                                                         </Button>
                                                     </Grid>
                                                   
