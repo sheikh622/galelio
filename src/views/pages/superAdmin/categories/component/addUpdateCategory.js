@@ -47,7 +47,7 @@ export default function AddUpdateCategory({
     const handleBrandChange = (event) => {
         setBrand(event.target.value);
     };
-
+    console.log('adddddddddddd', categories);
     const validationSchema = Yup.object({
         name: Yup.string()
             .required('Category Name is required!')
@@ -65,7 +65,9 @@ export default function AddUpdateCategory({
         initialValues: categories,
         validationSchema,
         onSubmit: async (values) => {
+            console.log('adddddddddddd',values);
             if (categories.name == '') {
+               
                 await dispatch(
                     addCategory({
                         name: values.name,
@@ -162,28 +164,30 @@ export default function AddUpdateCategory({
                                     </TextField>
                                 </>
                             )}
-
                         </Grid>
                     </form>
                 </DialogContent>
-                <DialogActions sx={{pr: 3}}>
-
-                <AnimateButton>
-                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
-                                    {categories.name !== '' ? 'Update ' : 'Add '}
-                                </Button>
-                            </AnimateButton>
-                            <AnimateButton>
-                                <Button
-                                    variant="contained"
-                                    sx={{ my: 3, ml: 1, color: '#fff' }}
-                                    onClick={handleClose}
-                                    color="secondary"
-                                    size="large"
-                                >
-                                    Cancel
-                                </Button>
-                            </AnimateButton>
+                <DialogActions sx={{ pr: 3 }}>
+                    <AnimateButton>
+                        <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large"
+                        onClick={() => {
+                            formik.handleSubmit();
+                        }}
+                         disableElevation>
+                            {categories.name !== '' ? 'Update ' : 'Add '}
+                        </Button>
+                    </AnimateButton>
+                    <AnimateButton>
+                        <Button
+                            variant="contained"
+                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            onClick={handleClose}
+                            color="secondary"
+                            size="large"
+                        >
+                            Cancel
+                        </Button>
+                    </AnimateButton>
                 </DialogActions>
             </Dialog>
         </>
