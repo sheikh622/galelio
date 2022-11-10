@@ -52,7 +52,7 @@ function* addCategoryRequest({ payload }) {
             })
         );
         payload.handleClose();
-
+        console.log('adddddddddddd');
         yield setNotification('success', response.data.message);
         // payload.navigate('/categories');
     } catch (error) {
