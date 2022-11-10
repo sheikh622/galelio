@@ -34,18 +34,9 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
                 <TableBody>
                     {brandsList.brands != undefined &&
                         brandsList.brands.map((row, index) => (
-                            <TableRow  
-                            color="primary"
-                            sx={{
-                                color: theme.palette.orange.dark,
-                                borderColor: theme.palette.orange.main,
-                                '&:hover ': { background: theme.palette.orange.light }
-                            }}
-                            onClick={() => {
-                                setBrandName(row.name);
-                                setBrandId(row.id);
-                                setAddUpdateOpen(true);
-                            }}>
+                            <TableRow  >
+                            
+                        
                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                     {row.name}
                                 </TableCell>
