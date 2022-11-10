@@ -4,10 +4,10 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { useTheme } from '@mui/material/styles';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider } from '@mui/material';
+import { Grid, Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 import { addBrand, updateBrand } from '../../../../../redux/brand/actions';
-
+import AnimateButton from 'ui-component/extended/AnimateButton';
 export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, page, limit, search, brandName, setBrandName, brandId }) {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -88,27 +88,31 @@ export default function AddUpdateBrandDialog({ addUpdateOpen, setAddUpdateOpen, 
                 </DialogContent>
                 <Divider />
                 <DialogActions sx={{ pr: 2.5 }}>
-                    <Button
-                        sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
-                        onClick={() => {
-                            handleClose();
-                        }}
-                        color="secondary"
-                    >
-                        Cancel
-                    </Button>
-
-                    <Button
-                        variant="contained"
-                        size="small"
-                        onClick={() => {
-                            formik.handleSubmit();
-                        }}
-                    >
-                        {brandName == '' ?
-                            'Add'
-                            : 'Update'}
-                    </Button>
+                    <AnimateButton>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            sx={{ my: 3, ml: 1 }}
+                            onClick={() => {
+                                formik.handleSubmit();
+                            }}
+                            size="large"
+                            disableElevation
+                        >
+                            {brandName == '' ? 'Add' : 'Update'}
+                        </Button>
+                    </AnimateButton>
+                    <AnimateButton>
+                        <Button
+                            variant="contained"
+                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            onClick={handleClose}
+                            color="secondary"
+                            size="large"
+                        >
+                            Cancel
+                        </Button>
+                    </AnimateButton>
                 </DialogActions>
             </Dialog>
         </>

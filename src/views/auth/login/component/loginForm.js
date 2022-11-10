@@ -30,6 +30,7 @@ import { useNavigate } from 'react-router-dom';
 import { setLoader } from '../../../../redux/auth/actions';
 import Google from 'assets/images/icons/social-google.svg';
 import FacebookSharpIcon from '@mui/icons-material/FacebookSharp';
+import axios from 'axios';
 // import useAuth from 'hooks/useAuth';
 
 const LoginForm = ({ loginProp, ...others }) => {
@@ -61,6 +62,15 @@ const LoginForm = ({ loginProp, ...others }) => {
     useEffect(() => {
         dispatch(setLoader(false));
     }, []);
+
+    const handleFBClick = () => {
+        window.open('http://localhost:3000/api/v1/auth/facebook', "_self");
+    };
+
+    const handleGoogleClick = () => {
+        window.open('http://localhost:3000/api/v1/auth/google', "_self");
+    };
+
     return (
         <>
             {/* <Grid container direction="column" justifyContent="center" spacing={2}>
@@ -72,17 +82,15 @@ const LoginForm = ({ loginProp, ...others }) => {
                     </Box>
                 </Grid>
             </Grid> */}
-            
+
             <Formik
                 enableReinitialize
                 initialValues={{
-
                     email: '',
                     password: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Enter valid email').max(255).required('Email is required!'
-                    ),
+                    email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     password: Yup.string().max(255).required('Password is required!')
                 })}
                 onSubmit={async (values) => {
@@ -94,22 +102,19 @@ const LoginForm = ({ loginProp, ...others }) => {
                             navigate: navigate
                         })
                     );
-
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">
-                                Email </InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput
                                 type="email"
                                 value={values.email}
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label='Email'
+                                label="Email"
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -124,8 +129,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">
-                                Password</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
                             <OutlinedInput
                                 type={showPassword ? 'text' : 'password'}
                                 value={values.password}
@@ -145,7 +149,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                label='Password'
+                                label="Password"
                                 inputProps={{}}
                             />
                             {touched.password && errors.password && (
@@ -155,13 +159,11 @@ const LoginForm = ({ loginProp, ...others }) => {
                             )}
                         </FormControl>
                         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-
                             <Typography
                                 variant="subtitle1"
                                 component={Link}
                                 to={'/forgetpassword'}
-
-                                sx={{ textDecoration: 'none', color: "#816a51 " }}
+                                sx={{ textDecoration: 'none', color: '#816a51 ' }}
                             >
                                 Forgot Password?
                             </Typography>
@@ -172,12 +174,12 @@ const LoginForm = ({ loginProp, ...others }) => {
                             </Box>
                         )}
 
-                        <Box sx={{ mt: 2, background: "#604223" }}>
+                        <Box sx={{ mt: 2, background: '#604223' }}>
                             <AnimateButton>
                                 {loader ? (
                                     <Button
-                                        className='signbutton'
-                                        sx={{ background: "#604223" }}
+                                        className="signbutton"
+                                        sx={{ background: '#604223' }}
                                         disabled
                                         disableElevation
                                         fullWidth
@@ -185,14 +187,13 @@ const LoginForm = ({ loginProp, ...others }) => {
                                         type="submit"
                                         variant="contained"
                                         color="secondary"
-
                                     >
                                         Sign in
                                     </Button>
                                 ) : (
                                     <Button
-                                        className='signbutton'
-                                        sx={{ background: "#604223" }}
+                                        className="signbutton"
+                                        sx={{ background: '#604223' }}
                                         disableElevation
                                         disabled={isSubmitting}
                                         fullWidth
@@ -200,7 +201,6 @@ const LoginForm = ({ loginProp, ...others }) => {
                                         type="submit"
                                         variant="contained"
                                         color="secondary"
-
                                     >
                                         Sign in
                                     </Button>
@@ -211,7 +211,74 @@ const LoginForm = ({ loginProp, ...others }) => {
                 )}
             </Formik>
 
-
+            {/* <Box sx={{ mt: 2, background: '#604223' }}>
+                <AnimateButton>
+                    {loader ? (
+                        <Button
+                            className="signbutton"
+                            sx={{ background: '#01579b' }}
+                            disabled
+                            disableElevation
+                            fullWidth
+                            size="large"
+                            // type="submit"
+                            variant="contained"
+                            color="secondary"
+                        >
+                            Sign in with Facebook
+                        </Button>
+                    ) : (
+                        <Button
+                            className="signbutton"
+                            sx={{ background: '#01579b' }}
+                            disableElevation
+                            // disabled={isSubmitting}
+                            fullWidth
+                            size="large"
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleFBClick}
+                        >
+                            Sign in with Facebook
+                        </Button>
+                    )}
+                </AnimateButton>
+            </Box>
+            <Box sx={{ mt: 2, background: '#604223' }}>
+                <AnimateButton>
+                    {loader ? (
+                        <Button
+                            className="signbutton"
+                            sx={{ background: '#ef5350' }}
+                            disabled
+                            disableElevation
+                            fullWidth
+                            size="large"
+                            type=""
+                            variant="contained"
+                            color="secondary"
+                        >
+                            Sign in with Google
+                        </Button>
+                    ) : (
+                        <Button
+                            className="signbutton"
+                            sx={{ background: '#ef5350' }}
+                            disableElevation
+                            // disabled={isSubmitting}
+                            fullWidth
+                            size="large"
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleGoogleClick}
+                        >
+                            Sign in with Google
+                        </Button>
+                    )}
+                </AnimateButton>
+            </Box> */}
         </>
     );
 };

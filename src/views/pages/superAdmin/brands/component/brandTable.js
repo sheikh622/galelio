@@ -13,7 +13,7 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
     const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
     const brandsList = useSelector((state) => state.brand.brandsList);
-   
+
     return (
         <TableContainer>
             <DeleteBrandDialog
@@ -27,17 +27,25 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
             <Table>
                 <TableHead>
                     <TableRow>
-
                         <TableCell align="center">Brand Name</TableCell>
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-
                     {brandsList.brands != undefined &&
                         brandsList.brands.map((row, index) => (
-                            <TableRow>
-
+                            <TableRow  
+                            color="primary"
+                            sx={{
+                                color: theme.palette.orange.dark,
+                                borderColor: theme.palette.orange.main,
+                                '&:hover ': { background: theme.palette.orange.light }
+                            }}
+                            onClick={() => {
+                                setBrandName(row.name);
+                                setBrandId(row.id);
+                                setAddUpdateOpen(true);
+                            }}>
                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                     {row.name}
                                 </TableCell>
@@ -77,8 +85,6 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
                                         </Tooltip>
                                     </Stack>
                                 </TableCell>
-
-
                             </TableRow>
                         ))}
                 </TableBody>

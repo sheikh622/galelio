@@ -22,7 +22,8 @@ import {
     TextField,
     Divider,
     OutlinedInput,
-    FormHelperText
+    FormHelperText,
+    Grid
 } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
@@ -110,18 +111,20 @@ export default function AddUpdateDialog({
     return (
         <>
             <Dialog
-                className="responsiveDialog"
+                // className="responsiveDialog"
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 // onClose={handleClose}
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
+              
             >
                 <DialogTitle id="alert-dialog-slide-title1">{adminManagement.firstName == '' ? 'Add Admin' : 'Update Admin'}</DialogTitle>
                 <Divider />
-                <DialogContent>
+                <DialogContent >
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
+                    <Grid container>
                         {adminManagement.firstName == '' ? (
                             <>
                                 <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
@@ -167,8 +170,11 @@ export default function AddUpdateDialog({
                                     autoComplete="given-name"
                                 />
                                 <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                    Password
+                                    Password (should contain 1 Uppercase, 1 Numeric and 1 Special character)
                                 </InputLabel>
+                                
+                               
+                                
                                 <OutlinedInput
                                     fullWidth
                                     type={showPassword ? 'text' : 'password'}
@@ -245,6 +251,7 @@ export default function AddUpdateDialog({
                                 )}
                             </>
                         )}
+                  </Grid>
                     </form>
                 </DialogContent>
                 <Divider />

@@ -120,7 +120,7 @@ export default function AddUpdateDialog({
         <>
             <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
-                    {brandManagement.firstName !== '' ? 'Update Brand Admin ' : ' Add  Brand Admin '}
+                    {brandManagement.firstName !== '' ? 'Update Brand Admin ' : ' Add Brand Admin '}
                 </DialogTitle>
                 <Divider />
                 <DialogContent>
@@ -196,7 +196,7 @@ export default function AddUpdateDialog({
                                         autoComplete="given-name"
                                     />
                                     <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                        Password
+                                    Password (should contain 1 Uppercase, 1 Numeric and 1 Special character)
                                     </InputLabel>
                                     <OutlinedInput
                                         fullWidth
@@ -275,8 +275,16 @@ export default function AddUpdateDialog({
                                 </>
                             )}
 
-                            <AnimateButton>
-                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
+                          
+                        </Grid>
+                    </form>
+                </DialogContent>
+
+                <DialogActions sx={{pr: 3}}>
+                <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation     onClick={() => {
+                                formik.handleSubmit();
+                            }}>
                                     {brandManagement.firstName !== '' ? 'Update ' : 'Add '}
                                 </Button>
                             </AnimateButton>
@@ -289,11 +297,9 @@ export default function AddUpdateDialog({
                                     size="large"
                                 >
                                     Cancel
-                                </Button>
+                                </Button>   
                             </AnimateButton>
-                        </Grid>
-                    </form>
-                </DialogContent>
+                    </DialogActions>
             </Dialog>
         </>
     );
