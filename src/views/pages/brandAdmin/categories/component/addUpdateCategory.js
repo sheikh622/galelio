@@ -169,7 +169,7 @@ export default function AddUpdateCategory({
                 <DialogActions sx={{pr: 3}}>
 
                 <AnimateButton>
-                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation onClick={formik.handleSubmit}>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation>
                                     {categories.name !== '' ? 'Update ' : 'Add '}
                                 </Button>
                             </AnimateButton>

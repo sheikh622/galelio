@@ -39,7 +39,6 @@ const Categories = () => {
     const user = useSelector((state) => state.auth.user);
     console.log('redux user')
     console.log('redux user', user)
-
     const [brand, setBrand] = useState(0);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -96,8 +95,6 @@ const Categories = () => {
 
     return (
         <>
-
-        <h1>{brandName}</h1>
             <AddUpdateCategory
                 open={addEditModal}
                 categories={categories}

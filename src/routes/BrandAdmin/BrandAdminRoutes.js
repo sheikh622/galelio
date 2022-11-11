@@ -5,6 +5,7 @@ import Loadable from 'ui-component/Loadable';
 import BrandAdminGuard from './BrandAdminGuard';
 
 const BrandAdmin = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
+const Category = Loadable(lazy(() => import('views/pages/brandAdmin/categories')));
 
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -21,6 +22,10 @@ const BrandAdminRoutes = {
             path: '/dashboard',
             element: <BrandAdmin />
         },
+        {
+            path: '/categories',
+            element: <Category />
+        }
    
    
     ]
