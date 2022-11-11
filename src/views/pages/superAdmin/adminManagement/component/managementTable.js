@@ -45,7 +45,10 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        block:'',
+        mint:''
+
     });
     const [detailId, setDetailId] = useState();
 
@@ -201,7 +204,8 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             onClick={() => {
                                                                 setStatus(true);
                                                                 setAdminManagement({
-                                                                    email: row.email
+                                                                    email: row.email,
+                                                                    block:row.isActive
                                                                 });
                                                             }}
                                                         >
@@ -215,7 +219,8 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, setBrandId })
                                                             onClick={() => {
                                                                 setMintRole(true);
                                                                 setAdminManagement({
-                                                                    email: row.email
+                                                                    email: row.email,
+                                                                    mint:row.hasMintingAccess
                                                                 });
                                                             }}
                                                         >

@@ -109,7 +109,8 @@ export default function AddUpdateDialog({
             email: '',
             firstName: '',
             lastName: '',
-            password: ''
+            password: '',
+            block:''
         });
         setOpen(false);
 

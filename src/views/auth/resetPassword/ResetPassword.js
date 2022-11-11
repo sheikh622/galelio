@@ -13,7 +13,7 @@ import { resetPassword } from 'redux/auth/actions';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+
 
 // ========================|| FIREBASE - RESET PASSWORD ||======================== //
 
@@ -21,13 +21,9 @@ const ResetPasswordForm = ({ token, ...others }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // language customization
+   
 
-    const customization = useSelector((state) => state.customization);
-    const [language, setLanguage] = useState(customization.locale);
-    useEffect(() => {
-        setLanguage(customization.locale);
-    }, [customization]);
+  
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);

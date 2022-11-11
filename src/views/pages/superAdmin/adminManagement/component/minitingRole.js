@@ -8,13 +8,16 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 export default function MiniterDialog({ open, setOpen, page, limit, search, adminManagement, setAdminManagement }) {
     const theme = useTheme();
     const dispatch = useDispatch();
+    console.log(adminManagement,'adminManagement')
     const handleClose = () => {
         setOpen(false);
         setAdminManagement({
             email: '',
             firstName: '',
             lastName: '',
-            password: ''
+            password: '',
+            block:'',
+            mint:''
         });
     };
 
@@ -33,7 +36,8 @@ export default function MiniterDialog({ open, setOpen, page, limit, search, admi
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                            Are you sure you want to change the Miniting status?
+                        {adminManagement.mint == false? 'Are you sure you  want to allow minting access to this Admin?' :
+                        'Are you sure you want to remove minting access?'} 
                         </Typography>
                     </DialogContentText>
                 </DialogContent>

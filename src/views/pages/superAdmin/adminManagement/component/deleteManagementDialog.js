@@ -13,7 +13,9 @@ export default function DeleteManagementDialog({ deleteOpen, setDeleteOpen, page
             email: '',
             firstName: '',
             lastName: '',
-            password: ''
+            password: '',
+            mint:'',
+            block:''
         });
     };
 
