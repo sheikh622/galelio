@@ -47,7 +47,7 @@ export default function AddUpdateCategory({
     const handleBrandChange = (event) => {
         setBrand(event.target.value);
     };
-    console.log('adddddddddddd', categories);
+    // console.log('adddddddddddd', categories);
     const validationSchema = Yup.object({
         name: Yup.string()
             .required('Category Name is required!')
@@ -65,7 +65,7 @@ export default function AddUpdateCategory({
         initialValues: categories,
         validationSchema,
         onSubmit: async (values) => {
-            console.log('adddddddddddd',values);
+            // console.log('adddddddddddd',values);
             if (categories.name == '') {
                
                 await dispatch(

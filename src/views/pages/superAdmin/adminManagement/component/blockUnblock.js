@@ -13,7 +13,9 @@ export default function BlockUnblockDialog({ open, setOpen, page, limit, adminMa
             email: '',
             firstName: '',
             lastName: '',
-            password: ''
+            password: '',
+            block:'',
+            mint:''
         });
     };
 
@@ -32,7 +34,8 @@ export default function BlockUnblockDialog({ open, setOpen, page, limit, adminMa
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                            Are you sure you want to change the status?
+                        {adminManagement.block == false? 'Are you sure you want to unblock this Admin?' :
+                        'Are you sure you want to block  this Admin?'}   
                         </Typography>
                     </DialogContentText>
                 </DialogContent>

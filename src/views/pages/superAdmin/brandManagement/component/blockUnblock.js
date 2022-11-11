@@ -10,6 +10,7 @@ export default function BlockUnblockDialog({
      }) {
     const theme = useTheme();
     const dispatch = useDispatch();
+    console.log(brandManagement,'brandManagement=>')
     const handleClose = () => {
         setOpen(false);
         setBrandManagement({
@@ -17,6 +18,7 @@ export default function BlockUnblockDialog({
             firstName:'',
             lastName:'',
             password:'',
+            block:''
         
         });
         
@@ -37,7 +39,8 @@ export default function BlockUnblockDialog({
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                          Are you sure you want to change the status?
+                     {brandManagement.block == false? 'Are you sure you want to unblock this Admin?' :
+                      'Are you sure you want to block  this Admin?'}     
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
