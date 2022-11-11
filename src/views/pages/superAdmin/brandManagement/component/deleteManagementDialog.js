@@ -16,7 +16,7 @@ export default function DeleteManagementDialog({
             email: '',
             firstName:'',
             lastName:'',
-          
+            block:'',
             password:'',
         
         });

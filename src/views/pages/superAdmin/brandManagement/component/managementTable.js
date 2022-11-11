@@ -44,9 +44,9 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
         id:'',
         firstName: '',
         lastName: '',        
-       
         email: '',
-        password: ''
+        password: '',
+        block:''
     });
     const [detailId, setDetailId] = useState();
 
@@ -188,8 +188,10 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                                                             size="large"
                                                             onClick={() => {
                                                                 setStatus(true);
+
                                                                 setBrandManagement({
-                                                                    email: row.email
+                                                                    email: row.email,
+                                                                    block:row.isActive
                                                                 });
                                                             }}
                                                         >

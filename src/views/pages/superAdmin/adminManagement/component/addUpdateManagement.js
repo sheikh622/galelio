@@ -101,7 +101,9 @@ export default function AddUpdateDialog({
             email: '',
             firstName: '',
             lastName: '',
-            password: ''
+            password: '',
+            block:'',
+            mint:''
         });
         setOpen(false);
 

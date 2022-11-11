@@ -64,11 +64,11 @@ const LoginForm = ({ loginProp, ...others }) => {
     }, []);
 
     const handleFBClick = () => {
-        window.open('http://localhost:3000/api/v1/auth/facebook', "_self");
+        window.open('http://localhost:3000/api/v1/auth/facebook', '_self');
     };
 
     const handleGoogleClick = () => {
-        window.open('http://localhost:3000/api/v1/auth/google', "_self");
+        window.open('http://localhost:3000/api/v1/auth/google', '_self');
     };
 
     return (
