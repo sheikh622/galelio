@@ -14,11 +14,14 @@ import {
     TableRow,
     Tooltip
 } from '@mui/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 const CategoryTable = ({ setOpen, open, categories, setCategories, categoryList, setDeleteOpen }) => {
+
+    const navigate = useNavigate();
     const theme = useTheme();
 
     return (
@@ -48,44 +51,20 @@ const CategoryTable = ({ setOpen, open, categories, setCategories, categoryList,
 
                                             <TableCell align="center" sx={{ padding: '0px' }}>
                                                 <Stack direction="row" justifyContent="center" alignItems="center">
-                                                    <Tooltip placement="top" title="Edit">
+                                                    <Tooltip placement="top" title="View">
                                                         <IconButton
                                                             color="primary"
-                                                            aria-label="Edit"
+                                                            aria-label="View"
                                                             size="large"
-                                                            onClick={() => {
-                                                                setOpen(true);
-
-                                                                setCategories({
-                                                                    name: row.name,
-                                                                    profitPercentage: row.profitPercentage,
-                                                                    brandId: row.BrandId,
-                                                                    categoryId: row.id
-                                                                });
+                                                            onClick={() => {                                                            
                                                             }}
                                                         >
-                                                            <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                    <Tooltip placement="top" title="Delete">
-                                                        <IconButton
-                                                            color="primary"
-                                                            sx={{
-                                                                color: theme.palette.orange.dark,
-                                                                borderColor: theme.palette.orange.main,
-                                                                '&:hover ': { background: theme.palette.orange.light }
+                                                            <VisibilityIcon sx={{ fontSize: '1.5rem' }}
+                                                            onClick={()=>{
+                                                                navigate(  `/${row.name}/${row.id}`, {replace: true})
                                                             }}
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setCategories({
-                                                                    brandId: row.BrandId,
-                                                                    categoryId: row.id
-                                                                });
-
-                                                                setDeleteOpen(true); //open delete dialoge
-                                                            }}
-                                                        >
-                                                            <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            
+                                                            />
                                                         </IconButton>
                                                     </Tooltip>
                                                 </Stack>

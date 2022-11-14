@@ -37,8 +37,6 @@ const Categories = () => {
     const dispatch = useDispatch();
     const categoryList = useSelector((state) => state.category.categoryList);
     const user = useSelector((state) => state.auth.user);
-    console.log('redux user')
-    console.log('redux user', user)
     const [brand, setBrand] = useState(0);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -69,7 +67,6 @@ const Categories = () => {
     };
 
     useEffect(() => {
-       
         dispatch(
             getAllBrands({
                 search: search,
@@ -78,14 +75,11 @@ const Categories = () => {
             })
         );
     }, [search, page, limit]);
-
-    const brandsList = useSelector((state) => state.brand.brandsList);
-
+    const brandId = useSelector((state)=>state.auth.user.brandId);
     useEffect(() => {
         dispatch(
             getAllCategories({
-                brandId: brand == 0 ? 0 : brand,
-
+                brandId: brandId,
                 search: searchCategories,
                 page: pageCategories,
                 limit: limitCategories
@@ -132,14 +126,14 @@ const Categories = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={3}>
+                        {/* <Grid item xs={3}>
                             <TextField
                                 className="selectField"
                                 id="outlined-select-budget"
                                 select
                                 fullWidth
                                 label="Select Brand"
-                                value={ brand}
+                                value={brand}
                                 // defaultValue={brand}
                                 onChange={handleBrandChange}
                             >
@@ -151,8 +145,8 @@ const Categories = () => {
                                         </MenuItem>
                                     ))}
                             </TextField>
-                        </Grid>
-                        <Grid item xs={6} textAlign="end">
+                        </Grid> */}
+                        {/* <Grid item xs={6} textAlign="end">
                             <Button
                                 variant="contained"
                                 size="large"
@@ -163,7 +157,7 @@ const Categories = () => {
                             >
                                 Add Category
                             </Button>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 }
                 content={false}
@@ -180,7 +174,7 @@ const Categories = () => {
                     limit={limitCategories}
                     search={searchCategories}
                 />
-              
+
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>
                         <Grid container justifyContent="space-between" spacing={gridSpacing}>
