@@ -36,9 +36,7 @@ const Categories = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const categoryList = useSelector((state) => state.category.categoryList);
-    const user = useSelector((state) => state.auth.user);
-    console.log('redux user')
-    console.log('redux user', user)
+  
 
     const [brand, setBrand] = useState(0);
     const [search, setSearch] = useState('');

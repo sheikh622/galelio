@@ -17,6 +17,8 @@ const AuthReducer = produce((draft, action) => {
             draft.user = action.payload.user;
         
             draft.token = action.payload.token;
+
+            draft.brandName = action.payload.brandName;
           
             break;
       
