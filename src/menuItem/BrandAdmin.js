@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconDashboard, IconDeviceAnalytics,IconCheckbox, IconUser, IconUserCheck, IconReceipt2, IconClipboardList } from '@tabler/icons';
+import { IconDashboard, IconDeviceAnalytics,IconCheckbox, IconUser, IconUserCheck, IconReceipt2, IconClipboardList,  } from '@tabler/icons';
 import React from 'react';
 
 // constant
@@ -29,6 +29,14 @@ const brandAdminMenu = {
             type: 'item',
             url: '/dashboard',
             icon: icons.IconDashboard,
+            breadcrumbs: false
+        },
+        {
+            id: 'categories',
+            title: <FormattedMessage id="Categories" />,
+            type: 'item',
+            url: '/categories',
+            icon: icons.IconCheckbox,
             breadcrumbs: false
         },
        
