@@ -36,18 +36,16 @@ const Categories = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const [deleteOpen, setDeleteOpen] = useState(false);
-    const [addEditModal, setAddEditModal] = useState(false);
+    const [addEditOpen, setAddUpdateOpen] = useState(false);
     const categoryList = useSelector((state) => state.category.categoryList);
 
-    
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [categories, setCategories] = useState({
+    const [categoryData, setCategoryData] = useState({
         name: '',
-        profitPercentage: '',
-       
-        categoryId: 0
+        description: '',
+        image: null
     });
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -58,8 +56,6 @@ const Categories = () => {
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
-
-   
 
     useEffect(() => {
         dispatch(
@@ -110,14 +106,14 @@ const Categories = () => {
                                 }}
                             />
                         </Grid>
-                      
+
                         <Grid item xs={9} textAlign="end">
                             <Button
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
                                     setAddEditModal(true);
-                                    setCategories({ name: '', profitPercentage: '', categoryId: 0 });
+                                    setCategoryData({ name: '', description: '', image: null });
                                 }}
                             >
                                 Add Category
@@ -127,18 +123,16 @@ const Categories = () => {
                 }
                 content={false}
             >
-                {/* <CategoryTable
-                    open={addEditModal}
-                    categories={categories}
-                    setCategories={setCategories}
-                    setOpen={setAddEditModal}
-                    setDeleteOpen={setDeleteOpen}
-                    mainBrandId={brand}
-                    categoryList={categoryList}
-                    page={pageCategories}
-                    limit={limitCategories}
-                    search={searchCategories}
-                /> */}
+                
+
+                <CategoryTable
+                    categoryList={categoryList && categoryList}
+                    page={page}
+                    limit={limit}
+                    search={search}
+                    setAddUpdateOpen={setAddUpdateOpen}
+                    setCategoryData={setCategoryData}
+                />
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>
@@ -149,7 +143,7 @@ const Categories = () => {
                                     showFirstButton
                                     showLastButton
                                     page={page}
-                                    count={categoryList.totalPages}
+                                    count={categoryList && categoryList.pages}
                                     onChange={(event, newPage) => {
                                         setPage(newPage);
                                     }}

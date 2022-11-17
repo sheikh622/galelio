@@ -16,20 +16,33 @@ import {
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-
+import DeleteCategoryDialog from './deleteCategoryDialog';
+import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
-const CategoryTable = ({ setOpen, open, categories, setCategories, categoryList, setDeleteOpen }) => {
-    const theme = useTheme();
 
+const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, setCategoryData }) => {
+    const theme = useTheme();
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const [categoryId, setCategoryId] = useState();
     return (
         <>
+            <DeleteCategoryDialog
+                open={deleteOpen}
+                setOpen={setDeleteOpen}
+                categoryId={categoryId}
+                page={page}
+                limit={limit}
+                search={search}
+            />
+            <DeleteCategoryDialog />
             <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">Name</TableCell>
-                            <TableCell align="center">Profit</TableCell>
-
+                            <TableCell align="center">Description</TableCell>
+                            <TableCell align="center">Created At</TableCell>
+                            <TableCell align="center">Updated At</TableCell>
                             <TableCell align="center">Actions</TableCell>
                         </TableRow>
                     </TableHead>
@@ -38,14 +51,25 @@ const CategoryTable = ({ setOpen, open, categories, setCategories, categoryList,
                             {categoryList.categories != undefined &&
                                 categoryList.categories.map((row, index) => (
                                     <>
-                                        <TableRow onClick={() => {}}>
-                                            <TableCell align="center" sx={{ padding: '0px' }}>
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="center" sx={{ padding: '0px' }}>
-                                                {row.profitPercentage}%
+                                        <TableRow>
+                                            <TableCell align="center" justifyContent="center" alignItems="center">
+                                                <Grid container spacing={2} justifyContent="center" alignItems="center">
+                                                    <Grid item>
+                                                        <Avatar alt="Category Image" src={row.image} />
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="subtitle1" component="div">
+                                                            {row.name}
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
                                             </TableCell>
 
+                                            <TableCell align="center" sx={{ padding: '0px' }}>
+                                                {row.description}
+                                            </TableCell>
+                                            <TableCell align="center">{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
+                                            <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
                                             <TableCell align="center" sx={{ padding: '0px' }}>
                                                 <Stack direction="row" justifyContent="center" alignItems="center">
                                                     <Tooltip placement="top" title="Edit">
@@ -55,13 +79,12 @@ const CategoryTable = ({ setOpen, open, categories, setCategories, categoryList,
                                                             size="large"
                                                             onClick={() => {
                                                                 setOpen(true);
-
-                                                                setCategories({
-                                                                    name: row.name,
-                                                                    profitPercentage: row.profitPercentage,
-                                                                    brandId: row.BrandId,
-                                                                    categoryId: row.id
-                                                                });
+                                                                // setCategories({
+                                                                //     name: row.name,
+                                                                //     profitPercentage: row.profitPercentage,
+                                                                //     brandId: row.BrandId,
+                                                                //     categoryId: row.id
+                                                                // });
                                                             }}
                                                         >
                                                             <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
@@ -77,12 +100,8 @@ const CategoryTable = ({ setOpen, open, categories, setCategories, categoryList,
                                                             }}
                                                             size="large"
                                                             onClick={() => {
-                                                                setCategories({
-                                                                    brandId: row.BrandId,
-                                                                    categoryId: row.id
-                                                                });
-
-                                                                setDeleteOpen(true); //open delete dialoge
+                                                                setDeleteOpen(true);
+                                                                setCategoryId(row.id);
                                                             }}
                                                         >
                                                             <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
