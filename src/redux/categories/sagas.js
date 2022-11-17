@@ -10,12 +10,8 @@ import { setNotification } from 'shared/helperMethods/setNotification';
 
 function* getAllCategoriesRequest({ payload }) {
     try {
-        const token = yield select(makeSelectAuthToken());
-        const response = yield axios.get(`/category/all?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.get(`/category/all?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, headers);
         yield put(getAllCategoriesSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -32,13 +28,8 @@ function* addCategoryRequest({ payload }) {
     formData.append('description', payload.description);
     formData.append('image', payload.image);
     try {
-        const token = yield select(makeSelectAuthToken());
-        const response = yield axios.post(`/category`, formData, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        console.log('response.data', response.data);
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.post(`/category`, formData,headers);
         yield put(
             getAllCategories({
                 search: payload.search,
@@ -58,18 +49,14 @@ export function* watchAddCategory() {
 }
 
 function* updateCategoryRequest({ payload }) {
-    console.log("payload",payload)
+    console.log('payload', payload);
     const formData = new FormData();
     formData.append('name', payload.name);
     formData.append('description', payload.description);
     formData.append('image', payload.image);
     try {
-        const token = yield select(makeSelectAuthToken());
-        const response = yield axios.put(`/category/${payload.categoryId}`, formData, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.put(`/category/${payload.categoryId}`, formData, headers);
         yield put(
             getAllCategories({
                 search: payload.search,
@@ -90,12 +77,8 @@ export function* watchUpdateCategory() {
 
 function* deleteCategoryRequest({ payload }) {
     try {
-        const token = yield select(makeSelectAuthToken());
-        const response = yield axios.delete(`category/delete/${payload.brandId}/${payload.categoryId}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.delete(`category/delete/${payload.brandId}/${payload.categoryId}`, headers);
         yield put(
             getAllCategories({
                 search: payload.search,

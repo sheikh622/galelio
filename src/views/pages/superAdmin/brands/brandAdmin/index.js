@@ -1,51 +1,26 @@
-import { forwardRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import CategoryTable from './component/categoryTable';
-import {
-    Button,
-    Dialog,
-    Divider,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Slide,
-    Typography,
-    Grid,
-    MenuItem,
-    Menu,
-    Pagination,
-    OutlinedInput,
-    TextField,
-    InputAdornment
-} from '@mui/material';
+import AdminTable from './component/managementTable';
+import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-
-import { getAllBrands } from '../../../../redux/brand/actions';
-import { getAllCategories } from '../../../../redux/categories/actions';
-import DeleteCategoryDialog from './component/deleteCategoryDialog';
+import { getAllBrandAdmin } from '../../../../../redux/brandManagement/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-import AddUpdateCategory from './component/addUpdateCategory';
-
 import MainCard from 'ui-component/cards/MainCard';
 import HeadingCard from 'shared/Card/HeadingCard';
 
-const Categories = () => {
+const BrandAdmin = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const categoryList = useSelector((state) => state.category.categoryList);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [categoryData, setCategoryData] = useState({
-        id: null,
-        name: '',
-        description: '',
-        image: null
-    });
-    const [addUpdateOpen, setAddUpdateOpen] = useState(false);
+    const [addEditModal, setAddEditModal] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -57,30 +32,40 @@ const Categories = () => {
 
     useEffect(() => {
         dispatch(
-            getAllCategories({
+            getAllBrandAdmin({
                 search: search,
                 page: page,
                 limit: limit
             })
         );
     }, [search, page, limit]);
-
+    console.log('location.state', location.state);
     return (
         <>
-            <AddUpdateCategory
-                open={addUpdateOpen}
-                setOpen={setAddUpdateOpen}
-                categoryData={categoryData}
-                page={page}
-                limit={limit}
-                search={search}
-            />
+            <MainCard
+                title={
+                    <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
+                        Admin Management of : {location.state.brandData.name}
+                    </Typography>
+                }
+                secondary={
+                    <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => {
+                            navigate('/brands');
+                        }}
+                    >
+                        back
+                    </Button>
+                }
+                content={false}
+            ></MainCard>
 
-            <HeadingCard title="Category Management" />
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>
-                        <Grid item xs={3}>
+                        <Grid item xs={6}>
                             <OutlinedInput
                                 id="input-search-list-style1"
                                 placeholder="Search"
@@ -95,31 +80,29 @@ const Categories = () => {
                                 }}
                             />
                         </Grid>
-
-                        <Grid item xs={9} textAlign="end">
+                        <Grid item xs={6} textAlign="end">
                             <Button
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
-                                    setAddUpdateOpen(true);
-                                    setCategoryData({ id: null, name: '', description: '', image: null });
+                                    setAddEditModal(true);
                                 }}
                             >
-                                Add Category
+                                Add Brand Admin
                             </Button>
                         </Grid>
                     </Grid>
                 }
                 content={false}
             >
-                <CategoryTable
-                    categoryList={categoryList && categoryList}
+                {/* <AdminTable
+                    brandsList={brandsList}
+                    search={search}
                     page={page}
                     limit={limit}
-                    search={search}
-                    setAddUpdateOpen={setAddUpdateOpen}
-                    setCategoryData={setCategoryData}
-                />
+                    setOpen={setAddEditModal}
+                    open={addEditModal}
+                /> */}
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>
@@ -130,7 +113,7 @@ const Categories = () => {
                                     showFirstButton
                                     showLastButton
                                     page={page}
-                                    count={categoryList && categoryList.pages}
+                                    count={brandAdminList.pages}
                                     onChange={(event, newPage) => {
                                         setPage(newPage);
                                     }}
@@ -205,4 +188,4 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+export default BrandAdmin;

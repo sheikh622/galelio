@@ -2,16 +2,28 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { deleteBrand } from '../../../../../redux/brand/actions';
+import { blockBrand } from 'redux/brandManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit, search }) {
+export default function BlockUnblockDialog({
+    open, setOpen,
+      page, limit, brandManagement,search,setBrandManagement
+     }) {
     const theme = useTheme();
     const dispatch = useDispatch();
+    console.log(brandManagement,'brandManagement=>')
     const handleClose = () => {
         setOpen(false);
+        setBrandManagement({
+            email: '',
+            firstName:'',
+            lastName:'',
+            password:'',
+            block:''
+        
+        });
         
     };
-   
+    
     return (
         <>
             <Dialog
@@ -22,12 +34,13 @@ export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit,
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Delete Brand</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1">Change Status  </DialogTitle>
                 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                            Are you sure you want to delete this Brand?
+                     {brandManagement.block == false? 'Are you sure you want to unblock this Admin?' :
+                      'Are you sure you want to block  this Admin?'}     
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -44,12 +57,15 @@ export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit,
                         size="large"
                         onClick={() => {
                             dispatch(
-                                deleteBrand({
-                                    id: brandId,
+                                blockBrand({
+                                   email:brandManagement.email,
                                     handleClose: handleClose,
                                     page: page,
                                     limit: limit,
-                                    search: search
+                                    search:search,
+                                  
+                                    
+                                    
                                    
                                 })
                             );

@@ -2,15 +2,10 @@ import {
     // Admin
     GET_ALL_BRAND_ADMINS,
     GET_ALL_BRAND_ADMINS_SUCCESS,
-
     ADD_BRAND_ADMIN,
     UPDATE_BRAND_ADMINS,
     DELETE_BRAND_ADMIN,
-    BLOCK_BRAND_ADMIN,
-   
-   
-   
-
+    BLOCK_BRAND_ADMIN
 } from './constants';
 
 // brand Admin
@@ -28,7 +23,6 @@ export const getAllBrandAdminSuccess = (data) => {
         payload: data
     };
 };
-
 
 export const addBrandAdmin = (data) => {
     return {
@@ -56,7 +50,3 @@ export const blockBrand = (data) => {
         payload: data
     };
 };
-
-
-
-

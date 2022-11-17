@@ -7,10 +7,10 @@ import SuperAdminGuard from './SuperAdminGuard';
 import Breadcrumbs from 'ui-component/extended/Breadcrumbs';
 const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
+const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
 const AdminManagement = Loadable(lazy(() => import('views/pages/superAdmin/adminManagement')));
 const BrandManagement = Loadable(lazy(() => import('views/pages/superAdmin/brandManagement')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
-
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -28,10 +28,14 @@ const SuperAdminRoutes = {
             path: '/',
             element: <SuperAdminDashboard />
         },
- 
+
         {
             path: '/brands',
             element: <Brand />
+        },
+        {
+            path: '/brands/admin',
+            element: <BrandAdmin />
         },
         {
             path: '/categories',
@@ -44,8 +48,7 @@ const SuperAdminRoutes = {
         {
             path: '/brandManagement',
             element: <BrandManagement />
-        },
- 
+        }
     ]
 };
 

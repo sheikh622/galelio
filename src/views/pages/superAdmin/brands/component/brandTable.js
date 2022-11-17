@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
     IconButton,
@@ -16,27 +17,19 @@ import {
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteBrandDialog from './deleteBrandDialog';
 import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
 
-const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOpen, brandId, setBrandId }) => {
+const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBrandData }) => {
     const theme = useTheme();
     const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
-    const brandsList = useSelector((state) => state.brand.brandsList);
-
+    const [brandId, setBrandId] = useState();
     return (
         <TableContainer>
-            <DeleteBrandDialog
-                deleteOpen={deleteOpen}
-                setDeleteOpen={setDeleteOpen}
-                brandId={brandId}
-                page={page}
-                limit={limit}
-                search={search}
-            />
+            <DeleteBrandDialog open={deleteOpen} setOpen={setDeleteOpen} brandId={brandId} page={page} limit={limit} search={search} />
             <Table>
                 <TableHead>
                     <TableRow>
@@ -74,15 +67,36 @@ const BrandTable = ({ page, limit, search, setOpen, setBrandName, setAddUpdateOp
                                 <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
+                                        <Tooltip placement="top" title="Add Brand Admin">
+                                            <IconButton
+                                                color="primary"
+                                                aria-label="detail"
+                                                size="medium"
+                                                onClick={() => {
+                                                    navigate('/brands/admin', {
+                                                        state: {
+                                                            brandData: row
+                                                        }
+                                                    });
+                                                }}
+                                            >
+                                                <AddOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                            </IconButton>
+                                        </Tooltip>
                                         <Tooltip placement="top" title="Edit">
                                             <IconButton
                                                 color="primary"
                                                 aria-label="Edit"
                                                 size="large"
                                                 onClick={() => {
-                                                    setBrandName(row.name);
-                                                    setBrandId(row.id);
                                                     setAddUpdateOpen(true);
+                                                    setBrandData({
+                                                        id: row.id,
+                                                        name: row.name,
+                                                        description: row.description,
+                                                        location: row.location,
+                                                        image: null
+                                                    });
                                                 }}
                                             >
                                                 <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
