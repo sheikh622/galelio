@@ -27,30 +27,27 @@ export function* watchGetAllCategories() {
 }
 
 function* addCategoryRequest({ payload }) {
-    let data = {
-        name: payload.name,
-        brandId: payload.brandId,
-        profitPercentage: payload.profitPercentage
-    };
+    const formData = new FormData();
+    formData.append('name', payload.name);
+    formData.append('description', payload.description);
+    formData.append('image', payload.image);
     try {
         const token = yield select(makeSelectAuthToken());
-        const response = yield axios.post(`/category/add`, data, {
+        const response = yield axios.post(`/category`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
+        console.log('response.data', response.data);
         yield put(
             getAllCategories({
                 search: payload.search,
                 page: payload.page,
-                limit: payload.limit,
-                brandId: 0
+                limit: payload.limit
             })
         );
         payload.handleClose();
-        console.log('adddddddddddd');
         yield setNotification('success', response.data.message);
-        // payload.navigate('/categories');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -61,15 +58,14 @@ export function* watchAddCategory() {
 }
 
 function* updateCategoryRequest({ payload }) {
-    let data = {
-        name: payload.name,
-        brandId: payload.brandId,
-        categoryId: payload.categoryId,
-        profitPercentage: payload.profitPercentage
-    };
+    console.log("payload",payload)
+    const formData = new FormData();
+    formData.append('name', payload.name);
+    formData.append('description', payload.description);
+    formData.append('image', payload.image);
     try {
         const token = yield select(makeSelectAuthToken());
-        const response = yield axios.put(`/category/update`, data, {
+        const response = yield axios.put(`/category/${payload.categoryId}`, formData, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -78,15 +74,11 @@ function* updateCategoryRequest({ payload }) {
             getAllCategories({
                 search: payload.search,
                 page: payload.page,
-                limit: payload.limit,
-                brandId: 0
+                limit: payload.limit
             })
         );
         payload.handleClose();
-
         yield setNotification('success', response.data.message);
-
-        // payload.navigate('/categories');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

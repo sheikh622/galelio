@@ -36,13 +36,14 @@ const Categories = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const [deleteOpen, setDeleteOpen] = useState(false);
-    const [addEditOpen, setAddUpdateOpen] = useState(false);
+    const [addUpdateOpen, setAddUpdateOpen] = useState(false);
     const categoryList = useSelector((state) => state.category.categoryList);
 
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const [categoryData, setCategoryData] = useState({
+        id: null,
         name: '',
         description: '',
         image: null
@@ -69,15 +70,16 @@ const Categories = () => {
 
     return (
         <>
-            {/* <AddUpdateCategory
-                open={addEditModal}
-                categories={categories}
-                setCategories={setCategories}
-                setOpen={setAddEditModal}
+            <AddUpdateCategory
+                open={addUpdateOpen}
+                setOpen={setAddUpdateOpen}
+                categoryData={categoryData}
                 page={page}
                 limit={limit}
                 search={search}
-            /> */}
+            />
+
+
             {/* <DeleteCategoryDialog
                 categories={categories}
                 setCategories={setCategories}
@@ -112,8 +114,8 @@ const Categories = () => {
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
-                                    setAddEditModal(true);
-                                    setCategoryData({ name: '', description: '', image: null });
+                                    setAddUpdateOpen(true);
+                                     setCategoryData({ id: null, name: '', description: '', image: null });
                                 }}
                             >
                                 Add Category
@@ -123,8 +125,6 @@ const Categories = () => {
                 }
                 content={false}
             >
-                
-
                 <CategoryTable
                     categoryList={categoryList && categoryList}
                     page={page}

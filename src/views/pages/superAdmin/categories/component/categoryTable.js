@@ -78,13 +78,13 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                                                             aria-label="Edit"
                                                             size="large"
                                                             onClick={() => {
-                                                                setOpen(true);
-                                                                // setCategories({
-                                                                //     name: row.name,
-                                                                //     profitPercentage: row.profitPercentage,
-                                                                //     brandId: row.BrandId,
-                                                                //     categoryId: row.id
-                                                                // });
+                                                                setAddUpdateOpen(true);
+                                                                setCategoryData({
+                                                                    id: row.id,
+                                                                    name: row.name,
+                                                                    description: row.description,
+                                                                    image: null
+                                                                });
                                                             }}
                                                         >
                                                             <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />

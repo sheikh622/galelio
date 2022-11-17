@@ -1,43 +1,24 @@
 import PropTypes from 'prop-types';
-import { useRef, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { Fragment } from 'react';
-import { Button, TextField, Grid, Stack, Typography, IconButton, Tooltip, RadioGroup, FormControlLabel, Radio } from '@mui/material';
-
-import { gridSpacing } from 'store/constant';
+import { Grid, Typography, IconButton, Tooltip, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 // Props needed for component formik ,correctOption, setCorrectOption , optionValue , formikFieldName , PlaceHOLDER
-const FileInput = ({ formik, correctOption, setCorrectOption, optionValue, fieldName, placeHolder, accept }) => {
+const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
     const dispatch = useDispatch();
     const fileRef1 = useRef();
 
     return (
         <>
             <Grid item className="displayFlex">
-                {correctOption && (
-                    <RadioGroup
-                        row
-                        aria-label="gender"
-                        value={correctOption}
-                        onChange={(e) => setCorrectOption(e.target.value)}
-                        name="row-radio-buttons-group"
-                    >
-                        <FormControlLabel
-                            value={optionValue}
-                            control={<Radio />}
-                            label=""
-                            sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }}
-                        />
-                    </RadioGroup>
-                )}
-
                 <Fragment>
                     <Tooltip placement="top" title={accept == 'image/*' ? 'Add Image' : 'Add Audio'}>
-                        <IconButton aria-label="delete" size="large" onClick={() => fileRef1.current.click()}>
-                            <AddCircleOutlinedIcon sx={{ fontSize: '3.0rem' ,  color:"#604223" }} />
+                        <IconButton color="primary" aria-label="delete" size="large" onClick={() => fileRef1.current.click()}>
+                            <AddCircleOutlinedIcon sx={{ fontSize: '3.0rem' }} />
                         </IconButton>
                     </Tooltip>
 
@@ -57,12 +38,17 @@ const FileInput = ({ formik, correctOption, setCorrectOption, optionValue, field
 
                     <Grid className="displayFlex">
                         {formik?.values[`${fieldName}`]?.name?.length < 40 ? (
-                            <Typography className="displayText" mt={3.5} variant="h5">
+                            <Typography mt={3.5} variant="h5">
                                 {formik.values[`${fieldName}`]?.name}
                             </Typography>
                         ) : (
-                            <Typography className="displayText" mt={3.5} variant="h5">
+                            <Typography mt={3.5} variant="h5">
                                 {formik.values[`${fieldName}`]?.name?.substring(0, 40)}
+                            </Typography>
+                        )}
+                        {formik?.values[`${fieldName}`] && (
+                            <Typography mt={3.5} variant="h5" ml={2}>
+                                {'(' + (formik.values[`${fieldName}`]?.size / 1000000).toFixed(2) + '  mb)'}
                             </Typography>
                         )}
 
@@ -91,7 +77,7 @@ const FileInput = ({ formik, correctOption, setCorrectOption, optionValue, field
             </Grid>
 
             <Grid item>
-                <p className={correctOption !== undefined ? "chooseFileError" : "fileError"}>
+                <p className={'fileError'}>
                     {formik.touched[`${fieldName}`] && Boolean(formik.errors[`${fieldName}`]) ? formik.errors[`${fieldName}`] : ''}
                 </p>
             </Grid>
