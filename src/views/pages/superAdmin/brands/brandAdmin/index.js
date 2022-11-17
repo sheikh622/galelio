@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import AdminTable from './component/managementTable';
+import BrandAdminTable from './component/brandAdminTable';
 import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllBrandAdmin } from '../../../../../redux/brandManagement/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
-import HeadingCard from 'shared/Card/HeadingCard';
+import AddUpdateBrandAdminDialog from './component/addUpdateBrandAdmin';
 
 const BrandAdmin = () => {
     const theme = useTheme();
@@ -20,7 +20,16 @@ const BrandAdmin = () => {
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [addEditModal, setAddEditModal] = useState(false);
+
+    const [addUpdateOpen, setAddUpdateOpen] = useState(false);
+    const [brandAdminData, setBrandAdminData] = useState({
+        id:null,
+        brandId: location.state.brandData.id,
+        firstName: '',
+        lastName: '',
+        adminEmail: '',
+        adminPassword: '',
+    });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -33,6 +42,7 @@ const BrandAdmin = () => {
     useEffect(() => {
         dispatch(
             getAllBrandAdmin({
+                brandId: location.state.brandData.id,
                 search: search,
                 page: page,
                 limit: limit
@@ -42,6 +52,14 @@ const BrandAdmin = () => {
     console.log('location.state', location.state);
     return (
         <>
+            <AddUpdateBrandAdminDialog
+                open={addUpdateOpen}
+                setOpen={setAddUpdateOpen}
+                brandAdminData={brandAdminData}
+                page={page}
+                limit={limit}
+                search={search}
+            />
             <MainCard
                 title={
                     <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
@@ -85,7 +103,15 @@ const BrandAdmin = () => {
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
-                                    setAddEditModal(true);
+                                    setAddUpdateOpen(true);
+                                    setBrandAdminData({
+                                        id: null,
+                                        brandId: location.state.brandData.id,
+                                        firstName: '',
+                                        lastName: '',
+                                        adminEmail: '',
+                                        adminPassword: '',
+                                    });
                                 }}
                             >
                                 Add Brand Admin
@@ -95,14 +121,16 @@ const BrandAdmin = () => {
                 }
                 content={false}
             >
-                {/* <AdminTable
-                    brandsList={brandsList}
+                <BrandAdminTable
+                    brandAdminList={brandAdminList}
                     search={search}
                     page={page}
                     limit={limit}
-                    setOpen={setAddEditModal}
-                    open={addEditModal}
-                /> */}
+                    addUpdateOpen={addUpdateOpen}
+                    setAddUpdateOpen={setAddUpdateOpen}
+                    brandAdminData={brandAdminData}
+                    setBrandAdminData={setBrandAdminData}
+                />
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>

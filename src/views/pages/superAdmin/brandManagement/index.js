@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import AdminTable from './component/managementTable';
-import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider  } from '@mui/material';
+import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllBrandAdmin } from '../../../../redux/brandManagement/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
@@ -15,9 +15,7 @@ const Brands = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
-   
-   
-    
+
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -29,12 +27,10 @@ const Brands = () => {
         setAnchorEl(event.currentTarget);
     };
 
-
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
     useEffect(() => {
-        
         dispatch(
             getAllBrands({
                 search: search,
@@ -47,10 +43,9 @@ const Brands = () => {
     const brandsList = useSelector((state) => state.brand.brandsList);
 
     useEffect(() => {
-       
         dispatch(
             getAllBrandAdmin({
-                search:search,
+                search: search,
                 page: page,
                 limit: limit
             })
@@ -58,7 +53,7 @@ const Brands = () => {
     }, [search, page, limit]);
     return (
         <>
-        <HeadingCard title="Brand Management" />
+            <HeadingCard title="Brand Management" />
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>
@@ -83,109 +78,103 @@ const Brands = () => {
                                 size="large"
                                 onClick={() => {
                                     setAddEditModal(true);
-                                   
-
-                                   
                                 }}
                             >
-                                Add  Brand Admin
+                                Add Brand Admin
                             </Button>
                         </Grid>
                     </Grid>
                 }
                 content={false}
             >
-            <AdminTable
-            brandsList={brandsList}                        
-            search={search}
-            page={page}
-            limit={limit}
-            setOpen={setAddEditModal} open={addEditModal}
-          
-          
-        />
-          
-                    <>
-                  
-                        <Grid item xs={12} sx={{ p: 3 }}>
-                            <Grid container justifyContent="space-between" spacing={gridSpacing}>
-                                <Grid item>
-                                    <Pagination
-                                        color="primary"
-                                        showFirstButton
-                                        showLastButton
-                                        page={page}
-                                        count={brandAdminList.pages}
-                                        onChange={(event, newPage) => {
-                                            setPage(newPage);
+                <AdminTable
+                    brandsList={brandsList}
+                    search={search}
+                    page={page}
+                    limit={limit}
+                    setOpen={setAddEditModal}
+                    open={addEditModal}
+                />
+
+                <>
+                    <Grid item xs={12} sx={{ p: 3 }}>
+                        <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                            <Grid item>
+                                <Pagination
+                                    color="primary"
+                                    showFirstButton
+                                    showLastButton
+                                    page={page}
+                                    count={brandAdminList.pages}
+                                    onChange={(event, newPage) => {
+                                        setPage(newPage);
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    size="large"
+                                    sx={{ color: theme.palette.grey[900] }}
+                                    color="secondary"
+                                    endIcon={<ExpandMoreRoundedIcon />}
+                                    onClick={handleClick}
+                                >
+                                    {limit} Rows
+                                </Button>
+                                <Menu
+                                    id="menu-user-list-style1"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleCloseMenu}
+                                    variant="selectedMenu"
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right'
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'right'
+                                    }}
+                                >
+                                    <MenuItem
+                                        value={10}
+                                        onClick={(e) => {
+                                            setLimit(e.target.value);
+                                            setPage(1);
+                                            handleCloseMenu();
                                         }}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <Button
-                                        size="large"
-                                        sx={{ color: theme.palette.grey[900] }}
-                                        color="secondary"
-                                        endIcon={<ExpandMoreRoundedIcon />}
-                                        onClick={handleClick}
                                     >
-                                        {limit} Rows
-                                    </Button>
-                                    <Menu
-                                        id="menu-user-list-style1"
-                                        anchorEl={anchorEl}
-                                        keepMounted
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleCloseMenu}
-                                        variant="selectedMenu"
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right'
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'right'
+                                        {' '}
+                                        10 Rows
+                                    </MenuItem>
+                                    <MenuItem
+                                        value={25}
+                                        onClick={(e) => {
+                                            setLimit(e.target.value);
+                                            setPage(1);
+                                            handleCloseMenu();
                                         }}
                                     >
-                                        <MenuItem
-                                            value={10}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleCloseMenu();
-                                            }}
-                                        >
-                                            {' '}
-                                            10 Rows
-                                        </MenuItem>
-                                        <MenuItem
-                                            value={25}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleCloseMenu();
-                                            }}
-                                        >
-                                            {' '}
-                                            25 Rows
-                                        </MenuItem>
-                                        <MenuItem
-                                            value={50}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleCloseMenu();
-                                            }}
-                                        >
-                                            {' '}
-                                            50 Rows{' '}
-                                        </MenuItem>
-                                    </Menu>
-                                </Grid>
+                                        {' '}
+                                        25 Rows
+                                    </MenuItem>
+                                    <MenuItem
+                                        value={50}
+                                        onClick={(e) => {
+                                            setLimit(e.target.value);
+                                            setPage(1);
+                                            handleCloseMenu();
+                                        }}
+                                    >
+                                        {' '}
+                                        50 Rows{' '}
+                                    </MenuItem>
+                                </Menu>
                             </Grid>
                         </Grid>
-                    </>
-               
+                    </Grid>
+                </>
             </MainCard>
         </>
     );

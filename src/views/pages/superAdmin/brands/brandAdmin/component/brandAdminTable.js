@@ -1,59 +1,30 @@
 import { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
 import {
     Divider,
     Typography,
     IconButton,
-    Stack,
     Grid,
     Table,
     TableBody,
-    Menu,
     TableCell,
-    MenuItem,
     TableContainer,
     TableHead,
     Button,
     TableRow,
     Tooltip
 } from '@mui/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import DeleteManagementDialog from './deleteManagementDialog';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import moment from 'moment';
 import Chip from 'ui-component/extended/Chip';
-import AddUpdateDialog from './addUpdateManagement';
-
+import AddUpdateBrandAdminDialog from './addUpdateBrandAdmin';
 import BlockUnblockDialog from './blockUnblock';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-import { useNavigate } from 'react-router-dom';
-const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList }) => {
-    const theme = useTheme();
-    const navigate = useNavigate();
-
+const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit, brandAdminList, setBrandAdminData, brandAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
- 
-    const [isMenu, setIsMenu] = useState(false);
-    const [status, setStatus] = useState(false);
-
-    const [brandManagement, setBrandManagement] = useState({
-        id:'',
-        firstName: '',
-        lastName: '',        
-        email: '',
-        password: '',
-        block:''
-    });
+    const [changeStatusOpen, setChangeStatusOpen] = useState(false);
+    const [adminId, setAdminId] = useState();
     const [detailId, setDetailId] = useState();
-
-   
-
     const openDetails = (id) => {
-        
         if (detailId === id) {
             setDetailId(null);
         } else {
@@ -61,42 +32,29 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
         }
     };
 
-    const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
-
     return (
         <TableContainer>
-            <AddUpdateDialog
-            setBrandManagement={setBrandManagement}
-            brandsList={brandsList}
-            brandManagement={brandManagement}
-                adminList={brandAdminList}
+            <AddUpdateBrandAdminDialog
+                open={addUpdateOpen}
+                setOpen={setAddUpdateOpen}
+                brandAdminData={brandAdminData}
                 page={page}
                 limit={limit}
-                setOpen={setOpen}
-                open={open}  
                 search={search}
             />
 
-            <DeleteManagementDialog
-                deleteOpen={deleteOpen}
-                setDeleteOpen={setDeleteOpen}
-                brandManagement={brandManagement}
-                setBrandManagement={setBrandManagement}
-                page={page}
-                limit={limit}
-                search={search}
-            />
-            <BlockUnblockDialog
-            brandManagement={brandManagement}
-            setBrandManagement={setBrandManagement}
-                open={status}
-                setOpen={setStatus}
+            <DeleteManagementDialog deleteOpen={deleteOpen} setDeleteOpen={setDeleteOpen} page={page} limit={limit} search={search} />
+
+            {/* <BlockUnblockDialog
+                adminId={adminId}
+                open={changeStatusOpen}
+                setOpen={setChangeStatusOpen}
                 brandId={brandId}
                 page={page}
                 limit={limit}
                 search={search}
-            />
-        
+            /> */}
+
             <Table>
                 <TableHead>
                     <TableRow>
@@ -104,8 +62,6 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                         <TableCell align="center">Last Name</TableCell>
                         <TableCell align="center">Email</TableCell>
                         <TableCell align="center">Status</TableCell>
-                      
-
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
@@ -127,7 +83,6 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                                             )}
                                         </TableCell>
 
-                                        
                                         <TableCell align="center">
                                             <Tooltip placement="top" title="View">
                                                 <IconButton
@@ -152,19 +107,18 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
-                                                                setOpen(true);
-                                                              
-
-                                                                setBrandManagement({
-                                                                    email: row.email,
+                                                                setAddUpdateOpen(true);
+                                                                setBrandAdminData({
+                                                                    id: row.id,
+                                                                    brandId: row.brandId,
                                                                     firstName: row.firstName,
                                                                     lastName: row.lastName,
-                                                                    // brandName: row.brandName,
-                                                                    password: ''
+                                                                    adminEmail: row.email,
+                                                                    adminPassword: ''
                                                                 });
                                                             }}
                                                         >
-                                                            edit
+                                                            Edit
                                                         </Button>
                                                     </Grid>
                                                     <Grid item xs={4} md={4}>
@@ -173,10 +127,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                                                             size="large"
                                                             onClick={() => {
                                                                 setDeleteOpen(true);
-                                                                setBrandManagement({
-                                                                   id:row.id,
-                                                                
-                                                                });
+                                                                setAdminId(row.id);
                                                             }}
                                                         >
                                                             Delete
@@ -187,18 +138,12 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
-                                                                setStatus(true);
-
-                                                                setBrandManagement({
-                                                                    email: row.email,
-                                                                    block:row.isActive
-                                                                });
+                                                                setChangeStatusOpen(true);
                                                             }}
                                                         >
-                                                         Change Status
+                                                            Change Status
                                                         </Button>
                                                     </Grid>
-                                                  
                                                 </Grid>
                                             </div>
                                         </TableCell>
@@ -221,4 +166,4 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
     );
 };
 
-export default AdminTable;
+export default BrandAdminTable;
