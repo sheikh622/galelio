@@ -25,7 +25,7 @@ const SuperAdminRoutes = {
     type: 'group',
     children: [
         {
-            path: '/dashboard',
+            path: '/',
             element: <SuperAdminDashboard />
         },
  

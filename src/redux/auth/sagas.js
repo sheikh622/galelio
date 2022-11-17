@@ -14,9 +14,7 @@ function* loginUser({ payload }) {
         const response = yield axios.post(`/auth/login`, data);
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
-      
         yield put(loginSuccess(response.data.data));
-        payload.navigate('/dashboard');
     } catch (error) {
         
         yield put(setLoader(false));

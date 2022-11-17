@@ -11,16 +11,12 @@ import { setNotification } from 'shared/helperMethods/setNotification';
 function* getAllCategoriesRequest({ payload }) {
     try {
         const token = yield select(makeSelectAuthToken());
-        const response = yield axios.get(
-            `/category/getAllCategoriesByBrand/${payload.brandId}?size=${payload.limit}&page=${payload.page}&&search=${payload.search}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
+        const response = yield axios.get(`/category/all?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
-        );
+        });
         yield put(getAllCategoriesSuccess(response.data.data));
-     
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -57,7 +53,6 @@ function* addCategoryRequest({ payload }) {
         // payload.navigate('/categories');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
-        
     }
 }
 
@@ -94,7 +89,6 @@ function* updateCategoryRequest({ payload }) {
         // payload.navigate('/categories');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
-       
     }
 }
 
@@ -122,7 +116,6 @@ function* deleteCategoryRequest({ payload }) {
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
-      
     }
 }
 

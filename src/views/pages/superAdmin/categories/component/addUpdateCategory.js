@@ -37,46 +37,32 @@ export default function AddUpdateCategory({
     search
 }) {
     const theme = useTheme();
-
-    const [brand, setBrand] = useState(0);
-
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const brandsList = useSelector((state) => state.brand.brandsList);
-    const handleBrandChange = (event) => {
-        setBrand(event.target.value);
-    };
-    // console.log('adddddddddddd', categories);
     const validationSchema = Yup.object({
         name: Yup.string()
             .required('Category Name is required!')
             .max(42, 'Category Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
-        profitPercentage: Yup.string()
-            .required('Profit Percentage required!')
-            .max(42, 'profit Percentage can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid profit Percentage')
+        description: Yup.string()
+            .required('Description is required!')
+            .max(42, 'Description can not exceed 200 characters')
+            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description')
     });
 
     const formik = useFormik({
         enableReinitialize: true,
-
         initialValues: categories,
         validationSchema,
         onSubmit: async (values) => {
-            // console.log('adddddddddddd',values);
             if (categories.name == '') {
-               
                 await dispatch(
                     addCategory({
                         name: values.name,
-                        profitPercentage: values.profitPercentage,
+                        description: values.description,
                         brandId: brand,
                         page: page,
                         limit: limit,
                         search: search,
-
                         handleClose: handleClose
                     })
                 );
@@ -84,7 +70,7 @@ export default function AddUpdateCategory({
                 dispatch(
                     updateCategory({
                         name: values.name,
-                        profitPercentage: categories.profitPercentage,
+                        description: categories.description,
                         brandId: categories.brandId,
                         categoryId: categories.categoryId,
                         limit: limit,
@@ -98,13 +84,13 @@ export default function AddUpdateCategory({
     });
     const handleClose = () => {
         setOpen(false);
-        setCategories({ name: '', profitPercentage: '', brandId: 0, categoryId: 0 });
+        setCategories({ name: '', description: '', brandId: 0, categoryId: 0 });
         formik.resetForm();
     };
 
     return (
         <>
-            <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{categories.name !== '' ? 'Update Category ' : ' Add Category '}</DialogTitle>
                 <Divider />
                 <DialogContent>
@@ -114,7 +100,6 @@ export default function AddUpdateCategory({
                             <TextField
                                 id="name"
                                 name="name"
-                                // label="Name"
                                 value={formik.values.name}
                                 onChange={formik.handleChange}
                                 error={formik.touched.name && Boolean(formik.errors.name)}
@@ -127,51 +112,28 @@ export default function AddUpdateCategory({
                                 Profit Percentage
                             </InputLabel>
                             <TextField
-                                id="profitPercentage"
-                                name="profitPercentage"
-                                value={formik.values.profitPercentage}
+                                id="description"
+                                name="description"
+                                value={formik.values.description}
                                 onChange={formik.handleChange}
-                                error={formik.touched.profitPercentage && Boolean(formik.errors.profitPercentage)}
-                                helperText={formik.touched.profitPercentage && formik.errors.profitPercentage}
+                                error={formik.touched.description && Boolean(formik.errors.description)}
+                                helperText={formik.touched.description && formik.errors.description}
                                 fullWidth
                                 autoComplete="given-name"
                             />
-
-                            {categories.name == '' && (
-                                <>
-                                    <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
-                                        Brand Name
-                                    </InputLabel>
-                                    <TextField
-                                        id="outlined-select-currency"
-                                        select
-                                        fullWidth
-                                        InputLabelProps={{ shrink: true }}
-                                        value={brand}
-                                        defaultValue={formik.values.brand}
-                                        onChange={handleBrandChange}
-                                        error={formik.touched.brand && Boolean(formik.errors.brand)}
-                                        helperText={formik.touched.brand && formik.errors.brand}
-                                        autoComplete="given-name"
-                                    >
-                                        <MenuItem value={0}>Choose Brand</MenuItem>
-                                        {brandsList != undefined &&
-                                            brandsList?.brands?.map((option, index) => (
-                                                <MenuItem key={index} value={option.id}>
-                                                    {option.name}
-                                                </MenuItem>
-                                            ))}
-                                    </TextField>
-                                </>
-                            )}
                         </Grid>
                     </form>
                 </DialogContent>
                 <DialogActions sx={{ pr: 3 }}>
                     <AnimateButton>
-                        <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large"
-                        onClick={formik.handleSubmit}
-                         disableElevation>
+                        <Button
+                            variant="contained"
+                            sx={{ my: 3, ml: 1 }}
+                            type="submit"
+                            size="large"
+                            onClick={formik.handleSubmit}
+                            disableElevation
+                        >
                             {categories.name !== '' ? 'Update ' : 'Add '}
                         </Button>
                     </AnimateButton>
