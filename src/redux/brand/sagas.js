@@ -1,4 +1,3 @@
-import axioss from "axios";
 import axios from "utils/axios";
 import { all, call, fork, put, retry, takeLatest, select } from 'redux-saga/effects';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
@@ -151,7 +150,6 @@ export default function* brandSaga() {
     yield all([
         //Brand
         fork(watchGetAllBrands),
-
         fork(watchAddBrand),
         fork(watchDeleteBrand),
         fork(watchUpdateBrand),

@@ -5,6 +5,7 @@ import categorySaga from 'redux/categories/sagas';
 
 import adminSaga from 'redux/adminManagement/sagas';
 import brandadminSaga from 'redux/brandManagement/sagas';
+import nftSaga from 'redux/nftManagement/sagas';
 export default function* rootSaga() {
     yield all([
         authSaga(),
@@ -12,6 +13,7 @@ export default function* rootSaga() {
         categorySaga(),
         adminSaga(),
         brandadminSaga(),
+        nftSaga()
      
         
     ]);

@@ -36,7 +36,8 @@ const Categories = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const categoryList = useSelector((state) => state.category.categoryList);
-    
+  
+
     const [brand, setBrand] = useState(0);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -93,6 +94,8 @@ const Categories = () => {
 
     return (
         <>
+
+        {/* <h1>{brandName && brandName}</h1> */}
             <AddUpdateCategory
                 open={addEditModal}
                 categories={categories}
