@@ -59,8 +59,9 @@ const Footer = () => {
     return (
         <>
             <FooterWrapper>
-                <Container>
-                    <Grid container alignItems="center" spacing={gridSpacing}>
+               
+                <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
+                
                         <Grid item xs={3}>
                             <img src={galileo} alt="Galileo" width="100" />
                             <div style={{ marginTop: '5%' }}>
@@ -167,7 +168,7 @@ const Footer = () => {
                             </div>
                         </Grid>
                     </Grid>
-                </Container> 
+             
             </FooterWrapper>
         </>
     );

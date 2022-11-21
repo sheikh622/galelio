@@ -61,7 +61,8 @@ const NewPage = () => {
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
-                    <Typography variant="h2" mt={4} component="div" sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' } }} >
+                    <Typography variant="h2" mt={4} component="div" 
+                    sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },textTransform: 'uppercase' }} >
                             New & Trending
                         </Typography>
                     </Grid>
