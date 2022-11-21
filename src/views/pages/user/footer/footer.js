@@ -59,9 +59,10 @@ const Footer = () => {
     return (
         <>
             <FooterWrapper>
-                <Container>
-                    <Grid container alignItems="center" spacing={gridSpacing}>
-                        <Grid item xs={12} md={4}>
+               
+                <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
+                
+                        <Grid item xs={3}>
                             <img src={galileo} alt="Galileo" width="100" />
                             <div style={{ marginTop: '5%' }}>
                                 <span style={{ color: '#0E0F1D', fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
@@ -173,7 +174,7 @@ const Footer = () => {
                             </div>
                         </Grid>
                     </Grid>
-                </Container> 
+             
             </FooterWrapper>
         </>
     );
