@@ -4,29 +4,35 @@ import { Box, Grid, Typography } from '@mui/material';
 
 // project imports
 import Header from './Header';
-import CategoriesPage from './Categories';
 
-import Footer from './Footer';
+import NewPage from './New';
+import FeaturedPage from './FeaturedCreators';
+import Sider from './Sider';
 
-import AppBar from 'ui-component/extended/AppBar';
-
-
+import Demo from './Demos';
 
 // =============================|| LANDING MAIN ||============================= //
 
 const Landing = () => (
     <>
-        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },  }} >
-            <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' },  }} >
-                <Footer />
+        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
+            <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } }}>
+                <Sider />
             </Grid>
-            <Grid item md={11} xs={12} sx={{ border: '2px solid red' }}>
+            <Grid item md={11} xs={12}>
                 <Grid container-fluid>
-                    <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid red' }}>
+                    <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
                         <Header />
                     </Grid>
-                    <Grid item md={12} xs={12} sx={{ border: '2px solid red' }}>
-                        <CategoriesPage />
+                    <Grid item md={12} xs={12}>
+                        <NewPage />
+                    </Grid>
+                    <Grid item md={12} xs={12}>
+                        <Demo />
+                    </Grid>
+
+                    <Grid item md={12} xs={12}>
+                        <FeaturedPage />
                     </Grid>
                 </Grid>
             </Grid>

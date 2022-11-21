@@ -1,85 +1,97 @@
-import { Link } from 'react-router-dom';
-
 // material-ui
-import { Button, ButtonBase, Container, Grid, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { Container, Grid, Typography, Box } from '@mui/material';
 
 // project imports
 import FadeInWhenVisible from './Animation';
-import AnimateButton from 'ui-component/extended/AnimateButton';
+import SubCard from 'ui-component/cards/SubCard';
+import Avatar from 'ui-component/extended/Avatar';
 import { gridSpacing } from 'store/constant';
+import car from 'assets/images/unsplash_bMSA5-tLFao.png';
+import CardMedia from '@mui/material/CardMedia';
 
 // assets
-import imgDemo1 from 'assets/images/landing/img-demo-1.jpg';
-import imgDemo2 from 'assets/images/landing/img-demo-2.jpg';
-import imgDemo3 from 'assets/images/landing/img-demo-3.jpg';
+import PaletteTwoToneIcon from '@mui/icons-material/PaletteTwoTone';
+import ReorderTwoToneIcon from '@mui/icons-material/ReorderTwoTone';
+import SpeedTwoToneIcon from '@mui/icons-material/SpeedTwoTone';
 
-const imageStyle = {
-    width: '100%',
-    borderRadius: '12px'
-};
+// =============================|| LANDING - FEATURE PAGE ||============================= //
 
-// ==============================|| LANDING - DEMOS PAGE ||============================== //
-
-const DemosPage = () => (
-    <Container>
-        <Grid container spacing={gridSpacing}>
-            <Grid item xs={12} lg={5} md={10}>
+const DemoPage = () => {
+    const theme = useTheme();
+    const itemData = [
+        {
+          img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+          title: 'Luxury Car',
+        
+        },
+        {
+          img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+         title: 'Luxury Shoes',
+        },
+        {
+          img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+          title: 'Luxury Watches'
+        },
+        {
+          img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+          title: 'Real Estate'
+        },
+        {
+          img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+          title: 'Luxury Goods'
+        },
+    
+       
+      ];
+    return (
+        <Grid container-fluid spacing={gridSpacing}>
+            <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
-                        <Grid container spacing={1}>
-                            <Grid item>
-                                <Typography variant="h5" color="primary">
-                                    Demos
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="h2" component="div">
-                            Pre-build Dashboard &#38; Apps
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="body2">
-                            Berry has customized pages with Material-UI components, Apps, Forms and lots more to explore.
+                        <Typography variant="h2" mt={4} component="div" sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' } }} >
+                            Categories
                         </Typography>
                     </Grid>
                 </Grid>
             </Grid>
+
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    <Grid item md={4} sm={6}>
+                {itemData.map((item) => (   
+                <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
                         <FadeInWhenVisible>
-                            <ButtonBase component={Link} to="/dashboard/default" target="_blank">
-                                <img src={imgDemo1} alt="Berry Dashboard" style={imageStyle} />
-                            </ButtonBase>
+                            <Grid container justifyContent="center" spacing={1}>
+                                <Grid item>
+                                    <Box sx={{ position: 'relative' }}>
+                                        <CardMedia component="img" width="100%" height="auto" image={car} alt="green iguana" />
+
+                                        <Box
+                                            sx={{
+                                                position: 'absolute',
+                                                top: '7px',
+                                                left: 0,
+                                                width: '100%',
+                                                bgcolor: 'rgba(0, 0, 0, 0.54)',
+                                                color: 'white',
+                                                padding: { xs: '10px', sm: '10px', md: '94px 10px 93px 10px', lg: '94px 10px 93px 10px' }
+                                            }}
+                                        >
+                                            <Typography variant="h5" color="#fff">
+                                                {item.title}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </Grid>
+                            </Grid>
                         </FadeInWhenVisible>
                     </Grid>
-                    <Grid item md={4} sm={6}>
-                        <FadeInWhenVisible>
-                            <ButtonBase component={Link} to="/user/social-profile/posts" target="_blank">
-                                <img src={imgDemo2} alt="Berry Social App" style={imageStyle} />
-                            </ButtonBase>
-                        </FadeInWhenVisible>
-                    </Grid>
-                    <Grid item md={4} sm={6}>
-                        <FadeInWhenVisible>
-                            <ButtonBase component={Link} to="/app/mail" target="_blank">
-                                <img src={imgDemo3} alt="Berry Mail App" style={imageStyle} />
-                            </ButtonBase>
-                        </FadeInWhenVisible>
-                    </Grid>
+                    ))}
+                  
                 </Grid>
             </Grid>
-            <Grid item xs={12} sx={{ textAlign: 'center', mt: 3 }}>
-                <AnimateButton>
-                    <Button component={Link} to="/components/autocomplete" target="_blank" variant="outlined" size="large">
-                        Explore Components
-                    </Button>
-                </AnimateButton>
-            </Grid>
         </Grid>
-    </Container>
-);
+    );
+};
 
-export default DemosPage;
+export default DemoPage;
