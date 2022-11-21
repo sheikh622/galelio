@@ -17,4 +17,12 @@ margin-left: 5%;
 .contactLink{
     font-weight: 500;
     margin-left: 2%;
+    
 }
+
+
+    @media (max-width: 480px) {
+        .phone {
+        display: none;
+        }
+    }

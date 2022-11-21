@@ -61,7 +61,7 @@ const Footer = () => {
             <FooterWrapper>
                 <Container>
                     <Grid container alignItems="center" spacing={gridSpacing}>
-                        <Grid item xs={3}>
+                        <Grid item xs={12} md={4}>
                             <img src={galileo} alt="Galileo" width="100" />
                             <div style={{ marginTop: '5%' }}>
                                 <span style={{ color: '#0E0F1D', fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
@@ -77,7 +77,9 @@ const Footer = () => {
                             </Grid>
                         </Grid>
 
-                        <Grid item xs={1}>
+
+
+                        <Grid item xs={4} md={1}>
                             <div style={{ marginBottom: '20%' }}>
                                 <h2>Company</h2>
                             </div>
@@ -94,9 +96,9 @@ const Footer = () => {
                                 <span className={styles.link}>Blog</span>
                             </div>
                         </Grid>
-                        <Grid item xs={2} sx={{ paddingBottom:"2.5%", ml: 7 }}>
-                            <h2 style={{ marginBottom: '', background: '' }}>Service</h2>
-                            <div style={{ background: '' }}>
+                        <Grid item xs={6} md={2} sx={{ paddingBottom:"2.5%", ml: 7 }}>
+                            <h2 >Service</h2>
+                            <div>
                                 <div>
                                     <span className={styles.link}>FAQ</span>
                                 </div>
@@ -108,14 +110,18 @@ const Footer = () => {
                                 </div>
                             </div>
                         </Grid>
-                        <Grid item xs={3} sx={{ paddingBottom:"1.7%", mr:5 }}>
+
+
+
+                        <Grid className={"phone"} item xs={12} sm={12} md={12} lg={3} xl={3} sx={{ paddingBottom:"1.7%", mr:5 }}>
                             <h2>Contact</h2>
 
                             <div style={{
                                 display: 'flex',
                                 alignItems: 'center',
                                 flexWrap: 'wrap',
-                                marginTop:"3%"
+                                marginTop:"3%", 
+                             
                             }}>
                                     <LocalPhoneIcon sx={{height:"1.3rem"}} />
                                 <span className={styles.contactLink} >
@@ -146,7 +152,7 @@ const Footer = () => {
                                 </span>
                             </div>
                         </Grid>
-                        <Grid item xs={2} sx={{ paddingBottom:"6.5%"}}>
+                        <Grid item xs={12} md={2} sx={{ paddingBottom:"6.5%"}}>
                             
                                 <h2>Social Media</h2>
                             
