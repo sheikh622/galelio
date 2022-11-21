@@ -17,7 +17,7 @@ import Appbar from '../user/header/header';
 
 const Landing = () => (
     <>
-    <Appbar/>
+        <Appbar />
         <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
             <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } }}>
                 <Sider />
@@ -37,11 +37,12 @@ const Landing = () => (
                     <Grid item md={12} xs={12}>
                         <FeaturedPage />
                     </Grid>
+                    <Grid item md={12} xs={12}>
+                        <Footer />
+                    </Grid>
                 </Grid>
             </Grid>
-           
         </Grid>
-        <Footer />
     </>
 );
 

@@ -45,6 +45,10 @@ const FeaturedPage = () => {
             img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
           creations: '20 Creations',   title: 'SuperSemi'
           },
+        {
+            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+          creations: '20 Creations',   title: 'SuperSemi'
+          },
     
        
       ];
@@ -53,8 +57,9 @@ const FeaturedPage = () => {
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
-                    <Typography variant="h2" mt={4} component="div" sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' } }} >
-                        Featured Creators
+                    <Typography variant="h2" mt={4} component="div"
+                     sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },textTransform: 'uppercase'}} >
+                    Featured Creators
                         </Typography>
                     </Grid>
                 </Grid>

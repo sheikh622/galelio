@@ -41,6 +41,11 @@ const DemoPage = () => {
           img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
           title: 'Luxury Goods'
         },
+        {
+          img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+          title: 'Luxury Goods'
+        },
+     
     
        
       ];
@@ -49,15 +54,15 @@ const DemoPage = () => {
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
-                        <Typography variant="h2" mt={4} component="div" sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' } }} >
-                            Categories
+                    <Typography variant="h2" mt={4} component="div" sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },textTransform: 'uppercase' }} >
+                    Categories
                         </Typography>
                     </Grid>
                 </Grid>
             </Grid>
 
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                 {itemData.map((item) => (   
                 <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
                         <FadeInWhenVisible>
