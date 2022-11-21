@@ -11,7 +11,7 @@ margin-left: 5%;
     margin-top: 5%;
 }
 .aboutLink{
-    margin-top: 13%;    
+    margin-top: 1em;    
 }
 
 .contactLink{
@@ -20,9 +20,12 @@ margin-left: 5%;
     
 }
 
+.contact{
+
+}
 
     @media (max-width: 480px) {
-        .phone {
-        display: none;
+        .contact {
+         margin-left: 35%;
         }
     }
