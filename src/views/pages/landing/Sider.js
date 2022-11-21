@@ -1,140 +1,46 @@
-import { useTheme, styled } from '@mui/material/styles';
-import { Container, Grid, Link, Typography } from '@mui/material';
 
-// project imports
-import { gridSpacing } from 'store/constant';
-
-// assets
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-
-import logoDark from 'assets/images/logo-white.svg';
-
-// styles
-const FooterWrapper = styled('div')(({ theme }) => ({
-    padding: '35px 0',
-    color: '#fff',
-
-    [theme.breakpoints.down('md')]: {
-        textAlign: 'center'
-    }
-}));
-
-const FooterLink = styled(Link)({
-    color: '#fff',
-    display: 'inline-flex',
-    alignItems: 'center',
-    textDecoration: 'none !important',
-    opacity: '0.8',
-    '& svg': {
-        fontsize: '1.125rem',
-        marginRight: 8
-    },
-    '&:hover': {
-        opacity: '1'
-    }
-});
-
-const FooterSubWrapper = styled('div')(({ theme }) => ({
-    padding: '20px 0',
-    color: '#fff',
-    background: theme.palette.secondary.dark,
-    [theme.breakpoints.down('md')]: {
-        textAlign: 'center'
-    }
-}));
-
-// ==============================|| LANDING - FOOTER PAGE ||============================== //
-
+import { Container, Grid} from '@mui/material';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PieChartIcon from '@mui/icons-material/PieChart';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import DownloadIcon from '@mui/icons-material/Download';
+import DiscountIcon from '@mui/icons-material/Discount';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 const SiderPage = () => {
-    const theme = useTheme();
-
     return (
         <>
-            <FooterWrapper>
-                <Container>
-                    <Grid item xs={12} sm={8}>
-                        <Grid container alignItems="center" spacing={2} sx={{ background: '#000', border: '2px solid red' }}>
-                            <Grid item>
-                                <FooterLink href="https://blog.berrydashboard.io/" target="_blank" underline="hover">
-                                    <InstagramIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://www.facebook.com/codedthemes" target="_blank" underline="hover">
-                                    <FacebookIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://twitter.com/codedthemes" target="_blank" underline="hover">
-                                    <TwitterIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://blog.berrydashboard.io/" target="_blank" underline="hover">
-                                    <InstagramIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://www.facebook.com/codedthemes" target="_blank" underline="hover">
-                                    <FacebookIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://twitter.com/codedthemes" target="_blank" underline="hover">
-                                    <TwitterIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://blog.berrydashboard.io/" target="_blank" underline="hover">
-                                    <InstagramIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://www.facebook.com/codedthemes" target="_blank" underline="hover">
-                                    <FacebookIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://twitter.com/codedthemes" target="_blank" underline="hover">
-                                    <TwitterIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://blog.berrydashboard.io/" target="_blank" underline="hover">
-                                    <InstagramIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://www.facebook.com/codedthemes" target="_blank" underline="hover">
-                                    <FacebookIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://twitter.com/codedthemes" target="_blank" underline="hover">
-                                    <TwitterIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://blog.berrydashboard.io/" target="_blank" underline="hover">
-                                    <InstagramIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://www.facebook.com/codedthemes" target="_blank" underline="hover">
-                                    <FacebookIcon />
-                                </FooterLink>
-                            </Grid>
-                            <Grid item>
-                                <FooterLink href="https://twitter.com/codedthemes" target="_blank" underline="hover">
-                                    <TwitterIcon />
-                                </FooterLink>
-                            </Grid>
+            <Container sx={{mt:5}}>
+                <Grid item xs={12} sm={8}>
+                    <Grid container alignItems="center" spacing={3} sx={{  pt:3, pb:3, ml:1, boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)", background: '#fafafa', borderRadius:"4px"}}>
+                        <Grid item>
+                        <DashboardIcon sx={{color:"#2196f3"}}/>
+                        </Grid>
+                        <Grid item sx={{mt:2}}>
+                        <PieChartIcon/>
+                        </Grid>
+                        <Grid item sx={{mt:2}}>
+                        <StorefrontIcon/>
+                        </Grid>
+                        <Grid item sx={{mt:2}}>
+                        <BookmarkIcon   />
+                        </Grid>
+                        <Grid item sx={{mt:2}}>
+                        <DownloadIcon/>
+                        </Grid>
+                        <Grid item sx={{mt:2}}>
+                        <DiscountIcon/>
+                        </Grid>
+                        <Grid item sx={{mt:2}}>
+                        <SettingsIcon/>
+                        </Grid>
+                        <Grid item sx={{mt:2}}>
+                        <LogoutIcon/>
                         </Grid>
                     </Grid>
-                </Container>
-            </FooterWrapper>
+                </Grid>
+            </Container>
         </>
     );
 };
