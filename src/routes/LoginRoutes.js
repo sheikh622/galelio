@@ -10,6 +10,7 @@ import Loadable from 'ui-component/Loadable';
 const AuthLogin = Loadable(lazy(() => import('views/auth/login')));
 const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
+const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace/index')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -34,7 +35,12 @@ const LoginRoutes = {
         {
             path: '/resetPassword',
             element: <AuthRsetPassword />
-        }
+        },
+        {
+            path: '/marketplace',
+            element: <Marketplace />
+        },
+
     ]
 };
 
