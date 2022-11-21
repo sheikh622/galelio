@@ -182,7 +182,7 @@ const Footer = () => {
                             </div>
                         </Grid>
                     </Grid>
-             
+              
             </FooterWrapper>
         </>
     );

@@ -50,6 +50,7 @@ const DemoPage = () => {
        
       ];
     return (
+        
         <Grid container-fluid spacing={gridSpacing}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -62,7 +63,7 @@ const DemoPage = () => {
             </Grid>
 
             <Grid item xs={12}>
-                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                 {itemData.map((item) => (   
                 <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
                         <FadeInWhenVisible>

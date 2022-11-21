@@ -73,12 +73,17 @@ const FeaturedPage = () => {
                             <SubCard>
                                 <Grid container justifyContent="center" spacing={1}>
                                     <Grid item md={6} xs={12}>
-                                        <CardMedia component="img" height="175" image={shoes1}  />
+                                        <CardMedia component="img" sx={{ height: { xs: 'auto', md: '175px', sm: 'auto' }}}
+                                        image={shoes1}/>
                                     </Grid>
                                     <Grid item md={6} xs={12}>
+                                    <Grid item md={12} xs={12}>
                                         <CardMedia  component="img" height="auto" image={shoes2}  />
+                                        </Grid>
+                                    <Grid item md={12} xs={12}>
+
                                         <CardMedia sx={{marginTop:'10px'}} component="img" height="auto" image={shoes3}  />
-                                    </Grid>
+                                    </Grid></Grid>
                                     <Grid item md={12} xs={12}>
                                         <Typography variant="h3" sx={{ textAlign:  {  xs: 'center', sm: 'center', md: 'left' },  }}>
                                             {item.title}
