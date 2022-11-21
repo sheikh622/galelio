@@ -10,11 +10,14 @@ import FeaturedPage from './FeaturedCreators';
 import Sider from './Sider';
 
 import Demo from './Demos';
+import Footer from '../user/footer/footer';
+import Appbar from '../user/header/header';
 
 // =============================|| LANDING MAIN ||============================= //
 
 const Landing = () => (
     <>
+    <Appbar/>
         <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
             <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } }}>
                 <Sider />
@@ -36,7 +39,9 @@ const Landing = () => (
                     </Grid>
                 </Grid>
             </Grid>
+           
         </Grid>
+        <Footer />
     </>
 );
 
