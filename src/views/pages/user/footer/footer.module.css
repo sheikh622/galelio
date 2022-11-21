@@ -24,8 +24,11 @@ margin-left: 5%;
 
 }
 
-    @media (max-width: 480px) {
+    @media (max-width: 890px ){
         .contact {
-         margin-left: 35%;
+            /* margin-left: 25%; */
+            width:100%;
+            justify-content:center;
+         text-align: center;
         }
     }

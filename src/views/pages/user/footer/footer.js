@@ -114,17 +114,16 @@ const Footer = () => {
 
 
 
-                        <Grid  item xs={12} sm={12} md={12} lg={3} xl={3} sx={{ paddingBottom:"1.7%" }}>
+                        <Grid  item xs={12} md={12} lg={3} xl={3} sx={{ paddingBottom:"1.7%" }}>
                             <h2>Contact</h2>
 
                             <Grid className={styles.contact}>
-                                <Grid item xs={12}>
-
-                            <div style={{
+                                <div>
+                       <div className={styles.contact} style={{
                                 display: 'flex',
-                                alignItems: 'center',
                                 flexWrap: 'wrap',
-                                marginTop:"3%", 
+                                marginTop:"3%",                                 
+                              
                              
                             }}>
                                     <LocalPhoneIcon sx={{height:"1.3rem"}} />
@@ -134,30 +133,37 @@ const Footer = () => {
                             </div>
                       
 
-                                </Grid>
+                                
 
-                            <div style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                flexWrap: 'wrap',
-                                marginTop:"3%"
+                            <div className={styles.contact} style={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    marginTop:"3%",                                 
+                                    width:"100%",
+                                    justifyContent:"center"
+                                 
                             }}>
                                        <EmailIcon   sx={{height:""}} />
                                 <span className={styles.contactLink}  >
                                   galileo@gmail.com
                                 </span>
                             </div>  
-                            <div style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                flexWrap: 'wrap',
-                                marginTop:"3%"
+                            <div className={styles.contact} style={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    marginTop:"3%",                                 
+                                    width:"100%",
+                                    justifyContent:"center"
+                                 
                             }}>
                                     <LocationOnIcon  sx={{height:"1.3rem"}}/>
                                 <span className={styles.contactLink} >
                                     2972 Westeast Rd. LA, 85400{' '}
                                 </span>
                             </div>
+
+                                </div>
+
                             </Grid>
 
                         </Grid>
