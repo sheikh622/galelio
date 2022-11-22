@@ -13,7 +13,7 @@ import {
     TableRow,
     Tooltip
 } from '@mui/material';
-import DeleteManagementDialog from './deleteManagementDialog';
+import DeleteBrandAdminDialog from './deleteBrandAdminDialog';
 import Chip from 'ui-component/extended/Chip';
 import AddUpdateBrandAdminDialog from './addUpdateBrandAdmin';
 import BlockUnblockDialog from './blockUnblock';
@@ -43,7 +43,14 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                 search={search}
             />
 
-            <DeleteManagementDialog deleteOpen={deleteOpen} setDeleteOpen={setDeleteOpen} page={page} limit={limit} search={search} />
+            <DeleteBrandAdminDialog
+                open={deleteOpen}
+                setOpen={setDeleteOpen}
+                page={page}
+                limit={limit}
+                search={search}
+                brandAdminData={brandAdminData}
+            />
 
             {/* <BlockUnblockDialog
                 adminId={adminId}
@@ -51,7 +58,7 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                 setOpen={setChangeStatusOpen}
                 brandId={brandId}
                 page={page}
-                limit={limit}
+                limit={limit}s
                 search={search}
             /> */}
 
@@ -107,7 +114,7 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
-                                                                console.log("row",row)
+                                                                console.log('row', row);
                                                                 setAddUpdateOpen(true);
                                                                 setBrandAdminData({
                                                                     id: row.id,
@@ -128,7 +135,10 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                             size="large"
                                                             onClick={() => {
                                                                 setDeleteOpen(true);
-                                                                setAdminId(row.id);
+                                                                setBrandAdminData({
+                                                                    id: row.id,
+                                                                    brandId: row.BrandId,
+                                                                });
                                                             }}
                                                         >
                                                             Delete

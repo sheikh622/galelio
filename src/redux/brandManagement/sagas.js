@@ -54,7 +54,7 @@ export function* watchAddBrandAdmin() {
 }
 
 function* updateBrandAdminRequest({ payload }) {
-    console.log("payload",payload)
+    console.log('payload', payload);
     let data = {
         adminId: payload.id,
         firstName: payload.firstName,
@@ -87,12 +87,13 @@ export function* watchUpdateBrandAdmin() {
 function* deleteBrandAdminRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.delete(`brandAdmin/${payload.id}`, headers);
+        const response = yield axios.delete(`brand/admin/${payload.id}`, headers);
         yield put(
             getAllBrandAdmin({
                 page: payload.page,
                 limit: payload.limit,
-                search: payload.search
+                search: payload.search,
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
