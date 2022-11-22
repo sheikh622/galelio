@@ -1,33 +1,30 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import BrandAdminTable from './component/brandAdminTable';
-import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
+import SubAdminTable from './component/subAdminTable';
+import { Button, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllBrandAdmin } from '../../../../redux/brandAdmin/actions';
+import { getAllSubAdminList } from '../../../../redux/subAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
-import AddUpdateBrandAdminDialog from './component/addUpdateBrandAdmin';
+import HeadingCard from 'shared/Card/HeadingCard';
+import AddUpdateSubAdminDialog from './component/addUpdateSubAdmin';
 
 const SubAdmin = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const location = useLocation();
-    const navigate = useNavigate();
-    const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
+    const subAdminList = useSelector((state) => state.subAdminReducer.subAdminList);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const [addUpdateOpen, setAddUpdateOpen] = useState(false);
-    const [brandAdminData, setBrandAdminData] = useState({
+    const [subAdminData, setSubAdminData] = useState({
         id: null,
-        brandId: location.state.brandData.id,
         firstName: '',
         lastName: '',
-        adminEmail: '',
-        adminPassword: ''
+        subAdminEmail: '',
+        subAdminPassword: ''
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -40,44 +37,26 @@ const SubAdmin = () => {
 
     useEffect(() => {
         dispatch(
-            getAllBrandAdmin({
-                brandId: location.state.brandData.id,
+            getAllSubAdminList({
                 search: search,
                 page: page,
                 limit: limit
             })
         );
     }, [search, page, limit]);
-    console.log('location.state', location.state);
+
     return (
         <>
-            <AddUpdateBrandAdminDialog
+            <AddUpdateSubAdminDialog
                 open={addUpdateOpen}
                 setOpen={setAddUpdateOpen}
-                brandAdminData={brandAdminData}
+                subAdminData={subAdminData}
                 page={page}
                 limit={limit}
                 search={search}
             />
-            <MainCard
-                title={
-                    <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
-                        Admin Management of : {location.state.brandData.name}
-                    </Typography>
-                }
-                secondary={
-                    <Button
-                        variant="contained"
-                        size="small"
-                        onClick={() => {
-                            navigate('/brands');
-                        }}
-                    >
-                        back
-                    </Button>
-                }
-                content={false}
-            ></MainCard>
+
+            <HeadingCard title="Sub Admin Management" />
 
             <MainCard
                 title={
@@ -103,9 +82,8 @@ const SubAdmin = () => {
                                 size="large"
                                 onClick={() => {
                                     setAddUpdateOpen(true);
-                                    setBrandAdminData({
+                                    setSubAdminData({
                                         id: null,
-                                        brandId: location.state.brandData.id,
                                         firstName: '',
                                         lastName: '',
                                         adminEmail: '',
@@ -113,22 +91,22 @@ const SubAdmin = () => {
                                     });
                                 }}
                             >
-                                Add Brand Admin
+                                Add Subadmin
                             </Button>
                         </Grid>
                     </Grid>
                 }
                 content={false}
             >
-                <BrandAdminTable
-                    brandAdminList={brandAdminList}
+                <SubAdminTable
+                    subAdminList={subAdminList}
                     search={search}
                     page={page}
                     limit={limit}
                     addUpdateOpen={addUpdateOpen}
                     setAddUpdateOpen={setAddUpdateOpen}
-                    brandAdminData={brandAdminData}
-                    setBrandAdminData={setBrandAdminData}
+                    subAdminData={subAdminData}
+                    setSubAdminData={setSubAdminData}
                 />
 
                 <>
@@ -140,7 +118,7 @@ const SubAdmin = () => {
                                     showFirstButton
                                     showLastButton
                                     page={page}
-                                    count={brandAdminList.pages}
+                                    count={subAdminList.pages}
                                     onChange={(event, newPage) => {
                                         setPage(newPage);
                                     }}

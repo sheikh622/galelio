@@ -17,7 +17,7 @@ import { setNotification } from 'shared/helperMethods/setNotification';
 function* getAllSubAdminListRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.get(`admin/all?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, headers);
+        const response = yield axios.get(`admin?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, headers);
         yield put(getAllSubAdminListSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -37,7 +37,7 @@ function* addSubAdminRequest({ payload }) {
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`admin/add`, data, headers);
+        const response = yield axios.post(`admin`, data, headers);
         yield put(
             getAllSubAdminList({
                 page: payload.page,
@@ -65,7 +65,7 @@ function* updateSubAdminRequest({ payload }) {
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.put(`admin/updatePassword`, data, headers);
+        const response = yield axios.put(`admin/${payload.id}`, data, headers);
         yield put(
             getAllSubAdminList({
                 page: payload.page,
@@ -87,7 +87,7 @@ export function* watchUpdateSubAdmin() {
 function* deleteSubAdminRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.delete(`admin/delete/${payload.id}`, headers);
+        const response = yield axios.delete(`admin/${payload.id}`, headers);
         yield put(
             getAllSubAdminList({
                 page: payload.page,
@@ -107,14 +107,12 @@ export function* watchDeleteSubAdmin() {
 }
 
 function* changeSubAdminStatusRequest({ payload }) {
-    let data = {
-        email: payload.email
-    };
+    console.log("payload",payload)
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.put(`admin/block`, data, headers);
+        const response = yield axios.patch(`admin/${payload.id}`,{}, headers);
         yield put(
-            getAllAdmin({
+            getAllSubAdminList({
                 page: payload.page,
                 limit: payload.limit,
                 search: payload.search
@@ -134,9 +132,9 @@ export function* watchChangeSubAdminStatus() {
 function* changeSubAdminMintingAccessRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`admin/mintingAccess`, data, headers);
+        const response = yield axios.patch(`admin/mint/${payload.id}`, {}, headers);
         yield put(
-            getAllAdmin({
+            getAllSubAdminList({
                 page: payload.page,
                 limit: payload.limit,
                 search: payload.search

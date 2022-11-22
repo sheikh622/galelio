@@ -2,23 +2,15 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { mintRole } from 'redux/subAdmin/actions';
-const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+import { changeSubAdminMintingAccess } from 'redux/subAdmin/actions';
 
-export default function MiniterDialog({ open, setOpen, page, limit, search, adminManagement, setAdminManagement }) {
+const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page, limit, search, subAdminData }) {
     const theme = useTheme();
     const dispatch = useDispatch();
-    console.log(adminManagement,'adminManagement')
+
     const handleClose = () => {
         setOpen(false);
-        setAdminManagement({
-            email: '',
-            firstName: '',
-            lastName: '',
-            password: '',
-            block:'',
-            mint:''
-        });
     };
 
     return (
@@ -31,13 +23,14 @@ export default function MiniterDialog({ open, setOpen, page, limit, search, admi
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1"> Miniting Access </DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1">Change Subadmin Status </DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                        {adminManagement.mint == false? 'Are you sure you  want to allow minting access to this Admin?' :
-                        'Are you sure you want to remove minting access?'} 
+                            {subAdminData.hasMintingAccess == false
+                                ? 'Are you sure you want to give minting access to this Admin?'
+                                : 'Are you sure you want to remove minting access of this Admin?'}
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -54,9 +47,8 @@ export default function MiniterDialog({ open, setOpen, page, limit, search, admi
                         size="large"
                         onClick={() => {
                             dispatch(
-                                mintRole({
-                                    email: adminManagement.email,
-                                    // mintingAccess:minterRole,
+                                changeSubAdminMintingAccess({
+                                    id: subAdminData.id,
                                     page: page,
                                     limit: limit,
                                     search: search,

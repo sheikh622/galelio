@@ -2,39 +2,35 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { deleteAdmin } from '../../../../../redux/subAdmin/actions';
+import { changeSubAdminStatus } from 'redux/subAdmin/actions';
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function DeleteManagementDialog({ deleteOpen, setDeleteOpen, page, limit, adminManagement, search, setAdminManagement }) {
+export default function ChangeSubAdminStatusDialog({ open, setOpen, page, limit, search, subAdminData }) {
     const theme = useTheme();
     const dispatch = useDispatch();
+
     const handleClose = () => {
-        setDeleteOpen(false);
-        setAdminManagement({
-            email: '',
-            firstName: '',
-            lastName: '',
-            password: '',
-            mint:'',
-            block:''
-        });
+        setOpen(false);
     };
 
     return (
         <>
             <Dialog
-                open={deleteOpen}
+                open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Delete Admin</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1">Change Subadmin Status </DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                            Are you sure you want to delete this Admin?
+                            {subAdminData.isActive == false
+                                ? 'Are you sure you want to unblock this Admin?'
+                                : 'Are you sure you want to block  this Admin?'}
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -51,12 +47,12 @@ export default function DeleteManagementDialog({ deleteOpen, setDeleteOpen, page
                         size="large"
                         onClick={() => {
                             dispatch(
-                                deleteAdmin({
-                                    id: adminManagement.id,
-                                    handleClose: handleClose,
+                                changeSubAdminStatus({
+                                    id: subAdminData.id,
                                     page: page,
                                     limit: limit,
-                                    search: search
+                                    search: search,
+                                    handleClose: handleClose
                                 })
                             );
                         }}

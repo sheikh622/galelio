@@ -45,7 +45,7 @@ const superAdminMenu = {
             id: 'admin',
             title: <FormattedMessage id="admin.adminManagement" />,
             type: 'item',
-            url: '/adminManagement',
+            url: '/subAdminManagement',
             icon: icons.IconUserCheck,
             breadcrumbs: false
         },

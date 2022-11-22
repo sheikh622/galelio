@@ -3,21 +3,21 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import { updateBrandAdmin, addBrandAdmin } from 'redux/brandAdmin/actions';
+import { addSubAdmin, updateSubAdmin } from 'redux/subAdmin/actions';
 import { Button, InputLabel, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider, Grid } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminData, page, limit, search }) {
+export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, page, limit, search }) {
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState(false);
 
     useEffect(() => {
-        if (brandAdminData.id == null) {
+        if (subAdminData.id == null) {
             setIsUpdate(false);
         } else {
             setIsUpdate(true);
         }
-    }, [brandAdminData]);
+    }, [subAdminData]);
 
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
@@ -45,16 +45,14 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
             )
         })
     });
-    console.log({ brandAdminData });
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: brandAdminData,
+        initialValues: subAdminData,
         validationSchema,
         onSubmit: (values) => {
-            if (brandAdminData.id == null) {
+            if (subAdminData.id == null) {
                 dispatch(
-                    addBrandAdmin({
-                        brandId: brandAdminData.brandId,
+                    addSubAdmin({
                         firstName: values.firstName,
                         lastName: values.lastName,
                         email: values.adminEmail,
@@ -67,9 +65,8 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                 );
             } else {
                 dispatch(
-                    updateBrandAdmin({
-                        id: brandAdminData.id,
-                        brandId: brandAdminData.brandId,
+                    updateSubAdmin({
+                        id: subAdminData.id,
                         firstName: values.firstName,
                         lastName: values.lastName,
                         email: values.adminEmail,
@@ -100,7 +97,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="form-dialog-title">{brandAdminData.id == null ? 'Add Brand Admin ' : ' Update Brand Admin '}</DialogTitle>
+                <DialogTitle id="form-dialog-title">{subAdminData.id == null ? 'Add Subadmin ' : ' Update Subadmin'}</DialogTitle>
                 <Divider />
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
@@ -159,7 +156,6 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         autoComplete="given-name"
                                     />
                                 </Grid>
-                                {/* )} */}
                             </>
                         </Grid>
                     </form>
@@ -177,7 +173,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                 formik.handleSubmit();
                             }}
                         >
-                            {brandAdminData.id == null ? 'Add ' : 'Update '}
+                            {subAdminData.id == null ? 'Add ' : 'Update '}
                         </Button>
                     </AnimateButton>
                     <AnimateButton>

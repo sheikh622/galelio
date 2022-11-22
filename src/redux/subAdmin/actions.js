@@ -51,7 +51,7 @@ export const changeSubAdminStatus = (data) => {
     };
 };
 
-export const changeSubAdminMintingRole = (data) => {
+export const changeSubAdminMintingAccess = (data) => {
     return {
         type: CHANGE_SUBADMIN_MINTING_ACCESS,
         payload: data

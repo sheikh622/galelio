@@ -13,15 +13,17 @@ import {
     TableRow,
     Tooltip
 } from '@mui/material';
-import DeleteBrandAdminDialog from './deleteBrandAdminDialog';
 import Chip from 'ui-component/extended/Chip';
-import AddUpdateBrandAdminDialog from './addUpdateBrandAdmin';
-import ChangeBrandAdminStatusDialog from './changeBrandAdminStatus';
+import AddUpdateBrandAdminDialog from './addUpdateSubAdmin';
+import DeleteSubAdminDialog from './deleteSubAdminDialog';
+import ChangeSubAdminStatusDialog from './changeSubAdminStatus';
+import ChangeSubAdminMintingAccessDialog from './changeSubAdminMintingAccess';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit, brandAdminList, setBrandAdminData, brandAdminData }) => {
+const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAddUpdateOpen, subAdminData, setSubAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [changeStatusOpen, setChangeStatusOpen] = useState(false);
+    const [changeMintingAccessOpen, setChangeMintingAccessOpen] = useState(false);
     const [detailId, setDetailId] = useState();
     const openDetails = (id) => {
         if (detailId === id) {
@@ -36,28 +38,37 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
             <AddUpdateBrandAdminDialog
                 open={addUpdateOpen}
                 setOpen={setAddUpdateOpen}
-                brandAdminData={brandAdminData}
+                subAdminData={subAdminData}
                 page={page}
                 limit={limit}
                 search={search}
             />
 
-            <DeleteBrandAdminDialog
+            <DeleteSubAdminDialog
                 open={deleteOpen}
                 setOpen={setDeleteOpen}
                 page={page}
                 limit={limit}
                 search={search}
-                brandAdminData={brandAdminData}
+                subAdminData={subAdminData}
             />
 
-            <ChangeBrandAdminStatusDialog
+            <ChangeSubAdminStatusDialog
                 open={changeStatusOpen}
                 setOpen={setChangeStatusOpen}
                 page={page}
                 limit={limit}
                 search={search}
-                brandAdminData={brandAdminData}
+                subAdminData={subAdminData}
+            />
+
+            <ChangeSubAdminMintingAccessDialog
+                open={changeMintingAccessOpen}
+                setOpen={setChangeMintingAccessOpen}
+                page={page}
+                limit={limit}
+                search={search}
+                subAdminData={subAdminData}
             />
 
             <Table>
@@ -70,10 +81,10 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
-                {brandAdminList.admins != undefined && brandAdminList.count > 0 ? (
+                {subAdminList.admins != undefined && subAdminList.count > 0 ? (
                     <TableBody sx={{ padding: '10px' }}>
-                        {brandAdminList.admins != undefined &&
-                            brandAdminList.admins.map((row, index) => (
+                        {subAdminList.admins != undefined &&
+                            subAdminList.admins.map((row, index) => (
                                 <>
                                     <TableRow>
                                         <TableCell align="center">{row.firstName}</TableCell>
@@ -107,16 +118,14 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                         <TableCell sx={{ pl: 12 }} colSpan={12}>
                                             <div>
                                                 <Grid container spacing={4}>
-                                                    <Grid item xs={4} md={4}>
+                                                    <Grid item xs={3} md={3}>
                                                         <Button
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
-                                                                console.log('row', row);
                                                                 setAddUpdateOpen(true);
-                                                                setBrandAdminData({
+                                                                setSubAdminData({
                                                                     id: row.id,
-                                                                    brandId: row.BrandId,
                                                                     firstName: row.firstName,
                                                                     lastName: row.lastName,
                                                                     adminEmail: row.email,
@@ -127,35 +136,49 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                             Edit
                                                         </Button>
                                                     </Grid>
-                                                    <Grid item xs={4} md={4}>
+                                                    <Grid item xs={3} md={3}>
                                                         <Button
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
                                                                 setDeleteOpen(true);
-                                                                setBrandAdminData({
-                                                                    id: row.id,
-                                                                    brandId: row.BrandId
+                                                                setSubAdminData({
+                                                                    id: row.id
                                                                 });
                                                             }}
                                                         >
                                                             Delete
                                                         </Button>
                                                     </Grid>
-                                                    <Grid item xs={4} md={4}>
+                                                    <Grid item xs={3} md={3}>
                                                         <Button
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
                                                                 setChangeStatusOpen(true);
-                                                                setBrandAdminData({
+                                                                setSubAdminData({
                                                                     id: row.id,
-                                                                    brandId: row.BrandId,
                                                                     isActive: row.isActive
                                                                 });
                                                             }}
                                                         >
                                                             Change Status
+                                                        </Button>
+                                                    </Grid>
+
+                                                    <Grid item xs={3} md={3}>
+                                                        <Button
+                                                            variant="outlined"
+                                                            size="large"
+                                                            onClick={() => {
+                                                                setChangeMintingAccessOpen(true);
+                                                                setSubAdminData({
+                                                                    id: row.id,
+                                                                    hasMintingAccess: row.hasMintingAccess
+                                                                });
+                                                            }}
+                                                        >
+                                                            Change Minting Access
                                                         </Button>
                                                     </Grid>
                                                 </Grid>
@@ -180,4 +203,4 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
     );
 };
 
-export default BrandAdminTable;
+export default SubAdminTable;
