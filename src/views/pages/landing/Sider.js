@@ -8,20 +8,35 @@ import DownloadIcon from '@mui/icons-material/Download';
 import DiscountIcon from '@mui/icons-material/Discount';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate, Link } from 'react-router-dom';
+
 const SiderPage = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <Container sx={{mt:5}}>
                 <Grid item xs={12} sm={8}>
                     <Grid container alignItems="center" spacing={3} sx={{  pt:3, pb:3, ml:1, boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)", background: '#fafafa', borderRadius:"4px"}}>
-                        <Grid item>
+                    <Grid item sx={{mt:2, cursor: "pointer"}} onClick={()=>{
+                          navigate('/');
+                        }}>
                         <DashboardIcon sx={{color:"#2196f3"}}/>
                         </Grid>
                         <Grid item sx={{mt:2}}>
                         <PieChartIcon/>
                         </Grid>
-                        <Grid item sx={{mt:2}}>
-                        <StorefrontIcon/>
+                        <Grid item sx={{mt:2, cursor: "pointer"}} onClick={()=>{
+                          navigate('/marketplace');
+                        }}>
+                        
+
+                        <StorefrontIcon />
+
+                        
+                        
+                        
+                        
                         </Grid>
                         <Grid item sx={{mt:2}}>
                         <BookmarkIcon   />
