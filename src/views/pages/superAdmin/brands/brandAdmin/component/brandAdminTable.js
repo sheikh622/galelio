@@ -16,13 +16,12 @@ import {
 import DeleteBrandAdminDialog from './deleteBrandAdminDialog';
 import Chip from 'ui-component/extended/Chip';
 import AddUpdateBrandAdminDialog from './addUpdateBrandAdmin';
-import BlockUnblockDialog from './blockUnblock';
+import ChangeBrandAdminStatusDialog from './changeBrandAdminStatus';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit, brandAdminList, setBrandAdminData, brandAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [changeStatusOpen, setChangeStatusOpen] = useState(false);
-    const [adminId, setAdminId] = useState();
     const [detailId, setDetailId] = useState();
     const openDetails = (id) => {
         if (detailId === id) {
@@ -52,15 +51,14 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                 brandAdminData={brandAdminData}
             />
 
-            {/* <BlockUnblockDialog
-                adminId={adminId}
+            <ChangeBrandAdminStatusDialog
                 open={changeStatusOpen}
                 setOpen={setChangeStatusOpen}
-                brandId={brandId}
                 page={page}
-                limit={limit}s
+                limit={limit}
                 search={search}
-            /> */}
+                brandAdminData={brandAdminData}
+            />
 
             <Table>
                 <TableHead>
@@ -137,7 +135,7 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                                 setDeleteOpen(true);
                                                                 setBrandAdminData({
                                                                     id: row.id,
-                                                                    brandId: row.BrandId,
+                                                                    brandId: row.BrandId
                                                                 });
                                                             }}
                                                         >
@@ -150,6 +148,11 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                             size="large"
                                                             onClick={() => {
                                                                 setChangeStatusOpen(true);
+                                                                setBrandAdminData({
+                                                                    id: row.id,
+                                                                    brandId: row.BrandId,
+                                                                    isActive: row.isActive
+                                                                });
                                                             }}
                                                         >
                                                             Change Status

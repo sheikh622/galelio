@@ -2,28 +2,16 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { blockBrand } from 'redux/brandManagement/actions';
+import { changeBrandAdminStatus } from 'redux/brandManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function BlockUnblockDialog({
-    open, setOpen,
-      page, limit, brandManagement,search,setBrandManagement
-     }) {
+export default function ChangeBrandAdminStatusDialog({ open, setOpen, page, limit, search, brandAdminData }) {
     const theme = useTheme();
     const dispatch = useDispatch();
-    console.log(brandManagement,'brandManagement=>')
+
     const handleClose = () => {
         setOpen(false);
-        setBrandManagement({
-            email: '',
-            firstName:'',
-            lastName:'',
-            password:'',
-            block:''
-        
-        });
-        
     };
-    
+
     return (
         <>
             <Dialog
@@ -34,13 +22,14 @@ export default function BlockUnblockDialog({
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Change Status  </DialogTitle>
-                
+                <DialogTitle id="alert-dialog-slide-title1">Change Brand Admin Status </DialogTitle>
+
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                     {brandManagement.block == false? 'Are you sure you want to unblock this Admin?' :
-                      'Are you sure you want to block  this Admin?'}     
+                            {brandAdminData.isActive == false
+                                ? 'Are you sure you want to unblock this Admin?'
+                                : 'Are you sure you want to block  this Admin?'}
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -57,16 +46,13 @@ export default function BlockUnblockDialog({
                         size="large"
                         onClick={() => {
                             dispatch(
-                                blockBrand({
-                                   email:brandManagement.email,
-                                    handleClose: handleClose,
+                                changeBrandAdminStatus({
+                                    id: brandAdminData.id,
+                                    brandId: brandAdminData.brandId,
                                     page: page,
                                     limit: limit,
-                                    search:search,
-                                  
-                                    
-                                    
-                                   
+                                    search: search,
+                                    handleClose: handleClose
                                 })
                             );
                         }}

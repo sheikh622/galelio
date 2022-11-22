@@ -1,14 +1,13 @@
 import {
-    // Admin
+    
     GET_ALL_BRAND_ADMINS,
     GET_ALL_BRAND_ADMINS_SUCCESS,
     ADD_BRAND_ADMIN,
     UPDATE_BRAND_ADMINS,
     DELETE_BRAND_ADMIN,
-    BLOCK_BRAND_ADMIN
+    CHANGE_BRAND_ADMIN_STATUS
 } from './constants';
 
-// brand Admin
 
 export const getAllBrandAdmin = (data) => {
     return {
@@ -44,9 +43,9 @@ export const deleteBrandAdmin = (data) => {
         payload: data
     };
 };
-export const blockBrand = (data) => {
+export const changeBrandAdminStatus = (data) => {
     return {
-        type: BLOCK_BRAND_ADMIN,
+        type: CHANGE_BRAND_ADMIN_STATUS,
         payload: data
     };
 };
