@@ -65,7 +65,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
 
     return (
         <TableContainer>
-            <AddUpdateDialog
+            {/* <AddUpdateDialog
             setBrandManagement={setBrandManagement}
             brandsList={brandsList}
             brandManagement={brandManagement}
@@ -95,7 +95,7 @@ const AdminTable = ({ page, limit, search, open, setOpen, brandId, brandsList })
                 page={page}
                 limit={limit}
                 search={search}
-            />
+            /> */}
         
             <Table>
                 <TableHead>

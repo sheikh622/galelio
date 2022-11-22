@@ -110,7 +110,7 @@ export function* watchDeleteBrandAdmin() {
 function* changeBrandAdminStatusRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.patch(`brand/admin/${payload.id}`, headers);
+        const response = yield axios.patch(`brand/admin/${payload.id}`, {}, headers);
         yield put(
             getAllBrandAdmin({
                 page: payload.page,
