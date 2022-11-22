@@ -89,9 +89,9 @@ const Trending = () => {
     return (
         <Grid container-fluid spacing={gridSpacing}>
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
+                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ ml:1, mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {itemData.map((item) => (
-                        <Grid item xs={6}>
+                        <Grid item xs={11} md={6} lg={3} xl={3} >
                             <Card sx={{ maxWidth: 395, width: '105%', boxShadow: '1px 2px 9px #d3d3d3', borderRadius: '7px' }}>
                                 <CardActionArea>
                                     <CardMedia component="img" height="250" image={item.img} />
@@ -106,7 +106,7 @@ const Trending = () => {
                                             </Grid>
                                         </Grid>
 
-                                        <hr style={{ width: '75%', background: '#e9e9e9', marginBottom: '10% ' }} />
+                                        <hr style={{ marginTop:"10%",width: '75%', background: '#e9e9e9', marginBottom: '10% ' }} />
 
                                         <Grid container sx={{}}>
                                             <Grid item xs={7} sx={{ pt: 1 }}>
