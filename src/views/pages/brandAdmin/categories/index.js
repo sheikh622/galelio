@@ -6,19 +6,11 @@ import { useTheme } from '@mui/material/styles';
 import CategoryTable from './component/categoryTable';
 import {
     Button,
-    Dialog,
-    Divider,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Slide,
-    Typography,
     Grid,
     MenuItem,
     Menu,
     Pagination,
     OutlinedInput,
-    TextField,
     InputAdornment
 } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
@@ -75,7 +67,7 @@ const Categories = () => {
             })
         );
     }, [search, page, limit]);
-    const brandId = useSelector((state)=>state.auth.user.brandId);
+    const brandId = useSelector((state) => state.auth.user.brandId);
     useEffect(() => {
         dispatch(
             getAllCategories({
@@ -126,38 +118,7 @@ const Categories = () => {
                                 }}
                             />
                         </Grid>
-                        {/* <Grid item xs={3}>
-                            <TextField
-                                className="selectField"
-                                id="outlined-select-budget"
-                                select
-                                fullWidth
-                                label="Select Brand"
-                                value={brand}
-                                // defaultValue={brand}
-                                onChange={handleBrandChange}
-                            >
-                                <MenuItem value="0">Select</MenuItem>
-                                {brandsList != undefined &&
-                                    brandsList?.brands?.map((option, index) => (
-                                        <MenuItem key={index} value={option.id}>
-                                            {option.name}
-                                        </MenuItem>
-                                    ))}
-                            </TextField>
-                        </Grid> */}
-                        {/* <Grid item xs={6} textAlign="end">
-                            <Button
-                                variant="contained"
-                                size="large"
-                                onClick={() => {
-                                    setAddEditModal(true);
-                                    setCategories({ name: '', profitPercentage: '', brandId: 0, categoryId: 0 });
-                                }}
-                            >
-                                Add Category
-                            </Button>
-                        </Grid> */}
+
                     </Grid>
                 }
                 content={false}

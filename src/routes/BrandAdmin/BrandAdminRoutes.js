@@ -4,12 +4,10 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import BrandAdminGuard from './BrandAdminGuard';
 
-const BrandAdmin = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
+const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/categories')));
 const NFTCategory = Loadable(lazy(() => import('views/pages/brandAdmin/nftCategory')));
 
-
-// ==============================|| MAIN ROUTING ||============================== //
 
 const BrandAdminRoutes = {
     path: '/',
@@ -20,19 +18,17 @@ const BrandAdminRoutes = {
     ),
     children: [
         {
-            path: '/dashboard',
-            element: <BrandAdmin />
+            path: '/',
+            element: <BrandAdminDashboard />
         },
         {
             path: '/categories',
             element: <Category />
         },
-        {
-            path: '/:categoryName/:categoryId',
-            element: <NFTCategory />
-        }
-   
-   
+        // {
+        //     path: '/:categoryName/:categoryId',
+        //     element: <NFTCategory />
+        // }
     ]
 };
 
