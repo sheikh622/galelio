@@ -3,7 +3,6 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import BrandAdminGuard from './BrandAdminGuard';
-import category from 'redux/categories/reducers';
 
 const BrandAdmin = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/categories')));

@@ -74,15 +74,6 @@ const superAdminMenu = {
                     icon: icons.IconCheckbox,
                     url: '/brands',
                     breadcrumbs: false
-                },
-
-                {
-                    id: 'Brand',
-                    title: <FormattedMessage id="Brand Management" />,
-                    type: 'item',
-                    url: '/brandManagement',
-                    icon: icons.IconReceipt2,
-                    breadcrumbs: false
                 }
             ]
         }

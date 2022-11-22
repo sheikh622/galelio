@@ -7,7 +7,6 @@ import SubAdminGuard from './SubAdminGuard';
 const SubAdmin = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
-const BrandManagement = Loadable(lazy(() => import('views/pages/superAdmin/brandManagement')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const SubAdminRoutes = {
@@ -29,12 +28,7 @@ const SubAdminRoutes = {
         {
             path: '/categories',
             element: <Category />
-        },
-        {
-            path: '/brandManagement',
-            element: <BrandManagement />
-        },
-   
+        }
     ]
 };
 
