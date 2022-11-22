@@ -2,12 +2,11 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { changeBrandAdminStatus } from 'redux/brandAdmin/actions';
+import { deleteBrandAdmin } from '../../../../../../redux/brandManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function ChangeBrandAdminStatusDialog({ open, setOpen, page, limit, search, brandAdminData }) {
+export default function DeleteBrandAdminDialog({ open, setOpen, page, limit, search, brandAdminData }) {
     const theme = useTheme();
     const dispatch = useDispatch();
-
     const handleClose = () => {
         setOpen(false);
     };
@@ -22,14 +21,12 @@ export default function ChangeBrandAdminStatusDialog({ open, setOpen, page, limi
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Change Brand Admin Status </DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1">Delete Brand Admin</DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
-                            {brandAdminData.isActive == false
-                                ? 'Are you sure you want to unblock this Admin?'
-                                : 'Are you sure you want to block  this Admin?'}
+                            Are you sure you want to delete this Admin?
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -46,7 +43,7 @@ export default function ChangeBrandAdminStatusDialog({ open, setOpen, page, limi
                         size="large"
                         onClick={() => {
                             dispatch(
-                                changeBrandAdminStatus({
+                                deleteBrandAdmin({
                                     id: brandAdminData.id,
                                     brandId: brandAdminData.brandId,
                                     page: page,

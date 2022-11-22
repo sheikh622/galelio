@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { deleteBrandAdmin } from '../../../../../../redux/brandManagement/actions';
+import { deleteBrandAdmin } from '../../../../../../redux/brandAdmin/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function DeleteBrandAdminDialog({ open, setOpen, page, limit, search, brandAdminData }) {
     const theme = useTheme();

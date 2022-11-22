@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import BrandAdminTable from './component/brandAdminTable';
 import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllBrandAdmin } from '../../../../../redux/brandManagement/actions';
+import { getAllBrandAdmin } from '../../../../../redux/brandAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddUpdateBrandAdminDialog from './component/addUpdateBrandAdmin';

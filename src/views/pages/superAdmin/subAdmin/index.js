@@ -1,28 +1,34 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import AdminTable from './component/managementTable';
+import BrandAdminTable from './component/brandAdminTable';
 import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllAdmin } from '../../../../redux/adminManagement/actions';
+import { getAllBrandAdmin } from '../../../../redux/brandAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-
 import MainCard from 'ui-component/cards/MainCard';
-import HeadingCard from 'shared/Card/HeadingCard';
-const Brands = () => {
+import AddUpdateBrandAdminDialog from './component/addUpdateBrandAdmin';
+
+const SubAdmin = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const [open, setOpen] = useState(false);
-    const adminList = useSelector((state) => state.adminReducer.adminsList);
-    // console.log(adminList,"===============adminList===========================>");
-
+    const location = useLocation();
+    const navigate = useNavigate();
+    const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [brandId, setBrandId] = useState();
-    const [brandName, setBrandName] = useState('');
-    const [addEditModal, setAddEditModal] = useState(false);
+    const [addUpdateOpen, setAddUpdateOpen] = useState(false);
+    const [brandAdminData, setBrandAdminData] = useState({
+        id: null,
+        brandId: location.state.brandData.id,
+        firstName: '',
+        lastName: '',
+        adminEmail: '',
+        adminPassword: ''
+    });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -33,18 +39,46 @@ const Brands = () => {
     };
 
     useEffect(() => {
-        console.log('run');
         dispatch(
-            getAllAdmin({
+            getAllBrandAdmin({
+                brandId: location.state.brandData.id,
                 search: search,
                 page: page,
                 limit: limit
             })
         );
     }, [search, page, limit]);
+    console.log('location.state', location.state);
     return (
         <>
-            <HeadingCard title="Admin Management" />
+            <AddUpdateBrandAdminDialog
+                open={addUpdateOpen}
+                setOpen={setAddUpdateOpen}
+                brandAdminData={brandAdminData}
+                page={page}
+                limit={limit}
+                search={search}
+            />
+            <MainCard
+                title={
+                    <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
+                        Admin Management of : {location.state.brandData.name}
+                    </Typography>
+                }
+                secondary={
+                    <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => {
+                            navigate('/brands');
+                        }}
+                    >
+                        back
+                    </Button>
+                }
+                content={false}
+            ></MainCard>
+
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>
@@ -68,18 +102,34 @@ const Brands = () => {
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
-                                    setAddEditModal(true);
-                                    console.log('trueeeeeeeeeeee');
+                                    setAddUpdateOpen(true);
+                                    setBrandAdminData({
+                                        id: null,
+                                        brandId: location.state.brandData.id,
+                                        firstName: '',
+                                        lastName: '',
+                                        adminEmail: '',
+                                        adminPassword: ''
+                                    });
                                 }}
                             >
-                                Add admin
+                                Add Brand Admin
                             </Button>
                         </Grid>
                     </Grid>
                 }
                 content={false}
             >
-                <AdminTable search={search} page={page} limit={limit} setOpen={setAddEditModal} open={addEditModal} />
+                <BrandAdminTable
+                    brandAdminList={brandAdminList}
+                    search={search}
+                    page={page}
+                    limit={limit}
+                    addUpdateOpen={addUpdateOpen}
+                    setAddUpdateOpen={setAddUpdateOpen}
+                    brandAdminData={brandAdminData}
+                    setBrandAdminData={setBrandAdminData}
+                />
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>
@@ -90,7 +140,7 @@ const Brands = () => {
                                     showFirstButton
                                     showLastButton
                                     page={page}
-                                    count={adminList.pages}
+                                    count={brandAdminList.pages}
                                     onChange={(event, newPage) => {
                                         setPage(newPage);
                                     }}
@@ -165,4 +215,4 @@ const Brands = () => {
     );
 };
 
-export default Brands;
+export default SubAdmin;

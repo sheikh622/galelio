@@ -14,7 +14,7 @@ import brand from 'redux/brand/reducers';
 import category from 'redux/categories/reducers';
 
 import adminReducer from 'redux/adminManagement/reducers';
-import brandadminReducer from 'redux/brandManagement/reducers';
+import brandadminReducer from 'redux/brandAdmin/reducers';
 import nftByCategoryReducer from 'redux/nftManagement/reducers';
 
 // ==============================|| COMBINE REDUCER ||============================== //
