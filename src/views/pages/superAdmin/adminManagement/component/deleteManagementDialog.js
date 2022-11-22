@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { deleteAdmin } from '../../../../../redux/adminManagement/actions';
+import { deleteAdmin } from '../../../../../redux/subAdmin/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function DeleteManagementDialog({ deleteOpen, setDeleteOpen, page, limit, adminManagement, search, setAdminManagement }) {
     const theme = useTheme();

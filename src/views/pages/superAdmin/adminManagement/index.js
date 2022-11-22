@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import AdminTable from './component/managementTable';
 import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllAdmin } from '../../../../redux/adminManagement/actions';
+import { getAllAdmin } from '../../../../redux/subAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import MainCard from 'ui-component/cards/MainCard';

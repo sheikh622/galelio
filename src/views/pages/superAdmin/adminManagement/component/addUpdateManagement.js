@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FormattedMessage } from 'react-intl';
-import { addAdmin, updateAdmin } from 'redux/adminManagement/actions';
+import { addAdmin, updateAdmin } from 'redux/subAdmin/actions';
 import { useTheme } from '@mui/material/styles';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
