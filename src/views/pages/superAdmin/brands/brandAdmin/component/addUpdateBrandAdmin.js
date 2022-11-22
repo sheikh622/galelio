@@ -42,7 +42,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
             otherwise: Yup.string().matches(
                 /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                 'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
-            ),
+            )
         })
     });
     console.log({ brandAdminData });
@@ -70,7 +70,9 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                     updateBrandAdmin({
                         id: brandAdminData.id,
                         brandId: brandAdminData.brandId,
-                        email: brandAdminData.email,
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        email: values.adminEmail,
                         password: values.adminPassword,
                         page: page,
                         limit: limit,

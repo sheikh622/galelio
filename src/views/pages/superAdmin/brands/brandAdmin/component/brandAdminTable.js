@@ -107,10 +107,11 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
+                                                                console.log("row",row)
                                                                 setAddUpdateOpen(true);
                                                                 setBrandAdminData({
                                                                     id: row.id,
-                                                                    brandId: row.brandId,
+                                                                    brandId: row.BrandId,
                                                                     firstName: row.firstName,
                                                                     lastName: row.lastName,
                                                                     adminEmail: row.email,

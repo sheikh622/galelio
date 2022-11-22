@@ -54,8 +54,9 @@ export function* watchAddBrandAdmin() {
 }
 
 function* updateBrandAdminRequest({ payload }) {
+    console.log("payload",payload)
     let data = {
-        id: payload.id,
+        adminId: payload.id,
         firstName: payload.firstName,
         lastName: payload.lastName,
         email: payload.email,
@@ -63,7 +64,7 @@ function* updateBrandAdminRequest({ payload }) {
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.put(`brandAdmin/updatePassword`, data, headers);
+        const response = yield axios.put(`brand/admin/${payload.brandId}`, data, headers);
         yield put(
             getAllBrandAdmin({
                 page: payload.page,
