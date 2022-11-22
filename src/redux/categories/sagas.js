@@ -29,7 +29,7 @@ function* addCategoryRequest({ payload }) {
     formData.append('image', payload.image);
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`/category`, formData,headers);
+        const response = yield axios.post(`/category`, formData, headers);
         yield put(
             getAllCategories({
                 search: payload.search,
@@ -78,13 +78,12 @@ export function* watchUpdateCategory() {
 function* deleteCategoryRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.delete(`category/delete/${payload.brandId}/${payload.categoryId}`, headers);
+        const response = yield axios.delete(`category/${payload.categoryId}`, headers);
         yield put(
             getAllCategories({
                 search: payload.search,
                 page: payload.page,
-                limit: payload.limit,
-                brandId: 0
+                limit: payload.limit
             })
         );
         payload.handleClose();

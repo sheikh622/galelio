@@ -4,7 +4,6 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import SuperAdminGuard from './SuperAdminGuard';
-import Breadcrumbs from 'ui-component/extended/Breadcrumbs';
 
 const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
 const SubAdmin = Loadable(lazy(() => import('views/pages/superAdmin/subAdmin')));

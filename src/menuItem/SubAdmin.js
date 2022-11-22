@@ -2,8 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconDashboard, IconDeviceAnalytics,IconCheckbox, IconUser, 
-    IconUserCheck, IconReceipt2, IconClipboardList } from '@tabler/icons';
+import { IconDashboard, IconDeviceAnalytics, IconCheckbox, IconUser, IconUserCheck, IconReceipt2, IconClipboardList } from '@tabler/icons';
 import React from 'react';
 
 // constant
@@ -21,7 +20,6 @@ const icons = {
 
 const subAdminMenu = {
     id: 'Admin',
-    // title: <FormattedMessage id="dashboard" />,
     type: 'group',
     children: [
         {
@@ -32,6 +30,7 @@ const subAdminMenu = {
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
+
         {
             id: 'Management',
             title: <FormattedMessage id=" Brand Management" />,
@@ -40,16 +39,6 @@ const subAdminMenu = {
             icon: icons.IconDeviceAnalytics,
             breadcrumbs: false,
             children: [
-             
-               
-                {
-                    id: 'brand',
-                    title: <FormattedMessage id="admin.brand" />,
-                    type: 'item',
-                    icon: icons.IconCheckbox,
-                    url: '/brands',
-                    breadcrumbs: false
-                },
                 {
                     id: 'category',
                     title: <FormattedMessage id="Category" />,
@@ -58,22 +47,19 @@ const subAdminMenu = {
                     url: '/categories',
                     breadcrumbs: false
                 },
+
                 {
-                    id: 'Brand',
-                    title: <FormattedMessage id="Brand Management" />,
+                    id: 'brand',
+                    title: <FormattedMessage id="admin.brand" />,
                     type: 'item',
-                    url: '/brandManagement',
-                    icon: icons.IconReceipt2,
+                    icon: icons.IconCheckbox,
+                    url: '/brands',
                     breadcrumbs: false
-                },
-              
+                }
             ]
         }
-         
-         
-
-      
     ]
 };
 
 export default subAdminMenu;
+
