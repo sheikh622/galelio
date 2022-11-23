@@ -1,29 +1,143 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Card, Container, CardMedia, Grid, Typography } from '@mui/material';
-
+import { Card, Container, CardMedia, Grid, Typography, TextField, MenuItem, Chip, Button } from '@mui/material';
+import React from 'react';
 // project imports
+import Avatar from 'ui-component/extended/Avatar';
 
 import SubCard from 'ui-component/cards/SubCard';
-import car from 'assets/images/unsplash_bMSA5-tLFao.png';
+import watch1 from 'assets/images/watch3.png';
+import watch2 from 'assets/images/watch2.png';
+import watch3 from 'assets/images/watch1.png';
+import Avatar3 from 'assets/images/users/avatar-3.png';
 
 import { gridSpacing } from 'store/constant';
+import { textAlign } from '@mui/system';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = () => {
     const theme = useTheme();
+    const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
+
+    const status = [
+        {
+            value: 'PROOF OF AUTHENTICITY',
+            label: 'PROOF OF AUTHENTICITY'
+        },
+        {
+            value: 'gia certificate',
+            label: 'gia certificate'
+        },
+        {
+            value: 'LCX Certificate',
+            label: 'LCX Certificate'
+        }
+    ];
 
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    <Grid item md={6} sm={12} sx={{ border: '2px solid red' }}>
-                        <CardMedia component="img" height="auto" image={car} alt="green iguana" />
+                    <Grid item md={6} sm={12}>
+                        <CardMedia component="img" height="auto" image={watch1} alt="green iguana" />
                     </Grid>
 
-                    <Grid item md={6} sm={12} sx={{ border: '2px solid red' }}>
-                        kjmhngfbvdsxz
+                    <Grid item md={6} sm={12}>
+                        <Grid item xs={12}>
+                            <Grid container>
+                                <Grid item md={4} sm={12}>
+                                    <CardMedia component="img" sx={{ marginBottom: '10px' }} height="auto" image={watch1} />
+                                    <CardMedia component="img" sx={{ marginBottom: '2px' }} height="auto" image={watch2} />
+                                    <CardMedia component="img" height="auto" image={watch3} />
+                                </Grid>
+                                <Grid item md={8} sm={12}>
+                                    <Grid container spacing={2}>
+                                        <Grid mt={4} ml={2} item xs={12}>
+                                            <Grid container spacing={2} alignItems="center">
+                                                <Grid item>
+                                                    <Avatar alt="User 1" src={Avatar3} />
+                                                </Grid>
+                                                <Grid item xs zeroMinWidth>
+                                                    <Typography align="left" fontWeight={600} variant="subtitle1">
+                                                        Jacob & Co
+                                                    </Typography>
+                                                    <Typography align="left" variant="subtitle2">
+                                                        Creator
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item mt={4} xs={12}>
+                                            <Typography className="Lux" variant="h3">
+                                                Luxury Stainless Watch{' '}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Typography className="productdescription" variant="body2">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lobortis facilisis tortor, ut
+                                                molestie. In rhoncus aliquam dui, vitae sollicitudin justo, cursus maecenas. Lorem ipsum
+                                                dolor sit amet, consectetur adipiscing elit. Lobortis facilisis tortor, ut molestie. In
+                                                rhoncus aliquam dui, vitae sollicitudin justo, cursus maecenas. In rhoncus aliquam dui,
+                                                vitae sollicitudin justo, cursus maecenas.
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                sx={{ borderRadius: '4px' }}
+                                                className="select"
+                                                fullWidth
+                                                id="standard-select-currency"
+                                                select
+                                                value={value}
+                                                onChange={(e) => setValue(e.target.value)}
+                                            >
+                                                {status.map((option) => (
+                                                    <MenuItem key={option.value} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))}
+                                            </TextField>
+                                        </Grid>
+                                        <Grid item mt={2} mb={2} className="timer" xs={12}>
+                                            <Grid className="auction" container>
+                                                <Grid item md={6} xs={12} sm={12}>
+                                                    <Typography variant="body">Auction Time </Typography>
+                                                </Grid>
+                                                <Grid item md={6} xs={12} sm={12}>
+                                                    <Typography variant="body"> 2h : 40m : 03s</Typography>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid item md={4} xs={12} textAlign="center">
+                                            <Grid item xs={12}>
+                                                <Typography
+                                                    sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
+                                                    className="price"
+                                                    variant="body2"
+                                                >
+                                                    Price
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography
+                                                    sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
+                                                    className="ETH"
+                                                    variant="h3"
+                                                >
+                                                    102 ETH
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>{' '}
+                                        <Grid item md={8} xs={12} textAlign="center">
+                                            <Button className="buy" variant="contained" size="large" onClick={() => {}}>
+                                                Buy Now
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
