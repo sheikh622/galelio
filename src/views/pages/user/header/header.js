@@ -156,8 +156,8 @@ export default function Header() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ backgroundColor: 'white', marginBottom:'15px' }}>
                 <Toolbar>
-                    <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        <img src={galileo} alt="" height={'55em'} />
+                    <Typography variant="h6" noWrap component="div" sx={{mt:2,  display: { xs: 'none', sm: 'block' } }}>
+                        <img src={galileo} alt="" height={'40em'} />
                     </Typography>
 
                     <Search className={styles.search}>

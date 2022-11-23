@@ -37,12 +37,13 @@ const Landing = () => (
                     <Grid item md={12} xs={12}>
                         <FeaturedPage />
                     </Grid>
-                    <Grid item md={12} xs={12}>
-                        <Footer />
-                    </Grid>
+                    
+                   
+                    
                 </Grid>
             </Grid>
         </Grid>
+        <Footer />
     </>
 );
 

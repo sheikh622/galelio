@@ -1,5 +1,5 @@
 // material-ui
-import { Grid } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 
 
 
@@ -29,13 +29,20 @@ const Marketplace = () => (
                         
                 <Tabs/>
                     </Grid>
-              
+                    {/* <Grid item xs={12}>
+
+                    <Divider fullWidth sx={{mt:3, mb:3, borderBottomWidth: 5 }} style={{background:"red !important"}}/>
+                    </Grid> */}
                     <Grid item md={12} xs={12}>
-                        <Footer />
+                        
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
+        {/* <Grid containerfluid> */}
+
+        <Footer />
+        {/* </Grid> */}
     </div>
 );
 

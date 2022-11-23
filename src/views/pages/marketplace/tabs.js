@@ -13,6 +13,11 @@ import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
 import RecentActorsTwoToneIcon from '@mui/icons-material/RecentActorsTwoTone';
 import Trending from './trending/index';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
+import binance from "assets/images/coins/binance.png"
+import eth from "assets/images/coins/eth.png"
+import polygon from "assets/images/coins/polygon.png"
+import xdc from "assets/images/coins/xdc.png"
+import solana from "assets/images/coins/solana.png"
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {
@@ -150,23 +155,26 @@ export default function HorizontalTabs() {
                     {...a11yProps(3)}
                 />
 
-                <div style={{ background: 'white', width: '20%', paddingLeft: '1%', borderRadius: '6%', marginLeft:"25%"}}>
+                <div style={{ background: 'white', width: '30%', paddingLeft: '1%', borderRadius: '6px', marginLeft:"23%", marginRight:"2%"}}>
                     <div
                         style={{
                             display: 'flex',
                             alignItems: 'center',
                             flexWrap: 'wrap', 
+                            marginTop:"1%"
                             
                         }}
                     >
                         <span style={{ fontWeight: '500' }}>All Chains</span>
                         {'   '}
-                        <span style={{ background: '#ededed   ', padding: '2% 3%', borderRadius: '7%', marginLeft: '3%' }}>
-                            <CurrencyBitcoinIcon sx={{ color: '#2196f3' }} />
-                            <CurrencyBitcoinIcon sx={{ color: '#2196f3' }} />
-                            <CurrencyBitcoinIcon sx={{ color: '#2196f3' }} />
-                            <CurrencyBitcoinIcon sx={{ color: '#2196f3' }} />
-                            <CurrencyBitcoinIcon sx={{ color: '#2196f3' }} />
+                        <span style={{ background: '#ededed', padding: '1%', borderRadius: '7px', marginLeft: '3%', marginRight:"2%", marginTop:"1%", width:"70%",paddingTop:"2.5%", paddingRight:"7%" }}>
+                            
+                            <img src={eth} height="18em"alt="" style={{marginLeft:"10%"}} />
+                            <img src={polygon} height="18em"alt=""style={{marginLeft:"10%"}}  />
+                            <img src={xdc} height="18em"alt=""style={{marginLeft:"10%"}}  />
+                            <img src={solana} height="18em"alt=""style={{marginLeft:"10%"}}  />
+                            <img src={binance} height="18em"alt="" style={{marginLeft:"10%"}} />
+                           
                         </span>
                     </div>
                 </div>

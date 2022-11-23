@@ -17,50 +17,38 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import styles from './footer.module.css';
+import Divider from '@mui/material/Divider';
+import { makeStyles } from '@mui/styles';
 // styles
 const FooterWrapper = styled('div')(({ theme }) => ({
     padding: '35px 0',
     color: 'black',
-    background: 'white',
+    background: '#f5f5f5',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center'
     }
 }));
 
-const FooterLink = styled(Link)({
-    color: '#fff',
-    display: 'inline-flex',
-    alignItems: 'center',
-    textDecoration: 'none !important',
-    opacity: '0.8',
-    '& svg': {
-        fontsize: '1.125rem',
-        marginRight: 8
-    },
-    '&:hover': {
-        opacity: '1'
-    }
-});
 
-const FooterSubWrapper = styled('div')(({ theme }) => ({
-    padding: '20px 0',
-    color: '#fff',
-    background: theme.palette.secondary.dark,
-    [theme.breakpoints.down('md')]: {
-        textAlign: 'center'
-    }
-}));
 
 // ==============================|| LANDING - FOOTER PAGE ||============================== //
 
 const Footer = () => {
-    const theme = useTheme();
+    const useStyles = makeStyles((theme) => ({
+        divider: {
+            // Theme Color, or use css color in quote
+            // background: theme.palette.success.light
+            background: "#d3d3d3"
+        }
+    }));
+    const classes = useStyles();
 
     return (
         <>
-            <FooterWrapper>
+            <Divider variant={"light"} fullWidth sx={{ mt: 3, mb: 3, borderBottomWidth: 1, border:"1px solid #d3d3d3" }} classes={{ root: classes.divider }} />
+    <FooterWrapper>
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
-                    <Grid item xs={12} md={3}>
+                    <Grid item xs={12} md={4} sx={{ pl: 5, ml:5 }}>
                         <img src={galileo} alt="Galileo" width="100" />
                         <div style={{ marginTop: '5%' }}>
                             <span style={{ color: '#0E0F1D', fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
@@ -130,8 +118,7 @@ const Footer = () => {
                                     style={{
                                         display: 'flex',
                                         flexWrap: 'wrap',
-                                        marginTop: '3%',
-                                      
+                                        marginTop: '3%'
                                     }}
                                 >
                                     <EmailIcon sx={{ height: '' }} />
@@ -142,8 +129,7 @@ const Footer = () => {
                                     style={{
                                         display: 'flex',
                                         flexWrap: 'wrap',
-                                        marginTop: '3%',
-                                   
+                                        marginTop: '3%'
                                     }}
                                 >
                                     <LocationOnIcon sx={{ height: '1.3rem' }} />

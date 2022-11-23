@@ -1,5 +1,5 @@
 // material-ui
-import { Grid, Typography } from '@mui/material';
+import { Divider, Grid, Typography } from '@mui/material';
 
 // project imports
 import FadeInWhenVisible from './Animation';
@@ -87,36 +87,39 @@ const Trending = () => {
         }
     ];
     return (
-        <Grid container-fluid spacing={gridSpacing}>
+        <Grid container-fluid spacing={gridSpacing} sx={{ paddingRight: '0%' }}>
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ ml:1, mr:2,  mt: 2, textAlign: 'center', paddingRight: '1%' }}>
+                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {itemData.map((item) => (
-                        <Grid item xs={11} md={6} lg={3} xl={3} >
-                            <Card sx={{ maxWidth: 365, width: '90%', boxShadow: '1px 2px 9px #d3d3d3', borderRadius: '7px' }}>
+                        <Grid item xs={11} md={6} lg={2} xl={2}>
+                            <Card sx={{ maxWidth: 365, width: '105%', boxShadow: '1px 2px 9px #d3d3d3', borderRadius: '7px' }}>
                                 <CardActionArea>
-                                    <CardMedia component="img" height="250" image={item.img} />
+                                    <CardMedia component="img" height="200" image={item.img} />
                                     <CardContent style={{ padding: '6%' }}>
-                                        <Grid container>
+                                        <Grid container style={{ background: '' }}>
                                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                                                <span style={{ fontWeight: '700', fontSize: '120%' }}>{item.heading}</span>
+                                                <span style={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
                                                 <div style={{ marginTop: '5%' }}>{item.title}</div>
                                             </Grid>
-                                            <Grid item xs={4}>
-                                                <span style={{ fontWeight: '50 !important ', fontSize: '' }}>{item.creator}</span>
+                                            <Grid item xs={4} sx={{ background: '' }}>
+                                                <span style={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
+                                                    {item.creator}
+                                                </span>
                                             </Grid>
                                         </Grid>
 
-                                        <hr style={{ marginTop:"10%",width: '75%', background: '#e9e9e9', marginBottom: '10% ' }} />
+                                        {/* <hr style={{ marginTop:"10%",width: '75%', background: '#e9e9e9', marginBottom: '10% ' }} /> */}
 
-                                        <Grid container sx={{}}>
+                                        <Divider sx={{ mt: 2, mb: 2 }} />
+                                        <Grid container sx={{ background: '' }}>
                                             <Grid item xs={7} sx={{ pt: 1 }}>
                                                 <span
                                                     style={{
                                                         background: '#d3d3d3',
-                                                        padding: '4% 6%',
+                                                        padding: '3% 4%',
                                                         borderRadius: '10%',
                                                         color: 'white',
-                                                        fontSize: '70%'
+                                                        fontSize: '80%'
                                                     }}
                                                 >
                                                     02h
@@ -125,10 +128,10 @@ const Trending = () => {
                                                 <span
                                                     style={{
                                                         background: '#d3d3d3',
-                                                        padding: '4% 6%',
+                                                        padding: '3% 4%',
                                                         borderRadius: '10%',
                                                         color: 'white',
-                                                        fontSize: '70%'
+                                                        fontSize: '80%'
                                                     }}
                                                 >
                                                     25m
@@ -137,10 +140,10 @@ const Trending = () => {
                                                 <span
                                                     style={{
                                                         background: '#d3d3d3',
-                                                        padding: '4% 6%  ',
+                                                        padding: '3% 4%  ',
                                                         borderRadius: '10%',
                                                         color: 'white',
-                                                        fontSize: '70%'
+                                                        fontSize: '80%'
                                                     }}
                                                 >
                                                     04s
@@ -148,7 +151,7 @@ const Trending = () => {
                                             </Grid>
                                             <Grid item xs={5} sx={{ pl: 1 }}>
                                                 Current Bid
-                                                <div>
+                                                <div style={{marginTop:"5%", fontSize:"110%"}}>
                                                     <b>$2913.32</b>
                                                 </div>
                                             </Grid>
