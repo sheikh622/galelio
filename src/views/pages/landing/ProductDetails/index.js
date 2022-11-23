@@ -15,13 +15,16 @@ import PropertiesView from './ProductView';
 const Products = () => (
     <>
         <Appbar />
-        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
-            <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } }}>
+        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },background:'#F5F5F5' }}>
+            <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } , }}>
                 <SiderPage />
             </Grid>
-            <Grid item md={11} xs={12}>
+            <Grid item md={11} xs={12} >
                 <Grid container-fluid>
                    
+                    <Grid item md={12} xs={12}>
+                     <PropertiesView/>
+                    </Grid>
                     <Grid item md={12} xs={12}>
                      <Properties/>
                     </Grid>

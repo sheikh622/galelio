@@ -11,14 +11,14 @@ import Sider from './Sider';
 
 import CategoriesPage from './Categories';
 import Footer from 'views/pages/user/footer/footer';
-import Appbar from 'views/pages/user/header/header'
+import Appbar from 'views/pages/user/header/header';
 
 // =============================|| LANDING MAIN ||============================= //
 
 const Landing = () => (
     <>
         <Appbar />
-        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
+        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },background:'#F5F5F5'  }}>
             <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } }}>
                 <Sider />
             </Grid>
