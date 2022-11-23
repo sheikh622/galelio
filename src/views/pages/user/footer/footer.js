@@ -59,136 +59,118 @@ const Footer = () => {
     return (
         <>
             <FooterWrapper>
-               
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
-                
-                        <Grid item xs={12} md={3}>
-                            <img src={galileo} alt="Galileo" width="100" />
-                            <div style={{ marginTop: '5%' }}>
-                                <span style={{ color: '#0E0F1D', fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
-                            </div>
+                    <Grid item xs={12} md={3}>
+                        <img src={galileo} alt="Galileo" width="100" />
+                        <div style={{ marginTop: '5%' }}>
+                            <span style={{ color: '#0E0F1D', fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
+                        </div>
 
-                            <Grid container sx={{ mt: 3 }}>
-                                <Grid item xs={6}>
-                                    <img src={googlePlay} alt="Google Play" width="120" />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <img src={appleStore} alt="Apple Store" width="120" />
-                                </Grid>
+                        <Grid container sx={{ mt: 3 }}>
+                            <Grid item xs={6}>
+                                <img src={googlePlay} alt="Google Play" width="120" />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <img src={appleStore} alt="Apple Store" width="120" />
                             </Grid>
                         </Grid>
+                    </Grid>
 
-
-
-                        <Grid item xs={12} md={1} sx={{ml:3}}>
-                            <div style={{ marginBottom: '' }}>
-                                <h2>Company</h2>
-                            </div>
+                    <Grid item xs={12} md={1} sx={{ ml: 3 }}>
+                        <div style={{ marginBottom: '' }}>
+                            <h2>Company</h2>
+                        </div>
+                        <div>
+                            <span className={styles.link}>About</span>
+                        </div>
+                        <div className={styles.aboutLink}>
+                            <span className={styles.link}>Mission</span>
+                        </div>
+                        <div className={styles.aboutLink}>
+                            <span className={styles.link}>Team</span>
+                        </div>
+                        <div className={styles.aboutLink}>
+                            <span className={styles.link}>Blog</span>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} md={2} sx={{ paddingBottom: '2.5%', ml: 3 }}>
+                        <h2>Service</h2>
+                        <div>
                             <div>
-                                <span className={styles.link}>About</span>
+                                <span className={styles.link}>FAQ</span>
                             </div>
-                            <div className={styles.aboutLink}>
-                                <span className={styles.link}>Mission</span>
+                            <div className={styles.serviceLink}>
+                                <span className={styles.link}>Support</span>
                             </div>
-                            <div className={styles.aboutLink}>
-                                <span className={styles.link}>Team</span>
+                            <div className={styles.serviceLink}>
+                                <span className={styles.link}>Privacy Policy</span>
                             </div>
-                            <div className={styles.aboutLink}>
-                                <span className={styles.link}>Blog</span>
-                            </div>
-                        </Grid>
-                        <Grid item  xs={12} md={2} sx={{ paddingBottom:"2.5%", ml:3 }}>
-                            <h2 >Service</h2>
+                        </div>
+                    </Grid>
+
+                    <Grid item xs={12} md={12} lg={3} xl={3} sx={{ paddingBottom: '1.7%' }}>
+                        <h2>Contact</h2>
+
+                        <Grid>
                             <div>
-                                <div>
-                                    <span className={styles.link}>FAQ</span>
-                                </div>
-                                <div className={styles.serviceLink}>
-                                    <span className={styles.link}>Support</span>
-                                </div>
-                                <div className={styles.serviceLink}>
-                                    <span className={styles.link}>Privacy Policy</span>
-                                </div>
-                            </div>
-                        </Grid>
-
-
-
-                        <Grid  item xs={12} md={12} lg={3} xl={3} sx={{ paddingBottom:"1.7%" }}>
-                            <h2>Contact</h2>
-
-                            <Grid className={styles.contact}>
-                                <div>
-                       <div className={styles.contact} style={{
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                marginTop:"3%",                                 
-                              
-                             
-                            }}>
-                                    <LocalPhoneIcon sx={{height:"1.3rem"}} />
-                                <span className={styles.contactLink} >
-                                    (123) 456-7890
-                                </span>
-                            </div>
-                      
-
-                                
-
-                            <div className={styles.contact} style={{
-                                    display: 'flex',
-                                    flexWrap: 'wrap',
-                                    marginTop:"3%",                                 
-                                    width:"100%",
-                                    justifyContent:"center"
-                                 
-                            }}>
-                                       <EmailIcon   sx={{height:""}} />
-                                <span className={styles.contactLink}  >
-                                  galileo@gmail.com
-                                </span>
-                            </div>  
-                            <div className={styles.contact} style={{
-                                    display: 'flex',
-                                    flexWrap: 'wrap',
-                                    marginTop:"3%",                                 
-                                    width:"100%",
-                                    justifyContent:"center"
-                                 
-                            }}>
-                                    <LocationOnIcon  sx={{height:"1.3rem"}}/>
-                                <span className={styles.contactLink} >
-                                    2972 Westeast Rd. LA, 85400{' '}
-                                </span>
-                            </div>
-
+                                <div
+                                    className={styles.contact}
+                                    style={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        marginTop: '3%'
+                                    }}
+                                >
+                                    <LocalPhoneIcon sx={{ height: '1.3rem' }} />
+                                    <span className={styles.contactLink}>(123) 456-7890</span>
                                 </div>
 
-                            </Grid>
-
-                        </Grid>
-                        <Grid item xs={12} md={2} sx={{ paddingBottom:"6.5%"}}>
-                            
-                                <h2>Social Media</h2>
-                            
-
-                            <div style={{}}>
-                                <span>
-                                    <FacebookIcon />
-                                </span>
-                                <span className={styles.socialLink}>
-                                    <TwitterIcon />
-                                </span>
-                                <span className={styles.socialLink}>
-                                    <LinkedInIcon />
-                                </span>
-                                <span className={styles.socialLink}>
-                                    <InstagramIcon />
-                                </span>
+                                <div
+                                    className={styles.contact}
+                                    style={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        marginTop: '3%',
+                                      
+                                    }}
+                                >
+                                    <EmailIcon sx={{ height: '' }} />
+                                    <span className={styles.contactLink}>galileo@gmail.com</span>
+                                </div>
+                                <div
+                                    className={styles.contact}
+                                    style={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        marginTop: '3%',
+                                   
+                                    }}
+                                >
+                                    <LocationOnIcon sx={{ height: '1.3rem' }} />
+                                    <span className={styles.contactLink}>2972 Westeast Rd. LA, 85400 </span>
+                                </div>
                             </div>
                         </Grid>
                     </Grid>
-              
+                    <Grid item xs={12} md={2} sx={{ paddingBottom: '6.5%' }}>
+                        <h2>Social Media</h2>
+
+                        <div style={{}}>
+                            <span>
+                                <FacebookIcon />
+                            </span>
+                            <span className={styles.socialLink}>
+                                <TwitterIcon />
+                            </span>
+                            <span className={styles.socialLink}>
+                                <LinkedInIcon />
+                            </span>
+                            <span className={styles.socialLink}>
+                                <InstagramIcon />
+                            </span>
+                        </div>
+                    </Grid>
+                </Grid>
             </FooterWrapper>
         </>
     );
