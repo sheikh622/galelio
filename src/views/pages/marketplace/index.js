@@ -23,7 +23,7 @@ const Marketplace = () => (
             </Grid>
             <Grid item md={11} xs={12} sx={{mt:2}}>
                 <Grid container-fluid>
-                <h1 style={{paddingLeft:"5%"}}>Marketplace</h1>
+                <h1 style={{paddingLeft:""}}>Marketplace</h1>
 
                     <Grid item md={12} xs={12}>
                         
