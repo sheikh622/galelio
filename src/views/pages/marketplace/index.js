@@ -3,7 +3,7 @@ import { Divider, Grid } from '@mui/material';
 
 
 
-import Sider from '../landing/Sider';
+import Sider from '../landing/BiggestNFTMarketplace/Sider';
 
 
 import Footer from '../user/footer/footer';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import { lazy } from 'react';
+import MainRoutes from './MainRoutes';
 
 import { useSelector } from 'react-redux';
 // routes
@@ -12,11 +13,11 @@ import AuthenticationRoutes from './AuthenticationRoutes';
 import Loadable from 'ui-component/Loadable';
 
 
-const PagesLanding = Loadable(lazy(() => import('views/pages/landing')));
+const PagesLanding = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
 // ==============================|| ROUTING RENDER ||============================== //
 export default function ThemeRoutes() {
     return useRoutes([{ path: '/', element: <PagesLanding /> },
-     AuthenticationRoutes, LoginRoutes, SuperAdminRoutes]);
+     AuthenticationRoutes, LoginRoutes, MainRoutes]);
 }
 // export default function ThemeRoutes() {
 //     const userData = useSelector((state) => state.auth);

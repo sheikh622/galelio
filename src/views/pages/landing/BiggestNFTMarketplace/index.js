@@ -9,9 +9,9 @@ import NewPage from './New';
 import FeaturedPage from './FeaturedCreators';
 import Sider from './Sider';
 
-import Demo from './Demos';
-import Footer from '../user/footer/footer';
-import Appbar from '../user/header/header';
+import CategoriesPage from './Categories';
+import Footer from 'views/pages/user/footer/footer';
+import Appbar from 'views/pages/user/header/header'
 
 // =============================|| LANDING MAIN ||============================= //
 
@@ -31,7 +31,7 @@ const Landing = () => (
                         <NewPage />
                     </Grid>
                     <Grid item md={12} xs={12}>
-                        <Demo />
+                        <CategoriesPage />
                     </Grid>
 
                     <Grid item md={12} xs={12}>
