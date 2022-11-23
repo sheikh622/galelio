@@ -22,8 +22,8 @@ const Marketplace = () => (
                 <Sider />
             </Grid>
             <Grid item md={11} xs={12} sx={{mt:2}}>
-                <Grid container-fluid>
-                <h1 style={{paddingLeft:""}}>Marketplace</h1>
+                <Grid container>
+                <h1 style={{paddingLeft:"0.5%"}}>Marketplace</h1>
 
                     <Grid item md={12} xs={12}>
                         

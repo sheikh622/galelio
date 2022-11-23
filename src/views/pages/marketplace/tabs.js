@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Chip, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Chip, Grid, Tab, Tabs, Typography } from '@mui/material';
 
 // assets
 import PersonOutlineTwoToneIcon from '@mui/icons-material/PersonOutlineTwoTone';
@@ -26,7 +26,7 @@ function TabPanel({ children, value, index, ...other }) {
             {value === index && (
                 <Box
                     sx={{
-                        p: 1
+                        p: 1, pr:2  
                     }}
                 >
                     <Typography>{children}</Typography>
@@ -70,21 +70,25 @@ export default function HorizontalTabs() {
                     // paddingBottom:"-100px",
                     // marginBottom:"10px",
                     mb: 1,
+                    ml:1,
                     '& a': {
-                        minHeight: 'auto',
+                        // color:"red", 
+                        minHeight: '1rem',
                         minWidth: 10,
-                        // py: 1.5,
-                        // px: 1,
-                        mr: 2.2,
+                        py: 1.5,
+                        px: 0,
+                        mr: 3.7,
                         color: theme.palette.grey[600],
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        marginBottom:"0.3%"
                     },
                     '& a.Mui-selected': {
                         color: theme.palette.primary.main,
-                        paddingBottom: '1.1%'
+                        // marginBottom: '1%',
+                        // paddingBottom:"2%"
                     }
                     // '& a > svg': {
                     //     mb: '0px !important',
@@ -92,32 +96,26 @@ export default function HorizontalTabs() {
                     // }
                 }}
             >
+
+                
                 <Tab
                     component={Link}
-                    to="#"
-                    // icon={<PersonOutlineTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
+                    to="#"                    
                     label="Trending"
                     {...a11yProps(0)}
                 />
                 <Tab
                     component={Link}
-                    to="#"
-                    // icon={<RecentActorsTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
+                    to="#"                    
                     label="Top"
                     {...a11yProps(1)}
                 />
                 <Tab
                     component={Link}
-                    to="#"
-                    // icon={<PeopleAltTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
+                    to="#"                    
                     label={
                         <>
                             Cars{' '}
-                            {/* <Chip
-                                label="01"
-                                size="small"
-                                sx={{ color: theme.palette.secondary.main, background: theme.palette.secondary.light, ml: 1.3 }}
-                            /> */}
                         </>
                     }
                     {...a11yProps(2)}
@@ -125,49 +123,42 @@ export default function HorizontalTabs() {
                 <Tab
                     component={Link}
                     to="#"
-                    // icon={<PanoramaTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
-
                     label="Luxury Watches"
                     {...a11yProps(3)}
                 />
                 <Tab
                     component={Link}
-                    to="#"
-                    // icon={<PanoramaTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
-
+                    to="#"            
                     label="Shoes"
                     {...a11yProps(3)}
                 />
                 <Tab
                     component={Link}
                     to="#"
-                    // icon={<PanoramaTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
-
-                    label="Luxury Goods"
+                     label="Luxury Goods"
                     {...a11yProps(3)}
                 />
                 <Tab
                     component={Link}
-                    to="#"
-                    // icon={<PanoramaTwoToneIcon sx={{ fontSize: '1.3rem' }} />}
-
+                    to="#"    
                     label="Real Estate"
                     {...a11yProps(3)}
                 />
 
-                <div style={{ background: 'white', width: '30%', paddingLeft: '1%', borderRadius: '6px', marginLeft:"23%", marginRight:"2%"}}>
+                <Grid item sx={{display:{xs:"none"}}} >
+                <div style={{ background: 'white', width: '20%', paddingLeft: '1%', borderRadius: '6px', marginLeft:"34%", marginRight:"2%"}}>
                     <div
                         style={{
                             display: 'flex',
                             alignItems: 'center',
                             flexWrap: 'wrap', 
-                            marginTop:"1%"
+                            marginTop:"2%"
                             
                         }}
                     >
                         <span style={{ fontWeight: '500' }}>All Chains</span>
                         {'   '}
-                        <span style={{ background: '#ededed', padding: '1%', borderRadius: '7px', marginLeft: '3%', marginRight:"2%", marginTop:"1%", width:"70%",paddingTop:"2.5%", paddingRight:"7%" }}>
+                        <span style={{ background: '#ededed', padding: '1%', borderRadius: '7px', marginLeft: '3%', marginRight:"3%", marginTop:"1%", width:"70%",paddingTop:"1.2%", paddingRight:"12%", paddingBottom:"0.3%" }}>
                             
                             <img src={eth} height="18em"alt="" style={{marginLeft:"10%"}} />
                             <img src={polygon} height="18em"alt=""style={{marginLeft:"10%"}}  />
@@ -178,7 +169,40 @@ export default function HorizontalTabs() {
                         </span>
                     </div>
                 </div>
+
+                </Grid>
+                
+
+
+                
             </Tabs>
+
+            <Grid item sx={{display:{md:"none"}, marginRight:"5%", marginLeft:"3%"}} >
+                <div style={{ background: 'white', width: '100%', paddingLeft: '5%', borderRadius: '6px', marginLeft:"", marginRight:"2%"}}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            flexWrap: 'wrap', 
+                            marginTop:"2%"
+                            
+                        }}
+                    >
+                        <span style={{ fontWeight: '500' }}>All Chains</span>
+                        {'   '}
+                        <span style={{ background: '#ededed', padding: '1%', borderRadius: '7px', marginLeft: '3%', marginRight:"3%", marginTop:"1%", width:"70%",paddingTop:"1.2%", paddingBottom:"1.2%", paddingRight:"", paddingBottom:"1.3%", marginBottom:"1.2%" }}>
+                            
+                            <img src={eth} height="18em"alt="" style={{marginLeft:"10%"}} />
+                            <img src={polygon} height="18em"alt=""style={{marginLeft:"10%"}}  />
+                            <img src={xdc} height="18em"alt=""style={{marginLeft:"10%"}}  />
+                            <img src={solana} height="18em"alt=""style={{marginLeft:"10%"}}  />
+                            <img src={binance} height="18em"alt="" style={{marginLeft:"10%"}} />
+                           
+                        </span>
+                    </div>
+                </div>
+
+                </Grid>
 
             <TabPanel value={value} index={0}>
                 <Trending />

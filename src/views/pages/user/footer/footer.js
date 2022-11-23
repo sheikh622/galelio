@@ -48,14 +48,14 @@ const Footer = () => {
             <Divider variant={"light"} fullWidth sx={{ mt: 3, mb: 3, borderBottomWidth: 1, border:"1px solid #d3d3d3" }} classes={{ root: classes.divider }} />
     <FooterWrapper>
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
-                    <Grid item xs={12} md={4} sx={{ pl: 5, ml:5 }}>
+                    <Grid item xs={12} md={4} sx={{ pl: 5, ml:4 }}>
                         <img src={galileo} alt="Galileo" width="100" />
                         <div style={{ marginTop: '5%' }}>
                             <span style={{ color: '#0E0F1D', fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
                         </div>
 
                         <Grid container sx={{ mt: 3 }}>
-                            <Grid item xs={6}>
+                            <Grid item xs={5}>
                                 <img src={googlePlay} alt="Google Play" width="120" />
                             </Grid>
                             <Grid item xs={6}>

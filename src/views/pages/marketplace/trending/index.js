@@ -91,7 +91,7 @@ const Trending = () => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {itemData.map((item) => (
-                        <Grid item xs={11} md={6} lg={2} xl={2}>
+                        <Grid item xs={11} sm={6} md={6} lg={2} xl={2}>
                             <Card sx={{ maxWidth: 365, width: '105%', boxShadow: '1px 2px 9px #d3d3d3', borderRadius: '7px' }}>
                                 <CardActionArea>
                                     <CardMedia component="img" height="200" image={item.img} />
