@@ -46,10 +46,7 @@ const LoginRoutes = {
             path: '/ProductDetails',
             element: <ProductDetails />
         },
-        {
-            path: '/ProductDetails',
-            element: <ProductDetails />
-        },
+       
         {
             path: '/BiggestNFTMarketplace',
             element: <BiggestNFTMarketplace />
