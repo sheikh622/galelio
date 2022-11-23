@@ -47,7 +47,7 @@ const CategoriesPage = () => {
         }
     ];
     return (
-        <Grid container-fluid spacing={gridSpacing}>
+        <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
@@ -85,7 +85,7 @@ const CategoriesPage = () => {
                                                         xs: '10px',
                                                         sm: '10px',
                                                         md: '94px 10px 93px 10px',
-                                                        lg: '94px 10px 93px 10px'
+                                                        lg: '10px',
                                                     }
                                                 }}
                                             >
