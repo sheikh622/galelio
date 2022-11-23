@@ -67,7 +67,7 @@ const CategoriesPage = () => {
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {itemData.map((item) => (
                         <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
-                            <FadeInWhenVisible>
+                           
                                 <Grid container justifyContent="center" spacing={1}>
                                     <Grid item>
                                         <Box sx={{ position: 'relative' }}>
@@ -96,7 +96,7 @@ const CategoriesPage = () => {
                                         </Box>
                                     </Grid>
                                 </Grid>
-                            </FadeInWhenVisible>
+                         
                         </Grid>
                     ))}
                 </Grid>
