@@ -40,18 +40,13 @@ const PropertiesView = () => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12}>
-                        <CardMedia component="img" height="auto" image={watch1} alt="green iguana" />
+                        <CardMedia component="img" sx={{height:'592px'}} image={watch1} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
                         <Grid item xs={12}>
                             <Grid container>
-                                <Grid item md={4} sm={12}>
-                                    <CardMedia component="img" sx={{ marginBottom: '10px' }} height="auto" image={watch1} />
-                                    <CardMedia component="img" sx={{ marginBottom: '2px' }} height="auto" image={watch2} />
-                                    <CardMedia component="img" height="auto" image={watch3} />
-                                </Grid>
-                                <Grid item md={8} sm={12}>
+                                <Grid item md={12} sm={12}>
                                     <Grid container spacing={2}>
                                         <Grid mt={4} ml={2} item xs={12}>
                                             <Grid container spacing={2} alignItems="center">
@@ -109,8 +104,10 @@ const PropertiesView = () => {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid item md={4} xs={12} textAlign="center">
-                                            <Grid item xs={12}>
+                                        <Grid item mt={2} mb={2} xs={12}>
+                                            <Grid  container>
+                                                <Grid item md={2} xs={12} sm={12}>
+                                                <Grid item xs={12}>
                                                 <Typography
                                                     sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
                                                     className="price"
@@ -119,7 +116,7 @@ const PropertiesView = () => {
                                                     Price
                                                 </Typography>
                                             </Grid>
-                                            <Grid item xs={12}>
+                                            <Grid item  xs={12}>
                                                 <Typography
                                                     sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
                                                     className="ETH"
@@ -128,12 +125,16 @@ const PropertiesView = () => {
                                                     102 ETH
                                                 </Typography>
                                             </Grid>
-                                        </Grid>{' '}
-                                        <Grid item md={8} xs={12} textAlign="center">
-                                            <Button className="buy" variant="contained" size="large" onClick={() => {}}>
+                                                </Grid>
+                                                <Grid item md={10} xs={12} sm={12}  textAlign="center">
+                                                <Button sx={{float: {md:'right'}}} className="buy" variant="contained" size="large" onClick={() => {}}>
                                                 Buy Now
                                             </Button>
+                                                </Grid>
+                                            </Grid>
                                         </Grid>
+                                       
+                                       
                                     </Grid>
                                 </Grid>
                             </Grid>
