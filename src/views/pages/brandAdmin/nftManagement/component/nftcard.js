@@ -1,29 +1,79 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
+import MainCard from './mainCard';
+import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function NftCard({ asset, name, price, currencyType, description }) {
+const NftCard = ({ nftData, categoryId, search, page, limit }) => {
+    const dispatch = useDispatch();
+    const [loader, setLoader] = useState(false);
+    const [openMint, setOpenMint] = useState(false);
+
     return (
-        <Card sx={{ maxWidth: 345 }}>
-            <CardMedia component="img" height="140" image={asset} />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    <b>Description: </b> {description}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    <b>Price:</b> {price} {currencyType}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small">Details</Button>
-            </CardActions>
-        </Card>
+        <>
+            <MainCard
+                content={false}
+                boxShadow
+                sx={{
+                    position: 'relative',
+                    '&:hover': {
+                        transform: 'scale3d(1.02, 1.02, 1)',
+                        transition: 'all .4s ease-in-out'
+                    }
+                }}
+            >
+                <CardMedia sx={{ height: 220 }} image={nftData.asset} />
+                <CardContent sx={{ p: 2 }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={9}>
+                            <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                                {nftData.name}
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={12} mt={-1.5}>
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    overflow: 'hidden',
+                                    height: 30
+                                }}
+                            >
+                                {nftData.description}
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={6}>
+                            <Grid item xs={12}>
+                                <Typography variant="h6">
+                                    {nftData.price} {nftData.currencyType}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography variant="h6">{nftData.NFTTokens.length} Items</Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Stack direction="row" justifyContent="end" alignItems="center">
+                                <Button
+                                    variant="text"
+                                    color="primary"
+                                    sx={{ marginRight: '5px' }}
+                                    onClick={() => {
+                                        console.log({nftData})
+                                    }}
+                                >
+                                    <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>
+                                </Button>
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                </CardContent>
+            </MainCard>
+        </>
     );
-}
+};
+
+export default NftCard;

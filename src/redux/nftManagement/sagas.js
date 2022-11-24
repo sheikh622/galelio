@@ -6,9 +6,8 @@ import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
-
 function* addNftRequest({ payload }) {
-    console.log("payload",payload)
+    console.log('payload', payload);
     const formData = new FormData();
     formData.append('asset', payload.asset);
     formData.append('name', payload.name);
@@ -39,7 +38,7 @@ function* getAllNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(
-            `admin/nft/getAll?page=${payload.page}&size=${payload.limit}&brandId=${payload.brandId}&categoryId=${payload.categoryId}&subCategoryId=${payload.subCategoryId}&type=${payload.type}`,
+            `/nft?page=${payload.page}&size=${payload.limit}&search=${payload.search}&categoryId=${payload.categoryId}`,
             headers
         );
         yield put(getAllNftSuccess(response.data.data));
