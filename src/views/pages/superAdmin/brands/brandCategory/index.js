@@ -11,6 +11,9 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddUpdateBrandCategoryDialog from './component/addUpdateBrandCategory';
 
+
+
+
 const BrandCategory = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -22,6 +25,7 @@ const BrandCategory = () => {
     const [limit, setLimit] = useState(10);
     const [addUpdateOpen, setAddUpdateOpen] = useState(false);
     const [brandCategoryData, setBrandCategoryData] = useState({
+        brand: location.state.brandData,
         brandId: location.state.brandData.id,
         categoryId: 0,
         profitPercentage: ''
@@ -101,6 +105,7 @@ const BrandCategory = () => {
                                 onClick={() => {
                                     setAddUpdateOpen(true);
                                     setBrandCategoryData({
+                                        brand: location.state.brandData,
                                         brandId: location.state.brandData.id,
                                         categoryId: 0,
                                         profitPercentage: ''

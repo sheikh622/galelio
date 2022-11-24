@@ -22,6 +22,14 @@ function* addNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/nft`, formData, headers);
+        yield put(
+            getAllNft({
+                categoryId: payload.categoryId,
+                search: payload.search,
+                page: payload.page,
+                limit: payload.limit
+            })
+        );
         payload.handleClose();
         yield setNotification('success', response.data.message);
     } catch (error) {

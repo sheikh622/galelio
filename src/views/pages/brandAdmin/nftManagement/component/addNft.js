@@ -49,7 +49,7 @@ const typeArray = [
     }
 ];
 
-export default function AddNft({ open, setOpen,data }) {
+export default function AddNft({ open, setOpen, data, search, page, limit }) {
     const dispatch = useDispatch();
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -114,21 +114,24 @@ export default function AddNft({ open, setOpen,data }) {
             console.log('values', values);
             console.log('fieldDataArray', fieldDataArray);
             console.log('mintType', mintType);
-           let isValid =  handleError(fieldDataArray, values);
+            let isValid = handleError(fieldDataArray, values);
             if (isValid) {
                 dispatch(
                     addNft({
-                        categoryId:data.CategoryId,
+                        categoryId: data.CategoryId,
                         mintType: mintType,
                         metaDataArray: fieldDataArray,
                         name: values.nftName,
                         price: values.nftPrice,
                         description: values.nftDescription,
-                        currencyType:type,
+                        currencyType: type,
                         quantity: values.images[0].quantity,
                         asset: values.images[0].image,
-                        handleClose:handleClose
-                        
+                        page:page,
+                        limit:limit,
+                        search:search,
+                        categoryId:data.CategoryId,
+                        handleClose: handleClose
                     })
                 );
             }

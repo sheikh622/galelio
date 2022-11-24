@@ -9,9 +9,10 @@ import {
 } from './constants';
 
 
-export const getAllCategoriesDropdown = () => {
+export const getAllCategoriesDropdown = (data) => {
     return {
-        type: GET_ALL_CATEGORIES_DROPDOWN
+        type: GET_ALL_CATEGORIES_DROPDOWN,
+        payload: data
     };
 };
 
@@ -50,7 +51,7 @@ export const updateBrandCategory = (data) => {
     };
 };
 
-export const deleteBrandCategory= (data) => {
+export const deleteBrandCategory = (data) => {
     return {
         type: DELETE_BRAND_CATEGORY,
         payload: data

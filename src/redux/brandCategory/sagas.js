@@ -13,10 +13,10 @@ import {
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
-function* getAllCategoriesDropdownRequest() {
+function* getAllCategoriesDropdownRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.get(`category/dropdown`, headers);
+        const response = yield axios.get(`category/dropdown/${payload.brandId}`, headers);
         yield put(getAllCategoriesDropdownSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -48,7 +48,8 @@ function* addBrandCategoryRequest({ payload }) {
     let data = {
         brandId: payload.brandId,
         categoryId: payload.categoryId,
-        profitPercentage: payload.profitPercentage
+        profitPercentage: payload.profitPercentage,
+        contractAddress: payload.contractAddress
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };

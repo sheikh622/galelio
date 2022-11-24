@@ -41,7 +41,7 @@ const NftManagement = () => {
 
     return (
         <>
-            <AddNft open={addNftOpen} setOpen={setAddNftOpen} data={location.state.data} />
+            <AddNft open={addNftOpen} setOpen={setAddNftOpen} data={location.state.data} search={search} page={page} limit={limit} />
             <MainCard
                 className="yellow"
                 style={{ marginBottom: '15px' }}
