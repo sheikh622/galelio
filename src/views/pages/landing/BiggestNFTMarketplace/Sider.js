@@ -7,10 +7,28 @@ import DownloadIcon from '@mui/icons-material/Download';
 import DiscountIcon from '@mui/icons-material/Discount';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate, Link } from 'react-router-dom';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import { useNavigate, Link, useParams, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const SiderPage = () => {
     const navigate = useNavigate();
+    const [color, setColor] = useState('#2196f3');
+    const [pathName, setPathName] = useState('');
+    // const pathname = window.location.href;
+
+    // console.log("pathname from sidebar", pathname)
+
+    const location = useLocation();
+
+    // let pathname;
+    // console.log('pathname from sidebar', location.pathname);
+
+    useEffect(() => {
+        setPathName(location.pathname);
+    }, []);
+
+    console.log('pathname state', pathName);
 
     return (
         <>
@@ -21,7 +39,7 @@ const SiderPage = () => {
                         alignItems="center"
                         spacing={3}
                         sx={{
-                            pt: 3,
+                            pt: 1,
                             pb: 3,
                             ml: 1,
                             boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.05)',
@@ -36,7 +54,15 @@ const SiderPage = () => {
                                 navigate('/');
                             }}
                         >
-                            <DashboardIcon sx={{ color: '#2196f3' }} />
+                            {pathName == '/' ? (
+                                <>
+                                    <DashboardIcon sx={{ color: `${color}` }} />
+                                </>
+                            ) : (
+                                <>
+                                    <DashboardIcon />
+                                </>
+                            )}
                         </Grid>
                         <Grid item sx={{ mt: 2 }}>
                             <PieChartIcon />
@@ -48,7 +74,15 @@ const SiderPage = () => {
                                 navigate('/marketplace');
                             }}
                         >
-                            <StorefrontIcon />
+                            {pathName.includes('/marketplace') ? (
+                                <>
+                                    <StorefrontIcon style={{ color: `${color}` }} />
+                                </>
+                            ) : (
+                                <>
+                                    <StorefrontIcon />
+                                </>
+                            )}
                         </Grid>
                         <Grid item sx={{ mt: 2 }}>
                             <BookmarkIcon />
@@ -64,6 +98,9 @@ const SiderPage = () => {
                         </Grid>
                         <Grid item sx={{ mt: 2 }}>
                             <LogoutIcon />
+                        </Grid>
+                        <Grid item sx={{ mt:5  }}>
+                            <WbSunnyIcon  style={{color:`${color}`}}/>
                         </Grid>
                     </Grid>
                 </Grid>
