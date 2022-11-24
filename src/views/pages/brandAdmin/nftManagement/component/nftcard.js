@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
-import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import MintNftDialog from './mintNftDialog';
 
 const NftCard = ({ nftData, categoryId, search, page, limit }) => {
     const dispatch = useDispatch();
@@ -13,6 +11,17 @@ const NftCard = ({ nftData, categoryId, search, page, limit }) => {
 
     return (
         <>
+            <MintNftDialog
+                nftData={nftData}
+                categoryId={nftData.CategoryId}
+                search={search}
+                page={page}
+                limit={limit}
+                loader={loader}
+                setLoader={setLoader}
+                open={openMint}
+                setOpen={setOpenMint}
+            />
             <MainCard
                 content={false}
                 boxShadow
@@ -62,7 +71,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit }) => {
                                     color="primary"
                                     sx={{ marginRight: '5px' }}
                                     onClick={() => {
-                                        console.log({nftData})
+                                        console.log({ nftData });
                                     }}
                                 >
                                     <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>

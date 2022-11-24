@@ -2,30 +2,17 @@ import { forwardRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { ethers, providers } from 'ethers';
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Slide,
-    Grid,
-    TextField,
-    FormControlLabel,
-    Radio,
-    FormControl,
-    RadioGroup
-} from '@mui/material';
-import { Oval } from 'react-loader-spinner';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide,Typography  } from '@mui/material';
+// import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MarketplaceAddress from '../../../../../contractAbi/KwikTrustMarketplace-address.json';
-import NFTAbi from '../../../../../contractAbi/KwikTrustNFT.json';
-import { mintNft, lazyMintNft } from 'redux/nft/actions';
+import { mintNft, lazyMintNft } from 'redux/nftManagement/actions';
+import NFTAbi from '../../../../../contractAbi/NFT.json';
 import { create } from 'ipfs-http-client';
 import { Buffer } from 'buffer';
-const projectId = '2DTzPWLbFhEcwsNVZSEnG7WOFfA';
-const projectSecret = 'ab50ee28a53e37298f049068d200875c';
+
+const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
+const projectSecret = 'a09de1e8b20292cd87460290de554003';
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
 const client = create({
@@ -36,25 +23,13 @@ const client = create({
         authorization: auth
     }
 });
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function MintNftDialog({
-    open,
-    setOpen,
-    page,
-    limit,
-    type,
-    brandId,
-    categoryId,
-    subCategoryId,
-    loader,
-    setLoader,
-    nftData
-}) {
+export default function MintNftDialog({ open, setOpen, page, limit, search, categoryId, loader, setLoader, nftData }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
-    const [valueLabel, setValueLabel] = useState('lazyMint');
     const handleClose = () => {
         setOpen(false);
         setLoader(false);
@@ -321,22 +296,9 @@ export default function MintNftDialog({
             >
                 <DialogTitle id="alert-dialog-slide-title1"> Mint NFT</DialogTitle>
                 <DialogContent>
-                    <Grid container spacing={2}>
-                        <Grid item>
-                            <FormControl>
-                                <RadioGroup
-                                    row
-                                    aria-label="gender"
-                                    value={valueLabel}
-                                    onChange={(e) => setValueLabel(e.target.value)}
-                                    name="row-radio-buttons-group"
-                                >
-                                    <FormControlLabel value="lazyMint" control={<Radio />} label="Lazy Mint" />
-                                    <FormControlLabel value="directMint" control={<Radio />} label="Mint" />
-                                </RadioGroup>
-                            </FormControl>
-                        </Grid>
-                    </Grid>
+                    <Typography variant="body2" component="span">
+                        Are you sure you want to mint this NFT?
+                    </Typography>
                 </DialogContent>
 
                 <DialogActions sx={{ pr: 2.5 }}>
@@ -366,18 +328,19 @@ export default function MintNftDialog({
                                 variant="contained"
                                 size="small"
                                 onClick={() => {
-                                    if (!loader) {
-                                        if (walletAddress == undefined) {
-                                            setOpen(false);
-                                            toast.error('Connect Metamask');
-                                        } else {
-                                            if (valueLabel == 'directMint') {
-                                                handleDirectMint();
-                                            } else if (valueLabel == 'lazyMint') {
-                                                handleLazyMint();
-                                            }
-                                        }
-                                    }
+                                    console.log({ nftData });
+                                    // if (!loader) {
+                                    //     if (walletAddress == undefined) {
+                                    //         setOpen(false);
+                                    //         toast.error('Connect Metamask');
+                                    //     } else {
+                                    //         if (valueLabel == 'directMint') {
+                                    //             handleDirectMint();
+                                    //         } else if (valueLabel == 'lazyMint') {
+                                    //             handleLazyMint();
+                                    //         }
+                                    //     }
+                                    // }
                                 }}
                             >
                                 {' '}
