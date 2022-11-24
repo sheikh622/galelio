@@ -14,6 +14,7 @@ import brand from 'redux/brand/reducers';
 import category from 'redux/categories/reducers';
 import subAdminReducer from 'redux/subAdmin/reducers';
 import brandadminReducer from 'redux/brandAdmin/reducers';
+import brandCategoryReducer from 'redux/brandCategory/reducers';
 import nftByCategoryReducer from 'redux/nftManagement/reducers';
 
 // ==============================|| COMBINE REDUCER ||============================== //
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     category: category,
     subAdminReducer: subAdminReducer,
     brandadminReducer: brandadminReducer,
+    brandCategoryReducer: brandCategoryReducer,
     nftsByCategoryReducer: nftByCategoryReducer
 });
 

@@ -9,6 +9,7 @@ const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/d
 const SubAdmin = Loadable(lazy(() => import('views/pages/superAdmin/subAdmin')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
+const BrandCategory = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandCategory')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 
 
@@ -36,6 +37,10 @@ const SuperAdminRoutes = {
         {
             path: '/brands/admin',
             element: <BrandAdmin />
+        },
+        {
+            path: '/brands/category',
+            element: <BrandCategory />
         },
         {
             path: '/categories',

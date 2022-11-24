@@ -33,7 +33,7 @@ const brandAdminMenu = {
         },
         {
             id: 'categories',
-            title: <FormattedMessage id="Categories" />,
+            title: <FormattedMessage id="categories" />,
             type: 'item',
             url: '/categories',
             icon: icons.IconCheckbox,

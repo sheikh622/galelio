@@ -145,7 +145,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         autoComplete="given-name"
                                     />
                                 </Grid>
-                                {/* {isUpdate == false && ( */}
+                                
                                 <Grid item xs={6} pt={2}>
                                     <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
                                     <TextField
@@ -159,7 +159,6 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         autoComplete="given-name"
                                     />
                                 </Grid>
-                                {/* )} */}
                             </>
                         </Grid>
                     </form>

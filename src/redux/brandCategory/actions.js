@@ -1,0 +1,58 @@
+import {
+    GET_ALL_BRAND_CATEGORIES,
+    GET_ALL_BRAND_CATEGORIES_SUCCESS,
+    GET_ALL_CATEGORIES_DROPDOWN,
+    GET_ALL_CATEGORIES_DROPDOWN_SUCCESS,
+    ADD_BRAND_CATEGORY,
+    UPDATE_BRAND_CATEGORY,
+    DELETE_BRAND_CATEGORY
+} from './constants';
+
+
+export const getAllCategoriesDropdown = () => {
+    return {
+        type: GET_ALL_CATEGORIES_DROPDOWN
+    };
+};
+
+export const getAllCategoriesDropdownSuccess = (data) => {
+    return {
+        type: GET_ALL_CATEGORIES_DROPDOWN_SUCCESS,
+        payload: data
+    };
+};
+
+export const getAllBrandCategories = (data) => {
+    return {
+        type: GET_ALL_BRAND_CATEGORIES,
+        payload: data
+    };
+};
+
+export const getAllBrandCategoriesSuccess = (data) => {
+    return {
+        type: GET_ALL_BRAND_CATEGORIES_SUCCESS,
+        payload: data
+    };
+};
+
+export const addBrandCategory = (data) => {
+    return {
+        type: ADD_BRAND_CATEGORY,
+        payload: data
+    };
+};
+
+export const updateBrandCategory = (data) => {
+    return {
+        type: UPDATE_BRAND_CATEGORY,
+        payload: data
+    };
+};
+
+export const deleteBrandCategory= (data) => {
+    return {
+        type: DELETE_BRAND_CATEGORY,
+        payload: data
+    };
+};

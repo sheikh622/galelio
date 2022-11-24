@@ -40,8 +40,8 @@ const subAdminMenu = {
             breadcrumbs: false,
             children: [
                 {
-                    id: 'category',
-                    title: <FormattedMessage id="Category" />,
+                    id: 'categories',
+                    title: <FormattedMessage id="categories" />,
                     type: 'item',
                     icon: icons.IconCheckbox,
                     url: '/categories',
