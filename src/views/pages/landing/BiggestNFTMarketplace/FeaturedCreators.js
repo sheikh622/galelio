@@ -75,11 +75,15 @@ const FeaturedPage = () => {
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {itemData.map((item) => (
                         <Grid item md={2} sm={6}>
-                            <Grid container justifyContent="center" spacing={1}>
-                                <Grid item md={6} xs={12}>
-                                    <CardMedia component="img" sx={{ height: { xs: 'auto', md: '213px', sm: 'auto' } }} image={shoes1} />
+                            <Grid container justifyContent="center">
+                                <Grid item md={6} xs={6}>
+                                    <CardMedia
+                                        component="img"
+                                        sx={{ height: { xs: '100%', md: '224px;', sm: '100%' }, width: '90%' }}
+                                        image={shoes1}
+                                    />
                                 </Grid>
-                                <Grid item md={6} xs={12}>
+                                <Grid item md={6} xs={6}>
                                     <Grid item md={12} xs={12}>
                                         <CardMedia component="img" height="auto" image={shoes2} />
                                     </Grid>
@@ -88,9 +92,12 @@ const FeaturedPage = () => {
                                     </Grid>
                                 </Grid>
 
-                                <Grid item md={12} xs={12} sx={{ background: '#fff', padding: '20px 0' }}>
+                                <Grid item md={12} xs={12} sx={{ background: '#fff', padding: '20px 10px' }}>
                                     <Grid item md={12} xs={12}>
-                                        <Typography variant="h3" sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}>
+                                        <Typography
+                                            variant="h3"
+                                            sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' }, marginBottom: '10px' }}
+                                        >
                                             {item.title}
                                         </Typography>
                                     </Grid>
