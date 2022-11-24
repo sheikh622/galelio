@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import {
     IconButton,
     Stack,

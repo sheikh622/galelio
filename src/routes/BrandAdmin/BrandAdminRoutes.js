@@ -6,7 +6,7 @@ import BrandAdminGuard from './BrandAdminGuard';
 
 const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
-const NFTCategory = Loadable(lazy(() => import('views/pages/brandAdmin/nftCategory')));
+const NftManagement = Loadable(lazy(() => import('views/pages/brandAdmin/nftManagement')));
 
 
 const BrandAdminRoutes = {
@@ -25,10 +25,10 @@ const BrandAdminRoutes = {
             path: '/categories',
             element: <Category />
         },
-        // {
-        //     path: '/:categoryName/:categoryId',
-        //     element: <NFTCategory />
-        // }
+        {
+            path: '/nftManagement',
+            element: <NftManagement />
+        }
     ]
 };
 

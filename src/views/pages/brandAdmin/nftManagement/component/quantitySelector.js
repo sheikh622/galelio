@@ -19,7 +19,6 @@ const QuantitySelector = ({ formik, fileArray, index }) => {
                 <Typography style={{ marginTop: '12px', marginRight: '5px' }}>Quantity : </Typography>
 
                 <TextField
-                
                     type="number"
                     className="quantityField"
                     id="outlined-select-currency-native"

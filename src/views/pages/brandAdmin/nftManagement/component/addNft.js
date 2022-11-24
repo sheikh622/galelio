@@ -43,11 +43,10 @@ import closeFill from '@iconify-icons/eva/close-fill';
 import { fData } from 'utils/formatNumber';
 import QuantitySelector from './quantitySelector';
 
-export default function AddNft({ addNftOpen, setAddNftOpen }) {
+export default function AddNft({ open, setOpen }) {
     const [mintType, setMintType] = useState('directMint');
     const [fields, setFields] = useState([]);
     const [uploadedImages, setUploadedImages] = useState([]);
-
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [currencyType, setCurrencyType] = useState([]);
 
@@ -87,7 +86,7 @@ export default function AddNft({ addNftOpen, setAddNftOpen }) {
     const hasFile = formik.values.images.length > 0;
 
     const handleClose = () => {
-        setAddNftOpen(false);
+        setOpen(false);
         formik.resetForm();
     };
     const handleDrop = useCallback(
@@ -130,14 +129,13 @@ export default function AddNft({ addNftOpen, setAddNftOpen }) {
 
     const handleCurrencyTypeChange = (e) => {
         let ct = e.target.value;
-
         setCurrencyType(ct);
     };
     return (
         <>
             <Dialog
                 style={{}}
-                open={addNftOpen}
+                open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 // onClose={handleClose}
@@ -145,7 +143,6 @@ export default function AddNft({ addNftOpen, setAddNftOpen }) {
                 aria-describedby="alert-dialog-slide-description1"
             >
                 <DialogTitle id="alert-dialog-slide-title1">{'Add NFT'}</DialogTitle>
-                {/* <Divider /> */}
 
                 <DialogContent style={{ width: '35rem' }}>
                     <Grid container spacing={2} sx={{ ml: 1, mb: 2 }}>
