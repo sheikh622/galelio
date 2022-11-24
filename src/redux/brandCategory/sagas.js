@@ -72,17 +72,15 @@ export function* watchAddBrandCategory() {
 }
 
 function* updateBrandCategoryRequest({ payload }) {
-    console.log('payload', payload);
+    console.log({ payload });
     let data = {
-        categoryId: payload.id,
-        firstName: payload.firstName,
-        lastName: payload.lastName,
-        email: payload.email,
-        password: payload.password
+        categoryId: payload.categoryId,
+        brandId: payload.brandId,
+        profitPercentage: payload.profitPercentage
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.put(`brand/category/${payload.brandId}`, data, headers);
+        const response = yield axios.put(`brand/category`, data, headers);
         yield put(
             getAllBrandCategories({
                 page: payload.page,
@@ -103,9 +101,13 @@ export function* watchUpdateBrandCategory() {
 }
 
 function* deleteBrandCategoryRequest({ payload }) {
+    let data = {
+        categoryId: payload.categoryId,
+        brandId: payload.brandId
+    };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.delete(`brand/category/${payload.id}`, headers);
+        const response = yield axios.post(`brand/category/remove`, data, headers);
         yield put(
             getAllBrandCategories({
                 page: payload.page,

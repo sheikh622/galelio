@@ -13,14 +13,22 @@ import {
     TableRow,
     Tooltip
 } from '@mui/material';
-import Chip from 'ui-component/extended/Chip';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddUpdateBrandCategoryDialog from './addUpdateBrandCategory';
 import DeleteBrandCategoryDialog from './deleteBrandCategoryDialog';
+import Avatar from 'ui-component/extended/Avatar';
 
-const BrandCategoryTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit, brandAdminList, setBrandAdminData, brandAdminData }) => {
+const BrandCategoryTable = ({
+    brandCategoriesList,
+    search,
+    page,
+    limit,
+    addUpdateOpen,
+    setAddUpdateOpen,
+    brandCategoryData,
+    setBrandCategoryData
+}) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
-    const [changeStatusOpen, setChangeStatusOpen] = useState(false);
     const [detailId, setDetailId] = useState();
     const openDetails = (id) => {
         if (detailId === id) {
@@ -35,7 +43,7 @@ const BrandCategoryTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, lim
             <AddUpdateBrandCategoryDialog
                 open={addUpdateOpen}
                 setOpen={setAddUpdateOpen}
-                brandAdminData={brandAdminData}
+                brandCategoryData={brandCategoryData}
                 page={page}
                 limit={limit}
                 search={search}
@@ -47,37 +55,39 @@ const BrandCategoryTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, lim
                 page={page}
                 limit={limit}
                 search={search}
-                brandAdminData={brandAdminData}
+                brandCategoryData={brandCategoryData}
             />
 
-          
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">First Name</TableCell>
-                        <TableCell align="center">Last Name</TableCell>
-                        <TableCell align="center">Email</TableCell>
-                        <TableCell align="center">Status</TableCell>
+                        <TableCell align="center">Category</TableCell>
+                        <TableCell align="center">Description</TableCell>
+                        <TableCell align="center">Profit percentage</TableCell>
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
-                {brandAdminList.admins != undefined && brandAdminList.count > 0 ? (
+                {brandCategoriesList.brandCategories != undefined && brandCategoriesList.count > 0 ? (
                     <TableBody sx={{ padding: '10px' }}>
-                        {brandAdminList.admins != undefined &&
-                            brandAdminList.admins.map((row, index) => (
+                        {brandCategoriesList.brandCategories != undefined &&
+                            brandCategoriesList.brandCategories.map((row, index) => (
                                 <>
                                     <TableRow>
-                                        <TableCell align="center">{row.firstName}</TableCell>
-                                        <TableCell align="center">{row.lastName}</TableCell>
-                                        <TableCell align="center">{row.email}</TableCell>
-
-                                        <TableCell align="center">
-                                            {row.isActive == false ? (
-                                                <Chip label="Blocked" size="small" chipcolor="orange" />
-                                            ) : (
-                                                <Chip label="Unblocked" size="small" chipcolor="success" />
-                                            )}
+                                        <TableCell align="center" justifyContent="center" alignItems="center">
+                                            <Grid container spacing={2} justifyContent="center" alignItems="center">
+                                                <Grid item>
+                                                    <Avatar alt="Category Image" src={row.Category.image} />
+                                                </Grid>
+                                                <Grid item>
+                                                    <Typography variant="subtitle1" component="div">
+                                                        {row.Category.name}
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
                                         </TableCell>
+
+                                        <TableCell align="center">{row.Category.description}</TableCell>
+                                        <TableCell align="center">{row.profitPercentage}</TableCell>
 
                                         <TableCell align="center">
                                             <Tooltip placement="top" title="View">
@@ -105,13 +115,10 @@ const BrandCategoryTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, lim
                                                             onClick={() => {
                                                                 console.log('row', row);
                                                                 setAddUpdateOpen(true);
-                                                                setBrandAdminData({
-                                                                    id: row.id,
+                                                                setBrandCategoryData({
+                                                                    categoryId: row.CategoryId,
                                                                     brandId: row.BrandId,
-                                                                    firstName: row.firstName,
-                                                                    lastName: row.lastName,
-                                                                    adminEmail: row.email,
-                                                                    adminPassword: ''
+                                                                    profitPercentage: row.profitPercentage
                                                                 });
                                                             }}
                                                         >
@@ -124,29 +131,13 @@ const BrandCategoryTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, lim
                                                             size="large"
                                                             onClick={() => {
                                                                 setDeleteOpen(true);
-                                                                setBrandAdminData({
-                                                                    id: row.id,
+                                                                setBrandCategoryData({
+                                                                    categoryId: row.CategoryId,
                                                                     brandId: row.BrandId
                                                                 });
                                                             }}
                                                         >
                                                             Delete
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item xs={4} md={4}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setChangeStatusOpen(true);
-                                                                setBrandAdminData({
-                                                                    id: row.id,
-                                                                    brandId: row.BrandId,
-                                                                    isActive: row.isActive
-                                                                });
-                                                            }}
-                                                        >
-                                                            Change Status
                                                         </Button>
                                                     </Grid>
                                                 </Grid>

@@ -26,7 +26,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     const [isUpdate, setIsUpdate] = useState(false);
 
     useEffect(() => {
-        if (brandCategoryData.id == null) {
+        if (brandCategoryData.categoryId == 0) {
             setIsUpdate(false);
         } else {
             setIsUpdate(true);
@@ -51,7 +51,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         initialValues: brandCategoryData,
         validationSchema,
         onSubmit: (values) => {
-            if (brandCategoryData.id == null) {
+            if (!isUpdate) {
                 dispatch(
                     addBrandCategory({
                         brandId: brandCategoryData.brandId,
@@ -66,9 +66,8 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             } else {
                 dispatch(
                     updateBrandCategory({
-                        id: brandCategoryData.id,
                         brandId: brandCategoryData.brandId,
-                        categoryId: values.categoryId,
+                        categoryId: brandCategoryData.categoryId,
                         profitPercentage: values.profitPercentage,
                         page: page,
                         limit: limit,
@@ -105,33 +104,36 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         console.log({ brandCategoryData });
                     }}
                 >
-                    {brandCategoryData.id == null ? 'Assign Category to brand ' : ' Update Profit percentage of category'}
+                    {!isUpdate ? 'Assign Category to brand ' : ' Update Profit percentage of category'}
                 </DialogTitle>
                 <Divider />
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
                             <>
-                                <Grid item xs={12} pt={2} pr={4}>
-                                    <TextField
-                                        className="responsiveSelectfield"
-                                        id="outlined-select-budget"
-                                        select
-                                        fullWidth
-                                        label="Select Category"
-                                        value={category}
-                                        onChange={handleCategoryChange}
-                                    >
-                                        <MenuItem value={0}>Choose Category</MenuItem>
-                                        {categoryArray &&
-                                            categoryArray.categories &&
-                                            categoryArray.categories.map((option, index) => (
-                                                <MenuItem key={index} value={option.value}>
-                                                    {option.label}
-                                                </MenuItem>
-                                            ))}
-                                    </TextField>
-                                </Grid>
+                                {!isUpdate && (
+                                    <Grid item xs={12} pt={2} pr={4}>
+                                        <TextField
+                                            className="responsiveSelectfield"
+                                            id="outlined-select-budget"
+                                            select
+                                            fullWidth
+                                            label="Select Category"
+                                            value={category}
+                                            onChange={handleCategoryChange}
+                                        >
+                                            <MenuItem value={0}>Choose Category</MenuItem>
+                                            {categoryArray &&
+                                                categoryArray.categories &&
+                                                categoryArray.categories.map((option, index) => (
+                                                    <MenuItem key={index} value={option.value}>
+                                                        {option.label}
+                                                    </MenuItem>
+                                                ))}
+                                        </TextField>
+                                    </Grid>
+                                )}
+
                                 <Grid item xs={12} pt={4} pr={4}>
                                     <TextField
                                         id="profitPercentage"
@@ -162,7 +164,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                 formik.handleSubmit();
                             }}
                         >
-                            {brandCategoryData.id == null ? 'Add ' : 'Update '}
+                            {!isUpdate ? 'Add ' : 'Update '}
                         </Button>
                     </AnimateButton>
                     <AnimateButton>

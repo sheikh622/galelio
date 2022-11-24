@@ -22,7 +22,6 @@ const BrandCategory = () => {
     const [limit, setLimit] = useState(10);
     const [addUpdateOpen, setAddUpdateOpen] = useState(false);
     const [brandCategoryData, setBrandCategoryData] = useState({
-        id: null,
         brandId: location.state.brandData.id,
         categoryId: 0,
         profitPercentage: ''
@@ -102,7 +101,6 @@ const BrandCategory = () => {
                                 onClick={() => {
                                     setAddUpdateOpen(true);
                                     setBrandCategoryData({
-                                        id: null,
                                         brandId: location.state.brandData.id,
                                         categoryId: 0,
                                         profitPercentage: ''
@@ -116,7 +114,7 @@ const BrandCategory = () => {
                 }
                 content={false}
             >
-                {/* <BrandCategoryTable
+                <BrandCategoryTable
                     brandCategoriesList={brandCategoriesList}
                     search={search}
                     page={page}
@@ -125,9 +123,9 @@ const BrandCategory = () => {
                     setAddUpdateOpen={setAddUpdateOpen}
                     brandCategoryData={brandCategoryData}
                     setBrandCategoryData={setBrandCategoryData}
-                /> */}
+                />
 
-                {/* <>
+                <>
                     <Grid item xs={12} sx={{ p: 3 }}>
                         <Grid container justifyContent="space-between" spacing={gridSpacing}>
                             <Grid item>
@@ -136,7 +134,7 @@ const BrandCategory = () => {
                                     showFirstButton
                                     showLastButton
                                     page={page}
-                                    count={brandAdminList.pages}
+                                    count={brandCategoriesList.pages}
                                     onChange={(event, newPage) => {
                                         setPage(newPage);
                                     }}
@@ -205,7 +203,7 @@ const BrandCategory = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                </> */}
+                </>
             </MainCard>
         </>
     );
