@@ -7,6 +7,7 @@ import { gridSpacing } from 'store/constant';
 
 // assets
 import galileo from 'assets/images/galileo.png';
+import galileoWhite from 'assets/images/galileo-white.png';
 import googlePlay from 'assets/images/google-play.png';
 import appleStore from 'assets/images/apple-store.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -23,7 +24,8 @@ import { makeStyles } from '@mui/styles';
 const FooterWrapper = styled('div')(({ theme }) => ({
     padding: '35px 0',
     color: 'black',
-    background: '#f5f5f5',
+  background:  theme.palette.mode === 'dark' ? theme.palette.dark.main : "#f5f5f5",
+    // background: '#f5f5f5',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center'
     }
@@ -42,16 +44,24 @@ const Footer = () => {
         }
     }));
     const classes = useStyles();
-
+const theme = useTheme()
     return (
-        <>
+        <div style={{}}>
             <Divider variant={"light"} fullWidth sx={{ mt: 3, mb: 3, borderBottomWidth: 1, border:"1px solid #d3d3d3" }} classes={{ root: classes.divider }} />
-    <FooterWrapper>
+    <FooterWrapper 
+    style={{ color: `${theme.palette.mode === 'dark' ? "white" : "black"}`}}>
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
                     <Grid item xs={12} md={4} sx={{ pl: 5, ml:4 }}>
-                        <img src={galileo} alt="Galileo" width="100" />
+                        {theme.palette.mode === 'dark' ?
+                        <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                        
+                        :
+                        <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                        
+                        
+                        }
                         <div style={{ marginTop: '5%' }}>
-                            <span style={{ color: '#0E0F1D', fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
+                            <span style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
                         </div>
 
                         <Grid container sx={{ mt: 3 }}>
@@ -158,7 +168,7 @@ const Footer = () => {
                     </Grid>
                 </Grid>
             </FooterWrapper>
-        </>
+        </div>
     );
 };
 

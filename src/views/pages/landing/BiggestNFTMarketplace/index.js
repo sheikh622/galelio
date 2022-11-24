@@ -16,7 +16,7 @@ import Appbar from 'views/pages/user/header/header';
 // =============================|| LANDING MAIN ||============================= //
 
 const Landing = () => (
-    <>
+    <div style={{  }}>
         <Appbar />
         <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' }, background: '#F5F5F5' }}>
             <Grid
@@ -28,7 +28,7 @@ const Landing = () => (
                 <Sider style={{}} />
             </Grid>
             <Grid item md={11} xs={12}>
-                <Grid container-fluid>
+                <Grid container-fluid sx={{background:""}}>
                     <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
                         <Header />
                     </Grid>
@@ -46,7 +46,7 @@ const Landing = () => (
             </Grid>
         </Grid>
         <Footer />
-    </>
+    </div>
 );
 
 export default Landing;

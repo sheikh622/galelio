@@ -10,8 +10,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
+import { useTheme } from '@mui/styles';
 
 const Trending = () => {
+    
     const itemData = [
         {
             img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
@@ -87,7 +89,7 @@ const Trending = () => {
         }
     ];
     return (
-        <Grid container-fluid spacing={gridSpacing} sx={{ paddingRight: '0%' }}>
+        <Grid container-fluid spacing={gridSpacing} sx={{ background:"", paddingRight: '0%' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {itemData.map((item) => (

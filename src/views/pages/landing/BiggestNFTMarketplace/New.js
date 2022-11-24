@@ -58,7 +58,7 @@ const NewPage = () => {
         }
     ];
     return (
-        <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
+        <Grid container-fluid spacing={gridSpacing} sx={{background:"", margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha, useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,8 +15,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import userHeader from 'assets/images/userHeader.png';
 import galileo from 'assets/images/galileo.png';
+import galileoWhite from 'assets/images/galileo-white.png';
 import styles from './header.module.css';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -45,6 +49,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    background:"white",
     color: 'white',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
@@ -152,22 +157,32 @@ export default function Header() {
         </Menu>
     );
 
+    const theme = useTheme()
+            
+
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: 'white', marginBottom:'4px' }}>
+            <AppBar position="static" sx={{ backgroundColor:`${theme.palette.mode === 'dark' ? theme.palette.dark.main : "#f5f5f5"}`, marginBottom:'4px' }}>
                 <Toolbar>
                     <Typography variant="h6" noWrap component="div" sx={{mt:2,  display: { xs: 'none', sm: 'block' } }}>
-                        <img src={galileo} alt="" height={'40em'} />
+                    {theme.palette.mode === 'dark' ?
+                        <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                        
+                        :
+                        <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                        
+                        
+                        }
                     </Typography>
 
                     <Search className={styles.search}>
                         <SearchIconWrapper>
-                            <SearchIcon sx={{ color: '#4dabf5' }} />
+                            <SearchIcon sx={{ color: '#d3d3d3', zIndex:"1" }} />
                         </SearchIconWrapper>
                         <StyledInputBase placeholder="Search" inputProps={{ 'aria-label': 'search' }} />
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
+                    <Box sx={{  display: { xs: 'none', md: 'flex' }, mr: 3 }}>
                         <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
                             <Badge badgeContent={17} color="error">
                                 <NotificationsIcon sx={{ color: '#4dabf5' }} />
@@ -178,11 +193,17 @@ export default function Header() {
                     <img src={userHeader} alt="" height="40" />
 
                     <div style={{ marginLeft: '1rem ' }}>
-                        <Typography variant="h5" component="h2" sx={{ color: '#262626' }}>
+                        <Typography variant="h5" component="h2" sx={{ }}>
                             Cia Natasya
                         </Typography>
 
-                        <div className={styles.subTitle}>Creator</div>
+                        <div className={styles.subTitle}>
+                            
+                        <Typography variant="h6" component="h2" sx={{ }}>
+                            Creator
+                        </Typography>
+                            
+                            </div>
                     </div>
 
                     <IconButton
