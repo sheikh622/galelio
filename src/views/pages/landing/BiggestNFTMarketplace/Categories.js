@@ -71,7 +71,8 @@ const CategoriesPage = () => {
                                 <Grid container justifyContent="center" spacing={1}>
                                     <Grid item>
                                         <Box sx={{ position: 'relative' }}>
-                                            <CardMedia component="img" width="100%" height="auto" image={car} alt="green iguana" />
+                                            <CardMedia component="img" width="100%" height="auto" image={car} 
+                                           />
 
                                             <Box
                                                 sx={{
@@ -84,7 +85,7 @@ const CategoriesPage = () => {
                                                     padding: {
                                                         xs: '10px',
                                                         sm: '10px',
-                                                        md: '94px 10px 93px 10px',
+                                                        md: '10px',
                                                         lg: '10px',
                                                     }
                                                 }}
