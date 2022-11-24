@@ -1,5 +1,6 @@
 import { forwardRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ethers } from 'ethers';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -7,7 +8,6 @@ import { updateBrandCategory, addBrandCategory, getAllCategoriesDropdown } from 
 import {
     MenuItem,
     Button,
-    InputLabel,
     Dialog,
     DialogActions,
     DialogContent,
@@ -18,6 +18,7 @@ import {
     Grid
 } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+
 
 export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCategoryData, page, limit, search }) {
     const dispatch = useDispatch();
@@ -37,6 +38,38 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         setCategory(event.target.value);
     };
 
+    const handleContractDeployment = async () => {
+        console.log("brandCategoryData",brandCategoryData)
+        const contractName = 'Galileo' + ' ' + formik.values.name;
+        console.log('contractNamecontractName', contractName);
+        // const validator = '0xBF09EE4E0F90EE3081Abe249f39a24b46298EFcf';
+        // const provider = new ethers.providers.Web3Provider(window.ethereum);
+        // // Set signer
+        // const signer = provider.getSigner();
+        // const minterAddress = await signer.getAddress();
+        // const symbol = 'KTX';
+        // const factoryAddr = new ethers.Contract(KwikTrustFactoryAddress.address, KwikTrustFactoryAbi.abi, signer);
+        // let res = await (
+        //     await factoryAddr.deployMintingContract(contractName, symbol, minterAddress, validator).catch((error) => {
+        //         toast.error(error.message);
+        //         setLoader(false);
+        //     })
+        // ).wait();
+        // let addr = res.events[3].args[0];
+        // console.log(res.events[3].args[0]);
+        // dispatch(
+        //     addBrandCategory({
+        //         brandId: brandCategoryData.brandId,
+        //         categoryId: category,
+        //         profitPercentage: values.profitPercentage,
+        //         page: page,
+        //         limit: limit,
+        //         search: search,
+        //         handleClose: handleClose
+        //     })
+        // );
+    };
+
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
         profitPercentage: Yup.number()
@@ -52,17 +85,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         validationSchema,
         onSubmit: (values) => {
             if (!isUpdate) {
-                dispatch(
-                    addBrandCategory({
-                        brandId: brandCategoryData.brandId,
-                        categoryId: category,
-                        profitPercentage: values.profitPercentage,
-                        page: page,
-                        limit: limit,
-                        search: search,
-                        handleClose: handleClose
-                    })
-                );
+                handleContractDeployment();
             } else {
                 dispatch(
                     updateBrandCategory({
@@ -86,6 +109,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     useEffect(() => {
         dispatch(getAllCategoriesDropdown());
     }, []);
+
     return (
         <>
             <Dialog
