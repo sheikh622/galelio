@@ -1,21 +1,17 @@
-import { forwardRef, useState, useCallback } from 'react';
+import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import { useTheme } from '@mui/material/styles';
 import {
     Grid,
     Button,
     Dialog,
     DialogActions,
-    Item,
     DialogContent,
     DialogTitle,
     Slide,
     TextField,
     Divider,
-    InputLabel,
     Box,
     Link,
     List,
@@ -25,15 +21,10 @@ import {
     Typography,
     ListItemSecondaryAction,
     IconButton,
-    Select,
-    MenuItem,
-    FormControl
+    MenuItem
 } from '@mui/material';
 import UploadImage from 'assets/images/icons/image-upload.svg';
-
-const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 import AnimateButton from 'ui-component/extended/AnimateButton';
-
 import clsx from 'clsx';
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -42,7 +33,10 @@ import fileFill from '@iconify-icons/eva/file-fill';
 import closeFill from '@iconify-icons/eva/close-fill';
 import { fData } from 'utils/formatNumber';
 import QuantitySelector from './quantitySelector';
-import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { addNft } from 'redux/nftManagement/actions';
+const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const typeArray = [
     {
@@ -55,7 +49,7 @@ const typeArray = [
     }
 ];
 
-export default function AddNft({ open, setOpen }) {
+export default function AddNft({ open, setOpen,data }) {
     const dispatch = useDispatch();
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -63,6 +57,33 @@ export default function AddNft({ open, setOpen }) {
     const [type, setType] = useState('ETH');
     const handleType = (event) => {
         setType(event.target.value);
+    };
+
+    const handleError = (fieldDataArray, values) => {
+        let isValid = true;
+        console.log('fieldDataArray', fieldDataArray);
+        console.log('values', values.images);
+        if (parseInt(values.images[0].quantity) < 1) {
+            toast.error('NFT Quantity must be greater than zero');
+            isValid = false;
+        }
+        if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
+        } else {
+            toast.error('Upload the files with these extensions: jpg, png, gif');
+            isValid = false;
+        }
+
+        fieldDataArray.forEach((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`Metadata name fields are mandatory`);
+            }
+            if (array.fieldValue == '') {
+                isValid = false;
+                toast.error(`Metadata value fields are mandatory`);
+            }
+        });
+        return isValid;
     };
 
     const validationSchema = Yup.object({
@@ -90,7 +111,27 @@ export default function AddNft({ open, setOpen }) {
         },
         validationSchema,
         onSubmit: (values) => {
-            dispatch();
+            console.log('values', values);
+            console.log('fieldDataArray', fieldDataArray);
+            console.log('mintType', mintType);
+           let isValid =  handleError(fieldDataArray, values);
+            if (isValid) {
+                dispatch(
+                    addNft({
+                        categoryId:data.CategoryId,
+                        mintType: mintType,
+                        metaDataArray: fieldDataArray,
+                        name: values.nftName,
+                        price: values.nftPrice,
+                        description: values.nftDescription,
+                        currencyType:type,
+                        quantity: values.images[0].quantity,
+                        asset: values.images[0].image,
+                        handleClose:handleClose
+                        
+                    })
+                );
+            }
         }
     });
 
@@ -137,16 +178,11 @@ export default function AddNft({ open, setOpen }) {
     };
 
     const handleRemoveField = (index) => {
-        console.log({ index });
         let array = [...fieldDataArray];
         array.splice(index, 1);
-        console.log({ array });
         setFieldDataArray(array);
     };
 
-    useEffect(() => {
-        console.log('fieldDataArray', fieldDataArray);
-    }, [fieldDataArray]);
     return (
         <>
             <Dialog

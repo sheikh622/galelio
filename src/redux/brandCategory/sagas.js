@@ -1,6 +1,6 @@
 import axios from 'utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
-import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
+
 import { makeSelectAuthToken } from 'store/Selector';
 import { getAllBrandCategories, getAllBrandCategoriesSuccess, getAllCategoriesDropdownSuccess } from './actions';
 import {
@@ -10,6 +10,7 @@ import {
     DELETE_BRAND_CATEGORY,
     GET_ALL_CATEGORIES_DROPDOWN
 } from './constants';
+import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
 function* getAllCategoriesDropdownRequest() {

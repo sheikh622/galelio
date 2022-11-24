@@ -1,25 +1,18 @@
 import produce from 'immer';
-import {
-   
-    GET_NFTS_BY_CATEGORY_SUCCESS,
-
-} from './constants';
+import { GET_ALL_NFT_SUCCESS } from './constants';
 
 const INITIAL_STATE = {
-    nftsByCategoryList: [],
-   
- 
+    nftList: []
 };
 
-const nftsByCategoryReducer = produce((draft, action) => {
+const nftReducer = produce((draft, action) => {
     switch (action.type) {
-        case GET_NFTS_BY_CATEGORY_SUCCESS:
-            draft.nftsByCategoryList = action.payload;
-           
+        case GET_ALL_NFT_SUCCESS:
+            draft.nftList = action.payload;
             break;
-       
+
         default:
     }
 }, INITIAL_STATE);
 
-export default nftsByCategoryReducer;
+export default nftReducer;

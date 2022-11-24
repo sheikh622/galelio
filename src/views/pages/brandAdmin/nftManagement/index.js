@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import { Button, Grid, Typography } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
@@ -8,13 +8,20 @@ import AddNft from './component/addNft';
 
 const NftManagement = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
     const [addNftOpen, setAddNftOpen] = useState(false);
+    console.log(' location.state', location.state.data);
 
+
+
+
+
+
+    
     return (
         <>
-            <AddNft open={addNftOpen} setOpen={setAddNftOpen} />
+            <AddNft open={addNftOpen} setOpen={setAddNftOpen} data={location.state.data}/>
             <MainCard
                 className="yellow"
                 style={{ marginBottom: '15px' }}
