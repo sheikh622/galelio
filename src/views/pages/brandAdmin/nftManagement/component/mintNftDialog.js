@@ -2,7 +2,7 @@ import { forwardRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { ethers, providers } from 'ethers';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide,Typography  } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
 // import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,7 +47,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             const signer = provider.getSigner();
             const address = await signer.getAddress();
             const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-
             const tokenUri = `https://kwiktrust.infura-ipfs.io/ipfs/${result.path}`;
             const uriArray = await nftTokens.map(() => {
                 return tokenUri;
@@ -152,16 +151,18 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
         let price = nftData.price;
         let name = nftData.name;
         let description = nftData.description;
-        let projectName = ' KwikTrust';
+        let projectName = 'Galelio';
         let mintedDate = new Date().valueOf();
-        let brandName = nftData.Brand.name;
         let categoryName = nftData.Category.name;
-        let subCategoryName = nftData.SubCategory.name;
-        setLoader(true);
+        let metaData = nftData.NFTMetaData
+        console.log({nftData})
+      
+       
+        // setLoader(true);
         if (!image || !price || !name || !description) return;
         try {
             const result = await client.add(
-                JSON.stringify({ projectName, image, name, description, brandName, categoryName, subCategoryName, mintedDate })
+                JSON.stringify({ projectName, image, name, description, categoryName, mintedDate, metaData})
             );
             directMintThenList(result);
         } catch (error) {
@@ -329,18 +330,18 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
                                 size="small"
                                 onClick={() => {
                                     console.log({ nftData });
-                                    // if (!loader) {
-                                    //     if (walletAddress == undefined) {
-                                    //         setOpen(false);
-                                    //         toast.error('Connect Metamask');
-                                    //     } else {
-                                    //         if (valueLabel == 'directMint') {
-                                    //             handleDirectMint();
-                                    //         } else if (valueLabel == 'lazyMint') {
-                                    //             handleLazyMint();
-                                    //         }
-                                    //     }
-                                    // }
+                                    if (!loader) {
+                                        if (walletAddress == undefined) {
+                                            setOpen(false);
+                                            toast.error('Connect Metamask');
+                                        } else {
+                                            if (nftData.mintType == 'directMint') {
+                                                handleDirectMint();
+                                            } else if (nftData.mintType == 'lazyMint') {
+                                                handleLazyMint();
+                                            }
+                                        }
+                                    }
                                 }}
                             >
                                 {' '}

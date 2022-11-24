@@ -72,6 +72,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit }) => {
                                     sx={{ marginRight: '5px' }}
                                     onClick={() => {
                                         console.log({ nftData });
+                                        setOpenMint(true);
                                     }}
                                 >
                                     <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>
