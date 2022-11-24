@@ -27,7 +27,6 @@ import MainCard from 'ui-component/cards/MainCard';
 import HeadingCard from 'shared/Card/HeadingCard';
 import { getNftsByCategory } from 'redux/nftManagement/actions';
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom';
-
 import NftCard from './nftcard';
 import AddNft from './addNft';
 
@@ -39,6 +38,7 @@ export default function NFTCategory() {
     const [addNftOpen, setAddNftOpen] = useState(false);
     const dispatch = useDispatch();
     const brandId = useSelector((state) => state.auth.user.brandId);
+
     useEffect(() => {
         dispatch(
             getNftsByCategory({
@@ -53,10 +53,8 @@ export default function NFTCategory() {
     const nftByCategoryList = useSelector((state) => state.nftsByCategoryReducer.nftsByCategoryList);
     return (
         <>
-          <AddNft addNftOpen={addNftOpen} setAddNftOpen={setAddNftOpen}  />
+            <AddNft addNftOpen={addNftOpen} setAddNftOpen={setAddNftOpen} />
             <div>
-              
-
                 <Button
                     variant="contained"
                     style={{ float: 'right' }}
@@ -72,30 +70,27 @@ export default function NFTCategory() {
             <HeadingCard title={categoryName} />
 
             <Grid container>
-            {nftByCategoryList.length == 0 
-            ?
-            <>
-            <h2>No NFTs yet.</h2>
-            </>
-            :
-            <>
-              {nftByCategoryList.map((d) => {
-                    return (
-                        <>
-                            <NftCard
-                                asset={d.asset}
-                                name={d.name}
-                                price={d.price}
-                                description={d.description}
-                                currencyType={d.currencyType}
-                            />
-                        </>
-                    );
-                })}
-            </>
-            
-            }
-              
+                {nftByCategoryList.length == 0 ? (
+                    <>
+                        <h2>No NFTs yet.</h2>
+                    </>
+                ) : (
+                    <>
+                        {nftByCategoryList.map((d) => {
+                            return (
+                                <>
+                                    <NftCard
+                                        asset={d.asset}
+                                        name={d.name}
+                                        price={d.price}
+                                        description={d.description}
+                                        currencyType={d.currencyType}
+                                    />
+                                </>
+                            );
+                        })}
+                    </>
+                )}
             </Grid>
         </>
     );

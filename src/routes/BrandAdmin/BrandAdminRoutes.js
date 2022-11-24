@@ -5,7 +5,7 @@ import Loadable from 'ui-component/Loadable';
 import BrandAdminGuard from './BrandAdminGuard';
 
 const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
-const Category = Loadable(lazy(() => import('views/pages/brandAdmin/categories')));
+const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
 const NFTCategory = Loadable(lazy(() => import('views/pages/brandAdmin/nftCategory')));
 
 

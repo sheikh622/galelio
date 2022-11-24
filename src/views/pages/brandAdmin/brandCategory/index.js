@@ -1,49 +1,24 @@
-import { forwardRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import CategoryTable from './component/categoryTable';
-import {
-    Button,
-    Grid,
-    MenuItem,
-    Menu,
-    Pagination,
-    OutlinedInput,
-    InputAdornment
-} from '@mui/material';
+import BrandCategoryTable from './component/brandCategoryTable';
+import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-
-import { getAllBrands } from '../../../../redux/brand/actions';
-import { getAllCategories } from '../../../../redux/categories/actions';
-import DeleteCategoryDialog from './component/deleteCategoryDialog';
+import { getAllBrandCategories } from '../../../../redux/brandCategory/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-import AddUpdateCategory from './component/addUpdateCategory';
-
 import MainCard from 'ui-component/cards/MainCard';
 import HeadingCard from 'shared/Card/HeadingCard';
 
 const Categories = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const categoryList = useSelector((state) => state.category.categoryList);
+    const brandCategoriesList = useSelector((state) => state.brandCategoryReducer.brandCategoriesList);
     const user = useSelector((state) => state.auth.user);
-    const [brand, setBrand] = useState(0);
+    console.log('user', user);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [deleteOpen, setDeleteOpen] = useState(false);
-    const [searchCategories, setSearchCategories] = useState('');
-    const [pageCategories, setPageCategories] = useState(1);
-    const [limitCategories, setLimitCategories] = useState(10);
-    const [addEditModal, setAddEditModal] = useState(false);
-    const [categories, setCategories] = useState({
-        name: '',
-        profitPercentage: '',
-        brandId: 0,
-        categoryId: 0
-    });
 
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -54,56 +29,23 @@ const Categories = () => {
         setAnchorEl(null);
     };
 
-    const handleBrandChange = (event) => {
-        setBrand(event.target.value);
-    };
-
     useEffect(() => {
         dispatch(
-            getAllBrands({
+            getAllBrandCategories({
+                brandId: user.BrandId,
                 search: search,
                 page: page,
                 limit: limit
             })
         );
     }, [search, page, limit]);
-    const brandId = useSelector((state) => state.auth.user.brandId);
-    useEffect(() => {
-        dispatch(
-            getAllCategories({
-                brandId: brandId,
-                search: searchCategories,
-                page: pageCategories,
-                limit: limitCategories
-            })
-        );
-    }, [searchCategories, pageCategories, limitCategories, brand]);
-
     return (
         <>
-            <AddUpdateCategory
-                open={addEditModal}
-                categories={categories}
-                setCategories={setCategories}
-                setOpen={setAddEditModal}
-                page={page}
-                limit={limit}
-                search={search}
-            />
-            <DeleteCategoryDialog
-                categories={categories}
-                setCategories={setCategories}
-                deleteOpen={deleteOpen}
-                setDeleteOpen={setDeleteOpen}
-                page={page}
-                limit={limit}
-                search={search}
-            />
             <HeadingCard title="Category Management" />
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>
-                        <Grid item xs={3}>
+                        <Grid item xs={6}>
                             <OutlinedInput
                                 id="input-search-list-style1"
                                 placeholder="Search"
@@ -114,27 +56,15 @@ const Categories = () => {
                                 }
                                 size="small"
                                 onChange={(e) => {
-                                    setSearchCategories(e.target.value);
+                                    setSearch(e.target.value);
                                 }}
                             />
                         </Grid>
-
                     </Grid>
                 }
                 content={false}
             >
-                <CategoryTable
-                    open={addEditModal}
-                    categories={categories}
-                    setCategories={setCategories}
-                    setOpen={setAddEditModal}
-                    setDeleteOpen={setDeleteOpen}
-                    mainBrandId={brand}
-                    categoryList={categoryList}
-                    page={pageCategories}
-                    limit={limitCategories}
-                    search={searchCategories}
-                />
+                <BrandCategoryTable brandCategoriesList={brandCategoriesList} />
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>
@@ -144,10 +74,10 @@ const Categories = () => {
                                     color="primary"
                                     showFirstButton
                                     showLastButton
-                                    page={pageCategories}
-                                    count={categoryList.totalPages}
+                                    page={page}
+                                    count={brandCategoriesList.pages}
                                     onChange={(event, newPage) => {
-                                        setPageCategories(newPage);
+                                        setPage(newPage);
                                     }}
                                 />
                             </Grid>
@@ -159,7 +89,7 @@ const Categories = () => {
                                     endIcon={<ExpandMoreRoundedIcon />}
                                     onClick={handleClick}
                                 >
-                                    {limitCategories} Rows
+                                    {limit} Rows
                                 </Button>
                                 <Menu
                                     id="menu-user-list-style1"
@@ -180,8 +110,8 @@ const Categories = () => {
                                     <MenuItem
                                         value={10}
                                         onClick={(e) => {
-                                            setLimitCategories(e.target.value);
-                                            setPageCategories(1);
+                                            setLimit(e.target.value);
+                                            setPage(1);
                                             handleCloseMenu();
                                         }}
                                     >
@@ -191,8 +121,8 @@ const Categories = () => {
                                     <MenuItem
                                         value={25}
                                         onClick={(e) => {
-                                            setLimitCategories(e.target.value);
-                                            setPageCategories(1);
+                                            setLimit(e.target.value);
+                                            setPage(1);
                                             handleCloseMenu();
                                         }}
                                     >
@@ -202,8 +132,8 @@ const Categories = () => {
                                     <MenuItem
                                         value={50}
                                         onClick={(e) => {
-                                            setLimitCategories(e.target.value);
-                                            setPageCategories(1);
+                                            setLimit(e.target.value);
+                                            setPage(1);
                                             handleCloseMenu();
                                         }}
                                     >
