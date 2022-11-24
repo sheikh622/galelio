@@ -10,7 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { useNavigate, Link, useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+import { useTheme } from '@mui/material/styles';
 const SiderPage = () => {
     const navigate = useNavigate();
     const [color, setColor] = useState('#2196f3');
@@ -29,10 +29,10 @@ const SiderPage = () => {
     }, []);
 
     console.log('pathname state', pathName);
-
+    const theme = useTheme();
     return (
         <>
-            <Container sx={{ mt: 5 }}>
+            <Container sx={{ mt: 5}}>
                 <Grid item xs={12} sm={8}>
                     <Grid
                         container
@@ -43,7 +43,7 @@ const SiderPage = () => {
                             pb: 3,
                             ml: 1,
                             boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.05)',
-                            background: '#fafafa',
+                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : "#f3f3f3",
                             borderRadius: '4px'
                         }}
                     >
