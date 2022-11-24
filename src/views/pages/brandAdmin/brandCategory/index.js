@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import BrandCategoryTable from './component/brandCategoryTable';
-import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment } from '@mui/material';
+import { Button, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllBrandCategories } from '../../../../redux/brandCategory/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
@@ -15,7 +15,6 @@ const Categories = () => {
     const dispatch = useDispatch();
     const brandCategoriesList = useSelector((state) => state.brandCategoryReducer.brandCategoriesList);
     const user = useSelector((state) => state.auth.user);
-    console.log('user', user);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
