@@ -11,7 +11,7 @@ const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
 const BrandCategory = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandCategory')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
-
+const NftManagement = Loadable(lazy(() => import('views/pages/superAdmin/nftManagement')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -29,7 +29,6 @@ const SuperAdminRoutes = {
             path: '/',
             element: <SuperAdminDashboard />
         },
-
         {
             path: '/brands',
             element: <Brand />
@@ -50,7 +49,10 @@ const SuperAdminRoutes = {
             path: '/subAdminManagement',
             element: <SubAdmin />
         },
-       
+        {
+            path: '/nftManagement',
+            element: <NftManagement />
+        }
     ]
 };
 

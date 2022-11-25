@@ -1,10 +1,27 @@
 import axios from 'utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
 import { makeSelectAuthToken } from 'store/Selector';
-import { getAllNft, getAllNftSuccess } from './actions';
-import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT, REQUEST_NFT_FOR_MINTING } from './constants';
+import { getAllNft, getAllNftSuccess, getAllNftSuperAdmin, getAllNftSuccessSuperAdmin } from './actions';
+import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT, REQUEST_NFT_FOR_MINTING, GET_ALL_NFT_SUPER_ADMIN } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
+
+function* getAllNftSuperAdminRequest({ payload }) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.get(
+            `/nft/admin?page=${payload.page}&size=${payload.limit}&search=${payload.search}&brandId=${payload.brandId}&categoryId=${payload.categoryId}&type=${payload.type}`,
+            headers
+        );
+        yield put(getAllNftSuccessSuperAdmin(response.data.data));
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchGetAllNftSuperAdmin() {
+    yield takeLatest(GET_ALL_NFT_SUPER_ADMIN, getAllNftSuperAdminRequest);
+}
 
 function* addNftRequest({ payload }) {
     const formData = new FormData();
@@ -91,11 +108,12 @@ function* lazyMintNftRequest({ payload }) {
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`nft/lazyMint`, data, headers);
+        const response = yield axios.post(`nft/admin/lazyMint`, data, headers);
         payload.handleClose();
         yield put(
-            getAllNft({
+            getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
+                brandId:payload.brandId,
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
@@ -121,11 +139,12 @@ function* mintNftRequest({ payload }) {
 
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`nft/mint`, formData, headers);
+        const response = yield axios.post(`nft/admin/mint`, formData, headers);
         payload.handleClose();
         yield put(
-            getAllNft({
+            getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
+                brandId:payload.brandId,
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
@@ -143,5 +162,12 @@ export function* watchMintNft() {
 }
 
 export default function* nftSaga() {
-    yield all([fork(watchGetAllNft), fork(watchAddNft), fork(watchMintNft), fork(watchLazyMintNft), fork(watchRequestNftForMinting)]);
+    yield all([
+        fork(watchGetAllNftSuperAdmin),
+        fork(watchGetAllNft),
+        fork(watchAddNft),
+        fork(watchMintNft),
+        fork(watchLazyMintNft),
+        fork(watchRequestNftForMinting)
+    ]);
 }

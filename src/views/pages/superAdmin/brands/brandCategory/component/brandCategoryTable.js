@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Divider,
     Typography,
@@ -28,6 +29,7 @@ const BrandCategoryTable = ({
     brandCategoryData,
     setBrandCategoryData
 }) => {
+    const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [detailId, setDetailId] = useState();
     const openDetails = (id) => {
@@ -138,6 +140,21 @@ const BrandCategoryTable = ({
                                                             }}
                                                         >
                                                             Delete
+                                                        </Button>
+                                                    </Grid>
+                                                    <Grid item xs={4} md={4}>
+                                                        <Button
+                                                            variant="outlined"
+                                                            size="large"
+                                                            onClick={() => {
+                                                                navigate('/nftManagement', {
+                                                                    state: {
+                                                                        brandData: row
+                                                                    }
+                                                                });
+                                                            }}
+                                                        >
+                                                            View NFT'S
                                                         </Button>
                                                     </Grid>
                                                 </Grid>
