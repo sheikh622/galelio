@@ -71,7 +71,8 @@ const HeaderPage = () => {
                                         sx={{
                                             fontSize: { xs: '2.25rem', sm: '3rem', md: '4rem' },
                                             fontWeight: 900,
-                                            lineHeight: 1.4
+                                            lineHeight: 1.4,
+                                            color:'#000'
                                         }}
                                     >
                                         The Biggest NFT

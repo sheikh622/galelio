@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Card, Container, CardMedia, Grid, Typography, TextField, MenuItem, Chip, Button } from '@mui/material';
+import { Card, Container, CardMedia, Grid, Typography, TextField, MenuItem, Chip, Button, Divider } from '@mui/material';
 import React from 'react';
 // project imports
 import Avatar from 'ui-component/extended/Avatar';
@@ -60,11 +60,14 @@ const PropertiesView = () => {
                                                     <Typography align="left" variant="subtitle2">
                                                         Creator
                                                     </Typography>
+                                                    
                                                 </Grid>
                                             </Grid>
                                         </Grid>
+                                       
                                         <Grid item mt={4} xs={12}>
-                                            <Typography className="Lux" variant="h3">
+
+                                            <Typography className="Lux"  color= {theme.palette.mode === 'dark' ? "white" : "black"} variant="h3">
                                                 Luxury Stainless Watch{' '}
                                             </Typography>
                                         </Grid>
@@ -97,10 +100,10 @@ const PropertiesView = () => {
                                         <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid className="auction" container>
                                                 <Grid item md={6} xs={12} sm={12}>
-                                                    <Typography variant="body">Auction Time </Typography>
+                                                    <Typography color='black' variant="body">Auction Time </Typography>
                                                 </Grid>
                                                 <Grid item md={6} xs={12} sm={12}>
-                                                    <Typography variant="body"> 2h : 40m : 03s</Typography>
+                                                    <Typography color='black' variant="body"> 2h : 40m : 03s</Typography>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -109,6 +112,7 @@ const PropertiesView = () => {
                                                 <Grid item md={2} xs={12} sm={12}>
                                                 <Grid item xs={12}>
                                                 <Typography
+                                                color= {theme.palette.mode === 'dark' ? "white" : "#404040"}
                                                     sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
                                                     className="price"
                                                     variant="body2"
@@ -118,6 +122,7 @@ const PropertiesView = () => {
                                             </Grid>
                                             <Grid item  xs={12}>
                                                 <Typography
+                                                color= {theme.palette.mode === 'dark' ? "white" : "#262626"}
                                                     sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
                                                     className="ETH"
                                                     variant="h3"

@@ -11,6 +11,7 @@ import shoes1 from 'assets/images/shoes1.png';
 import shoes2 from 'assets/images/shoes2.png';
 import shoes3 from 'assets/images/shoes3.png';
 import CardMedia from '@mui/material/CardMedia';
+import { Link as RouterLink } from 'react-router-dom';
 
 // assets
 import PaletteTwoToneIcon from '@mui/icons-material/PaletteTwoTone';
@@ -74,8 +75,9 @@ const FeaturedPage = () => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {itemData.map((item) => (
-                        <Grid item md={2} sm={6}>
-                            <Grid container justifyContent="center">
+                        <Grid item md={2} sm={6} component={RouterLink}
+                        to="/ProductDetails" sx={{color:theme.palette.mode === 'dark' ? "white" : "black"  , textDecoration:'none'}}>
+                            <Grid container justifyContent="center"   >
                                 <Grid item md={6} xs={6}>
                                     <CardMedia
                                         component="img"
@@ -92,7 +94,9 @@ const FeaturedPage = () => {
                                     </Grid>
                                 </Grid>
 
-                                <Grid item md={12} xs={12} sx={{ background: '#fff', padding: '20px 10px' }}>
+                                <Grid item md={12} xs={12} sx={{ background: theme.palette.mode === 'dark' ? 
+                                theme.palette.dark.main : "#f3f3f3", boxShadow: '0px 4px 4px rgb(0 0 0 / 49%)',
+                                 padding: '20px 10px' }}>
                                     <Grid item md={12} xs={12}>
                                         <Typography
                                             variant="h3"
@@ -102,7 +106,8 @@ const FeaturedPage = () => {
                                         </Typography>
                                     </Grid>
 
-                                    <Grid item md={12} xs={12} sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}>
+                                    <Grid item md={12} xs={12} 
+                                    sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}>
                                         <Typography variant="body"> {item.creations}</Typography>
                                     </Grid>
                                 </Grid>

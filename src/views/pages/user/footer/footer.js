@@ -40,14 +40,14 @@ const Footer = () => {
         divider: {
             // Theme Color, or use css color in quote
             // background: theme.palette.success.light
-            background: "#d3d3d3"
+           
         }
     }));
     const classes = useStyles();
 const theme = useTheme()
     return (
         <div style={{}}>
-            <Divider variant={"light"} fullWidth sx={{ mt: 3, mb: 3, borderBottomWidth: 1, border:"1px solid #d3d3d3" }} classes={{ root: classes.divider }} />
+            <Divider  fullWidth sx={{  border:"1px solid #d3d3d3" }} />
     <FooterWrapper 
     style={{ color: `${theme.palette.mode === 'dark' ? "white" : "black"}`}}>
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
