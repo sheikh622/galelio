@@ -3,17 +3,12 @@ import { useTheme } from '@mui/material/styles';
 import { Container, Card, Grid, Typography, CardActionArea, CardContent, Divider } from '@mui/material';
 
 // project imports
-import FadeInWhenVisible from '../BiggestNFTMarketplace/Animation';
-import SubCard from 'ui-component/cards/SubCard';
-import Avatar from 'ui-component/extended/Avatar';
+
 import { gridSpacing } from 'store/constant';
-import WATCHES from 'assets/images/watch.png';
+
 import CardMedia from '@mui/material/CardMedia';
 
-// assets
-import PaletteTwoToneIcon from '@mui/icons-material/PaletteTwoTone';
-import ReorderTwoToneIcon from '@mui/icons-material/ReorderTwoTone';
-import SpeedTwoToneIcon from '@mui/icons-material/SpeedTwoTone';
+
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 

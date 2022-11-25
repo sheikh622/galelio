@@ -89,7 +89,7 @@ const NewPage = () => {
                                                 <span sx={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
                                                 <div sx={{ marginTop: '5%' }}>{item.title}</div>
                                             </Grid>
-                                            <Grid item xs={4} sx={{ background: '' }}>
+                                            <Grid item xs={4} >
                                                 <span sx={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
                                                     {item.creator}
                                                 </span>
