@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled, alpha, useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -165,20 +166,23 @@ export default function Header() {
                 sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? theme.palette.dark.main : 'white'}`, }}
             >
                 <Toolbar>
-                    <Typography variant="h6" noWrap component="div" sx={{ mt: 2, display: { xs: 'none', sm: 'block' } }}>
+                    <Typography variant="h6" noWrap component="div" sx={{ mt: 2, display: { xs: '', sm: 'block' } }}>
                         {theme.palette.mode === 'dark' ? (
                             <img src={galileoWhite} alt="Galileo White Logo" width="100" />
                         ) : (
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                     </Typography>
+<Grid container-fluid>
 
-                    <Search className={styles.search} style={{ width: '50rem' }}>
+                     <Search  sx={{width:"50rem !important",  display:{xs:"none",  md:"flex" , lg:"none", xl:"flex" }}} className={styles.search}>
                         <SearchIconWrapper>
                             <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                         </SearchIconWrapper>
                         <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
                     </Search>
+
+</Grid>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
                         <IconButton size="large" aria-label="" color="inherit">
@@ -194,10 +198,11 @@ export default function Header() {
                         </IconButton>
                     </Box>
 
-                    <img src={userHeader} alt="" height="40" />
 
-                    <div style={{ marginLeft: '1rem ' }}>
-                        <Typography variant="h5" component="h2" sx={{}}>
+                    <img src={userHeader} alt="" height="40" style={{display:"inlineBlock"}} />
+
+                    <div style={{ marginLeft: '1%', display:"inline" , width:""}}>
+                        <Typography variant="h5" component="h2" sx={{width:"100%"}}>
                             Cia Natasya
                         </Typography>
 
@@ -220,18 +225,9 @@ export default function Header() {
                         <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
                     </IconButton>
 
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </Box>
+
+
+               
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
