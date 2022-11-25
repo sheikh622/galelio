@@ -21,7 +21,7 @@ import styles from './header.module.css';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import Drawer from "../drawer/drawer"
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -174,6 +174,11 @@ export default function Header() {
                         )}
                     </Typography>
 <Grid container-fluid>
+
+<Grid item sx={{display:{lg:'none'}}}>
+    <Drawer/>
+
+</Grid>
 
                      <Search  sx={{width:"50rem !important",  display:{xs:"none",  md:"flex" , lg:"none", xl:"flex" }}} className={styles.search}>
                         <SearchIconWrapper>
