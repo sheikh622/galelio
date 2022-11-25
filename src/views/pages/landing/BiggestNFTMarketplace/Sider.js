@@ -8,30 +8,21 @@ import DiscountIcon from '@mui/icons-material/Discount';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import { useNavigate, Link, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useDispatch, useSelector } from 'react-redux';
-import { MENU_TYPE, PRESET_COLORS, SET_BORDER_RADIUS, SET_FONT_FAMILY, SET_OUTLINED_FILLED, THEME_RTL } from 'store/actions';
+import { MENU_TYPE } from 'store/actions';
 const SiderPage = () => {
     const navigate = useNavigate();
-    const [color, setColor] = useState('#2196f3');
+    const [color] = useState('#2196f3');
     const [pathName, setPathName] = useState('');
-    // const pathname = window.location.href;
-
-    // console.log("pathname from sidebar", pathname)
 
     const location = useLocation();
-
-    // let pathname;
-    // console.log('pathname from sidebar', location.pathname);
-
     useEffect(() => {
         setPathName(location.pathname);
     }, []);
-
-    console.log('pathname state', pathName);
     const theme = useTheme();
 
 

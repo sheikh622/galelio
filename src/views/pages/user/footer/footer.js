@@ -20,46 +20,36 @@ import EmailIcon from '@mui/icons-material/Email';
 import styles from './footer.module.css';
 import Divider from '@mui/material/Divider';
 import { makeStyles } from '@mui/styles';
-// styles
+
 const FooterWrapper = styled('div')(({ theme }) => ({
     padding: '35px 0',
     color: 'black',
-  background:  theme.palette.mode === 'dark' ? theme.palette.dark.main : "#f5f5f5",
-    // background: '#f5f5f5',
+    background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f5f5f5',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center'
     }
 }));
 
-
-
-// ==============================|| LANDING - FOOTER PAGE ||============================== //
-
 const Footer = () => {
-    const useStyles = makeStyles((theme) => ({
+    const useStyles = makeStyles(() => ({
         divider: {
-            // Theme Color, or use css color in quote
-            // background: theme.palette.success.light
-           
+            background: '#d3d3d3'
         }
     }));
     const classes = useStyles();
-const theme = useTheme()
+    const theme = useTheme();
     return (
         <div style={{}}>
             <Divider  fullWidth sx={{  border:"1px solid #d3d3d3" }} />
     <FooterWrapper 
     style={{ color: `${theme.palette.mode === 'dark' ? "white" : "black"}`}}>
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
-                    <Grid item xs={12} md={4} sx={{ pl: 5, ml:4 }}>
-                        {theme.palette.mode === 'dark' ?
-                        <img src={galileoWhite} alt="Galileo White Logo" width="100" />
-                        
-                        :
-                        <img src={galileo} alt="Galileo Dark Logo" width="100" />
-                        
-                        
-                        }
+                    <Grid item xs={12} md={4} sx={{ pl: 5, ml: 4 }}>
+                        {theme.palette.mode === 'dark' ? (
+                            <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                        ) : (
+                            <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                        )}
                         <div style={{ marginTop: '5%' }}>
                             <span style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
                         </div>

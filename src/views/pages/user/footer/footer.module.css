@@ -1,32 +1,26 @@
-
-.link{
+.link {
     font-weight: 500;
 }
 
-.socialLink{
-margin-left: 5%;
+.socialLink {
+    margin-left: 5%;
 }
 
-.serviceLink{
+.serviceLink {
     margin-top: 5%;
 }
-.aboutLink{
-    margin-top: 1em;    
+.aboutLink {
+    margin-top: 1em;
 }
 
-.contactLink{
+.contactLink {
     font-weight: 500;
     margin-left: 2%;
-    
 }
-
-
-
-    @media (max-width: 890px ){
-        .contact {
-            /* margin-left: 25%; */
-            width:100%;
-            justify-content:center;
-         text-align: center;
-        }
+@media (max-width: 890px) {
+    .contact {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
     }
+}

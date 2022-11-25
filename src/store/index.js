@@ -26,8 +26,8 @@ import rootSaga from './sagas';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['auth'],
-    blacklist: []
+    // whitelist: ['auth'],
+    // blacklist: []
 };
 
 // const history = createBrowserHistory();
