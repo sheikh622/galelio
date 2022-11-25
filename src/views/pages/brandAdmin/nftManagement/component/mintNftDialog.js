@@ -36,10 +36,14 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
     };
 
     const directMintThenList = async (result) => {
-        let nftTokens = nftData.NftTokens;
-        console.log('nftTokens array', nftTokens);
-        let contractAddress = nftData.contractAddress;
+        let nftTokens = nftData.NFTTokens;
+        let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
         let nftId = nftData.id;
+        let categoryId = nftData.CategoryId;
+        console.log('nftTokens array', nftTokens);
+        console.log('contractAddress', contractAddress);
+        console.log('nftId', nftId);
+
         let tokenIdArray = [];
         let transactionHash;
         try {
@@ -47,7 +51,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             const signer = provider.getSigner();
             const address = await signer.getAddress();
             const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-            const tokenUri = `https://kwiktrust.infura-ipfs.io/ipfs/${result.path}`;
+            const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
             const uriArray = await nftTokens.map(() => {
                 return tokenUri;
             });
@@ -55,13 +59,14 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             if (uriArray.length == 1) {
                 console.log('Going in first Condition', uriArray);
                 let mintedNFT = await (
-                    await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
+                    await nft.mint(tokenUri).catch((error) => {
                         toast.error(`${error.message}`);
                     })
                 ).wait();
-                transactionHash = `https://mumbai.polygonscan.com/tx/${mintedNFT.transactionHash}`;
+                console.log('mintedNFT', mintedNFT);
+                transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                 console.log(transactionHash);
-                const id = parseInt(mintedNFT.events[2].args[1]);
+                const id = parseInt(mintedNFT.events[0].args[2]);
                 console.log('NFT tokenId', id);
                 console.log('handle mint of single nft is working');
                 tokenIdArray.push({
@@ -81,10 +86,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
                         tokenIdArray: tokenIdArray,
                         transactionHash: transactionHash,
                         signerAddress: address,
-                        brandId: brandId,
                         categoryId: categoryId,
-                        subCategoryId: subCategoryId,
-                        type: type,
+                        search: search,
                         page: page,
                         limit: limit,
                         handleClose: handleClose
@@ -93,12 +96,12 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             } else if (uriArray.length > 1) {
                 console.log('Going in Second Condition', uriArray);
                 let mintedNFT = await (
-                    await nft.bulkMint(uriArray, MarketplaceAddress.address).catch((error) => {
+                    await nft.bulkMint(uriArray).catch((error) => {
                         toast.error('NFT minting  unsuccessfull');
                     })
                 ).wait();
 
-                transactionHash = `https://mumbai.polygonscan.com/tx/${mintedNFT.transactionHash}`;
+                transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                 console.log('mintedNft of clone', mintedNFT.events);
 
                 let counter = 0;
@@ -106,7 +109,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
                 for (let i = 0; i < uriArray.length; i++) {
                     myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
                     console.log('mintedNft of clone', mintedNFT.events[counter].args[2].toString());
-                    counter = counter + 2;
+                    counter = counter + 1;
                 }
                 console.log('Transaction hash: ', transactionHash);
                 console.log('handle mint of cloned nft is working');
@@ -124,16 +127,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
                 });
                 console.log('nftDataArray for backend', nftDataArray);
                 console.log('tokenArray to be sent to backend', tokenIdArray);
+
                 dispatch(
                     mintNft({
                         nftDataArray: nftDataArray,
                         tokenIdArray: tokenIdArray,
                         transactionHash: transactionHash,
                         signerAddress: address,
-                        brandId: brandId,
                         categoryId: categoryId,
-                        subCategoryId: subCategoryId,
-                        type: type,
+                        search: search,
                         page: page,
                         limit: limit,
                         handleClose: handleClose
@@ -154,15 +156,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
         let projectName = 'Galelio';
         let mintedDate = new Date().valueOf();
         let categoryName = nftData.Category.name;
-        let metaData = nftData.NFTMetaData
-        console.log({nftData})
-      
-       
+        let brandName = nftData.Brand.name;
+        let metaData = nftData.NFTMetaData;
+        console.log({ nftData });
+
         // setLoader(true);
         if (!image || !price || !name || !description) return;
         try {
             const result = await client.add(
-                JSON.stringify({ projectName, image, name, description, categoryName, mintedDate, metaData})
+                JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, metaData })
             );
             directMintThenList(result);
         } catch (error) {
@@ -172,86 +174,53 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
     };
 
     const handleLazyMint = async () => {
-        let id = nftData.id;
+        // setLoader(true);
+        let nftId = nftData.id;
         let image = nftData.asset;
-        let priceNft = nftData.price;
+        let price = nftData.price;
         let name = nftData.name;
         let description = nftData.description;
-        let brandName = nftData.Brand.name;
-        let categoryName = nftData.Category.name;
-        let subCategoryName = nftData.SubCategory.name;
-        let nftTokens = nftData.NftTokens;
-        let contractAddress = nftData.contractAddress;
-        console.log('NFT ADDRESS: ', contractAddress);
-        setLoader(true);
-        // const signingDomain = async () => {
-        //     const domain = {
-        //         name: 'KwikTrust-Voucher',
-        //         version: '1',
-        //         verifyingContract: contractAddress,
-        //         chainId: 80001
-        //     };
-        //     return domain;
-        // };
-
-        // const domain = await signingDomain();
-
-        // const types = {
-        //     NFTVoucher: [
-        //         { name: 'uri', type: 'string' },
-        //         { name: 'price', type: 'uint256' },
-        //         { name: 'token', type: 'address' }
-        //     ]
-        // };
-
-        // const prices = ethers.utils.parseEther(priceNft.toString());
-
-        let projectName = ' KwikTrust';
+        let projectName = 'Galelio';
         let mintedDate = new Date().valueOf();
-        let token = '0x25Be9b58b5990204e08950206df22d7445EFa3C9';
+        let categoryName = nftData.Category.name;
+        let brandName = nftData.Brand.name;
+        let metaData = nftData.NFTMetaData;
+        let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
+        let nftTokens = nftData.NFTTokens;
+
         const result = await client.add(
-            JSON.stringify({ projectName, image, name, description, brandName, categoryName, subCategoryName, mintedDate })
+            JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, metaData })
         );
-        const uri = `https://kwiktrust.infura-ipfs.io/ipfs/${result.path}`;
+        const uri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
-        ///
-        const signingDomain = async () => {
-            const domain = {
-                name: 'KwikTrust-Voucher',
-                version: '1',
-                verifyingContract: contractAddress,
-                chainId: 80001
-            };
-            return domain;
+        let token = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+        const SIGNING_DOMAIN = 'Voucher';
+        const SIGNATURE_VERSION = '4';
+        const chainId = 5;
+
+        const domain = {
+            name: SIGNING_DOMAIN,
+            version: SIGNATURE_VERSION,
+            verifyingContract: contractAddress,
+            chainId
         };
-
-        const domain = await signingDomain();
-
         const types = {
-            NFTVoucher: [
+            LazyNFTVoucher: [
                 { name: 'uri', type: 'string' },
                 { name: 'price', type: 'uint256' },
                 { name: 'token', type: 'address' }
             ]
         };
-        const prices = ethers.utils.parseEther(priceNft.toString());
-
-        const voucher = {
-            uri,
-            price: prices,
-            token
-        };
-        ///
-
-        const privateKey = '11aa78f2b32af7dc6c5933157e1144eca14306f9d18a7371eb4c24fef14d57d6';
-        const provider = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/');
-        const signer = new ethers.Wallet(privateKey, provider);
+        const prices = ethers.utils.parseEther(price.toString());
+        const voucher = { uri, price: prices, token };
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
         const signature = await signer._signTypedData(domain, types, voucher);
-        const signerAddr = '0xBF09EE4E0F90EE3081Abe249f39a24b46298EFcf';
+        const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
         let nftDataArray = [
             {
-                nftId: id,
+                nftId: nftId,
                 tokenUri: uri,
                 tokenPrice: prices.toString(),
                 signerAddress: signerAddr // save wallet address
@@ -273,10 +242,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             lazyMintNft({
                 nftDataArray: nftDataArray,
                 tokenIdArray: tokenIdArray,
-                brandId: brandId,
                 categoryId: categoryId,
-                subCategoryId: subCategoryId,
-                type: type,
+                search: search,
                 page: page,
                 limit: limit,
                 handleClose: handleClose

@@ -66,14 +66,12 @@ function* lazyMintNftRequest({ payload }) {
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`admin/nft/lazyMint`, data, headers);
+        const response = yield axios.post(`nft/lazyMint`, data, headers);
         payload.handleClose();
         yield put(
             getAllNft({
-                brandId: payload.brandId,
                 categoryId: payload.categoryId,
-                subCategoryId: payload.subCategoryId,
-                type: payload.type,
+                search: payload.search,
                 page: payload.page,
                 limit: payload.limit
             })
@@ -97,14 +95,12 @@ function* mintNftRequest({ payload }) {
 
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`admin/nft/mint`, formData, headers);
+        const response = yield axios.post(`nft/mint`, formData, headers);
         payload.handleClose();
         yield put(
             getAllNft({
-                brandId: payload.brandId,
                 categoryId: payload.categoryId,
-                subCategoryId: payload.subCategoryId,
-                type: payload.type,
+                search: payload.search,
                 page: payload.page,
                 limit: payload.limit
             })
