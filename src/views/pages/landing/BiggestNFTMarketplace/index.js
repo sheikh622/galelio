@@ -20,7 +20,11 @@ const Landing = () => {
     const theme = useTheme();
 
     return (
-        <div style={{}}>
+        <Grid     sx={{
+           
+                background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3'
+            
+        }}>
             <Appbar />
             <Grid
                 container-fluid
@@ -28,9 +32,9 @@ const Landing = () => {
                     display: {
                         xs: 'block',
                         sm: 'block',
-                        md: 'flex',
-                        background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3'
-                    }
+                        md: 'flex',},
+                      
+                    
                 }}
             >
                 <Grid
@@ -61,7 +65,7 @@ const Landing = () => {
                 </Grid>
             </Grid>
             <Footer />
-        </div>
+        </Grid>
     );
 };
 
