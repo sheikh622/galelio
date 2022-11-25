@@ -5,7 +5,7 @@ import {
     ADD_NFT,
     MINT_NFT,
     LAZY_MINT_NFT,
-    
+    REQUEST_NFT_FOR_MINTING
 } from './constants';
 
 export const getAllNft = (data) => {
@@ -28,6 +28,15 @@ export const addNft = (data) => {
         payload: data
     };
 };
+
+
+export const requestNftForMinting = (data) => {
+    return {
+        type: REQUEST_NFT_FOR_MINTING,
+        payload: data
+    };
+};
+
 
 export const lazyMintNft = (data) => {
     return {

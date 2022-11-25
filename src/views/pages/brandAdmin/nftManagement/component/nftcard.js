@@ -3,14 +3,25 @@ import { useDispatch } from 'react-redux';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
-
-const NftCard = ({ nftData, categoryId, search, page, limit,type }) => {
+import RequestForMintDialog from './requestForMintDialog';
+const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
-
+    const [openRequestMint, setOpenRequestMint] = useState(false);
     return (
         <>
+            <RequestForMintDialog
+                nftData={nftData}
+                type={type}
+                search={search}
+                page={page}
+                limit={limit}
+                loader={loader}
+                setLoader={setLoader}
+                open={openRequestMint}
+                setOpen={setOpenRequestMint}
+            />
             <MintNftDialog
                 nftData={nftData}
                 categoryId={nftData.CategoryId}
@@ -77,6 +88,19 @@ const NftCard = ({ nftData, categoryId, search, page, limit,type }) => {
                                     }}
                                 >
                                     <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>
+                                </Button>
+                            </Stack>
+                            <Stack direction="row" justifyContent="end" alignItems="center">
+                                <Button
+                                    variant="text"
+                                    color="primary"
+                                    sx={{ marginRight: '5px' }}
+                                    onClick={() => {
+                                        console.log({ nftData });
+                                        setOpenRequestMint(true);
+                                    }}
+                                >
+                                    <Typography style={{ textDecoration: 'underline' }}> Request</Typography>
                                 </Button>
                             </Stack>
                         </Grid>

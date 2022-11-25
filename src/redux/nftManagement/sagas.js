@@ -2,12 +2,11 @@ import axios from 'utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
 import { makeSelectAuthToken } from 'store/Selector';
 import { getAllNft, getAllNftSuccess } from './actions';
-import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT } from './constants';
+import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT, REQUEST_NFT_FOR_MINTING } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
 function* addNftRequest({ payload }) {
-    console.log('payload', payload);
     const formData = new FormData();
     formData.append('asset', payload.asset);
     formData.append('name', payload.name);
@@ -21,7 +20,7 @@ function* addNftRequest({ payload }) {
 
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`/nft`, formData, headers);
+        const response = yield axios.post(`/nft/brandAdmin`, formData, headers);
         yield put(
             getAllNft({
                 categoryId: payload.categoryId,
@@ -58,6 +57,31 @@ function* getAllNftRequest({ payload }) {
 
 export function* watchGetAllNft() {
     yield takeLatest(GET_ALL_NFT, getAllNftRequest);
+}
+
+function* requestNftForMintingRequest({ payload }) {
+    let data = {};
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.patch(`nft/brandAdmin/mintRequest/${payload.id}`, data, headers);
+        payload.handleClose();
+        yield put(
+            getAllNft({
+                categoryId: payload.categoryId,
+                search: payload.search,
+                page: payload.page,
+                limit: payload.limit,
+                type: payload.type
+            })
+        );
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchRequestNftForMinting() {
+    yield takeLatest(REQUEST_NFT_FOR_MINTING, requestNftForMintingRequest);
 }
 
 function* lazyMintNftRequest({ payload }) {
@@ -119,5 +143,5 @@ export function* watchMintNft() {
 }
 
 export default function* nftSaga() {
-    yield all([fork(watchGetAllNft), fork(watchAddNft), fork(watchMintNft), fork(watchLazyMintNft)]);
+    yield all([fork(watchGetAllNft), fork(watchAddNft), fork(watchMintNft), fork(watchLazyMintNft), fork(watchRequestNftForMinting)]);
 }
