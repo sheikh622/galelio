@@ -90,7 +90,7 @@ const Trending = () => {
                                 <CardActionArea>
                                     <CardMedia component="img" height="200" image={item.img} />
                                     <CardContent style={{ padding: '6%' }}>
-                                        <Grid container style={{ background: '' }}>
+                                        <Grid container>
                                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                                 <span style={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
                                                 <div style={{ marginTop: '5%' }}>{item.title}</div>

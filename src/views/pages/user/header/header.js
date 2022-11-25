@@ -161,10 +161,7 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar
-                position="static"
-                sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? theme.palette.dark.main : 'white'}`,  }}
-            >
+            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? theme.palette.dark.main : 'white'}` }}>
                 <Toolbar>
                     <Typography variant="h6" noWrap component="div" sx={{ mt: 2, display: { xs: '', sm: 'block' } }}>
                         {theme.palette.mode === 'dark' ? (
@@ -173,16 +170,17 @@ export default function Header() {
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                     </Typography>
-<Grid container-fluid>
-
-                     <Search  sx={{width:"50rem !important",  display:{xs:"none",  md:"flex" , lg:"none", xl:"flex" }}} className={styles.search}>
-                        <SearchIconWrapper>
-                            <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
-                        </SearchIconWrapper>
-                        <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
-                    </Search>
-
-</Grid>
+                    <Grid container-fluid>
+                        <Search
+                            sx={{ width: '50rem !important', display: { xs: 'none', md: 'flex', lg: 'none', xl: 'flex' } }}
+                            className={styles.search}
+                        >
+                            <SearchIconWrapper>
+                                <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
+                            </SearchIconWrapper>
+                            <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
+                        </Search>
+                    </Grid>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
                         <IconButton size="large" aria-label="" color="inherit">
@@ -198,11 +196,10 @@ export default function Header() {
                         </IconButton>
                     </Box>
 
+                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
 
-                    <img src={userHeader} alt="" height="40" style={{display:"inlineBlock"}} />
-
-                    <div style={{ marginLeft: '1%', display:"inline" , width:""}}>
-                        <Typography variant="h5" component="h2" sx={{width:"100%"}}>
+                    <div style={{ marginLeft: '1%', display: 'inline', width: '' }}>
+                        <Typography variant="h5" component="h2" sx={{ width: '100%' }}>
                             Cia Natasya
                         </Typography>
 
@@ -224,10 +221,6 @@ export default function Header() {
                     >
                         <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
                     </IconButton>
-
-
-
-               
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
