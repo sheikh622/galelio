@@ -20,7 +20,11 @@ const Landing = () => {
     const theme = useTheme();
 
     return (
-        <div style={{}}>
+        <Grid     sx={{
+           
+                background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3'
+            
+        }}>
             <Appbar />
             <Grid
                 container-fluid
@@ -28,18 +32,19 @@ const Landing = () => {
                     display: {
                         xs: 'block',
                         sm: 'block',
-                        md: 'flex',
-                        background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3'
-                    }
+                        md: 'flex',},
+                      
+                    
                 }}
             >
                 <Grid
                     item
                     md={1}
                     xs={12}
-                    sx={{ position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
+                    sx={{ position: 'sticky', height: '100%', top: '0', display:
+                     { xs: 'none', sm: 'none', md: 'flex' } }}
                 >
-                    <Sider style={{}} />
+                    <Sider />
                 </Grid>
                 <Grid item md={11} xs={12}>
                     <Grid container-fluid sx={{ background: '' }}>
@@ -60,7 +65,7 @@ const Landing = () => {
                 </Grid>
             </Grid>
             <Footer />
-        </div>
+        </Grid>
     );
 };
 
