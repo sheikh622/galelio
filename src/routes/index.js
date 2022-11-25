@@ -13,24 +13,19 @@ import AuthenticationRoutes from './AuthenticationRoutes';
 import Loadable from 'ui-component/Loadable';
 
 
-const PagesLanding = Loadable(lazy(() => import('views/pages/landing/BiggestNFTMarketplace')));
-// ==============================|| ROUTING RENDER ||============================== //
+
 export default function ThemeRoutes() {
-    return useRoutes([{ path: '/', element: <PagesLanding /> },
-     AuthenticationRoutes, LoginRoutes, MainRoutes]);
-}
-// export default function ThemeRoutes() {
-//     const userData = useSelector((state) => state.auth);
+    const userData = useSelector((state) => state.auth);
    
-//     // const userData = useSelector((state) => state.auth);
-//     if (userData.user && userData.user.role == 'Super Admin') {
-//         return useRoutes([SuperAdminRoutes, LoginRoutes, AuthenticationRoutes] );
-//     } else if (userData.user && userData.user.role == 'Admin') {
-//         return useRoutes([SubAdminGuard, LoginRoutes, AuthenticationRoutes]);
-//     } else if (userData.user && userData.user.role == 'Brand Admin') {
-//         return useRoutes([BrandAdminGuard, LoginRoutes, AuthenticationRoutes]);
-//     } 
-//     else{
-//         return useRoutes([LoginRoutes, AuthenticationRoutes] );
-//     }
-// }
+    // const userData = useSelector((state) => state.auth);
+    if (userData.user && userData.user.role == 'Super Admin') {
+        return useRoutes([SuperAdminRoutes, LoginRoutes, AuthenticationRoutes] );
+    } else if (userData.user && userData.user.role == 'Admin') {
+        return useRoutes([SubAdminGuard, LoginRoutes, AuthenticationRoutes]);
+    } else if (userData.user && userData.user.role == 'Brand Admin') {
+        return useRoutes([BrandAdminGuard, LoginRoutes, AuthenticationRoutes]);
+    } 
+    else{
+        return useRoutes([LoginRoutes, AuthenticationRoutes] );
+    }
+}

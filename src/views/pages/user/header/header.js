@@ -162,7 +162,7 @@ export default function Header() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar
                 position="static"
-                sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? theme.palette.dark.main : 'white'}`, marginBottom: '4px' }}
+                sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? theme.palette.dark.main : 'white'}`, }}
             >
                 <Toolbar>
                     <Typography variant="h6" noWrap component="div" sx={{ mt: 2, display: { xs: 'none', sm: 'block' } }}>

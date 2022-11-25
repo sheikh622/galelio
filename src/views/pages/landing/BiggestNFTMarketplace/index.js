@@ -37,9 +37,10 @@ const Landing = () => {
                     item
                     md={1}
                     xs={12}
-                    sx={{ position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
+                    sx={{ position: 'sticky', height: '100%', top: '0', display:
+                     { xs: 'none', sm: 'none', md: 'flex' } }}
                 >
-                    <Sider style={{}} />
+                    <Sider />
                 </Grid>
                 <Grid item md={11} xs={12}>
                     <Grid container-fluid sx={{ background: '' }}>

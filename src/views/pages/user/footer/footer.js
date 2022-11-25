@@ -39,7 +39,7 @@ const Footer = () => {
     const classes = useStyles();
     const theme = useTheme();
     return (
-        <div style={{}}>
+        <Grid sx={{marginTop:'20px'}}>
             <Divider  fullWidth sx={{  border:"1px solid #d3d3d3" }} />
     <FooterWrapper 
     style={{ color: `${theme.palette.mode === 'dark' ? "white" : "black"}`}}>
@@ -64,7 +64,7 @@ const Footer = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={1} sx={{ ml: 3 }}>
+                    <Grid item xs={12} md={1} sx={{mt:-1, ml: 3 }}>
                         <div style={{ marginBottom: '' }}>
                             <h2>Company</h2>
                         </div>
@@ -158,7 +158,7 @@ const Footer = () => {
                     </Grid>
                 </Grid>
             </FooterWrapper>
-        </div>
+        </Grid>
     );
 };
 
