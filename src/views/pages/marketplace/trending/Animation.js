@@ -1,11 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-
-// third party
 import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
-
-// =============================|| LANDING - FADE IN ANIMATION ||============================= //
 
 function FadeInWhenVisible({ children }) {
     const controls = useAnimation();

@@ -18,9 +18,8 @@ import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
 import styles from './header.module.css';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
-
-
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -49,11 +48,12 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    background:"white",
+    background: theme.palette.mode === 'dark' ? theme.palette.dark.main : 'white',
+
     color: 'white',
     '& .MuiInputBase-input': {
+        background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -142,6 +142,7 @@ export default function Header() {
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
+
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
                     size="large"
@@ -149,61 +150,62 @@ export default function Header() {
                     aria-controls="primary-search-account-menu"
                     aria-haspopup="true"
                     color="inherit"
-                >
-                    {/* <AccountCircle /> */}
-                </IconButton>
+                ></IconButton>
                 <p>Profile</p>
             </MenuItem>
         </Menu>
     );
 
-    const theme = useTheme()
-            
+    const theme = useTheme();
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor:`${theme.palette.mode === 'dark' ? theme.palette.dark.main : "#f5f5f5"}`, marginBottom:'4px' }}>
+            <AppBar
+                position="static"
+                sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? theme.palette.dark.main : 'white'}`, marginBottom: '4px' }}
+            >
                 <Toolbar>
-                    <Typography variant="h6" noWrap component="div" sx={{mt:2,  display: { xs: 'none', sm: 'block' } }}>
-                    {theme.palette.mode === 'dark' ?
-                        <img src={galileoWhite} alt="Galileo White Logo" width="100" />
-                        
-                        :
-                        <img src={galileo} alt="Galileo Dark Logo" width="100" />
-                        
-                        
-                        }
+                    <Typography variant="h6" noWrap component="div" sx={{ mt: 2, display: { xs: 'none', sm: 'block' } }}>
+                        {theme.palette.mode === 'dark' ? (
+                            <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                        ) : (
+                            <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                        )}
                     </Typography>
 
-                    <Search className={styles.search}>
+                    <Search className={styles.search} style={{ width: '50rem' }}>
                         <SearchIconWrapper>
-                            <SearchIcon sx={{ color: '#d3d3d3', zIndex:"1" }} />
+                            <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                         </SearchIconWrapper>
-                        <StyledInputBase placeholder="Search" inputProps={{ 'aria-label': 'search' }} />
+                        <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{  display: { xs: 'none', md: 'flex' }, mr: 3 }}>
-                        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
+                        <IconButton size="large" aria-label="" color="inherit">
                             <Badge badgeContent={17} color="error">
                                 <NotificationsIcon sx={{ color: '#4dabf5' }} />
                             </Badge>
+                        </IconButton>
+                        <IconButton size="large" aria-label="" color="inherit">
+                            <AccountBalanceWalletIcon sx={{ color: '#4dabf5' }} />
+                        </IconButton>
+                        <IconButton size="large" aria-label="" color="inherit">
+                            <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                         </IconButton>
                     </Box>
 
                     <img src={userHeader} alt="" height="40" />
 
                     <div style={{ marginLeft: '1rem ' }}>
-                        <Typography variant="h5" component="h2" sx={{ }}>
+                        <Typography variant="h5" component="h2" sx={{}}>
                             Cia Natasya
                         </Typography>
 
                         <div className={styles.subTitle}>
-                            
-                        <Typography variant="h6" component="h2" sx={{ }}>
-                            Creator
-                        </Typography>
-                            
-                            </div>
+                            <Typography variant="h6" component="h2" sx={{}}>
+                                Creator
+                            </Typography>
+                        </div>
                     </div>
 
                     <IconButton
