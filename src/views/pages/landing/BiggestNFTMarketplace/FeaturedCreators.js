@@ -13,10 +13,7 @@ import shoes3 from 'assets/images/shoes3.png';
 import CardMedia from '@mui/material/CardMedia';
 import { Link as RouterLink } from 'react-router-dom';
 
-// assets
-import PaletteTwoToneIcon from '@mui/icons-material/PaletteTwoTone';
-import ReorderTwoToneIcon from '@mui/icons-material/ReorderTwoTone';
-import SpeedTwoToneIcon from '@mui/icons-material/SpeedTwoTone';
+
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
