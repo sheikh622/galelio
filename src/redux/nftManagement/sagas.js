@@ -27,7 +27,8 @@ function* addNftRequest({ payload }) {
                 categoryId: payload.categoryId,
                 search: payload.search,
                 page: payload.page,
-                limit: payload.limit
+                limit: payload.limit,
+                type: payload.type
             })
         );
         payload.handleClose();
@@ -46,7 +47,7 @@ function* getAllNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(
-            `/nft?page=${payload.page}&size=${payload.limit}&search=${payload.search}&categoryId=${payload.categoryId}`,
+            `/nft/brandAdmin?page=${payload.page}&size=${payload.limit}&search=${payload.search}&categoryId=${payload.categoryId}&type=${payload.type}`,
             headers
         );
         yield put(getAllNftSuccess(response.data.data));
@@ -73,7 +74,8 @@ function* lazyMintNftRequest({ payload }) {
                 categoryId: payload.categoryId,
                 search: payload.search,
                 page: payload.page,
-                limit: payload.limit
+                limit: payload.limit,
+                type: payload.type
             })
         );
         yield setNotification('success', response.data.message);
@@ -102,7 +104,8 @@ function* mintNftRequest({ payload }) {
                 categoryId: payload.categoryId,
                 search: payload.search,
                 page: payload.page,
-                limit: payload.limit
+                limit: payload.limit,
+                type: payload.type
             })
         );
         yield setNotification('success', response.data.message);

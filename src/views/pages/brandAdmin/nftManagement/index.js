@@ -3,12 +3,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import { Button, Grid, Typography, Pagination, Menu, MenuItem, Box } from '@mui/material';
+import { Button, Grid, Typography, Pagination, Menu, MenuItem, TextField } from '@mui/material';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddNft from './component/addNft';
 import { getAllNft } from '../../../../redux/nftManagement/actions';
 import NftCard from './component/nftCard';
+const typeArray = [
+    {
+        value: 'all',
+        label: "All NFT'S"
+    },
+    {
+        value: 'directMint',
+        label: 'Minted NFTS'
+    },
+    {
+        value: 'lazyMint',
+        label: "Lazy Minted NFT'S"
+    },
+    {
+        value: 'waiting',
+        label: 'Waiting For approval'
+    },
+    {
+        value: 'draft',
+        label: 'Draft NFTS'
+    },
+    {
+        value: 'rejected',
+        label: 'Rejected NFTS'
+    }
+];
+
 const NftManagement = () => {
     const theme = useTheme();
     const navigate = useNavigate();
@@ -16,10 +43,11 @@ const NftManagement = () => {
     const dispatch = useDispatch();
     const nftList = useSelector((state) => state.nftReducer.nftList);
     console.log('nftList', nftList);
-    const [addNftOpen, setAddNftOpen] = useState(false);
+    const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(12);
+    const [addNftOpen, setAddNftOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -28,29 +56,62 @@ const NftManagement = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const handleType = (event) => {
+        setType(event.target.value);
+        setLimit(12);
+        setSearch('');
+        setPage(1);
+    };
+
     useEffect(() => {
         dispatch(
             getAllNft({
                 categoryId: location.state.data.CategoryId,
                 search: search,
                 page: page,
-                limit: limit
+                limit: limit,
+                type: type
             })
         );
-    }, [, search, page, limit]);
+    }, [, search, page, limit, type]);
 
     return (
         <>
-            <AddNft open={addNftOpen} setOpen={setAddNftOpen} data={location.state.data} search={search} page={page} limit={limit} />
+            <AddNft
+                open={addNftOpen}
+                setOpen={setAddNftOpen}
+                data={location.state.data}
+                search={search}
+                page={page}
+                limit={limit}
+                nftType={type}
+            />
             <MainCard
                 className="yellow"
                 style={{ marginBottom: '15px' }}
                 title={
                     <Grid container spacing={gridSpacing}>
-                        <Grid item xs={6}>
+                        <Grid item xs={3}>
                             <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
                                 NFT Management
                             </Typography>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                className="selectField"
+                                id="outlined-select-budget"
+                                select
+                                fullWidth
+                                label="Select Type"
+                                value={type}
+                                onChange={handleType}
+                            >
+                                {typeArray.map((option, index) => (
+                                    <MenuItem key={index} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                         </Grid>
                         <Grid item xs={6} style={{ textAlign: 'end' }}>
                             <Button
@@ -97,6 +158,7 @@ const NftManagement = () => {
                                                 search={search}
                                                 page={page}
                                                 limit={limit}
+                                                type={type}
                                             />
                                         </Grid>
                                     );

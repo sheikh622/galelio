@@ -4,7 +4,7 @@ import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
 
-const NftCard = ({ nftData, categoryId, search, page, limit }) => {
+const NftCard = ({ nftData, categoryId, search, page, limit,type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
@@ -14,6 +14,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit }) => {
             <MintNftDialog
                 nftData={nftData}
                 categoryId={nftData.CategoryId}
+                type={type}
                 search={search}
                 page={page}
                 limit={limit}

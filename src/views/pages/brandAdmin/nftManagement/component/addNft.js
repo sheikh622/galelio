@@ -49,7 +49,7 @@ const typeArray = [
     }
 ];
 
-export default function AddNft({ open, setOpen, data, search, page, limit }) {
+export default function AddNft({ open, setOpen, data, search, page, limit,nftType }) {
     const dispatch = useDispatch();
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -127,6 +127,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit }) {
                         currencyType: type,
                         quantity: values.images[0].quantity,
                         asset: values.images[0].image,
+                        type:nftType,
                         page:page,
                         limit:limit,
                         search:search,
