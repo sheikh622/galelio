@@ -11,7 +11,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { useNavigate, Link, useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import NightlightIcon from '@mui/icons-material/Nightlight';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useDispatch, useSelector } from 'react-redux';
 import { MENU_TYPE, PRESET_COLORS, SET_BORDER_RADIUS, SET_FONT_FAMILY, SET_OUTLINED_FILLED, THEME_RTL } from 'store/actions';
 const SiderPage = () => {
@@ -116,14 +116,14 @@ const SiderPage = () => {
                             {customization.navType =="dark"
                             ?
                             <>
-                            <WbSunnyIcon  style={{color:`${color}`}}
+                            <WbSunnyIcon  style={{color:`${color}`, cursor:"pointer"}}
                               onClick={() => setNavType("light")}                            
                             />
                             
                             </>
                             :
                             <>
-                            <NightlightIcon  style={{color:`${color}`}}
+                            <DarkModeIcon  style={{color:`${color}`, cursor:"pointer"}}
                              onClick={() => setNavType("dark")}                            
                            />
                             
