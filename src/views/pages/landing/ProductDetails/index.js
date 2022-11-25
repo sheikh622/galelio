@@ -10,12 +10,17 @@ import Footer from 'views/pages/user/footer/footer';
 import Appbar from 'views/pages/user/header/header'
 import Properties from './Properties';
 import PropertiesView from './ProductView';
+import { useTheme } from '@emotion/react';
 // =============================|| LANDING MAIN ||============================= //
 
-const Products = () => (
+const Products = () => {
+    const theme = useTheme();
+    return(
     <>
         <Appbar />
-        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },background:'#F5F5F5' }}>
+        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },   
+        background: theme.palette.mode === 'dark' ? 
+        theme.palette.dark.main : "#f3f3f3", }}>
             <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } , }}>
                 <SiderPage />
             </Grid>
@@ -41,5 +46,6 @@ const Products = () => (
         </Grid>
     </>
 );
+}
 
 export default Products;

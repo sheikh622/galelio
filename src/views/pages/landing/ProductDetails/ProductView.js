@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Card, Container, CardMedia, Grid, Typography, TextField, MenuItem, Chip, Button } from '@mui/material';
+import { Card, Container, CardMedia, Grid, Typography, TextField, MenuItem, Chip, Button, Divider } from '@mui/material';
 import React from 'react';
 // project imports
 import Avatar from 'ui-component/extended/Avatar';
@@ -40,18 +40,13 @@ const PropertiesView = () => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12}>
-                        <CardMedia component="img" height="auto" image={watch1} alt="green iguana" />
+                        <CardMedia component="img" sx={{height:'592px'}} image={watch1} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
                         <Grid item xs={12}>
                             <Grid container>
-                                <Grid item md={4} sm={12}>
-                                    <CardMedia component="img" sx={{ marginBottom: '10px' }} height="auto" image={watch1} />
-                                    <CardMedia component="img" sx={{ marginBottom: '2px' }} height="auto" image={watch2} />
-                                    <CardMedia component="img" height="auto" image={watch3} />
-                                </Grid>
-                                <Grid item md={8} sm={12}>
+                                <Grid item md={12} sm={12}>
                                     <Grid container spacing={2}>
                                         <Grid mt={4} ml={2} item xs={12}>
                                             <Grid container spacing={2} alignItems="center">
@@ -65,11 +60,14 @@ const PropertiesView = () => {
                                                     <Typography align="left" variant="subtitle2">
                                                         Creator
                                                     </Typography>
+                                                    
                                                 </Grid>
                                             </Grid>
                                         </Grid>
+                                       
                                         <Grid item mt={4} xs={12}>
-                                            <Typography className="Lux" variant="h3">
+
+                                            <Typography className="Lux"  color= {theme.palette.mode === 'dark' ? "white" : "black"} variant="h3">
                                                 Luxury Stainless Watch{' '}
                                             </Typography>
                                         </Grid>
@@ -102,16 +100,19 @@ const PropertiesView = () => {
                                         <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid className="auction" container>
                                                 <Grid item md={6} xs={12} sm={12}>
-                                                    <Typography variant="body">Auction Time </Typography>
+                                                    <Typography color='black' variant="body">Auction Time </Typography>
                                                 </Grid>
                                                 <Grid item md={6} xs={12} sm={12}>
-                                                    <Typography variant="body"> 2h : 40m : 03s</Typography>
+                                                    <Typography color='black' variant="body"> 2h : 40m : 03s</Typography>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid item md={4} xs={12} textAlign="center">
-                                            <Grid item xs={12}>
+                                        <Grid item mt={2} mb={2} xs={12}>
+                                            <Grid  container>
+                                                <Grid item md={2} xs={12} sm={12}>
+                                                <Grid item xs={12}>
                                                 <Typography
+                                                color= {theme.palette.mode === 'dark' ? "white" : "#404040"}
                                                     sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
                                                     className="price"
                                                     variant="body2"
@@ -119,8 +120,9 @@ const PropertiesView = () => {
                                                     Price
                                                 </Typography>
                                             </Grid>
-                                            <Grid item xs={12}>
+                                            <Grid item  xs={12}>
                                                 <Typography
+                                                color= {theme.palette.mode === 'dark' ? "white" : "#262626"}
                                                     sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
                                                     className="ETH"
                                                     variant="h3"
@@ -128,12 +130,16 @@ const PropertiesView = () => {
                                                     102 ETH
                                                 </Typography>
                                             </Grid>
-                                        </Grid>{' '}
-                                        <Grid item md={8} xs={12} textAlign="center">
-                                            <Button className="buy" variant="contained" size="large" onClick={() => {}}>
+                                                </Grid>
+                                                <Grid item md={10} xs={12} sm={12}  textAlign="center">
+                                                <Button sx={{float: {md:'right'}}} className="buy" variant="contained" size="large" onClick={() => {}}>
                                                 Buy Now
                                             </Button>
+                                                </Grid>
+                                            </Grid>
                                         </Grid>
+                                       
+                                       
                                     </Grid>
                                 </Grid>
                             </Grid>

@@ -74,8 +74,8 @@ const Properties = () => {
                                     <Grid item xs={12}>
                                         <Typography variant="h3">{item.title} </Typography>
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography className="plight" variant="body2">
+                                    <Grid  item xs={12}>
+                                        <Typography color= {theme.palette.mode === 'dark' ? "white" : "black"} className="plight" variant="body2">
                                             {item.title2}
                                         </Typography>
                                     </Grid>
