@@ -124,7 +124,7 @@ const HeaderPage = () => {
                                                 <Button
                                                     className="create"
                                                     component={RouterLink}
-                                                    to="/dashboard/default"
+                                                    to=""
                                                     target="_blank"
                                                     size="large"
                                                     variant="contained"
