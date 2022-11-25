@@ -11,6 +11,9 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { useNavigate, Link, useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
+import NightlightIcon from '@mui/icons-material/Nightlight';
+import { useDispatch, useSelector } from 'react-redux';
+import { MENU_TYPE, PRESET_COLORS, SET_BORDER_RADIUS, SET_FONT_FAMILY, SET_OUTLINED_FILLED, THEME_RTL } from 'store/actions';
 const SiderPage = () => {
     const navigate = useNavigate();
     const [color, setColor] = useState('#2196f3');
@@ -30,6 +33,16 @@ const SiderPage = () => {
 
     console.log('pathname state', pathName);
     const theme = useTheme();
+
+
+    const dispatch = useDispatch();
+    const customization = useSelector((state) => state.customization);
+
+    const [navType, setNavType] = useState(customization.navType);
+
+    useEffect(() => {
+        dispatch({ type: MENU_TYPE, navType });
+    }, [dispatch, navType]);
     return (
         <>
             <Container sx={{ mt: 5}}>
@@ -100,7 +113,26 @@ const SiderPage = () => {
                             <LogoutIcon />
                         </Grid>
                         <Grid item sx={{ mt:5  }}>
-                            <WbSunnyIcon  style={{color:`${color}`}}/>
+                            {customization.navType =="dark"
+                            ?
+                            <>
+                            <WbSunnyIcon  style={{color:`${color}`}}
+                              onClick={() => setNavType("light")}                            
+                            />
+                            
+                            </>
+                            :
+                            <>
+                            <NightlightIcon  style={{color:`${color}`}}
+                             onClick={() => setNavType("dark")}                            
+                           />
+                            
+                            </>
+                            
+                            }
+
+
+
                         </Grid>
                     </Grid>
                 </Grid>
