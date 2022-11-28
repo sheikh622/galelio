@@ -8,10 +8,10 @@ import Tabs from './tabs';
 const Marketplace = () => {
     const theme = useTheme();
     return (
-        <div style={{ background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3' }}>
-            <div style={{}}>
+        <Grid style={{ background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3' }}>
+            <Grid style={{}}>
                 <Appbar />
-            </div>
+            </Grid>
             <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
                 <Grid
                     item
@@ -32,8 +32,23 @@ const Marketplace = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Footer />
-        </div>
+              {/*  footer side */}
+              <Grid
+              container-fluid
+              sx={{
+                  display: {
+                      xs: 'block',
+                      sm: 'block',
+                      md: 'flex'
+                  }
+              }}
+          >
+              <Grid item md={1} xs={12}></Grid>
+              <Grid item md={11} xs={12}>
+                  <Footer />
+              </Grid>
+          </Grid>
+        </Grid>
     );
 };
 

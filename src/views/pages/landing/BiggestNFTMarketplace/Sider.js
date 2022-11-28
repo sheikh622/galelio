@@ -14,6 +14,7 @@ import { useTheme } from '@mui/material/styles';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useDispatch, useSelector } from 'react-redux';
 import { MENU_TYPE } from 'store/actions';
+import Tooltip from '@mui/material/Tooltip';
 const SiderPage = () => {
     const navigate = useNavigate();
     const [color] = useState('#2196f3');
@@ -60,11 +61,19 @@ const SiderPage = () => {
                         >
                             {pathName == '/BiggestNFTMarketplace' ? (
                                 <>
+                                <Tooltip title="Dashboard" placement="right" arrow>
+                                    
                                     <DashboardIcon sx={{ color: `${color}` }} />
+                                    </Tooltip>
+                                    
                                 </>
                             ) : (
                                 <>
+                                   <Tooltip title="Dashboard" placement="right" arrow>
+
                                     <DashboardIcon />
+
+                                   </Tooltip>
                                 </>
                             )}
                         </Grid>
@@ -80,11 +89,19 @@ const SiderPage = () => {
                         >
                             {pathName.includes('/marketplace') ? (
                                 <>
+                                   <Tooltip title="Marketplace" placement="right" arrow>
+
                                     <StorefrontIcon style={{ color: `${color}` }} />
+
+                                   </Tooltip>
                                 </>
                             ) : (
                                 <>
+                                   <Tooltip title="Marketplace" placement="right" arrow>
+
+                                    
                                     <StorefrontIcon />
+                                   </Tooltip>
                                 </>
                             )}
                         </Grid>

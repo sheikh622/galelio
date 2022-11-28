@@ -81,7 +81,7 @@ const Trending = () => {
         }
     ];
     return (
-        <Grid container-fluid spacing={gridSpacing} sx={{ background: '', paddingRight: '0%' }}>
+        <Grid container-fluid spacing={gridSpacing} sx={{ paddingRight: '0%' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {itemData.map((item) => (
