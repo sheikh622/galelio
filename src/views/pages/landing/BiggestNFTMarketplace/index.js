@@ -22,7 +22,7 @@ const Landing = () => {
     return (
         <Grid
             sx={{
-                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
+                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3', 
             }}
         >
             <Appbar />

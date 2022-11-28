@@ -13,8 +13,6 @@ import shoes3 from 'assets/images/shoes3.png';
 import CardMedia from '@mui/material/CardMedia';
 import { Link as RouterLink } from 'react-router-dom';
 
-
-
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const FeaturedPage = () => {
@@ -72,13 +70,23 @@ const FeaturedPage = () => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {itemData.map((item) => (
-                        <Grid item md={2} sm={6} component={RouterLink}
-                        to="/ProductDetails" sx={{color:theme.palette.mode === 'dark' ? "white" : "black"  , textDecoration:'none'}}>
-                            <Grid container justifyContent="center"   >
+                        <Grid
+                            item
+                            md={2}
+                            sm={6}
+                            component={RouterLink}
+                            to="/ProductDetails"
+                            sx={{
+                                color: theme.palette.mode === 'dark' ? 'white' : 'black',
+
+                                textDecoration: 'none'
+                            }}
+                        >
+                            <Grid container justifyContent="center">
                                 <Grid item md={6} xs={6}>
                                     <CardMedia
                                         component="img"
-                                        sx={{ height: { xs: '100%', md: '224px;', sm: '100%' }, width: '90%' }}
+                                        sx={{ height: { xs: '100%', md: '254px;', sm: '100%' }, width: '90%' }}
                                         image={shoes1}
                                     />
                                 </Grid>
@@ -91,9 +99,17 @@ const FeaturedPage = () => {
                                     </Grid>
                                 </Grid>
 
-                                <Grid item md={12} xs={12} sx={{ background: theme.palette.mode === 'dark' ? 
-                               '#181C1F': "#f3f3f3", boxShadow: '0px 4px 4px rgb(0 0 0 / 49%)',
-                                 padding: '20px 10px' }}>
+                                <Grid
+                                    item
+                                    md={12}
+                                    xs={12}
+                                    sx={{
+                                        color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                                        background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                                        boxShadow: '0px 4px 4px rgb(0 0 0 / 49%)',
+                                        padding: '20px 10px'
+                                    }}
+                                >
                                     <Grid item md={12} xs={12}>
                                         <Typography
                                             variant="h3"
@@ -103,8 +119,7 @@ const FeaturedPage = () => {
                                         </Typography>
                                     </Grid>
 
-                                    <Grid item md={12} xs={12} 
-                                    sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}>
+                                    <Grid item md={12} xs={12} sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}>
                                         <Typography variant="body"> {item.creations}</Typography>
                                     </Grid>
                                 </Grid>
