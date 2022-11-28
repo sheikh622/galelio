@@ -1,17 +1,9 @@
-import { useDispatch } from 'react-redux';
 import { Typography, TextField } from '@mui/material';
-import { useEffect } from 'react';
-
 const QuantitySelector = ({ formik, fileArray, index }) => {
-    const dispatch = useDispatch();
-
     const handleChange = (value) => {
         fileArray[index].quantity = value;
         formik.setFieldValue('images', fileArray);
     };
-    useEffect(() => {
-        console.log('fileArray', fileArray);
-    }, [fileArray]);
 
     return (
         <>

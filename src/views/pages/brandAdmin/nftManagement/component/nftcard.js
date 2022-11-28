@@ -124,7 +124,6 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                             color="primary"
                                             sx={{ marginRight: '5px' }}
                                             onClick={() => {
-                                                console.log({ nftData });
                                                 setEditNftOpen(true);
                                                 setNftInfo({
                                                     id: nftData.id,

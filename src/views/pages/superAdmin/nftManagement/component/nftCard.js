@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
 import RejectNftDialog from './rejectNftDialog';
+
 const NftCard = ({ nftData, search, page, limit, type }) => {
-    const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
     const [rejectMintOpen, setRejectMintOpen] = useState(false);

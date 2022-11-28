@@ -23,19 +23,19 @@ import {
     IconButton,
     MenuItem
 } from '@mui/material';
-import UploadImage from 'assets/images/icons/image-upload.svg';
-import AnimateButton from 'ui-component/extended/AnimateButton';
-import clsx from 'clsx';
+
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import fileFill from '@iconify-icons/eva/file-fill';
-import closeFill from '@iconify-icons/eva/close-fill';
-import { fData } from 'utils/formatNumber';
-import QuantitySelector from './quantitySelector';
+import { editNft } from 'redux/nftManagement/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { editNft } from 'redux/nftManagement/actions';
+import fileFill from '@iconify-icons/eva/file-fill';
+import closeFill from '@iconify-icons/eva/close-fill';
+import QuantitySelector from './quantitySelector';
+import UploadImage from 'assets/images/icons/image-upload.svg';
+import AnimateButton from 'ui-component/extended/AnimateButton';
+import clsx from 'clsx';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const currencyTypeArray = [
@@ -62,8 +62,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
 
     const handleError = (fieldDataArray, values, isFile) => {
         let isValid = true;
-        console.log('fieldDataArray', fieldDataArray);
-        console.log('values', values.images);
         if (isFile) {
             if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
             } else {
@@ -110,10 +108,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         initialValues: nftInfo,
         validationSchema,
         onSubmit: (values) => {
-            console.log('values', values);
-            console.log('fieldDataArray', fieldDataArray);
-            console.log('mintType', mintType);
-            console.log('values.images[0].image', values.images[0].image);
             let file = values.images[0].image;
             let isFile = file instanceof File;
             let isValid = handleError(fieldDataArray, values, isFile);

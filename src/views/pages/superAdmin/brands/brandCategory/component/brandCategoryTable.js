@@ -115,7 +115,6 @@ const BrandCategoryTable = ({
                                                             variant="outlined"
                                                             size="large"
                                                             onClick={() => {
-                                                                console.log('row', row);
                                                                 setAddUpdateOpen(true);
                                                                 setBrandCategoryData({
                                                                     categoryId: row.CategoryId,

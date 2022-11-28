@@ -37,12 +37,10 @@ const NftManagement = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const nftList = useSelector((state) => state.nftReducer.nftListSuperAdmin);
-    console.log('nftList', nftList);
     const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(12);
-    const [addNftOpen, setAddNftOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);

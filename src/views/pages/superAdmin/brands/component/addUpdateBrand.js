@@ -43,8 +43,6 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
         })
     });
     const errorHandler = (values) => {
-        console.log('values', values);
-
         if (values.image) {
             if (
                 values.image.name.split('.').pop() == 'jpg' ||
