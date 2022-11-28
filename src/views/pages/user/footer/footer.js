@@ -24,14 +24,12 @@ import { makeStyles } from '@mui/styles';
 const FooterWrapper = styled('div')(({ theme }) => ({
     padding: '35px 0',
     color: 'black',
-  background:  theme.palette.mode === 'dark' ? theme.palette.dark.main : "#f5f5f5",
+    
     // background: '#f5f5f5',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center'
     }
 }));
-
-
 
 // ==============================|| LANDING - FOOTER PAGE ||============================== //
 
@@ -40,78 +38,76 @@ const Footer = () => {
         divider: {
             // Theme Color, or use css color in quote
             // background: theme.palette.success.light
-            background: "#d3d3d3"
+            background: '#d3d3d3'
         }
     }));
     const classes = useStyles();
-const theme = useTheme()
+    const theme = useTheme();
     return (
-        <div style={{}}>
-            <Divider variant={"light"} fullWidth sx={{ mt: 3, mb: 3, borderBottomWidth: 1, border:"1px solid #d3d3d3" }} classes={{ root: classes.divider }} />
-    <FooterWrapper 
-    style={{ background:theme.palette.mode === 'dark' ? "#181C1F" : "white",color: `${theme.palette.mode === 'dark' ? "white" : "black"}`}}>
-                <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
-                    <Grid item xs={12} md={4} sx={{ pl: 5, ml:4 }}>
-                        {theme.palette.mode === 'dark' ?
-                        <img src={galileoWhite} alt="Galileo White Logo" width="100" />
-                        
-                        :
-                        <img src={galileo} alt="Galileo Dark Logo" width="100" />
-                        
-                        
-                        }
-                        <div style={{ marginTop: '5%' }}>
+        <Grid >
+        
+            <FooterWrapper style={{ color: `${theme.palette.mode === 'dark' ? 'white' : 'black'}` }}>
+                <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } ,
+                }}
+                 spacing={gridSpacing}>
+                    <Grid item xs={12} md={4} >
+                        {theme.palette.mode === 'dark' ? (
+                            <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                        ) : (
+                            <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                        )}
+                        <Grid style={{ marginTop: '5%' }}>
                             <span style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
-                        </div>
+                        </Grid>
 
                         <Grid container sx={{ mt: 3 }}>
-                            <Grid item xs={5}>
+                            <Grid item md={4} xs={12}>
                                 <img src={googlePlay} alt="Google Play" width="120" />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item md={8} xs={12}>
                                 <img src={appleStore} alt="Apple Store" width="120" />
                             </Grid>
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={1} sx={{mt:-1, ml: 3 }}>
-                        <div style={{ marginBottom: '' }}>
+                    <Grid item xs={12} md={2} >
+                        <Grid sx={{ marginTop:{ md:'-10px'}  }}>
                             <h2>Company</h2>
-                        </div>
-                        <div>
+                        </Grid>
+                        <Grid>
                             <span className={styles.link}>About</span>
-                        </div>
-                        <div className={styles.aboutLink}>
+                        </Grid>
+                        <Grid className={styles.aboutLink}>
                             <span className={styles.link}>Mission</span>
-                        </div>
-                        <div className={styles.aboutLink}>
+                        </Grid>
+                        <Grid className={styles.aboutLink}>
                             <span className={styles.link}>Team</span>
-                        </div>
-                        <div className={styles.aboutLink}>
+                        </Grid>
+                        <Grid className={styles.aboutLink}>
                             <span className={styles.link}>Blog</span>
-                        </div>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2} sx={{ paddingBottom: '2.5%', ml: 3 }}>
+                    <Grid item xs={12} md={2} sx={{ marginTop:{ md:'-37px'}  }} >
                         <h2>Service</h2>
-                        <div>
-                            <div>
+                        <Grid>
+                            <Grid>
                                 <span className={styles.link}>FAQ</span>
-                            </div>
-                            <div className={styles.serviceLink}>
+                            </Grid>
+                            <Grid className={styles.serviceLink}>
                                 <span className={styles.link}>Support</span>
-                            </div>
-                            <div className={styles.serviceLink}>
+                            </Grid>
+                            <Grid className={styles.serviceLink}>
                                 <span className={styles.link}>Privacy Policy</span>
-                            </div>
-                        </div>
+                            </Grid>
+                        </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={12} lg={3} xl={3} sx={{ paddingBottom: '1.7%' }}>
+                    <Grid item xs={12} md={2}  sx={{ marginTop:{ md:'-37px'}  }}>
                         <h2>Contact</h2>
 
                         <Grid>
-                            <div>
-                                <div
+                            <Grid>
+                                <Grid
                                     className={styles.contact}
                                     style={{
                                         display: 'flex',
@@ -121,9 +117,9 @@ const theme = useTheme()
                                 >
                                     <LocalPhoneIcon sx={{ height: '1.3rem' }} />
                                     <span className={styles.contactLink}>(123) 456-7890</span>
-                                </div>
+                                </Grid>
 
-                                <div
+                                <Grid
                                     className={styles.contact}
                                     style={{
                                         display: 'flex',
@@ -133,8 +129,8 @@ const theme = useTheme()
                                 >
                                     <EmailIcon sx={{ height: '' }} />
                                     <span className={styles.contactLink}>galileo@gmail.com</span>
-                                </div>
-                                <div
+                                </Grid>
+                                <Grid
                                     className={styles.contact}
                                     style={{
                                         display: 'flex',
@@ -144,14 +140,14 @@ const theme = useTheme()
                                 >
                                     <LocationOnIcon sx={{ height: '1.3rem' }} />
                                     <span className={styles.contactLink}>2972 Westeast Rd. LA, 85400 </span>
-                                </div>
-                            </div>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2} sx={{ paddingBottom: '6.5%' }}>
+                    <Grid item xs={12} md={2} sx={{ paddingBottom: {md:'6.5%'} }}>
                         <h2>Social Media</h2>
 
-                        <div style={{}}>
+                        <Grid style={{}}>
                             <span>
                                 <FacebookIcon />
                             </span>
@@ -164,11 +160,11 @@ const theme = useTheme()
                             <span className={styles.socialLink}>
                                 <InstagramIcon />
                             </span>
-                        </div>
+                        </Grid>
                     </Grid>
                 </Grid>
             </FooterWrapper>
-        </div>
+        </Grid>
     );
 };
 

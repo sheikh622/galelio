@@ -21,7 +21,7 @@ import styles from './header.module.css';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Drawer from "../drawer/drawer"
+import Drawer from '../drawer/drawer';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -173,21 +173,21 @@ export default function Header() {
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                     </Typography>
-<Grid container-fluid>
+                    <Grid container-fluid>
+                        <Grid item sx={{ display: { lg: 'none' } }}>
+                            <Drawer />
+                        </Grid>
 
-<Grid item sx={{display:{lg:'none'}}}>
-    <Drawer/>
-
-</Grid>
-
-                     <Search  sx={{width:"50rem !important",  display:{xs:"none",  md:"flex" , lg:"none", xl:"flex" }}} className={styles.search}>
-                        <SearchIconWrapper>
-                            <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
-                        </SearchIconWrapper>
-                        <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
-                    </Search>
-
-</Grid>
+                        <Search
+                            sx={{ width: '50rem !important', display: { xs: 'none', md: 'flex', lg: 'flex', xl: 'flex' } }}
+                            className={styles.search}
+                        >
+                            <SearchIconWrapper>
+                                <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
+                            </SearchIconWrapper>
+                            <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
+                        </Search>
+                    </Grid>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
                         <IconButton size="large" aria-label="" color="inherit">
@@ -203,11 +203,10 @@ export default function Header() {
                         </IconButton>
                     </Box>
 
+                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
 
-                    <img src={userHeader} alt="" height="40" style={{display:"inlineBlock"}} />
-
-                    <div style={{ marginLeft: '1%', display:"inline" , width:""}}>
-                        <Typography variant="h5" component="h2" sx={{width:"100%"}}>
+                    <div style={{ marginLeft: '1%', display: 'inline', width: '' }}>
+                        <Typography variant="h5" component="h2" sx={{ width: '100%' }}>
                             Cia Natasya
                         </Typography>
 
@@ -229,10 +228,6 @@ export default function Header() {
                     >
                         <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
                     </IconButton>
-
-
-
-               
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
