@@ -7,7 +7,8 @@ import {
     MINT_NFT,
     LAZY_MINT_NFT,
     REQUEST_NFT_FOR_MINTING,
-    EDIT_NFT
+    EDIT_NFT,
+    DELETE_NFT
 } from './constants';
 
 export const getAllNftSuperAdmin = (data) => {
@@ -44,6 +45,14 @@ export const addNft = (data) => {
         payload: data
     };
 };
+
+export const deleteNft = (data) => {
+    return {
+        type: DELETE_NFT,
+        payload: data
+    };
+};
+
 
 export const editNft = (data) => {
     return {

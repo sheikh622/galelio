@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
+import { Button, CardContent, CardMedia, Grid, Stack, Typography } from '@mui/material';
 import MainCard from './mainCard';
 import EditNftDialog from './editNftDialog';
 import RequestForMintDialog from './requestForMintDialog';
+import DeleteNFTDialog from './deleteNftDialog';
+
 import { useEffect } from 'react';
 const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const [openRequestMint, setOpenRequestMint] = useState(false);
     const [editNftOpen, setEditNftOpen] = useState(false);
+    const [deleteNftOpen, setDeleteNftOpen] = useState(false);
     const [image, setImage] = useState([]);
     const [nftInfo, setNftInfo] = useState({
-        id:null,
+        id: null,
         nftName: '',
         nftDescription: '',
         nftPrice: 0,
@@ -33,6 +36,18 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     }, [nftData]);
     return (
         <>
+            <DeleteNFTDialog
+                nftInfo={nftInfo}
+                categoryId={categoryId}
+                type={type}
+                search={search}
+                page={page}
+                limit={limit}
+                loader={loader}
+                setLoader={setLoader}
+                open={deleteNftOpen}
+                setOpen={setDeleteNftOpen}
+            />
             <EditNftDialog
                 nftInfo={nftInfo}
                 categoryId={categoryId}
@@ -107,10 +122,32 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                     color="primary"
                                     sx={{ marginRight: '5px' }}
                                     onClick={() => {
+                                        setDeleteNftOpen(true);
+                                        setNftInfo({
+                                            id: nftData.id,
+                                            nftName: nftData.name,
+                                            nftDescription: nftData.description,
+                                            nftPrice: nftData.price,
+                                            mintType: nftData.mintType,
+                                            currencyType: nftData.currencyType,
+                                            fieldDataArray: nftData.NFTMetaData,
+                                            images: image
+                                        });
+                                    }}
+                                >
+                                    <Typography style={{ textDecoration: 'underline' }}> Delete NFT</Typography>
+                                </Button>
+                            </Stack>
+                            <Stack direction="row" justifyContent="end" alignItems="center">
+                                <Button
+                                    variant="text"
+                                    color="primary"
+                                    sx={{ marginRight: '5px' }}
+                                    onClick={() => {
                                         console.log({ nftData });
                                         setEditNftOpen(true);
                                         setNftInfo({
-                                            id:nftData.id,
+                                            id: nftData.id,
                                             nftName: nftData.name,
                                             nftDescription: nftData.description,
                                             nftPrice: nftData.price,
@@ -130,7 +167,6 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                     color="primary"
                                     sx={{ marginRight: '5px' }}
                                     onClick={() => {
-                                        console.log({ nftData });
                                         setOpenRequestMint(true);
                                     }}
                                 >

@@ -2,9 +2,42 @@ import axios from 'utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
 import { makeSelectAuthToken } from 'store/Selector';
 import { getAllNft, getAllNftSuccess, getAllNftSuperAdmin, getAllNftSuccessSuperAdmin } from './actions';
-import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT, REQUEST_NFT_FOR_MINTING, GET_ALL_NFT_SUPER_ADMIN, EDIT_NFT } from './constants';
+import {
+    GET_ALL_NFT,
+    ADD_NFT,
+    MINT_NFT,
+    LAZY_MINT_NFT,
+    REQUEST_NFT_FOR_MINTING,
+    GET_ALL_NFT_SUPER_ADMIN,
+    EDIT_NFT,
+    DELETE_NFT
+} from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
+
+function* deleteNftRequest({ payload }) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.delete(`nft/brandAdmin/${payload.id}`, headers);
+        yield put(
+            getAllNft({
+                categoryId: payload.categoryId,
+                search: payload.search,
+                page: payload.page,
+                limit: payload.limit,
+                type: payload.type
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchDeleteNft() {
+    yield takeLatest(DELETE_NFT, deleteNftRequest);
+}
 
 function* getAllNftSuperAdminRequest({ payload }) {
     try {
@@ -207,6 +240,7 @@ export default function* nftSaga() {
         fork(watchMintNft),
         fork(watchLazyMintNft),
         fork(watchRequestNftForMinting),
-        fork(watchEditNft)
+        fork(watchEditNft),
+        fork(watchDeleteNft)
     ]);
 }

@@ -49,33 +49,22 @@ const superAdminMenu = {
             icon: icons.IconUserCheck,
             breadcrumbs: false
         },
+        {
+            id: 'categories',
+            title: <FormattedMessage id="categories" />,
+            type: 'item',
+            icon: icons.IconCheckbox,
+            url: '/categories',
+            breadcrumbs: false
+        },
 
         {
-            id: 'Management',
-            title: <FormattedMessage id=" Brand Management" />,
-            type: 'collapse',
-
-            icon: icons.IconDeviceAnalytics,
-            breadcrumbs: false,
-            children: [
-                {
-                    id: 'categories',
-                    title: <FormattedMessage id="categories" />,
-                    type: 'item',
-                    icon: icons.IconCheckbox,
-                    url: '/categories',
-                    breadcrumbs: false
-                },
-
-                {
-                    id: 'brand',
-                    title: <FormattedMessage id="admin.brand" />,
-                    type: 'item',
-                    icon: icons.IconCheckbox,
-                    url: '/brands',
-                    breadcrumbs: false
-                }
-            ]
+            id: 'brand',
+            title: <FormattedMessage id="admin.BrandManagement" />,
+            type: 'item',
+            icon: icons.IconCheckbox,
+            url: '/brands',
+            breadcrumbs: false
         }
     ]
 };
