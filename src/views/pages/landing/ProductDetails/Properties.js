@@ -64,7 +64,7 @@ const Properties = () => {
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {property.map((item) => (
                         <Grid item md={2} sm={6}>
-                            <SubCard className="property">
+                            <SubCard className="property" sx={{background:theme.palette.mode === 'dark' ? "#181C1F" : "#fff", }}>
                                 <Grid container justifyContent="center" spacing={2}>
                                     <Grid item xs={12}>
                                         <Typography className="pbackground" variant="body">

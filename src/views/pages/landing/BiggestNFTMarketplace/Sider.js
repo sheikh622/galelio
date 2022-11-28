@@ -48,7 +48,7 @@ const SiderPage = () => {
                             pb: 3,
                             ml: 1,
                              boxShadow: '1px 2px 9px #d3d3d3',
-                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : "#fff",
+                            background: theme.palette.mode === 'dark' ? '#181C1F': "#fff",
                             borderRadius: '4px'
                         }}
                     >

@@ -20,7 +20,7 @@ const Products = () => {
         <Appbar />
         <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },   
         background: theme.palette.mode === 'dark' ? 
-        theme.palette.dark.main : "#f3f3f3", }}>
+       'black' : "#f3f3f3", }}>
             <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } , }}>
                 <SiderPage />
             </Grid>

@@ -24,7 +24,7 @@ import { makeStyles } from '@mui/styles';
 const FooterWrapper = styled('div')(({ theme }) => ({
     padding: '35px 0',
     color: 'black',
-    background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f5f5f5',
+    
     // background: '#f5f5f5',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center'
@@ -45,12 +45,7 @@ const Footer = () => {
     const theme = useTheme();
     return (
         <Grid >
-            <divider
-                variant={'light'}
-                fullWidth
-                sx={{ mt: 3, mb: 3, borderBottomWidth: 1, border: '1px solid #d3d3d3' }}
-                classes={{ root: classes.Gridider }}
-            />
+        
             <FooterWrapper style={{ color: `${theme.palette.mode === 'dark' ? 'white' : 'black'}` }}>
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } ,
                 }}
@@ -76,7 +71,7 @@ const Footer = () => {
                     </Grid>
 
                     <Grid item xs={12} md={2} >
-                        <Grid style={{ marginBottom: '' }}>
+                        <Grid sx={{ marginTop:{ md:'-10px'}  }}>
                             <h2>Company</h2>
                         </Grid>
                         <Grid>

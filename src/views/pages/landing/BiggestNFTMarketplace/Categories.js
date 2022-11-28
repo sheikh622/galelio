@@ -73,7 +73,8 @@ const CategoriesPage = () => {
                                   
                                         sx={{
                                             position: 'relative',
-                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : 
+                                            '#f3f3f3',
                                             boxShadow: '1px 2px 9px #d3d3d3'
                                         }}
                                         

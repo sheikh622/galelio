@@ -1,6 +1,6 @@
 // material-ui
 import { styled } from '@mui/material/styles';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography , Divider} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 // project imports
@@ -22,7 +22,7 @@ const Landing = () => {
     return (
         <Grid
             sx={{
-                background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3'
+                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
             }}
         >
             <Appbar />
@@ -33,7 +33,8 @@ const Landing = () => {
                         xs: 'block',
                         sm: 'block',
                         md: 'flex'
-                    }
+                    },
+                    marginBottom:'40px'
                 }}
             >
                 <Grid
@@ -62,6 +63,7 @@ const Landing = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            <Divider sx={{borderBottomWidth: 1, border: '1px solid #ccc'}}/>
             {/*  footer side */}
             <Grid
                 container-fluid

@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Divider } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import Sider from '../landing/BiggestNFTMarketplace/Sider';
 import Footer from '../user/footer/footer';
@@ -8,11 +8,11 @@ import Tabs from './tabs';
 const Marketplace = () => {
     const theme = useTheme();
     return (
-        <Grid style={{ background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3' }}>
+        <Grid style={{ background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'}}>
             <Grid style={{}}>
                 <Appbar />
             </Grid>
-            <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
+            <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } ,   marginBottom:'40px'}}>
                 <Grid
                     item
                     md={1}
@@ -32,6 +32,8 @@ const Marketplace = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            <Divider sx={{borderBottomWidth: 1, border: '1px solid #ccc'}}/>
+
               {/*  footer side */}
               <Grid
               container-fluid
@@ -40,11 +42,12 @@ const Marketplace = () => {
                       xs: 'block',
                       sm: 'block',
                       md: 'flex'
-                  }
+                  },
+                  background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
               }}
           >
               <Grid item md={1} xs={12}></Grid>
-              <Grid item md={11} xs={12}>
+              <Grid  item md={11} xs={12}>
                   <Footer />
               </Grid>
           </Grid>
