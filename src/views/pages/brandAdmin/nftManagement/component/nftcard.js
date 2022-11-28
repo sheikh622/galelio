@@ -2,17 +2,52 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
-import MintNftDialog from './mintNftDialog';
+import EditNftDialog from './editNftDialog';
 import RequestForMintDialog from './requestForMintDialog';
+import { useEffect } from 'react';
 const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
-    const [openMint, setOpenMint] = useState(false);
     const [openRequestMint, setOpenRequestMint] = useState(false);
+    const [editNftOpen, setEditNftOpen] = useState(false);
+    const [image, setImage] = useState([]);
+    const [nftInfo, setNftInfo] = useState({
+        id:null,
+        nftName: '',
+        nftDescription: '',
+        nftPrice: 0,
+        mintType: 'directMint',
+        currencyType: 'ETH',
+        fieldDataArray: [],
+        images: []
+    });
+
+    useEffect(() => {
+        const length = nftData.asset.split('/').length;
+        setImage([
+            {
+                image: { name: nftData.asset.split('/')[length - 1] },
+                quantity: nftData.NFTTokens.length
+            }
+        ]);
+    }, [nftData]);
     return (
         <>
+            <EditNftDialog
+                nftInfo={nftInfo}
+                categoryId={categoryId}
+                type={type}
+                search={search}
+                page={page}
+                limit={limit}
+                loader={loader}
+                setLoader={setLoader}
+                open={editNftOpen}
+                setOpen={setEditNftOpen}
+            />
             <RequestForMintDialog
                 nftData={nftData}
+                categoryId={categoryId}
                 type={type}
                 search={search}
                 page={page}
@@ -22,18 +57,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 open={openRequestMint}
                 setOpen={setOpenRequestMint}
             />
-            <MintNftDialog
-                nftData={nftData}
-                categoryId={nftData.CategoryId}
-                type={type}
-                search={search}
-                page={page}
-                limit={limit}
-                loader={loader}
-                setLoader={setLoader}
-                open={openMint}
-                setOpen={setOpenMint}
-            />
+
             <MainCard
                 content={false}
                 boxShadow
@@ -84,10 +108,20 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                     sx={{ marginRight: '5px' }}
                                     onClick={() => {
                                         console.log({ nftData });
-                                        setOpenMint(true);
+                                        setEditNftOpen(true);
+                                        setNftInfo({
+                                            id:nftData.id,
+                                            nftName: nftData.name,
+                                            nftDescription: nftData.description,
+                                            nftPrice: nftData.price,
+                                            mintType: nftData.mintType,
+                                            currencyType: nftData.currencyType,
+                                            fieldDataArray: nftData.NFTMetaData,
+                                            images: image
+                                        });
                                     }}
                                 >
-                                    <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>
+                                    <Typography style={{ textDecoration: 'underline' }}> Edit NFT</Typography>
                                 </Button>
                             </Stack>
                             <Stack direction="row" justifyContent="end" alignItems="center">

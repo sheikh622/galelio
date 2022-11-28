@@ -1,10 +1,7 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { IconButton, Typography, TextField } from '@mui/material';
+import { Typography, TextField } from '@mui/material';
+import { useEffect } from 'react';
 
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 const QuantitySelector = ({ formik, fileArray, index }) => {
     const dispatch = useDispatch();
 
@@ -12,6 +9,9 @@ const QuantitySelector = ({ formik, fileArray, index }) => {
         fileArray[index].quantity = value;
         formik.setFieldValue('images', fileArray);
     };
+    useEffect(() => {
+        console.log('fileArray', fileArray);
+    }, [fileArray]);
 
     return (
         <>

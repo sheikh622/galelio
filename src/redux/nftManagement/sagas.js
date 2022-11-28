@@ -2,7 +2,7 @@ import axios from 'utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
 import { makeSelectAuthToken } from 'store/Selector';
 import { getAllNft, getAllNftSuccess, getAllNftSuperAdmin, getAllNftSuccessSuperAdmin } from './actions';
-import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT, REQUEST_NFT_FOR_MINTING, GET_ALL_NFT_SUPER_ADMIN } from './constants';
+import { GET_ALL_NFT, ADD_NFT, MINT_NFT, LAZY_MINT_NFT, REQUEST_NFT_FOR_MINTING, GET_ALL_NFT_SUPER_ADMIN, EDIT_NFT } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
@@ -21,6 +21,44 @@ function* getAllNftSuperAdminRequest({ payload }) {
 
 export function* watchGetAllNftSuperAdmin() {
     yield takeLatest(GET_ALL_NFT_SUPER_ADMIN, getAllNftSuperAdminRequest);
+}
+
+function* editNftRequest({ payload }) {
+    console.log({ payload });
+    const formData = new FormData();
+    if (payload.isFile) {
+        formData.append('asset', payload.asset);
+    }
+    formData.append('name', payload.name);
+    formData.append('price', payload.price);
+    formData.append('currencyType', payload.currencyType);
+    formData.append('description', payload.description);
+    formData.append('quantity', payload.quantity);
+    formData.append('metaData', JSON.stringify(payload.metaDataArray));
+    formData.append('mintType', payload.mintType);
+
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.put(`/nft/brandAdmin/${payload.id}`, formData, headers);
+        yield put(
+            getAllNft({
+                categoryId: payload.categoryId,
+                search: payload.search,
+                page: payload.page,
+                limit: payload.limit,
+                type: payload.type
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+        payload.setLoader(false);
+    }
+}
+
+export function* watchEditNft() {
+    yield takeLatest(EDIT_NFT, editNftRequest);
 }
 
 function* addNftRequest({ payload }) {
@@ -113,7 +151,7 @@ function* lazyMintNftRequest({ payload }) {
         yield put(
             getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
-                brandId:payload.brandId,
+                brandId: payload.brandId,
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
@@ -144,7 +182,7 @@ function* mintNftRequest({ payload }) {
         yield put(
             getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
-                brandId:payload.brandId,
+                brandId: payload.brandId,
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
@@ -168,6 +206,7 @@ export default function* nftSaga() {
         fork(watchAddNft),
         fork(watchMintNft),
         fork(watchLazyMintNft),
-        fork(watchRequestNftForMinting)
+        fork(watchRequestNftForMinting),
+        fork(watchEditNft)
     ]);
 }

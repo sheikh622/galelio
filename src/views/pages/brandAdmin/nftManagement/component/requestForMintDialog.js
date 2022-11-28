@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { requestNftForMinting } from 'redux/nftManagement/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData }) {
+export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData,categoryId }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
@@ -45,7 +45,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                             dispatch(
                                 requestNftForMinting({
                                     id: nftData.id,
-                                    categoryId: nftData.CategoryId,
+                                    categoryId: categoryId,
                                     page: page,
                                     limit: limit,
                                     search: search,

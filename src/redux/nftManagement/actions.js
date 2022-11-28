@@ -6,7 +6,8 @@ import {
     ADD_NFT,
     MINT_NFT,
     LAZY_MINT_NFT,
-    REQUEST_NFT_FOR_MINTING
+    REQUEST_NFT_FOR_MINTING,
+    EDIT_NFT
 } from './constants';
 
 export const getAllNftSuperAdmin = (data) => {
@@ -43,6 +44,14 @@ export const addNft = (data) => {
         payload: data
     };
 };
+
+export const editNft = (data) => {
+    return {
+        type: EDIT_NFT,
+        payload: data
+    };
+};
+
 
 export const requestNftForMinting = (data) => {
     return {
