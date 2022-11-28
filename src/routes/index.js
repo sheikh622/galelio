@@ -1,5 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+
+
 import { useSelector } from 'react-redux';
 // routes
 import SuperAdminRoutes from './superAdmin/SuperAdminRoutes';
@@ -8,7 +10,7 @@ import BrandAdminGuard from './BrandAdmin/BrandAdminRoutes';
 import LoginRoutes from './LoginRoutes';
 import AuthenticationRoutes from './AuthenticationRoutes';
 
-// ==============================|| ROUTING RENDER ||============================== //
+
 
 export default function ThemeRoutes() {
     const userData = useSelector((state) => state.auth);
