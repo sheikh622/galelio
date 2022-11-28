@@ -6,11 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
-
 const Trending = () => {
-    
     const theme = useTheme();
-    
+
     const itemData = [
         {
             img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
@@ -91,7 +89,16 @@ const Trending = () => {
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {itemData.map((item) => (
                         <Grid item xs={11} sm={6} md={6} lg={2} xl={2}>
-                            <Card sx={{ color:theme.palette.mode === 'dark' ? "white" : "#404040", background:theme.palette.mode === 'dark' ? "#181C1F" : "white", maxWidth: 365, width: '105%', boxShadow: '1px 2px 9px #d3d3d3', borderRadius: '7px' }}>
+                            <Card
+                                sx={{
+                                    color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                                    background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                                    maxWidth: 365,
+                                    width: '105%',
+                                    boxShadow: '1px 2px 9px #d3d3d3',
+                                    borderRadius: '7px'
+                                }}
+                            >
                                 <CardActionArea>
                                     <CardMedia component="img" height="200" image={item.img} />
                                     <CardContent style={{ padding: '6%' }}>
@@ -111,8 +118,8 @@ const Trending = () => {
                                         <Grid container sx={{ background: '' }}>
                                             <Grid item xs={7} sx={{ pt: 1 }}>
                                                 <span
-                                                    style={{                                                        
-                                                        background: theme.palette.mode === 'dark' ? 'black': '#d9d9d9' ,
+                                                    style={{
+                                                        background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
                                                         padding: '3% 4%',
                                                         borderRadius: '10%',
                                                         color: 'white',
@@ -124,7 +131,7 @@ const Trending = () => {
                                                 :{' '}
                                                 <span
                                                     style={{
-                                                        background: theme.palette.mode === 'dark' ? 'black': '#d9d9d9' ,
+                                                        background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
                                                         padding: '3% 4%',
                                                         borderRadius: '10%',
                                                         color: 'white',
@@ -136,7 +143,7 @@ const Trending = () => {
                                                 :{' '}
                                                 <span
                                                     style={{
-                                                        background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9' ,
+                                                        background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
                                                         padding: '3% 4%  ',
                                                         borderRadius: '10%',
                                                         color: 'white',
