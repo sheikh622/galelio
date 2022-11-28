@@ -174,7 +174,7 @@ export default function Header() {
                         )}
                     </Typography>
                     <Grid container-fluid>
-                        <Grid item sx={{ display: { lg: 'none' } }}>
+                        <Grid item sx={{ display: { lg: 'none', md: 'none'} }}>
                             <Drawer />
                         </Grid>
 

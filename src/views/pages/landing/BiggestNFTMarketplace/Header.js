@@ -54,7 +54,7 @@ const HeaderPage = () => {
                         <Grid
                             container
                             spacing={gridSpacing}
-                            sx={{ pr: 10, [theme.breakpoints.down('lg')]: { pr: 0, textAlign: 'center' } }}
+                            sx={{ pr: 10, [theme.breakpoints.down('lg')]: { pr: 0, justifyContent: { xs: 'center', md: 'flex-start' }} }}
                         >
                             <Grid item xs={12}>
                                 <motion.div
@@ -101,7 +101,7 @@ const HeaderPage = () => {
                                             textTransform: 'capitalize',
                                             fontSize: { xs: '1rem', md: '1.125rem' },
                                             fontWeight: 400,
-                                            lineHeight: 1.4
+                                            lineHeight: 1.4, 
                                         }}
                                     >
                                         Find lots of cool works to buy, sell or collect here{' '}
