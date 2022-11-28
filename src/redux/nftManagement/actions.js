@@ -8,7 +8,8 @@ import {
     LAZY_MINT_NFT,
     REQUEST_NFT_FOR_MINTING,
     EDIT_NFT,
-    DELETE_NFT
+    DELETE_NFT,
+    REJECT_NFT
 } from './constants';
 
 export const getAllNftSuperAdmin = (data) => {
@@ -79,6 +80,13 @@ export const lazyMintNft = (data) => {
 export const mintNft = (data) => {
     return {
         type: MINT_NFT,
+        payload: data
+    };
+};
+
+export const rejectNft = (data) => {
+    return {
+        type: REJECT_NFT,
         payload: data
     };
 };

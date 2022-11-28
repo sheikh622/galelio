@@ -3,12 +3,25 @@ import { useDispatch } from 'react-redux';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
+import RejectNftDialog from './rejectNftDialog'
 const NftCard = ({ nftData, search, page, limit, type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
+    const [rejectMintOpen, setRejectMintOpen] = useState(false);
     return (
         <>
+          <RejectNftDialog
+                nftData={nftData}
+                type={type}
+                search={search}
+                page={page}
+                limit={limit}
+                loader={loader}
+                setLoader={setLoader}
+                open={rejectMintOpen}
+                setOpen={setRejectMintOpen}
+            />
             <MintNftDialog
                 nftData={nftData}
                 type={type}
@@ -63,6 +76,19 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                             </Grid>
                         </Grid>
                         <Grid item xs={6}>
+                            <Stack direction="row" justifyContent="end" alignItems="center">
+                                <Button
+                                    variant="text"
+                                    color="primary"
+                                    sx={{ marginRight: '5px' }}
+                                    onClick={() => {
+                                        console.log({ nftData });
+                                        setRejectMintOpen(true);
+                                    }}
+                                >
+                                    <Typography style={{ textDecoration: 'underline' }}> Reject</Typography>
+                                </Button>
+                            </Stack>
                             <Stack direction="row" justifyContent="end" alignItems="center">
                                 <Button
                                     variant="text"

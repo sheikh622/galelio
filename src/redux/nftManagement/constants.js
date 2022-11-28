@@ -8,3 +8,4 @@ export const REQUEST_NFT_FOR_MINTING = 'request_nft_for_minting';
 export const MINT_NFT = 'mint_nft';
 export const LAZY_MINT_NFT = 'lazy_mint_nft';
 export const DELETE_NFT = 'delete_nft';
+export const REJECT_NFT = 'reject_nft';

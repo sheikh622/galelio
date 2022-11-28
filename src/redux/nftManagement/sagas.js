@@ -10,10 +10,15 @@ import {
     REQUEST_NFT_FOR_MINTING,
     GET_ALL_NFT_SUPER_ADMIN,
     EDIT_NFT,
-    DELETE_NFT
+    DELETE_NFT,
+    REJECT_NFT
 } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
+
+
+
+
 
 function* deleteNftRequest({ payload }) {
     try {
@@ -232,6 +237,31 @@ export function* watchMintNft() {
     yield takeLatest(MINT_NFT, mintNftRequest);
 }
 
+function* rejectNftRequest({ payload }) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.patch(`nft/admin/mintReject/${payload.id}`,{}, headers);
+        yield put(
+            getAllNftSuperAdmin({
+                categoryId: payload.categoryId,
+                brandId: payload.brandId,
+                search: payload.search,
+                page: payload.page,
+                limit: payload.limit,
+                type: payload.type
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchRejectNft() {
+    yield takeLatest(REJECT_NFT, rejectNftRequest);
+}
+
 export default function* nftSaga() {
     yield all([
         fork(watchGetAllNftSuperAdmin),
@@ -241,6 +271,7 @@ export default function* nftSaga() {
         fork(watchLazyMintNft),
         fork(watchRequestNftForMinting),
         fork(watchEditNft),
-        fork(watchDeleteNft)
+        fork(watchDeleteNft),
+        fork(watchRejectNft)
     ]);
 }
