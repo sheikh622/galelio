@@ -8,7 +8,8 @@ import Tabs from './tabs';
 const Marketplace = () => {
     const theme = useTheme();
     return (
-        <Grid style={{ background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'}}>
+        <Grid style={{ background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+        color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}>
             <Grid style={{}}>
                 <Appbar />
             </Grid>
