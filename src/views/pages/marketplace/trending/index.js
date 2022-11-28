@@ -91,7 +91,7 @@ const Trending = () => {
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {itemData.map((item) => (
                         <Grid item xs={11} sm={6} md={6} lg={2} xl={2}>
-                            <Card sx={{ background:theme.palette.mode === 'dark' ? "#181C1F" : "white", maxWidth: 365, width: '105%', boxShadow: '1px 2px 9px #d3d3d3', borderRadius: '7px' }}>
+                            <Card sx={{ color:theme.palette.mode === 'dark' ? "white" : "#404040", background:theme.palette.mode === 'dark' ? "#181C1F" : "white", maxWidth: 365, width: '105%', boxShadow: '1px 2px 9px #d3d3d3', borderRadius: '7px' }}>
                                 <CardActionArea>
                                     <CardMedia component="img" height="200" image={item.img} />
                                     <CardContent style={{ padding: '6%' }}>
