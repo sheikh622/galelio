@@ -15,7 +15,8 @@ import NavigationScroll from 'layout/NavigationScroll';
 // import RTLLayout from 'ui-component/RTLLayout';
 import Snackbar from 'ui-component/extended/Snackbar';
 import React from 'react';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // ==============================|| APP ||============================== //
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
                 <CssBaseline />
                 {/* RTL layout */}
                 {/* <RTLLayout> */}
+                <ToastContainer autoClose={8000} />
                 <Locales>
                     <NavigationScroll>
                         <>

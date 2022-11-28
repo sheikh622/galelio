@@ -1,24 +1,16 @@
 {
-
     "admin.dashboard": "Dashboard",
-   
-   
-    
- 
-    "admin.brand":"Brand",
-    "admin.adminManagement":"Admin Management",
-    "admin.BrandManagement":"Brand Management",
-    
-
+    "categories": "Categories",
+    "admin.brand": "Brand",
+    "admin.adminManagement": "Admin Management",
+    "admin.BrandManagement": "Brand Management",
     "dashboard": "Dashboard",
     "default": "Default",
     "analytics": "Analytics",
-
     "widget": "Widget",
     "statistics": "Statistics",
     "data": "Data",
     "chart": "Chart",
-
     "application": "Application",
     "users": "Users",
     "social-profile": "Social Profile",

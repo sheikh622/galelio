@@ -4,18 +4,18 @@ import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { deleteBrand } from '../../../../../redux/brand/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function DeleteBrandDialog({ deleteOpen, setDeleteOpen, brandId, page, limit, search }) {
+export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit, search }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
-        setDeleteOpen(false);
+        setOpen(false);
         
     };
    
     return (
         <>
             <Dialog
-                open={deleteOpen}
+                open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}

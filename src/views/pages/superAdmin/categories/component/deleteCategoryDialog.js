@@ -4,18 +4,17 @@ import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { deleteCategory } from 'redux/categories/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function DeleteCategoryDialog({categories,setCategories, deleteOpen, setDeleteOpen,page, limit, search }) {
+export default function DeleteCategoryDialog({ open, setOpen, page, limit, search, categoryId }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const handleClose = () => {
-        setDeleteOpen(false);
-        setCategories({ brandId: 0 });
+        setOpen(false);
     };
-   
+
     return (
         <>
             <Dialog
-                open={deleteOpen}
+                open={open}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
@@ -44,12 +43,11 @@ export default function DeleteCategoryDialog({categories,setCategories, deleteOp
                         onClick={() => {
                             dispatch(
                                 deleteCategory({
-                                    categoryId: categories.categoryId,
-                                    brandId:categories.brandId,
-                                    handleClose: handleClose,
+                                    categoryId: categoryId,
                                     page: page,
                                     limit: limit,
-                                    search: search
+                                    search: search,
+                                    handleClose: handleClose
                                 })
                             );
                         }}

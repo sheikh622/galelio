@@ -4,10 +4,11 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import SubAdminGuard from './SubAdminGuard';
 
-const SubAdmin = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
+const SubAdminDashboard = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
-const BrandManagement = Loadable(lazy(() => import('views/pages/superAdmin/brandManagement')));
+const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const SubAdminRoutes = {
@@ -19,22 +20,22 @@ const SubAdminRoutes = {
     ),
     children: [
         {
-            path: '/dashboard',
-            element: <SubAdmin />
+            path: '/',
+            element: <SubAdminDashboard />
         },
+
         {
             path: '/brands',
             element: <Brand />
         },
         {
-            path: '/categories',
-            element: <Category />
+            path: '/brands/admin',
+            element: <BrandAdmin />
         },
         {
-            path: '/brandManagement',
-            element: <BrandManagement />
-        },
-   
+            path: '/categories',
+            element: <Category />
+        }
     ]
 };
 

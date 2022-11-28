@@ -12,35 +12,24 @@ import kanbanReducer from './themeReducers/kanbanReducer';
 import AuthReducer from 'redux/auth/reducers';
 import brand from 'redux/brand/reducers';
 import category from 'redux/categories/reducers';
+import subAdminReducer from 'redux/subAdmin/reducers';
+import brandadminReducer from 'redux/brandAdmin/reducers';
+import brandCategoryReducer from 'redux/brandCategory/reducers';
+import nftReducer from 'redux/nftManagement/reducers';
 
-import adminReducer from 'redux/adminManagement/reducers';
-import brandadminReducer from 'redux/brandManagement/reducers';
-import nftByCategoryReducer from 'redux/nftManagement/reducers';
-
-// ==============================|| COMBINE REDUCER ||============================== //
 
 const rootReducer = combineReducers({
-    // router: connectRouter(history),
     customization: customizationReducer,
     snackbar: snackbarReducer,
     cart: cartReducer,
-    // cart: persistReducer(
-    //     {
-    //         key: 'cart',
-    //         storage,
-    //         keyPrefix: 'berry-'
-    //     },
-    //     cartReducer
-    // ),
-    brand: brand,
-    category: category,
     kanban: kanbanReducer,
     auth: AuthReducer,
-    adminReducer: adminReducer,
+    brand: brand,
+    category: category,
+    subAdminReducer: subAdminReducer,
     brandadminReducer: brandadminReducer,
-    nftsByCategoryReducer: nftByCategoryReducer
-
-
+    brandCategoryReducer: brandCategoryReducer,
+    nftReducer: nftReducer
 });
 
 export default rootReducer;

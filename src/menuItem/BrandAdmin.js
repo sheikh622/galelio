@@ -27,13 +27,13 @@ const brandAdminMenu = {
             id: 'dashboard',
             title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
-            url: '/dashboard',
+            url: '/',
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
         {
             id: 'categories',
-            title: <FormattedMessage id="Categories" />,
+            title: <FormattedMessage id="categories" />,
             type: 'item',
             url: '/categories',
             icon: icons.IconCheckbox,

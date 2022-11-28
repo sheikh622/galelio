@@ -2,8 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconDashboard, IconDeviceAnalytics,IconCheckbox, IconUser, 
-    IconUserCheck, IconReceipt2, IconClipboardList } from '@tabler/icons';
+import { IconDashboard, IconDeviceAnalytics, IconCheckbox, IconUser, IconUserCheck, IconReceipt2, IconClipboardList } from '@tabler/icons';
 import React from 'react';
 
 // constant
@@ -21,17 +20,17 @@ const icons = {
 
 const subAdminMenu = {
     id: 'Admin',
-    // title: <FormattedMessage id="dashboard" />,
     type: 'group',
     children: [
         {
             id: 'dashboard',
             title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
-            url: '/dashboard',
+            url: '/',
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
+
         {
             id: 'Management',
             title: <FormattedMessage id=" Brand Management" />,
@@ -40,8 +39,15 @@ const subAdminMenu = {
             icon: icons.IconDeviceAnalytics,
             breadcrumbs: false,
             children: [
-             
-               
+                {
+                    id: 'categories',
+                    title: <FormattedMessage id="categories" />,
+                    type: 'item',
+                    icon: icons.IconCheckbox,
+                    url: '/categories',
+                    breadcrumbs: false
+                },
+
                 {
                     id: 'brand',
                     title: <FormattedMessage id="admin.brand" />,
@@ -49,31 +55,11 @@ const subAdminMenu = {
                     icon: icons.IconCheckbox,
                     url: '/brands',
                     breadcrumbs: false
-                },
-                {
-                    id: 'category',
-                    title: <FormattedMessage id="Category" />,
-                    type: 'item',
-                    icon: icons.IconCheckbox,
-                    url: '/categories',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Brand',
-                    title: <FormattedMessage id="Brand Management" />,
-                    type: 'item',
-                    url: '/brandManagement',
-                    icon: icons.IconReceipt2,
-                    breadcrumbs: false
-                },
-              
+                }
             ]
         }
-         
-         
-
-      
     ]
 };
 
 export default subAdminMenu;
+

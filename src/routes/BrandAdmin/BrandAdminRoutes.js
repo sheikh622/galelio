@@ -3,14 +3,11 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import BrandAdminGuard from './BrandAdminGuard';
-import category from 'redux/categories/reducers';
 
-const BrandAdmin = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
-const Category = Loadable(lazy(() => import('views/pages/brandAdmin/categories')));
-const NFTCategory = Loadable(lazy(() => import('views/pages/brandAdmin/nftCategory')));
+const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
+const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
+const NftManagement = Loadable(lazy(() => import('views/pages/brandAdmin/nftManagement')));
 
-
-// ==============================|| MAIN ROUTING ||============================== //
 
 const BrandAdminRoutes = {
     path: '/',
@@ -21,19 +18,17 @@ const BrandAdminRoutes = {
     ),
     children: [
         {
-            path: '/dashboard',
-            element: <BrandAdmin />
+            path: '/',
+            element: <BrandAdminDashboard />
         },
         {
             path: '/categories',
             element: <Category />
         },
         {
-            path: '/:categoryName/:categoryId',
-            element: <NFTCategory />
+            path: '/nftManagement',
+            element: <NftManagement />
         }
-   
-   
     ]
 };
 
