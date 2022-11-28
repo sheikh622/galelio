@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
-import { lazy } from 'react';
-import MainRoutes from './MainRoutes';
+
 
 import { useSelector } from 'react-redux';
 // routes
@@ -10,7 +9,6 @@ import SubAdminGuard from './subAdmin/SubAdminRoutes';
 import BrandAdminGuard from './BrandAdmin/BrandAdminRoutes';
 import LoginRoutes from './LoginRoutes';
 import AuthenticationRoutes from './AuthenticationRoutes';
-import Loadable from 'ui-component/Loadable';
 
 
 

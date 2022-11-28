@@ -102,9 +102,9 @@ const NewPage = () => {
                                         <Grid container>
                                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                                 <span style={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
-                                                <div style={{ marginTop: '5%' }}>{item.title}</div>
+                                                <div className='overflow' style={{ marginTop: '5%' }}>{item.title}</div>
                                             </Grid>
-                                            <Grid item xs={4} sx={{ background: '' }}>
+                                            <Grid item xs={4}  sx={{ background: '' }}>
                                                 <span style={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
                                                     {item.creator}
                                                 </span>
@@ -113,7 +113,7 @@ const NewPage = () => {
 
                                         <Divider sx={{ mt: 2, mb: 2 }} />
                                         <Grid container sx={{ background: '' }}>
-                                            <Grid item xs={7} sx={{ pt: 1 }}>
+                                            <Grid item md={6} xs={12} className='overflow' sx={{ pt: 1, }}>
                                                 <span
                                                     style={{
                                                         background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
@@ -150,7 +150,8 @@ const NewPage = () => {
                                                     04s
                                                 </span>
                                             </Grid>
-                                            <Grid item xs={5} sx={{ pl: 1 }}>
+                                            <Grid item md={6} xs={12} className='overflow' sx={{ pl: 1, marginTop:{xs:'10px', md:'0'} , 
+                                              }}>
                                                 Current Bid
                                                 <div style={{ marginTop: '5%', fontSize: '110%' }}>
                                                     <b>$2913.32</b>

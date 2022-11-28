@@ -86,7 +86,7 @@ const FeaturedPage = () => {
                                 <Grid item md={6} xs={6}>
                                     <CardMedia
                                         component="img"
-                                        sx={{ height: { xs: '100%', md: '254px;', sm: '100%' }, width: '90%' }}
+                                        sx={{ height: { xs: '100%', md: '100%', sm: '100%' }, width: '90%' }}
                                         image={shoes1}
                                     />
                                 </Grid>
@@ -110,7 +110,7 @@ const FeaturedPage = () => {
                                         padding: '20px 10px'
                                     }}
                                 >
-                                    <Grid item md={12} xs={12}>
+                                    <Grid item md={12} xs={12}   className='overflow'>
                                         <Typography
                                             variant="h3"
                                             sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' }, marginBottom: '10px' }}
