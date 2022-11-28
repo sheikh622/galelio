@@ -1,6 +1,6 @@
 import { Grid, Divider } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import Sider from '../landing/BiggestNFTMarketplace/Sider';
+import Sider from '../landing/biggestNFTMarketplace/Sider';
 import Footer from '../user/footer/footer';
 import Appbar from '../user/header/header';
 import Tabs from './tabs';

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import FadeInWhenVisible from '../BiggestNFTMarketplace/Animation';
+import FadeInWhenVisible from '../biggestNFTMarketplace/Animation';
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import WATCHES from 'assets/images/watch.png';
