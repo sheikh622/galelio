@@ -115,64 +115,68 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                 <Typography variant="h6">{nftData.NFTTokens.length} Items</Typography>
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
-                                <Button
-                                    variant="text"
-                                    color="primary"
-                                    sx={{ marginRight: '5px' }}
-                                    onClick={() => {
-                                        setDeleteNftOpen(true);
-                                        setNftInfo({
-                                            id: nftData.id,
-                                            nftName: nftData.name,
-                                            nftDescription: nftData.description,
-                                            nftPrice: nftData.price,
-                                            mintType: nftData.mintType,
-                                            currencyType: nftData.currencyType,
-                                            fieldDataArray: nftData.NFTMetaData,
-                                            images: image
-                                        });
-                                    }}
-                                >
-                                    <Typography style={{ textDecoration: 'underline' }}> Delete NFT</Typography>
-                                </Button>
+                                {nftData.status !== 'MINTED' && (
+                                    <>
+                                        <Button
+                                            variant="text"
+                                            color="primary"
+                                            sx={{ marginRight: '5px' }}
+                                            onClick={() => {
+                                                console.log({ nftData });
+                                                setEditNftOpen(true);
+                                                setNftInfo({
+                                                    id: nftData.id,
+                                                    nftName: nftData.name,
+                                                    nftDescription: nftData.description,
+                                                    nftPrice: nftData.price,
+                                                    mintType: nftData.mintType,
+                                                    currencyType: nftData.currencyType,
+                                                    fieldDataArray: nftData.NFTMetaData,
+                                                    images: image
+                                                });
+                                            }}
+                                        >
+                                            <Typography style={{ textDecoration: 'underline' }}> Edit NFT</Typography>
+                                        </Button>
+                                        <Button
+                                            variant="text"
+                                            color="primary"
+                                            sx={{ marginRight: '5px' }}
+                                            onClick={() => {
+                                                setDeleteNftOpen(true);
+                                                setNftInfo({
+                                                    id: nftData.id,
+                                                    nftName: nftData.name,
+                                                    nftDescription: nftData.description,
+                                                    nftPrice: nftData.price,
+                                                    mintType: nftData.mintType,
+                                                    currencyType: nftData.currencyType,
+                                                    fieldDataArray: nftData.NFTMetaData,
+                                                    images: image
+                                                });
+                                            }}
+                                        >
+                                            <Typography style={{ textDecoration: 'underline' }}> Delete NFT</Typography>
+                                        </Button>
+                                    </>
+                                )}
+
+                                {(nftData.status == 'DRAFT' || nftData.status == 'REJECTED') && (
+                                    <Button
+                                        variant="text"
+                                        color="primary"
+                                        sx={{ marginRight: '5px' }}
+                                        onClick={() => {
+                                            setOpenRequestMint(true);
+                                        }}
+                                    >
+                                        <Typography style={{ textDecoration: 'underline' }}> Request</Typography>
+                                    </Button>
+                                )}
                             </Stack>
-                            <Stack direction="row" justifyContent="end" alignItems="center">
-                                <Button
-                                    variant="text"
-                                    color="primary"
-                                    sx={{ marginRight: '5px' }}
-                                    onClick={() => {
-                                        console.log({ nftData });
-                                        setEditNftOpen(true);
-                                        setNftInfo({
-                                            id: nftData.id,
-                                            nftName: nftData.name,
-                                            nftDescription: nftData.description,
-                                            nftPrice: nftData.price,
-                                            mintType: nftData.mintType,
-                                            currencyType: nftData.currencyType,
-                                            fieldDataArray: nftData.NFTMetaData,
-                                            images: image
-                                        });
-                                    }}
-                                >
-                                    <Typography style={{ textDecoration: 'underline' }}> Edit NFT</Typography>
-                                </Button>
-                            </Stack>
-                            <Stack direction="row" justifyContent="end" alignItems="center">
-                                <Button
-                                    variant="text"
-                                    color="primary"
-                                    sx={{ marginRight: '5px' }}
-                                    onClick={() => {
-                                        setOpenRequestMint(true);
-                                    }}
-                                >
-                                    <Typography style={{ textDecoration: 'underline' }}> Request</Typography>
-                                </Button>
-                            </Stack>
+                            <Stack direction="row" justifyContent="end" alignItems="center"></Stack>
                         </Grid>
                     </Grid>
                 </CardContent>

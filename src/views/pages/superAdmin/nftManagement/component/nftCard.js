@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
-import RejectNftDialog from './rejectNftDialog'
+import RejectNftDialog from './rejectNftDialog';
 const NftCard = ({ nftData, search, page, limit, type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
@@ -11,7 +11,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
     const [rejectMintOpen, setRejectMintOpen] = useState(false);
     return (
         <>
-          <RejectNftDialog
+            <RejectNftDialog
                 nftData={nftData}
                 type={type}
                 search={search}
@@ -47,12 +47,16 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                 <CardMedia sx={{ height: 220 }} image={nftData.asset} />
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={9}>
+                        <Grid item xs={8}>
                             <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
                                 {nftData.name}
                             </Typography>
                         </Grid>
-
+                        <Grid item xs={4}>
+                            <Typography variant="body1" sx={{ textDecoration: 'none' }}>
+                                {nftData.mintType == 'lazyMint' ? 'Lazy Mint' : 'Mint'}
+                            </Typography>
+                        </Grid>
                         <Grid item xs={12} mt={-1.5}>
                             <Typography
                                 variant="body1"
@@ -77,32 +81,34 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                         </Grid>
                         <Grid item xs={6}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
-                                <Button
-                                    variant="text"
-                                    color="primary"
-                                    sx={{ marginRight: '5px' }}
-                                    onClick={() => {
-                                        console.log({ nftData });
-                                        setRejectMintOpen(true);
-                                    }}
-                                >
-                                    <Typography style={{ textDecoration: 'underline' }}> Reject</Typography>
-                                </Button>
+                                {nftData.status == 'REQUESTED' && (
+                                    <Button
+                                        variant="text"
+                                        color="primary"
+                                        sx={{ marginRight: '5px' }}
+                                        onClick={() => {
+                                            console.log({ nftData });
+                                            setRejectMintOpen(true);
+                                        }}
+                                    >
+                                        <Typography style={{ textDecoration: 'underline' }}> Reject</Typography>
+                                    </Button>
+                                )}
+
+                                {nftData.status == 'REQUESTED' && (
+                                    <Button
+                                        variant="text"
+                                        color="primary"
+                                        sx={{ marginRight: '5px' }}
+                                        onClick={() => {
+                                            console.log({ nftData });
+                                            setOpenMint(true);
+                                        }}
+                                    >
+                                        <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>
+                                    </Button>
+                                )}
                             </Stack>
-                            <Stack direction="row" justifyContent="end" alignItems="center">
-                                <Button
-                                    variant="text"
-                                    color="primary"
-                                    sx={{ marginRight: '5px' }}
-                                    onClick={() => {
-                                        console.log({ nftData });
-                                        setOpenMint(true);
-                                    }}
-                                >
-                                    <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>
-                                </Button>
-                            </Stack>
-                           
                         </Grid>
                     </Grid>
                 </CardContent>

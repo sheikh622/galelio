@@ -49,7 +49,7 @@ const typeArray = [
     }
 ];
 
-export default function AddNft({ open, setOpen, data, search, page, limit,nftType }) {
+export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
     const dispatch = useDispatch();
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -127,11 +127,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit,nftTyp
                         currencyType: type,
                         quantity: values.images[0].quantity,
                         asset: values.images[0].image,
-                        type:nftType,
-                        page:page,
-                        limit:limit,
-                        search:search,
-                        categoryId:data.CategoryId,
+                        type: nftType,
+                        page: page,
+                        limit: limit,
+                        search: search,
+                        categoryId: data.CategoryId,
                         handleClose: handleClose
                     })
                 );
@@ -144,6 +144,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit,nftTyp
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
+        setMintType('directMint');
+        setType('ETH');
+        setUploadedImages([]);
+        setFieldDataArray([]);
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {

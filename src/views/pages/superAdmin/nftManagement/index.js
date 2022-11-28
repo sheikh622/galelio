@@ -26,10 +26,6 @@ const typeArray = [
         label: 'Waiting For approval'
     },
     {
-        value: 'draft',
-        label: 'Draft NFTS'
-    },
-    {
         value: 'rejected',
         label: 'Rejected NFTS'
     }
@@ -107,21 +103,6 @@ const NftManagement = () => {
                             </TextField>
                         </Grid>
                         <Grid item xs={6} style={{ textAlign: 'end' }}>
-                            <Button
-                                size="small"
-                                sx={{
-                                    marginRight: '10px',
-                                    ':hover': {
-                                        boxShadow: 'none'
-                                    }
-                                }}
-                                variant="contained"
-                                onClick={() => {
-                                    setAddNftOpen(true);
-                                }}
-                            >
-                                Add NFT
-                            </Button>
                             <Button
                                 variant="contained"
                                 size="small"

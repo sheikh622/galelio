@@ -16,10 +16,6 @@ import {
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
-
-
-
-
 function* deleteNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -240,7 +236,7 @@ export function* watchMintNft() {
 function* rejectNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.patch(`nft/admin/mintReject/${payload.id}`,{}, headers);
+        const response = yield axios.patch(`nft/admin/mintReject/${payload.id}`, {}, headers);
         yield put(
             getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
