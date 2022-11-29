@@ -8,6 +8,7 @@ import SuperAdminRoutes from './superAdmin/SuperAdminRoutes';
 import SubAdminGuard from './subAdmin/SubAdminRoutes';
 import BrandAdminGuard from './BrandAdmin/BrandAdminRoutes';
 import LoginRoutes from './LoginRoutes';
+import UserRoutes from './UserRoutes'
 import AuthenticationRoutes from './AuthenticationRoutes';
 
 
@@ -24,6 +25,6 @@ export default function ThemeRoutes() {
         return useRoutes([BrandAdminGuard, LoginRoutes, AuthenticationRoutes]);
     } 
     else{
-        return useRoutes([LoginRoutes, AuthenticationRoutes] );
+        return useRoutes([LoginRoutes, AuthenticationRoutes,UserRoutes] );
     }
 }

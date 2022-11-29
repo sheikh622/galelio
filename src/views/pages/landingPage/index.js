@@ -4,13 +4,13 @@ import { Box, Grid, Typography, Divider } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 // project imports
-import Header from './Header';
+import Header from './component/Header';
 
-import NewPage from './New';
-import FeaturedPage from './FeaturedCreators';
-import Sider from './Sider';
+import NewPage from './component/New';
+import FeaturedPage from './component/FeaturedCreators';
+import Sider from './component/Sider';
 
-import CategoriesPage from './Categories';
+import CategoriesPage from './component/Categories';
 import Footer from 'views/pages/user/footer/footer';
 import Appbar from 'views/pages/user/header/header';
 
