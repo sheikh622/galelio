@@ -8,7 +8,7 @@ import Loadable from 'ui-component/Loadable';
 
 // login routing
 const LandingPage = Loadable(lazy(() => import('views/pages/landingPage')));
-
+const Marketplace = Loadable(lazy(() => import('views/pages/marketplace')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -26,8 +26,10 @@ const UserRoutes = {
             path: '/landingPage',
             element: <LandingPage />
         },
-        
-
+        {
+            path: '/marketplace',
+            element: <Marketplace />
+        }
     ]
 };
 

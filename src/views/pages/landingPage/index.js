@@ -1,10 +1,19 @@
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import Header from './component/Header';
-import NewPage from './component/New';
-import FeaturedPage from './component/FeaturedCreators';
-import CategoriesPage from './component/Categories';
+import NewAndTrendingNfts from './component/newAndTrending';
+import Categories from './component/Categories';
+import FeaturedCreators from './component/FeaturedCreators';
+import { getAllLandingPageData } from 'redux/landingPage/actions';
+const LandingPage = () => {
+    const dispatch = useDispatch();
+    const landingPageData = useSelector((state) => state.landingPageReducer.landingPageData);
+    console.log('landingPageData', landingPageData);
+    useEffect(() => {
+        dispatch(getAllLandingPageData());
+    }, []);
 
-const Landing = () => {
     return (
         <Grid item md={11} xs={12}>
             <Grid container-fluid sx={{ background: '' }}>
@@ -12,18 +21,18 @@ const Landing = () => {
                     <Header />
                 </Grid>
                 <Grid item md={12} xs={12}>
-                    <NewPage />
+                    <NewAndTrendingNfts nfts={landingPageData.newNfts} />
                 </Grid>
                 <Grid item md={12} xs={12}>
-                    <CategoriesPage />
+                    <Categories categories={landingPageData.categories}/>
                 </Grid>
 
                 <Grid mb={4} item md={12} xs={12}>
-                    <FeaturedPage />
+                    <FeaturedCreators brands={landingPageData.brands}/>
                 </Grid>
             </Grid>
         </Grid>
     );
 };
 
-export default Landing;
+export default LandingPage;

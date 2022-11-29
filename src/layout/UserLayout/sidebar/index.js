@@ -55,18 +55,18 @@ const SideBar = () => {
                             item
                             sx={{ mt: 2, cursor: 'pointer' }}
                             onClick={() => {
-                                navigate('/BiggestNFTMarketplace');
+                                navigate('/landingPage');
                             }}
                         >
-                            {pathName == '/BiggestNFTMarketplace' ? (
+                            {pathName == '/landingPage' ? (
                                 <>
-                                    <Tooltip title="Dashboard" placement="right" arrow>
+                                    <Tooltip title="Landing Page" placement="right" arrow>
                                         <DashboardIcon sx={{ color: `${color}` }} />
                                     </Tooltip>
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip title="Dashboard" placement="right" arrow>
+                                    <Tooltip title="Landing Page" placement="right" arrow>
                                         <DashboardIcon />
                                     </Tooltip>
                                 </>

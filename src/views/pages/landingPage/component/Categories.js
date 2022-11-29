@@ -3,38 +3,12 @@ import { useTheme } from '@mui/material/styles';
 import {  Grid, Typography, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
-import car from 'assets/images/unsplash_bMSA5-tLFao.png';
 import CardMedia from '@mui/material/CardMedia';
 
 
-const CategoriesPage = () => {
+const Categories = ({categories}) => {
     const theme = useTheme();
-    const itemData = [
-        {
-            img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-            title: 'Luxury Car'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-            title: 'Luxury Shoes'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            title: 'Luxury Watches'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-            title: 'Real Estate'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-            title: 'Luxury Goods'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-            title: 'Luxury Goods'
-        }
-    ];
+    
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
@@ -54,7 +28,7 @@ const CategoriesPage = () => {
 
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {itemData.map((item) => (
+                    {categories.length > 0 && categories.map((item) => (
                         <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
                             <Grid container justifyContent="center" spacing={1}>
                                 <Grid item   component={RouterLink}
@@ -70,7 +44,7 @@ const CategoriesPage = () => {
                                         }}
                                         
                                     >
-                                        <CardMedia component="img" width="100%" height="auto" image={car} />
+                                        <CardMedia component="img" width="100%" height="auto" image={item.image} />
 
                                         <Box
                                             sx={{
@@ -89,7 +63,7 @@ const CategoriesPage = () => {
                                             }}
                                         >
                                             <Typography variant="h5" color="#fff">
-                                                {item.title}
+                                                {item.name}
                                             </Typography>
                                         </Box>
                                     </Box>
@@ -103,4 +77,4 @@ const CategoriesPage = () => {
     );
 };
 
-export default CategoriesPage;
+export default Categories;

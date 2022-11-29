@@ -1,13 +1,8 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Grid, Tab, Tabs, Typography } from '@mui/material';
-
-// assets
-import Trending from './trending/index';
 import binance from 'assets/images/coins/binance.png';
 import eth from 'assets/images/coins/eth.png';
 import polygon from 'assets/images/coins/polygon.png';
@@ -45,10 +40,11 @@ function a11yProps(index) {
     };
 }
 
-export default function HorizontalTabs() {
+export default function HorizontalTabs({ marketplaceCategories }) {
     const theme = useTheme();
     const [value, setValue] = useState(0);
 
+    console.log('marketplaceCategories', marketplaceCategories);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -67,7 +63,7 @@ export default function HorizontalTabs() {
                         minWidth: 10,
                         py: 1.5,
                         px: 0,
-                        mr: 3.7,
+                        mr: 4.7,
                         color: theme.palette.grey[600],
                         display: 'flex',
                         flexDirection: 'row',
@@ -80,15 +76,12 @@ export default function HorizontalTabs() {
                     }
                 }}
             >
-                <Tab component={Link} to="#" label="Trending" {...a11yProps(0)} />
-                <Tab component={Link} to="#" label="Top" {...a11yProps(1)} />
-                <Tab component={Link} to="#" label={<>Cars </>} {...a11yProps(2)} />
-                <Tab component={Link} to="#" label="Luxury Watches" {...a11yProps(3)} />
-                <Tab component={Link} to="#" label="Shoes" {...a11yProps(3)} />
-                <Tab component={Link} to="#" label="Luxury Goods" {...a11yProps(3)} />
-                <Tab component={Link} to="#" label="Real Estate" {...a11yProps(3)} />
+                {marketplaceCategories.categories.length > 0 &&
+                    marketplaceCategories.categories.map((item) => {
+                        return <Tab component={Link} to="#" label={item.name} {...a11yProps(item.id)} />;
+                    })}
 
-                <Grid item sx={{ display: { xs: 'none' } }}>
+                {/* <Grid item sx={{ display: { xs: 'none' } }}>
                     <div
                         style={{
                             background: 'white',
@@ -131,10 +124,10 @@ export default function HorizontalTabs() {
                             </span>
                         </div>
                     </div>
-                </Grid>
+                </Grid> */}
             </Tabs>
 
-            <Grid item sx={{ display: { md: 'none' }, marginRight: '5%', marginLeft: '3%' }}>
+            {/* <Grid item sx={{ display: { md: 'none' }, marginRight: '5%', marginLeft: '3%' }}>
                 <div
                     style={{
                         background: 'white',
@@ -180,8 +173,8 @@ export default function HorizontalTabs() {
                     </div>
                 </div>
             </Grid>
-
-            <TabPanel value={value} index={0}>
+         */}
+            {/* <TabPanel value={value} index={0}>
                 <Trending />
             </TabPanel>
             <TabPanel value={value} index={1}>
@@ -201,7 +194,7 @@ export default function HorizontalTabs() {
             </TabPanel>
             <TabPanel value={value} index={6}>
                 Seven
-            </TabPanel>
+            </TabPanel> */}
         </>
     );
 }

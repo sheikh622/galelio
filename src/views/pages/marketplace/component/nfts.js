@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
-const Trending = () => {
+const NFTS = () => {
     const theme = useTheme();
 
     const itemData = [
@@ -171,4 +171,4 @@ const Trending = () => {
     );
 };
 
-export default Trending;
+export default NFTS;
