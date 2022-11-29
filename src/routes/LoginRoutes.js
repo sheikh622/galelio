@@ -10,9 +10,9 @@ import Loadable from 'ui-component/Loadable';
 const AuthLogin = Loadable(lazy(() => import('views/auth/login')));
 const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
-const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
-const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/BiggestNFTMarketplace')));
-const Marketplace = Loadable(lazy(() => import('views/pages/marketplace/index')));
+// const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
+// const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/BiggestNFTMarketplace')));
+// const Marketplace = Loadable(lazy(() => import('views/pages/marketplace/index')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -38,19 +38,19 @@ const LoginRoutes = {
             path: '/resetPassword',
             element: <AuthRsetPassword />
         },
-        {
-            path: '/marketplace',
-            element: <Marketplace />
-        },
-        {
-            path: '/ProductDetails',
-            element: <ProductDetails />
-        },
+        // {
+        //     path: '/marketplace',
+        //     element: <Marketplace />
+        // },
+        // {
+        //     path: '/ProductDetails',
+        //     element: <ProductDetails />
+        // },
        
-        {
-            path: '/BiggestNFTMarketplace',
-            element: <BiggestNFTMarketplace />
-        },
+        // {
+        //     path: '/BiggestNFTMarketplace',
+        //     element: <BiggestNFTMarketplace />
+        // },
 
     ]
 };

@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 // project imports
 import GuestGuard from 'utils/route-guard/GuestGuard';
-import MinimalLayout from 'layout/MinimalLayout';
+import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
 
@@ -17,7 +17,7 @@ const UserRoutes = {
     element: (
         <NavMotion>
             <GuestGuard>
-                <MinimalLayout />
+                <UserLayout />
             </GuestGuard>
         </NavMotion>
     ),

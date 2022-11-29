@@ -1,18 +1,13 @@
-// material-ui
-import { styled } from '@mui/material/styles';
-import { Box, Grid, Typography, Divider } from '@mui/material';
+
+import { Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
-// project imports
 import Header from './component/Header';
-
 import NewPage from './component/New';
 import FeaturedPage from './component/FeaturedCreators';
 import Sider from './component/Sider';
-
 import CategoriesPage from './component/Categories';
-import Footer from 'views/pages/user/footer/footer';
-import Appbar from 'views/pages/user/header/header';
+
+
 
 // =============================|| LANDING MAIN ||============================= //
 
@@ -25,7 +20,7 @@ const Landing = () => {
                 background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
             }}
         >
-            <Appbar />
+           
             <Grid
                 container-fluid
                 sx={{
@@ -63,22 +58,7 @@ const Landing = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
-            <Grid
-                container-fluid
-                sx={{
-                    display: {
-                        xs: 'block',
-                        sm: 'block',
-                        md: 'flex'
-                    }
-                }}
-            >
-                <Grid item md={1} xs={12}></Grid>
-                <Grid item md={11} xs={12}>
-                    <Footer />
-                </Grid>
-            </Grid>
+          
         </Grid>
     );
 };
