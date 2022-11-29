@@ -1,17 +1,11 @@
-// material-ui
+
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Typography, Box } from '@mui/material';
-
+import {  Grid, Typography, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
-
 import { gridSpacing } from 'store/constant';
 import car from 'assets/images/unsplash_bMSA5-tLFao.png';
 import CardMedia from '@mui/material/CardMedia';
 
-// assets
-
-// =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const CategoriesPage = () => {
     const theme = useTheme();

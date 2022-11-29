@@ -1,19 +1,12 @@
-// material-ui
-import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Typography } from '@mui/material';
 
-// project imports
-import FadeInWhenVisible from './Animation';
-import SubCard from 'ui-component/cards/SubCard';
-import Avatar from 'ui-component/extended/Avatar';
+import { useTheme } from '@mui/material/styles';
+import {  Grid, Typography } from '@mui/material';
 import { gridSpacing } from 'store/constant';
 import shoes1 from 'assets/images/shoes1.png';
 import shoes2 from 'assets/images/shoes2.png';
 import shoes3 from 'assets/images/shoes3.png';
 import CardMedia from '@mui/material/CardMedia';
 import { Link as RouterLink } from 'react-router-dom';
-
-// =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const FeaturedPage = () => {
     const theme = useTheme();

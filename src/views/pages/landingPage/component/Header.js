@@ -1,41 +1,15 @@
 import { Link as RouterLink } from 'react-router-dom';
-
-// material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { Box, Button, Container, Grid, Link, Typography } from '@mui/material';
-
-// third party
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-
-// project imports
-// project imports
-import Avatar from 'ui-component/extended/Avatar';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
-
-// assets
-// import dashboard from 'assets/images/landing/dashboard.png';
 import widget1 from 'assets/images/watch.png';
-// import widget2 from 'assets/images/landing/widget-2.png';
-
-// styles
-const HeaderImage = styled('img')(({ theme }) => ({
-    maxWidth: '100%',
-
-    borderRadius: '20px',
-    transform: 'scale(1.7)',
-    transformOrigin: theme.direction === 'rtl' ? '100% 50%' : '0 50%',
-    [theme.breakpoints.down('lg')]: {
-        transform: 'scale(1.2)'
-    }
-}));
 
 const HeaderAnimationImage = styled('img')({
     maxWidth: '100%',
     filter: 'drop-shadow(0px 0px 50px rgb(33 150 243 / 30%))'
 });
-
-// ==============================|| LANDING - HEADER PAGE ||============================== //
 
 const HeaderPage = () => {
     const theme = useTheme();
@@ -72,7 +46,7 @@ const HeaderPage = () => {
                                             fontSize: { xs: '2.25rem', sm: '3rem', md: '4rem' },
                                             fontWeight: 900,
                                             lineHeight: 1.4,
-                                            color:'#000'
+                                            color: '#000'
                                         }}
                                     >
                                         The Biggest NFT

@@ -1,22 +1,9 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Container, Card, Grid, Typography, CardActionArea, CardContent, Divider } from '@mui/material';
-
-// project imports
-import FadeInWhenVisible from './Animation';
-import SubCard from 'ui-component/cards/SubCard';
-import Avatar from 'ui-component/extended/Avatar';
+import { Card, Grid, Typography, CardActionArea, CardContent, Divider } from '@mui/material';
 import { gridSpacing } from 'store/constant';
-import WATCHES from 'assets/images/WATCHES.png';
 import CardMedia from '@mui/material/CardMedia';
-
-// assets
-import PaletteTwoToneIcon from '@mui/icons-material/PaletteTwoTone';
-import ReorderTwoToneIcon from '@mui/icons-material/ReorderTwoTone';
-import SpeedTwoToneIcon from '@mui/icons-material/SpeedTwoTone';
 import { Link as RouterLink } from 'react-router-dom';
-
-// =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const NewPage = () => {
     const theme = useTheme();
