@@ -611,3 +611,28 @@ body {
     /* border: 1px solid; */
     text-overflow: ellipsis;
 }
+.text{
+    font-weight: 700;
+font-size: 22px;
+
+}
+.creator{
+    font-weight: 400;
+    font-size: 17px;  
+}
+.list{
+display: flex;
+}
+.item{
+margin-right: 30px;
+list-style: none;
+}
+.itemstyle{
+    margin-right: 30px;
+
+}
+.para{
+    font-weight: 300;
+font-size: 17px;
+
+}

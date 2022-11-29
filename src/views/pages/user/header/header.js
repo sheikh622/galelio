@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { styled, alpha, useTheme } from '@mui/material/styles';
+import { Link as RouterLink } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -105,7 +107,13 @@ export default function Header() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem
+                component={RouterLink}
+                to="/creatorProfile"
+                //  onClick={handleMenuClose}
+            >
+                My Profile
+            </MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
@@ -161,10 +169,7 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar
-                position="static"
-                sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}`,  }}
-            >
+            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
                 <Toolbar>
                     <Typography variant="h6" noWrap component="div" sx={{ mt: 2, display: { xs: '', sm: 'block' } }}>
                         {theme.palette.mode === 'dark' ? (
@@ -174,7 +179,7 @@ export default function Header() {
                         )}
                     </Typography>
                     <Grid container-fluid>
-                        <Grid item sx={{ display: { lg: 'none', md: 'none'} }}>
+                        <Grid item sx={{ display: { lg: 'none', md: 'none' } }}>
                             <Drawer />
                         </Grid>
 

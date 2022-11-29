@@ -46,7 +46,7 @@ const Landing = () => {
                     <Sider />
                 </Grid>
                 <Grid item md={11} xs={12}>
-                    <Grid container-fluid sx={{ background: '' }}>
+                    <Grid container-fluid>
                         <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
                             <Header />
                         </Grid>
