@@ -26,10 +26,6 @@ const typeArray = [
         label: 'Waiting For approval'
     },
     {
-        value: 'draft',
-        label: 'Draft NFTS'
-    },
-    {
         value: 'rejected',
         label: 'Rejected NFTS'
     }
@@ -41,12 +37,10 @@ const NftManagement = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const nftList = useSelector((state) => state.nftReducer.nftListSuperAdmin);
-    console.log('nftList', nftList);
     const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(12);
-    const [addNftOpen, setAddNftOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -107,21 +101,6 @@ const NftManagement = () => {
                             </TextField>
                         </Grid>
                         <Grid item xs={6} style={{ textAlign: 'end' }}>
-                            <Button
-                                size="small"
-                                sx={{
-                                    marginRight: '10px',
-                                    ':hover': {
-                                        boxShadow: 'none'
-                                    }
-                                }}
-                                variant="contained"
-                                onClick={() => {
-                                    setAddNftOpen(true);
-                                }}
-                            >
-                                Add NFT
-                            </Button>
                             <Button
                                 variant="contained"
                                 size="small"

@@ -23,19 +23,21 @@ import {
     IconButton,
     MenuItem
 } from '@mui/material';
-import UploadImage from 'assets/images/icons/image-upload.svg';
-import AnimateButton from 'ui-component/extended/AnimateButton';
-import clsx from 'clsx';
+
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import fileFill from '@iconify-icons/eva/file-fill';
-import closeFill from '@iconify-icons/eva/close-fill';
+import { addNft } from 'redux/nftManagement/actions';
 import { fData } from 'utils/formatNumber';
-import QuantitySelector from './quantitySelector';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addNft } from 'redux/nftManagement/actions';
+import QuantitySelector from './quantitySelector';
+import fileFill from '@iconify-icons/eva/file-fill';
+import closeFill from '@iconify-icons/eva/close-fill';
+import UploadImage from 'assets/images/icons/image-upload.svg';
+import AnimateButton from 'ui-component/extended/AnimateButton';
+import clsx from 'clsx';
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const typeArray = [
@@ -49,7 +51,7 @@ const typeArray = [
     }
 ];
 
-export default function AddNft({ open, setOpen, data, search, page, limit,nftType }) {
+export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
     const dispatch = useDispatch();
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -61,8 +63,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit,nftTyp
 
     const handleError = (fieldDataArray, values) => {
         let isValid = true;
-        console.log('fieldDataArray', fieldDataArray);
-        console.log('values', values.images);
         if (parseInt(values.images[0].quantity) < 1) {
             toast.error('NFT Quantity must be greater than zero');
             isValid = false;
@@ -111,9 +111,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit,nftTyp
         },
         validationSchema,
         onSubmit: (values) => {
-            console.log('values', values);
-            console.log('fieldDataArray', fieldDataArray);
-            console.log('mintType', mintType);
             let isValid = handleError(fieldDataArray, values);
             if (isValid) {
                 dispatch(
@@ -127,11 +124,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit,nftTyp
                         currencyType: type,
                         quantity: values.images[0].quantity,
                         asset: values.images[0].image,
-                        type:nftType,
-                        page:page,
-                        limit:limit,
-                        search:search,
-                        categoryId:data.CategoryId,
+                        type: nftType,
+                        page: page,
+                        limit: limit,
+                        search: search,
+                        categoryId: data.CategoryId,
                         handleClose: handleClose
                     })
                 );
@@ -144,6 +141,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit,nftTyp
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
+        setMintType('directMint');
+        setType('ETH');
+        setUploadedImages([]);
+        setFieldDataArray([]);
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {

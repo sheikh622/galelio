@@ -6,7 +6,10 @@ import {
     ADD_NFT,
     MINT_NFT,
     LAZY_MINT_NFT,
-    REQUEST_NFT_FOR_MINTING
+    REQUEST_NFT_FOR_MINTING,
+    EDIT_NFT,
+    DELETE_NFT,
+    REJECT_NFT
 } from './constants';
 
 export const getAllNftSuperAdmin = (data) => {
@@ -44,6 +47,22 @@ export const addNft = (data) => {
     };
 };
 
+export const deleteNft = (data) => {
+    return {
+        type: DELETE_NFT,
+        payload: data
+    };
+};
+
+
+export const editNft = (data) => {
+    return {
+        type: EDIT_NFT,
+        payload: data
+    };
+};
+
+
 export const requestNftForMinting = (data) => {
     return {
         type: REQUEST_NFT_FOR_MINTING,
@@ -61,6 +80,13 @@ export const lazyMintNft = (data) => {
 export const mintNft = (data) => {
     return {
         type: MINT_NFT,
+        payload: data
+    };
+};
+
+export const rejectNft = (data) => {
+    return {
+        type: REJECT_NFT,
         payload: data
     };
 };

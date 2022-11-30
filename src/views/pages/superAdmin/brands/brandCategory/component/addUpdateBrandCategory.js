@@ -32,9 +32,6 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     };
 
     const handleContractDeployment = async () => {
-        console.log('brandCategoryData', brandCategoryData.brand);
-        console.log({ category });
-
         let brandName = brandCategoryData.brand.name;
         let categoryName;
         categoryArray.categories.map((data) => {
@@ -42,30 +39,20 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 categoryName = data.label;
             }
         });
-
-        console.log({ brandName });
-        console.log({ categoryName });
-
         const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
-        console.log({ contractName });
         const symbol = 'G' + brandName.substring(0, 1) + categoryName.substring(0, 1);
-        console.log({ symbol });
-
         const admin = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
         const validator = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        // // Set signer
         const signer = provider.getSigner();
         const minterAddress = await signer.getAddress();
         const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
-        console.log('factoryAddr', factoryAddr);
         let res = await (
             await factoryAddr.deployMintingContract(contractName, symbol, admin, minterAddress, validator).catch((error) => {
                 toast.error(error.message);
             })
         ).wait();
         let addr = res.events[3].args[0];
-        console.log(res.events[3].args[0]);
         dispatch(
             addBrandCategory({
                 brandId: brandCategoryData.brandId,
@@ -132,12 +119,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle
-                    id="form-dialog-title"
-                    onClick={() => {
-                        console.log({ brandCategoryData });
-                    }}
-                >
+                <DialogTitle id="form-dialog-title">
                     {!isUpdate ? 'Assign Category to brand ' : ' Update Profit percentage of category'}
                 </DialogTitle>
                 <Divider />

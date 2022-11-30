@@ -45,7 +45,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
             )
         })
     });
-    console.log({ brandAdminData });
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: brandAdminData,
