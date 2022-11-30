@@ -1,6 +1,6 @@
 import { Grid, Divider } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import Sider from '../landing/biggestNFTMarketplace/Sider';
+import SiderPage from '../landing/biggestNFTMarketplace/Sider';
 import Footer from '../user/footer/footer';
 import Appbar from '../user/header/header';
 import Tabs from './tabs';
@@ -24,7 +24,7 @@ const Marketplace = () => {
                     xs={12}
                     sx={{ position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
                 >
-                    <Sider style={{}} />
+                    <SiderPage style={{}} />
                 </Grid>
                 <Grid item md={11} xs={12} sx={{ mt: 2 }}>
                     <Grid container>

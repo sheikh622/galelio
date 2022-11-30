@@ -7,7 +7,7 @@ import SimilarProducts from './SimilarProducts';
 import SiderPage from '../biggestNFTMarketplace/Sider';
 import Activity from './Activity';
 import Footer from 'views/pages/user/footer/footer';
-import Appbar from 'views/pages/user/header/header'
+import Appbar from 'views/pages/user/header/header';
 import Properties from './Properties';
 import PropertiesView from './ProductView';
 import { useTheme } from '@emotion/react';

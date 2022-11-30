@@ -7,7 +7,7 @@ import { Divider, Grid, Stack, Typography, useMediaQuery, Box } from '@mui/mater
 // project imports
 import AuthWrapper1 from 'shared/component/AuthWrapper';
 import AuthCardWrapper from 'shared/component/AuthCardWrapper';
-import LoginForm from './component/LoginForm';
+import SignUpForm from './component/SignUp';
 import Logo from 'ui-component/Logo';
 import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
 import AuthSlider from 'ui-component/cards/AuthSlider';
@@ -20,7 +20,7 @@ import AuthSlider from 'ui-component/cards/AuthSlider';
 
 // ================================|| AUTH1 - LOGIN ||================================ //
 
-const Login = () => {
+const SignUp = () => {
     const theme = useTheme();
 
     return (
@@ -47,13 +47,13 @@ const Login = () => {
                         <Box sx={{ mb: 2 }}>
                             <Typography className='signInMarket' variant="subtitle1">
                                 
-                            Sign In</Typography>
+                            Sign Up</Typography>
                         </Box>
                     </Grid>
                 </Grid> 
                         <Grid container spacing={2} justifyContent="center" >
                             <Grid item xs={12}>
-                                <LoginForm />
+                                <SignUpForm />
                             </Grid>
                             <Grid item xs={12}>
                                 <Divider />
@@ -62,11 +62,11 @@ const Login = () => {
                                 <Grid item container direction="column" alignItems="center" xs={12}>
                                     <Typography
                                         component={Link}
-                                        to="/signUp"
+                                        to="/login"
                                         variant="subtitle1"
                                         sx={{ textDecoration: 'none' }}
                                     >
-                                        Don&apos;t have an account?
+                                    Already have an account? 
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -78,4 +78,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
