@@ -12,6 +12,7 @@ const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
 const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
+const LoginMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/login')));
 const Marketplace = Loadable(lazy(() => import('views/pages/marketplace/index')));
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
 
@@ -55,6 +56,10 @@ const LoginRoutes = {
         {
             path: '/creatorProfile',
             element: <Profile />
+        },
+        {
+            path: '/login',
+            element: <LoginMarketPlace />
         },
 
     ]

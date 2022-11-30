@@ -25,7 +25,6 @@ import {
     FormHelperText,
     FormControl,
     MenuItem,
-    CardContent,
     Grid,
     Stack
 } from '@mui/material';
@@ -110,7 +109,7 @@ export default function AddUpdateDialog({
             firstName: '',
             lastName: '',
             password: '',
-            block:''
+            block: ''
         });
         setOpen(false);
 
@@ -197,7 +196,7 @@ export default function AddUpdateDialog({
                                         autoComplete="given-name"
                                     />
                                     <InputLabel sx={{ marginTop: '25px' }} htmlFor="outlined-adornment-password-login">
-                                    Password (should contain 1 Uppercase, 1 Numeric and 1 Special character)
+                                        Password (should contain 1 Uppercase, 1 Numeric and 1 Special character)
                                     </InputLabel>
                                     <OutlinedInput
                                         fullWidth
@@ -275,32 +274,37 @@ export default function AddUpdateDialog({
                                     )}
                                 </>
                             )}
-
-                          
                         </Grid>
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{pr: 3}}>
-                <AnimateButton>
-                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" size="large" disableElevation     onClick={() => {
+                <DialogActions sx={{ pr: 3 }}>
+                    <AnimateButton>
+                        <Button
+                            variant="contained"
+                            sx={{ my: 3, ml: 1 }}
+                            type="submit"
+                            size="large"
+                            disableElevation
+                            onClick={() => {
                                 formik.handleSubmit();
-                            }}>
-                                    {brandManagement.firstName !== '' ? 'Update ' : 'Add '}
-                                </Button>
-                            </AnimateButton>
-                            <AnimateButton>
-                                <Button
-                                    variant="contained"
-                                    sx={{ my: 3, ml: 1, color: '#fff' }}
-                                    onClick={handleClose}
-                                    color="secondary"
-                                    size="large"
-                                >
-                                    Cancel
-                                </Button>   
-                            </AnimateButton>
-                    </DialogActions>
+                            }}
+                        >
+                            {brandManagement.firstName !== '' ? 'Update ' : 'Add '}
+                        </Button>
+                    </AnimateButton>
+                    <AnimateButton>
+                        <Button
+                            variant="contained"
+                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            onClick={handleClose}
+                            color="secondary"
+                            size="large"
+                        >
+                            Cancel
+                        </Button>
+                    </AnimateButton>
+                </DialogActions>
             </Dialog>
         </>
     );
