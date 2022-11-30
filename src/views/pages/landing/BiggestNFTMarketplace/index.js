@@ -64,7 +64,6 @@ const Landing = () => {
                 </Grid>
             </Grid>
             <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
-            {/*  footer side */}
             <Grid
                 container-fluid
                 sx={{

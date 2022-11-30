@@ -41,8 +41,6 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
     });
 
     const errorHandler = (values) => {
-        console.log('values', values);
-
         if (values.image) {
             if (
                 values.image.name.split('.').pop() == 'jpg' ||

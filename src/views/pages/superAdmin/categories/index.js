@@ -1,34 +1,21 @@
-import { forwardRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import CategoryTable from './component/categoryTable';
 import {
     Button,
-    Dialog,
-    Divider,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Slide,
-    Typography,
     Grid,
     MenuItem,
     Menu,
     Pagination,
     OutlinedInput,
-    TextField,
     InputAdornment
 } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-
-import { getAllBrands } from '../../../../redux/brand/actions';
 import { getAllCategories } from '../../../../redux/categories/actions';
-import DeleteCategoryDialog from './component/deleteCategoryDialog';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import AddUpdateCategory from './component/addUpdateCategory';
-
 import MainCard from 'ui-component/cards/MainCard';
 import HeadingCard from 'shared/Card/HeadingCard';
 

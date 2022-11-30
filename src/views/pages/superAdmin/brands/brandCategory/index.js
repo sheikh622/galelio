@@ -11,9 +11,6 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddUpdateBrandCategoryDialog from './component/addUpdateBrandCategory';
 
-
-
-
 const BrandCategory = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -49,7 +46,7 @@ const BrandCategory = () => {
             })
         );
     }, [search, page, limit]);
-    console.log('location.state', location.state);
+
     return (
         <>
             <AddUpdateBrandCategoryDialog

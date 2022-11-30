@@ -26,7 +26,7 @@ const client = create({
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function MintNftDialog({ open, setOpen, page, limit, search, loader, setLoader, nftData,type }) {
+export default function MintNftDialog({ open, setOpen, page, limit, search, loader, setLoader, nftData, type }) {
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
@@ -41,9 +41,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let nftId = nftData.id;
         let categoryId = nftData.CategoryId;
         let brandId = nftData.BrandId;
-        console.log('nftTokens array', nftTokens);
-        console.log('contractAddress', contractAddress);
-        console.log('nftId', nftId);
 
         let tokenIdArray = [];
         let transactionHash;
@@ -56,20 +53,18 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             const uriArray = await nftTokens.map(() => {
                 return tokenUri;
             });
-            console.log('uriArray', uriArray);
+
             if (uriArray.length == 1) {
-                console.log('Going in first Condition', uriArray);
                 let mintedNFT = await (
                     await nft.mint(tokenUri).catch((error) => {
                         toast.error(`${error.message}`);
                     })
                 ).wait();
-                console.log('mintedNFT', mintedNFT);
+
                 transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
-                console.log(transactionHash);
+
                 const id = parseInt(mintedNFT.events[0].args[2]);
-                console.log('NFT tokenId', id);
-                console.log('handle mint of single nft is working');
+
                 tokenIdArray.push({
                     id: nftTokens[0].id,
                     tokenId: id
@@ -79,17 +74,16 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     nftId: nftId,
                     tokenUri: tokenUri
                 });
-                console.log('nftDataArray for backend', nftDataArray);
-                console.log('tokenArray to be sent to backend', tokenIdArray);
+
                 dispatch(
                     mintNft({
                         nftDataArray: nftDataArray,
                         tokenIdArray: tokenIdArray,
                         transactionHash: transactionHash,
                         signerAddress: address,
-                        brandId:brandId,
+                        brandId: brandId,
                         categoryId: categoryId,
-                        type:type,
+                        type: type,
                         search: search,
                         page: page,
                         limit: limit,
@@ -97,7 +91,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     })
                 );
             } else if (uriArray.length > 1) {
-                console.log('Going in Second Condition', uriArray);
                 let mintedNFT = await (
                     await nft.bulkMint(uriArray).catch((error) => {
                         toast.error('NFT minting  unsuccessfull');
@@ -105,17 +98,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 ).wait();
 
                 transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
-                console.log('mintedNft of clone', mintedNFT.events);
 
                 let counter = 0;
                 let myNftTokenIdArray = [];
                 for (let i = 0; i < uriArray.length; i++) {
                     myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
-                    console.log('mintedNft of clone', mintedNFT.events[counter].args[2].toString());
+
                     counter = counter + 1;
                 }
-                console.log('Transaction hash: ', transactionHash);
-                console.log('handle mint of cloned nft is working');
+
                 nftTokens.map((data, index) => {
                     tokenIdArray.push({
                         id: data.id,
@@ -128,8 +119,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     nftId: nftId,
                     tokenUri: tokenUri
                 });
-                console.log('nftDataArray for backend', nftDataArray);
-                console.log('tokenArray to be sent to backend', tokenIdArray);
 
                 dispatch(
                     mintNft({
@@ -137,9 +126,9 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                         tokenIdArray: tokenIdArray,
                         transactionHash: transactionHash,
                         signerAddress: address,
-                        brandId:brandId,
+                        brandId: brandId,
                         categoryId: categoryId,
-                        type:type,
+                        type: type,
                         search: search,
                         page: page,
                         limit: limit,
@@ -149,7 +138,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             }
         } catch (error) {
             setLoader(false);
-            console.log('error', error);
         }
     };
 
@@ -163,8 +151,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let categoryName = nftData.Category.name;
         let brandName = nftData.Brand.name;
         let metaData = nftData.NFTMetaData;
-        console.log({ nftData });
-
         // setLoader(true);
         if (!image || !price || !name || !description) return;
         try {
@@ -173,7 +159,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             );
             directMintThenList(result);
         } catch (error) {
-            console.log('ipfs uri upload error: ', error);
             setLoader(false);
         }
     };
@@ -242,16 +227,13 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             };
         });
 
-        console.log('nftDataArray', nftDataArray);
-        console.log('tokenIdArray', tokenIdArray);
-
         dispatch(
             lazyMintNft({
                 nftDataArray: nftDataArray,
                 tokenIdArray: tokenIdArray,
-                brandId:brandId,
+                brandId: brandId,
                 categoryId: categoryId,
-                type:type,
+                type: type,
                 search: search,
                 page: page,
                 limit: limit,
@@ -305,7 +287,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 variant="contained"
                                 size="small"
                                 onClick={() => {
-                                    console.log({ nftData });
                                     if (!loader) {
                                         if (walletAddress == undefined) {
                                             setOpen(false);

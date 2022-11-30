@@ -9,9 +9,8 @@ export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit,
     const dispatch = useDispatch();
     const handleClose = () => {
         setOpen(false);
-        
     };
-   
+
     return (
         <>
             <Dialog
@@ -23,7 +22,7 @@ export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit,
                 aria-describedby="alert-dialog-slide-description1"
             >
                 <DialogTitle id="alert-dialog-slide-title1">Delete Brand</DialogTitle>
-                
+
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span">
@@ -50,7 +49,6 @@ export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit,
                                     page: page,
                                     limit: limit,
                                     search: search
-                                   
                                 })
                             );
                         }}

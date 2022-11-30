@@ -1,10 +1,4 @@
-// import { combineReducers } from 'redux';
 import { combineReducers } from 'redux';
-// import { connectRouter } from 'connected-react-router';
-// import { persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-
-// reducer import
 import customizationReducer from './themeReducers/customizationReducer';
 import snackbarReducer from './themeReducers/snackbarReducer';
 import cartReducer from './themeReducers/cartReducer';
@@ -16,7 +10,8 @@ import subAdminReducer from 'redux/subAdmin/reducers';
 import brandadminReducer from 'redux/brandAdmin/reducers';
 import brandCategoryReducer from 'redux/brandCategory/reducers';
 import nftReducer from 'redux/nftManagement/reducers';
-
+import landingPageReducer from 'redux/landingPage/reducers';
+import marketplaceReducer from 'redux/marketplace/reducers';
 
 const rootReducer = combineReducers({
     customization: customizationReducer,
@@ -29,7 +24,9 @@ const rootReducer = combineReducers({
     subAdminReducer: subAdminReducer,
     brandadminReducer: brandadminReducer,
     brandCategoryReducer: brandCategoryReducer,
-    nftReducer: nftReducer
+    nftReducer: nftReducer,
+    landingPageReducer: landingPageReducer,
+    marketplaceReducer:marketplaceReducer
 });
 
 export default rootReducer;

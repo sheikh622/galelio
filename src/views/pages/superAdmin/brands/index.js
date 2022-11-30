@@ -55,9 +55,6 @@ const Brands = () => {
                 setOpen={setAddUpdateOpen}
             />
 
-
-            
-
             <HeadingCard title="Brand Management" />
             <MainCard
                 title={

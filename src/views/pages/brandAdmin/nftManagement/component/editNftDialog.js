@@ -27,20 +27,18 @@ import {
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import { addNft } from 'redux/nftManagement/actions';
-import { fData } from 'utils/formatNumber';
+import { editNft } from 'redux/nftManagement/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import QuantitySelector from './quantitySelector';
 import fileFill from '@iconify-icons/eva/file-fill';
 import closeFill from '@iconify-icons/eva/close-fill';
+import QuantitySelector from './quantitySelector';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
-
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-const typeArray = [
+const currencyTypeArray = [
     {
         value: 'ETH',
         label: 'ETH'
@@ -51,25 +49,29 @@ const typeArray = [
     }
 ];
 
-export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
+export default function EditNftDialog({ nftInfo, categoryId, type, search, page, limit, loader, setLoader, open, setOpen }) {
     const dispatch = useDispatch();
     const [mintType, setMintType] = useState('directMint');
-    const [uploadedImages, setUploadedImages] = useState([]);
+    const [currencyType, setCurrencyType] = useState('ETH');
     const [fieldDataArray, setFieldDataArray] = useState([]);
-    const [type, setType] = useState('ETH');
-    const handleType = (event) => {
-        setType(event.target.value);
+    const [uploadedImages, setUploadedImages] = useState([]);
+
+    const handleCurrencyType = (event) => {
+        setCurrencyType(event.target.value);
     };
 
-    const handleError = (fieldDataArray, values) => {
+    const handleError = (fieldDataArray, values, isFile) => {
         let isValid = true;
+        if (isFile) {
+            if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
+            } else {
+                toast.error('Upload the files with these extensions: jpg, png, gif');
+                isValid = false;
+            }
+        }
+
         if (parseInt(values.images[0].quantity) < 1) {
             toast.error('NFT Quantity must be greater than zero');
-            isValid = false;
-        }
-        if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
-        } else {
-            toast.error('Upload the files with these extensions: jpg, png, gif');
             isValid = false;
         }
 
@@ -103,32 +105,29 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     });
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: {
-            nftName: '',
-            nftDescription: '',
-            nftPrice: 0,
-            images: []
-        },
+        initialValues: nftInfo,
         validationSchema,
         onSubmit: (values) => {
-            let isValid = handleError(fieldDataArray, values);
+            let file = values.images[0].image;
+            let isFile = file instanceof File;
+            let isValid = handleError(fieldDataArray, values, isFile);
             if (isValid) {
                 dispatch(
-                    addNft({
-                        categoryId: data.CategoryId,
-                        mintType: mintType,
-                        metaDataArray: fieldDataArray,
+                    editNft({
+                        id: nftInfo.id,
                         name: values.nftName,
                         price: values.nftPrice,
                         description: values.nftDescription,
-                        currencyType: type,
                         quantity: values.images[0].quantity,
-                        asset: values.images[0].image,
-                        type: nftType,
+                        asset: isFile ? values.images[0].image : null,
+                        currencyType: currencyType,
+                        mintType: mintType,
+                        metaDataArray: fieldDataArray,
+                        type: type,
                         page: page,
                         limit: limit,
                         search: search,
-                        categoryId: data.CategoryId,
+                        categoryId: categoryId,
                         handleClose: handleClose
                     })
                 );
@@ -141,10 +140,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
-        setMintType('directMint');
-        setType('ETH');
-        setUploadedImages([]);
-        setFieldDataArray([]);
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {
@@ -159,7 +154,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
 
         [formik.setFieldValue, uploadedImages]
     );
-    const handleRemoveFile = (file, index) => {
+    const handleRemoveFile = (index) => {
         const newFiles = [...formik.values.images];
         newFiles.splice(index, 1);
         setUploadedImages(newFiles);
@@ -172,12 +167,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     });
 
     const handleFieldNameChange = (value, index) => {
-        let array = [...fieldDataArray];
+        let array = structuredClone(fieldDataArray);
         array[index].fieldName = value;
         setFieldDataArray(array);
     };
     const handleFieldValueChange = (value, index) => {
-        let array = [...fieldDataArray];
+        let array = structuredClone(fieldDataArray);
         array[index].fieldValue = value;
         setFieldDataArray(array);
     };
@@ -187,6 +182,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         array.splice(index, 1);
         setFieldDataArray(array);
     };
+
+    useEffect(() => {
+        setFieldDataArray(nftInfo.fieldDataArray);
+        setMintType(nftInfo.mintType);
+        setCurrencyType(nftInfo.currencyType);
+        setUploadedImages(nftInfo.images);
+    }, [nftInfo]);
 
     return (
         <>
@@ -262,10 +264,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     select
                                     fullWidth
                                     label="Select Token"
-                                    value={type}
-                                    onChange={handleType}
+                                    value={currencyType}
+                                    onChange={handleCurrencyType}
                                 >
-                                    {typeArray.map((option, index) => (
+                                    {currencyTypeArray.map((option, index) => (
                                         <MenuItem key={index} value={option.value}>
                                             {option.label}
                                         </MenuItem>
@@ -406,10 +408,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             </ListItemIcon>
                                             <ListItemText
                                                 primary={file.image.name ? file.image.name : ''}
-                                                secondary={fData(file.image.size) ? fData(file.image.size) : ''}
-                                                primaryTypographyProps={{
-                                                    variant: 'subtitle2'
-                                                }}
+                                                // secondary={fData(file.image.size) ? fData(file.image.size) : ''}
+                                                // primaryTypographyProps={{
+                                                //     variant: 'subtitle2'
+                                                // }}
                                             />
                                             <ListItemSecondaryAction style={{ display: 'flex' }}>
                                                 <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
@@ -442,7 +444,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             size="large"
                             disableElevation
                         >
-                            Add
+                            Edit NFT
                         </Button>
                     </AnimateButton>
                     <AnimateButton>
