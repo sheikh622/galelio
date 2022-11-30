@@ -40,21 +40,16 @@ function a11yProps(index) {
     };
 }
 
-export default function HorizontalTabs({ marketplaceCategories }) {
+export default function HorizontalTabs({ marketplaceCategories,category,handleCategoryChange }) {
     const theme = useTheme();
-    const [value, setValue] = useState(0);
-
-    console.log('marketplaceCategories', marketplaceCategories);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    
 
     return (
         <>
             <Tabs
-                value={value}
+                value={category}
                 variant="scrollable"
-                onChange={handleChange}
+                onChange={handleCategoryChange}
                 sx={{
                     mb: 1,
                     ml: 1,
@@ -76,9 +71,10 @@ export default function HorizontalTabs({ marketplaceCategories }) {
                     }
                 }}
             >
+                <Tab component={Link} to="#" label={"All"} value={0} {...a11yProps(0)} />
                 {marketplaceCategories.categories.length > 0 &&
                     marketplaceCategories.categories.map((item) => {
-                        return <Tab component={Link} to="#" label={item.name} {...a11yProps(item.id)} />;
+                        return <Tab component={Link} to="#" label={item.name} value={item.id} {...a11yProps(item.id)} />;
                     })}
 
                 {/* <Grid item sx={{ display: { xs: 'none' } }}>
