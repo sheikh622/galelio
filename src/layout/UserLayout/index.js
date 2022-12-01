@@ -22,14 +22,15 @@ const UserLayout = () => {
                             sm: 'block',
                             md: 'flex'
                         },
-                        marginBottom: '40px'
+                        paddingBottom: '40px'
                     }}
                 >
                     <Grid
                         item
                         md={1}
                         xs={12}
-                        sx={{ position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
+                        sx={{ position: 'sticky', height: '100%', top: '0', 
+                        display: { xs: 'none', sm: 'none', md: 'flex' } }}
                     >
                         <SideBar />
                     </Grid>
@@ -45,7 +46,9 @@ const UserLayout = () => {
                         xs: 'block',
                         sm: 'block',
                         md: 'flex'
-                    }
+                    },
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
                 <Grid item md={1} xs={12}></Grid>

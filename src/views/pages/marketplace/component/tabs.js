@@ -12,7 +12,8 @@ import solana from 'assets/images/coins/solana.png';
 // tab content
 function TabPanel({ children, value, index, ...other }) {
     return (
-        <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+        <div role="tabpanel" hidden={value !== index} 
+        id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
             {value === index && (
                 <Box
                     sx={{
@@ -40,15 +41,21 @@ function a11yProps(index) {
     };
 }
 
-export default function HorizontalTabs({ marketplaceCategories, category, handleCategoryChange }) {
+export default function HorizontalTabs({ marketplaceCategories }) {
     const theme = useTheme();
+    const [value, setValue] = useState(0);
+
+    console.log('marketplaceCategories', marketplaceCategories);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <>
             <Tabs
-                value={category}
+                value={value}
                 variant="scrollable"
-                onChange={handleCategoryChange}
+                onChange={handleChange}
                 sx={{
                     mb: 1,
                     ml: 1,
@@ -70,11 +77,9 @@ export default function HorizontalTabs({ marketplaceCategories, category, handle
                     }
                 }}
             >
-                <Tab component={Link} to="#" label={'All'} value={0} {...a11yProps(0)} />
-                {marketplaceCategories.categories &&
-                    marketplaceCategories.categories.length > 0 &&
-                    marketplaceCategories.categories.map((item) => {
-                        return <Tab component={Link} to="#" label={item.name} value={item.id} {...a11yProps(item.id)} />;
+                {marketplaceCategories?.categories?.length > 0 &&
+                    marketplaceCategories?.categories.map((item) => {
+                        return <Tab component={Link} to="#" label={item.name} {...a11yProps(item.id)} />;
                     })}
 
                 {/* <Grid item sx={{ display: { xs: 'none' } }}>
