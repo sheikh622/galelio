@@ -5,6 +5,7 @@ import GuestGuard from 'utils/route-guard/GuestGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
+import CompanyPage from 'views/pages/companyPage';
 
 // market routing
 const LandingPage = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
@@ -42,7 +43,10 @@ const UserRoutes = {
         },
         {
             path: '/creatorProfile',
-            element: <Profile />
+            element: <Profile />},
+            {
+            path: '/companyPage',
+            element: <CompanyPage />
         }
     ]
 };

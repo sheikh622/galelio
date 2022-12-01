@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 
 // project imports
 // project imports
-import Avatar from 'ui-component/extended/Avatar';
+
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 
@@ -54,7 +54,8 @@ const HeaderPage = () => {
                         <Grid
                             container
                             spacing={gridSpacing}
-                            sx={{ pr: 10, [theme.breakpoints.down('lg')]: { pr: 0, justifyContent: { xs: 'center', md: 'flex-start' }} }}
+                            sx={{ pr: 10, [theme.breakpoints.down('lg')]:
+                             { pr: 0, justifyContent: { xs: 'center', md: 'flex-start' }} }}
                         >
                             <Grid item xs={12}>
                                 <motion.div

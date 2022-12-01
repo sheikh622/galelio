@@ -5,9 +5,7 @@ import { Container, Grid, Typography, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 // project imports
-import FadeInWhenVisible from './Animation';
-import SubCard from 'ui-component/cards/SubCard';
-import Avatar from 'ui-component/extended/Avatar';
+
 import { gridSpacing } from 'store/constant';
 import car from 'assets/images/unsplash_bMSA5-tLFao.png';
 import CardMedia from '@mui/material/CardMedia';
@@ -62,7 +60,8 @@ const CategoriesPage = () => {
             </Grid>
 
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="center" spacing={gridSpacing} 
+                sx={{ textAlign: 'center' }}>
                     {itemData.map((item) => (
                         <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
                             <Grid container justifyContent="center" spacing={1}>
