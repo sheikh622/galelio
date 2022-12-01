@@ -5,6 +5,7 @@ import GuestGuard from 'utils/route-guard/GuestGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
+import CompanyPage from 'views/pages/companyPage';
 
 // login routing
 const LandingPage = Loadable(lazy(() => import('views/pages/landingPage')));
@@ -29,6 +30,10 @@ const UserRoutes = {
         {
             path: '/marketplace',
             element: <Marketplace />
+        },
+        {
+            path: '/companyPage',
+            element: <CompanyPage />
         }
     ]
 };

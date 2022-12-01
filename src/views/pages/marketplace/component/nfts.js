@@ -93,8 +93,8 @@ const NFTS = () => {
                                 sx={{
                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                                    maxWidth: 365,
-                                    width: '105%',
+                                    maxWidth: 375,
+                                    width: '109%',
                                     boxShadow: '1px 2px 9px #d3d3d3',
                                     borderRadius: '7px'
                                 }}
@@ -107,7 +107,7 @@ const NFTS = () => {
                                                 <span style={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
                                                 <div style={{ marginTop: '5%' }}>{item.title}</div>
                                             </Grid>
-                                            <Grid item xs={4} sx={{ background: '' }}>
+                                            <Grid item xs={4} >
                                                 <span style={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
                                                     {item.creator}
                                                 </span>
@@ -115,7 +115,7 @@ const NFTS = () => {
                                         </Grid>
 
                                         <Divider sx={{ mt: 2, mb: 2 }} />
-                                        <Grid container sx={{ background: '' }}>
+                                        <Grid container>
                                             <Grid item xs={7} sx={{ pt: 1 }}>
                                                 <span
                                                     style={{
