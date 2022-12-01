@@ -12,7 +12,8 @@ import solana from 'assets/images/coins/solana.png';
 // tab content
 function TabPanel({ children, value, index, ...other }) {
     return (
-        <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+        <div role="tabpanel" hidden={value !== index} 
+        id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
             {value === index && (
                 <Box
                     sx={{
@@ -76,8 +77,8 @@ export default function HorizontalTabs({ marketplaceCategories }) {
                     }
                 }}
             >
-                {marketplaceCategories.categories?.length > 0 &&
-                    marketplaceCategories.categories.map((item) => {
+                {marketplaceCategories?.categories?.length > 0 &&
+                    marketplaceCategories?.categories.map((item) => {
                         return <Tab component={Link} to="#" label={item.name} {...a11yProps(item.id)} />;
                     })}
 
