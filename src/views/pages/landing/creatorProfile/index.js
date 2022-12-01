@@ -4,8 +4,9 @@ import { Box, Grid, Typography } from '@mui/material';
 
 // project imports
 import HorizontalTabs from './ItemsTage';
-import Footer from 'views/pages/user/footer/footer';
-import Appbar from 'views/pages/user/header/header';
+import Appbar from 'layout/UserLayout/header';
+import Footer from 'layout/UserLayout/footer';
+
 import SocialProfile from './SocialProfile';
 import { useTheme } from '@emotion/react';
 // =============================|| LANDING MAIN ||============================= //
@@ -20,7 +21,6 @@ const Profile = () => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Appbar />
                 <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
                     <Grid item md={12} xs={12}>
                         <Grid container-fluid>
@@ -31,9 +31,7 @@ const Profile = () => {
                                 <HorizontalTabs />
                             </Grid>
 
-                            <Grid item md={12} xs={12} sx={{ marginLeft: '30px' }}>
-                                <Footer />
-                            </Grid>
+                          
                         </Grid>
                     </Grid>
                 </Grid>

@@ -6,8 +6,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import SimilarProducts from './SimilarProducts';
 import SiderPage from '../biggestNFTMarketplace/Sider';
 import Activity from './Activity';
-import Footer from 'views/pages/user/footer/footer';
-import Appbar from 'views/pages/user/header/header';
+
 import Properties from './Properties';
 import PropertiesView from './ProductView';
 import { useTheme } from '@emotion/react';
@@ -17,14 +16,12 @@ const Products = () => {
     const theme = useTheme();
     return(
     <>
-        <Appbar />
+        
         <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },   
-        background: theme.palette.mode === 'dark' ? 
-       'black' : "#f3f3f3", }}>
-            <Grid item md={1} xs={12} sx={{ display: { xs: 'none', sm: 'none', md: 'flex' } , }}>
-                <SiderPage />
-            </Grid>
-            <Grid item md={11} xs={12} >
+        background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+        color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}>
+          
+            <Grid item md={12} xs={12} >
                 <Grid container-fluid>
                    
                     <Grid item md={12} xs={12}>

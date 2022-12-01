@@ -6,13 +6,11 @@ import Loadable from 'ui-component/Loadable';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 
 
-// const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard/index')));
+
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 const AdminManagement = Loadable(lazy(() => import('views/pages/superAdmin/adminManagement')));
 const BrandManagement = Loadable(lazy(() => import('views/pages/superAdmin/brandManagement')));
-
-
 const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
 const SchoolAdminDashboard = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
 const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));

@@ -5,14 +5,15 @@ import { useTheme } from '@mui/material/styles';
 
 // project imports
 import Header from './Header';
-
+import Appbar from 'layout/UserLayout/header';
+import Footer from 'layout/UserLayout/footer';
 import NewPage from './New';
 import FeaturedPage from './FeaturedCreators';
 import Sider from './Sider';
 
 import CategoriesPage from './Categories';
-import Footer from 'views/pages/user/footer/footer';
-import Appbar from 'views/pages/user/header/header';
+// import Footer from 'views/pages/user/footer/footer';
+// import Appbar from 'views/pages/user/header/header';
 
 // =============================|| LANDING MAIN ||============================= //
 
@@ -22,10 +23,11 @@ const Landing = () => {
     return (
         <Grid
             sx={{
-                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
+                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >
-            <Appbar />
+            <Appbar /> 
             <Grid
                 container-fluid
                 sx={{
@@ -34,6 +36,7 @@ const Landing = () => {
                         sm: 'block',
                         md: 'flex'
                     },
+                    
                     marginBottom: '40px'
                 }}
             >
@@ -63,23 +66,8 @@ const Landing = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
-            {/*  footer side */}
-            <Grid
-                container-fluid
-                sx={{
-                    display: {
-                        xs: 'block',
-                        sm: 'block',
-                        md: 'flex'
-                    }
-                }}
-            >
-                <Grid item md={1} xs={12}></Grid>
-                <Grid item md={11} xs={12}>
-                    <Footer />
-                </Grid>
-            </Grid>
+          
+          
         </Grid>
     );
 };

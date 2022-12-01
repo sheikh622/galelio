@@ -4,13 +4,14 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import SuperAdminGuard from './SuperAdminGuard';
-import Breadcrumbs from 'ui-component/extended/Breadcrumbs';
-const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
-const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
-const AdminManagement = Loadable(lazy(() => import('views/pages/superAdmin/adminManagement')));
-const BrandManagement = Loadable(lazy(() => import('views/pages/superAdmin/brandManagement')));
-const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 
+const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
+const SubAdmin = Loadable(lazy(() => import('views/pages/superAdmin/subAdmin')));
+const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
+const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
+const BrandCategory = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandCategory')));
+const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
+const NftManagement = Loadable(lazy(() => import('views/pages/superAdmin/nftManagement')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -25,27 +26,33 @@ const SuperAdminRoutes = {
     type: 'group',
     children: [
         {
-            path: '/dashboard',
+            path: '/',
             element: <SuperAdminDashboard />
         },
- 
         {
             path: '/brands',
             element: <Brand />
+        },
+        {
+            path: '/brands/admin',
+            element: <BrandAdmin />
+        },
+        {
+            path: '/brands/category',
+            element: <BrandCategory />
         },
         {
             path: '/categories',
             element: <Category />
         },
         {
-            path: '/adminManagement',
-            element: <AdminManagement />
+            path: '/subAdminManagement',
+            element: <SubAdmin />
         },
         {
-            path: '/brandManagement',
-            element: <BrandManagement />
-        },
- 
+            path: '/nftManagement',
+            element: <NftManagement />
+        }
     ]
 };
 

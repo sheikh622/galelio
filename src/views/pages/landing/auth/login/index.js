@@ -26,7 +26,7 @@ const Login = () => {
     return (
         <AuthWrapper1 >
             <Grid container justifyContent="space-between" alignItems="center" sx={{ minHeight: '100vh', 
-             background: theme.palette.mode === 'dark' ? theme.palette.dark.dark : '#fff', }}>
+             background: theme.palette.mode === 'dark' ? '#fff' : '#fff', }}>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', 
                 display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>

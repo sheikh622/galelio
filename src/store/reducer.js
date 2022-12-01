@@ -1,10 +1,4 @@
-// import { combineReducers } from 'redux';
 import { combineReducers } from 'redux';
-// import { connectRouter } from 'connected-react-router';
-// import { persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-
-// reducer import
 import customizationReducer from './themeReducers/customizationReducer';
 import snackbarReducer from './themeReducers/snackbarReducer';
 import cartReducer from './themeReducers/cartReducer';
@@ -12,35 +6,27 @@ import kanbanReducer from './themeReducers/kanbanReducer';
 import AuthReducer from 'redux/auth/reducers';
 import brand from 'redux/brand/reducers';
 import category from 'redux/categories/reducers';
-
-import adminReducer from 'redux/adminManagement/reducers';
-import brandadminReducer from 'redux/brandManagement/reducers';
-import nftByCategoryReducer from 'redux/nftManagement/reducers';
-
-// ==============================|| COMBINE REDUCER ||============================== //
+import subAdminReducer from 'redux/subAdmin/reducers';
+import brandadminReducer from 'redux/brandAdmin/reducers';
+import brandCategoryReducer from 'redux/brandCategory/reducers';
+import nftReducer from 'redux/nftManagement/reducers';
+import landingPageReducer from 'redux/landingPage/reducers';
+import marketplaceReducer from 'redux/marketplace/reducers';
 
 const rootReducer = combineReducers({
-    // router: connectRouter(history),
     customization: customizationReducer,
     snackbar: snackbarReducer,
     cart: cartReducer,
-    // cart: persistReducer(
-    //     {
-    //         key: 'cart',
-    //         storage,
-    //         keyPrefix: 'berry-'
-    //     },
-    //     cartReducer
-    // ),
-    brand: brand,
-    category: category,
     kanban: kanbanReducer,
     auth: AuthReducer,
-    adminReducer: adminReducer,
+    brand: brand,
+    category: category,
+    subAdminReducer: subAdminReducer,
     brandadminReducer: brandadminReducer,
-    nftsByCategoryReducer: nftByCategoryReducer
-
-
+    brandCategoryReducer: brandCategoryReducer,
+    nftReducer: nftReducer,
+    landingPageReducer: landingPageReducer,
+    marketplaceReducer:marketplaceReducer
 });
 
 export default rootReducer;

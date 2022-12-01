@@ -18,9 +18,6 @@ const SubAdminGuard = ({ children }) => {
         if (token == '') {
             navigate('/', { replace: true });
         }
-        else{
-            navigate('/dashboard', { replace: true }); 
-        }
     }, [token]);
 
     return children;

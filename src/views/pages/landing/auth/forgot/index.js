@@ -26,7 +26,7 @@ const Forgot = () => {
     return (
         <AuthWrapper1 >
             <Grid container justifyContent="space-between" alignItems="center" sx={{ minHeight: '100vh', 
-             background: theme.palette.mode === 'dark' ? theme.palette.dark.dark : '#fff', }}>
+             background: theme.palette.mode === 'dark' ? '#fff': '#fff', }}>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', 
                 display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
@@ -58,8 +58,7 @@ const Forgot = () => {
                     <Grid item xs={12}>
                         <Grid item container direction="column" alignItems="center" xs={12}>
                             <Typography
-                                component={Link}
-                                to="/pages/register/register1"
+                               
                                 variant="subtitle1"
                                 sx={{ textDecoration: 'none' }}
                             >

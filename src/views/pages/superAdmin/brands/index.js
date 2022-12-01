@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import BrandTable from './component/brandTable';
-import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider  } from '@mui/material';
+import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllBrands } from '../../../../redux/brand/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
@@ -13,16 +13,18 @@ import HeadingCard from 'shared/Card/HeadingCard';
 const Brands = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const [open, setOpen] = useState(false);
     const brandsList = useSelector((state) => state.brand.brandsList);
-   
-   
-    
+
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [brandId, setBrandId] = useState();
-    const [brandName, setBrandName] = useState('');
+    const [brandData, setBrandData] = useState({
+        id: null,
+        name: '',
+        description: '',
+        image: null,
+        location: ''
+    });
     const [addUpdateOpen, setAddUpdateOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -34,7 +36,6 @@ const Brands = () => {
     };
 
     useEffect(() => {
-       
         dispatch(
             getAllBrands({
                 search: search,
@@ -46,16 +47,14 @@ const Brands = () => {
     return (
         <>
             <AddUpdateBrandDialog
-                brandId={brandId}
-                setBrandId={setBrandId}
-                brandName={brandName}
-                setBrandName={setBrandName}
+                brandData={brandData}
                 page={page}
                 limit={limit}
                 search={search}
-                addUpdateOpen={addUpdateOpen}
-                setAddUpdateOpen={setAddUpdateOpen}
+                open={addUpdateOpen}
+                setOpen={setAddUpdateOpen}
             />
+
             <HeadingCard title="Brand Management" />
             <MainCard
                 title={
@@ -81,8 +80,7 @@ const Brands = () => {
                                 size="large"
                                 onClick={() => {
                                     setAddUpdateOpen(true);
-
-                                    setBrandName('');
+                                    setBrandData({ id: null, name: '', description: '', location: '', image: null });
                                 }}
                             >
                                 Add Brand
@@ -92,19 +90,17 @@ const Brands = () => {
                 }
                 content={false}
             >
-            {brandsList.brands != undefined && brandsList.count > 0 ? (
+                {brandsList.brands != undefined && brandsList.count > 0 ? (
                     <>
                         <BrandTable
-                            brandsList={brandsList}
+                            brandsList={brandsList && brandsList}
                             page={page}
                             limit={limit}
                             search={search}
-                            setOpen={setOpen}
-                            brandId={brandId}
-                            setBrandId={setBrandId}
-                            setBrandName={setBrandName}
                             setAddUpdateOpen={setAddUpdateOpen}
+                            setBrandData={setBrandData}
                         />
+
                         <Grid item xs={12} sx={{ p: 3 }}>
                             <Grid container justifyContent="space-between" spacing={gridSpacing}>
                                 <Grid item>
@@ -113,7 +109,7 @@ const Brands = () => {
                                         showFirstButton
                                         showLastButton
                                         page={page}
-                                        count={brandsList.totalPages}
+                                        count={brandsList && brandsList.pages}
                                         onChange={(event, newPage) => {
                                             setPage(newPage);
                                         }}
@@ -183,16 +179,16 @@ const Brands = () => {
                             </Grid>
                         </Grid>
                     </>
-                    ) : (
-                        <>
-                            <Grid item md={12}>
-                                <Divider />
-                            </Grid>
-                            <Grid item>
-                                <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
-                            </Grid>
-                        </>
-                    )}
+                ) : (
+                    <>
+                        <Grid item md={12}>
+                            <Divider />
+                        </Grid>
+                        <Grid item>
+                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                        </Grid>
+                    </>
+                )}
             </MainCard>
         </>
     );
