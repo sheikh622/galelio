@@ -11,7 +11,6 @@ const LandingPage = Loadable(lazy(() => import('views/pages/landingPage')));
 const Marketplace = Loadable(lazy(() => import('views/pages/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
 const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
-
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
 // ==============================|| market  ROUTING ||============================== //
 

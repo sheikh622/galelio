@@ -14,35 +14,36 @@ import { useTheme } from '@emotion/react';
 
 const Products = () => {
     const theme = useTheme();
-    return(
-    <>
-        
-        <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' },   
-        background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-        color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}>
-          
-            <Grid item md={12} xs={12} >
-                <Grid container-fluid>
-                   
-                    <Grid item md={12} xs={12}>
-                     <PropertiesView/>
-                    </Grid>
-                    <Grid item md={12} xs={12}>
-                     <Properties/>
-                    </Grid>
-                    <Grid item md={12} xs={12}>
-                     <Activity/>
-                    </Grid>
+    return (
+        <>
+            <Grid
+                container-fluid
+                sx={{
+                    display: { xs: 'block', sm: 'block', md: 'flex' },
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040'
+                }}
+            >
+                <Grid item md={12} xs={12}>
+                    <Grid container-fluid>
+                        <Grid item md={12} xs={12}>
+                            <PropertiesView />
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                            <Properties />
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                            <Activity />
+                        </Grid>
 
-                    <Grid item md={12} xs={12}>
-                      <SimilarProducts/>
+                        <Grid item md={12} xs={12}>
+                            <SimilarProducts />
+                        </Grid>
                     </Grid>
-                    
                 </Grid>
             </Grid>
-        </Grid>
-    </>
-);
-}
+        </>
+    );
+};
 
 export default Products;

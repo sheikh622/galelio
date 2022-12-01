@@ -23,7 +23,6 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ShareIcon from '@mui/icons-material/Share';
 import LanguageIcon from '@mui/icons-material/Language';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import RedditIcon from '@mui/icons-material/Reddit';
 // ==============================|| SOCIAL PROFILE ||============================== //
 
@@ -97,12 +96,7 @@ const SocialProfile = () => {
                     </Grid>
                 </Grid>
                 <Grid container mt={2}>
-                    <Grid
-                        item
-                        xs={12}
-                        md={6}
-                        // sx={{ marginLeft: { md: '30px', xl: '30px' }}}
-                    >
+                    <Grid item xs={12} md={6}>
                         <Typography
                             sx={{
                                 marginLeft: { md: '30px', xl: '30px' },

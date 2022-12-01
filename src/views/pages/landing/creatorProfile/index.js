@@ -4,8 +4,6 @@ import { Box, Grid, Typography } from '@mui/material';
 
 // project imports
 import HorizontalTabs from './ItemsTage';
-import Appbar from 'layout/UserLayout/header';
-import Footer from 'layout/UserLayout/footer';
 
 import SocialProfile from './SocialProfile';
 import { useTheme } from '@emotion/react';
@@ -30,8 +28,6 @@ const Profile = () => {
                             <Grid item md={12} xs={12} sx={{ margin: '15px' }}>
                                 <HorizontalTabs />
                             </Grid>
-
-                          
                         </Grid>
                     </Grid>
                 </Grid>

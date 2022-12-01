@@ -16,7 +16,7 @@ const LandingPage = () => {
 
     return (
         <Grid item md={11} xs={12}>
-            <Grid container-fluid sx={{ background: '' }}>
+            <Grid container-fluid>
                 <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
                     <Header />
                 </Grid>
@@ -24,11 +24,11 @@ const LandingPage = () => {
                     <NewAndTrendingNfts nfts={landingPageData.newNfts} />
                 </Grid>
                 <Grid item md={12} xs={12}>
-                    <Categories categories={landingPageData.categories}/>
+                    <Categories categories={landingPageData.categories} />
                 </Grid>
 
                 <Grid mb={4} item md={12} xs={12}>
-                    <FeaturedCreators brands={landingPageData.brands}/>
+                    <FeaturedCreators brands={landingPageData.brands} />
                 </Grid>
             </Grid>
         </Grid>

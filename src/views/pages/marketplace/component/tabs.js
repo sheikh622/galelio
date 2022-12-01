@@ -77,8 +77,8 @@ export default function HorizontalTabs({ marketplaceCategories }) {
                     }
                 }}
             >
-                {marketplaceCategories.categories.length > 0 &&
-                    marketplaceCategories.categories.map((item) => {
+                {marketplaceCategories?.categories?.length > 0 &&
+                    marketplaceCategories?.categories.map((item) => {
                         return <Tab component={Link} to="#" label={item.name} {...a11yProps(item.id)} />;
                     })}
 
