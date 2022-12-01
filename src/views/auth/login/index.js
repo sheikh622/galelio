@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Box, Stack, Typography, useMediaQuery } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-
+import { useNavigate } from 'react-router-dom';
 // project imports
 import AuthWrapper from '../../../shared/component/AuthWrapper';
 import LoginCardWrapper from '../../../shared/component/LoginCardWrapper';
@@ -15,7 +15,7 @@ import React from 'react';
 
 const Login = () => {
     const theme = useTheme();
-
+    const navigate = useNavigate();
     // const { isLoggedIn } = useAuth();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -27,28 +27,28 @@ const Login = () => {
                         <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
                             <LoginCardWrapper>
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
-                                <Grid item sx={{ mb: 3 }}>
+                                    <Grid item sx={{ mb: 3 }}>
                                         {/* <Link to="/"> */}
-                                            {/* <Logo /> */}
+                                        {/* <Logo /> */}
                                         {/* </Link> */}
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Grid container alignItems="center" justifyContent="center" textAlign="center" spacing={1}>
                                             <Grid item xs={12}>
                                                 <Typography
-                                                className='Signin'
-                                                   sx={{color:"#816a51"}}
+                                                    className="Signin"
+                                                    sx={{ color: '#816a51' }}
                                                     gutterBottom
                                                     variant={matchDownSM ? 'h3' : 'h2'}
                                                 >
-                                                  Sign in
+                                                    Sign in
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={12}>
-                                            <Typography variant="caption" fontSize="16px" textAlign="center">
-                                            Enter Your email and password     
-                                            </Typography>
-                                        </Grid>
+                                                <Typography variant="caption" fontSize="16px" textAlign="center">
+                                                    Enter Your email and password
+                                                </Typography>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
 
@@ -58,8 +58,18 @@ const Login = () => {
                                     <Grid item xs={12}>
                                         <Divider />
                                     </Grid>
-                                
-                                  
+                                    <Grid item xs={12}>
+                                        <Typography
+                                            variant="caption"
+                                            fontSize="16px"
+                                            textAlign="center"
+                                            onClick={() => {
+                                                navigate('/landingPage');
+                                            }}
+                                        >
+                                            Marketplace
+                                        </Typography>
+                                    </Grid>
                                 </Grid>
                             </LoginCardWrapper>
                         </Grid>
