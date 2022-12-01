@@ -40,9 +40,8 @@ function a11yProps(index) {
     };
 }
 
-export default function HorizontalTabs({ marketplaceCategories,category,handleCategoryChange }) {
+export default function HorizontalTabs({ marketplaceCategories, category, handleCategoryChange }) {
     const theme = useTheme();
-    
 
     return (
         <>
@@ -71,8 +70,9 @@ export default function HorizontalTabs({ marketplaceCategories,category,handleCa
                     }
                 }}
             >
-                <Tab component={Link} to="#" label={"All"} value={0} {...a11yProps(0)} />
-                {marketplaceCategories.categories.length > 0 &&
+                <Tab component={Link} to="#" label={'All'} value={0} {...a11yProps(0)} />
+                {marketplaceCategories.categories &&
+                    marketplaceCategories.categories.length > 0 &&
                     marketplaceCategories.categories.map((item) => {
                         return <Tab component={Link} to="#" label={item.name} value={item.id} {...a11yProps(item.id)} />;
                     })}

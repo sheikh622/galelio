@@ -66,7 +66,7 @@ const Marketplace = () => {
                             />
                         </Grid>
                         <Grid item md={12} xs={12}>
-                            <NFTS marketplaceNfts={marketplaceNfts}/>
+                            <NFTS marketplaceNfts={marketplaceNfts} />
                         </Grid>
                         <Grid item xs={12} sx={{ p: 3 }}>
                             <Grid container justifyContent="space-between" spacing={gridSpacing}>
