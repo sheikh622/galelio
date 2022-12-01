@@ -21,14 +21,15 @@ const LandingPage = () => {
                     <Header />
                 </Grid>
                 <Grid item md={12} xs={12}>
-                    <NewAndTrendingNfts nfts={landingPageData.newNfts} />
+                    <Categories categories={landingPageData.categories} />
                 </Grid>
+
                 <Grid item md={12} xs={12}>
-                    <Categories categories={landingPageData.categories}/>
+                    <NewAndTrendingNfts nfts={landingPageData.newNfts} />
                 </Grid>
 
                 <Grid mb={4} item md={12} xs={12}>
-                    <FeaturedCreators brands={landingPageData.brands}/>
+                    <FeaturedCreators brands={landingPageData.brands} />
                 </Grid>
             </Grid>
         </Grid>
