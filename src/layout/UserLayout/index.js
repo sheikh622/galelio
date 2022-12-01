@@ -13,7 +13,6 @@ const UserLayout = () => {
                 sx={{
                     background:  theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                     padding:"1%"
-                    // background:"red",
                 }}
             >
                 <Grid
@@ -32,7 +31,7 @@ const UserLayout = () => {
                         item
                         md={3}
                         xs={12}
-                        sx={{ background:"", marginRight:"", position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
+                        sx={{ position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
                     >
                         <SideBar />
                     </Grid>
