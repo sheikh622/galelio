@@ -6,8 +6,8 @@ import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
 
-// login routing
-const LandingPage = Loadable(lazy(() => import('views/pages/landingPage')));
+// market routing
+const LandingPage = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
 const Marketplace = Loadable(lazy(() => import('views/pages/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
 const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));

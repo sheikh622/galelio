@@ -10,7 +10,7 @@ import Loadable from 'ui-component/Loadable';
 const AuthLogin = Loadable(lazy(() => import('views/auth/login')));
 const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
-
+// Market login routing
 const LoginMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/login')));
 const SignUpMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/signUp')));
 const ForgotMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/forgot')));
