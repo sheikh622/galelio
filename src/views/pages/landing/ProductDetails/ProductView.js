@@ -10,6 +10,7 @@ import watch1 from 'assets/images/watch3.png';
 import watch2 from 'assets/images/watch2.png';
 import watch3 from 'assets/images/watch1.png';
 import Avatar3 from 'assets/images/users/avatar-3.png';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { gridSpacing } from 'store/constant';
 import { textAlign } from '@mui/system';
@@ -39,7 +40,8 @@ const PropertiesView = () => {
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    <Grid item md={6} sm={12}>
+                    <Grid item md={6} sm={12} component={RouterLink}
+                    to="/companyPage">
                         <CardMedia component="img" sx={{ height: '592px' }} image={watch1} alt="green iguana" />
                     </Grid>
 
@@ -53,7 +55,8 @@ const PropertiesView = () => {
                                                 <Grid item>
                                                     <Avatar alt="User 1" src={Avatar3} />
                                                 </Grid>
-                                                <Grid item xs zeroMinWidth>
+                                                <Grid item xs zeroMinWidth component={RouterLink} sx={{textDecoration: 'none'}}
+                                                to="/companyPage">
                                                     <Typography align="left" fontWeight={600} variant="subtitle1">
                                                         Jacob & Co
                                                     </Typography>
