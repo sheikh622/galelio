@@ -19,9 +19,9 @@ const UserRoutes = {
     path: '/',
     element: (
         <NavMotion>
-            <GuestGuard>
+            {/* <GuestGuard> */}
                 <UserLayout />
-            </GuestGuard>
+            {/* </GuestGuard> */}
         </NavMotion>
     ),
     children: [
