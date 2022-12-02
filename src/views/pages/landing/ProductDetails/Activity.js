@@ -5,8 +5,6 @@ import { useTheme } from '@mui/material/styles';
 
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import WATCHES from 'assets/images/watch.png';
-import CardMedia from '@mui/material/CardMedia';
 import {
     Button,
     Typography,

@@ -135,7 +135,8 @@ const SocialProfile = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid mt={2} item xs={12} md={12} sx={{ display: 'flex', marginLeft: { md: '-9px' } }}>
+                <Grid mt={2} item xs={12} md={12} sx={{ display: 'flex',
+                 marginLeft: { md: '-9px' } }}>
                     <ul className="list">
                         <li className="item">
                             Items <b> 120</b>
