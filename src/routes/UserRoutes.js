@@ -11,7 +11,7 @@ import CompanyPage from 'views/pages/companyPage';
 const LandingPage = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
 const Marketplace = Loadable(lazy(() => import('views/pages/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
-const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
+// const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/')));
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
 // ==============================|| market  ROUTING ||============================== //
 
@@ -19,9 +19,9 @@ const UserRoutes = {
     path: '/',
     element: (
         <NavMotion>
-            <GuestGuard>
+            {/* <GuestGuard> */}
                 <UserLayout />
-            </GuestGuard>
+            {/* </GuestGuard> */}
         </NavMotion>
     ),
     children: [
@@ -37,10 +37,7 @@ const UserRoutes = {
             path: '/ProductDetails',
             element: <ProductDetails />
         },
-        {
-            path: '/BiggestNFTMarketplace',
-            element: <BiggestNFTMarketplace />
-        },
+       
         {
             path: '/creatorProfile',
             element: <Profile />},

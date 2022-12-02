@@ -105,7 +105,7 @@ const NftManagement = () => {
                                 variant="contained"
                                 size="small"
                                 onClick={() => {
-                                    navigate('/categories');
+                                    navigate('/brands');
                                 }}
                             >
                                 back

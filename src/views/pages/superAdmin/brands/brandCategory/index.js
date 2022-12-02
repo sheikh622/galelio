@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import BrandCategoryTable from './component/brandCategoryTable';
 import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllBrandCategories } from '../../../../../redux/brandCategory/actions';
+import { getAllBrandCategories, getAllCategoriesDropdown } from '../../../../../redux/brandCategory/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddUpdateBrandCategoryDialog from './component/addUpdateBrandCategory';
@@ -46,7 +46,7 @@ const BrandCategory = () => {
             })
         );
     }, [search, page, limit]);
-
+  
     return (
         <>
             <AddUpdateBrandCategoryDialog
@@ -107,6 +107,7 @@ const BrandCategory = () => {
                                         categoryId: 0,
                                         profitPercentage: ''
                                     });
+                                    dispatch(getAllCategoriesDropdown({ brandId: location.state.brandData.id }));
                                 }}
                             >
                                 Add Brand Catgeory
