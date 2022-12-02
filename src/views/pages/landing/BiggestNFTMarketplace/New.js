@@ -3,17 +3,13 @@ import { useTheme } from '@mui/material/styles';
 import { Container, Card, Grid, Typography, CardActionArea, CardContent, Divider } from '@mui/material';
 
 // project imports
-import FadeInWhenVisible from './Animation';
-import SubCard from 'ui-component/cards/SubCard';
-import Avatar from 'ui-component/extended/Avatar';
+
 import { gridSpacing } from 'store/constant';
-import WATCHES from 'assets/images/WATCHES.png';
+
 import CardMedia from '@mui/material/CardMedia';
 
 // assets
-import PaletteTwoToneIcon from '@mui/icons-material/PaletteTwoTone';
-import ReorderTwoToneIcon from '@mui/icons-material/ReorderTwoTone';
-import SpeedTwoToneIcon from '@mui/icons-material/SpeedTwoTone';
+
 import { Link as RouterLink } from 'react-router-dom';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
@@ -59,7 +55,7 @@ const NewPage = () => {
         }
     ];
     return (
-        <Grid container-fluid spacing={gridSpacing} sx={{ background: '', margin: '15px' }}>
+        <Grid container-fluid spacing={gridSpacing} sx={{  margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
@@ -104,7 +100,7 @@ const NewPage = () => {
                                                 <span style={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
                                                 <div className='overflow' style={{ marginTop: '5%' }}>{item.title}</div>
                                             </Grid>
-                                            <Grid item xs={4}  sx={{ background: '' }}>
+                                            <Grid item xs={4}  >
                                                 <span style={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
                                                     {item.creator}
                                                 </span>
@@ -112,7 +108,7 @@ const NewPage = () => {
                                         </Grid>
 
                                         <Divider sx={{ mt: 2, mb: 2 }} />
-                                        <Grid container sx={{ background: '' }}>
+                                        <Grid container >
                                             <Grid item md={6} xs={12} className='overflow' sx={{ pt: 1, }}>
                                                 <span
                                                     style={{

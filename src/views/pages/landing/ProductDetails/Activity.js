@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import FadeInWhenVisible from '../BiggestNFTMarketplace/Animation';
+
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import WATCHES from 'assets/images/watch.png';
@@ -79,10 +79,10 @@ const Activity = () => {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={12} >
+                <Grid item xs={12}>
                     <Grid item md={12} sm={12}>
                         <MainCard
-                        sx={{background:theme.palette.mode === 'dark' ? "#181C1F" : "#fff", }}
+                            sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
                             title={
                                 <Grid container spacing={gridSpacing}>
                                     <Grid item xs={12}>

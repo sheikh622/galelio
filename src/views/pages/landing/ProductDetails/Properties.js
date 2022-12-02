@@ -64,7 +64,7 @@ const Properties = () => {
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {property.map((item) => (
                         <Grid item md={2} sm={6}>
-                            <SubCard className="property" sx={{background:theme.palette.mode === 'dark' ? "#181C1F" : "#fff", }}>
+                            <SubCard className="property" sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}>
                                 <Grid container justifyContent="center" spacing={2}>
                                     <Grid item xs={12}>
                                         <Typography className="pbackground" variant="body">
@@ -74,8 +74,12 @@ const Properties = () => {
                                     <Grid item xs={12}>
                                         <Typography variant="h3">{item.title} </Typography>
                                     </Grid>
-                                    <Grid  item xs={12}>
-                                        <Typography color= {theme.palette.mode === 'dark' ? "white" : "black"} className="plight" variant="body2">
+                                    <Grid item xs={12}>
+                                        <Typography
+                                            color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                            className="plight"
+                                            variant="body2"
+                                        >
                                             {item.title2}
                                         </Typography>
                                     </Grid>

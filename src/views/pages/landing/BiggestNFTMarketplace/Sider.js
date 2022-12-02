@@ -26,7 +26,6 @@ const SiderPage = () => {
     }, []);
     const theme = useTheme();
 
-
     const dispatch = useDispatch();
     const customization = useSelector((state) => state.customization);
 
@@ -37,7 +36,7 @@ const SiderPage = () => {
     }, [dispatch, navType]);
     return (
         <>
-            <Container sx={{ mt: 5}}>
+            <Container sx={{ mt: 5 }}>
                 <Grid item xs={12} sm={8}>
                     <Grid
                         container
@@ -47,8 +46,8 @@ const SiderPage = () => {
                             pt: 1,
                             pb: 3,
                             ml: 1,
-                             boxShadow: '1px 2px 9px #d3d3d3',
-                            background: theme.palette.mode === 'dark' ? '#181C1F': "#fff",
+                            boxShadow: '1px 2px 9px #d3d3d3',
+                            background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
                             borderRadius: '4px'
                         }}
                     >
@@ -61,19 +60,15 @@ const SiderPage = () => {
                         >
                             {pathName == '/BiggestNFTMarketplace' ? (
                                 <>
-                                <Tooltip title="Dashboard" placement="right" arrow>
-                                    
-                                    <DashboardIcon sx={{ color: `${color}` }} />
+                                    <Tooltip title="Dashboard" placement="right" arrow>
+                                        <DashboardIcon sx={{ color: `${color}` }} />
                                     </Tooltip>
-                                    
                                 </>
                             ) : (
                                 <>
-                                   <Tooltip title="Dashboard" placement="right" arrow>
-
-                                    <DashboardIcon />
-
-                                   </Tooltip>
+                                    <Tooltip title="Dashboard" placement="right" arrow>
+                                        <DashboardIcon />
+                                    </Tooltip>
                                 </>
                             )}
                         </Grid>
@@ -89,19 +84,15 @@ const SiderPage = () => {
                         >
                             {pathName.includes('/marketplace') ? (
                                 <>
-                                   <Tooltip title="Marketplace" placement="right" arrow>
-
-                                    <StorefrontIcon style={{ color: `${color}` }} />
-
-                                   </Tooltip>
+                                    <Tooltip title="Marketplace" placement="right" arrow>
+                                        <StorefrontIcon style={{ color: `${color}` }} />
+                                    </Tooltip>
                                 </>
                             ) : (
                                 <>
-                                   <Tooltip title="Marketplace" placement="right" arrow>
-
-                                    
-                                    <StorefrontIcon />
-                                   </Tooltip>
+                                    <Tooltip title="Marketplace" placement="right" arrow>
+                                        <StorefrontIcon />
+                                    </Tooltip>
                                 </>
                             )}
                         </Grid>
@@ -120,27 +111,16 @@ const SiderPage = () => {
                         <Grid item sx={{ mt: 2 }}>
                             <LogoutIcon />
                         </Grid>
-                        <Grid item sx={{ mt:5  }}>
-                            {customization.navType =="dark"
-                            ?
-                            <>
-                            <WbSunnyIcon  style={{color:`${color}`, cursor:"pointer"}}
-                              onClick={() => setNavType("light")}                            
-                            />
-                            
-                            </>
-                            :
-                            <>
-                            <DarkModeIcon  style={{color:`${color}`, cursor:"pointer"}}
-                             onClick={() => setNavType("dark")}                            
-                           />
-                            
-                            </>
-                            
-                            }
-
-
-
+                        <Grid item sx={{ mt: 5 }}>
+                            {customization.navType == 'dark' ? (
+                                <>
+                                    <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
+                                </>
+                            ) : (
+                                <>
+                                    <DarkModeIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('dark')} />
+                                </>
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>

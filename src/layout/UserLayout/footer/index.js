@@ -35,18 +35,15 @@ const FooterWrapper = styled('div')(({ theme }) => ({
 
 const Footer = () => {
     const useStyles = makeStyles((theme) => ({
-        divider: {
-            // Theme Color, or use css color in quote
-            // background: theme.palette.success.light
-            background: '#d3d3d3'
-        }
+    
     }));
     const classes = useStyles();
     const theme = useTheme();
     return (
         <Grid >
         
-            <FooterWrapper style={{ color: `${theme.palette.mode === 'dark' ? 'white' : 'black'}` }}>
+            <FooterWrapper style={{ background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+            color: theme.palette.mode === 'dark' ? 'white' : '#404040'}}>
                 <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } ,
                 }}
                  spacing={gridSpacing}>
