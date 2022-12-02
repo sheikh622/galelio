@@ -8,10 +8,10 @@ import Loadable from 'ui-component/Loadable';
 import CompanyPage from 'views/pages/companyPage';
 
 // market routing
-const LandingPage = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
+const LandingPage = Loadable(lazy(() => import('views/pages/landing/BiggestNFTMarketplace')));
 const Marketplace = Loadable(lazy(() => import('views/pages/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
-const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/biggestNFTMarketplace')));
+const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/landing/BiggestNFTMarketplace')));
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
 // ==============================|| market  ROUTING ||============================== //
 

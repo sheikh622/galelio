@@ -7,7 +7,7 @@ import { Divider, Grid, Stack, Typography, useMediaQuery, Box } from '@mui/mater
 // project imports
 import AuthWrapper1 from 'shared/component/AuthWrapper';
 import AuthCardWrapper from 'shared/component/AuthCardWrapper';
-import LoginForm from './component/LoginForm';
+import LoginForm from './component/loginForm';
 import Logo from 'ui-component/Logo';
 import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
 import AuthSlider from 'ui-component/cards/AuthSlider';

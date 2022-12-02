@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from '@mui/material';
 
 // project imports
 import SimilarProducts from './SimilarProducts';
-import SiderPage from '../biggestNFTMarketplace/Sider';
+import SiderPage from '../BiggestNFTMarketplace/Sider';
 import Activity from './Activity';
 
 import Properties from './Properties';
