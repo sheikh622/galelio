@@ -26,11 +26,14 @@ const Categories = ({ categories }) => {
 
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {categories?.length > 0 &&
+                    {categories &&
+                        categories.length > 0 &&
                         categories.map((item) => (
                             <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
                                 <Grid container justifyContent="center" spacing={1}>
                                     <Grid item component={RouterLink} to="/ProductDetails">
+                                        <CardMedia component="img" width="100%" height="auto" image={item.image} />
+
                                         <Box
                                             sx={{
                                                 position: 'relative',

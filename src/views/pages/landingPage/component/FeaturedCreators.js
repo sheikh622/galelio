@@ -26,7 +26,7 @@ const FeaturedCreators = ({ brands }) => {
 
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {brands?.length > 0 &&
+                    {brands && brands.length > 0 &&
                         brands.map((item) => (
                             <Grid
                                 item
@@ -78,7 +78,7 @@ const FeaturedCreators = ({ brands }) => {
                                         </Grid>
 
                                         <Grid item md={12} xs={12} sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}>
-                                            <Typography variant="body"> 50</Typography>
+                                            <Typography variant="body"> 34</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>

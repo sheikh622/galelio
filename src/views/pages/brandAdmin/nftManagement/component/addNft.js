@@ -395,38 +395,37 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 </div>
                             </Grid>
                         )}
-
-                        <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
-                            <AnimatePresence>
-                                {formik.values.images &&
-                                    formik.values.images.map((file, index) => (
-                                        <ListItem key={file.image.name} component={motion.div} className="listItem">
-                                            <ListItemIcon>
-                                                <Icon icon={fileFill} width={32} height={32} />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={file.image.name ? file.image.name : ''}
-                                                secondary={fData(file.image.size) ? fData(file.image.size) : ''}
-                                                primaryTypographyProps={{
-                                                    variant: 'subtitle2'
-                                                }}
-                                            />
-                                            <ListItemSecondaryAction style={{ display: 'flex' }}>
-                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
-
-                                                <IconButton
-                                                    color="error"
-                                                    edge="end"
-                                                    size="small"
-                                                    onClick={() => handleRemoveFile(file.image, index)}
-                                                >
-                                                    <Icon icon={closeFill} width={28} height={28} />
-                                                </IconButton>
-                                            </ListItemSecondaryAction>
-                                        </ListItem>
-                                    ))}
-                            </AnimatePresence>
-                        </List>
+                        <Grid item lg={12} mt={3}>
+                            <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
+                                <AnimatePresence>
+                                    {formik.values.images &&
+                                        formik.values.images.map((file, index) => (
+                                            <ListItem key={file.image.name} component={motion.div} className="listItem">
+                                                <ListItemIcon>
+                                                    <Icon icon={fileFill} width={32} height={32} />
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={file.image.name ? file.image.name : ''}
+                                                    secondary={fData(file.image.size) ? fData(file.image.size) : ''}
+                                                    primaryTypographyProps={{
+                                                        variant: 'subtitle2'
+                                                    }}
+                                                />
+                                                  <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                    <IconButton
+                                                        color="error"
+                                                        edge="end"
+                                                        size="small"
+                                                        onClick={() => handleRemoveFile(file.image, index)}
+                                                    >
+                                                        <Icon icon={closeFill} width={28} height={28} />
+                                                    </IconButton>
+                                              
+                                            </ListItem>
+                                        ))}
+                                </AnimatePresence>
+                            </List>
+                        </Grid>
                     </form>
                 </DialogContent>
                 <Divider />

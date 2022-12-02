@@ -4,9 +4,7 @@ import { Box, Grid, Typography } from '@mui/material';
 
 // project imports
 import SimilarProducts from './SimilarProducts';
-import SiderPage from '../BiggestNFTMarketplace/Sider';
 import Activity from './Activity';
-
 import Properties from './Properties';
 import PropertiesView from './ProductView';
 import { useTheme } from '@emotion/react';
