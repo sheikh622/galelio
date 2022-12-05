@@ -11,8 +11,7 @@ const UserLayout = () => {
             <Header />
             <Grid
                 sx={{
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                    padding: '1%'
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
                 }}
             >
                 <Grid
@@ -23,27 +22,22 @@ const UserLayout = () => {
                             sm: 'block',
                             md: 'flex'
                         },
-                        marginBottom: '40px'
+                        paddingBottom: '40px'
                     }}
                 >
                     <Grid
                         item
-                        md={3}
+                        md={1}
                         xs={12}
-                        sx={{
-                            background: '',
-                            marginRight: '',
-                            position: 'sticky',
-                            height: '100%',
-                            top: '0',
-                            display: { xs: 'none', sm: 'none', md: 'flex' }
-                        }}
+                        sx={{ position: 'sticky', height: '100%', top: '0', 
+                        display: { xs: 'none', sm: 'none', md: 'flex' } }}
                     >
                         <SideBar />
                     </Grid>
                     <Outlet />
                 </Grid>
             </Grid>
+
             <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
             <Grid
                 container-fluid
@@ -52,11 +46,13 @@ const UserLayout = () => {
                         xs: 'block',
                         sm: 'block',
                         md: 'flex'
-                    }
+                    },
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Grid item md={1} xs={12} sx={{}}></Grid>
-                <Grid item md={12} xs={12}>
+                <Grid item md={1} xs={12}></Grid>
+                <Grid item md={11} xs={12}>
                     <Footer />
                 </Grid>
             </Grid>

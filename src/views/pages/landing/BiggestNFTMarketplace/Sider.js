@@ -37,7 +37,7 @@ const SiderPage = () => {
     return (
         <>
             <Container sx={{ mt: 5 }}>
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={12} sm={8} >
                     <Grid
                         container
                         alignItems="center"
@@ -48,6 +48,7 @@ const SiderPage = () => {
                             ml: 1,
                             boxShadow: '1px 2px 9px #d3d3d3',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
+                            
                             borderRadius: '4px'
                         }}
                     >
