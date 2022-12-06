@@ -111,10 +111,28 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                     {nftData.price} {nftData.currencyType}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item  xs={12}>
                                 <Typography variant="h6">{nftData.NFTTokens.length} Items</Typography>
                             </Grid>
                         </Grid>
+                        <Grid item xs={6}>
+                        <Button
+                        size="small"
+                        sx={{
+                            marginRight: '10px',
+                            float:'right',
+                            ':hover': {
+                                boxShadow: 'none'
+                            }
+                        }}
+                        variant="contained"
+                        onClick={() => {
+                          
+                        }}
+                    >
+                        Details
+                    </Button>
+</Grid>
                         <Grid item xs={12}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
                                 {nftData.status !== 'MINTED' && (

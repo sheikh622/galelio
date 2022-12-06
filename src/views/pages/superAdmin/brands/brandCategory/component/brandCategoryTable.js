@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
+
 import { useNavigate } from 'react-router-dom';
 import {
     Divider,
@@ -12,13 +14,17 @@ import {
     TableHead,
     Button,
     TableRow,
-    Tooltip
+    Tooltip,
+    Stack
 } from '@mui/material';
+
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddUpdateBrandCategoryDialog from './addUpdateBrandCategory';
 import DeleteBrandCategoryDialog from './deleteBrandCategoryDialog';
 import Avatar from 'ui-component/extended/Avatar';
-
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 const BrandCategoryTable = ({
     brandCategoriesList,
     search,
@@ -32,6 +38,8 @@ const BrandCategoryTable = ({
     const navigate = useNavigate();
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [detailId, setDetailId] = useState();
+    const theme = useTheme();
+
     const openDetails = (id) => {
         if (detailId === id) {
             setDetailId(null);
@@ -91,73 +99,63 @@ const BrandCategoryTable = ({
                                         <TableCell align="center">{row.Category.description}</TableCell>
                                         <TableCell align="center">{row.profitPercentage}</TableCell>
 
-                                        <TableCell align="center">
-                                            <Tooltip placement="top" title="View">
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="detail"
-                                                    size="large"
-                                                    onClick={() => {
-                                                        openDetails(row.id);
-                                                    }}
-                                                >
-                                                    <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
-                                        <TableCell sx={{ pl: 12 }} colSpan={12}>
-                                            <div>
-                                                <Grid container spacing={4}>
-                                                    <Grid item xs={4} md={4}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setAddUpdateOpen(true);
-                                                                setBrandCategoryData({
-                                                                    categoryId: row.CategoryId,
-                                                                    brandId: row.BrandId,
-                                                                    profitPercentage: row.profitPercentage
-                                                                });
-                                                            }}
-                                                        >
-                                                            Edit
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item xs={4} md={4}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setDeleteOpen(true);
-                                                                setBrandCategoryData({
-                                                                    categoryId: row.CategoryId,
-                                                                    brandId: row.BrandId
-                                                                });
-                                                            }}
-                                                        >
-                                                            Delete
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item xs={4} md={4}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                navigate('/nftManagement', {
-                                                                    state: {
-                                                                        brandData: row
-                                                                    }
-                                                                });
-                                                            }}
-                                                        >
-                                                            View NFT'S
-                                                        </Button>
-                                                    </Grid>
-                                                </Grid>
-                                            </div>
+                                        <TableCell align="center" sx={{ padding: '0px' }}>
+                                            <Stack direction="row" justifyContent="center" alignItems="center">
+                                                <Tooltip placement="top" title=" View NFT'S">
+                                                    <IconButton
+                                                        color="primary"
+                                                        aria-label="detail"
+                                                        size="medium"
+                                                        onClick={() => {
+                                                            navigate('/nftManagement', {
+                                                                state: {
+                                                                    brandData: row
+                                                                }
+                                                            });
+                                                        }}
+                                                    >
+                                                        <RemoveRedEyeIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+
+                                                <Tooltip placement="top" title="Edit">
+                                                    <IconButton
+                                                        color="primary"
+                                                        aria-label="Edit"
+                                                        size="large"
+                                                        onClick={() => {
+                                                            setAddUpdateOpen(true);
+                                                            setBrandCategoryData({
+                                                                categoryId: row.CategoryId,
+                                                                brandId: row.BrandId,
+                                                                profitPercentage: row.profitPercentage
+                                                            });
+                                                        }}
+                                                    >
+                                                        <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                                <Tooltip placement="top" title="Delete">
+                                                    <IconButton
+                                                        color="primary"
+                                                        sx={{
+                                                            color: theme.palette.orange.dark,
+                                                            borderColor: theme.palette.orange.main,
+                                                            '&:hover ': { background: theme.palette.orange.light }
+                                                        }}
+                                                        size="large"
+                                                        onClick={() => {
+                                                            setDeleteOpen(true);
+                                                            setBrandCategoryData({
+                                                                categoryId: row.CategoryId,
+                                                                brandId: row.BrandId
+                                                            });
+                                                        }}
+                                                    >
+                                                        <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </Stack>
                                         </TableCell>
                                     </TableRow>
                                 </>

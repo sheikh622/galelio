@@ -21,7 +21,8 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteBrandDialog from './deleteBrandDialog';
 import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBrandData }) => {
     const theme = useTheme();
     const navigate = useNavigate();
@@ -83,7 +84,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                     });
                                                 }}
                                             >
-                                                <AddOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                <AccountCircleIcon sx={{ fontSize: '1.5rem' }} />
                                             </IconButton>
                                         </Tooltip>
                                         <Tooltip placement="top" title="Add Brand Admin">
@@ -99,7 +100,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                     });
                                                 }}
                                             >
-                                                <AddOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                <DashboardIcon sx={{ fontSize: '1.5rem' }} />
                                             </IconButton>
                                         </Tooltip>
 
