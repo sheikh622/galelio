@@ -1,14 +1,23 @@
-import { useTheme } from '@mui/material/styles';
-import { Divider, Grid, Typography, useMediaQuery, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
+
+// material-ui
+import { useTheme, styled } from '@mui/material/styles';
+import { Divider, Grid, Stack, Typography, useMediaQuery, Box } from '@mui/material';
+
+// project imports
 import AuthWrapper1 from 'shared/component/AuthWrapper';
 import AuthCardWrapper from 'shared/component/AuthCardWrapper';
+import SignUpForm from './component/SignUp';
 
 import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
 
-import ForgotForm from './component/ForgetForm';
-import React from 'react';
+// assets
 
-const ForgotPassword = () => {
+// styles
+
+// ================================|| AUTH1 - LOGIN ||================================ //
+
+const SignUp = () => {
     const theme = useTheme();
 
     return (
@@ -34,24 +43,24 @@ const ForgotPassword = () => {
                             <Grid item xs={12} container alignItems="center" justifyContent="center">
                                 <Box sx={{ mb: 2 }}>
                                     <Typography className="signInMarket" variant="subtitle1">
-                                        Forgot Password
+                                        Sign Up
                                     </Typography>
                                 </Box>
                             </Grid>
                         </Grid>
                         <Grid container spacing={2} justifyContent="center">
                             <Grid item xs={12}>
+                                <SignUpForm />
+                            </Grid>
+                            <Grid item xs={12}>
                                 <Divider />
                             </Grid>
                             <Grid item xs={12}>
                                 <Grid item container direction="column" alignItems="center" xs={12}>
-                                    <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
-                                        Please enter registered email ID.
+                                    <Typography component={Link} to="/login" variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                                        Already have an account?
                                     </Typography>
                                 </Grid>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <ForgotForm />
                             </Grid>
                         </Grid>
                     </AuthCardWrapper>
@@ -61,4 +70,4 @@ const ForgotPassword = () => {
     );
 };
 
-export default ForgotPassword;
+export default SignUp;

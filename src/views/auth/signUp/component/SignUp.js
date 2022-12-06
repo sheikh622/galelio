@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -5,7 +6,9 @@ import { useTheme } from '@mui/material/styles';
 import {
     Box,
     Button,
+    Checkbox,
     FormControl,
+    FormControlLabel,
     FormHelperText,
     Grid,
     IconButton,
@@ -13,26 +16,20 @@ import {
     InputLabel,
     OutlinedInput,
     Stack,
-    Typography
+    Typography,
+    useMediaQuery,
+    Divider
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { login } from '../../../../redux/auth/actions';
-import { useNavigate } from 'react-router-dom';
-import { setLoader } from '../../../../redux/auth/actions';
-import googleweb from 'assets/images/googleweb.png';
-import facebook from 'assets/images/facebook.png';
 
-const LoginForm = ({ loginProp, ...others }) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+const SignUpForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
 
-    const loader = useSelector((state) => state.auth.loader);
-
+    const [checked, setChecked] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -41,35 +38,46 @@ const LoginForm = ({ loginProp, ...others }) => {
         event.preventDefault();
     };
 
-    useEffect(() => {
-        dispatch(setLoader(false));
-    }, []);
-
     return (
         <>
             <Formik
                 enableReinitialize
                 initialValues={{
+                    name: '',
                     email: '',
-                    password: ''
+                    password: '',
+                    confirmPassword: ''
                 }}
                 validationSchema={Yup.object().shape({
+                    name: Yup.string().max(255).required('Name is required!'),
+
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-                    password: Yup.string().max(255).required('Password is required!')
+                    password: Yup.string().max(255).required('Password is required!'),
+                    confirmPassword: Yup.string().max(255).required('Confirm Password is required!')
                 })}
                 onSubmit={async (values) => {
-                    await dispatch(setLoader(true));
-                    dispatch(
-                        login({
-                            email: values.email,
-                            password: values.password,
-                            navigate: navigate
-                        })
-                    );
+                    await console.log('login');
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Name </InputLabel>
+                            <OutlinedInput
+                                type="name"
+                                value={values.name}
+                                name="name"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                label="Name"
+                                inputProps={{}}
+                            />
+                            {touched.name && errors.name && (
+                                <FormHelperText error id="standard-weight-helper-text-name-login">
+                                    {errors.name}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput
@@ -122,15 +130,52 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
+                        <FormControl
+                            fullWidth
+                            error={Boolean(touched.password && errors.password)}
+                            sx={{ ...theme.typography.customInput }}
+                        >
+                            <InputLabel htmlFor="outlined-adornment-password-login">Confirm Password</InputLabel>
+                            <OutlinedInput
+                                type={showPassword ? 'text' : 'password'}
+                                value={values.confirmPassword}
+                                name="confirmPassword"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                            size="large"
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="confirmPassword"
+                                inputProps={{}}
+                            />
+                            {touched.confirmPassword && errors.confirmPassword && (
+                                <FormHelperText error id="standard-weight-helper-text-password-login">
+                                    {errors.confirmPassword}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
                         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                            <Typography
-                                variant="subtitle1"
-                                component={Link}
-                                to={'/forgetPassword'}
-                                sx={{ textDecoration: 'none', color: '#000 ' }}
-                            >
-                                Forgot Password?
-                            </Typography>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={checked}
+                                        onChange={(event) => setChecked(event.target.checked)}
+                                        name="checked"
+                                        color="primary"
+                                    />
+                                }
+                                label="By checking you agree to our Terms and Conditions"
+                            />
                         </Stack>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
@@ -140,51 +185,20 @@ const LoginForm = ({ loginProp, ...others }) => {
 
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
-                                {loader ? (
-                                    <Button
-                                        className="signbuttonMarket"
-                                        disableElevation
-                                        disabled={isSubmitting}
-                                        fullWidth
-                                        size="large"
-                                        type="submit"
-                                        variant="contained"
-                                        color="secondary"
-                                    >
-                                        Sign in
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        className="signbuttonMarket"
-                                        disableElevation
-                                        disabled={isSubmitting}
-                                        fullWidth
-                                        size="large"
-                                        type="submit"
-                                        variant="contained"
-                                        color="secondary"
-                                    >
-                                        Sign in
-                                    </Button>
-                                )}
+                                <Button
+                                    className="signbuttonMarket"
+                                    disableElevation
+                                    disabled={isSubmitting}
+                                    fullWidth
+                                    size="large"
+                                    type="submit"
+                                    variant="contained"
+                                    color="secondary"
+                                >
+                                    Sign in
+                                </Button>
                             </AnimateButton>
                         </Box>
-
-                        <Grid item xs={12}>
-                            <Grid mt={2} item container direction="column" alignItems="center" xs={12}>
-                                <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
-                                    or continue with
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid item sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                            <Box sx={{ color: 'red' }}>
-                                <img src={facebook} alt="facebook" width="44px" height="42px" />
-                            </Box>
-                            <Box sx={{ marginLeft: '20px', marginTop: '-2px' }}>
-                                <img src={googleweb} alt="google" width="47px" height="47px" />
-                            </Box>
-                        </Grid>
                     </form>
                 )}
             </Formik>
@@ -192,4 +206,4 @@ const LoginForm = ({ loginProp, ...others }) => {
     );
 };
 
-export default LoginForm;
+export default SignUpForm;

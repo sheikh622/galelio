@@ -67,21 +67,18 @@ const ResetPasswordForm = ({ token, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl
+                    <FormControl
                             fullWidth
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-reset">Password</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
                             <OutlinedInput
-                                id="outlined-adornment-password-reset"
                                 type={showPassword ? 'text' : 'password'}
                                 value={values.password}
                                 name="password"
                                 onBlur={handleBlur}
-                                onChange={(e) => {
-                                    handleChange(e);
-                                }}
+                                onChange={handleChange}
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
@@ -95,78 +92,62 @@ const ResetPasswordForm = ({ token, ...others }) => {
                                         </IconButton>
                                     </InputAdornment>
                                 }
+                                label="Password"
                                 inputProps={{}}
                             />
-                        </FormControl>
-                        {touched.password && errors.password && (
-                            <FormControl fullWidth>
-                                <FormHelperText error id="standard-weight-helper-text-reset">
+                            {touched.password && errors.password && (
+                                <FormHelperText error id="standard-weight-helper-text-password-login">
                                     {errors.password}
                                 </FormHelperText>
-                            </FormControl>
-                        )}
-
+                            )}
+                        </FormControl>
                         <FormControl
                             fullWidth
-                            error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                            error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-reset">
-                            Confirm Password
-                            </InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-login">Confirm Password</InputLabel>
                             <OutlinedInput
-                                id="outlined-adornment-confirmpassword-reset"
-                                type={showConfirmPassword ? 'text' : 'password'}
+                                type={showPassword ? 'text' : 'password'}
                                 value={values.confirmPassword}
                                 name="confirmPassword"
                                 onBlur={handleBlur}
-                                onChange={(e) => {
-                                    handleChange(e);
-                                }}
+                                onChange={handleChange}
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
                                             aria-label="toggle password visibility"
-                                            onClick={handleClickShowConfirmPassword}
+                                            onClick={handleClickShowPassword}
                                             onMouseDown={handleMouseDownPassword}
                                             edge="end"
                                             size="large"
                                         >
-                                            {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
                                         </IconButton>
                                     </InputAdornment>
                                 }
+                                label="confirmPassword"
                                 inputProps={{}}
                             />
+                            {touched.confirmPassword && errors.confirmPassword && (
+                                <FormHelperText error id="standard-weight-helper-text-password-login">
+                                    {errors.confirmPassword}
+                                </FormHelperText>
+                            )}
                         </FormControl>
 
-                        {touched.confirmPassword && errors.confirmPassword && (
-                            <FormControl fullWidth>
-                                <FormHelperText error id="standard-weight-helper-text-confirm-password">
-                                    {' '}
-                                    {errors.confirmPassword}{' '}
-                                </FormHelperText>
-                            </FormControl>
-                        )}
-
+                       
+                       
                         {errors.submit && (
-                            <Box
-                                sx={{
-                                    mt: 3
-                                }}
-                            >
+                            <Box sx={{ mt: 3 }}>
                                 <FormHelperText error>{errors.submit}</FormHelperText>
                             </Box>
                         )}
-                        <Box
-                            sx={{
-                                mt: 1
-                            }}
-                        >
+
+                        <Box sx={{ mt: 2 }}>
                             <AnimateButton>
                                 <Button
-                                className='signbutton'
-                                sx={{ background:"#604223"}}
+                                    className="signbuttonMarket"
                                     disableElevation
                                     disabled={isSubmitting}
                                     fullWidth
@@ -175,10 +156,12 @@ const ResetPasswordForm = ({ token, ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                   Reset Password
+                                Reset Password
                                 </Button>
                             </AnimateButton>
                         </Box>
+                    
+                
                     </form>
                 )}
             </Formik>
