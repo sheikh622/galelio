@@ -26,15 +26,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import { useNavigate } from 'react-router-dom';
-import googleweb from 'assets/images/googleweb.png';
-import facebook from 'assets/images/facebook.png';
-import Google from 'assets/images/icons/social-google.svg';
-import FacebookSharpIcon from '@mui/icons-material/FacebookSharp';
-import axios from 'axios';
-// import useAuth from 'hooks/useAuth';
-
-const ResetForm = ({ loginProp, ...others }) => {
+const SignUpForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
 
     const [checked, setChecked] = useState(true);
@@ -51,12 +43,17 @@ const ResetForm = ({ loginProp, ...others }) => {
             <Formik
                 enableReinitialize
                 initialValues={{
+                    name: '',
+                    email: '',
                     password: '',
-                    confirmPassword:''
+                    confirmPassword: ''
                 }}
                 validationSchema={Yup.object().shape({
+                    name: Yup.string().max(255).required('Name is required!'),
+
+                    email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     password: Yup.string().max(255).required('Password is required!'),
-                    confirmPassword: Yup.string().max(255).required('Confirm Password is required!'),
+                    confirmPassword: Yup.string().max(255).required('Confirm Password is required!')
                 })}
                 onSubmit={async (values) => {
                     await console.log('login');
@@ -64,7 +61,42 @@ const ResetForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                    <FormControl
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Name </InputLabel>
+                            <OutlinedInput
+                                type="name"
+                                value={values.name}
+                                name="name"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                label="Name"
+                                inputProps={{}}
+                            />
+                            {touched.name && errors.name && (
+                                <FormHelperText error id="standard-weight-helper-text-name-login">
+                                    {errors.name}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
+                            <OutlinedInput
+                                type="email"
+                                value={values.email}
+                                name="email"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                label="Email"
+                                inputProps={{}}
+                            />
+                            {touched.email && errors.email && (
+                                <FormHelperText error id="standard-weight-helper-text-email-login">
+                                    {errors.email}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <FormControl
                             fullWidth
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
@@ -132,9 +164,19 @@ const ResetForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-
-                       
-                       
+                        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={checked}
+                                        onChange={(event) => setChecked(event.target.checked)}
+                                        name="checked"
+                                        color="primary"
+                                    />
+                                }
+                                label="By checking you agree to our Terms and Conditions"
+                            />
+                        </Stack>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
                                 <FormHelperText error>{errors.submit}</FormHelperText>
@@ -153,19 +195,15 @@ const ResetForm = ({ loginProp, ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                Reset Password
+                                    Sign in
                                 </Button>
                             </AnimateButton>
                         </Box>
-                    
-                
                     </form>
                 )}
             </Formik>
-
-           
         </>
     );
 };
 
-export default ResetForm;
+export default SignUpForm;

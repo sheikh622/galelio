@@ -9,7 +9,7 @@ import Appbar from 'layout/UserLayout/header';
 
 import NewPage from './New';
 import FeaturedPage from './FeaturedCreators';
-import Sider from '../BiggestNFTMarketplace/Sider';
+import Sider from '../biggestNFTMarketplace/Sider';
 
 import CategoriesPage from './Categories';
 
@@ -22,7 +22,8 @@ const Landing = () => {
     return (
       <Grid item md={11} xs={12}>
                     <Grid container-fluid>
-                        <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
+                        <Grid item md={12} xs={12} className="mainBackground" 
+                        sx={{ border: '2px solid transparent' }}>
                             <Header />
                         </Grid>
                         <Grid item md={12} xs={12}>

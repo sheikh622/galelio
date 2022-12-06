@@ -14,7 +14,9 @@ const Marketplace = () => {
         dispatch(getAllMarketplaceCategories());
     }, []);
     return (
-        <Grid
+        
+        <Grid 
+        item md={11} xs={12}
             style={{
                 background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'

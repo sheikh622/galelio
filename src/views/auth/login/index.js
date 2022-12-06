@@ -3,80 +3,63 @@ import { Link } from 'react-router-dom';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Box, Stack, Typography, useMediaQuery } from '@mui/material';
-import { FormattedMessage } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
-// project imports
-import AuthWrapper from '../../../shared/component/AuthWrapper';
-import LoginCardWrapper from '../../../shared/component/LoginCardWrapper';
+
+import AuthWrapper1 from 'shared/component/AuthWrapper';
+import AuthCardWrapper from 'shared/component/AuthCardWrapper';
 import LoginForm from './component/loginForm';
-import Logo from 'ui-component/Logo';
-import AuthFooter from 'ui-component/cards/AuthFooter';
-import React from 'react';
+
+import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
 
 const Login = () => {
     const theme = useTheme();
-    const navigate = useNavigate();
-    // const { isLoggedIn } = useAuth();
-    const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
     return (
-        <AuthWrapper>
-            <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
-                <Grid item xs={12}>
-                    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
-                        <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
-                            <LoginCardWrapper>
-                                <Grid container spacing={2} alignItems="center" justifyContent="center">
-                                    <Grid item sx={{ mb: 3 }}>
-                                        {/* <Link to="/"> */}
-                                        {/* <Logo /> */}
-                                        {/* </Link> */}
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Grid container alignItems="center" justifyContent="center" textAlign="center" spacing={1}>
-                                            <Grid item xs={12}>
-                                                <Typography
-                                                    className="Signin"
-                                                    sx={{ color: '#816a51' }}
-                                                    gutterBottom
-                                                    variant={matchDownSM ? 'h3' : 'h2'}
-                                                >
-                                                    Sign in
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant="caption" fontSize="16px" textAlign="center">
-                                                    Enter Your email and password
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-
-                                    <Grid item xs={12}>
-                                        <LoginForm />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Divider />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography
-                                            variant="caption"
-                                            fontSize="16px"
-                                            textAlign="center"
-                                            onClick={() => {
-                                                navigate('/landingPage');
-                                            }}
-                                        >
-                                            Marketplace
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </LoginCardWrapper>
+        <AuthWrapper1>
+            <Grid
+                container
+                justifyContent="space-between"
+                alignItems="center"
+                sx={{ minHeight: '100vh', background: theme.palette.mode === 'dark' ? '#fff' : '#fff' }}
+            >
+                <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
+                    <BackgroundPattern1>
+                        <Grid item container alignItems="flex-end" justifyContent="center" spacing={3}>
+                            <Grid item xs={12}>
+                                <span />
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </BackgroundPattern1>
+                </Grid>
+                <Grid item container justifyContent="center" md={6} lg={7}>
+                    <AuthCardWrapper>
+                        <Grid container direction="column" justifyContent="center" spacing={2}>
+                            <Grid item xs={12} container alignItems="center" justifyContent="center">
+                                <Box sx={{ mb: 2 }}>
+                                    <Typography className="signInMarket" variant="subtitle1">
+                                        Sign In
+                                    </Typography>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={2} justifyContent="center">
+                            <Grid item xs={12}>
+                                <LoginForm />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Divider />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Grid item container direction="column" alignItems="center" xs={12}>
+                                    <Typography component={Link} to="/signUp" variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                                        Don&apos;t have an account?
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </AuthCardWrapper>
                 </Grid>
             </Grid>
-        </AuthWrapper>
+        </AuthWrapper1>
     );
 };
 
