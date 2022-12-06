@@ -13,7 +13,8 @@ import {
     TableHead,
     Button,
     TableRow,
-    Tooltip,Stack 
+    Tooltip,
+    Stack
 } from '@mui/material';
 import DeleteBrandAdminDialog from './deleteBrandAdminDialog';
 import Chip from 'ui-component/extended/Chip';
@@ -29,13 +30,11 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
 
     const [changeStatusOpen, setChangeStatusOpen] = useState(false);
     const [detailId, setDetailId] = useState();
-    const openDetails = (id)
- => {
+    const openDetails = (id) => {
         if (detailId === id) {
             setDetailId(null);
         } else {
-            setDetailId(id)
-;
+            setDetailId(id);
         }
     };
 
@@ -96,68 +95,67 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                             )}
                                         </TableCell>
                                         <TableCell align="center" sx={{ padding: '0px' }}>
-                                        <Stack direction="row" justifyContent="center" alignItems="center">
-                                            
-                                            <Tooltip placement="top" title="Change Status">
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="detail"
-                                                    size="medium"
-                                                    onClick={() => {
-                                                        setChangeStatusOpen(true);
-                                                        setBrandAdminData({
-                                                            id: row.id,
-                                                            brandId: row.BrandId,
-                                                            isActive: row.isActive
-                                                        });
-                                                    }}
-                                                >
-                                                    <UpdateIcon sx={{ fontSize: '1.5rem' }} />
-                                                </IconButton>
-                                            </Tooltip>
-    
-                                            <Tooltip placement="top" title="Edit">
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="Edit"
-                                                    size="large"
-                                                    onClick={() => {
-                                                        setAddUpdateOpen(true);
-                                                        setBrandAdminData({
-                                                            id: row.id,
-                                                            brandId: row.BrandId,
-                                                            firstName: row.firstName,
-                                                            lastName: row.lastName,
-                                                            adminEmail: row.email,
-                                                            adminPassword: ''
-                                                        });
-                                                    }}
-                                                >
-                                                    <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                                </IconButton>
-                                            </Tooltip>
-                                            <Tooltip placement="top" title="Delete">
-                                                <IconButton
-                                                    color="primary"
-                                                    sx={{
-                                                        color: theme.palette.orange.dark,
-                                                        borderColor: theme.palette.orange.main,
-                                                        '&:hover ': { background: theme.palette.orange.light }
-                                                    }}
-                                                    size="large"
-                                                    onClick={() => {
-                                                        setDeleteOpen(true);
-                                                        setBrandAdminData({
-                                                            id: row.id,
-                                                            brandId: row.BrandId
-                                                        });
-                                                    }}
-                                                >
-                                                    <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </Stack>
-                                    </TableCell>
+                                            <Stack direction="row" justifyContent="center" alignItems="center">
+                                                <Tooltip placement="top" title="Change Status">
+                                                    <IconButton
+                                                        color="primary"
+                                                        aria-label="detail"
+                                                        size="medium"
+                                                        onClick={() => {
+                                                            setChangeStatusOpen(true);
+                                                            setBrandAdminData({
+                                                                id: row.id,
+                                                                brandId: row.BrandId,
+                                                                isActive: row.isActive
+                                                            });
+                                                        }}
+                                                    >
+                                                        <UpdateIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+
+                                                <Tooltip placement="top" title="Edit">
+                                                    <IconButton
+                                                        color="primary"
+                                                        aria-label="Edit"
+                                                        size="large"
+                                                        onClick={() => {
+                                                            setAddUpdateOpen(true);
+                                                            setBrandAdminData({
+                                                                id: row.id,
+                                                                brandId: row.BrandId,
+                                                                firstName: row.firstName,
+                                                                lastName: row.lastName,
+                                                                adminEmail: row.email,
+                                                                adminPassword: ''
+                                                            });
+                                                        }}
+                                                    >
+                                                        <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                                <Tooltip placement="top" title="Delete">
+                                                    <IconButton
+                                                        color="primary"
+                                                        sx={{
+                                                            color: theme.palette.orange.dark,
+                                                            borderColor: theme.palette.orange.main,
+                                                            '&:hover ': { background: theme.palette.orange.light }
+                                                        }}
+                                                        size="large"
+                                                        onClick={() => {
+                                                            setDeleteOpen(true);
+                                                            setBrandAdminData({
+                                                                id: row.id,
+                                                                brandId: row.BrandId
+                                                            });
+                                                        }}
+                                                    >
+                                                        <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </Stack>
+                                        </TableCell>
                                     </TableRow>
                                     <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
                                         <TableCell sx={{ pl: 12 }} colSpan={12}>
