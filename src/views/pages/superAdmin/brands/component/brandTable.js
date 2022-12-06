@@ -12,7 +12,8 @@ import {
     TableRow,
     Tooltip,
     Grid,
-    Typography
+    Typography,
+    CircularProgress
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -41,7 +42,10 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {brandsList.brands != undefined &&
+                    {brandsList.brands != undefined && brandsList.count != 0 || undefined
+                    ?
+                    <>
+                       {brandsList.brands != undefined &&
                         brandsList.brands.map((row, index) => (
                             <TableRow>
                                 <TableCell align="center" justifyContent="center" alignItems="center">
@@ -139,6 +143,19 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                 </TableCell>
                             </TableRow>
                         ))}
+                    </>
+                    :
+                    <>
+                    
+                    <Grid container justifyContent="center" sx={{ width: '400%', m: 5 }}>
+                                    <Grid item>
+                                        <CircularProgress size={'4rem'} />
+                                    </Grid>
+                                </Grid>
+                    </>
+                    
+                    }
+                 
                 </TableBody>
             </Table>
         </TableContainer>

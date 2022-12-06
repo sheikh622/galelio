@@ -11,7 +11,8 @@ import {
     TableHead,
     Button,
     TableRow,
-    Tooltip
+    Tooltip,
+    CircularProgress
 } from '@mui/material';
 import Chip from 'ui-component/extended/Chip';
 import AddUpdateBrandAdminDialog from './addUpdateSubAdmin';
@@ -81,123 +82,133 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
-                {subAdminList.admins != undefined && subAdminList.count > 0 ? (
-                    <TableBody sx={{ padding: '10px' }}>
-                        {subAdminList.admins != undefined &&
-                            subAdminList.admins.map((row, index) => (
-                                <>
-                                    <TableRow>
-                                        <TableCell align="center">{row.firstName}</TableCell>
-                                        <TableCell align="center">{row.lastName}</TableCell>
-                                        <TableCell align="center">{row.email}</TableCell>
-
-                                        <TableCell align="center">
-                                            {row.isActive == false ? (
-                                                <Chip label="Blocked" size="small" chipcolor="orange" />
-                                            ) : (
-                                                <Chip label="Unblocked" size="small" chipcolor="success" />
-                                            )}
-                                        </TableCell>
-
-                                        <TableCell align="center">
-                                            <Tooltip placement="top" title="View">
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="detail"
-                                                    size="large"
-                                                    onClick={() => {
-                                                        openDetails(row.id);
-                                                    }}
-                                                >
-                                                    <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
-                                        <TableCell sx={{ pl: 12 }} colSpan={12}>
-                                            <div>
-                                                <Grid container spacing={4}>
-                                                    <Grid item xs={3} md={3}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setAddUpdateOpen(true);
-                                                                setSubAdminData({
-                                                                    id: row.id,
-                                                                    firstName: row.firstName,
-                                                                    lastName: row.lastName,
-                                                                    adminEmail: row.email,
-                                                                    adminPassword: ''
-                                                                });
-                                                            }}
-                                                        >
-                                                            Edit
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item xs={3} md={3}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setDeleteOpen(true);
-                                                                setSubAdminData({
-                                                                    id: row.id
-                                                                });
-                                                            }}
-                                                        >
-                                                            Delete
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item xs={3} md={3}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setChangeStatusOpen(true);
-                                                                setSubAdminData({
-                                                                    id: row.id,
-                                                                    isActive: row.isActive
-                                                                });
-                                                            }}
-                                                        >
-                                                            Change Status
-                                                        </Button>
-                                                    </Grid>
-
-                                                    <Grid item xs={3} md={3}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setChangeMintingAccessOpen(true);
-                                                                setSubAdminData({
-                                                                    id: row.id,
-                                                                    hasMintingAccess: row.hasMintingAccess
-                                                                });
-                                                            }}
-                                                        >
-                                                            Change Minting Access
-                                                        </Button>
-                                                    </Grid>
-                                                </Grid>
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
-                                </>
-                            ))}
-                    </TableBody>
-                ) : (
+                {(subAdminList.admins == undefined) && (subAdminList.count == 0 || undefined) ? (
                     <>
-                        <Grid item md={12}>
-                            <Divider />
-                        </Grid>
                         <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                            <Typography style={{ padding: '20px', fontWeight: '800', textAlign: 'center' }}> No Data Available</Typography>
                         </Grid>
                     </>
+                ) : (
+                    <>
+                        {subAdminList.count > 0 ? (
+                            <TableBody sx={{ padding: '10px' }}>
+                                {subAdminList.admins != undefined &&
+                                    subAdminList.admins.map((row, index) => (
+                                        <>
+                                            <TableRow>
+                                                <TableCell align="center">{row.firstName}</TableCell>
+                                                <TableCell align="center">{row.lastName}</TableCell>
+                                                <TableCell align="center">{row.email}</TableCell>
+
+                                                <TableCell align="center">
+                                                    {row.isActive == false ? (
+                                                        <Chip label="Blocked" size="small" chipcolor="orange" />
+                                                    ) : (
+                                                        <Chip label="Unblocked" size="small" chipcolor="success" />
+                                                    )}
+                                                </TableCell>
+
+                                                <TableCell align="center">
+                                                    <Tooltip placement="top" title="View">
+                                                        <IconButton
+                                                            color="primary"
+                                                            aria-label="detail"
+                                                            size="large"
+                                                            onClick={() => {
+                                                                openDetails(row.id);
+                                                            }}
+                                                        >
+                                                            <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </TableCell>
+                                            </TableRow>
+                                            <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
+                                                <TableCell sx={{ pl: 12 }} colSpan={12}>
+                                                    <div>
+                                                        <Grid container spacing={4}>
+                                                            <Grid item xs={3} md={3}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    size="large"
+                                                                    onClick={() => {
+                                                                        setAddUpdateOpen(true);
+                                                                        setSubAdminData({
+                                                                            id: row.id,
+                                                                            firstName: row.firstName,
+                                                                            lastName: row.lastName,
+                                                                            adminEmail: row.email,
+                                                                            adminPassword: ''
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Edit
+                                                                </Button>
+                                                            </Grid>
+                                                            <Grid item xs={3} md={3}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    size="large"
+                                                                    onClick={() => {
+                                                                        setDeleteOpen(true);
+                                                                        setSubAdminData({
+                                                                            id: row.id
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Delete
+                                                                </Button>
+                                                            </Grid>
+                                                            <Grid item xs={3} md={3}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    size="large"
+                                                                    onClick={() => {
+                                                                        setChangeStatusOpen(true);
+                                                                        setSubAdminData({
+                                                                            id: row.id,
+                                                                            isActive: row.isActive
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Change Status
+                                                                </Button>
+                                                            </Grid>
+
+                                                            <Grid item xs={3} md={3}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    size="large"
+                                                                    onClick={() => {
+                                                                        setChangeMintingAccessOpen(true);
+                                                                        setSubAdminData({
+                                                                            id: row.id,
+                                                                            hasMintingAccess: row.hasMintingAccess
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Change Minting Access
+                                                                </Button>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </div>
+                                                </TableCell>
+                                            </TableRow>
+                                        </>
+                                    ))}
+                            </TableBody>
+                        ) : (
+                            <>
+                                <Grid container justifyContent="center" sx={{ width: '300%', m: 5 }}>
+                                    <Grid item>
+                                        <CircularProgress size={'4rem'} />
+                                    </Grid>
+                                </Grid>
+                            </>
+                        )}
+                    </>
                 )}
+             
             </Table>
         </TableContainer>
     );
