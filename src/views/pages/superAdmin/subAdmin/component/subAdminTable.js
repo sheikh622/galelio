@@ -10,19 +10,27 @@ import {
     TableContainer,
     TableHead,
     Button,
+    Stack,
     TableRow,
     Tooltip,
     CircularProgress
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 import Chip from 'ui-component/extended/Chip';
 import AddUpdateBrandAdminDialog from './addUpdateSubAdmin';
 import DeleteSubAdminDialog from './deleteSubAdminDialog';
 import ChangeSubAdminStatusDialog from './changeSubAdminStatus';
 import ChangeSubAdminMintingAccessDialog from './changeSubAdminMintingAccess';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
+import UpdateIcon from '@mui/icons-material/Update';
 const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAddUpdateOpen, subAdminData, setSubAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const theme = useTheme();
+
     const [changeStatusOpen, setChangeStatusOpen] = useState(false);
     const [changeMintingAccessOpen, setChangeMintingAccessOpen] = useState(false);
     const [detailId, setDetailId] = useState();
@@ -82,10 +90,11 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
-                {(subAdminList.admins == undefined) && (subAdminList.count == 0 || undefined) ? (
+                {subAdminList.admins == undefined && (subAdminList.count == 0 || undefined) ? (
                     <>
                         <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800', textAlign: 'center' }}> No Data Available</Typography>
+                            <Typography style={{ padding: '20px', fontWeight: '800', textAlign: 'center' }}> 
+                            No Data Available</Typography>
                         </Grid>
                     </>
                 ) : (
@@ -108,90 +117,62 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                     )}
                                                 </TableCell>
 
-                                                <TableCell align="center">
-                                                    <Tooltip placement="top" title="View">
-                                                        <IconButton
-                                                            color="primary"
-                                                            aria-label="detail"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                openDetails(row.id);
-                                                            }}
-                                                        >
-                                                            <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                </TableCell>
-                                            </TableRow>
-                                            <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
-                                                <TableCell sx={{ pl: 12 }} colSpan={12}>
-                                                    <div>
-                                                        <Grid container spacing={4}>
-                                                            <Grid item xs={3} md={3}>
-                                                                <Button
-                                                                    variant="outlined"
-                                                                    size="large"
-                                                                    onClick={() => {
-                                                                        setAddUpdateOpen(true);
-                                                                        setSubAdminData({
-                                                                            id: row.id,
-                                                                            firstName: row.firstName,
-                                                                            lastName: row.lastName,
-                                                                            adminEmail: row.email,
-                                                                            adminPassword: ''
-                                                                        });
-                                                                    }}
-                                                                >
-                                                                    Edit
-                                                                </Button>
-                                                            </Grid>
-                                                            <Grid item xs={3} md={3}>
-                                                                <Button
-                                                                    variant="outlined"
-                                                                    size="large"
-                                                                    onClick={() => {
-                                                                        setDeleteOpen(true);
-                                                                        setSubAdminData({
-                                                                            id: row.id
-                                                                        });
-                                                                    }}
-                                                                >
-                                                                    Delete
-                                                                </Button>
-                                                            </Grid>
-                                                            <Grid item xs={3} md={3}>
-                                                                <Button
-                                                                    variant="outlined"
-                                                                    size="large"
-                                                                    onClick={() => {
-                                                                        setChangeStatusOpen(true);
-                                                                        setSubAdminData({
-                                                                            id: row.id,
-                                                                            isActive: row.isActive
-                                                                        });
-                                                                    }}
-                                                                >
-                                                                    Change Status
-                                                                </Button>
-                                                            </Grid>
+                                                <TableCell align="center" sx={{ padding: '0px' }}>
+                                                    <Stack direction="row" justifyContent="center" alignItems="center">
+                                                        <Tooltip placement="top" title="Change Status">
+                                                            <IconButton
+                                                                color="primary"
+                                                                aria-label="detail"
+                                                                size="medium"
+                                                                onClick={() => {
+                                                                    setChangeStatusOpen(true);
+                                                                    setSubAdminData({
+                                                                        id: row.id,
+                                                                        isActive: row.isActive
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <UpdateIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    
 
-                                                            <Grid item xs={3} md={3}>
-                                                                <Button
-                                                                    variant="outlined"
-                                                                    size="large"
-                                                                    onClick={() => {
-                                                                        setChangeMintingAccessOpen(true);
-                                                                        setSubAdminData({
-                                                                            id: row.id,
-                                                                            hasMintingAccess: row.hasMintingAccess
-                                                                        });
-                                                                    }}
-                                                                >
-                                                                    Change Minting Access
-                                                                </Button>
-                                                            </Grid>
-                                                        </Grid>
-                                                    </div>
+                                                        <Tooltip placement="top" title="Edit">
+                                                            <IconButton color="primary" aria-label="Edit" size="large"
+                                                             onClick={() => {
+                                                                
+                                                                setAddUpdateOpen(true);
+                                                                setSubAdminData({
+                                                                    id: row.id,
+                                                                    firstName: row.firstName,
+                                                                    lastName: row.lastName,
+                                                                    adminEmail: row.email,
+                                                                    adminPassword: ''
+                                                                });
+                                                             }}>
+                                                                <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                        <Tooltip placement="top" title="Delete">
+                                                            <IconButton
+                                                                color="primary"
+                                                                sx={{
+                                                                    color: theme.palette.orange.dark,
+                                                                    borderColor: theme.palette.orange.main,
+                                                                    '&:hover ': { background: theme.palette.orange.light }
+                                                                }}
+                                                                size="large"
+                                                                onClick={() => {
+                                                                    setDeleteOpen(true);
+                                                                    setSubAdminData({
+                                                                        id: row.id
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </Stack>
                                                 </TableCell>
                                             </TableRow>
                                         </>
@@ -208,7 +189,6 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                         )}
                     </>
                 )}
-             
             </Table>
         </TableContainer>
     );

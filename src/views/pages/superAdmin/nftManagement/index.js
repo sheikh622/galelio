@@ -60,8 +60,8 @@ const NftManagement = () => {
     useEffect(() => {
         dispatch(
             getAllNftSuperAdmin({
-                brandId: location.state.brandData.BrandId,
-                categoryId: location.state.brandData.CategoryId,
+                brandId: location?.state?.brandData?.BrandId,
+                categoryId: location?.state?.brandData?.CategoryId,
                 search: search,
                 page: page,
                 limit: limit,
