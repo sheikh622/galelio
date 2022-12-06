@@ -22,12 +22,15 @@ const CompanyPage = () => {
                 p: 1
             }}
         >
-            <Grid container-fluid sx={{ margin: '0', padding:"0", display: { xs: 'block', sm: 'block', md: 'flex' }, marginBottom: '40px' }}>
+            <Grid
+                container-fluid
+                sx={{ margin: '0', padding: '0', display: { xs: 'block', sm: 'block', md: 'flex' }, marginBottom: '40px' }}
+            >
                 <Grid item md={12} xs={12} sx={{ mt: 2 }}>
-                    <Grid container >
-                        <Grid item xs={12} md={3} sx={{paddingRight:"1rem"}}>
+                    <Grid container>
+                        <Grid item xs={12} md={3} sx={{ paddingRight: '1rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                <div style={{paddingTop:"0"}}>
+                                <div style={{ paddingTop: '0' }}>
                                     <img src={rolex} style={{ borderRadius: '100px', border: '3px solid #2196f3' }} />
                                 </div>
 
@@ -37,7 +40,7 @@ const CompanyPage = () => {
                                 </div>
                             </div>
                         </Grid>
-                        <Grid item xs={10} md={4} sx={{background:" ", ml:1, pl:4, mt:2}}>
+                        <Grid item xs={10} md={4} sx={{ background: ' ', ml: 1, pl: 4, mt: 2 }}>
                             <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
                                 <Grid item xs={2} className={styles.statsCover}>
                                     <div className={styles.stats}>120</div>
@@ -59,8 +62,8 @@ const CompanyPage = () => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        
-                        <Grid item xs={12} md={3} sx={{marginLeft:"15%", mt:2}}>
+
+                        <Grid item xs={12} md={3} sx={{ marginLeft: '15%', mt: 2 }}>
                             <Grid container style={{ display: 'flex', justifyContent: 'space-evenly', marginRight: '7%', float: 'right' }}>
                                 <Grid item>
                                     <img src={etherscan} height="18rem" alt="" />
@@ -91,26 +94,22 @@ const CompanyPage = () => {
                                     <img src={share} height="18rem" alt="" />
                                 </Grid>
                             </Grid>
-                            <Grid item xs={8} md={12} style={{justifyContent:""}}>
+                            <Grid item xs={8} md={12} style={{ justifyContent: '' }}>
                                 <Button variant="contained" sx={{ mt: 2, width: '50%', float: 'right', mr: 2 }}>
                                     Follow
                                 </Button>
                             </Grid>
                         </Grid>
 
-                        
-
-                        
-
-                        <Grid container-fluid sx={{paddingRight:"7%", paddingLeft:"2%"}}>
-                            <p style={{lineHeight:"210%"}}>
+                        <Grid container-fluid sx={{ paddingRight: '7%', paddingLeft: '2%' }}>
+                            <p style={{ lineHeight: '210%' }}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lobortis facilisis tortor, ut molestie. In rhoncus
                                 aliquam dui, vitae sollicitudin justo, cursus maecenas. Lorem ipsum dolor sit amet, consectetur adipiscing
                                 elit. Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae sollicitudin justo,
                             </p>
                         </Grid>
                     </Grid>
-                    <Grid container sx={{paddingLeft:"2%", width:"100%"}}>
+                    <Grid container sx={{ paddingLeft: '2%', width: '100%' }}>
                         <h1>Items</h1>
 
                         <Grid item md={12} xs={11}>

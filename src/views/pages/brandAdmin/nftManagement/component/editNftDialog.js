@@ -413,18 +413,16 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 //     variant: 'subtitle2'
                                                 // }}
                                             />
-                                            <ListItemSecondaryAction style={{ display: 'flex' }}>
-                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                            <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
 
-                                                <IconButton
-                                                    color="error"
-                                                    edge="end"
-                                                    size="small"
-                                                    onClick={() => handleRemoveFile(file.image, index)}
-                                                >
-                                                    <Icon icon={closeFill} width={28} height={28} />
-                                                </IconButton>
-                                            </ListItemSecondaryAction>
+                                            <IconButton
+                                                color="error"
+                                                edge="end"
+                                                size="small"
+                                                onClick={() => handleRemoveFile(file.image, index)}
+                                            >
+                                                <Icon icon={closeFill} width={28} height={28} />
+                                            </IconButton>
                                         </ListItem>
                                     ))}
                             </AnimatePresence>
