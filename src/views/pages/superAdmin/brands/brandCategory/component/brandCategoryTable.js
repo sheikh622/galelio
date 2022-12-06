@@ -169,7 +169,7 @@ const BrandCategoryTable = ({
                             <Divider />
                         </Grid>
                         <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Dataa Available</Typography>
                         </Grid>
                     </>
                 )}
