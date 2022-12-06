@@ -3,13 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import BrandTable from './component/brandTable';
-import { Button, Typography, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Divider } from '@mui/material';
+import {
+    CircularProgress,
+    Button,
+    Typography,
+    Grid,
+    MenuItem,
+    Menu,
+    Pagination,
+    OutlinedInput,
+    InputAdornment,
+    Divider
+} from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllBrands } from '../../../../redux/brand/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import AddUpdateBrandDialog from './component/addUpdateBrand';
 import MainCard from 'ui-component/cards/MainCard';
 import HeadingCard from 'shared/Card/HeadingCard';
+
 const Brands = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -44,6 +56,7 @@ const Brands = () => {
             })
         );
     }, [search, page, limit]);
+
     return (
         <>
             <AddUpdateBrandDialog
@@ -90,105 +103,92 @@ const Brands = () => {
                 }
                 content={false}
             >
-                {brandsList.brands != undefined && brandsList.count > 0 ? (
-                    <>
-                        <BrandTable
-                            brandsList={brandsList && brandsList}
-                            page={page}
-                            limit={limit}
-                            search={search}
-                            setAddUpdateOpen={setAddUpdateOpen}
-                            setBrandData={setBrandData}
-                        />
+                <BrandTable
+                    brandsList={brandsList && brandsList}
+                    page={page}
+                    limit={limit}
+                    search={search}
+                    setAddUpdateOpen={setAddUpdateOpen}
+                    setBrandData={setBrandData}
+                />
 
-                        <Grid item xs={12} sx={{ p: 3 }}>
-                            <Grid container justifyContent="space-between" spacing={gridSpacing}>
-                                <Grid item>
-                                    <Pagination
-                                        color="primary"
-                                        showFirstButton
-                                        showLastButton
-                                        page={page}
-                                        count={brandsList && brandsList.pages}
-                                        onChange={(event, newPage) => {
-                                            setPage(newPage);
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <Button
-                                        size="large"
-                                        sx={{ color: theme.palette.grey[900] }}
-                                        color="secondary"
-                                        endIcon={<ExpandMoreRoundedIcon />}
-                                        onClick={handleClick}
-                                    >
-                                        {limit} Rows
-                                    </Button>
-                                    <Menu
-                                        id="menu-user-list-style1"
-                                        anchorEl={anchorEl}
-                                        keepMounted
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleCloseMenu}
-                                        variant="selectedMenu"
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right'
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'right'
-                                        }}
-                                    >
-                                        <MenuItem
-                                            value={10}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleCloseMenu();
-                                            }}
-                                        >
-                                            {' '}
-                                            10 Rows
-                                        </MenuItem>
-                                        <MenuItem
-                                            value={25}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleCloseMenu();
-                                            }}
-                                        >
-                                            {' '}
-                                            25 Rows
-                                        </MenuItem>
-                                        <MenuItem
-                                            value={50}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleCloseMenu();
-                                            }}
-                                        >
-                                            {' '}
-                                            50 Rows{' '}
-                                        </MenuItem>
-                                    </Menu>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </>
-                ) : (
-                    <>
-                        <Grid item md={12}>
-                            <Divider />
+                <Grid item xs={12} sx={{ p: 3 }}>
+                    <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                        <Grid item>
+                            <Pagination
+                                color="primary"
+                                showFirstButton
+                                showLastButton
+                                page={page}
+                                count={brandsList && brandsList.pages}
+                                onChange={(event, newPage) => {
+                                    setPage(newPage);
+                                }}
+                            />
                         </Grid>
                         <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
+                            <Button
+                                size="large"
+                                sx={{ color: theme.palette.grey[900] }}
+                                color="secondary"
+                                endIcon={<ExpandMoreRoundedIcon />}
+                                onClick={handleClick}
+                            >
+                                {limit} Rows
+                            </Button>
+                            <Menu
+                                id="menu-user-list-style1"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleCloseMenu}
+                                variant="selectedMenu"
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right'
+                                }}
+                                transformOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'right'
+                                }}
+                            >
+                                <MenuItem
+                                    value={10}
+                                    onClick={(e) => {
+                                        setLimit(e.target.value);
+                                        setPage(1);
+                                        handleCloseMenu();
+                                    }}
+                                >
+                                    {' '}
+                                    10 Rows
+                                </MenuItem>
+                                <MenuItem
+                                    value={25}
+                                    onClick={(e) => {
+                                        setLimit(e.target.value);
+                                        setPage(1);
+                                        handleCloseMenu();
+                                    }}
+                                >
+                                    {' '}
+                                    25 Rows
+                                </MenuItem>
+                                <MenuItem
+                                    value={50}
+                                    onClick={(e) => {
+                                        setLimit(e.target.value);
+                                        setPage(1);
+                                        handleCloseMenu();
+                                    }}
+                                >
+                                    {' '}
+                                    50 Rows{' '}
+                                </MenuItem>
+                            </Menu>
                         </Grid>
-                    </>
-                )}
+                    </Grid>
+                </Grid>
             </MainCard>
         </>
     );
