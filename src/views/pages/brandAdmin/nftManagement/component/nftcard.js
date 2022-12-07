@@ -5,7 +5,7 @@ import MainCard from './mainCard';
 import EditNftDialog from './editNftDialog';
 import RequestForMintDialog from './requestForMintDialog';
 import DeleteNFTDialog from './deleteNftDialog';
-
+import DetailsDialog from './details';
 import { useEffect } from 'react';
 const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const [openRequestMint, setOpenRequestMint] = useState(false);
     const [editNftOpen, setEditNftOpen] = useState(false);
     const [deleteNftOpen, setDeleteNftOpen] = useState(false);
+    const [DetailsNftOpen, setDetailsNftOpen] = useState(false);
     const [image, setImage] = useState([]);
     const [nftInfo, setNftInfo] = useState({
         id: null,
@@ -72,7 +73,10 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 open={openRequestMint}
                 setOpen={setOpenRequestMint}
             />
-
+            <DetailsDialog
+            open={DetailsNftOpen}
+            setOpen={setDetailsNftOpen}
+            />
             <MainCard
                 content={false}
                 boxShadow
@@ -84,6 +88,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                     }
                 }}
             >
+           
                 <CardMedia sx={{ height: 220 }} image={nftData.asset} />
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
@@ -127,7 +132,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                         }}
                         variant="contained"
                         onClick={() => {
-                          
+                            setDetailsNftOpen(true);
                         }}
                     >
                         Details
