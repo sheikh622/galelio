@@ -20,7 +20,7 @@ import { gridSpacing } from 'store/constant';
 export default function DetailsDialog({ open, setOpen }) {
     const theme = useTheme();
 
-    const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
+ 
 
     const status = [
         {
