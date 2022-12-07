@@ -131,7 +131,7 @@ const ProfileSection = () => {
                         color="inherit"
                     />
                 }
-                label={<IconSettings stroke={1.5} size="1.5rem" sx={{color:"#9c6a36"}} />}
+                label={<IconSettings stroke={1.5} size="1.5rem" sx={{color:""}} />}
                 variant="outlined"
                 ref={anchorRef}
                 aria-controls={open ? 'menu-list-grow' : undefined}

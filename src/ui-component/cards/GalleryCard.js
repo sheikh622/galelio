@@ -59,7 +59,7 @@ const GalleryCard = ({ dateTime, image, title }) => {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <ButtonBase sx={{ borderRadius: '12px' }} onClick={handleClick}>
+                        <ButtonBase sx={{ borderRadius: '' }} onClick={handleClick}>
                             <Avatar
                                 variant="rounded"
                                 sx={{

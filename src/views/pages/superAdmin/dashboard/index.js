@@ -22,7 +22,7 @@ const Dashboard = () => {
     // console.log(Dashboard.total_users,"Dashboard")
 
     return (
-        <Grid container spacing={gridSpacing}>
+        <Grid container spacing={gridSpacing} sx={{background:""}}>
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>

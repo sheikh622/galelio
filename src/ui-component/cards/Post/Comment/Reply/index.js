@@ -78,7 +78,7 @@ const Reply = ({ commentId, handleReplayLikes, onReply, postId, reply }) => {
                                             </Grid>
                                         </Grid>
                                         <Grid item>
-                                            <ButtonBase sx={{ borderRadius: '12px' }} onClick={handleClick}>
+                                            <ButtonBase sx={{ borderRadius: '' }} onClick={handleClick}>
                                                 <Avatar
                                                     variant="rounded"
                                                     sx={{

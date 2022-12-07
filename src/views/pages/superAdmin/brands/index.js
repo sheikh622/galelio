@@ -68,7 +68,9 @@ const Brands = () => {
                 setOpen={setAddUpdateOpen}
             />
 
-            <HeadingCard title="Brand Management" />
+                <Typography variant="h1" sx={{m:2}}>
+            Brand Management
+                </Typography>
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>
