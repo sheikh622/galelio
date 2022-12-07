@@ -10,7 +10,8 @@ import {
     Menu,
     Pagination,
     OutlinedInput,
-    InputAdornment
+    InputAdornment,
+    Typography
 } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllCategories } from '../../../../redux/categories/actions';
@@ -63,7 +64,9 @@ const Categories = () => {
                 search={search}
             />
 
-            <HeadingCard title="Category Management" />
+<Typography variant="h1" sx={{m:2}}>
+            Category Management
+                </Typography>
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>

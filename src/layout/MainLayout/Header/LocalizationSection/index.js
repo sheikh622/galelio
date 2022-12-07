@@ -80,7 +80,7 @@ const LocalizationSection = () => {
                     }
                 }}
             >
-                <ButtonBase sx={{ borderRadius: '12px' }}>
+                <ButtonBase sx={{ borderRadius: '' }}>
                     <Avatar
                         variant="rounded"
                         sx={{

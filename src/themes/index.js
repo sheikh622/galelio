@@ -63,9 +63,9 @@ export const theme = (customization) => {
 
     switch (customization.navType) {
         case 'dark':
-            themeOption.paper = color.darkLevel2;
-            themeOption.backgroundDefault = color.darkPaper;
-            themeOption.background = color.darkBackground;
+            themeOption.paper = "#181C1F";
+            themeOption.backgroundDefault = "#000000";
+            themeOption.background = "#000000";
             themeOption.darkTextPrimary = color.darkTextPrimary;
             themeOption.darkTextSecondary = color.darkTextSecondary;
             themeOption.textDark = color.darkTextPrimary;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import SubAdminTable from './component/subAdminTable';
-import { Button, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment } from '@mui/material';
+import { Button, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Typography } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllSubAdminList } from '../../../../redux/subAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
@@ -56,7 +56,9 @@ const SubAdmin = () => {
                 search={search}
             />
 
-            <HeadingCard title="Sub Admin Management" />
+            <Typography variant="h1" sx={{m:2}}>
+            Sub Admin Management
+                </Typography>
 
             <MainCard
                 title={
