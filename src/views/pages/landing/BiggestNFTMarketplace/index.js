@@ -9,7 +9,7 @@ import Appbar from 'layout/UserLayout/header';
 
 import NewPage from './New';
 import FeaturedPage from './FeaturedCreators';
-import Sider from '../biggestNFTMarketplace/Sider';
+
 
 import CategoriesPage from './Categories';
 
