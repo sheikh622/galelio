@@ -200,34 +200,32 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-               
-                <Grid container spacing={2} sx={{marginTop: '12px'}}>
-                <Grid item md={8} xs={12} textAlign="left">
-                <DialogTitle id="alert-dialog-slide-title1">Add NFT</DialogTitle>
+                <Grid container spacing={2}>
+                    <Grid item md={8} xs={12} textAlign="left">
+                        <DialogTitle id="alert-dialog-slide-title1">Add NFT</DialogTitle>
+                    </Grid>
+                    <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
+                        <Button
+                            sx={{ marginRight: '10px' }}
+                            variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                            onClick={() => {
+                                setMintType('directMint');
+                            }}
+                        >
+                            Direct Mint
+                        </Button>
+                        <Button
+                            variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
+                            onClick={() => {
+                                setMintType('lazyMint');
+                            }}
+                        >
+                            Lazy Minting
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Grid item md={4} xs={12}>
-                    <Button
-                        sx={{ marginRight: '10px' }}
-                        variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                        onClick={() => {
-                            setMintType('directMint');
-                        }}
-                    >
-                        Direct Mint
-                    </Button>
-                    <Button
-                        variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                        onClick={() => {
-                            setMintType('lazyMint');
-                        }}
-                    >
-                        Lazy Minting
-                    </Button>
-                </Grid>
-            </Grid>
-<Divider/>
+                <Divider />
                 <DialogContent>
-                 
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={2}>
                             <Grid xs={4} mt={2} pr={3}>
@@ -415,16 +413,15 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         variant: 'subtitle2'
                                                     }}
                                                 />
-                                                  <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
-                                                    <IconButton
-                                                        color="error"
-                                                        edge="end"
-                                                        size="small"
-                                                        onClick={() => handleRemoveFile(file.image, index)}
-                                                    >
-                                                        <Icon icon={closeFill} width={28} height={28} />
-                                                    </IconButton>
-                                              
+                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                <IconButton
+                                                    color="error"
+                                                    edge="end"
+                                                    size="small"
+                                                    onClick={() => handleRemoveFile(file.image, index)}
+                                                >
+                                                    <Icon icon={closeFill} width={28} height={28} />
+                                                </IconButton>
                                             </ListItem>
                                         ))}
                                 </AnimatePresence>
