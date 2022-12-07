@@ -202,7 +202,31 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Add NFT</DialogTitle>
+            <Grid container spacing={2}>
+            <Grid item md={8} xs={12} textAlign="left">
+                <DialogTitle id="alert-dialog-slide-title1">Edit NFT</DialogTitle>
+            </Grid>
+            <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
+                <Button
+                    sx={{ marginRight: '10px' }}
+                    variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                    onClick={() => {
+                        setMintType('directMint');
+                    }}
+                >
+                    Direct Mint
+                </Button>
+                <Button
+                    variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
+                    onClick={() => {
+                        setMintType('lazyMint');
+                    }}
+                >
+                    Lazy Minting
+                </Button>
+            </Grid>
+        </Grid>
+        <Divider />
 
                 <DialogContent>
                     <Grid container spacing={2} textAlign="end">

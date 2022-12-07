@@ -82,7 +82,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                             <Stack direction="row" justifyContent="end" alignItems="center">
                                 {nftData.status == 'REQUESTED' && (
                                     <Button
-                                        variant="text"
+                                        variant="contained"
                                         color="primary"
                                         sx={{ marginRight: '5px' }}
                                         onClick={() => {
@@ -90,13 +90,13 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                             setRejectMintOpen(true);
                                         }}
                                     >
-                                        <Typography style={{ textDecoration: 'underline' }}> Reject</Typography>
+                                        Reject
                                     </Button>
                                 )}
 
                                 {nftData.status == 'REQUESTED' && (
                                     <Button
-                                        variant="text"
+                                        variant="contained"
                                         color="primary"
                                         sx={{ marginRight: '5px' }}
                                         onClick={() => {
@@ -104,7 +104,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                             setOpenMint(true);
                                         }}
                                     >
-                                        <Typography style={{ textDecoration: 'underline' }}> Mint</Typography>
+                                        Mint
                                     </Button>
                                 )}
                             </Stack>

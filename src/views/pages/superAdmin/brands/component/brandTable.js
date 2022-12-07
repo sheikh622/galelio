@@ -71,22 +71,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                 <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
-                                        <Tooltip placement="top" title="Add Brand Categories">
-                                            <IconButton
-                                                color="primary"
-                                                aria-label="detail"
-                                                size="medium"
-                                                onClick={() => {
-                                                    navigate('/brands/category', {
-                                                        state: {
-                                                            brandData: row
-                                                        }
-                                                    });
-                                                }}
-                                            >
-                                                <AccountCircleIcon sx={{ fontSize: '1.5rem' }} />
-                                            </IconButton>
-                                        </Tooltip>
+                                      
                                         <Tooltip placement="top" title="Add Brand Admin">
                                             <IconButton
                                                 color="primary"
@@ -100,10 +85,25 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                     });
                                                 }}
                                             >
-                                                <DashboardIcon sx={{ fontSize: '1.5rem' }} />
+                                                <AccountCircleIcon sx={{ fontSize: '1.5rem' }} />
                                             </IconButton>
                                         </Tooltip>
-
+                                        <Tooltip placement="top" title="Add Brand Categories">
+                                        <IconButton
+                                            color="primary"
+                                            aria-label="detail"
+                                            size="medium"
+                                            onClick={() => {
+                                                navigate('/brands/category', {
+                                                    state: {
+                                                        brandData: row
+                                                    }
+                                                });
+                                            }}
+                                        >
+                                            <DashboardIcon sx={{ fontSize: '1.5rem' }} />
+                                        </IconButton>
+                                    </Tooltip>
                                         <Tooltip placement="top" title="Edit">
                                             <IconButton
                                                 color="primary"
