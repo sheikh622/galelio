@@ -3,16 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import CategoryTable from './component/categoryTable';
-import {
-    Button,
-    Grid,
-    MenuItem,
-    Menu,
-    Pagination,
-    OutlinedInput,
-    InputAdornment,
-    Typography
-} from '@mui/material';
+import { Button, Grid, MenuItem, Menu, Pagination, OutlinedInput, InputAdornment, Typography } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllCategories } from '../../../../redux/categories/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
@@ -64,9 +55,9 @@ const Categories = () => {
                 search={search}
             />
 
-<Typography variant="h1" sx={{m:2}}>
-            Category Management
-                </Typography>
+            <Typography variant="h1" sx={{ m: 2 }}>
+                Category Management
+            </Typography>
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>

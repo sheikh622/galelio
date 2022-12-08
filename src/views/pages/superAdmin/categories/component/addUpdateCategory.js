@@ -111,7 +111,8 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="form-dialog-title">{categoryData.id == null ? 'Add Category ' : ' Update Category '}</DialogTitle>
+                <DialogTitle id="form-dialog-title">{categoryData.id == null ? 'Add Category ' :
+                 ' Update Category '}</DialogTitle>
                 <Divider />
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
