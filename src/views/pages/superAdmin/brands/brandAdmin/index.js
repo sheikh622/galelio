@@ -62,7 +62,8 @@ const BrandAdmin = () => {
             />
             <MainCard
                 title={
-                    <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
+
+                    <Typography variant="h2" sx={{ fontWeight: 500, color: 'cadetblue'}}>
                         Admin Management of : {location.state.brandData.name}
                     </Typography>
                 }

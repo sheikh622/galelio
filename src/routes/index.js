@@ -14,9 +14,7 @@ import AuthenticationRoutes from './AuthenticationRoutes';
 
 
 export default function ThemeRoutes() {
-    const userData = useSelector((state) => state.auth);
-   
-    // const userData = useSelector((state) => state.auth);
+    const userData = useSelector((state) => state.auth);    
     if (userData.user && userData.user.role == 'Super Admin') {
         return useRoutes([SuperAdminRoutes, LoginRoutes, AuthenticationRoutes,UserRoutes] );
     } else if (userData.user && userData.user.role == 'Admin') {
@@ -25,6 +23,6 @@ export default function ThemeRoutes() {
         return useRoutes([BrandAdminRoutes, LoginRoutes, AuthenticationRoutes,UserRoutes]);
     } 
     else{
-        return useRoutes([LoginRoutes, AuthenticationRoutes,UserRoutes] );
+        return useRoutes([LoginRoutes, AuthenticationRoutes, UserRoutes] );
     }
 }

@@ -16,10 +16,14 @@ import { store, persistor } from 'store';
 // style + assets
 import 'assets/scss/style.scss';
 import config from 'config';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 ReactDOM.render(
+    <GoogleOAuthProvider clientId="854386915479-1i90od38i6r963g6ai3mghf5g7k2crrs.apps.googleusercontent.com">
+
+ 
     <Provider store={store}>
         {/* <ConnectedRouter history={history}> */}
         <PersistGate loading={null} persistor={persistor}>
@@ -28,7 +32,8 @@ ReactDOM.render(
             </BrowserRouter>
         </PersistGate>
         {/* </ConnectedRouter> */}
-    </Provider>,
+    </Provider>
+    </GoogleOAuthProvider>,
     document.getElementById('root')
 );
 

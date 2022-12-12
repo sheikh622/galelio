@@ -59,7 +59,7 @@ const BrandCategory = () => {
             />
             <MainCard
                 title={
-                    <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
+                    <Typography variant="h2" sx={{ fontWeight: 500, color: 'cadetblue' }}>
                         Category Management of : {location.state.brandData.name}
                     </Typography>
                 }
