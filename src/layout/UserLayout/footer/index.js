@@ -24,7 +24,7 @@ import { makeStyles } from '@mui/styles';
 const FooterWrapper = styled('div')(({ theme }) => ({
     padding: '35px 0',
     color: 'black',
-    
+
     // background: '#f5f5f5',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center'
@@ -34,20 +34,19 @@ const FooterWrapper = styled('div')(({ theme }) => ({
 // ==============================|| LANDING - FOOTER PAGE ||============================== //
 
 const Footer = () => {
-    const useStyles = makeStyles((theme) => ({
-    
-    }));
+    const useStyles = makeStyles((theme) => ({}));
     const classes = useStyles();
     const theme = useTheme();
     return (
-        <Grid >
-        
-            <FooterWrapper style={{ background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-            color: theme.palette.mode === 'dark' ? 'white' : '#404040'}}>
-                <Grid container-fluid alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } ,
+        <Grid>
+            <FooterWrapper
+                style={{
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
-                 spacing={gridSpacing}>
-                    <Grid item xs={12} md={4} >
+            >
+                <Grid container alignItems="center" sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }} spacing={gridSpacing}>
+                    <Grid item xs={12} md={4}>
                         {theme.palette.mode === 'dark' ? (
                             <img src={galileoWhite} alt="Galileo White Logo" width="100" />
                         ) : (
@@ -67,8 +66,8 @@ const Footer = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={2} >
-                        <Grid sx={{ marginTop:{ md:'-10px'}  }}>
+                    <Grid item xs={12} md={2}>
+                        <Grid sx={{ marginTop: { md: '-10px' } }}>
                             <h2>Company</h2>
                         </Grid>
                         <Grid>
@@ -84,7 +83,7 @@ const Footer = () => {
                             <span className={styles.link}>Blog</span>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2} sx={{ marginTop:{ md:'-37px'}  }} >
+                    <Grid item xs={12} md={2} sx={{ marginTop: { md: '-37px' } }}>
                         <h2>Service</h2>
                         <Grid>
                             <Grid>
@@ -99,7 +98,7 @@ const Footer = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={2}  sx={{ marginTop:{ md:'-37px'}  }}>
+                    <Grid item xs={12} md={2} sx={{ marginTop: { md: '-37px' } }}>
                         <h2>Contact</h2>
 
                         <Grid>
@@ -141,7 +140,7 @@ const Footer = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2} sx={{ paddingBottom: {md:'6.5%'} }}>
+                    <Grid item xs={12} md={2} sx={{ paddingBottom: { md: '6.5%' } }}>
                         <h2>Social Media</h2>
 
                         <Grid style={{}}>

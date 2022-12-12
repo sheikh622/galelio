@@ -15,7 +15,7 @@ const Products = () => {
     return (
         <>
             <Grid
-                container-fluid
+                
                 sx={{
                     display: { xs: 'block', sm: 'block', md: 'flex' },
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
@@ -23,7 +23,7 @@ const Products = () => {
                 }}
             >
                 <Grid item md={12} xs={12}>
-                    <Grid container-fluid>
+                    <Grid container>
                         <Grid item md={12} xs={12}>
                             <PropertiesView />
                         </Grid>
