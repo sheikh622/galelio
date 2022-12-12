@@ -14,15 +14,17 @@ const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetai
 //Old Routing
 
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
+
+
 // ==============================|| market  ROUTING ||============================== //
 
 const UserRoutes = {
     path: '/',
     element: (
         <NavMotion>
-            {/* {/ <GuestGuard> /} */}
+            {/* <GuestGuard> */}
                 <UserLayout />
-            {/* {/ </GuestGuard> /} */}
+         {/* </GuestGuard> */}
         </NavMotion>
     ),
     children: [

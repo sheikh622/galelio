@@ -13,7 +13,7 @@ const Marketplace = () => {
     useEffect(() => {
         dispatch(getAllMarketplaceCategories());
     }, []);
-    return (
+    return (    
         
         <Grid 
         item md={11} xs={12}

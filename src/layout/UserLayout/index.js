@@ -8,14 +8,14 @@ const UserLayout = () => {
     const theme = useTheme();
     return (
         <>
-            {/* <Header /> */}
+            <Header />
             <Grid
                 sx={{
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
                 }}
             >
                 <Grid
-                    container-fluid
+                    container
                     sx={{
                         display: {
                             xs: 'block',
@@ -29,8 +29,7 @@ const UserLayout = () => {
                         item
                         md={1}
                         xs={12}
-                        sx={{ position: 'sticky', height: '100%', top: '0', 
-                        display: { xs: 'none', sm: 'none', md: 'flex' } }}
+                        sx={{ position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
                     >
                         <SideBar />
                     </Grid>
@@ -39,22 +38,9 @@ const UserLayout = () => {
             </Grid>
 
             <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
-            <Grid
-                container-fluid
-                sx={{
-                    display: {
-                        xs: 'block',
-                        sm: 'block',
-                        md: 'flex'
-                    },
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                color: theme.palette.mode === 'dark' ? 'white' : '#404040'
-                }}
-            >
-                <Grid item md={1} xs={12}></Grid>
-                <Grid item md={11} xs={12}>
-                    <Footer />
-                </Grid>
+
+            <Grid item md={10} xs={12} sx={{ pl: 3 }}>
+                <Footer />
             </Grid>
         </>
     );

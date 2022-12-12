@@ -37,8 +37,9 @@ const SideBar = () => {
     return (
         <>
             <Container sx={{ mt: 5 }}>
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={12}>
                     <Grid
+                    xs={12}
                         container
                         alignItems="center"
                         spacing={3}
@@ -46,6 +47,7 @@ const SideBar = () => {
                             pt: 1,
                             pb: 3,
                             ml: 1,
+                            mr:1,
                             boxShadow: '1px 2px 9px #d3d3d3',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
                             borderRadius: '4px'

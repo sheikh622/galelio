@@ -33,6 +33,7 @@ const ProductDetails = () => {
         <>
             <Grid
                 container-fluid
+                md={11}
                 sx={{
                     display: { xs: 'block', sm: 'block', md: 'flex' },
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
