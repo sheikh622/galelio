@@ -42,11 +42,11 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         });
         const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
         const symbol = 'G' + brandName.substring(0, 1) + categoryName.substring(0, 1);
-        const admin = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
-        const validator = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
+        const admin = '0x714fBdB63EC4Ba12d3b3Dd7a2e38DBdED83fF953';
+        const validator = '0x714fBdB63EC4Ba12d3b3Dd7a2e38DBdED83fF953';
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const minterAddress = 'zz714fBdB63EC4Ba12d3b3Dd7a2e38DBdED83fF953';
         const signer = provider.getSigner();
-        const minterAddress = await signer.getAddress();
         const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
         let res = await (
             await factoryAddr.deployMintingContract(contractName, symbol, admin, minterAddress, validator).catch((error) => {
