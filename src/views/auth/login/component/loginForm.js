@@ -199,7 +199,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     googleAuthHandle(data);
                                 }}
                                 onError={() => {
-                                    console.log('Login Failed');
+                                    toast.error('Google Auth Failed');
                                 }}
                             />
                         </Grid>
