@@ -20,8 +20,6 @@ import { gridSpacing } from 'store/constant';
 export default function DetailsDialog({ open, setOpen }) {
     const theme = useTheme();
 
- 
-
     const status = [
         {
             name: 'Name:',
@@ -94,35 +92,32 @@ export default function DetailsDialog({ open, setOpen }) {
 
                                     <Grid item md={6} sm={12}>
                                         <Grid item xs={12}>
-                                            <Grid container justifyContent='left'>
+                                            <Grid container justifyContent="left">
                                                 <Grid item md={12} sm={12}>
-                                                {status.map((option) => (
-                                                    <Grid container spacing={2}>
-                                                        <Grid item md={6} xs={12}>
-                                                           
-                                                                <Typography  mt={1}
+                                                    {status.map((option) => (
+                                                        <Grid container spacing={2}>
+                                                            <Grid item md={6} xs={12}>
+                                                                <Typography
+                                                                    mt={1}
                                                                     className="nftHead"
                                                                     color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                                     variant="h3"
                                                                 >
                                                                     {option.name}
                                                                 </Typography>
-                                                        
-                                                        </Grid>
+                                                            </Grid>
 
-                                                        <Grid item md={6} xs={12} sx={{marginTop:'12px', textAlign:'left'}}>
-                                                        
-                                                            <Typography
-                                                            mt={1}
-                                                                className="nftText"
-                                                                color={theme.palette.mode === 'dark' ? 'white' : '#767676'}
-                                                                variant="body"
-                                                            >
-                                                            {option.value}
-                                                            </Typography>
-                                                           
+                                                            <Grid item md={6} xs={12} sx={{ marginTop: '12px', textAlign: 'left' }}>
+                                                                <Typography
+                                                                    mt={1}
+                                                                    className="nftText"
+                                                                    color={theme.palette.mode === 'dark' ? 'white' : '#767676'}
+                                                                    variant="body"
+                                                                >
+                                                                    {option.value}
+                                                                </Typography>
+                                                            </Grid>
                                                         </Grid>
-                                                    </Grid>
                                                     ))}
                                                 </Grid>
                                             </Grid>
