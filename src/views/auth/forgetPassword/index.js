@@ -1,70 +1,63 @@
-import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Divider, Grid, Typography, useMediaQuery } from '@mui/material';
-import AuthWrapper from '../../../shared/component/AuthWrapper';
-import LoginCardWrapper from '../../../shared/component/LoginCardWrapper';
-import Logo from 'ui-component/Logo';
-import ForgetForm from './component/ForgetForm';
-import React from 'react';
+import { Divider, Grid, Typography, useMediaQuery, Box } from '@mui/material';
+import AuthWrapper1 from 'shared/component/AuthWrapper';
+import AuthCardWrapper from 'shared/component/AuthCardWrapper';
 
+import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
+
+import ForgotForm from './component/ForgetForm';
+import React from 'react';
 
 const ForgotPassword = () => {
     const theme = useTheme();
 
-    const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-
     return (
-        <AuthWrapper>
-            <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
-                <Grid item xs={12}>
-                    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
-                        <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
-                            <LoginCardWrapper>
-                                <Grid container spacing={2} alignItems="center" justifyContent="center">
-                                    <Grid item sx={{ mb: 3 }}>
-                                        <Link to="#">
-                                            {/* <Logo /> */}
-                                        </Link>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Grid container alignItems="center" justifyContent="center" textAlign="center" spacing={2}>
-                                            <Grid item xs={12}>
-                                                <Typography
-                                                 className='Signin'
-                                                 sx={{color:"#816a51"}}
-                                                    gutterBottom
-                                                    variant={matchDownSM ? 'h3' : 'h2'}
-                                                >
-                                                    Forgot Password
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant="caption" fontSize="16px" textAlign="center">
-                                                Enter your email address below and we'll send you a new  password on your email. 
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <ForgetForm />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Divider />
-                                    </Grid>
-                                    {/* <Grid item xs={12}>
-                                        <Grid item container direction="column" alignItems="center" xs={12}>
-                                            <Typography component={Link} to={'/'} variant="subtitle1" sx={{ textDecoration: 'none' }}>
-                                            {<FormattedMessage id="forgot.alreadyAccount" />}   
-                                            </Typography>
-                                        </Grid>
-                                    </Grid> */}
-                                </Grid>
-                            </LoginCardWrapper>
+        <AuthWrapper1>
+            <Grid
+                container
+                justifyContent="space-between"
+                alignItems="center"
+                sx={{ minHeight: '100vh', background: theme.palette.mode === 'dark' ? '#fff' : '#fff' }}
+            >
+                <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
+                    <BackgroundPattern1>
+                        <Grid item container alignItems="flex-end" justifyContent="center" spacing={3}>
+                            <Grid item xs={12}>
+                                <span />
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </BackgroundPattern1>
+                </Grid>
+                <Grid item container justifyContent="center" md={6} lg={7}>
+                    <AuthCardWrapper>
+                        <Grid container direction="column" justifyContent="center" spacing={2}>
+                            <Grid item xs={12} container alignItems="center" justifyContent="center">
+                                <Box sx={{ mb: 2 }}>
+                                    <Typography className="signInMarket" variant="subtitle1">
+                                        Forgot Password
+                                    </Typography>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={2} justifyContent="center">
+                            <Grid item xs={12}>
+                                <Divider />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Grid item container direction="column" alignItems="center" xs={12}>
+                                    <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                                        Please enter registered email ID.
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <ForgotForm />
+                            </Grid>
+                        </Grid>
+                    </AuthCardWrapper>
                 </Grid>
             </Grid>
-        </AuthWrapper>
+        </AuthWrapper1>
     );
 };
 

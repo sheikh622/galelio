@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
-import AuthWrapper from '../../../shared/component/AuthWrapper';
-import LoginCardWrapper from '../../../shared/component/LoginCardWrapper';
-import Logo from 'ui-component/Logo';
-import ResetPasswordForm from './ResetPassword';
+import { Divider, Grid, Stack, Typography, useMediaQuery,Box  } from '@mui/material';
+// project imports
+import AuthWrapper1 from 'shared/component/AuthWrapper';
+import AuthCardWrapper from 'shared/component/AuthCardWrapper';
+
+import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
+import AuthSlider from 'ui-component/cards/AuthSlider';
+import ResetForm from './ResetPassword';
 import React from 'react';
 // import { FormattedMessage } from 'react-intl';
 const ResetPassword = () => {
@@ -14,67 +17,43 @@ const ResetPassword = () => {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     return (
-        <AuthWrapper>
-            <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
-                <Grid item xs={12}>
-                    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
-                        <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
-                            <LoginCardWrapper>
-                                <Grid container spacing={2} alignItems="center" justifyContent="center">
-                                    <Grid item sx={{ mb: 3 }}>
-                                       
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Grid
-                                            container
-                                            direction={matchDownSM ? 'column-reverse' : 'row'}
-                                            alignItems="center"
-                                            justifyContent="center"
-                                        >
-                                            <Grid item>
-                                                <Stack alignItems="center" justifyContent="center" spacing={1}>
-                                                    <Typography
-                                                         className='Signin'
-                                                         sx={{color:"#816a51"}}
-                                                        gutterBottom
-                                                        variant={matchDownSM ? 'h3' : 'h2'}
-                                                    >
-                                                       Reset Password 
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="caption"
-                                                        fontSize="16px"
-                                                        textAlign={matchDownSM ? 'center' : 'inherit'}
-                                                    >
-                                                       Please choose your new password
-                                                    </Typography>
-                                                </Stack>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <ResetPasswordForm 
-                                        token={params.token} userId={params.id} 
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Divider />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Grid item container direction="column" alignItems="center" xs={12}>
-                                            <Typography component={Link} to={'/'} variant="subtitle1" sx={{ textDecoration: 'none' }}>
-                                           Already have an account? 
-                                              
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </LoginCardWrapper>
+        <AuthWrapper1 >
+        <Grid container justifyContent="space-between" alignItems="center" sx={{ minHeight: '100vh', 
+         background: theme.palette.mode === 'dark' ? '#fff' : '#fff', }}>
+            <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', 
+            display: { xs: 'none', md: 'block' } }}>
+                <BackgroundPattern1>
+                    <Grid item container alignItems="flex-end" justifyContent="center" spacing={3}>
+                        <Grid item xs={12}>
+                            <span />
+                            
                         </Grid>
                     </Grid>
-                </Grid>
+                </BackgroundPattern1>
             </Grid>
-        </AuthWrapper>
+            <Grid item container justifyContent="center" md={6} lg={7} >
+          
+
+                <AuthCardWrapper>
+                <Grid container direction="column" justifyContent="center" spacing={2}>
+                <Grid item xs={12} container alignItems="center" justifyContent="center">
+                    <Box sx={{ mb: 2 }}>
+                        <Typography className='signInMarket' variant="subtitle1">
+                            
+                      Reset Password</Typography>
+                    </Box>
+                </Grid>
+            </Grid> 
+                    <Grid container spacing={2} justifyContent="center" >
+                        <Grid item xs={12}>
+                            <ResetForm />
+                        </Grid>
+                      
+                    </Grid>
+                </AuthCardWrapper>
+            </Grid>
+        </Grid>
+    </AuthWrapper1>
     );
 };
 

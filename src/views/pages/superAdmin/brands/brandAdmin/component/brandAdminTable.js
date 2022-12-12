@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
+
 import {
     Divider,
     Typography,
@@ -11,16 +13,21 @@ import {
     TableHead,
     Button,
     TableRow,
-    Tooltip
+    Tooltip,
+    Stack
 } from '@mui/material';
 import DeleteBrandAdminDialog from './deleteBrandAdminDialog';
 import Chip from 'ui-component/extended/Chip';
 import AddUpdateBrandAdminDialog from './addUpdateBrandAdmin';
+import UpdateIcon from '@mui/icons-material/Update';
 import ChangeBrandAdminStatusDialog from './changeBrandAdminStatus';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit, brandAdminList, setBrandAdminData, brandAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const theme = useTheme();
+
     const [changeStatusOpen, setChangeStatusOpen] = useState(false);
     const [detailId, setDetailId] = useState();
     const openDetails = (id) => {
@@ -87,20 +94,67 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                 <Chip label="Unblocked" size="small" chipcolor="success" />
                                             )}
                                         </TableCell>
+                                        <TableCell align="center" sx={{ padding: '0px' }}>
+                                            <Stack direction="row" justifyContent="center" alignItems="center">
+                                                <Tooltip placement="top" title="Change Status">
+                                                    <IconButton
+                                                        color="primary"
+                                                        aria-label="detail"
+                                                        size="medium"
+                                                        onClick={() => {
+                                                            setChangeStatusOpen(true);
+                                                            setBrandAdminData({
+                                                                id: row.id,
+                                                                brandId: row.BrandId,
+                                                                isActive: row.isActive
+                                                            });
+                                                        }}
+                                                    >
+                                                        <UpdateIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
 
-                                        <TableCell align="center">
-                                            <Tooltip placement="top" title="View">
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="detail"
-                                                    size="large"
-                                                    onClick={() => {
-                                                        openDetails(row.id);
-                                                    }}
-                                                >
-                                                    <KeyboardArrowDownIcon sx={{ fontSize: '1.5rem' }} />
-                                                </IconButton>
-                                            </Tooltip>
+                                                <Tooltip placement="top" title="Edit">
+                                                    <IconButton
+                                                        color="primary"
+                                                        aria-label="Edit"
+                                                        size="large"
+                                                        onClick={() => {
+                                                            setAddUpdateOpen(true);
+                                                            setBrandAdminData({
+                                                                id: row.id,
+                                                                brandId: row.BrandId,
+                                                                firstName: row.firstName,
+                                                                lastName: row.lastName,
+                                                                adminEmail: row.email,
+                                                                adminPassword: ''
+                                                            });
+                                                        }}
+                                                    >
+                                                        <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                                <Tooltip placement="top" title="Delete">
+                                                    <IconButton
+                                                        color="primary"
+                                                        sx={{
+                                                            color: theme.palette.orange.dark,
+                                                            borderColor: theme.palette.orange.main,
+                                                            '&:hover ': { background: theme.palette.orange.light }
+                                                        }}
+                                                        size="large"
+                                                        onClick={() => {
+                                                            setDeleteOpen(true);
+                                                            setBrandAdminData({
+                                                                id: row.id,
+                                                                brandId: row.BrandId
+                                                            });
+                                                        }}
+                                                    >
+                                                        <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </Stack>
                                         </TableCell>
                                     </TableRow>
                                     <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>

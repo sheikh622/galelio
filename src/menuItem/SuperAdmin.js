@@ -10,7 +10,10 @@ import {
     IconUserCheck,
     IconBell,
     IconReceipt2,
-    IconClipboardList
+    IconClipboardList,
+    IconLayout2,
+    IconBuildingStore,
+    IconCurrencyEthereum
 } from '@tabler/icons';
 
 // constant
@@ -22,8 +25,12 @@ const icons = {
     IconClipboardList,
     IconBell,
     IconCheckbox,
-    IconCash
+    IconCash,
+    IconLayout2,
+    IconBuildingStore,
+    IconCurrencyEthereum
 };
+import GridViewIcon from '@mui/icons-material/GridView';
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -37,7 +44,7 @@ const superAdminMenu = {
             title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
             url: '/',
-            icon: icons.IconDashboard,
+            icon: icons.IconLayout2,
             breadcrumbs: false
         },
 
@@ -62,8 +69,16 @@ const superAdminMenu = {
             id: 'brand',
             title: <FormattedMessage id="admin.BrandManagement" />,
             type: 'item',
-            icon: icons.IconCheckbox,
+            icon: icons.IconBuildingStore,
             url: '/brands',
+            breadcrumbs: false
+        },
+        {
+            id: 'nft',
+            title: <FormattedMessage id="NFT Management" />,
+            type: 'item',
+            icon: icons.IconCurrencyEthereum,
+            url: '/category',
             breadcrumbs: false
         }
     ]

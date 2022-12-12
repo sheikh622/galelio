@@ -92,7 +92,7 @@ const NftManagement = () => {
                 title={
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={3}>
-                            <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
+                            <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue',marginTop:'12px' }}>
                                 NFT Management
                             </Typography>
                         </Grid>
@@ -115,7 +115,7 @@ const NftManagement = () => {
                         </Grid>
                         <Grid item xs={6} style={{ textAlign: 'end' }}>
                             <Button
-                                size="small"
+                                size="large"
                                 sx={{
                                     marginRight: '10px',
                                     ':hover': {
@@ -131,7 +131,7 @@ const NftManagement = () => {
                             </Button>
                             <Button
                                 variant="contained"
-                                size="small"
+                                size="large"
                                 onClick={() => {
                                     navigate('/categories');
                                 }}

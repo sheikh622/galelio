@@ -8,7 +8,7 @@ const UserLayout = () => {
     const theme = useTheme();
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <Grid
                 sx={{
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'

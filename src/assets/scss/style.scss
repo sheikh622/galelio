@@ -368,8 +368,8 @@ body {
 }
 
 .icons:hover {
-    background-color: #ede7f6 !important;
-    color: #9c6a36 !important;
+    // background-color: #ede7f6 !important;
+    // color: #9c6a36 !important;
 }
 
 .packageDescription {
@@ -546,6 +546,26 @@ body {
 
     padding: 0 15px;
 
+}
+.nftHead{
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size:  21px;
+   
+    text-align: left;
+
+    
+}
+.nftText{
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+   
+    text-align: left;
+
+  
 }
 
 .productdescription {

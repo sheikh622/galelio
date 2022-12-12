@@ -22,8 +22,8 @@ const BrandCategory = () => {
     const [limit, setLimit] = useState(10);
     const [addUpdateOpen, setAddUpdateOpen] = useState(false);
     const [brandCategoryData, setBrandCategoryData] = useState({
-        brand: location.state.brandData,
-        brandId: location.state.brandData.id,
+        brand: location?.state?.brandData,
+        brandId: location?.state?.brandData.id,
         categoryId: 0,
         profitPercentage: ''
     });
@@ -39,7 +39,7 @@ const BrandCategory = () => {
     useEffect(() => {
         dispatch(
             getAllBrandCategories({
-                brandId: location.state.brandData.id,
+                brandId: location?.state?.brandData?.id,
                 search: search,
                 page: page,
                 limit: limit
@@ -60,7 +60,7 @@ const BrandCategory = () => {
             <MainCard
                 title={
                     <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue' }}>
-                        Category Management of : {location.state.brandData.name}
+                        Category Management of : {location?.state?.brandData?.name}
                     </Typography>
                 }
                 secondary={

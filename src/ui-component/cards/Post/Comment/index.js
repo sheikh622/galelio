@@ -191,7 +191,7 @@ const Comment = ({ comment, handleCommentLikes, handleReplayLikes, postId, reply
                                         </Grid>
                                     </Grid>
                                     <Grid item>
-                                        <ButtonBase sx={{ borderRadius: '12px' }}>
+                                        <ButtonBase sx={{ borderRadius: '' }}>
                                             <Avatar
                                                 variant="rounded"
                                                 sx={{

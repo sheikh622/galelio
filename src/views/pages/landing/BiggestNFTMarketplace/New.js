@@ -55,7 +55,7 @@ const NewPage = () => {
         }
     ];
     return (
-        <Grid container-fluid spacing={gridSpacing} sx={{  margin: '15px' }}>
+        <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
@@ -98,18 +98,21 @@ const NewPage = () => {
                                         <Grid container>
                                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                                 <span style={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
-                                                <div className='overflow' style={{ marginTop: '5%' }}>{item.title}</div>
+                                                <Grid className="overflow" style={{ marginTop: '5%' }}>
+                                                    {item.title}
+                                                </Grid>
                                             </Grid>
-                                            <Grid item xs={4}  >
-                                                <span style={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
+                                            <Grid item xs={4}>
+                                                <span style={{ fontWeight: '50 !important ', 
+                                                fontSize: '110%', float: 'right' }}>
                                                     {item.creator}
                                                 </span>
                                             </Grid>
                                         </Grid>
 
                                         <Divider sx={{ mt: 2, mb: 2 }} />
-                                        <Grid container >
-                                            <Grid item md={6} xs={12} className='overflow' sx={{ pt: 1, }}>
+                                        <Grid container>
+                                            <Grid item md={6} xs={12} className="overflow" sx={{ pt: 1 }}>
                                                 <span
                                                     style={{
                                                         background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
@@ -146,12 +149,17 @@ const NewPage = () => {
                                                     04s
                                                 </span>
                                             </Grid>
-                                            <Grid item md={6} xs={12} className='overflow' sx={{ pl: 1, marginTop:{xs:'10px', md:'0'} , 
-                                              }}>
+                                            <Grid
+                                                item
+                                                md={6}
+                                                xs={12}
+                                                className="overflow"
+                                                sx={{ pl: 1, marginTop: { xs: '10px', md: '0' } }}
+                                            >
                                                 Current Bid
-                                                <div style={{ marginTop: '5%', fontSize: '110%' }}>
+                                                <Grid style={{ marginTop: '5%', fontSize: '110%' }}>
                                                     <b>$2913.32</b>
-                                                </div>
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </CardContent>

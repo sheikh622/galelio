@@ -120,7 +120,8 @@ const HeaderPage = () => {
                                         delay: 0.4
                                     }}
                                 >
-                                    <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                                    <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', 
+                                    md: 'flex-start' } }}>
                                         <Grid item>
                                             <AnimateButton>
                                                 <Button

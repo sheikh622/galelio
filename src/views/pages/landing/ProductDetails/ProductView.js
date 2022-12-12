@@ -7,8 +7,7 @@ import Avatar from 'ui-component/extended/Avatar';
 
 import SubCard from 'ui-component/cards/SubCard';
 import watch1 from 'assets/images/watch3.png';
-import watch2 from 'assets/images/watch2.png';
-import watch3 from 'assets/images/watch1.png';
+
 import Avatar3 from 'assets/images/users/avatar-3.png';
 import { Link as RouterLink } from 'react-router-dom';
 

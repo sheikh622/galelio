@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,9 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import {
     Box,
     Button,
-    Checkbox,
     FormControl,
-    FormControlLabel,
     FormHelperText,
     Grid,
     IconButton,
@@ -16,41 +13,29 @@ import {
     InputLabel,
     OutlinedInput,
     Stack,
-    Typography,
-    useMediaQuery,
-    Divider
+    Typography
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { login } from '../../../../redux/auth/actions';
+import { login, loginSuccess } from '../../../../redux/auth/actions';
 import { useNavigate } from 'react-router-dom';
 import { setLoader } from '../../../../redux/auth/actions';
-import Google from 'assets/images/icons/social-google.svg';
-import FacebookSharpIcon from '@mui/icons-material/FacebookSharp';
+import { GoogleLogin } from '@react-oauth/google';
+let jwt = require('jsonwebtoken');
 import axios from 'axios';
-// import useAuth from 'hooks/useAuth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = ({ loginProp, ...others }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const theme = useTheme();
 
-    const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const customization = useSelector((state) => state.customization);
-    // const { firebaseGoogleSignIn } = useAuth();
-    // const googleHandler = async () => {
-    //     try {
-    //         await firebaseGoogleSignIn();
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // };
     const loader = useSelector((state) => state.auth.loader);
-    // console.log("loader",loader);
-    const [checked, setChecked] = useState(true);
+
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -63,26 +48,21 @@ const LoginForm = ({ loginProp, ...others }) => {
         dispatch(setLoader(false));
     }, []);
 
-    const handleFBClick = () => {
-        window.open('http://localhost:3000/api/v1/auth/facebook', '_self');
+    const googleAuthHandle = (data) => {
+        const decoded_data = jwt.decode(data.credential);
+        axios
+            .post('http://localhost:4000/api/v1/auth/google/callback/success', {
+                data: decoded_data
+            })
+            .then(function (response) {
+                dispatch(loginSuccess(response.data.data));
+            })
+            .catch(function (error) {
+                toast.error(error.message);
+            });
     };
-
-    const handleGoogleClick = () => {
-        window.open('http://localhost:3000/api/v1/auth/google', '_self');
-    };
-
     return (
         <>
-            {/* <Grid container direction="column" justifyContent="center" spacing={2}>
-                <Grid item xs={12} container alignItems="center" justifyContent="center">
-                    <Box sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1">
-                            
-                    {<FormattedMessage id="signIn.Heading" />}</Typography>
-                    </Box>
-                </Grid>
-            </Grid> */}
-
             <Formik
                 enableReinitialize
                 initialValues={{
@@ -162,8 +142,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                             <Typography
                                 variant="subtitle1"
                                 component={Link}
-                                to={'/forgetpassword'}
-                                sx={{ textDecoration: 'none', color: '#816a51 ' }}
+                                to={'/forgetPassword'}
+                                sx={{ textDecoration: 'none', color: '#000 ' }}
                             >
                                 Forgot Password?
                             </Typography>
@@ -174,14 +154,13 @@ const LoginForm = ({ loginProp, ...others }) => {
                             </Box>
                         )}
 
-                        <Box sx={{ mt: 2, background: '#604223' }}>
+                        <Box sx={{ mt: 2 }}>
                             <AnimateButton>
                                 {loader ? (
                                     <Button
-                                        className="signbutton"
-                                        sx={{ background: '#604223' }}
-                                        disabled
+                                        className="signbuttonMarket"
                                         disableElevation
+                                        disabled={isSubmitting}
                                         fullWidth
                                         size="large"
                                         type="submit"
@@ -192,8 +171,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     </Button>
                                 ) : (
                                     <Button
-                                        className="signbutton"
-                                        sx={{ background: '#604223' }}
+                                        className="signbuttonMarket"
                                         disableElevation
                                         disabled={isSubmitting}
                                         fullWidth
@@ -207,78 +185,27 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 )}
                             </AnimateButton>
                         </Box>
+
+                        <Grid item xs={12}>
+                            <Grid mt={2} item container direction="column" alignItems="center" xs={12}>
+                                <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                                    or continue with
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                            <GoogleLogin
+                                onSuccess={(data) => {
+                                    googleAuthHandle(data);
+                                }}
+                                onError={() => {
+                                    toast.error('Google Auth Failed');
+                                }}
+                            />
+                        </Grid>
                     </form>
                 )}
             </Formik>
-
-            {/* <Box sx={{ mt: 2, background: '#604223' }}>
-                <AnimateButton>
-                    {loader ? (
-                        <Button
-                            className="signbutton"
-                            sx={{ background: '#01579b' }}
-                            disabled
-                            disableElevation
-                            fullWidth
-                            size="large"
-                            // type="submit"
-                            variant="contained"
-                            color="secondary"
-                        >
-                            Sign in with Facebook
-                        </Button>
-                    ) : (
-                        <Button
-                            className="signbutton"
-                            sx={{ background: '#01579b' }}
-                            disableElevation
-                            // disabled={isSubmitting}
-                            fullWidth
-                            size="large"
-                            type="submit"
-                            variant="contained"
-                            color="secondary"
-                            onClick={handleFBClick}
-                        >
-                            Sign in with Facebook
-                        </Button>
-                    )}
-                </AnimateButton>
-            </Box>
-            <Box sx={{ mt: 2, background: '#604223' }}>
-                <AnimateButton>
-                    {loader ? (
-                        <Button
-                            className="signbutton"
-                            sx={{ background: '#ef5350' }}
-                            disabled
-                            disableElevation
-                            fullWidth
-                            size="large"
-                            type=""
-                            variant="contained"
-                            color="secondary"
-                        >
-                            Sign in with Google
-                        </Button>
-                    ) : (
-                        <Button
-                            className="signbutton"
-                            sx={{ background: '#ef5350' }}
-                            disableElevation
-                            // disabled={isSubmitting}
-                            fullWidth
-                            size="large"
-                            type="submit"
-                            variant="contained"
-                            color="secondary"
-                            onClick={handleGoogleClick}
-                        >
-                            Sign in with Google
-                        </Button>
-                    )}
-                </AnimateButton>
-            </Box> */}
         </>
     );
 };

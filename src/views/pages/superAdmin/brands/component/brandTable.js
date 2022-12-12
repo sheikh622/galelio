@@ -12,7 +12,8 @@ import {
     TableRow,
     Tooltip,
     Grid,
-    Typography
+    Typography,
+    CircularProgress
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -20,7 +21,8 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteBrandDialog from './deleteBrandDialog';
 import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBrandData }) => {
     const theme = useTheme();
     const navigate = useNavigate();
@@ -41,7 +43,10 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {brandsList.brands != undefined &&
+                    {brandsList.brands != undefined && brandsList.count != 0 || undefined
+                    ?
+                    <>
+                       {brandsList.brands != undefined &&
                         brandsList.brands.map((row, index) => (
                             <TableRow>
                                 <TableCell align="center" justifyContent="center" alignItems="center">
@@ -66,22 +71,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                 <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                     <Stack direction="row" justifyContent="center" alignItems="center">
-                                        <Tooltip placement="top" title="Add Brand Categories">
-                                            <IconButton
-                                                color="primary"
-                                                aria-label="detail"
-                                                size="medium"
-                                                onClick={() => {
-                                                    navigate('/brands/category', {
-                                                        state: {
-                                                            brandData: row
-                                                        }
-                                                    });
-                                                }}
-                                            >
-                                                <AddOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                            </IconButton>
-                                        </Tooltip>
+                                      
                                         <Tooltip placement="top" title="Add Brand Admin">
                                             <IconButton
                                                 color="primary"
@@ -95,10 +85,25 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                     });
                                                 }}
                                             >
-                                                <AddOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                <AccountCircleIcon sx={{ fontSize: '1.5rem' }} />
                                             </IconButton>
                                         </Tooltip>
-
+                                        <Tooltip placement="top" title="Add Brand Categories">
+                                        <IconButton
+                                            color="primary"
+                                            aria-label="detail"
+                                            size="medium"
+                                            onClick={() => {
+                                                navigate('/brands/category', {
+                                                    state: {
+                                                        brandData: row
+                                                    }
+                                                });
+                                            }}
+                                        >
+                                            <DashboardIcon sx={{ fontSize: '1.5rem' }} />
+                                        </IconButton>
+                                    </Tooltip>
                                         <Tooltip placement="top" title="Edit">
                                             <IconButton
                                                 color="primary"
@@ -139,6 +144,19 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                 </TableCell>
                             </TableRow>
                         ))}
+                    </>
+                    :
+                    <>
+                    
+                    <Grid container justifyContent="center" sx={{ width: '400%', m: 5 }}>
+                                    <Grid item>
+                                        <CircularProgress size={'4rem'} />
+                                    </Grid>
+                                </Grid>
+                    </>
+                    
+                    }
+                 
                 </TableBody>
             </Table>
         </TableContainer>

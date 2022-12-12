@@ -50,6 +50,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
             duration: theme.transitions.duration.enteringScreen
         }),
         marginLeft: 0,
+        borderRadius:0,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
         width: `calc(100% - ${drawerWidth}px)`,
@@ -81,8 +82,8 @@ const MainLayout = () => {
     }, [matchDownMd]);
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{ display: 'flex'}}>
+            {/* <CssBaseline /> */}
             {/* header */}
             <AppBar
                 enableColorOnDark
@@ -90,6 +91,8 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 sx={{
+                    padding:"0",
+                    margin:"0", 
                     bgcolor: theme.palette.background.default,
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
                 }}
@@ -103,7 +106,7 @@ const MainLayout = () => {
             <Sidebar drawerOpen={leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
 
             {/* main content */}
-            <Main theme={theme} open={leftDrawerOpened}>
+            <Main theme={theme} open={leftDrawerOpened} sx={{marginRight:"0"}}>
                 {/* breadcrumb */}
                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
                 <Outlet />

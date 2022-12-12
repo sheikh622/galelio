@@ -5,7 +5,7 @@ import MainCard from './mainCard';
 import EditNftDialog from './editNftDialog';
 import RequestForMintDialog from './requestForMintDialog';
 import DeleteNFTDialog from './deleteNftDialog';
-
+import DetailsDialog from './details';
 import { useEffect } from 'react';
 const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const [openRequestMint, setOpenRequestMint] = useState(false);
     const [editNftOpen, setEditNftOpen] = useState(false);
     const [deleteNftOpen, setDeleteNftOpen] = useState(false);
+    const [DetailsNftOpen, setDetailsNftOpen] = useState(false);
     const [image, setImage] = useState([]);
     const [nftInfo, setNftInfo] = useState({
         id: null,
@@ -72,7 +73,10 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 open={openRequestMint}
                 setOpen={setOpenRequestMint}
             />
-
+            <DetailsDialog
+            open={DetailsNftOpen}
+            setOpen={setDetailsNftOpen}
+            />
             <MainCard
                 content={false}
                 boxShadow
@@ -84,11 +88,12 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                     }
                 }}
             >
+           
                 <CardMedia sx={{ height: 220 }} image={nftData.asset} />
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
-                            <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                            <Typography variant="subtitle1" sx={{ textDecoration: 'none', textTransform:'capitalize' }}>
                                 {nftData.name}
                             </Typography>
                         </Grid>
@@ -98,7 +103,8 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                 variant="body1"
                                 sx={{
                                     overflow: 'hidden',
-                                    height: 30
+                                    height: 30,
+                                    textTransform:'capitalize' 
                                 }}
                             >
                                 {nftData.description}
@@ -111,16 +117,34 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                     {nftData.price} {nftData.currencyType}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item  xs={12}>
                                 <Typography variant="h6">{nftData.NFTTokens.length} Items</Typography>
                             </Grid>
                         </Grid>
+                        <Grid item xs={6}>
+                        <Button
+                        size="small"
+                        sx={{
+                            marginRight: '10px',
+                            float:'right',
+                            ':hover': {
+                                boxShadow: 'none'
+                            }
+                        }}
+                        variant="outlined"
+                        onClick={() => {
+                            setDetailsNftOpen(true);
+                        }}
+                    >
+                        Details
+                    </Button>
+</Grid>
                         <Grid item xs={12}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
                                 {nftData.status !== 'MINTED' && (
                                     <>
                                         <Button
-                                            variant="text"
+                                            variant="contained"
                                             color="primary"
                                             sx={{ marginRight: '5px' }}
                                             onClick={() => {
@@ -137,10 +161,10 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                                 });
                                             }}
                                         >
-                                            <Typography style={{ textDecoration: 'underline' }}> Edit NFT</Typography>
+                                        Edit 
                                         </Button>
                                         <Button
-                                            variant="text"
+                                            variant="contained"
                                             color="primary"
                                             sx={{ marginRight: '5px' }}
                                             onClick={() => {
@@ -157,21 +181,21 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                                 });
                                             }}
                                         >
-                                            <Typography style={{ textDecoration: 'underline' }}> Delete NFT</Typography>
+                                        Delete 
                                         </Button>
                                     </>
                                 )}
 
                                 {(nftData.status == 'DRAFT' || nftData.status == 'REJECTED') && (
                                     <Button
-                                        variant="text"
+                                        variant="contained"
                                         color="primary"
                                         sx={{ marginRight: '5px' }}
                                         onClick={() => {
                                             setOpenRequestMint(true);
                                         }}
                                     >
-                                        <Typography style={{ textDecoration: 'underline' }}> Request</Typography>
+                                    Request
                                     </Button>
                                 )}
                             </Stack>

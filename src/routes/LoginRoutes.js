@@ -5,17 +5,12 @@ import GuestGuard from 'utils/route-guard/GuestGuard';
 import MinimalLayout from 'layout/MinimalLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
-import CompanyPage from 'views/pages/companyPage';
 
 // login routing
 const AuthLogin = Loadable(lazy(() => import('views/auth/login')));
 const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
-// Market login routing
-const LoginMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/login')));
-const SignUpMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/signUp')));
-const ForgotMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/forgot')));
-const ResetMarketPlace = Loadable(lazy(() => import('views/pages/landing/auth/reset')));
+const SignUpMarketPlace = Loadable(lazy(() => import('views/auth/signUp')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -43,20 +38,8 @@ const LoginRoutes = {
         },
 
         {
-            path: '/login',
-            element: <LoginMarketPlace />
-        },
-        {
             path: '/signUp',
             element: <SignUpMarketPlace />
-        },
-        {
-            path: '/forgot',
-            element: <ForgotMarketPlace />
-        },
-        {
-            path: '/reset',
-            element: <ResetMarketPlace />
         }
     ]
 };

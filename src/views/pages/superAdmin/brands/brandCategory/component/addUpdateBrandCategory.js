@@ -25,7 +25,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         } else {
             setIsUpdate(true);
         }
-        setCategory(brandCategoryData.categoryId)
+        setCategory(brandCategoryData.categoryId);
     }, [brandCategoryData]);
 
     const handleCategoryChange = (event) => {

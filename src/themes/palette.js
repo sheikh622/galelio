@@ -55,7 +55,7 @@ export default function themePalette(theme) {
         dark: {
             light: theme.colors?.darkTextPrimary,
             main: theme.colors?.darkLevel1,
-            dark: theme.colors?.darkLevel2,
+            dark: theme.colors?.darkLevel1,
             800: theme.colors?.darkBackground,
             900: theme.colors?.darkPaper
         },

@@ -5,8 +5,6 @@ import { useTheme } from '@mui/material/styles';
 
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import WATCHES from 'assets/images/watch.png';
-import CardMedia from '@mui/material/CardMedia';
 import {
     Button,
     Typography,
@@ -70,7 +68,8 @@ const Activity = () => {
                                 variant="h2"
                                 mt={4}
                                 component="div"
-                                sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                                sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, 
+                                textTransform: 'capitalize' }}
                             >
                                 Activity
                                 <AutorenewIcon />
