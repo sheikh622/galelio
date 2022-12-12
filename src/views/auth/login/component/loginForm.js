@@ -20,11 +20,14 @@ import { Formik } from 'formik';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { login } from '../../../../redux/auth/actions';
+import { login, loginSuccess } from '../../../../redux/auth/actions';
 import { useNavigate } from 'react-router-dom';
 import { setLoader } from '../../../../redux/auth/actions';
-import googleweb from 'assets/images/googleweb.png';
-import facebook from 'assets/images/facebook.png';
+import { GoogleLogin } from '@react-oauth/google';
+let jwt = require('jsonwebtoken');
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = ({ loginProp, ...others }) => {
     const dispatch = useDispatch();
@@ -45,6 +48,19 @@ const LoginForm = ({ loginProp, ...others }) => {
         dispatch(setLoader(false));
     }, []);
 
+    const googleAuthHandle = (data) => {
+        const decoded_data = jwt.decode(data.credential);
+        axios
+            .post('http://localhost:4000/api/v1/auth/google/callback/success', {
+                data: decoded_data
+            })
+            .then(function (response) {
+                dispatch(loginSuccess(response.data.data));
+            })
+            .catch(function (error) {
+                toast.error(error.message);
+            });
+    };
     return (
         <>
             <Formik
@@ -178,12 +194,14 @@ const LoginForm = ({ loginProp, ...others }) => {
                             </Grid>
                         </Grid>
                         <Grid item sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                            <Box sx={{ color: 'red' }}>
-                                <img src={facebook} alt="facebook" width="44px" height="42px" />
-                            </Box>
-                            <Box sx={{ marginLeft: '20px', marginTop: '-2px' }}>
-                                <img src={googleweb} alt="google" width="47px" height="47px" />
-                            </Box>
+                            <GoogleLogin
+                                onSuccess={(data) => {
+                                    googleAuthHandle(data);
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed');
+                                }}
+                            />
                         </Grid>
                     </form>
                 )}

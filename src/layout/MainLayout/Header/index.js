@@ -13,7 +13,6 @@ import MobileSection from './MobileSection';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
 
-
 // assets
 import { IconMenu2 } from '@tabler/icons';
 
@@ -26,12 +25,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
         <>
             {/* logo & toggler button */}
             <Box
-                sx={{
-                    
-                    height:"4em",
-                    paddingTop:"1em",
-                    width: 203,
-                    marginLeft: "2%",
+                sx={{                    
+                    height: '4em',
+                    paddingTop: '1em',
+                    width: 200,
+                    marginLeft: '2%',
                     display: 'flex',
                     [theme.breakpoints.down('md')]: {
                         width: 'auto'
@@ -39,26 +37,25 @@ const Header = ({ handleLeftDrawerToggle }) => {
                 }}
             >
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-                {/* <img style={{width: '100px' }} src={logo} alt="Admin Panel" /> */}
+                    {/* <img style={{width: '100px' }} src={logo} alt="Admin Panel" /> */}
                     {/* <p style={{  fontStyle: 'oblique', fontWeight: 800, color: 'cadetblue' }}>
                    Admin Panel
                     </p> */}
-                   
+
                     <LogoSection />
                 </Box>
-                <ButtonBase sx={{ borderRadius: '', overflow: 'hidden'  }}>
+                <ButtonBase sx={{ borderRadius: '', overflow: 'hidden' }}>
                     <Avatar
-                    
                         variant="rounded"
                         sx={{
                             ...theme.typography.commonAvatar,
                             ...theme.typography.mediumAvatar,
                             transition: 'all .2s ease-in-out',
                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.secondary.light,
-                            color:"#604223",
+                            color: '#604223',
                             '&:hover': {
-                                background: "#604223",
-                                color:"#FFF"
+                                background: '#604223',
+                                color: '#FFF'
                             }
                         }}
                         onClick={handleLeftDrawerToggle}
@@ -74,8 +71,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { sm: 'block', marginRight: '10px' } }}>
-            <MetaMaskSection />
-        </Box>
+                <MetaMaskSection />
+            </Box>
             {/* live customization & localization */}
             {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 <LocalizationSection />
