@@ -5,14 +5,16 @@ import GuestGuard from 'utils/route-guard/GuestGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
-import CompanyPage from 'views/pages/landing/companyPage';
+import CompanyPage from 'views/pages/user/companyPage';
 
 // market routing
-const LandingPage = Loadable(lazy(() => import('views/pages/landing/BiggestNFTMarketplace/index')));
-const Marketplace = Loadable(lazy(() => import('views/pages/landing/marketplace')));
-const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
+const LandingPage = Loadable(lazy(() => import('views/pages/user/BiggestNFTMarketplace/index')));
+const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
+const ProductDetails = Loadable(lazy(() => import('views/pages/user/ProductDetails')));
 // const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/')));
-const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
+const Profile = Loadable(lazy(() => import('views/pages/user/creatorProfile')));
+
+
 // ==============================|| market  ROUTING ||============================== //
 
 const UserRoutes = {

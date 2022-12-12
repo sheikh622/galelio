@@ -15,9 +15,9 @@ const Products = () => {
     return (
         <>
             <Grid
-                
+                md={11}
                 sx={{
-                    display: { xs: 'block', sm: 'block', md: 'flex' },
+                    display: { xs: 'block', sm: 'block', md: '' },
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
