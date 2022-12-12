@@ -7,11 +7,12 @@ import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
 import CompanyPage from 'views/pages/landing/companyPage';
 
-// market routing
-const LandingPage = Loadable(lazy(() => import('views/pages/landing/BiggestNFTMarketplace/index')));
-const Marketplace = Loadable(lazy(() => import('views/pages/landing/marketplace')));
-const ProductDetails = Loadable(lazy(() => import('views/pages/landing/ProductDetails')));
-// const BiggestNFTMarketplace = Loadable(lazy(() => import('views/pages/')));
+//New Routing
+const LandingPage = Loadable(lazy(() => import('views/pages/user/landingPage')));
+const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
+const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetails')));
+//Old Routing
+
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
 
 
@@ -36,7 +37,7 @@ const UserRoutes = {
             element: <Marketplace />
         },
         {
-            path: '/ProductDetails',
+            path: '/productDetails',
             element: <ProductDetails />
         },
        

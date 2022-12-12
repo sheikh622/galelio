@@ -22,7 +22,7 @@ export function* watchGetAllMarketplaceCategories() {
 function* getAllMarketplaceNftsByCategoryRequest({ payload }) {
     try {
         const response = yield axios.get(
-            `/nft/category/${payload.category}?&size=${payload.limit}&page=${payload.page}&search=${payload.search}`
+            `/nft/category/${payload.categoryId}?&size=${payload.limit}&page=${payload.page}&search=${payload.search}`
         );
         yield put(getAllMarketplaceNftsByCategorySuccess(response.data.data));
     } catch (error) {
