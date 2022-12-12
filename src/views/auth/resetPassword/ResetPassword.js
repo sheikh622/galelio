@@ -14,16 +14,13 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React from 'react';
 
-
 // ========================|| FIREBASE - RESET PASSWORD ||======================== //
 
 const ResetPasswordForm = ({ token, ...others }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-   
 
-  
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -45,19 +42,15 @@ const ResetPasswordForm = ({ token, ...others }) => {
                     confirmPassword: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    password: Yup.string()
-                        .max(255)
-                        .required("Password is required!"),
+                    password: Yup.string().max(255).required('Password is required!'),
                     confirmPassword: Yup.string().when('password', {
                         is: (val) => !!(val && val.length > 0),
                         then: Yup.string().oneOf([Yup.ref('password')], 'Both Password must be match!')
                     })
                 })}
                 onSubmit={async (values) => {
-                  
                     await dispatch(
                         resetPassword({
-                            
                             newPassword: values.password,
                             token: token,
                             navigate: navigate
@@ -67,7 +60,7 @@ const ResetPasswordForm = ({ token, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                    <FormControl
+                        <FormControl
                             fullWidth
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
@@ -136,8 +129,6 @@ const ResetPasswordForm = ({ token, ...others }) => {
                             )}
                         </FormControl>
 
-                       
-                       
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
                                 <FormHelperText error>{errors.submit}</FormHelperText>
@@ -156,12 +147,10 @@ const ResetPasswordForm = ({ token, ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                Reset Password
+                                    Reset Password
                                 </Button>
                             </AnimateButton>
                         </Box>
-                    
-                
                     </form>
                 )}
             </Formik>

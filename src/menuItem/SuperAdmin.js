@@ -78,7 +78,7 @@ const superAdminMenu = {
             title: <FormattedMessage id="NFT Management" />,
             type: 'item',
             icon: icons.IconCurrencyEthereum,
-            url: '/brands',
+            url: '/category',
             breadcrumbs: false
         }
     ]
