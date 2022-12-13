@@ -1,8 +1,28 @@
 import { Grid, Typography } from '@mui/material';
 import { gridSpacing } from 'store/constant';
 import NftCard from '../../commonComponent/nftCard';
-
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 const NewAndTrendingNfts = ({ nfts }) => {
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 5
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    };
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ background: '', margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
@@ -19,11 +39,25 @@ const NewAndTrendingNfts = ({ nfts }) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={12}>
-                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
-                    {nfts && nfts.length > 0 && nfts.map((item) => <NftCard data={item} />)}
-                </Grid>
-            </Grid>
+                {nfts && nfts.length > 0 && (
+                        <>
+                            <Grid item xs={12}>
+                                <Carousel
+                                    responsive={responsive}
+                                    autoPlay={true}
+                                    autoPlaySpeed={2800}
+                                    customTransition="all .5"
+                                    transitionDuration={500}
+                                    infinite={true}
+        
+                                >
+                       { nfts.map((item) => <NftCard data={item} />)}
+                       </Carousel>
+                       </Grid>
+                       </>
+                        )}
+                
+           
         </Grid>
     );
 };

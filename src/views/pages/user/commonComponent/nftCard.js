@@ -9,6 +9,12 @@ const NftCard = ({ data }) => {
     console.log('data', data);
     return (
         <Grid
+        container
+        justifyContent="left"
+        spacing={0}
+        sx={{ textAlign: 'center',  width: '500%'  }}
+    >
+        <Grid
             item
             md={2}
             sm={6}
@@ -63,6 +69,7 @@ const NftCard = ({ data }) => {
                     </CardContent>
                 </CardActionArea>
             </Card>
+        </Grid>
         </Grid>
     );
 };
