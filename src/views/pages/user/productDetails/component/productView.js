@@ -72,8 +72,14 @@ const PropertiesView = ({nft}) => {
                                                 className="Lux"
                                                 color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                 variant="h3"
+                                                
                                             >
+
+                                            <span>
+
                                                 {nft.name}
+
+                                            </span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>

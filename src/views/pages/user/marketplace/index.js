@@ -49,7 +49,7 @@ const Marketplace = () => {
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >
-            <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' }, marginBottom: '40px' }}>
+            <Grid container sx={{ display: { xs: 'block', sm: 'block', md: 'flex' }, marginBottom: '40px' }}>
                 <Grid item md={12} xs={12} sx={{ mt: 2, paddingLeft: 1, paddingRight: 2 }}>
                     <Grid container>
                         <h1 style={{ paddingLeft: '0.5%' }}>Marketplace</h1>
