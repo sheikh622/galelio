@@ -55,10 +55,9 @@ const Categories = ({ categories }) => {
                             customTransition="all .5"
                             transitionDuration={500}
                             infinite={true}
-
                         >
                             {categories.map((item) => (
-                                <>
+                                 <>
                                     <Grid
                                         container
                                         justifyContent="left"
