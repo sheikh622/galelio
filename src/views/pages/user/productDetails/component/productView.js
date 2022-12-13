@@ -44,7 +44,6 @@ const PropertiesView = ({ nft }) => {
                 toast.error(error.message);
             })
         ).wait();
-        
     };
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>

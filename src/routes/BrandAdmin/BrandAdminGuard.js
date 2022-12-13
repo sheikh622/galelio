@@ -18,7 +18,6 @@ const BrandAdminGuard = ({ children }) => {
         if (token == '') {
             navigate('/', { replace: true });
         }
-       
     }, [token]);
 
     return children;

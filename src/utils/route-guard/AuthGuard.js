@@ -13,15 +13,14 @@ import { useSelector } from 'react-redux';
 const AuthGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
     const token1 = useSelector((state) => state.auth);
-    console.log(token1.user.role,"token authGuard")
+    console.log(token1.user.role, 'token authGuard');
     const navigate = useNavigate();
 
     useEffect(() => {
         if (token == '') {
             navigate('/login', { replace: true });
-        }
-        else{
-            navigate('/dashboard', { replace: true }); 
+        } else if (token !== '') {
+            navigate('/dashboard', { replace: true });
         }
     }, [token]);
     return children;
