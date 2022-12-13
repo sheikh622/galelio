@@ -20,7 +20,7 @@ const SimilarProducts = ({ marketplaceNfts }) => {
             </Grid>
 
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {marketplaceNfts?.nfts?.rows.map((item) => (
                         <NftCard data={item} />
                     ))}
