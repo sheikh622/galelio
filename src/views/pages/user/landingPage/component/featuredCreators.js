@@ -52,12 +52,12 @@ const FeaturedCreators = ({ brands }) => {
                             autoPlaySpeed={2800}
                             customTransition="all .5"
                             transitionDuration={500}
-                            infinite={true} arrows={false} showDots
-                         
+                            infinite={true}
+                            arrows={true}
+                            showDots
                         >
                             {brands.map((item) => (
-                                <Grid container mb={2} justifyContent="left" spacing={0}
-                                 sx={{ textAlign: 'center',  height: '325px' }}>
+                                <Grid container mb={2} justifyContent="left" spacing={0} sx={{ textAlign: 'center', height: '325px' }}>
                                     <Grid
                                         item
                                         md={2}
@@ -70,16 +70,13 @@ const FeaturedCreators = ({ brands }) => {
                                             textDecoration: 'none'
                                         }}
                                     >
-                                        <Grid container justifyContent="center" sx={{ width: '490%', }}>
-                                        
+                                        <Grid container justifyContent="center" sx={{ width: '490%' }}>
                                             <Grid item md={12} xs={12}>
-                                           
                                                 <CardMedia
                                                     component="img"
                                                     sx={{ height: { xs: '100%', md: '220px', sm: '100%' }, width: '100%' }}
                                                     image={item.image}
                                                 />
-
                                             </Grid>
 
                                             <Grid
