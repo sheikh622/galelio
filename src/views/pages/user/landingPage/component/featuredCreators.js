@@ -44,16 +44,17 @@ const FeaturedCreators = ({ brands }) => {
                                     <Grid item md={6} xs={6}>
                                         <CardMedia
                                             component="img"
-                                            sx={{ height: { xs: '100%', md: '100%', sm: '100%' }, width: '90%' }}
+                                            sx={{ height: { xs: '100%', md: '220px', sm: '100%' }, width: '90%' }}
                                             image={item.image}
                                         />
                                     </Grid>
                                     <Grid item md={6} xs={6}>
                                         <Grid item md={12} xs={12}>
-                                            <CardMedia component="img" height="auto" image={item.image} />
+                                            <CardMedia component="img" height="105px" image={item.image} />
                                         </Grid>
                                         <Grid item md={12} xs={12}>
-                                            <CardMedia sx={{ marginTop: '10px' }} component="img" height="auto" image={item.image} />
+                                            <CardMedia sx={{ marginTop: '10px' }} 
+                                            component="img" height="105px" image={item.image} />
                                         </Grid>
                                     </Grid>
 

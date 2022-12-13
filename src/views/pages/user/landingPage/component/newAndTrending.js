@@ -20,7 +20,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
+                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
                     {nfts && nfts.length > 0 && nfts.map((item) => <NftCard data={item} />)}
                 </Grid>
             </Grid>
