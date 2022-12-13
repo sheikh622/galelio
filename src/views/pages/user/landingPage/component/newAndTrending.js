@@ -51,7 +51,16 @@ const NewAndTrendingNfts = ({ nfts }) => {
                                     infinite={true}
         
                                 >
-                       { nfts.map((item) => <NftCard data={item} />)}
+
+                       { nfts.map((item) => 
+                        <Grid
+                        container
+                        justifyContent="left"
+                        spacing={0}
+                        sx={{ textAlign: 'center',  width: '500%'  }}
+                    > <NftCard data={item} />
+                    </Grid>
+                        )}
                        </Carousel>
                        </Grid>
                        </>
