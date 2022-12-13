@@ -43,7 +43,7 @@ const superAdminMenu = {
             id: 'dashboard',
             title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
-            url: '/',
+            url: '/dashboard',
             icon: icons.IconLayout2,
             breadcrumbs: false
         },

@@ -15,6 +15,7 @@ function* loginUser({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
+        payload.navigate('/dashboard');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
@@ -83,5 +84,5 @@ export function* watchReset() {
 }
 
 export default function* authSaga() {
-    yield all([fork(watchLogin), fork(watchForgot), fork(watchReset),fork(watchSignup)]);
+    yield all([fork(watchLogin), fork(watchForgot), fork(watchReset), fork(watchSignup)]);
 }

@@ -39,7 +39,7 @@ const SideBar = () => {
             <Container sx={{ mt: 5 }}>
                 <Grid item xs={12}>
                     <Grid
-                    xs={12}
+                        xs={12}
                         container
                         alignItems="center"
                         spacing={3}
@@ -47,7 +47,7 @@ const SideBar = () => {
                             pt: 1,
                             pb: 3,
                             ml: 1,
-                            mr:1,
+                            mr: 1,
                             boxShadow: '1px 2px 9px #d3d3d3',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
                             borderRadius: '4px'
@@ -57,10 +57,10 @@ const SideBar = () => {
                             item
                             sx={{ mt: 2, cursor: 'pointer' }}
                             onClick={() => {
-                                navigate('/landingPage');
+                                navigate('/');
                             }}
                         >
-                            {pathName == '/landingPage' ? (
+                            {pathName == '/' ? (
                                 <>
                                     <Tooltip title="Landing Page" placement="right" arrow>
                                         <DashboardIcon sx={{ color: `${color}` }} />

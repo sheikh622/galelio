@@ -3,7 +3,7 @@ import { LOGIN_SUCCESS, SET_WALLET_ADDRESS, LOGOUT, SET_LOADER, SIGN_UP_SUCCESS 
 
 const INITIAL_STATE = {
     user: null,
-    token: '',
+    token: null,
     loader: false,
     walletAddress: null
 };
@@ -26,8 +26,8 @@ const AuthReducer = produce((draft, action) => {
             draft.walletAddress = action.payload;
             break;
         case LOGOUT:
-            draft.user = '';
-            draft.token = '';
+            draft.user = null;
+            draft.token = null;
             break;
         default:
     }
