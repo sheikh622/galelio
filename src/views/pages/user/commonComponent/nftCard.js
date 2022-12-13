@@ -8,6 +8,7 @@ const NftCard = ({ data }) => {
     const navigate = useNavigate();
     console.log('data', data);
     return (
+  
         <Grid
             item
             md={2}
@@ -64,6 +65,7 @@ const NftCard = ({ data }) => {
                 </CardActionArea>
             </Card>
         </Grid>
+     
     );
 };
 
