@@ -1,7 +1,5 @@
-import React from 'react';
+
 import { useRoutes } from 'react-router-dom';
-
-
 import { useSelector } from 'react-redux';
 // routes
 import SuperAdminRoutes from './superAdmin/SuperAdminRoutes';

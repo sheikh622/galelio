@@ -5,8 +5,6 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 
-
-
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const Category = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 const AdminManagement = Loadable(lazy(() => import('views/pages/superAdmin/adminManagement')));
@@ -25,13 +23,11 @@ const MainRoutes = {
         </AuthGuard>
     ),
     children: [
-     
         {
             path: '/superAdmin/dashboard',
             element: <SuperAdminDashboard />
         },
-        
-       
+
         {
             path: '/schoolAdmin/dashboard',
             element: <SchoolAdminDashboard />
@@ -55,8 +51,7 @@ const MainRoutes = {
         {
             path: '/brandManagement',
             element: <BrandManagement />
-        },
-       
+        }
     ]
 };
 

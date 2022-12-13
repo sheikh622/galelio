@@ -18,8 +18,9 @@ const GuestGuard = ({ children }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log('yaaaaaaaaaaaaaaaaaaaayyy i am here', token);
         if (token) {
-            navigate(config.defaultPath, { replace: true });
+            navigate('/dashboard', { replace: true });
         }
     }, [token, navigate]);
 
