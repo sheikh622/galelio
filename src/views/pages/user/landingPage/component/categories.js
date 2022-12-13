@@ -54,6 +54,8 @@ const Categories = ({ categories }) => {
                             autoPlaySpeed={2800}
                             customTransition="all .5"
                             transitionDuration={500}
+                            infinite={true}
+
                         >
                             {categories.map((item) => (
                                 <>
