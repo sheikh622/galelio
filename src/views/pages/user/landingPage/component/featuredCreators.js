@@ -69,7 +69,7 @@ const FeaturedCreators = ({ brands }) => {
                                             textDecoration: 'none'
                                         }}
                                     >
-                                        <Grid container justifyContent="center" sx={{ width: '480%', }}>
+                                        <Grid container justifyContent="center" sx={{ width: '490%', }}>
                                             <Grid item md={12} xs={12}>
                                                 <CardMedia
                                                     component="img"
