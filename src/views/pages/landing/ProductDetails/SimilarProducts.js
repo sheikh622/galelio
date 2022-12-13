@@ -9,7 +9,6 @@ import { gridSpacing } from 'store/constant';
 import CardMedia from '@mui/material/CardMedia';
 
 
-
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const SimilarProducts = () => {
@@ -107,6 +106,7 @@ const SimilarProducts = () => {
 
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+             
                     {itemData.map((item) => (
                         <Grid item md={2} sm={6}>
                         <Card
@@ -186,6 +186,7 @@ const SimilarProducts = () => {
                     </Card>
                         </Grid>
                     ))}
+                    
                 </Grid>
             </Grid>
         </Grid>
