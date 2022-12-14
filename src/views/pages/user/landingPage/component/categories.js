@@ -3,29 +3,40 @@ import { Grid, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import CardMedia from '@mui/material/CardMedia';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+// import Carousel from 'react-multi-carousel';
+// import 'react-multi-carousel/lib/styles.css';
+import Slider from 'react-slick';
+
 
 const Categories = ({ categories }) => {
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 5
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-        }
+       var settings = {
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        autoplay: true,
+        arrows:true,
+        slidesToShow: 4,
+        slidesToScroll: 1
     };
+    // const responsive = {
+    //     superLargeDesktop: {
+    //         // the naming can be any, depends on you.
+    //         breakpoint: { max: 4000, min: 3000 },
+    //         items: 5
+    //     },
+    //     desktop: {
+    //         breakpoint: { max: 3000, min: 1024 },
+    //         items: 5
+    //     },
+    //     tablet: {
+    //         breakpoint: { max: 1024, min: 464 },
+    //         items: 2
+    //     },
+    //     mobile: {
+    //         breakpoint: { max: 464, min: 0 },
+    //         items: 1
+    //     }
+    // };
 
     const theme = useTheme();
     const navigate = useNavigate();
@@ -48,17 +59,11 @@ const Categories = ({ categories }) => {
             {categories && categories.length > 0 && (
                 <>
                     <Grid item xs={12}>
-                        <Carousel
-                            responsive={responsive}
-                            autoPlay={true}
-                            autoPlaySpeed={2800}
-                            customTransition="all .5"
-                            transitionDuration={500}
-                            infinite={true}
-                        >
+                      <Slider className="sliderBrand" {...settings}>   
                             {categories.map((item) => (
                                  <>
                                     <Grid
+                                    mt={7}
                                         container
                                         justifyContent="left"
                                         spacing={0}
@@ -114,7 +119,7 @@ const Categories = ({ categories }) => {
                                     </Grid>
                                 </>
                             ))}
-                        </Carousel>
+                         </Slider>
                     </Grid>
                 </>
             )}
