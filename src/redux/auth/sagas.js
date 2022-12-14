@@ -15,7 +15,14 @@ function* loginUser({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
-        payload.navigate('/dashboard');
+        console.log("login user redux", response.data.data.user.role)
+        if(response.data.data.user.role == "User"){
+            payload.navigate('/');
+
+        }
+        else{
+            payload.navigate('/dashboard');
+        }
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);

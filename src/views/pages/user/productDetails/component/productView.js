@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import { CardMedia, Grid, Typography, Button } from '@mui/material';
 import React from 'react';
 import Avatar from 'ui-component/extended/Avatar';
-import { Link as RouterLink } from 'react-router-dom';
+
 import { gridSpacing } from 'store/constant';
 import { ethers } from 'ethers';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
@@ -12,12 +12,18 @@ import MarketplaceAddress from '../../../../../contractAbi/Marketplace-address.j
 import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+
 const PropertiesView = ({ nft }) => {
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
 
     const buyNft = async () => {
-        console.log('nft to be buyed', nft);
-
+        if(user == null){
+navigate("/login")
+        }
         let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
         let tokenId = parseInt(nft.NFTTokens[0].tokenId);
         let contractAddress = nft.Category.BrandCategories[0].contractAddress;
@@ -151,6 +157,7 @@ const PropertiesView = ({ nft }) => {
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
+                                                
                                                 <Grid item md={10} xs={12} sm={12} textAlign="center">
                                                     <Button
                                                         sx={{ float: { md: 'right' } }}

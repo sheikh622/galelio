@@ -15,7 +15,7 @@ const UserGuard = ({ children }) => {
             navigate('/', { replace: true });
         }
     }, [token]);
-
+    
     return children;
 };
 
