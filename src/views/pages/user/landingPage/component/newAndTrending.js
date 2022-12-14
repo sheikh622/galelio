@@ -1,27 +1,19 @@
 import { Grid, Typography } from '@mui/material';
 import { gridSpacing } from 'store/constant';
-import NftCard from '../../commonComponent/nftCard';
+import NewCard from '../../commonComponent/newCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import React from 'react';
+import Slider from 'react-slick';
 const NewAndTrendingNfts = ({ nfts }) => {
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 5
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-        }
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        autoplay: true,
+
+        slidesToShow: 4,
+        slidesToScroll: 1
     };
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ background: '', margin: '15px' }}>
@@ -39,34 +31,20 @@ const NewAndTrendingNfts = ({ nfts }) => {
                     </Grid>
                 </Grid>
             </Grid>
-                {nfts && nfts.length > 0 && (
+            <Grid item xs={12}>
+                <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                    {nfts && nfts.length > 0 && (
                         <>
-                            <Grid item xs={12}>
-                                <Carousel
-                                    responsive={responsive}
-                                    autoPlay={true}
-                                    autoPlaySpeed={2800}
-                                    customTransition="all .5"
-                                    transitionDuration={500}
-                                    infinite={true}
-        
-                                >
-
-                       { nfts.map((item) => 
-                        <Grid
-                        container
-                        justifyContent="left"
-                        spacing={0}
-                        sx={{ textAlign: 'center',  width: '500%'  }}
-                    > <NftCard data={item} />
-                    </Grid>
-                        )}
-                       </Carousel>
-                       </Grid>
-                       </>
-                        )}
-                
-           
+                        <Slider className="slider" {...settings}>
+                        {nfts.map((item) => (
+                            <NewCard data={item} />
+                        ))}
+                        </Slider>
+                         
+                        </>
+                    )}
+                </Grid>
+            </Grid>
         </Grid>
     );
 };
