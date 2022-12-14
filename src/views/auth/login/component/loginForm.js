@@ -30,8 +30,15 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactFacebookLogin from 'react-facebook-login';
 import './loginForm.css';
+import { API_URL} from 'utils/axios';
+
+
+
 
 const LoginForm = ({ loginProp, ...others }) => {
+
+    
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const theme = useTheme();
@@ -53,7 +60,7 @@ const LoginForm = ({ loginProp, ...others }) => {
     const googleAuthHandle = (data) => {
         const decoded_data = jwt.decode(data.credential);
         axios
-            .post('http://localhost:4000/api/v1/auth/google/callback/success', {
+            .post(API_URL+'auth/google/callback/success', {
                 data: decoded_data
             })
             .then(function (response) {
@@ -68,7 +75,7 @@ const LoginForm = ({ loginProp, ...others }) => {
         console.log('facebook data', data);
         let { email, first_name, last_name } = data;
         axios
-            .post('http://localhost:4000/api/v1/auth/facebook/callback/success', {
+            .post(API_URL+'auth/facebook/callback/success', {
                 data: { email, first_name, last_name }
             })
             .then(function (response) {
