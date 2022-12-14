@@ -50,7 +50,7 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" sx={{ height: '592px' }} image={nft.asset} alt="green iguana" />
+                        <CardMedia component="img" sx={{ height: '100%' }} image={nft.asset} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
@@ -87,7 +87,7 @@ const PropertiesView = ({ nft }) => {
                                                 color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                 variant="h3"
                                             >
-                                                {nft.name}
+                                                <span>{nft.name}</span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>

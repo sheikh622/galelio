@@ -67,14 +67,14 @@ export default function HorizontalTabs({ marketplaceCategories,categoryId,setCat
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginBottom: '0.3%'
+                        // marginBottom: '0.3%'
                     },
                     '& a.Mui-selected': {
                         color: theme.palette.primary.main
                     }
                 }}
             >
-                   <Tab component={Link} to="#" label={'All'} value={0} {...a11yProps(0)} />
+                   <Tab sx={{}} to="#" label={'All'} value={0} {...a11yProps(0)} />
                 {marketplaceCategories?.categories?.length > 0 &&
                     marketplaceCategories?.categories.map((item) => {
                         return <Tab label={item.name} value={item.id} {...a11yProps(item.id)} />;

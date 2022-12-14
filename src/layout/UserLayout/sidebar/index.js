@@ -23,7 +23,8 @@ const SideBar = () => {
     const location = useLocation();
     useEffect(() => {
         setPathName(location.pathname);
-    }, []);
+    });
+
     const theme = useTheme();
 
     const dispatch = useDispatch();
@@ -84,7 +85,7 @@ const SideBar = () => {
                                 navigate('/marketplace');
                             }}
                         >
-                            {pathName.includes('/marketplace') ? (
+                            {pathName.includes('marketplace') ? (
                                 <>
                                     <Tooltip title="Marketplace" placement="right" arrow>
                                         <StorefrontIcon style={{ color: `${color}` }} />

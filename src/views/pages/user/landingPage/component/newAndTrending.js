@@ -1,8 +1,49 @@
 import { Grid, Typography } from '@mui/material';
 import { gridSpacing } from 'store/constant';
-import NftCard from '../../commonComponent/nftCard';
-
+import NewCard from '../../commonComponent/newCard';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import React from 'react';
+import Slider from 'react-slick';
 const NewAndTrendingNfts = ({ nfts }) => {
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        autoplay: true,
+arrows:'true',
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                fade: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+    };
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ background: '', margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
@@ -20,8 +61,17 @@ const NewAndTrendingNfts = ({ nfts }) => {
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}>
-                    {nfts && nfts.length > 0 && nfts.map((item) => <NftCard data={item} />)}
+                <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                    {nfts && nfts.length > 0 && (
+                        <>
+                        <Slider className="slider" {...settings}>
+                        {nfts.map((item) => (
+                            <NewCard data={item} />
+                        ))}
+                        </Slider>
+                         
+                        </>
+                    )}
                 </Grid>
             </Grid>
         </Grid>

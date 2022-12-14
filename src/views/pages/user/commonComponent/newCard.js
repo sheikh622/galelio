@@ -3,15 +3,18 @@ import { Card, Grid, CardActionArea, CardContent, Divider } from '@mui/material'
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from 'react-router-dom';
 
-const NftCard = ({ data }) => {
+
+const NewCard = ({ data }) => {
+
     const theme = useTheme();
     const navigate = useNavigate();
     console.log('data', data);
     return (
-  
+        
         <Grid
             item
-            md={2}
+            mt={4}
+            md={3}
             sm={6}
             onClick={() => {
                 navigate('/productDetails', {
@@ -27,7 +30,7 @@ const NftCard = ({ data }) => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     maxWidth: 365,
-                    width: '105%',
+                    width: {md:'355%'},
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}
@@ -65,8 +68,8 @@ const NftCard = ({ data }) => {
                 </CardActionArea>
             </Card>
         </Grid>
-     
+   
     );
 };
 
-export default NftCard;
+export default NewCard;
