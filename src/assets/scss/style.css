@@ -706,4 +706,25 @@ body {
 }
 .quantityField .css-4pzdr3-MuiInputBase-input-MuiOutlinedInput-input {
   height: 0.8375em;
+}
+
+.slider {
+  background-color: transparent;
+  height: 390px;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+  color: #212121;
+  overflow: hidden;
+}
+
+.sliderBrand {
+  background-color: transparent;
+  height: 340px;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+  color: #212121;
 }/*# sourceMappingURL=style.css.map */
