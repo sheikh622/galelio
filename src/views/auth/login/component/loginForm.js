@@ -28,6 +28,8 @@ let jwt = require('jsonwebtoken');
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReactFacebookLogin from 'react-facebook-login';
+import './loginForm.css';
 
 const LoginForm = ({ loginProp, ...others }) => {
     const dispatch = useDispatch();
@@ -60,6 +62,25 @@ const LoginForm = ({ loginProp, ...others }) => {
             .catch(function (error) {
                 toast.error(error.message);
             });
+    };
+
+    const responseFacebook = (data) => {
+        console.log('facebook data', data);
+        let { email, first_name, last_name } = data;
+        axios
+            .post('http://localhost:4000/api/v1/auth/facebook/callback/success', {
+                data: { email, first_name, last_name }
+            })
+            .then(function (response) {
+                dispatch(loginSuccess(response.data.data));
+                // console.log(response)
+            })
+            .catch(function (error) {
+                toast.error(error.message);
+            });
+    };
+    const responseFacebookFailure = () => {
+        toast.error('Facebook login failed');
     };
     return (
         <>
@@ -193,14 +214,31 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                             <GoogleLogin
+                                select_account={false}
+                                auto_select={false}
                                 onSuccess={(data) => {
                                     googleAuthHandle(data);
                                 }}
                                 onError={() => {
                                     toast.error('Google Auth Failed');
                                 }}
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
+                        >
+                            <ReactFacebookLogin
+                                appId="851727442768362"
+                                // autoLoad={true}
+                                fields="first_name, last_name,email"
+                                callback={responseFacebook}
+                                onFailure={responseFacebookFailure}
+                                icon="fa-facebook"
+                                cssClass="my-facebook-button-class"
+                                textButton=" Login with Facebook"
                             />
                         </Grid>
                     </form>
