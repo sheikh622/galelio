@@ -16,7 +16,7 @@ import { textAlign } from '@mui/system';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const PropertiesView = ({nft}) => {
+const PropertiesView = ({ nft }) => {
     const theme = useTheme();
     const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
 
@@ -39,10 +39,8 @@ const PropertiesView = ({nft}) => {
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    <Grid item md={6} sm={12} component={RouterLink}
-                    to="/companyPage"
-                    >
-                        <CardMedia component="img" sx={{ height: '100%', }} image={nft.asset} alt="green iguana" />
+                    <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
+                        <CardMedia component="img" sx={{ height: '100%' }} image={nft.asset} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
@@ -55,10 +53,16 @@ const PropertiesView = ({nft}) => {
                                                 <Grid item>
                                                     <Avatar alt="User 1" src={nft.Brand.image} />
                                                 </Grid>
-                                                <Grid item xs zeroMinWidth component={RouterLink} sx={{textDecoration: 'none'}}
-                                                to="/companyPage">
+                                                <Grid
+                                                    item
+                                                    xs
+                                                    zeroMinWidth
+                                                    component={RouterLink}
+                                                    sx={{ textDecoration: 'none' }}
+                                                    to="/companyPage"
+                                                >
                                                     <Typography align="left" fontWeight={600} variant="subtitle1">
-                                                    {nft.Brand.name}
+                                                        {nft.Brand.name}
                                                     </Typography>
                                                     <Typography align="left" variant="subtitle2">
                                                         Creator
@@ -72,19 +76,13 @@ const PropertiesView = ({nft}) => {
                                                 className="Lux"
                                                 color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                 variant="h3"
-                                                
                                             >
-
-                                            <span>
-
-                                                {nft.name}
-
-                                            </span>
+                                                <span>{nft.name}</span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                            {nft.description}
+                                                {nft.description}
                                             </Typography>
                                         </Grid>
                                         {/* <Grid item xs={12}>

@@ -15,7 +15,6 @@ const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetai
 
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
 
-
 // ==============================|| market  ROUTING ||============================== //
 
 const UserRoutes = {
@@ -23,8 +22,8 @@ const UserRoutes = {
     element: (
         <NavMotion>
             {/* <GuestGuard> */}
-                <UserLayout />
-         {/* </GuestGuard> */}
+            <UserLayout />
+            {/* </GuestGuard> */}
         </NavMotion>
     ),
     children: [
@@ -40,11 +39,12 @@ const UserRoutes = {
             path: '/productDetails',
             element: <ProductDetails />
         },
-       
+
         {
             path: '/creatorProfile',
-            element: <Profile />},
-            {
+            element: <Profile />
+        },
+        {
             path: '/companyPage',
             element: <CompanyPage />
         }

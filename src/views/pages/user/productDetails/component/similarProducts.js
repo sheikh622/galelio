@@ -31,13 +31,13 @@ const SimilarProducts = ({ marketplaceNfts }) => {
                     </>
                     :
                     <>
-                     <div style={{width:"100%", margin:"3%"}}>
-                   <h3 style={{textAlign:"center"}}>
+                     <Grid sx={{width:"100%", margin:"3%"}}>
+                   <h3 sx={{textAlign:"center"}}>
                 No Similar products found.
 
                    </h3>
 
-                   </div>
+                   </Grid>
                     </>
                     }
                 </Grid>
