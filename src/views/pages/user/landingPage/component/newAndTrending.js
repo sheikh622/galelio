@@ -11,7 +11,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
         infinite: true,
         speed: 1000,
         autoplay: true,
-
+arrows:'true',
         slidesToShow: 4,
         slidesToScroll: 1
     };

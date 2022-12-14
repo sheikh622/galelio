@@ -40,7 +40,7 @@ const ProductDetails = () => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Grid item md={12} xs={12}>
+                <Grid item md={11} xs={12}>
                     <Grid container-fluid>
                         <Grid item md={12} xs={12}>
                             <PropertiesView nft={location.state.nft} />
