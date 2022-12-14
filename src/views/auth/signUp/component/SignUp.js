@@ -208,7 +208,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                    Sign in
+                                    Sign up
                                 </Button>
                             </AnimateButton>
                         </Box>

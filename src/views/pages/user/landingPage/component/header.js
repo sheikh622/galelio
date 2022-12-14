@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 import widget1 from 'assets/images/watch.png';
+import { useSelector } from 'react-redux';
 
 const HeaderAnimationImage = styled('img')({
     maxWidth: '100%',
@@ -12,6 +13,7 @@ const HeaderAnimationImage = styled('img')({
 });
 
 const Header = () => {
+    const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
 
     return (
@@ -93,23 +95,27 @@ const Header = () => {
                                         delay: 0.4
                                     }}
                                 >
-                                    <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                                        <Grid item>
-                                            <AnimateButton>
-                                                <Button
-                                                    className="create"
-                                                    component={RouterLink}
-                                                    to="/login"
-                                                    target="_blank"
-                                                    size="large"
-                                                    variant="contained"
-                                                    color="secondary"
-                                                >
-                                                    Create Yours
-                                                </Button>
-                                            </AnimateButton>
-                                        </Grid>
-                                    </Grid>
+                                    {user !== null && (
+                                        <>
+                                            <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                                                <Grid item>
+                                                    <AnimateButton>
+                                                        <Button
+                                                            className="create"
+                                                            component={RouterLink}
+                                                            to="/login"
+                                                            target="_blank"
+                                                            size="large"
+                                                            variant="contained"
+                                                            color="secondary"
+                                                        >
+                                                            Create Your's
+                                                        </Button>
+                                                    </AnimateButton>
+                                                </Grid>
+                                            </Grid>
+                                        </>
+                                    )}
                                 </motion.div>
                             </Grid>
                         </Grid>
