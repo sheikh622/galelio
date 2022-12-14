@@ -43,7 +43,7 @@ const superAdminMenu = {
             id: 'dashboard',
             title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
-            url: '/',
+            url: '/dashboard',
             icon: icons.IconLayout2,
             breadcrumbs: false
         },
@@ -73,14 +73,7 @@ const superAdminMenu = {
             url: '/brands',
             breadcrumbs: false
         },
-        {
-            id: 'nft',
-            title: <FormattedMessage id="NFT Management" />,
-            type: 'item',
-            icon: icons.IconCurrencyEthereum,
-            url: '/category',
-            breadcrumbs: false
-        }
+       
     ]
 };
 

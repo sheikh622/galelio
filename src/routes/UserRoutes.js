@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 // project imports
-import GuestGuard from 'utils/route-guard/GuestGuard';
+import UserGuard from './RouteGuard/UserGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
@@ -15,21 +15,20 @@ const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetai
 
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
 
-
 // ==============================|| market  ROUTING ||============================== //
 
 const UserRoutes = {
     path: '/',
     element: (
         <NavMotion>
-            {/* <GuestGuard> */}
+            <UserGuard>
                 <UserLayout />
-         {/* </GuestGuard> */}
+            </UserGuard>
         </NavMotion>
     ),
     children: [
         {
-            path: '/landingPage',
+            path: '/',
             element: <LandingPage />
         },
         {
@@ -40,11 +39,12 @@ const UserRoutes = {
             path: '/productDetails',
             element: <ProductDetails />
         },
-       
+
         {
             path: '/creatorProfile',
-            element: <Profile />},
-            {
+            element: <Profile />
+        },
+        {
             path: '/companyPage',
             element: <CompanyPage />
         }

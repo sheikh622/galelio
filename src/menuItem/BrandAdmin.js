@@ -27,7 +27,7 @@ const brandAdminMenu = {
             id: 'dashboard',
             title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
-            url: '/',
+            url: '/dashboard',
             icon: icons.IconDashboard,
             breadcrumbs: false
         },

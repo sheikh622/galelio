@@ -1,7 +1,7 @@
-import { forwardRef, useState, useEffect } from 'react';
+import { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-import { ethers, providers } from 'ethers';
+import { ethers } from 'ethers';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
 // import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
@@ -10,7 +10,8 @@ import { mintNft, lazyMintNft } from 'redux/nftManagement/actions';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
 import { create } from 'ipfs-http-client';
 import { Buffer } from 'buffer';
-
+import MarketplaceAbi from '../../../../../contractAbi/Marketplace.json';
+import MarketplaceAddress from '../../../../../contractAbi/Marketplace-address.json';
 const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
 const projectSecret = 'a09de1e8b20292cd87460290de554003';
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
@@ -41,7 +42,9 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let nftId = nftData.id;
         let categoryId = nftData.CategoryId;
         let brandId = nftData.BrandId;
-
+        let price = ethers.utils.parseEther(nftData.price.toString());
+        console.log('price', price);
+        let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
         let tokenIdArray = [];
         let transactionHash;
         try {
@@ -54,16 +57,24 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 return tokenUri;
             });
 
+            console.log('MarketplaceAddress.address', MarketplaceAddress.address);
             if (uriArray.length == 1) {
                 let mintedNFT = await (
-                    await nft.mint(tokenUri).catch((error) => {
+                    await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
                         toast.error(`${error.message}`);
                     })
                 ).wait();
 
                 transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
-
                 const id = parseInt(mintedNFT.events[0].args[2]);
+
+                const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                await (
+                    await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price).catch((error) => {
+                        console.log('error', error.message);
+                        toast.error(error.message);
+                    })
+                ).wait();
 
                 tokenIdArray.push({
                     id: nftTokens[0].id,
@@ -92,7 +103,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 );
             } else if (uriArray.length > 1) {
                 let mintedNFT = await (
-                    await nft.bulkMint(uriArray).catch((error) => {
+                    await nft.bulkMint(uriArray, MarketplaceAddress.address).catch((error) => {
                         toast.error('NFT minting  unsuccessfull');
                     })
                 ).wait();
@@ -103,9 +114,18 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 let myNftTokenIdArray = [];
                 for (let i = 0; i < uriArray.length; i++) {
                     myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
-
-                    counter = counter + 1;
+                    counter = counter + 2;
                 }
+
+                console.log('myNftTokenIdArray', myNftTokenIdArray);
+                const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+
+                await (
+                    await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price).catch((error) => {
+                        console.log('error', error.message);
+                        toast.error(error.message);
+                    })
+                ).wait();
 
                 nftTokens.map((data, index) => {
                     tokenIdArray.push({
