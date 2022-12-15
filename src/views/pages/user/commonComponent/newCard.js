@@ -13,6 +13,7 @@ const NewCard = ({ data }) => {
         
         <Grid
             item
+          
             mt={4}
             md={4}
             sm={6}
