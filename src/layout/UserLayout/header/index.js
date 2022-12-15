@@ -74,9 +74,10 @@ export default function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const handleLogout = async () => {
-        navigate('/login');
+       
         try {
             await dispatch(logout());
+            navigate('/login');
             
         } catch (err) {
             console.error(err);

@@ -64,7 +64,9 @@ const LoginForm = ({ loginProp, ...others }) => {
                 data: decoded_data
             })
             .then(function (response) {
-                dispatch(loginSuccess(response.data.data));
+                console.log("response from google auth", response)
+                dispatch(loginSuccess(response.data.data))
+                navigate("/")
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -80,7 +82,7 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                // console.log(response)
+                navigate("/")
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -118,7 +120,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                             <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput
                                 type="email"
-                                value={values.email}
+                                // value={values.email}
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
@@ -140,7 +142,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                             <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
                             <OutlinedInput
                                 type={showPassword ? 'text' : 'password'}
-                                value={values.password}
+                                // value={values.password}
                                 name="password"
                                 onBlur={handleBlur}
                                 onChange={handleChange}

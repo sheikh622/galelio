@@ -18,7 +18,6 @@ function* loginUser({ payload }) {
         console.log("login user redux", response.data.data.user.role)
         if(response.data.data.user.role == "User"){
             payload.navigate('/');
-
         }
         else{
             payload.navigate('/dashboard');
@@ -41,6 +40,7 @@ function* signupUserRequest({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupSuccess(response.data.data));
+        payload.navigate('/login');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
