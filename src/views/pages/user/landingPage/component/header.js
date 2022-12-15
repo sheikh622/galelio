@@ -95,7 +95,7 @@ const Header = () => {
                                         delay: 0.4
                                     }}
                                 >
-                                    {user !== null && (
+                                    {user == null && (
                                         <>
                                             <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
                                                 <Grid item>
@@ -103,8 +103,7 @@ const Header = () => {
                                                         <Button
                                                             className="create"
                                                             component={RouterLink}
-                                                            to="/login"
-                                                            target="_blank"
+                                                            to="/login"                                                            
                                                             size="large"
                                                             variant="contained"
                                                             color="secondary"

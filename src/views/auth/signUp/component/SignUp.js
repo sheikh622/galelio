@@ -70,6 +70,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                             navigate: navigate
                         })
                     );
+                    
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
