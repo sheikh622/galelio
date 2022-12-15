@@ -16,7 +16,7 @@ const FeaturedCreators = ({ brands }) => {
         speed: 1000,
         autoplay: true,
 arrows:true,
-        slidesToShow: 4,
+        slidesToShow: brands?.length > 3? 3 : 1,
         slidesToScroll: 1
     };
     return (
@@ -28,7 +28,8 @@ arrows:true,
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                             textTransform: 'capitalize' }}
                         >
                             Featured Creators
                         </Typography>
@@ -36,10 +37,10 @@ arrows:true,
                 </Grid>
             </Grid>
 
-            {brands && brands.length > 0 && (
+            {brands && brands.length > 0 ? (
                 <>
-                    <Grid item xs={12}>
-                        <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                    <Grid item xs={12} >
+                        <Grid container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
                         <Slider className="sliderBrand" {...settings}>   
                         {brands.map((item) => (
                                 <BrandCard data={item} />
@@ -48,7 +49,13 @@ arrows:true,
                         </Grid>
                     </Grid>
                 </>
-            )}
+            )
+        :
+    (
+        <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
+        <h2 sx={{ textAlign: 'center', fontsize:'30px' }}>No data found...!</h2>
+        </Grid>
+    )}
         </Grid>
     );
 };

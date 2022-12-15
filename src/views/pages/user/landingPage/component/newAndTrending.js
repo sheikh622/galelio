@@ -12,7 +12,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
         speed: 1000,
         autoplay: true,
 arrows:'true',
-        slidesToShow: 4,
+        slidesToShow:nfts?.length > 3 ? 3 : 1,
         slidesToScroll: 1,
         responsive: [
             {
@@ -35,7 +35,7 @@ arrows:'true',
             {
               breakpoint: 480,
               settings: {
-                fade: true,
+                // fade: true,
                 infinite: true,
                 speed: 500,
                 slidesToShow: 1,
@@ -62,7 +62,7 @@ arrows:'true',
             </Grid>
             <Grid item xs={12}>
                 <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
-                    {nfts && nfts.length > 0 && (
+                    {nfts && nfts.length > 0 ? (
                         <>
                         <Slider className="slider" {...settings}>
                         {nfts.map((item) => (
@@ -71,7 +71,15 @@ arrows:'true',
                         </Slider>
                          
                         </>
-                    )}
+                    )
+                  :
+                (
+                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
+                <h2 sx={{ textAlign: 'center', fontsize:'30px' }}>No data found...!</h2>
+                </Grid>
+
+                  
+                )}
                 </Grid>
             </Grid>
         </Grid>

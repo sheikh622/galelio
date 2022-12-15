@@ -15,14 +15,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
+// =============================|| LANDING - FEATURE PAGE ||============================= //
+
 const PropertiesView = ({ nft }) => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
 
     const buyNft = async () => {
-        if(user == null){
-navigate("/login")
+        if (user == null) {
+            navigate('/login');
         }
         let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
         let tokenId = parseInt(nft.NFTTokens[0].tokenId);
@@ -157,7 +159,7 @@ navigate("/login")
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
-                                                
+
                                                 <Grid item md={10} xs={12} sm={12} textAlign="center">
                                                     <Button
                                                         sx={{ float: { md: 'right' } }}
