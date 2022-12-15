@@ -11,7 +11,7 @@ const BrandCard = ({ data }) => {
         <Grid
             item
             mt={4}
-            md={3}
+            md={4}
             sm={6}
             justifyContent='center'
             onClick={() => {
@@ -28,7 +28,7 @@ const BrandCard = ({ data }) => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     maxWidth: 365,
-                    width: '355%',
+                    width: '250%',
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}

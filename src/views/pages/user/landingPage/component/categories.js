@@ -10,12 +10,13 @@ import Slider from 'react-slick';
 const Categories = ({ categories }) => {
     console.log('categories', categories);
     var settings = {
+        Arrows: true,
         dots: true,
         infinite: true,
         speed: 1000,
         autoplay: true,
         arrows: true,
-        slidesToShow: categories?.length > 3 ? 3 : 1,
+        slidesToShow: 3,
         slidesToScroll: 1
     };
     // const responsive = {
@@ -56,11 +57,11 @@ const Categories = ({ categories }) => {
                     </Grid>
                 </Grid>
             </Grid>
-            {categories && categories.length > 0 ? (
+            {categories && categories?.length > 3 ? (
                 <>
                     <Grid item xs={12}>
                         <Slider className="sliderBrand" {...settings}>
-                            {categories.map((item) => (
+                            {categories?.map((item) => (
                                 <>
                                     <Grid
                                         mt={7}
@@ -115,6 +116,47 @@ const Categories = ({ categories }) => {
                         </Slider>
                     </Grid>
                 </>
+            ) : categories && categories?.length > 0 ? (
+                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center', width: { md: '97%' } }}>
+                    {categories?.map((item) => (
+                        <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={4} sm={6}>
+                            <Box
+                                onClick={() => {
+                                    navigate('/marketplace', {
+                                        state: {
+                                            category: item
+                                        }
+                                    });
+                                }}
+                                sx={{
+                                    position: 'relative',
+                                    background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
+                                    boxShadow: '1px 2px 9px #d3d3d3',
+                                    padding: '0',
+                                    margin: '0'
+                                }}
+                            >
+                                <CardMedia component="img" width="100%" height="210rem" image={item.image} />
+
+                                <Box
+                                    sx={{
+                                        height: '100%',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        width: '100%',
+                                        bgcolor: 'rgba(0, 0, 0, 0.54)',
+                                        color: 'white'
+                                    }}
+                                >
+                                    <Typography variant="h4" color="#fff" sx={{ mt: 11 }}>
+                                        {item.name}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </Grid>
+                    ))}
+                </Grid>
             ) : (
                 <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
                     <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
