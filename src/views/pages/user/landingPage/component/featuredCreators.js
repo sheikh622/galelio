@@ -16,7 +16,7 @@ const FeaturedCreators = ({ brands }) => {
         speed: 1000,
         autoplay: true,
 arrows:true,
-        slidesToShow: brands?.length > 3? 3 : 1,
+        slidesToShow: 3,
         slidesToScroll: 1
     };
     return (
@@ -37,7 +37,7 @@ arrows:true,
                 </Grid>
             </Grid>
 
-            {brands && brands.length > 0 ? (
+            {brands && brands?.length > 3 ? (
                 <>
                     <Grid item xs={12} >
                         <Grid container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
@@ -52,9 +52,19 @@ arrows:true,
             )
         :
     (
+        brands && brands?.length > 0 ? (
         <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-        <h2 sx={{ textAlign: 'center', fontsize:'30px' }}>No data found...!</h2>
+        {brands?.map((item) => (
+            <BrandCard data={item} />
+        ))}
         </Grid>
+        )
+        :
+        (
+            <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
+                    <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
+                </Grid>  
+        )
     )}
         </Grid>
     );
