@@ -15,8 +15,8 @@ const FeaturedCreators = ({ brands }) => {
         infinite: true,
         speed: 1000,
         autoplay: true,
-arrows:true,
-        slidesToShow: 4,
+        arrows: true,
+        slidesToShow: 3,
         slidesToScroll: 1
     };
     return (
@@ -40,10 +40,10 @@ arrows:true,
                 <>
                     <Grid item xs={12}>
                         <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
-                        <Slider className="sliderBrand" {...settings}>   
-                        {brands.map((item) => (
-                                <BrandCard data={item} />
-                            ))}
+                            <Slider className="sliderBrand" {...settings}>
+                                {brands.map((item) => (
+                                    <BrandCard data={item} />
+                                ))}
                             </Slider>
                         </Grid>
                     </Grid>

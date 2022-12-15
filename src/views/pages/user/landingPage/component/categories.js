@@ -7,14 +7,14 @@ import CardMedia from '@mui/material/CardMedia';
 // import 'react-multi-carousel/lib/styles.css';
 import Slider from 'react-slick';
 
-
 const Categories = ({ categories }) => {
-       var settings = {
+    console.log('categories', categories);
+    var settings = {
         dots: true,
         infinite: true,
         speed: 1000,
         autoplay: true,
-        arrows:true,
+        arrows: true,
         slidesToShow: 4,
         slidesToScroll: 1
     };
@@ -59,22 +59,11 @@ const Categories = ({ categories }) => {
             {categories && categories.length > 0 && (
                 <>
                     <Grid item xs={12}>
-                      <Slider className="sliderBrand" {...settings}>   
+                        <Slider className="sliderBrand" {...settings}>
                             {categories.map((item) => (
-                                 <>
-                                    <Grid
-                                    mt={7}
-                                        container
-                                        justifyContent="left"
-                                        spacing={0}
-                                        sx={{ textAlign: 'center', width: '160%' }}
-                                    >
-                                        <Grid
-                                            sx={{ my: { xs: '10px', md: '0', sm: '10px' } }}
-                                            item
-                                            md={6}
-                                            sm={6}
-                                        >
+                                <>
+                                    <Grid mt={7} container justifyContent="left" spacing={0} sx={{ textAlign: 'center', width: '160%' }}>
+                                        <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={6} sm={6}>
                                             <Box
                                                 onClick={() => {
                                                     navigate('/marketplace', {
@@ -92,12 +81,7 @@ const Categories = ({ categories }) => {
                                                     background: 'red'
                                                 }}
                                             >
-                                                <CardMedia                                                    
-                                                    component="img"
-                                                    width="100%"
-                                                    height="210rem"
-                                                    image={item.image}
-                                                />
+                                                <CardMedia component="img" width="100%" height="210rem" image={item.image} />
 
                                                 <Box
                                                     sx={{
@@ -119,7 +103,7 @@ const Categories = ({ categories }) => {
                                     </Grid>
                                 </>
                             ))}
-                         </Slider>
+                        </Slider>
                     </Grid>
                 </>
             )}
