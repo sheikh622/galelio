@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 // project imports
-import GuestGuard from 'utils/route-guard/GuestGuard';
+import UserGuard from './RouteGuard/UserGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
@@ -21,14 +21,14 @@ const UserRoutes = {
     path: '/',
     element: (
         <NavMotion>
-            {/* <GuestGuard> */}
-            <UserLayout />
-            {/* </GuestGuard> */}
+            <UserGuard>
+                <UserLayout />
+            </UserGuard>
         </NavMotion>
     ),
     children: [
         {
-            path: '/landingPage',
+            path: '/',
             element: <LandingPage />
         },
         {

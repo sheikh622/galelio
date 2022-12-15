@@ -1,30 +1,26 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-
-// project imports
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-// ==============================|| AUTH GUARD ||============================== //
-
 /**
  * Authentication guard for routes
  * @param {PropTypes.node} children children element/node
  */
-const SubAdminGuard = ({ children }) => {
+const UserGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
     const navigate = useNavigate();
-   
+    console.log('token in UserGuard', token);
     useEffect(() => {
-        if (token == '') {
+        if (token == null) {
             navigate('/', { replace: true });
         }
     }, [token]);
-
+    
     return children;
 };
 
-SubAdminGuard.propTypes = {
+UserGuard.propTypes = {
     children: PropTypes.node
 };
 
-export default SubAdminGuard;
+export default UserGuard;

@@ -25,10 +25,12 @@ import { Formik } from 'formik';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import { signup, setLoader } from '../../../../redux/auth/actions';
+import { useNavigate } from 'react-router-dom';
 const SignUpForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [checked, setChecked] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -49,14 +51,25 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     confirmPassword: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    name: Yup.string().max(255).required('Name is required!'),
-
+                    name: Yup.string()
+                        .required('Name is required!')
+                        .max(42, 'Name can not exceed 42 characters')
+                        .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     password: Yup.string().max(255).required('Password is required!'),
                     confirmPassword: Yup.string().max(255).required('Confirm Password is required!')
                 })}
                 onSubmit={async (values) => {
-                    await console.log('login');
+                    await console.log('login', values);
+                    await dispatch(setLoader(true));
+                    dispatch(
+                        signup({
+                            name: values.name,
+                            email: values.email,
+                            password: values.password,
+                            navigate: navigate
+                        })
+                    );
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
@@ -195,7 +208,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                    Sign in
+                                    Sign up
                                 </Button>
                             </AnimateButton>
                         </Box>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled, alpha, useTheme } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -24,6 +24,10 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Drawer from '../drawer/drawer';
+import { logout } from 'redux/auth/actions';
+import { useSelector, useDispatch } from 'react-redux';
+
+
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -67,6 +71,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const handleLogout = async () => {
+        navigate('/login');
+        try {
+            await dispatch(logout());
+            
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const user = useSelector((state) => state.auth.user);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -91,32 +108,36 @@ export default function Header() {
     };
 
     const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem
-                component={RouterLink}
-                to="/creatorProfile"
-                 onClick={handleMenuClose}
+    
+  
+        const renderMenu = (
+            <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                }}
+                id={menuId}
+                keepMounted
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                }}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
             >
-                My Profile
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        </Menu>
-    );
+                <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
+                    My Profile
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+        );
+
+    
+
+
+
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -207,20 +228,17 @@ export default function Header() {
                             <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                         </IconButton>
                     </Box>
-
+                    {user !== null && (
+                        <>
                     <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
-
-                    <div style={{ marginLeft: '1%', display: 'inline', width: '' }}>
-                        <Typography variant="h5" component="h2" sx={{ width: '100%' }}>
-                            Cia Natasya
-                        </Typography>
-
-                        <div className={styles.subTitle}>
-                            <Typography variant="h6" component="h2" sx={{}}>
-                                Creator
-                            </Typography>
-                        </div>
-                    </div>
+                   
+                            <div style={{ marginLeft: '1%', display: 'inline', width: '' }}>
+                                <Typography variant="h5" component="h2" sx={{ width: '100%' }}>
+                                    {user.firstName}
+                                    {user.lastName}
+                                </Typography>
+                            </div>
+                    
 
                     <IconButton
                         size="large"
@@ -233,10 +251,18 @@ export default function Header() {
                     >
                         <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
                     </IconButton>
+                    </>
+                    )}
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
+            {user !== null && (
+                <>
+                {renderMobileMenu}
+                {renderMenu}
+                
+                </>
+
+            )}
         </Box>
     );
 }

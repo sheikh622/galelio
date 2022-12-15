@@ -1,40 +1,58 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Card, Container, CardMedia, Grid, Typography, TextField, MenuItem, Chip, Button, Divider } from '@mui/material';
+import { CardMedia, Grid, Typography, Button } from '@mui/material';
 import React from 'react';
-// project imports
 import Avatar from 'ui-component/extended/Avatar';
 
-import SubCard from 'ui-component/cards/SubCard';
-import watch1 from 'assets/images/watch3.png';
-
-import Avatar3 from 'assets/images/users/avatar-3.png';
-import { Link as RouterLink } from 'react-router-dom';
-
 import { gridSpacing } from 'store/constant';
-import { textAlign } from '@mui/system';
+import { ethers } from 'ethers';
+import NFTAbi from '../../../../../contractAbi/NFT.json';
+import MarketplaceAbi from '../../../../../contractAbi/Marketplace.json';
+import MarketplaceAddress from '../../../../../contractAbi/Marketplace-address.json';
+import Erc20 from '../../../../../contractAbi/Erc20.json';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({ nft }) => {
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
-    const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
 
-    const status = [
-        {
-            value: 'PROOF OF AUTHENTICITY',
-            label: 'PROOF OF AUTHENTICITY'
-        },
-        {
-            value: 'gia certificate',
-            label: 'gia certificate'
-        },
-        {
-            value: 'LCX Certificate',
-            label: 'LCX Certificate'
+    const buyNft = async () => {
+        if (user == null) {
+            navigate('/login');
         }
-    ];
+        let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+        let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+        let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+        let price = ethers.utils.parseEther(nft.price.toString());
 
+        console.log('price', price);
+        console.log('erc20Address', erc20Address);
+        console.log('tokenId', tokenId);
+        console.log('contractAddress', contractAddress);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+
+        console.log('signer', signer);
+        console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
+
+        const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+        console.log('Erc20.abi', Erc20);
+        const token = new ethers.Contract(erc20Address, Erc20, signer);
+        console.log('token', token);
+        await (await token.approve(MarketplaceAddress.address, price)).wait();
+        await (
+            await marketplace.purchaseItem(tokenId, contractAddress, price).catch((error) => {
+                console.log('error', error.message);
+                toast.error(error.message);
+            })
+        ).wait();
+    };
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
@@ -141,13 +159,16 @@ const PropertiesView = ({ nft }) => {
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
+
                                                 <Grid item md={10} xs={12} sm={12} textAlign="center">
                                                     <Button
                                                         sx={{ float: { md: 'right' } }}
                                                         className="buy"
                                                         variant="contained"
                                                         size="large"
-                                                        onClick={() => {}}
+                                                        onClick={() => {
+                                                            buyNft();
+                                                        }}
                                                     >
                                                         Buy Now
                                                     </Button>

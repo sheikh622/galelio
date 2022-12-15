@@ -13,6 +13,7 @@ const BrandCard = ({ data }) => {
             mt={4}
             md={3}
             sm={6}
+            justifyContent='center'
             onClick={() => {
                 navigate('/productDetails', {
                     state: {

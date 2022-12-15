@@ -2,7 +2,7 @@ import React, { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
-import BrandAdminGuard from './BrandAdminGuard';
+import AdminGuard from './RouteGuard/AdminGuard';
 
 const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
@@ -12,13 +12,13 @@ const NftManagement = Loadable(lazy(() => import('views/pages/brandAdmin/nftMana
 const BrandAdminRoutes = {
     path: '/',
     element: (
-        <BrandAdminGuard>
+        <AdminGuard>
             <MainLayout />
-        </BrandAdminGuard>
+        </AdminGuard>
     ),
     children: [
         {
-            path: '/',
+            path: '/dashboard',
             element: <BrandAdminDashboard />
         },
         {
