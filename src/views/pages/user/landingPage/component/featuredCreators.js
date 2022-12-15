@@ -15,7 +15,7 @@ const FeaturedCreators = ({ brands }) => {
         infinite: true,
         speed: 1000,
         autoplay: true,
-arrows:true,
+        arrows: true,
         slidesToShow: 3,
         slidesToScroll: 1
     };
@@ -28,8 +28,7 @@ arrows:true,
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
-                             textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
                         >
                             Featured Creators
                         </Typography>
@@ -39,33 +38,27 @@ arrows:true,
 
             {brands && brands?.length > 3 ? (
                 <>
-                    <Grid item xs={12} >
+                    <Grid item xs={12}>
                         <Grid container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-                        <Slider className="sliderBrand" {...settings}>   
-                        {brands.map((item) => (
-                                <BrandCard data={item} />
-                            ))}
+                            <Slider className="sliderBrand" {...settings}>
+                                {brands.map((item) => (
+                                    <BrandCard data={item} />
+                                ))}
                             </Slider>
                         </Grid>
                     </Grid>
                 </>
-            )
-        :
-    (
-        brands && brands?.length > 0 ? (
-        <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-        {brands?.map((item) => (
-            <BrandCard data={item} />
-        ))}
-        </Grid>
-        )
-        :
-        (
-            <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
+            ) : brands && brands?.length > 0 ? (
+                <Grid mt={4} container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                    {brands?.map((item) => (
+                        <BrandCard data={item} />
+                    ))}
+                </Grid>
+            ) : (
+                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
                     <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
-                </Grid>  
-        )
-    )}
+                </Grid>
+            )}
         </Grid>
     );
 };
