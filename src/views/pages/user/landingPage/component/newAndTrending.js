@@ -11,38 +11,38 @@ const NewAndTrendingNfts = ({ nfts }) => {
         infinite: true,
         speed: 1000,
         autoplay: true,
-arrows:'true',
-        slidesToShow:nfts?.length > 3 ? 3 : 1,
+        arrows: 'true',
+        slidesToShow: 3,
         slidesToScroll: 1,
         responsive: [
             {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: true
-              }
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
             },
             {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                initialSlide: 2
-              }
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
             },
             {
-              breakpoint: 480,
-              settings: {
-                // fade: true,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
+                breakpoint: 480,
+                settings: {
+                    // fade: true,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-          ]
+        ]
     };
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ background: '', margin: '15px' }}>
@@ -62,24 +62,25 @@ arrows:'true',
             </Grid>
             <Grid item xs={12}>
                 <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
-                    {nfts && nfts.length > 0 ? (
+                    {nfts && nfts.length > 3 ? (
                         <>
-                        <Slider className="slider" {...settings}>
-                        {nfts.map((item) => (
-                            <NewCard data={item} />
-                        ))}
-                        </Slider>
-                         
+                            <Slider className="sliderBrand" {...settings}>
+                                {nfts.map((item) => (
+                                    <NewCard data={item} />
+                                ))}
+                            </Slider>
                         </>
-                    )
-                  :
-                (
-                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-                <h2 sx={{ textAlign: 'center', fontsize:'30px' }}>No data found...!</h2>
-                </Grid>
-
-                  
-                )}
+                    ) : nfts && nfts?.length > 0 ? (
+                        <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
+                            {nfts?.map((item) => (
+                                <NewCard data={item} />
+                            ))}
+                        </Grid>
+                    ) : (
+                        <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
+                            <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
+                        </Grid>
+                    )}
                 </Grid>
             </Grid>
         </Grid>
