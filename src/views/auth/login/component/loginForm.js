@@ -82,7 +82,7 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                navigate("/")
+            navigate("/")
             })
             .catch(function (error) {
                 toast.error(error.message);
