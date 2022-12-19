@@ -64,6 +64,7 @@
         "react-draft-wysiwyg": "^1.14.6",
         "react-draggable": "^4.4.3",
         "react-dropzone": "^14.2.3",
+        "react-error-overlay": "^6.0.9",
         "react-facebook-login": "^4.1.1",
         "react-google-recaptcha": "^2.1.0",
         "react-hook-form": "^6.15.5",

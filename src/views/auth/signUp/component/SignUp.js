@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { ethers, utils } from 'ethers';
 import {
     Box,
     Button,
@@ -27,18 +28,59 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { signup, setLoader } from '../../../../redux/auth/actions';
 import { useNavigate } from 'react-router-dom';
+import { setWallet } from 'redux/auth/actions';
+import { SNACKBAR_OPEN } from 'store/actions';
+
+
 const SignUpForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [checked, setChecked] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
+    const [walletAddress, setWalletAddress] = useState("");
+
+    const handleConnect = async () => {
+        if (!window.ethereum) {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'No crypto wallet found. Please install it.',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('No crypto wallet found. Please install it.');
+            // toast.error('No crypto wallet found. Please install it.');
+        }
+
+        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (response) {
+            const address = utils?.getAddress(response[0]);
+            // console.log("address from signup", address)
+            setWalletAddress(address);
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Success',
+                variant: 'alert',
+                alertSeverity: 'success'
+            });
+        } else {
+            console.log('No crypto wallet found. Please install it.');
+            // toast.error('No crypto wallet found. Please install it.');
+        }
+    };
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    useEffect(() => {
+        dispatch(setWallet(walletAddress));
+    }, [walletAddress]);
+
 
     return (
         <>
@@ -48,7 +90,8 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     name: '',
                     email: '',
                     password: '',
-                    confirmPassword: ''
+                    confirmPassword: '',
+                    walletAddress:""
                 }}
                 validationSchema={Yup.object().shape({
                     name: Yup.string()
@@ -60,6 +103,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     confirmPassword: Yup.string().max(255).required('Confirm Password is required!')
                 })}
                 onSubmit={async (values) => {
+                    console.log("walletAddress from onsubmit formik", walletAddress)
                     await console.log('login', values);
                     await dispatch(setLoader(true));
                     dispatch(
@@ -67,10 +111,10 @@ const SignUpForm = ({ loginProp, ...others }) => {
                             name: values.name,
                             email: values.email,
                             password: values.password,
+                            walletAddress: walletAddress,
                             navigate: navigate
                         })
                     );
-                    
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
@@ -191,6 +235,14 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 label="By checking you agree to our Terms and Conditions"
                             />
                         </Stack>
+                        <Button
+                            variant="contained"
+                            onClick={() => {
+                                handleConnect();
+                            }}
+                        >
+                            {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
+                        </Button>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
                                 <FormHelperText error>{errors.submit}</FormHelperText>
