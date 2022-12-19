@@ -65,12 +65,13 @@ const PropertiesView = ({ nft }) => {
                             })
                         );
                         setBought(true);
+                        console.log("NFT mint success")
                     })
                     .catch((error) => {
                         console.log('error', error.message);
                         toast.error(error.message);
                     })
-            ).wait();
+            );
         }
     };
 
