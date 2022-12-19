@@ -70,7 +70,7 @@ const Categories = ({ categories }) => {
                                         spacing={0}
                                         sx={{
                                             textAlign: 'center',
-                                            width: categories?.length > 3 ? '150%' : '100%'
+                                            width: '150%'
                                         }}
                                     >
                                         <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={6} sm={6}>
@@ -117,7 +117,8 @@ const Categories = ({ categories }) => {
                     </Grid>
                 </>
             ) : categories && categories?.length > 0 ? (
-                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center', width: { md: '97%' } }}>
+                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center', 
+                width: { md: '97%' } }}>
                     {categories?.map((item) => (
                         <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={4} sm={6}>
                             <Box

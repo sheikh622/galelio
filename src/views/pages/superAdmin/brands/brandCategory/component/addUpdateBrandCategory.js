@@ -139,7 +139,9 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                             value={category}
                                             onChange={handleCategoryChange}
                                         >
-                                            <MenuItem value={0}>Choose Category</MenuItem>
+                                            <MenuItem value={0}>
+                                            Choose Category
+                                            </MenuItem>
                                             {categoryArray &&
                                                 categoryArray.categories &&
                                                 categoryArray.categories.map((option, index) => (

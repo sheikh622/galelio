@@ -15,8 +15,9 @@ const NewCard = ({ data }) => {
             item
           
             mt={4}
-            md={4}
+            md={11}
             sm={6}
+            ml={4}
             onClick={() => {
                 navigate('/productDetails', {
                     state: {
@@ -24,14 +25,14 @@ const NewCard = ({ data }) => {
                     }
                 });
             }}
-            sx={{ color: theme.palette.mode === 'dark' ? 'white' : 'black', textDecoration: 'none' }}
+            sx={{ color: theme.palette.mode === 'dark' ? 'white' : 'black', textDecoration: 'none',}}
         >
             <Card
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                    maxWidth: 365,
-                    width: {md:'250%'},
+                   
+                    
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}
