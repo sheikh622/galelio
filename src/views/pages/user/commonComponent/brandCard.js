@@ -11,9 +11,10 @@ const BrandCard = ({ data }) => {
         <Grid
             item
             mt={4}
-            md={4}
+            md={11}
+            ml={4}
             sm={6}
-            justifyContent='center'
+            justifyContent="center"
             onClick={() => {
                 navigate('/productDetails', {
                     state: {
@@ -27,8 +28,7 @@ const BrandCard = ({ data }) => {
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                    maxWidth: 365,
-                    width: '250%',
+                  
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}
@@ -39,14 +39,11 @@ const BrandCard = ({ data }) => {
                         <Grid container>
                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                 <span style={{ fontWeight: '550', fontSize: '130%' }}> {data?.name}</span>
-                                <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
+                                <Grid className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
                                     34
-                                </div>
+                                </Grid>
                             </Grid>
-                           
                         </Grid>
-
-                    
                     </CardContent>
                 </CardActionArea>
             </Card>

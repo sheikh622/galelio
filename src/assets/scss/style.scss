@@ -547,25 +547,27 @@ body {
     padding: 0 15px;
 
 }
-.nftHead{
+
+.nftHead {
     font-family: 'Public Sans';
     font-style: normal;
     font-weight: 500;
-    font-size:  21px;
-   
+    font-size: 21px;
+
     text-align: left;
 
-    
+
 }
-.nftText{
+
+.nftText {
     font-family: 'Public Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-   
+
     text-align: left;
 
-  
+
 }
 
 .productdescription {
@@ -632,45 +634,54 @@ body {
     /* border: 1px solid; */
     text-overflow: ellipsis;
 }
-.text{
+
+.text {
     font-weight: 700;
-font-size: 22px;
+    font-size: 22px;
 
 }
-.creator{
+
+.creator {
     font-weight: 400;
-    font-size: 17px;  
+    font-size: 17px;
 }
-.list{
-display: flex;
+
+.list {
+    display: flex;
 }
-.item{
-margin-right: 30px;
-list-style: none;
+
+.item {
+    margin-right: 30px;
+    list-style: none;
 }
-.itemstyle{
+
+.itemstyle {
     margin-right: 30px;
 
 }
-.para{
+
+.para {
     font-weight: 300;
-font-size: 17px;
+    font-size: 17px;
 
 }
-.signInMarket{
+
+.signInMarket {
     font-weight: 700;
-font-size: 30px;
-line-height: 100%;
-/* identical to box height, or 30px */
+    font-size: 30px;
+    line-height: 100%;
+    /* identical to box height, or 30px */
 
-text-align: center;
+    text-align: center;
 
 
 }
-.signbuttonMarket{
+
+.signbuttonMarket {
     background: linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%);
-border-radius: 4px;
-color: #fff;}
+    border-radius: 4px;
+    color: #fff;
+}
 
 .brandDialog {
     .MuiDialog-paper {
@@ -697,6 +708,7 @@ color: #fff;}
 .list {
     margin: 12px;
 }
+
 .listItem {
     border: solid 1px rgba(145, 158, 171, 0.24);
     margin: 8px 0px;
@@ -704,31 +716,34 @@ color: #fff;}
     border-radius: 8px;
     background-color: #fff;
 }
+
 .quantityField {
     width: 100px;
+
     & .css-4pzdr3-MuiInputBase-input-MuiOutlinedInput-input {
         height: 0.8375em;
     }
 }
-.slider{
-    
+
+.slider {
+
     background-color: transparent;
     height: 390px;
     width: 90%;
-    margin:0 auto;
+    margin: 0 auto;
     justify-content: center;
     text-align: center;
     color: #212121;
     overflow: hidden;
 }
-.sliderBrand{
-    
+
+.sliderBrand {
+
     background-color: transparent;
     height: 340px;
     width: 90%;
-    margin:0 auto;
+    margin: 0 auto;
     justify-content: center;
     text-align: center;
     color: #212121;
 }
-

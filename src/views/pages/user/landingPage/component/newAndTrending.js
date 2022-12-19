@@ -7,7 +7,7 @@ import React from 'react';
 import Slider from 'react-slick';
 const NewAndTrendingNfts = ({ nfts }) => {
     var settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 1000,
         autoplay: true,
@@ -45,7 +45,8 @@ const NewAndTrendingNfts = ({ nfts }) => {
         ]
     };
     return (
-        <Grid container-fluid spacing={gridSpacing} sx={{ background: '', margin: '15px' }}>
+        <Grid container-fluid spacing={gridSpacing} sx={{ background: '', 
+        margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
@@ -53,7 +54,8 @@ const NewAndTrendingNfts = ({ nfts }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                             textTransform: 'capitalize' }}
                         >
                             New & Trending
                         </Typography>
@@ -62,16 +64,16 @@ const NewAndTrendingNfts = ({ nfts }) => {
             </Grid>
             <Grid item xs={12}>
                 <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
-                    {nfts && nfts.length > 3 ? (
+                    {nfts && nfts?.length > 3 ? (
                         <>
-                            <Slider className="sliderBrand" {...settings}>
+                            <Slider  className="sliderBrand" {...settings}>
                                 {nfts.map((item) => (
                                     <NewCard data={item} />
                                 ))}
                             </Slider>
                         </>
                     ) : nfts && nfts?.length > 0 ? (
-                        <Grid   ml={1} mt={1} container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                        <Grid ml={1} mt={1} container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
                             {nfts?.map((item) => (
                                 <NewCard data={item} />
                             ))}
