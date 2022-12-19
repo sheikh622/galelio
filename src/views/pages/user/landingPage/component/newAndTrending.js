@@ -68,14 +68,14 @@ const NewAndTrendingNfts = ({ nfts }) => {
                         <>
                             <Slider  className="sliderBrand" {...settings}>
                                 {nfts.map((item) => (
-                                    <NewCard data={item} />
+                                    <NewCard data={item} nfts={nfts} />
                                 ))}
                             </Slider>
                         </>
                     ) : nfts && nfts?.length > 0 ? (
-                        <Grid ml={1} mt={1} container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                        <Grid ml={1}  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
                             {nfts?.map((item) => (
-                                <NewCard data={item} />
+                                <NewCard data={item} nfts={nfts} />
                             ))}
                         </Grid>
                     ) : (
