@@ -1,6 +1,7 @@
 import {
     GET_ALL_NFT_SUPER_ADMIN,
     GET_ALL_NFT_SUPER_ADMIN_SUCCESS,
+    GET_ALL_NFT_USER_SUCCESS,
     GET_ALL_NFT,
     GET_ALL_NFT_SUCCESS,
     ADD_NFT,
@@ -9,7 +10,9 @@ import {
     REQUEST_NFT_FOR_MINTING,
     EDIT_NFT,
     DELETE_NFT,
-    REJECT_NFT
+    REJECT_NFT,
+    BUY_NFT,
+    GET_ALL_NFT_USER
 } from './constants';
 
 export const getAllNftSuperAdmin = (data) => {
@@ -19,9 +22,21 @@ export const getAllNftSuperAdmin = (data) => {
     };
 };
 
+export const getAllNftUser = (data) => {
+    return {
+        type: GET_ALL_NFT_USER,
+        payload: data
+    };
+};
 export const getAllNftSuccessSuperAdmin = (data) => {
     return {
         type: GET_ALL_NFT_SUPER_ADMIN_SUCCESS,
+        payload: data
+    };
+};
+export const getAllNftSuccessUser= (data) => {
+    return {
+        type: GET_ALL_NFT_USER_SUCCESS,
         payload: data
     };
 };
@@ -46,6 +61,14 @@ export const addNft = (data) => {
         payload: data
     };
 };
+
+export const buyNft = (data) => {
+    return {
+        type: BUY_NFT,
+        payload: data
+    };
+};
+
 
 export const deleteNft = (data) => {
     return {

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -22,10 +24,22 @@ import { gridSpacing } from 'store/constant';
 import CardMedia from '@mui/material/CardMedia';
 
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllNftUser } from 'redux/nftManagement/actions';
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const Items = () => {
+    const user = useSelector((state) => state.auth.user);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(
+            getAllNftUser({
+                walletAddress: user.walletAddress
+            })
+        );
+    }, []);
+
     const theme = useTheme();
     const [value, setValue] = React.useState('Order By');
 
@@ -44,80 +58,20 @@ const Items = () => {
         }
     ];
 
-    const itemData = [
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            heading: 'Zennie',
-            title: 'Luxury Cars',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            heading: 'Zennie',
-            title: 'Luxury Shoes',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            heading: 'Zennie',
-            title: 'Luxury Watches',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            heading: 'Zennie',
-            title: 'Real Estate',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            heading: 'Zennie',
-            title: 'Luxury Goods',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            heading: 'Zennie',
-            title: 'Luxury Watches',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-            heading: 'Zennie',
-            title: 'Luxury Cars',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-            heading: 'Zennie',
-            title: 'Luxury Shoes',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-            heading: 'Zennie',
-            title: 'Luxury Watches',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-            heading: 'Zennie',
-            title: 'Real Estate',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-            heading: 'Zennie',
-            title: 'Luxury Goods',
-            creator: 'Creator'
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-            heading: 'Zennie',
-            title: 'Luxury Watches',
-            creator: 'Creator'
-        }
-    ];
+    const { nfts } = useSelector((state) => state.nftReducer.nftListUser);
+    const itemData = [];
+    {
+        nfts?.length > 0 &&
+            nfts.map((data) => {
+                itemData.push({
+                    img: data.asset,
+                    heading: data.name,
+                    price: data.price,
+                    currencyType: data.currencyType
+                });
+            });
+    }
+
     return (
         <Grid mt={2} container-fluid spacing={gridSpacing}>
             <Grid item xs={12} lg={12} md={12}>
@@ -168,7 +122,7 @@ const Items = () => {
             </Grid>
 
             <Grid mt={4} item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     {itemData.map((item) => (
                         <Grid item md={2} sm={6}>
                             <Card
@@ -186,70 +140,21 @@ const Items = () => {
                                     <CardContent sx={{ padding: '6%' }}>
                                         <Grid container>
                                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                                                <span sx={{ fontWeight: '550', fontSize: '130%' }}>{item.heading}</span>
+                                                <span sx={{ fontWeight: '750', fontSize: '180%' }}>
+                                                    <b style={{}}>{item.heading}</b>
+                                                </span>
                                                 <Grid className="overflow" sx={{ marginTop: '5%' }}>
-                                                    {item.title}
+                                                    {item.price} {item.currencyType}
                                                 </Grid>
                                             </Grid>
                                             <Grid item xs={4} sx={{ background: '' }}>
                                                 <span sx={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
-                                                    {item.creator}
+                                                    {/* {item.creator} */}
                                                 </span>
                                             </Grid>
                                         </Grid>
 
-                                        <Divider sx={{ mt: 2, mb: 2 }} />
-                                        <Grid container sx={{ background: '' }}>
-                                            <Grid item md={6} xs={12} className="overflow" sx={{ pt: 1 }}>
-                                                <span
-                                                    sx={{
-                                                        background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
-                                                        padding: '3% 4%',
-                                                        borderRadius: '10%',
-                                                        color: 'white',
-                                                        fontSize: '80%'
-                                                    }}
-                                                >
-                                                    02h
-                                                </span>{' '}
-                                                :{' '}
-                                                <span
-                                                    sx={{
-                                                        background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
-                                                        padding: '3% 4%',
-                                                        borderRadius: '10%',
-                                                        color: 'white',
-                                                        fontSize: '80%'
-                                                    }}
-                                                >
-                                                    25m
-                                                </span>{' '}
-                                                :{' '}
-                                                <span
-                                                    sx={{
-                                                        background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
-                                                        padding: '3% 4%  ',
-                                                        borderRadius: '10%',
-                                                        color: 'white',
-                                                        fontSize: '80%'
-                                                    }}
-                                                >
-                                                    04s
-                                                </span>
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                md={6}
-                                                xs={12}
-                                                className="overflow"
-                                                sx={{ pl: 1, marginTop: { xs: '10px', md: '0' } }}
-                                            >
-                                                Current Bid
-                                                <div sx={{ marginTop: '5%', fontSize: '110%' }}>
-                                                    <b>$2913.32</b>
-                                                </div>
-                                            </Grid>
-                                        </Grid>
+                                        {/* <Divider sx={{ mt: 2, mb: 2 }} /> */}
                                     </CardContent>
                                 </CardActionArea>
                             </Card>

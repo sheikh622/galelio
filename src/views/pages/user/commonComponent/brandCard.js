@@ -3,16 +3,21 @@ import { Card, Grid, CardActionArea, CardContent, Divider } from '@mui/material'
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from 'react-router-dom';
 
-const BrandCard = ({ data }) => {
+const BrandCard = ({ data, brands }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-    console.log('data', data);
+    console.log('brands?.length=========>>', brands?.length);
+
     return (
         <Grid
             item
-            mt={4}
-            md={3}
+            mt={2}
+           
+            md={brands && brands?.length > 3 ? 12 : 3}
+            ml={brands && brands?.length > 3 ? 4 : 0}
+            mr={brands && brands?.length > 3 ? 4 : 0}
             sm={6}
+            justifyContent="center"
             onClick={() => {
                 navigate('/productDetails', {
                     state: {
@@ -26,8 +31,7 @@ const BrandCard = ({ data }) => {
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                    maxWidth: 365,
-                    width: '355%',
+                   
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}
@@ -38,14 +42,11 @@ const BrandCard = ({ data }) => {
                         <Grid container>
                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                 <span style={{ fontWeight: '550', fontSize: '130%' }}> {data?.name}</span>
-                                <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
+                                <Grid className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
                                     34
-                                </div>
+                                </Grid>
                             </Grid>
-                           
                         </Grid>
-
-                    
                     </CardContent>
                 </CardActionArea>
             </Card>

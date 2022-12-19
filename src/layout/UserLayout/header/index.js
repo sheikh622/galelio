@@ -74,9 +74,10 @@ export default function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const handleLogout = async () => {
-        navigate('/login');
+       
         try {
             await dispatch(logout());
+            navigate('/login');
             
         } catch (err) {
             console.error(err);
@@ -234,7 +235,7 @@ export default function Header() {
                    
                             <div style={{ marginLeft: '1%', display: 'inline', width: '' }}>
                                 <Typography variant="h5" component="h2" sx={{ width: '100%' }}>
-                                    {user.firstName}
+                                    {user.firstName}{" "}
                                     {user.lastName}
                                 </Typography>
                             </div>

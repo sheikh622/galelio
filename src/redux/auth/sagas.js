@@ -18,7 +18,6 @@ function* loginUser({ payload }) {
         console.log("login user redux", response.data.data.user.role)
         if(response.data.data.user.role == "User"){
             payload.navigate('/');
-
         }
         else{
             payload.navigate('/dashboard');
@@ -34,13 +33,15 @@ function* signupUserRequest({ payload }) {
         let data = {
             name: payload.name,
             email: payload.email,
-            password: payload.password
+            password: payload.password,
+            walletAddress: payload.walletAddress
         };
         const response = yield axios.post(`/auth/signup`, data);
         console.log('response', response.data.message);
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupSuccess(response.data.data));
+        payload.navigate('/login');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);

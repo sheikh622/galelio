@@ -14,43 +14,67 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import { buyNft } from 'redux/nftManagement/actions';
+
+// =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({ nft }) => {
+    const dispatch = useDispatch();
+    const [bought, setBought] = useState(false);
+
+    console.log('nft from productview', nft);
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
 
-    const buyNft = async () => {
-        if(user == null){
-navigate("/login")
+    const handleBuyNft = async () => {
+        if (user == null) {
+            navigate('/login');
+        } else {
+            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            let price = ethers.utils.parseEther(nft.price.toString());
+
+            console.log('price', price);
+            console.log('erc20Address', erc20Address);
+            console.log('tokenId', tokenId);
+            console.log('contractAddress', contractAddress);
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+
+            console.log('signer', signer);
+            console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
+
+            const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+            console.log('Erc20.abi', Erc20);
+            const token = new ethers.Contract(erc20Address, Erc20, signer);
+            console.log('token', token);
+            await (await token.approve(MarketplaceAddress.address, price)).wait();
+            await (
+                await marketplace
+                    .purchaseItem(tokenId, contractAddress, price)
+                    .then((data) => {
+                        dispatch(
+                            buyNft({
+                                nftId: nft.id,
+                                nftToken: nft.NFTTokens[0].id,
+                                buyerAddress: data.from
+                            })
+                        );
+                        setBought(true);
+                    })
+                    .catch((error) => {
+                        console.log('error', error.message);
+                        toast.error(error.message);
+                    })
+            ).wait();
         }
-        let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
-        let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-        let contractAddress = nft.Category.BrandCategories[0].contractAddress;
-        let price = ethers.utils.parseEther(nft.price.toString());
-
-        console.log('price', price);
-        console.log('erc20Address', erc20Address);
-        console.log('tokenId', tokenId);
-        console.log('contractAddress', contractAddress);
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-
-        console.log('signer', signer);
-        console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
-
-        const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-        console.log('Erc20.abi', Erc20);
-        const token = new ethers.Contract(erc20Address, Erc20, signer);
-        console.log('token', token);
-        await (await token.approve(MarketplaceAddress.address, price)).wait();
-        await (
-            await marketplace.purchaseItem(tokenId, contractAddress, price).catch((error) => {
-                console.log('error', error.message);
-                toast.error(error.message);
-            })
-        ).wait();
     };
+
+    
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
@@ -157,20 +181,29 @@ navigate("/login")
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
-                                                
+                                                {bought == true || nft.isSold == true ?
+                                                <div>
+
+                                                  <h1 style={{textAlign:"center", color:"red"}}>
+                                                 Item is sold already.
+                                                </h1>
+                                                    
+                                                </div> 
+                                                :
                                                 <Grid item md={10} xs={12} sm={12} textAlign="center">
-                                                    <Button
-                                                        sx={{ float: { md: 'right' } }}
-                                                        className="buy"
-                                                        variant="contained"
-                                                        size="large"
-                                                        onClick={() => {
-                                                            buyNft();
-                                                        }}
-                                                    >
-                                                        Buy Now
-                                                    </Button>
-                                                </Grid>
+                                                <Button
+                                                    sx={{ float: { md: 'right' } }}
+                                                    className="buy"
+                                                    variant="contained"
+                                                    size="large"
+                                                    onClick={() => {
+                                                        handleBuyNft();
+                                                    }}
+                                                >
+                                                    Buy Now
+                                                </Button>
+                                            </Grid>
+                                                }
                                             </Grid>
                                         </Grid>
                                     </Grid>

@@ -4,17 +4,20 @@ import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from 'react-router-dom';
 
 
-const NewCard = ({ data }) => {
+const NewCard = ({ data , nfts }) => {
 
     const theme = useTheme();
     const navigate = useNavigate();
-    console.log('data', data);
+    console.log('nfts=>', nfts);
     return (
         
         <Grid
             item
-            mt={4}
-            md={3}
+          
+            mt={5}
+            md={nfts && nfts?.length > 3 ? 12 : 3}
+            ml={nfts && nfts?.length > 3 ? 4 : 0}
+            mr={nfts && nfts?.length > 3 ? 4 : 0}
             sm={6}
             onClick={() => {
                 navigate('/productDetails', {
@@ -29,8 +32,8 @@ const NewCard = ({ data }) => {
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                    maxWidth: 365,
-                    width: {md:'355%'},
+                    // maxWidth: nfts && nfts?.length > 3? 0 : 365,
+                    // width: nfts && nfts?.length > 3? '0' : '250%',
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const NftCard = ({ data }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-    console.log('data', data);
+    // console.log('data', data);
     return (
   
         <Grid
