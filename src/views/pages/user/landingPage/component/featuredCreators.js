@@ -42,16 +42,16 @@ const FeaturedCreators = ({ brands }) => {
                         <Grid container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
                             <Slider className="sliderBrand" {...settings}>
                                 {brands.map((item) => (
-                                    <BrandCard data={item} />
+                                    <BrandCard data={item} brands={brands}  />
                                 ))}
                             </Slider>
                         </Grid>
                     </Grid>
                 </>
             ) : brands && brands?.length > 0 ? (
-                <Grid mt={4} container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                <Grid  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
                     {brands?.map((item) => (
-                        <BrandCard data={item} />
+                        <BrandCard data={item}  brands={brands}   />
                     ))}
                 </Grid>
             ) : (
