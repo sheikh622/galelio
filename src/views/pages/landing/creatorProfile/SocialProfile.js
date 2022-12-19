@@ -27,6 +27,8 @@ import RedditIcon from '@mui/icons-material/Reddit';
 // ==============================|| SOCIAL PROFILE ||============================== //
 
 const SocialProfile = () => {
+
+    const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
     const itemData = [
         {
@@ -105,7 +107,7 @@ const SocialProfile = () => {
                             className="text"
                             variant="h5"
                         >
-                            Sergey Vlad
+                            {user.firstName}{" "}{user.lastName}
                         </Typography>
                         <Typography
                             sx={{
@@ -115,7 +117,7 @@ const SocialProfile = () => {
                             className="creator"
                             variant="subtitle2"
                         >
-                            Creator
+                            {user.role}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={6}>
