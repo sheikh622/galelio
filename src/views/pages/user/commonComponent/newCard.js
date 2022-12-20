@@ -8,7 +8,7 @@ const NewCard = ({ data , nfts }) => {
 
     const theme = useTheme();
     const navigate = useNavigate();
-    console.log('nfts=>', nfts);
+    // console.log('nfts=>', nfts);
     return (
         
         <Grid
@@ -16,7 +16,7 @@ const NewCard = ({ data , nfts }) => {
           
             mt={5}
             md={nfts && nfts?.length > 3 ? 12 : 3}
-            ml={nfts && nfts?.length > 3 ? 4 : 0}
+            ml={nfts && nfts?.length > 3 ? 2 : 0}
             mr={nfts && nfts?.length > 3 ? 4 : 0}
             sm={6}
             onClick={() => {

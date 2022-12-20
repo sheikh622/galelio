@@ -24,7 +24,7 @@ const ProductDetails = () => {
                 search: search,
                 page: page,
                 limit: limit,
-                categoryId: location.state.nft.Category.id
+                categoryId: location?.state.nft?.Category?.id
             })
         );
     }, [search, page, limit]);
