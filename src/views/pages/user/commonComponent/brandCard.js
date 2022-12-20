@@ -6,15 +6,15 @@ import { useNavigate } from 'react-router-dom';
 const BrandCard = ({ data, brands }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-    console.log('brands?.length=========>>', brands?.length);
+    // console.log('brands?.length=========>>', brands?.length);
 
     return (
         <Grid
             item
-            mt={2}
+           
            
             md={brands && brands?.length > 3 ? 12 : 3}
-            ml={brands && brands?.length > 3 ? 4 : 0}
+            ml={brands && brands?.length > 3 ? 2 : 0}
             mr={brands && brands?.length > 3 ? 4 : 0}
             sm={6}
             justifyContent="center"
