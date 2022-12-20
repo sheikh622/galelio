@@ -22,7 +22,7 @@ const FeaturedCreators = ({ brands }) => {
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
-                <Grid container spacing={2} sx={{ mb: 2 }}>
+                <Grid container spacing={2} sx={{ mb: 4 }}>
                     <Grid item xs={12}>
                         <Typography
                             variant="h2"
@@ -39,7 +39,7 @@ const FeaturedCreators = ({ brands }) => {
             {brands && brands?.length > 3 ? (
                 <>
                     <Grid item xs={12}>
-                        <Grid container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
+                        <Grid mt={2} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
                             <Slider className="sliderBrand" {...settings}>
                                 {brands.map((item) => (
                                     <BrandCard data={item} brands={brands}  />

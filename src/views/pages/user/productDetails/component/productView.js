@@ -81,7 +81,7 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" sx={{ height: '100%' }} image={nft.asset} alt="green iguana" />
+                        <CardMedia component="img" sx={{ height: '100%' }} image={nft?.asset} alt="image" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
@@ -92,7 +92,7 @@ const PropertiesView = ({ nft }) => {
                                         <Grid mt={4} ml={2} item xs={12}>
                                             <Grid container spacing={2} alignItems="center">
                                                 <Grid item>
-                                                    <Avatar alt="User 1" src={nft.Brand.image} />
+                                                    <Avatar alt="User 1" src={nft?.Brand?.image} />
                                                 </Grid>
                                                 <Grid
                                                     item
@@ -103,7 +103,7 @@ const PropertiesView = ({ nft }) => {
                                                     to="/companyPage"
                                                 >
                                                     <Typography align="left" fontWeight={600} variant="subtitle1">
-                                                        {nft.Brand.name}
+                                                        {nft?.Brand?.name}
                                                     </Typography>
                                                     <Typography align="left" variant="subtitle2">
                                                         Creator
@@ -118,12 +118,12 @@ const PropertiesView = ({ nft }) => {
                                                 color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                 variant="h3"
                                             >
-                                                <span>{nft.name}</span>
+                                                <span>{nft?.name}</span>
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                                {nft.description}
+                                                {nft?.description}
                                             </Typography>
                                         </Grid>
                                         {/* <Grid item xs={12}>
@@ -160,7 +160,7 @@ const PropertiesView = ({ nft }) => {
                                         </Grid> */}
                                         <Grid item mt={2} mb={2} xs={12}>
                                             <Grid container>
-                                                <Grid item md={2} xs={12} sm={12}>
+                                                <Grid item md={4} xs={12} sm={12}>
                                                     <Grid item xs={12}>
                                                         <Typography
                                                             color={theme.palette.mode === 'dark' ? 'white' : '#404040'}
@@ -191,7 +191,7 @@ const PropertiesView = ({ nft }) => {
                                                     
                                                 </div> 
                                                 :
-                                                <Grid item md={10} xs={12} sm={12} textAlign="center">
+                                                <Grid item md={8} xs={12} sm={12} textAlign="center">
                                                 <Button
                                                     sx={{ float: { md: 'right' } }}
                                                     className="buy"
