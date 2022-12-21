@@ -7,6 +7,7 @@ const AuthLogin = Loadable(lazy(() => import('views/auth/login')));
 const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
 const SignUpMarketPlace = Loadable(lazy(() => import('views/auth/signUp')));
+const SocialLogin = Loadable(lazy(() => import('views/auth/socialLogin')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -34,6 +35,10 @@ const LoginRoutes = {
         {
             path: '/signUp',
             element: <SignUpMarketPlace />
+        },
+        {
+            path: '/socialLogin',
+            element: <SocialLogin />
         }
     ]
 };
