@@ -67,7 +67,7 @@ const PropertiesView = ({ nft }) => {
                         setBought(true);
                     })
                     .catch((error) => {
-                        console.log('error', error.message);
+                        // console.log('error', error.message);
                         toast.error(error.message);
                     })
             ).wait();
@@ -182,13 +182,24 @@ const PropertiesView = ({ nft }) => {
                                                     </Grid>
                                                 </Grid>
                                                 {bought == true || nft.isSold == true ?
-                                                <div>
+                                                    <Grid item md={8} xs={12} sm={12} textAlign="center">
+                                                    <Button
+                                                        sx={{ float: { md: 'right', color:"red", borderColor:'red' } }}
+                                                        className="sel"
+                                                        variant="outlined"
+                                                        size="large"
+                                                        
+                                                    >
+                                                    Item is sold already.
+                                                    </Button>
+                                                </Grid>
+                                                // <div>
 
-                                                  <h1 style={{textAlign:"center", color:"red"}}>
-                                                 Item is sold already.
-                                                </h1>
+                                                //   <h1 style={{textAlign:"center", color:"red"}}>
+                                                //  Item is sold already.
+                                                // </h1>
                                                     
-                                                </div> 
+                                                // </div> 
                                                 :
                                                 <Grid item md={8} xs={12} sm={12} textAlign="center">
                                                 <Button
