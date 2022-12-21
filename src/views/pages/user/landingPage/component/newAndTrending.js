@@ -12,7 +12,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
         speed: 1000,
         autoplay: true,
         arrows: 'true',
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 1,
         responsive: [
             {
@@ -54,7 +54,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, marginLeft: {md:'18px'}, 
                              textTransform: 'capitalize' }}
                         >
                             New & Trending
@@ -64,16 +64,16 @@ const NewAndTrendingNfts = ({ nfts }) => {
             </Grid>
             <Grid item xs={12}>
                 <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
-                    {nfts && nfts?.length > 3 ? (
+                    {nfts && nfts?.length > 5 ? (
                         <>
-                            <Slider  className="sliderBrand" {...settings}>
+                            <Slider  className="slider" {...settings}>
                                 {nfts.map((item) => (
                                     <NewCard data={item} nfts={nfts} />
                                 ))}
                             </Slider>
                         </>
                     ) : nfts && nfts?.length > 0 ? (
-                        <Grid ml={1}  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                        <Grid ml={1}  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' ,  marginLeft: {md:'18px'}, }}>
                             {nfts?.map((item) => (
                                 <NewCard data={item} nfts={nfts} />
                             ))}
