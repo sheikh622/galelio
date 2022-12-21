@@ -8,7 +8,6 @@ const NftCard = ({ data }) => {
     const navigate = useNavigate();
     // console.log('data', data);
     return (
-  
         <Grid
             item
             md={2}
@@ -38,34 +37,30 @@ const NftCard = ({ data }) => {
                         <Grid container>
                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                 <span style={{ fontWeight: '550', fontSize: '130%' }}> {data.Brand.name}</span>
-                                <div className="overflow" style={{ marginTop: '5%', color:"#656565" }}>
+                                <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
                                     {data.name}
                                 </div>
                             </Grid>
                             <Grid item xs={4} sx={{ background: '' }}>
-                                <span style={{ fontWeight: '40 !important ', fontSize: '110%', float: 'right', color:"#878787" }}>Creator</span>
+                                <span style={{ fontWeight: '40 !important ', fontSize: '110%', float: 'right', color: '#878787' }}>
+                                    Creator
+                                </span>
                             </Grid>
                         </Grid>
 
                         <Divider sx={{ mt: 2, mb: 2 }} />
                         <Grid>
                             <Grid item md={12} xs={12} className="overflow" sx={{ marginTop: { xs: '10px', md: '0' } }}>
-                               <span style={{float:"left"}}>
-                               Current Price :
-                                </span>
-                                <span style={{marginLeft:"2%"}}>
+                                <span style={{ float: 'left' }}>Current Price :</span>
+                                <span style={{ marginLeft: '2%' }}>
                                     <b>{data.currencyType + ' ' + data.price}</b>
-
                                 </span>
-                
-                                
                             </Grid>
                         </Grid>
                     </CardContent>
                 </CardActionArea>
             </Card>
         </Grid>
-     
     );
 };
 
