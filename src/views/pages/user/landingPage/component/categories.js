@@ -11,12 +11,12 @@ const Categories = ({ categories }) => {
     console.log('categories', categories);
     var settings = {
         Arrows: true,
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 1000,
         autoplay: true,
         arrows: true,
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 1
     };
     // const responsive = {
@@ -44,36 +44,46 @@ const Categories = ({ categories }) => {
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
-                <Grid container spacing={2} sx={{ mb: -3 }}>
+                <Grid container spacing={2} sx={{ mb: -1 }}>
                     <Grid item xs={12}>
                         <Typography
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                            sx={{
+                                textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                                marginLeft: { md: '18px' },
+                                textTransform: 'capitalize'
+                            }}
                         >
                             Categories
                         </Typography>
                     </Grid>
                 </Grid>
             </Grid>
-            {categories && categories?.length > 3 ? (
+            {categories && categories?.length > 5 ? (
                 <>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sx={{ mb: -5,  marginLeft: { md: '-28px' }  }}>
                         <Slider className="sliderBrand" {...settings}>
                             {categories?.map((item) => (
                                 <>
                                     <Grid
-                                        mt={7}
+                                        mt={3}
                                         container
                                         justifyContent="center"
                                         spacing={0}
                                         sx={{
-                                            textAlign: 'center',
-                                            width: '150%'
+                                            textAlign: 'center', 
                                         }}
                                     >
-                                        <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={6} sm={6}>
+                                        <Grid
+                                            sx={{ my: { xs: '10px', md: '0', sm: '10px' } }}
+                                            item
+                                            sm={6}
+                                            md={categories && categories?.length > 5 ? 12 : 2}
+                                            ml={categories && categories?.length > 5 ? 2 : 0}
+                                            mr={categories && categories?.length > 5 ? 2 : 0}
+                                        >
                                             <Box
                                                 onClick={() => {
                                                     navigate('/marketplace', {
@@ -84,8 +94,7 @@ const Categories = ({ categories }) => {
                                                 }}
                                                 sx={{
                                                     position: 'relative',
-                                                    background: theme.palette.mode === 'dark' ? 
-                                                    theme.palette.dark.main : '#f3f3f3',
+                                                    background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
                                                     boxShadow: '1px 2px 9px #d3d3d3',
                                                     padding: '0',
                                                     margin: '0',
@@ -118,10 +127,15 @@ const Categories = ({ categories }) => {
                     </Grid>
                 </>
             ) : categories && categories?.length > 0 ? (
-                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center', 
-                width: { md: '97%' } }}>
+                <Grid
+                    mt={1}
+                    container
+                    justifyContent="left"
+                    spacing={4}
+                    sx={{ textAlign: 'center', marginLeft: { md: '-12px' }, width: { md: '100%' } }}
+                >
                     {categories?.map((item) => (
-                        <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={4} sm={6}>
+                        <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
                             <Box
                                 onClick={() => {
                                     navigate('/marketplace', {
