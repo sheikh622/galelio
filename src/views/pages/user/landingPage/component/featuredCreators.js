@@ -11,12 +11,12 @@ import BrandCard from '../../commonComponent/brandCard';
 const FeaturedCreators = ({ brands }) => {
     const theme = useTheme();
     var settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 1000,
-        autoplay: true,
+        autoplay: false,
         arrows: true,
-        slidesToShow: 3,
+        slidesToShow: 5,
         slidesToScroll: 1
     };
     return (
@@ -28,7 +28,8 @@ const FeaturedCreators = ({ brands }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, marginLeft: {md:'18px'}, 
+                             textTransform: 'capitalize' }}
                         >
                             Featured Creators
                         </Typography>
@@ -36,28 +37,28 @@ const FeaturedCreators = ({ brands }) => {
                 </Grid>
             </Grid>
 
-            {brands && brands?.length > 3 ? (
+            {brands && brands?.length > 5 ? (
                 <>
                     <Grid item xs={12}>
                         <Grid mt={2} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
                             <Slider className="sliderBrand" {...settings}>
                                 {brands.map((item) => (
-                                    <BrandCard data={item} brands={brands}  />
+                                    <BrandCard data={item} brands={brands} />
                                 ))}
                             </Slider>
                         </Grid>
                     </Grid>
                 </>
             ) : brands && brands?.length > 0 ? (
-                <Grid  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
                     {brands?.map((item) => (
-                        <BrandCard data={item}  brands={brands}   />
+                        <BrandCard data={item} brands={brands} />
                     ))}
                 </Grid>
             ) : (
-                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-                    <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
-                </Grid>
+                <Grid mt={4} container justifyContent="left" spacing={4} >
+                <h3 className='noData'>No data found...!</h3>
+            </Grid>
             )}
         </Grid>
     );

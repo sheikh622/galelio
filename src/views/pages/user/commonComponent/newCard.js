@@ -15,9 +15,9 @@ const NewCard = ({ data , nfts }) => {
             item
           
             mt={5}
-            md={nfts && nfts?.length > 3 ? 12 : 3}
-            ml={nfts && nfts?.length > 3 ? 2 : 0}
-            mr={nfts && nfts?.length > 3 ? 4 : 0}
+            md={nfts && nfts?.length > 5 ? 12 : 2}
+            ml={nfts && nfts?.length > 5 ? 2 : 0}
+            mr={nfts && nfts?.length > 5 ? 4 : 0}
             sm={6}
             onClick={() => {
                 navigate('/productDetails', {

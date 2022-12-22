@@ -598,6 +598,13 @@ body {
 
     margin-right: 15px;
 }
+.sel {
+    background: transparent;
+    border-radius: 4px;
+    width: 90%;
+
+    margin-right: 15px;
+}
 
 .price {
     font-family: 'Public Sans';
@@ -728,22 +735,35 @@ body {
 .slider {
 
     background-color: transparent;
-    height: 390px;
-    width: 90%;
+    height: 330px;
+    width: 95%;
     margin: 0 auto;
     justify-content: center;
     text-align: center;
     color: #212121;
-    overflow: hidden;
 }
 
 .sliderBrand {
 
     background-color: transparent;
-    height: 340px;
-    width: 92%;
+    height: 250px;
+    width: 95%;
     margin: 0 auto;
     justify-content: center;
     text-align: center;
     color: #212121;
 }
+.noData{
+   
+    font-size: 18px;
+    font-weight: 400px;
+    margin-left: 50px;
+}
+  
+.noDataNew{
+   
+    font-size: 18px;
+    font-weight: 400px;
+    margin-left: 82px;
+}
+  
