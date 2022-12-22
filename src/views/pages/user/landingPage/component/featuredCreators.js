@@ -28,8 +28,11 @@ const FeaturedCreators = ({ brands }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, marginLeft: {md:'18px'}, 
-                             textTransform: 'capitalize' }}
+                            sx={{
+                                textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                                marginLeft: { md: '18px' },
+                                textTransform: 'capitalize'
+                            }}
                         >
                             Featured Creators
                         </Typography>
@@ -56,9 +59,9 @@ const FeaturedCreators = ({ brands }) => {
                     ))}
                 </Grid>
             ) : (
-                <Grid mt={4} container justifyContent="left" spacing={4} >
-                <h3 className='noData'>No data found...!</h3>
-            </Grid>
+                <Grid mt={4} container justifyContent="left" spacing={4}>
+                    <h3 className="noData">No data found...!</h3>
+                </Grid>
             )}
         </Grid>
     );
