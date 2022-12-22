@@ -14,7 +14,7 @@ const FeaturedCreators = ({ brands }) => {
         dots: false,
         infinite: true,
         speed: 1000,
-        autoplay: true,
+        autoplay: false,
         arrows: true,
         slidesToShow: 5,
         slidesToScroll: 1

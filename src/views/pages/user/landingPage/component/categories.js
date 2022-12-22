@@ -10,11 +10,11 @@ import Slider from 'react-slick';
 const Categories = ({ categories }) => {
     console.log('categories', categories);
     var settings = {
-        Arrows: true,
+        Arrows: false,
         dots: false,
         infinite: true,
         speed: 1000,
-        autoplay: true,
+        autoplay: false,
         arrows: true,
         slidesToShow: 5,
         slidesToScroll: 1
@@ -82,7 +82,7 @@ const Categories = ({ categories }) => {
                                             sm={6}
                                             md={categories && categories?.length > 5 ? 12 : 2}
                                             ml={categories && categories?.length > 5 ? 2 : 0}
-                                            mr={categories && categories?.length > 5 ? 2 : 0}
+                                            mr={categories && categories?.length > 5 ? 4 : 0}
                                         >
                                             <Box
                                                 onClick={() => {
@@ -97,11 +97,11 @@ const Categories = ({ categories }) => {
                                                     background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
                                                     boxShadow: '1px 2px 9px #d3d3d3',
                                                     padding: '0',
-                                                    margin: '0',
-                                                    background: 'red'
+                                                    margin: '0', width:'111%'
+                                                   
                                                 }}
                                             >
-                                                <CardMedia component="img" width="160%" height="210rem" image={item.image} />
+                                                <CardMedia component="img" width="170%" height="210rem" image={item.image} />
 
                                                 <Box
                                                     sx={{
