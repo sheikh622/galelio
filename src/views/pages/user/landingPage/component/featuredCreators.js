@@ -56,9 +56,9 @@ const FeaturedCreators = ({ brands }) => {
                     ))}
                 </Grid>
             ) : (
-                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-                    <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
-                </Grid>
+                <Grid mt={4} container justifyContent="left" spacing={4} >
+                <h3 className='noData'>No data found...!</h3>
+            </Grid>
             )}
         </Grid>
     );
