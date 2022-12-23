@@ -8,6 +8,7 @@ import DeleteNFTDialog from './deleteNftDialog';
 import DetailsDialog from './details';
 import { useEffect } from 'react';
 const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
+    
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const [openRequestMint, setOpenRequestMint] = useState(false);
@@ -72,10 +73,12 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 setLoader={setLoader}
                 open={openRequestMint}
                 setOpen={setOpenRequestMint}
+                
             />
             <DetailsDialog
             open={DetailsNftOpen}
             setOpen={setDetailsNftOpen}
+            nftData={nftData}
             />
             <MainCard
                 content={false}

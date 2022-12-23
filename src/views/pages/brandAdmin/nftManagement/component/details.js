@@ -6,48 +6,43 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typogr
 import { Card, Container, CardMedia, TextField, MenuItem, Chip, Divider } from '@mui/material';
 import React from 'react';
 // project imports
-import Avatar from 'ui-component/extended/Avatar';
 
-import SubCard from 'ui-component/cards/SubCard';
-import watch1 from 'assets/images/watch3.png';
-
-import Avatar3 from 'assets/images/users/avatar-3.png';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { gridSpacing } from 'store/constant';
 // ===============================|| UI DIALOG - SCROLLABLE ||=============================== //
 
-export default function DetailsDialog({ open, setOpen }) {
+export default function DetailsDialog({ open, setOpen, nftData }) {
     const theme = useTheme();
-
+    console.log(nftData.name, 'nftData');
     const status = [
         {
             name: 'Name:',
-            value: 'name'
+            value: nftData?.name
         },
         {
             name: 'Status:',
-            value: 'status'
+            value: nftData?.status
         },
         {
             name: 'Description:',
-            value: 'description'
+            value: nftData?.description
         },
         {
             name: 'Price:',
-            value: 'price'
+            value: nftData?.price
         },
         {
             name: 'Mint Type:',
-            value: 'mint'
+            value: nftData?.mintType
         },
         {
             name: 'Brand:',
-            value: 'brand'
+            value: nftData?.Brand.name
         },
         {
             name: 'Token URL:',
-            value: 'token URL'
+            value: 'Null'
         }
     ];
     const [scroll, setScroll] = useState('paper');
@@ -86,8 +81,8 @@ export default function DetailsDialog({ open, setOpen }) {
                         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
                             <Grid item xs={12}>
                                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                                    <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                                        <CardMedia component="img" sx={{ height: 'auto' }} image={watch1} alt="green iguana" />
+                                    <Grid item lg={6} className="NFTdetails">
+                                        <img src={nftData?.asset} alt="Statement Image" className="imageSize" />
                                     </Grid>
 
                                     <Grid item md={6} sm={12}>
@@ -130,11 +125,9 @@ export default function DetailsDialog({ open, setOpen }) {
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5, pt: 2.5 }}>
                     <Button sx={{ color: theme.palette.error.dark }} onClick={handleClose} color="secondary">
-                        Cancel
+                        Close
                     </Button>
-                    <Button variant="contained" size="small" onClick={handleClose}>
-                        Mint
-                    </Button>
+                   
                 </DialogActions>
             </Dialog>
         </div>
