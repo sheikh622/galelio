@@ -75,15 +75,19 @@ const PropertiesView = ({ nft }) => {
         }
     };
 
-    
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" sx={{ height: '100%' }} image={nft?.asset} alt="image" />
+                    <Grid item md={3} sm={12} component={RouterLink} to="/companyPage">
+                        <CardMedia
+                            component="img"
+                            sx={{ height: '330px', width: '330px', objectFit: 'contain' }}
+                            image={nft?.asset}
+                            alt="image"
+                        />
                     </Grid>
-
+                    <Grid item md={1} sm={12}></Grid>
                     <Grid item md={6} sm={12}>
                         <Grid item xs={12}>
                             <Grid container>
@@ -182,40 +186,39 @@ const PropertiesView = ({ nft }) => {
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
-                                                {bought == true || nft.isSold == true ?
+                                                {bought == true || nft.isSold == true ? (
                                                     <Grid item md={8} xs={12} sm={12} textAlign="center">
-                                                    <Button
-                                                        sx={{ float: { md: 'right', color:"red", borderColor:'red' } }}
-                                                        className="sel"
-                                                        variant="outlined"
-                                                        size="large"
-                                                        
-                                                    >
-                                                    Item is sold already.
-                                                    </Button>
-                                                </Grid>
-                                                // <div>
+                                                        <Button
+                                                            sx={{ float: { md: 'right', color: 'red', borderColor: 'red' } }}
+                                                            className="sel"
+                                                            variant="outlined"
+                                                            size="large"
+                                                        >
+                                                            Item is sold already.
+                                                        </Button>
+                                                    </Grid>
+                                                ) : (
+                                                    // <div>
 
-                                                //   <h1 style={{textAlign:"center", color:"red"}}>
-                                                //  Item is sold already.
-                                                // </h1>
-                                                    
-                                                // </div> 
-                                                :
-                                                <Grid item md={8} xs={12} sm={12} textAlign="center">
-                                                <Button
-                                                    sx={{ float: { md: 'right' } }}
-                                                    className="buy"
-                                                    variant="contained"
-                                                    size="large"
-                                                    onClick={() => {
-                                                        handleBuyNft();
-                                                    }}
-                                                >
-                                                    Buy Now
-                                                </Button>
-                                            </Grid>
-                                                }
+                                                    //   <h1 style={{textAlign:"center", color:"red"}}>
+                                                    //  Item is sold already.
+                                                    // </h1>
+
+                                                    // </div>
+                                                    <Grid item md={8} xs={12} sm={12} textAlign="center">
+                                                        <Button
+                                                            sx={{ float: { md: 'right' } }}
+                                                            className="buy"
+                                                            variant="contained"
+                                                            size="large"
+                                                            onClick={() => {
+                                                                handleBuyNft();
+                                                            }}
+                                                        >
+                                                            Buy Now
+                                                        </Button>
+                                                    </Grid>
+                                                )}
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -223,6 +226,7 @@ const PropertiesView = ({ nft }) => {
                             </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item md={2} sm={12}></Grid>
                 </Grid>
             </Grid>
         </Grid>

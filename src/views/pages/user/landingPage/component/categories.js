@@ -2,6 +2,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
+import { Card, CardActionArea, CardContent, Divider } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
@@ -10,11 +11,11 @@ import Slider from 'react-slick';
 const Categories = ({ categories }) => {
     console.log('categories', categories);
     var settings = {
-        Arrows: true,
+        Arrows: false,
         dots: false,
         infinite: true,
         speed: 1000,
-        autoplay: true,
+        autoplay: false,
         arrows: true,
         slidesToShow: 5,
         slidesToScroll: 1
@@ -44,7 +45,7 @@ const Categories = ({ categories }) => {
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
-                <Grid container spacing={2} sx={{ mb: -1 }}>
+                <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography
                             variant="h2"
@@ -61,29 +62,105 @@ const Categories = ({ categories }) => {
                     </Grid>
                 </Grid>
             </Grid>
-            {categories && categories?.length > 5 ? (
-                <>
-                    <Grid item xs={12} sx={{ mb: -5,  marginLeft: { md: '-28px' }  }}>
-                        <Slider className="sliderBrand" {...settings}>
-                            {categories?.map((item) => (
-                                <>
-                                    <Grid
-                                        mt={3}
-                                        container
-                                        justifyContent="center"
-                                        spacing={0}
-                                        sx={{
-                                            textAlign: 'center', 
-                                        }}
-                                    >
+            <Grid item xs={12} mt={7}>
+                <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                    {categories && categories?.length > 5 ? (
+                        <>
+                            <Slider className="catigaryslider" {...settings}>
+                                {categories?.map((item) => (
+                                    <>
                                         <Grid
                                             sx={{ my: { xs: '10px', md: '0', sm: '10px' } }}
                                             item
                                             sm={6}
                                             md={categories && categories?.length > 5 ? 12 : 2}
                                             ml={categories && categories?.length > 5 ? 2 : 0}
-                                            mr={categories && categories?.length > 5 ? 2 : 0}
+                                            mr={categories && categories?.length > 5 ? 4 : 0}
                                         >
+                                            <Card
+                                                sx={{
+                                                    color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                                                    background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                                                    // maxWidth: nfts && nfts?.length > 3? 0 : 365,
+                                                    // width: nfts && nfts?.length > 3? '0' : '250%',
+                                                    boxShadow: '1px 2px 6px #d3d3d3',
+                                                    borderRadius: '7px'
+                                                }}
+                                                onClick={() => {
+                                                    navigate('/marketplace', {
+                                                        state: {
+                                                            category: item
+                                                        }
+                                                    });
+                                                }}
+                                            >
+                                                <CardActionArea>
+                                                    <Box
+                                                        onClick={() => {
+                                                            navigate('/marketplace', {
+                                                                state: {
+                                                                    category: item
+                                                                }
+                                                            });
+                                                        }}
+                                                        sx={{
+                                                            position: 'relative',
+                                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
+                                                            boxShadow: '1px 2px 9px #d3d3d3'
+                                                        }}
+                                                    >
+                                                        <CardMedia component="img" height="200" image={item.image} />
+                                                        <Box
+                                                            sx={{
+                                                                height: '100%',
+                                                                position: 'absolute',
+                                                                top: 0,
+                                                                left: 0,
+                                                                width: '100%',
+                                                                bgcolor: 'rgba(0, 0, 0, 0.54)',
+                                                                color: 'white'
+                                                            }}
+                                                        >
+                                                            <Typography variant="h4" color="#fff" sx={{ mt: 11 }}>
+                                                                {item.name}
+                                                            </Typography>
+                                                        </Box>
+                                                    </Box>
+                                                </CardActionArea>
+                                            </Card>
+                                        </Grid>
+                                    </>
+                                ))}
+                            </Slider>
+                        </>
+                    ) : categories && categories?.length > 0 ? (
+                        <Grid
+                            mt={-3}
+                            container
+                            justifyContent="left"
+                            spacing={4}
+                            sx={{ textAlign: 'center', marginLeft: { md: '18px' }, width: { md: '100%' } }}
+                        >
+                            {categories?.map((item) => (
+                                <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
+                                    <Card
+                                        sx={{
+                                            color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                                            background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                                            // maxWidth: nfts && nfts?.length > 3? 0 : 365,
+                                            // width: nfts && nfts?.length > 3? '0' : '250%',
+                                            boxShadow: '1px 2px 6px #d3d3d3',
+                                            borderRadius: '7px'
+                                        }}
+                                        onClick={() => {
+                                            navigate('/marketplace', {
+                                                state: {
+                                                    category: item
+                                                }
+                                            });
+                                        }}
+                                    >
+                                        <CardActionArea>
                                             <Box
                                                 onClick={() => {
                                                     navigate('/marketplace', {
@@ -95,14 +172,10 @@ const Categories = ({ categories }) => {
                                                 sx={{
                                                     position: 'relative',
                                                     background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
-                                                    boxShadow: '1px 2px 9px #d3d3d3',
-                                                    padding: '0',
-                                                    margin: '0',
-                                                    background: 'red'
+                                                    boxShadow: '1px 2px 9px #d3d3d3'
                                                 }}
                                             >
-                                                <CardMedia component="img" width="160%" height="210rem" image={item.image} />
-
+                                                <CardMedia component="img" height="200" image={item.image} />
                                                 <Box
                                                     sx={{
                                                         height: '100%',
@@ -119,65 +192,18 @@ const Categories = ({ categories }) => {
                                                     </Typography>
                                                 </Box>
                                             </Box>
-                                        </Grid>
-                                    </Grid>
-                                </>
+                                        </CardActionArea>
+                                    </Card>
+                                </Grid>
                             ))}
-                        </Slider>
-                    </Grid>
-                </>
-            ) : categories && categories?.length > 0 ? (
-                <Grid
-                    mt={1}
-                    container
-                    justifyContent="left"
-                    spacing={4}
-                    sx={{ textAlign: 'center', marginLeft: { md: '-12px' }, width: { md: '100%' } }}
-                >
-                    {categories?.map((item) => (
-                        <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
-                            <Box
-                                onClick={() => {
-                                    navigate('/marketplace', {
-                                        state: {
-                                            category: item
-                                        }
-                                    });
-                                }}
-                                sx={{
-                                    position: 'relative',
-                                    background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
-                                    boxShadow: '1px 2px 9px #d3d3d3',
-                                    padding: '0',
-                                    margin: '0'
-                                }}
-                            >
-                                <CardMedia component="img" width="100%" height="210rem" image={item.image} />
-
-                                <Box
-                                    sx={{
-                                        height: '100%',
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                        width: '100%',
-                                        bgcolor: 'rgba(0, 0, 0, 0.54)',
-                                        color: 'white'
-                                    }}
-                                >
-                                    <Typography variant="h4" color="#fff" sx={{ mt: 11 }}>
-                                        {item.name}
-                                    </Typography>
-                                </Box>
-                            </Box>
                         </Grid>
-                    ))}
+                    ) : (
+                        <Grid mt={0} container justifyContent="left" spacing={2}>
+                            <h3 className="noDatacat">No data found...!</h3>
+                        </Grid>
+                    )}
                 </Grid>
-            ) : (
-                <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-                    <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
-                </Grid>
-            )}
+            </Grid>
         </Grid>
     );
 };

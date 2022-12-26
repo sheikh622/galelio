@@ -10,8 +10,8 @@ const NewAndTrendingNfts = ({ nfts }) => {
         dots: false,
         infinite: true,
         speed: 1000,
-        autoplay: true,
-        arrows: 'true',
+        autoplay: false,
+        arrows: true,
         slidesToShow: 5,
         slidesToScroll: 1,
         responsive: [
@@ -73,15 +73,16 @@ const NewAndTrendingNfts = ({ nfts }) => {
                             </Slider>
                         </>
                     ) : nfts && nfts?.length > 0 ? (
-                        <Grid ml={1}  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' ,  marginLeft: {md:'18px'}, }}>
+                        <Grid ml={1}  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' ,  
+                        marginLeft: {md:'18px'}, }}>
                             {nfts?.map((item) => (
                                 <NewCard data={item} nfts={nfts} />
                             ))}
                         </Grid>
                     ) : (
-                        <Grid mt={4} container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
-                            <h2 sx={{ textAlign: 'center', fontsize: '30px' }}>No data found...!</h2>
-                        </Grid>
+                        <Grid mt={4} container justifyContent="left" spacing={4} >
+                        <h3 className='noDataNew'>No data found...!</h3>
+                    </Grid>
                     )}
                 </Grid>
             </Grid>
