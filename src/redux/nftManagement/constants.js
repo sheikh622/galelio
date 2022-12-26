@@ -13,3 +13,5 @@ export const DELETE_NFT = 'delete_nft';
 
 export const REJECT_NFT = 'reject_nft';
 export const BUY_NFT = 'buy_nft';
+export const RESELL_NFT = 'resell_nft';
+export const REDEEM_NFT = 'redeem_nft';

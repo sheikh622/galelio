@@ -3,11 +3,10 @@ import { useTheme } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
-import SimilarProducts from './component/similarProducts';
-import Activity from './component/activity';
 import Properties from './component/properties';
 import PropertiesView from './component/productView';
 import { getAllMarketplaceNftsByCategory } from 'redux/marketplace/actions';
+
 
 const ProductDetails = () => {
     const theme = useTheme();
@@ -18,16 +17,16 @@ const ProductDetails = () => {
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    useEffect(() => {
-        dispatch(
-            getAllMarketplaceNftsByCategory({
-                search: search,
-                page: page,
-                limit: limit,
-                categoryId: location?.state.nft?.Category?.id
-            })
-        );
-    }, [search, page, limit]);
+    // useEffect(() => {
+    //     dispatch(
+    //         getAllMarketplaceNftsByCategory({
+    //             search: search,
+    //             page: page,
+    //             limit: limit,
+    //             categoryId: location?.state.nft?.Category?.id
+    //         })
+    //     );
+    // }, [search, page, limit]);
     console.log("location.state",location.state)
     return (
         <>
@@ -47,14 +46,7 @@ const ProductDetails = () => {
                         </Grid>
                         <Grid item md={12} xs={12}>
                             <Properties nft={location.state.nft} />
-                        </Grid>
-                        {/* <Grid item md={12} xs={12}>
-                            <Activity />
-                        </Grid> */}
-
-                        <Grid item md={12} xs={12}>
-                            <SimilarProducts marketplaceNfts={marketplaceNfts}/>
-                        </Grid>
+                        </Grid>        
                     </Grid>
                 </Grid>
             </Grid>

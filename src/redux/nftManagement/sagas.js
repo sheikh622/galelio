@@ -13,7 +13,9 @@ import {
     EDIT_NFT,
     DELETE_NFT,
     REJECT_NFT,
-    BUY_NFT
+    BUY_NFT,
+    RESELL_NFT,
+    REDEEM_NFT
 } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
@@ -150,11 +152,13 @@ function* buyNftRequest({ payload }) {
         let data = {
             nftId: payload.nftId,
             nftToken: payload.nftToken,
-            buyerAddress: payload.buyerAddress
+            buyerAddress: payload.buyerAddress,
+            contractAddress:payload.contractAddress,
+            status: "Buy"
         };
 
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`/users/buynft`, data, headers);
+        const response = yield axios.post(`/users/nftOperation`, data, headers);
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -162,11 +166,58 @@ function* buyNftRequest({ payload }) {
     }
 }
 
+
+function* resellNftRequest({ payload }) {
+    try {
+        let data = {
+            nftId: payload.nftId,
+            nftToken: payload.nftToken,
+            buyerAddress: payload.buyerAddress,
+            contractAddress:payload.contractAddress,
+            status: "Resell"
+        };
+
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.post(`/users/nftOperation`, data, headers);
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+        payload.setLoader(false);
+    }
+}
+
+function* redeemNftRequest({ payload }) {
+    try {
+        let data = {
+            nftId: payload.nftId,
+            nftToken: payload.nftToken,
+            buyerAddress: payload.buyerAddress,
+            contractAddress:payload.contractAddress,
+            status: "Redeem"
+        };
+
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.post(`/users/nftOperation`, data, headers);
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+        payload.setLoader(false);
+    }
+}
+
+
+
 export function* watchAddNft() {
     yield takeLatest(ADD_NFT, addNftRequest);
 }
 export function* watchBuyNft() {
     yield takeLatest(BUY_NFT, buyNftRequest);
+}
+export function* watchResellNft() {
+    yield takeLatest(RESELL_NFT, resellNftRequest);
+}
+export function* watchRedeemNft() {
+    yield takeLatest(REDEEM_NFT, redeemNftRequest);
 }
 
 function* getAllNftRequest({ payload }) {
@@ -302,7 +353,9 @@ export default function* nftSaga() {
         fork(watchGetAllNftSuperAdmin),
         fork(watchGetAllNftUser),
         fork(watchAddNft),
-        fork(watchBuyNft),
+        fork(watchBuyNft), 
+        fork(watchResellNft), 
+        fork(watchRedeemNft), 
         fork(watchMintNft),
         fork(watchLazyMintNft),
         fork(watchRequestNftForMinting),

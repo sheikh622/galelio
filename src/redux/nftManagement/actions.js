@@ -12,7 +12,9 @@ import {
     DELETE_NFT,
     REJECT_NFT,
     BUY_NFT,
-    GET_ALL_NFT_USER
+    GET_ALL_NFT_USER,
+    RESELL_NFT,
+    REDEEM_NFT
 } from './constants';
 
 export const getAllNftSuperAdmin = (data) => {
@@ -65,6 +67,18 @@ export const addNft = (data) => {
 export const buyNft = (data) => {
     return {
         type: BUY_NFT,
+        payload: data
+    };
+};
+export const resellNft = (data) => {
+    return {
+        type: RESELL_NFT,
+        payload: data
+    };
+};
+export const redeemNft = (data) => {
+    return {
+        type: REDEEM_NFT,
         payload: data
     };
 };
