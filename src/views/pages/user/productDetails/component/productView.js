@@ -1,7 +1,7 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { CardMedia, Grid, Typography, Button } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
 
 import { gridSpacing } from 'store/constant';
@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { buyNft, resellNft, redeemNft } from 'redux/nftManagement/actions';
+import { buyNft, resellNft, redeemNft, getNftBuyer } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -28,8 +28,33 @@ import DialogTitle from '@mui/material/DialogTitle';
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({ nft }) => {
+    const dispatch = useDispatch();
+    const [bought, setBought] = useState(false);
+    const [resell, setResell] = useState(false);
+    const [redeem, setRedeem] = useState(false);
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.user);
+
+    const theme = useTheme();
+
+    if(user){
+        useEffect(() => {
+            dispatch(
+                getNftBuyer({
+                    walletAddress: user?.walletAddress,
+                    NFTTokenId: nft.NFTTokens[0].tokenId,
+                    NftId: nft.id
+
+                    
+                })
+            );
+        }, [bought, resell, redeem]);
+
+    }
+
+    const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
+
     const [open, setOpen] = React.useState(false);
-    // const [resellPrice, setResellPrice] = React.useState(0)
     let rprice = 0;
     const ResellDialog = () => {
         const handleClickOpen = () => {
@@ -84,16 +109,6 @@ const PropertiesView = ({ nft }) => {
             </div>
         );
     };
-
-    const dispatch = useDispatch();
-    const [bought, setBought] = useState(false);
-    const [resell, setResell] = useState(false);
-    const [redeem, setRedeem] = useState(false);
-
-    console.log('nft from productview', nft);
-    const navigate = useNavigate();
-    const user = useSelector((state) => state.auth.user);
-    const theme = useTheme();
 
     const handleBuyNft = async () => {
         if (user == null) {
@@ -344,72 +359,79 @@ const PropertiesView = ({ nft }) => {
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
-                                                {/* {user.walletAddress !== nft.signerAddress ? (*/}
-                                                
-                                                    <>
-                                                        {bought == true || nft.isSold == true ? (
-                                                            <Grid item md={8} xs={12} sm={12} textAlign="center">
-                                                                <Button
-                                                                    sx={{ float: { md: 'right', color: 'red', borderColor: 'red' } }}
-                                                                    className="sel"
-                                                                    variant="outlined"
-                                                                    size="large"
-                                                                >
-                                                                    Item is sold already.
-                                                                </Button>
-                                                            </Grid>
-                                                        ) : (
-                                                            <Grid item md={8} xs={12} sm={12} textAlign="center">
-                                                                <Button
-                                                                    sx={{ float: { md: 'right' } }}
-                                                                    className="buy"
-                                                                    variant="contained"
-                                                                    size="large"
-                                                                    onClick={() => {
-                                                                        handleBuyNft();
-                                                                    }}
-                                                                >
-                                                                    Buy Now
-                                                                </Button>
-                                                            </Grid>
-                                                        )}
-                                                    </>
-                                                {/* ) : ( */}
-                                                    <>
-                                                        <Grid sx={{ mt: 4 }} item md={12} xs={12} sm={12} textAlign="right">
-                                                            {redeem ? (
+                        
+
+                                                <>
+                                                    {(bought == true || nft.isSold == true) && buyerNft?.founded == false ? (
+                                                        <Grid item md={8} xs={12} sm={12} textAlign="center">
+                                                            <Button
+                                                                sx={{ float: { md: 'right', color: 'red', borderColor: 'red' } }}
+                                                                className="sel"
+                                                                variant="outlined"
+                                                                size="large"
+                                                            >
+                                                                Item is sold already.
+                                                            </Button>
+                                                        </Grid>
+                                                    ) : (
+                                                        <>
+                                                            {buyerNft?.founded ? (
                                                                 <>
-                                                                    <h2>Item redeemed</h2>
+                                                                    <>
+                                                                        <Grid sx={{ mt: 4 }} item md={12} xs={12} sm={12} textAlign="right">
+                                                                            {buyerNft?.status == "Redeem"? (
+                                                                                <>
+                                                                                    <h2>Item redeemed</h2>
+                                                                                </>
+                                                                            ) : (
+                                                                                <>
+                                                                                    <Button
+                                                                                        sx={{ float: { md: 'right' } }}
+                                                                                        className="buy"
+                                                                                        variant="contained"
+                                                                                        size="large"
+                                                                                        onClick={() => {
+                                                                                            handleRedeemNft();
+                                                                                        }}
+                                                                                    >
+                                                                                        Redeem
+                                                                                    </Button>
+                                                                                </>
+                                                                            )}
+                                                                        </Grid>
+                                                                        <Grid sx={{ mt: 3 }} item md={12} xs={12} sm={12} textAlign="right">
+                                                                            {buyerNft?.status == "Resell" ? (
+                                                                                <>
+                                                                                    <h2>Item resold</h2>
+                                                                                </>
+                                                                            ) : (
+                                                                                <>
+                                                                                    <ResellDialog />
+                                                                                </>
+                                                                            )}
+                                                                        </Grid>
+                                                                    </>
                                                                 </>
                                                             ) : (
                                                                 <>
-                                                                    <Button
-                                                                        sx={{ float: { md: 'right' } }}
-                                                                        className="buy"
-                                                                        variant="contained"
-                                                                        size="large"
-                                                                        onClick={() => {
-                                                                            handleRedeemNft();
-                                                                        }}
-                                                                    >
-                                                                        Redeem
-                                                                    </Button>
+                                                                    <Grid item md={8} xs={12} sm={12} textAlign="center">
+                                                                        <Button
+                                                                            sx={{ float: { md: 'right' } }}
+                                                                            className="buy"
+                                                                            variant="contained"
+                                                                            size="large"
+                                                                            onClick={() => {
+                                                                                handleBuyNft();
+                                                                            }}
+                                                                        >
+                                                                            Buy Now
+                                                                        </Button>
+                                                                    </Grid>
                                                                 </>
                                                             )}
-                                                        </Grid>
-                                                        <Grid sx={{ mt: 3 }} item md={12} xs={12} sm={12} textAlign="right">
-                                                            {resell ? (
-                                                                <>
-                                                                    <h2>Item resold</h2>
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <ResellDialog />
-                                                                </>
-                                                            )}
-                                                        </Grid>
-                                                    </>
-                                                {/* )} */}
+                                                        </>
+                                                    )}
+                                                </>
                                             </Grid>
                                         </Grid>
                                     </Grid>

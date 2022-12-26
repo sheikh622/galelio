@@ -14,12 +14,29 @@ import {
     BUY_NFT,
     GET_ALL_NFT_USER,
     RESELL_NFT,
-    REDEEM_NFT
+    REDEEM_NFT,
+    GET_NFT_BUYER_SUCCESS,
+    GET_NFT_BUYER
 } from './constants';
+
+
 
 export const getAllNftSuperAdmin = (data) => {
     return {
         type: GET_ALL_NFT_SUPER_ADMIN,
+        payload: data
+    };
+};
+
+export const getNftBuyer = (data) => {
+    return {
+        type: GET_NFT_BUYER,
+        payload: data
+    };
+};
+export const getNftBuyerSuccess = (data) => {
+    return {
+        type: GET_NFT_BUYER_SUCCESS,
         payload: data
     };
 };
