@@ -12,12 +12,31 @@ import {
     DELETE_NFT,
     REJECT_NFT,
     BUY_NFT,
-    GET_ALL_NFT_USER
+    GET_ALL_NFT_USER,
+    RESELL_NFT,
+    REDEEM_NFT,
+    GET_NFT_BUYER_SUCCESS,
+    GET_NFT_BUYER
 } from './constants';
+
+
 
 export const getAllNftSuperAdmin = (data) => {
     return {
         type: GET_ALL_NFT_SUPER_ADMIN,
+        payload: data
+    };
+};
+
+export const getNftBuyer = (data) => {
+    return {
+        type: GET_NFT_BUYER,
+        payload: data
+    };
+};
+export const getNftBuyerSuccess = (data) => {
+    return {
+        type: GET_NFT_BUYER_SUCCESS,
         payload: data
     };
 };
@@ -65,6 +84,18 @@ export const addNft = (data) => {
 export const buyNft = (data) => {
     return {
         type: BUY_NFT,
+        payload: data
+    };
+};
+export const resellNft = (data) => {
+    return {
+        type: RESELL_NFT,
+        payload: data
+    };
+};
+export const redeemNft = (data) => {
+    return {
+        type: REDEEM_NFT,
         payload: data
     };
 };

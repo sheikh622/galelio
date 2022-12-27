@@ -10,6 +10,9 @@ export const REQUEST_NFT_FOR_MINTING = 'request_nft_for_minting';
 export const MINT_NFT = 'mint_nft';
 export const LAZY_MINT_NFT = 'lazy_mint_nft';
 export const DELETE_NFT = 'delete_nft';
-
 export const REJECT_NFT = 'reject_nft';
 export const BUY_NFT = 'buy_nft';
+export const RESELL_NFT = 'resell_nft';
+export const REDEEM_NFT = 'redeem_nft';
+export const GET_NFT_BUYER = 'nft_buyer';
+export const GET_NFT_BUYER_SUCCESS = 'nft_buyer_success';

@@ -26,9 +26,13 @@ import CardMedia from '@mui/material/CardMedia';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllNftUser } from 'redux/nftManagement/actions';
+import { useNavigate } from 'react-router-dom';
+
+
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const Items = () => {
+    const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
     const dispatch = useDispatch();
@@ -59,6 +63,7 @@ const Items = () => {
     ];
 
     const { nfts } = useSelector((state) => state.nftReducer.nftListUser);
+    console.log('nfts from creator profile', nfts);
     const itemData = [];
     {
         nfts?.length > 0 &&
@@ -73,7 +78,7 @@ const Items = () => {
     }
 
     return (
-        <Grid mt={2} container-fluid spacing={gridSpacing}>
+        <Grid mt={2} container-fluid spacing={gridSpacing} >
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container sx={{ mb: 2 }}>
                     <Grid item md={1} xs={12}>
@@ -123,8 +128,14 @@ const Items = () => {
 
             <Grid mt={4} item xs={12}>
                 <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {itemData.map((item) => (
-                        <Grid item md={2} sm={6}>
+                    {nfts?.map((data) => (
+                        <Grid item md={2} sm={6} onClick={()=>{
+                            navigate('/productDetails', {
+                                state: {
+                                    nft: data
+                                }
+                            });
+                        }}>
                             <Card
                                 sx={{
                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
@@ -136,15 +147,15 @@ const Items = () => {
                                 }}
                             >
                                 <CardActionArea>
-                                    <CardMedia component="img" height="200" image={item.img} />
+                                    <CardMedia component="img" height="200" image={data.asset} />
                                     <CardContent sx={{ padding: '6%' }}>
                                         <Grid container>
                                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                                 <span sx={{ fontWeight: '750', fontSize: '180%' }}>
-                                                    <b style={{}}>{item.heading}</b>
+                                                    <b style={{}}>{data.name}</b>
                                                 </span>
                                                 <Grid className="overflow" sx={{ marginTop: '5%' }}>
-                                                    {item.price} {item.currencyType}
+                                                    {data.price} {data.currencyType} 
                                                 </Grid>
                                             </Grid>
                                             <Grid item xs={4} sx={{ background: '' }}>
