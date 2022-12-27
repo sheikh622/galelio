@@ -11,7 +11,8 @@ const SimilarProducts = ({ marketplaceNfts }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                            sx={{ textAlign: { xs: 'center', md: 'left',
+                             sm: 'center' },
                              textTransform: 'capitalize' }}
                         >
                             Similar Products
@@ -22,7 +23,7 @@ const SimilarProducts = ({ marketplaceNfts }) => {
 
             <Grid item xs={12}>
                 <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {marketplaceNfts?.nfts?.rows.length >0
+                    {marketplaceNfts?.nfts?.rows.length > 0
                     ?
                     <>
                     {marketplaceNfts?.nfts?.rows.map((item) => (

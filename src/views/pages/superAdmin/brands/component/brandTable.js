@@ -30,7 +30,8 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
     const [brandId, setBrandId] = useState();
     return (
         <TableContainer>
-            <DeleteBrandDialog open={deleteOpen} setOpen={setDeleteOpen} brandId={brandId} page={page} limit={limit} search={search} />
+            <DeleteBrandDialog open={deleteOpen} 
+            setOpen={setDeleteOpen} brandId={brandId} page={page} limit={limit} search={search} />
             <Table>
                 <TableHead>
                     <TableRow>
