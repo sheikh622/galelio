@@ -16,7 +16,8 @@ import {
     RESELL_NFT,
     REDEEM_NFT,
     GET_NFT_BUYER_SUCCESS,
-    GET_NFT_BUYER
+    GET_NFT_BUYER,
+    ADD_DELIVERY_NFT
 } from './constants';
 
 
@@ -96,6 +97,12 @@ export const resellNft = (data) => {
 export const redeemNft = (data) => {
     return {
         type: REDEEM_NFT,
+        payload: data
+    };
+};
+export const addDeliveryNft = (data) => {
+    return {
+        type: ADD_DELIVERY_NFT,
         payload: data
     };
 };

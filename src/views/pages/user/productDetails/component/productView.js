@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { buyNft, resellNft, redeemNft, getNftBuyer } from 'redux/nftManagement/actions';
+import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -137,6 +137,7 @@ const PropertiesView = ({ nft }) => {
             await await marketplace
                 .purchaseItem(tokenId, contractAddress, price)
                 .then((data) => {
+                    setBought(true);
                     dispatch(
                         buyNft({
                             nftId: nft.id,
@@ -145,7 +146,7 @@ const PropertiesView = ({ nft }) => {
                             contractAddress: contractAddress
                         })
                     );
-                    setBought(true);
+                    
                     console.log('NFT mint success');
                 })
                 .catch((error) => {
@@ -236,6 +237,14 @@ const PropertiesView = ({ nft }) => {
                             nftToken: nft.NFTTokens[0].id,
                             buyerAddress: data.from,
                             contractAddress: contractAddress
+                        })
+                    );
+                    dispatch(
+                        addDeliveryNft({
+                            status: "Pending",
+                            TokenId: nft.NFTTokens[0].id,
+                            WalletAddress: data.from,
+                            NftId: nft.id
                         })
                     );
                     setRedeem(true)
