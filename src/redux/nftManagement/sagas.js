@@ -5,7 +5,6 @@ import {
     getAllNft,
     getAllNftSuccess,
     getAllNftSuperAdmin,
-    getAllNftUser,
     getAllNftSuccessUser,
     getAllNftSuccessSuperAdmin,
     getNftBuyerSuccess
@@ -24,6 +23,7 @@ import {
     BUY_NFT,
     RESELL_NFT,
     REDEEM_NFT,
+    ADD_DELIVERY_NFT,
     GET_NFT_BUYER
 } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
@@ -79,7 +79,10 @@ function* getAllNftUserRequest({ payload }) {
 function* getNftBuyerRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.get(`/users/nfts/check/` + payload.walletAddress + '/' + payload.NftId + '/' +  payload.NFTTokenId, headers);
+        const response = yield axios.get(
+            `/users/nfts/check/` + payload.walletAddress + '/' + payload.NftId + '/' + payload.NFTTokenId,
+            headers
+        );
         yield put(getNftBuyerSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -222,6 +225,23 @@ function* redeemNftRequest({ payload }) {
         payload.setLoader(false);
     }
 }
+function* addDeliveryNftRequest({ payload }) {
+    try {
+        let data = {
+            NftId: payload.NftId,
+            TokenId: payload.TokenId.toString(),
+            WalletAddress: payload.WalletAddress,
+            status: payload.status
+        };
+
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.post(`/addDelivery`, data, headers);
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+        payload.setLoader(false);
+    }
+}
 
 export function* watchAddNft() {
     yield takeLatest(ADD_NFT, addNftRequest);
@@ -234,6 +254,9 @@ export function* watchResellNft() {
 }
 export function* watchRedeemNft() {
     yield takeLatest(REDEEM_NFT, redeemNftRequest);
+}
+export function* watchAddDeliveryNft() {
+    yield takeLatest(ADD_DELIVERY_NFT, addDeliveryNftRequest);
 }
 
 function* getAllNftRequest({ payload }) {
@@ -372,6 +395,7 @@ export default function* nftSaga() {
         fork(watchBuyNft),
         fork(watchResellNft),
         fork(watchRedeemNft),
+        fork(watchAddDeliveryNft),
         fork(watchMintNft),
         fork(watchLazyMintNft),
         fork(watchRequestNftForMinting),

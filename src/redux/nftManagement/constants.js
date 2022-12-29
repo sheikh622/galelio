@@ -16,3 +16,4 @@ export const RESELL_NFT = 'resell_nft';
 export const REDEEM_NFT = 'redeem_nft';
 export const GET_NFT_BUYER = 'nft_buyer';
 export const GET_NFT_BUYER_SUCCESS = 'nft_buyer_success';
+export const ADD_DELIVERY_NFT = 'add_delivery_nft';
