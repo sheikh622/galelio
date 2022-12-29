@@ -759,6 +759,17 @@ body {
     padding: 10px;
     height: 325px;
 }
+.Productdetails {
+    overflow: hidden;
+  
+    
+}
+.ProductimageSize {
+    width: 100%;
+   
+    height: 240px;
+    object-fit: cover;
+}
 .imageSize {
     width: 100%;
     height: 300px;

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 // assets
 import { IconDashboard, IconDeviceAnalytics,IconCheckbox, IconUser, IconUserCheck, IconReceipt2, IconClipboardList,  } from '@tabler/icons';
 import React from 'react';
-
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 // constant
 const icons = {
     IconCheckbox,
@@ -37,6 +37,14 @@ const brandAdminMenu = {
             type: 'item',
             url: '/categories',
             icon: icons.IconCheckbox,
+            breadcrumbs: false
+        },
+        {
+            id: 'Delivery Dashboard',
+            title: <FormattedMessage id="deliveryDashboard" />,
+            type: 'item',
+            url: '/deliveryDashboard',
+            icon: LocalShippingIcon,
             breadcrumbs: false
         },
        
