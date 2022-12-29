@@ -6,6 +6,7 @@ import AdminGuard from './RouteGuard/AdminGuard';
 
 const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
+const DeliveryDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/deliveryDashboard')));
 const NftManagement = Loadable(lazy(() => import('views/pages/brandAdmin/nftManagement')));
 
 
@@ -24,6 +25,10 @@ const BrandAdminRoutes = {
         {
             path: '/categories',
             element: <Category />
+        },
+        {
+            path: '/deliveryDashboard',
+            element: <DeliveryDashboard />
         },
         {
             path: '/nftManagement',
