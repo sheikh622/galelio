@@ -30,7 +30,7 @@ const FeaturedCreators = ({ brands }) => {
                             component="div"
                             sx={{
                                 textAlign: { xs: 'center', md: 'left', sm: 'center' },
-                                marginLeft: { md: '18px' },
+                                marginLeft: { md: '16px' },
                                 textTransform: 'capitalize'
                             }}
                         >
@@ -53,7 +53,7 @@ const FeaturedCreators = ({ brands }) => {
                     </Grid>
                 </>
             ) : brands && brands?.length > 0 ? (
-                <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                <Grid  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
                     {brands?.map((item) => (
                         <BrandCard data={item} brands={brands} />
                     ))}

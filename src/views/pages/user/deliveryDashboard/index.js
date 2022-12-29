@@ -11,25 +11,24 @@ const DeliverD = () => {
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.delivery.productList);
     const user = useSelector((state) => state.auth.user);
-    console.log('user==>',user);
+    console.log('user==>', user.walletAddress);
     useEffect(() => {
-        dispatch(getAllProducts(
-           { WalletAddress : user.WalletAddress}
-        ));
+        dispatch(getAllProducts({ walletAddress: user.walletAddress }));
     }, []);
     return (
         <Grid
             item
             md={11}
             xs={12}
-            style={{ marginTop:'15px',
-            maxWidth:'90%',
-           
+            style={{
+                marginTop: '15px',
+                maxWidth: '90%',
+
                 background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >
-            <DeliveryDashboard productList={productList}/>
+            <DeliveryDashboard productList={productList} />
         </Grid>
     );
 };
