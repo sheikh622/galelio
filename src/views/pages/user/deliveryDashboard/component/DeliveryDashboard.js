@@ -80,12 +80,13 @@ const DeliveryDashboard = ({ productList }) => {
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
                                 <Grid item xs={12}>
-                                    {productList.length > 0 &&
-                                        productList.map((row) => (
+                                    {productList?.length > 0 &&
+                                        productList?.map((row) => (
                                             <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                                                 <Grid item md={1} sm={12}></Grid>
 
-                                                <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
+                                                <Grid item md={4} lg={4} className="Productdetails" 
+                                                sx={{ height: 'auto' }}>
                                                     <SubCard>
                                                         <img src={row?.Nft.asset} alt="Statement Image" className="ProductimageSize" />
                                                     </SubCard>{' '}

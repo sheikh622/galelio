@@ -10,9 +10,12 @@ const DeliverD = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.delivery.productList);
-   
+    const user = useSelector((state) => state.auth.user);
+    console.log('user==>',user);
     useEffect(() => {
-        dispatch(getAllProducts());
+        dispatch(getAllProducts(
+           { WalletAddress : user.WalletAddress}
+        ));
     }, []);
     return (
         <Grid

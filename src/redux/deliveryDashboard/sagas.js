@@ -2,15 +2,15 @@ import axios from 'utils/axios';
 import { all, call, fork, put, retry, takeLatest, select } from 'redux-saga/effects';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { makeSelectAuthToken } from 'store/Selector';
-import { getAllCategories, getAllProductsSuccess,  } from './actions';
+import { getDeliveryDashboardSuccess, getAllProductsSuccess, getDeliveryDashboard} from './actions';
 import { setLoader } from 'redux/auth/actions';
-import { GET_ALL_PRODUCT,} from './constants';
+import { GET_ALL_PRODUCT,GET_ALL_DELIVERY_DASHBOARD , CHANGE_STATUS} from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
 function* getAllProductRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.get(`/delivery?WalletAddress=0x6f3B51bd5B67F3e5bca2fb32796215A796B79651&page=1&size=10`, headers);
+        const response = yield axios.get(`/delivery?WalletAddress=${payload.WalletAddress}`, headers);
         yield put(getAllProductsSuccess(response.data.data.deliveries.rows));
         console.log(response.data.data.deliveries.rows,'response=?saga=>');
     } catch (error) {
@@ -22,11 +22,53 @@ export function* watchGetAllProducts() {
     yield takeLatest(GET_ALL_PRODUCT, getAllProductRequest);
 }
 
+function* getDeliveryDashRequest({ payload }) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.get(`/delivery/brand/${payload.brand}?page=1&size=10`, headers);
+        yield put(getDeliveryDashboardSuccess(response.data.data.deliveries.rows));
+        console.log(response.data.data.deliveries.rows,'deliveries===>');
+    } catch (error) {
+        // yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchGetAllDeliveryDashs() {
+    yield takeLatest(GET_ALL_DELIVERY_DASHBOARD, getDeliveryDashRequest);
+}
+
+function* changeStatusRequest({ payload }) {
+    let data = {
+        "status": payload.status
+    };
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.put(`/update/delivery/${payload.delivery}/brand/${payload.brand}`, data, headers);
+        yield put(
+            getDeliveryDashboard({
+                page: 1,
+                size: 10,
+                brand: payload.brand,
+               
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        // yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchChangeStatus() {
+    yield takeLatest(CHANGE_STATUS, changeStatusRequest);
+}
 
 
 export default function* deliverySaga() {
     yield all([
         fork(watchGetAllProducts),
+        fork(watchGetAllDeliveryDashs),
+        fork(watchChangeStatus),
         
     ]);
 }
