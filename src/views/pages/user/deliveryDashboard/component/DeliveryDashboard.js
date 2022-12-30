@@ -82,13 +82,16 @@ const DeliveryDashboard = ({ productList }) => {
                                 <Grid item xs={12}>
                                     {productList?.length > 0 &&
                                         productList?.map((row) => (
-                                            <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                                            <>
+                                            <Grid container justifyContent="center" spacing={gridSpacing} 
+                                            sx={{ textAlign: 'center', marginBottom:'20px' }}>
                                                 <Grid item md={1} sm={12}></Grid>
 
                                                 <Grid item md={4} lg={4} className="Productdetails" 
                                                 sx={{ height: 'auto' }}>
                                                     <SubCard>
-                                                        <img src={row?.Nft.asset} alt="Statement Image" className="ProductimageSize" />
+                                                        <img src={row?.Nft.asset} alt="Statement Image" 
+                                                        className="ProductimageSize" />
                                                     </SubCard>{' '}
                                                 </Grid>
 
@@ -110,7 +113,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                     </ListItemSecondaryAction>
                                                                 </ListItemButton>
                                                                 <Divider />
-                                                                <ListItemButton>
+                                                              {/*   <ListItemButton>
                                                                     <ListItemIcon>
                                                                         <ModeIcon sx={{ fontSize: '1.3rem' }} />
                                                                     </ListItemIcon>
@@ -123,7 +126,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                         </Typography>
                                                                     </ListItemSecondaryAction>
                                                                 </ListItemButton>
-                                                                <Divider />
+                                                                <Divider /> */}
                                                                 <ListItemButton>
                                                                     <ListItemIcon>
                                                                         <DescriptionIcon sx={{ fontSize: '1.3rem' }} />
@@ -165,26 +168,15 @@ const DeliveryDashboard = ({ productList }) => {
                                                                         </Typography>
                                                                     </ListItemSecondaryAction>
                                                                 </ListItemButton>
-                                                                <Divider />
-                                                                <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <TipsAndUpdatesIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Updated At </Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:'#000'}} variant="subtitle1" align="right">
-                                                                        {moment(row?.updatedAt).format('DD-MMM-YYYY')} 
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
+                                                             
                                                             </List>
                                                         </TableContainer>
                                                     </SubCard>
                                                 </Grid>
                                                 <Grid item md={1} sm={12}></Grid>
                                             </Grid>
+                                          
+                                            </>
                                         ))}
                                 </Grid>
                             </Grid>
