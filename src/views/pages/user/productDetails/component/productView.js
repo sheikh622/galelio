@@ -436,6 +436,10 @@ const PropertiesView = ({ nft }) => {
                                                                 </>
                                                             ) : (
                                                                 <>
+                                                                {((bought || redeem || resell) !== true)
+                                                                &&
+
+                                                                
                                                                     <Grid item md={8} xs={12} sm={12} textAlign="center">
                                                                         <Button
                                                                             sx={{ float: { md: 'right' } }}
@@ -449,6 +453,8 @@ const PropertiesView = ({ nft }) => {
                                                                             Buy Now
                                                                         </Button>
                                                                     </Grid>
+                                                                
+                                                                }
                                                                 </>
                                                             )}
                                                         </>
