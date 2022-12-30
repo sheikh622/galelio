@@ -14,7 +14,7 @@ const BrandCard = ({ data, brands }) => {
            
            
             md={brands && brands?.length > 5 ? 12 : 2}
-            ml={brands && brands?.length > 5 ? 2 : 0}
+            ml={brands && brands?.length > 5 ? 2 : 2}
             mr={brands && brands?.length > 5 ? 4 : 0}
             sm={6}
             justifyContent="center"

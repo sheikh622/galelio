@@ -13,7 +13,7 @@ const DeliverD = () => {
     const user = useSelector((state) => state.auth.user);
     console.log('user==>', user.walletAddress);
     useEffect(() => {
-        dispatch(getAllProducts({ walletAddress: user.walletAddress }));
+        dispatch(getAllProducts({ walletAddress: user?.walletAddress }));
     }, []);
     return (
         <Grid
