@@ -11,9 +11,11 @@ import CompanyPage from 'views/pages/landing/companyPage';
 const LandingPage = Loadable(lazy(() => import('views/pages/user/landingPage')));
 const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetails')));
+const DeliveryDashboard = Loadable(lazy(() => import('views/pages/user/deliveryDashboard')));
 //Old Routing
 
 const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
+
 
 // ==============================|| market  ROUTING ||============================== //
 
@@ -43,6 +45,10 @@ const UserRoutes = {
         {
             path: '/creatorProfile',
             element: <Profile />
+        },
+        {
+            path: '/deliveryDashboard',
+            element: <DeliveryDashboard />
         },
         {
             path: '/companyPage',

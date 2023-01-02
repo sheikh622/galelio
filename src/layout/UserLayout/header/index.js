@@ -26,6 +26,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Drawer from '../drawer/drawer';
 import { logout } from 'redux/auth/actions';
 import { useSelector, useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -130,6 +131,9 @@ export default function Header() {
                 <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
                     My Profile
                 </MenuItem>
+                <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
+                    Delivery Dashboard
+                </MenuItem>
                 <MenuItem onClick={handleMenuClose}>My account</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
@@ -229,6 +233,20 @@ export default function Header() {
                             <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                         </IconButton>
                     </Box>
+                    {user == null
+                    &&
+                    <Button variant="outlined"
+
+                    onClick={()=>{
+                        navigate("/login")
+
+                    }}
+                    
+                    
+                    >Login</Button>
+
+                    
+                    }
                     {user !== null && (
                         <>
                     <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />

@@ -42,7 +42,8 @@ const Properties = ({ nft }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                             textTransform: 'capitalize' }}
                         >
                             Properties
                         </Typography>
@@ -62,7 +63,8 @@ const Properties = ({ nft }) => {
                         >
                             {nft.NFTMetaData.map((item) => (
                                 <>
-                                    <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center', width: '500%' }}>
+                                    <Grid container justifyContent="left" spacing={gridSpacing}
+                                     sx={{ textAlign: 'center', width: '500%' }}>
                                         <Grid item md={2} sm={6}>
                                             <SubCard
                                                 className="property"
@@ -87,7 +89,7 @@ const Properties = ({ nft }) => {
                     </>
                 ) : (
                     <>
-                        <Grid sx={{ width: '100%', margin: '3%' }}>
+                        <Grid sx={{ width: '100%', marginTop: '3%' }}>
                             <h3 sx={{ textAlign: 'center' }}>No properties found.</h3>
                         </Grid>
                     </>

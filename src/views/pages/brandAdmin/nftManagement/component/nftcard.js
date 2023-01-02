@@ -1,4 +1,4 @@
-    import { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography } from '@mui/material';
 import MainCard from './mainCard';
@@ -73,10 +73,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 open={openRequestMint}
                 setOpen={setOpenRequestMint}
             />
-            <DetailsDialog
-            open={DetailsNftOpen}
-            setOpen={setDetailsNftOpen}
-            />
+            <DetailsDialog open={DetailsNftOpen} setOpen={setDetailsNftOpen} nftData={nftData} />
             <MainCard
                 content={false}
                 boxShadow
@@ -88,12 +85,12 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                     }
                 }}
             >
-           
                 <CardMedia sx={{ height: 220 }} image={nftData.asset} />
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
-                            <Typography variant="subtitle1" sx={{ textDecoration: 'none', textTransform:'capitalize' }}>
+                            <Typography variant="subtitle1"
+                             sx={{ textDecoration: 'none', textTransform: 'capitalize' }}>
                                 {nftData.name}
                             </Typography>
                         </Grid>
@@ -104,7 +101,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                 sx={{
                                     overflow: 'hidden',
                                     height: 30,
-                                    textTransform:'capitalize' 
+                                    textTransform: 'capitalize'
                                 }}
                             >
                                 {nftData.description}
@@ -117,28 +114,28 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                     {nftData.price} {nftData.currencyType}
                                 </Typography>
                             </Grid>
-                            <Grid item  xs={12}>
+                            <Grid item xs={12}>
                                 <Typography variant="h6">{nftData.NFTTokens.length} Items</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={6}>
-                        <Button
-                        size="small"
-                        sx={{
-                            marginRight: '10px',
-                            float:'right',
-                            ':hover': {
-                                boxShadow: 'none'
-                            }
-                        }}
-                        variant="outlined"
-                        onClick={() => {
-                            setDetailsNftOpen(true);
-                        }}
-                    >
-                        Details
-                    </Button>
-</Grid>
+                            <Button
+                                size="small"
+                                sx={{
+                                    marginRight: '10px',
+                                    float: 'right',
+                                    ':hover': {
+                                        boxShadow: 'none'
+                                    }
+                                }}
+                                variant="outlined"
+                                onClick={() => {
+                                    setDetailsNftOpen(true);
+                                }}
+                            >
+                                Details
+                            </Button>
+                        </Grid>
                         <Grid item xs={12}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
                                 {nftData.status !== 'MINTED' && (
@@ -161,7 +158,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                                 });
                                             }}
                                         >
-                                        Edit 
+                                            Edit
                                         </Button>
                                         <Button
                                             variant="contained"
@@ -181,7 +178,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                                 });
                                             }}
                                         >
-                                        Delete 
+                                            Delete
                                         </Button>
                                     </>
                                 )}
@@ -195,7 +192,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                             setOpenRequestMint(true);
                                         }}
                                     >
-                                    Request
+                                        Request
                                     </Button>
                                 )}
                             </Stack>

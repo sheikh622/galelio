@@ -12,7 +12,7 @@ import brandCategoryReducer from 'redux/brandCategory/reducers';
 import nftReducer from 'redux/nftManagement/reducers';
 import landingPageReducer from 'redux/landingPage/reducers';
 import marketplaceReducer from 'redux/marketplace/reducers';
-
+import delivery from 'redux/deliveryDashboard/reducers';
 const rootReducer = combineReducers({
     customization: customizationReducer,
     snackbar: snackbarReducer,
@@ -26,7 +26,8 @@ const rootReducer = combineReducers({
     brandCategoryReducer: brandCategoryReducer,
     nftReducer: nftReducer,
     landingPageReducer: landingPageReducer,
-    marketplaceReducer:marketplaceReducer
+    marketplaceReducer:marketplaceReducer,
+    delivery:delivery,
 });
 
 export default rootReducer;

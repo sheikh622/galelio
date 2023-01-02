@@ -13,7 +13,6 @@ const BrandCategory = Loadable(lazy(() => import('views/pages/superAdmin/brands/
 const Categories = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 const NftManagement = Loadable(lazy(() => import('views/pages/superAdmin/nftManagement')));
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const SuperAdminRoutes = {
