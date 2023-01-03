@@ -8,7 +8,7 @@ const UserLayout = () => {
     const theme = useTheme();
     return (
         <>
-            <Header />
+            
             <Grid
                 sx={{
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
@@ -20,16 +20,25 @@ const UserLayout = () => {
                         display: {
                             xs: 'block',
                             sm: 'block',
-                            md: 'flex'
+                            md: 'flex',
+                            lg:'flex'
                         },
                         paddingBottom: '40px'
                     }}
                 >
+                <Grid item md={12} sm={12} xs={12} sx={{  
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040'
+                }}>
+                <Header />
+                </Grid>
+
                     <Grid
                         item
                         md={1}
                         xs={12}
-                        sx={{ position: 'sticky', height: '100%', top: '0', display: { xs: 'none', sm: 'none', md: 'flex' } }}
+                        sx={{ position: 'sticky', height: '100%', top: '0', 
+                        display: { xs: 'none', sm: 'none', md: 'none' , lg:'flex' , xl:'flex'} }}
                     >
                         <SideBar />
                     </Grid>
@@ -39,7 +48,7 @@ const UserLayout = () => {
 
             <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
 
-            <Grid item md={10} xs={12} sx={{ pl: 3 ,  
+            <Grid item md={10} sm={10} xs={12} sx={{ pl: 3 ,  
                 background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}>

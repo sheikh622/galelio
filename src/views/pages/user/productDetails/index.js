@@ -13,7 +13,7 @@ const ProductDetails = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const marketplaceNfts = useSelector((state) => state.marketplaceReducer.marketplaceNfts);
-    console.log('marketplaceNfts', marketplaceNfts);
+    // console.log('marketplaceNfts', marketplaceNfts);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -32,14 +32,15 @@ const ProductDetails = () => {
         <>
             <Grid
                 container-fluid
-                md={11}
+                md={12}
+                lg={11}
                 sx={{
-                    display: { xs: 'block', sm: 'block', md: 'flex' },
+                    display: { xs: 'block', sm: 'block', md: 'flex' , lg:'flex' },
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Grid item md={11} xs={12}>
+                <Grid item md={12} xs={12} lg={11}>
                     <Grid container-fluid>
                         <Grid item md={12} xs={12}>
                             <PropertiesView nft={location.state.nft} />

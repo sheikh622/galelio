@@ -42,7 +42,7 @@ const PropertiesView = ({ nft }) => {
             dispatch(
                 getNftBuyer({
                     walletAddress: user?.walletAddress,
-                    NFTTokenId: nft.NFTTokens[0].tokenId,
+                    NFTTokenId: nft.NFTTokens[0]?.tokenId,
                     NftId: nft.id
                 })
             );
@@ -141,7 +141,7 @@ const PropertiesView = ({ nft }) => {
                     dispatch(
                         buyNft({
                             nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].tokenId,
+                            nftToken: nft.NFTTokens[0]?.tokenId,
                             buyerAddress: data.from,
                             contractAddress: contractAddress
                         })

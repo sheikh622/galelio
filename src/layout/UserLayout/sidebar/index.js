@@ -38,9 +38,10 @@ const SideBar = () => {
     return (
         <>
             <Container sx={{ mt: 5 }}>
-                <Grid item xs={12}>
+                <Grid item xs={12}  >
                     <Grid
                         xs={12}
+                        md={12}
                         container
                         alignItems="center"
                         spacing={3}
@@ -56,7 +57,9 @@ const SideBar = () => {
                     >
                         <Grid
                             item
-                            sx={{ mt: 2, cursor: 'pointer' }}
+                            sx={{ mt: 2, 
+                                //  marginLeft:'-13px',
+                                  cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/');
                             }}

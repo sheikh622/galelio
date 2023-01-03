@@ -88,7 +88,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                 </Tooltip>
                                                 <Tooltip placement="top" title="Add Brand Categories">
                                                     <IconButton
-                                                        color="primary"
+                                                        sx={{ color: '#c71585' }}
                                                         aria-label="detail"
                                                         size="medium"
                                                         onClick={() => {
@@ -104,7 +104,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                 </Tooltip>
                                                 <Tooltip placement="top" title="Edit">
                                                     <IconButton
-                                                        color="primary"
+                                                        sx={{ color: '#008b04' }}
                                                         aria-label="Edit"
                                                         size="large"
                                                         onClick={() => {

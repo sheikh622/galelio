@@ -42,7 +42,8 @@ const Marketplace = () => {
     return (
         <Grid
             item
-            md={11}
+            md={12}
+            lg={11}
             xs={12}
             style={{
                 background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',

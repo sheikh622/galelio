@@ -16,26 +16,26 @@ const NewAndTrendingNfts = ({ nfts }) => {
         slidesToScroll: 1,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1200,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 5,
                     slidesToScroll: 3,
                     infinite: true,
-                    dots: true
+                    dots: false
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 900,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 5,
                     slidesToScroll: 2,
                     initialSlide: 2
                 }
             },
             {
-                breakpoint: 480,
+                breakpoint: 425,
                 settings: {
-                    // fade: true,
+                    fade: true,
                     infinite: true,
                     speed: 500,
                     slidesToShow: 1,

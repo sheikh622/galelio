@@ -11,7 +11,7 @@ const DeliverD = () => {
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.delivery.productList);
     const user = useSelector((state) => state.auth.user);
-    console.log('user==>', user.walletAddress);
+    // console.log('user==>', user.walletAddress);
     useEffect(() => {
         dispatch(getAllProducts({ walletAddress: user?.walletAddress }));
     }, []);
@@ -19,6 +19,7 @@ const DeliverD = () => {
         <Grid
             item
             md={11}
+            lg={11}
             xs={12}
             style={{
                 marginTop: '15px',
