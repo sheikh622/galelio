@@ -38,9 +38,10 @@ const SideBar = () => {
     return (
         <>
             <Container sx={{ mt: 5 }}>
-                <Grid item xs={12}>
+                <Grid item xs={12}  >
                     <Grid
                         xs={12}
+                        md={12}
                         container
                         alignItems="center"
                         spacing={3}
@@ -56,7 +57,9 @@ const SideBar = () => {
                     >
                         <Grid
                             item
-                            sx={{ mt: 2, cursor: 'pointer' }}
+                            sx={{ mt: 2, 
+                                 marginLeft:'-5px',
+                                  cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/');
                             }}
@@ -75,12 +78,12 @@ const SideBar = () => {
                                 </>
                             )}
                         </Grid>
-                        <Grid item sx={{ mt: 2 }}>
+                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <PieChartIcon />
                         </Grid>
                         <Grid
                             item
-                            sx={{ mt: 2, cursor: 'pointer' }}
+                            sx={{ mt: 2, marginLeft:'-5px', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/marketplace');
                             }}
@@ -99,22 +102,22 @@ const SideBar = () => {
                                 </>
                             )}
                         </Grid>
-                        <Grid item sx={{ mt: 2 }}>
+                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <BookmarkIcon />
                         </Grid>
-                        <Grid item sx={{ mt: 2 }}>
+                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <DownloadIcon />
                         </Grid>
-                        <Grid item sx={{ mt: 2 }}>
+                        <Grid item sx={{ mt: 2 , marginLeft:'-5px', }}>
                             <DiscountIcon />
                         </Grid>
-                        <Grid item sx={{ mt: 2 }}>
+                        <Grid item sx={{ mt: 2 , marginLeft:'-5px', }}>
                             <SettingsIcon />
                         </Grid>
-                        <Grid item sx={{ mt: 2 }}>
+                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <LogoutIcon />
                         </Grid>
-                        <Grid item sx={{ mt: 5 }}>
+                        <Grid item sx={{ mt: 5 ,  marginLeft:'-5px',}}>
                             {customization.navType == 'dark' ? (
                                 <>
                                     <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />

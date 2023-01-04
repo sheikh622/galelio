@@ -10,28 +10,35 @@ const BrandCard = ({ data, brands }) => {
 
     return (
         <Grid
+            sx={{
+                color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                textDecoration: 'none',
+                ml: { 
+                    xs: brands && brands?.length > 5 ? 4 : 0 ,  
+                    sm: brands && brands?.length > 5 ? 2 : 0 ,  
+                    md: brands && brands?.length > 5 ? 2 : 1},
+                mr: { xs: brands && brands?.length > 5 ? 1 : 0 ,
+                      md: brands && brands?.length > 5 ? 4 : 0},
+              
+            }}
             item
-           
-           
             md={brands && brands?.length > 5 ? 12 : 2}
-            ml={brands && brands?.length > 5 ? 2 : 2}
-            mr={brands && brands?.length > 5 ? 4 : 0}
-            sm={6}
+            sm={brands && brands?.length > 5 ? 12 : 2}
+            xs={12}
             justifyContent="center"
             onClick={() => {
-                navigate('/productDetails', {
+                navigate('/', {
                     state: {
                         nft: data
                     }
                 });
             }}
-            sx={{ color: theme.palette.mode === 'dark' ? 'white' : 'black', textDecoration: 'none' }}
         >
             <Card
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                //    width : brands && brands?.length > 3 ? '0' : '270&',
+                    //    width : brands && brands?.length > 3 ? '0' : '270&',
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}

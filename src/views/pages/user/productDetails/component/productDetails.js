@@ -36,6 +36,9 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import PinDropTwoToneIcon from '@mui/icons-material/PinDropTwoTone';
 import DescriptionIcon from '@mui/icons-material/Description';
 import moment from 'moment';
+import { Watch } from 'react-loader-spinner';
+import watch1 from 'assets/images/watch3.png';
+
 // progress
 function LinearProgressWithLabel({ value, ...other }) {
     return (
@@ -73,16 +76,15 @@ const rows = [
 const DeliveryDashboard = ({ productList }) => {
     console.log(productList, 'productList>==============');
     return (
-        <Grid item lg={12} md={12} xs={12}>
+        <Grid mt={2} ml={2} item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <SubCard title="Delivery Dashboard">
+                    <SubCard title="Product Details">
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
-                                {productList?.length > 0 ? (
+                              
                                     <Grid item xs={12}>
-                                        {productList?.length > 0 &&
-                                            productList?.map((row) => (
+                                      
                                                 <>
                                                     <Grid
                                                         container
@@ -92,10 +94,12 @@ const DeliveryDashboard = ({ productList }) => {
                                                     >
                                                         <Grid item md={1} sm={12}></Grid>
 
-                                                        <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
+                                                        <Grid item md={4} lg={4} 
+                                                        className="Productdetails" 
+                                                        sx={{ height: 'auto' }}>
                                                             <SubCard>
                                                                 <img
-                                                                    src={row?.Nft.asset}
+                                                                    src={watch1}
                                                                     alt="Statement Image"
                                                                     className="ProductimageSize"
                                                                 />
@@ -119,7 +123,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                                     variant="subtitle1"
                                                                                     align="right"
                                                                                 >
-                                                                                    {row?.Nft.name}
+                                                                                   aiman
                                                                                 </Typography>
                                                                             </ListItemSecondaryAction>
                                                                         </ListItemButton>
@@ -153,7 +157,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                                     variant="subtitle1"
                                                                                     align="right"
                                                                                 >
-                                                                                    {row?.Nft.description}
+                                                                                aiman
                                                                                 </Typography>
                                                                             </ListItemSecondaryAction>
                                                                         </ListItemButton>
@@ -169,17 +173,13 @@ const DeliveryDashboard = ({ productList }) => {
                                                                             />
                                                                             <ListItemSecondaryAction>
                                                                                 <Typography
-                                                                                    color={
-                                                                                        row?.status == 'Delivered'
-                                                                                            ? 'Green'
-                                                                                            : row?.status == 'pending'
-                                                                                            ? 'Blue'
-                                                                                            : 'Orange'
-                                                                                    }
+                                                                                    color=
+                                                                                       'Orange'
+                                                                                    
                                                                                     variant="subtitle1"
                                                                                     align="right"
                                                                                 >
-                                                                                    {row?.status}
+                                                                                aiman
                                                                                 </Typography>
                                                                             </ListItemSecondaryAction>
                                                                         </ListItemButton>
@@ -197,7 +197,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                                     variant="subtitle1"
                                                                                     align="right"
                                                                                 >
-                                                                                    {row?.Nft.price}
+                                                                                aiman
                                                                                 </Typography>
                                                                             </ListItemSecondaryAction>
                                                                         </ListItemButton>
@@ -208,13 +208,9 @@ const DeliveryDashboard = ({ productList }) => {
                                                         <Grid item md={1} sm={12}></Grid>
                                                     </Grid>
                                                 </>
-                                            ))}
+                                         
                                     </Grid>
-                                ) : (
-                                    <Grid item xs={12}>
-                                        <Typography>No data available</Typography>
-                                    </Grid>
-                                )}
+                             
                             </Grid>
                         </Grid>
                     </SubCard>

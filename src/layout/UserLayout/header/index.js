@@ -28,7 +28,6 @@ import { logout } from 'redux/auth/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 
-
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -73,13 +72,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const handleLogout = async () => {
-       
         try {
             await dispatch(logout());
             navigate('/login');
-            
         } catch (err) {
             console.error(err);
         }
@@ -110,39 +107,38 @@ export default function Header() {
     };
 
     const menuId = 'primary-search-account-menu';
-    
-  
-        const renderMenu = (
-            <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                }}
-                id={menuId}
-                keepMounted
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                }}
-                open={isMenuOpen}
-                onClose={handleMenuClose}
-            >
-                <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
-                    My Profile
-                </MenuItem>
-                <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
-                    Delivery Dashboard
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
-        );
 
-    
-
-
-
+    const renderMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+            }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+            }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+        >
+            <MenuItem component={RouterLink}
+           className='userName'
+             >
+            {user?.firstName} {user?.lastName}
+            </MenuItem>
+            <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
+                My Profile
+            </MenuItem>
+            <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
+                Delivery Dashboard
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
+    );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
@@ -194,29 +190,48 @@ export default function Header() {
     const theme = useTheme();
 
     return (
+
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div" sx={{ mt: 2, display: { xs: '', sm: 'block' } }}>
+            <AppBar position="static" 
+            sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
+                <Toolbar >
+                <Box
+                sx={{                    
+                    height: '4em',
+                    paddingTop: '1em',
+                    width: '100%',
+                    marginLeft: '2%',
+                    display: 'flex',
+                    [theme.breakpoints.down('md')]: {
+                        width: 'auto'
+                    }
+                }}
+            >
+                <Box sx={{ display: { xs: 'block', md: 'block' },  }}>
+                    <Typography variant="h6" noWrap component="div" 
+                    sx={{ marginTop:'5px', display: { xs: '', sm: 'block' } }}>
                         {theme.palette.mode === 'dark' ? (
                             <img src={galileoWhite} alt="Galileo White Logo" width="100" />
                         ) : (
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                     </Typography>
+                    </Box>
                     <Grid container-fluid>
-                        <Grid item sx={{ display: { lg: 'none', md: 'none' } }}>
+                        <Grid item sx={{ display: { lg: 'none', md: 'block' } }}>
                             <Drawer />
                         </Grid>
 
                         <Search
-                            sx={{ width: '50rem !important', display: { xs: 'none', md: 'flex', lg: 'flex', xl: 'flex' } }}
+                            sx={{ width: '50rem !important', 
+                            display: { xs: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
                             className={styles.search}
                         >
                             <SearchIconWrapper>
                                 <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                             </SearchIconWrapper>
-                            <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
+                            <StyledInputBase placeholder="Search" style={{ width: '100%' }} 
+                            inputProps={{ 'aria-label': 'search' }} />
                         </Search>
                     </Grid>
                     <Box sx={{ flexGrow: 1 }} />
@@ -233,54 +248,43 @@ export default function Header() {
                             <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                         </IconButton>
                     </Box>
-                    {user == null
-                    &&
-                    <Button variant="outlined"
-
-                    onClick={()=>{
-                        navigate("/login")
-
-                    }}
-                    
-                    
-                    >Login</Button>
-
-                    
-                    }
+                    {user == null && (
+                        <Button
+                            variant="outlined"
+                            onClick={() => {
+                                navigate('/login');
+                            }}
+                        >
+                            Login
+                        </Button>
+                    )}
                     {user !== null && (
                         <>
-                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
-                   
-                            <div style={{ marginLeft: '1%', display: 'inline', width: '' }}>
-                                <Typography variant="h5" component="h2" sx={{ width: '100%' }}>
-                                    {user.firstName}{" "}
-                                    {user.lastName}
-                                </Typography>
-                            </div>
-                    
+                            <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
 
-                    <IconButton
-                        size="large"
-                        edge="end"
-                        aria-label="account of current user"
-                        aria-controls={menuId}
-                        aria-haspopup="true"
-                        onClick={handleProfileMenuOpen}
-                        color="inherit"
-                    >
-                        <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
-                    </IconButton>
-                    </>
+                           
+
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
+                            </IconButton>
+                        </>
                     )}
+                    </Box>
                 </Toolbar>
             </AppBar>
             {user !== null && (
                 <>
-                {renderMobileMenu}
-                {renderMenu}
-                
+                    {renderMobileMenu}
+                    {renderMenu}
                 </>
-
             )}
         </Box>
     );

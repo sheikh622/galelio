@@ -10,11 +10,20 @@ const NewCard = ({ data, nfts }) => {
     return (
         <Grid
             item
+            xs={12}
             mt={5}
+            sx={{ color: theme.palette.mode === 'dark' ? 'white' : 'black', textDecoration: 'none',  
+             ml: { 
+                xs: nfts && nfts?.length > 5 ? 4 : 0,
+                sm: nfts && nfts?.length > 5 ? 2 : 0,
+                 md: nfts && nfts?.length > 5 ? 2 : 0 },
+            mr: { xs: nfts && nfts?.length > 5 ? 1 : 0 , md: nfts && nfts?.length > 5 ? 4 : 0},
+       
+         }}
             md={nfts && nfts?.length > 5 ? 12 : 2}
-            ml={nfts && nfts?.length > 5 ? 2 : 0}
-            mr={nfts && nfts?.length > 5 ? 4 : 0}
-            sm={6}
+         
+            
+            sm={nfts && nfts?.length > 5 ? 12 : 2}
             onClick={() => {
                 navigate('/productDetails', {
                     state: {
@@ -22,7 +31,7 @@ const NewCard = ({ data, nfts }) => {
                     }
                 });
             }}
-            sx={{ color: theme.palette.mode === 'dark' ? 'white' : 'black', textDecoration: 'none' }}
+        
         >
             <Card
                 sx={{

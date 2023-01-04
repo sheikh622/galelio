@@ -121,7 +121,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                                         <Tooltip placement="top" title="Change Status">
                                                             <IconButton
-                                                                color="primary"
+                                                               sx={{color:"#da07ac"}} 
                                                                 aria-label="detail"
                                                                 size="medium"
                                                                 onClick={() => {
@@ -138,7 +138,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                     
 
                                                         <Tooltip placement="top" title="Edit">
-                                                            <IconButton color="primary" aria-label="Edit" size="large"
+                                                            <IconButton   sx={{color:"#008b04"}} aria-label="Edit" size="large"
                                                              onClick={() => {
                                                                 
                                                                 setAddUpdateOpen(true);

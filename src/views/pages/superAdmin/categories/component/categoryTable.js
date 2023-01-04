@@ -88,7 +88,7 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                                                             <Stack direction="row" justifyContent="center" alignItems="center">
                                                                 <Tooltip placement="top" title="Edit">
                                                                     <IconButton
-                                                                        color="primary"
+                                                                    sx={{color:"#008b04"}}
                                                                         aria-label="Edit"
                                                                         size="large"
                                                                         onClick={() => {
