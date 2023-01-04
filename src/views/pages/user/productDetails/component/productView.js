@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
-
 import { gridSpacing } from 'store/constant';
 import { ethers } from 'ethers';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
@@ -15,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
 import TextField from '@mui/material/TextField';
