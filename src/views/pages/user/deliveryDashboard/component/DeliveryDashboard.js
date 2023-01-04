@@ -92,7 +92,8 @@ const DeliveryDashboard = ({ productList }) => {
                                                     >
                                                         <Grid item md={1} sm={12}></Grid>
 
-                                                        <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
+                                                        <Grid item md={4} lg={4} className="Productdetails" 
+                                                        sx={{ height: 'auto' }}>
                                                             <SubCard>
                                                                 <img
                                                                     src={row?.Nft.asset}

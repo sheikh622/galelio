@@ -25,7 +25,7 @@ const DeliverD = () => {
                 marginTop: '15px',
                 maxWidth: '90%',
 
-                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                background: 'tranparent',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >

@@ -5,6 +5,7 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AdminGuard from './RouteGuard/AdminGuard';
 
+
 const SubAdminDashboard = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
@@ -15,6 +16,7 @@ const NftManagement = Loadable(lazy(() => import('views/pages/superAdmin/nftMana
 // ==============================|| MAIN ROUTING ||============================== //
 
 const SubAdminRoutes = {
+    id: 'Admin',
     path: '/',
     element: (
         <AdminGuard>
@@ -24,9 +26,10 @@ const SubAdminRoutes = {
     type: 'group',
     children: [
         {
-            path: '/dashbaord',
+            path: '/dashboard',
             element: <SubAdminDashboard />
         },
+
         {
             path: '/brands',
             element: <Brand />

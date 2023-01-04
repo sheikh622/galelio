@@ -16,8 +16,8 @@ const Delivered = () => {
     const dispatch = useDispatch();
     const deliveryList = useSelector((state) => state.delivery.deliveryList);
     const user = useSelector((state) => state.auth.user);
-    console.log('user==>',user.BrandId);
-    // console.log(deliveryList,'INDEX =>');
+   
+    console.log(deliveryList,'INDEX =>');
 
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -51,9 +51,8 @@ const Delivered = () => {
 
     return (
         <>
-            <Typography variant="h1" sx={{ m: 2 }}>
-                Delivery Dashboard
-            </Typography>
+        <HeadingCard title=" Delivery Dashboard" />
+
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>

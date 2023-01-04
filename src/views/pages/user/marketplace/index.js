@@ -46,7 +46,7 @@ const Marketplace = () => {
             lg={11}
             xs={12}
             style={{
-                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                background:'tranparent',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >
