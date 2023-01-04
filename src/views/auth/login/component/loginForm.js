@@ -31,7 +31,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReactFacebookLogin from 'react-facebook-login';
 import './loginForm.css';
 import { API_URL} from 'utils/axios';
-
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 
 
 
@@ -235,7 +235,12 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 }}
                             />
                         </Grid>
-                        <Grid
+                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                        <Button variant="contained" startIcon={<FacebookOutlinedIcon />}>
+                        Login with Facebook
+                      </Button>
+                        </Grid>
+                      {/*   <Grid
                             item
                             sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
                         >
@@ -249,7 +254,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 cssClass="my-facebook-button-class"
                                 textButton=" Login with Facebook"
                             />
-                        </Grid>
+                        </Grid> */}
                     </form>
                 )}
             </Formik>

@@ -36,7 +36,7 @@ const ProductDetails = () => {
                 lg={11}
                 sx={{
                     display: { xs: 'block', sm: 'block', md: 'flex' , lg:'flex' },
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    background:'tranparent',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >

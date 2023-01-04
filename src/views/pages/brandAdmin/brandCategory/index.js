@@ -40,11 +40,8 @@ const Categories = () => {
     }, [search, page, limit]);
     return (
         <>
-        
-        
-        <Typography variant="h1" sx={{m:2}}>
-        Category Management
-            </Typography>
+            <HeadingCard title=" Category Management" />
+
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>

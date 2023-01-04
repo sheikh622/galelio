@@ -16,14 +16,15 @@ const BrandCard = ({ data, brands }) => {
                 ml: { 
                     xs: brands && brands?.length > 5 ? 4 : 0 ,  
                     sm: brands && brands?.length > 5 ? 2 : 0 ,  
-                    md: brands && brands?.length > 5 ? 2 : 1},
+                    md: brands && brands?.length > 5 ? 2 : 2},
                 mr: { xs: brands && brands?.length > 5 ? 1 : 0 ,
-                      md: brands && brands?.length > 5 ? 4 : 0},
+                      md: brands && brands?.length > 5 ? 4 : 2},
               
             }}
             item
-            md={brands && brands?.length > 5 ? 12 : 2}
-            sm={brands && brands?.length > 5 ? 12 : 2}
+            lg={brands && brands?.length > 5 ? 12 : 2}
+            md={brands && brands?.length > 5 ? 12 : 4}
+            sm={brands && brands?.length > 5 ? 12 : 4}
             xs={12}
             justifyContent="center"
             onClick={() => {
@@ -38,7 +39,7 @@ const BrandCard = ({ data, brands }) => {
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                    //    width : brands && brands?.length > 3 ? '0' : '270&',
+                       width : brands && brands?.length > 5 ? '100%' : {lg:'188px'},
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}
