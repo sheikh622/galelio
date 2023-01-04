@@ -23,12 +23,12 @@ const UserLayout = () => {
                             md: 'flex',
                             lg:'flex'
                         },
-                        paddingBottom: '40px'
+                        paddingBottom: '40px' , 
                     }}
                 >
                 <Grid item md={12} sm={12} xs={12} sx={{  
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                    color: theme.palette.mode === 'dark' ? 'white' : '#404040'
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                 }}>
                 <Header />
                 </Grid>

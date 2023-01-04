@@ -6,7 +6,7 @@ import { Grid } from '@mui/material';
 import Properties from './component/properties';
 import PropertiesView from './component/productView';
 import { getAllMarketplaceNftsByCategory } from 'redux/marketplace/actions';
-
+import DeliveryDashboard from './component/productDetails';
 
 const ProductDetails = () => {
     const theme = useTheme();
@@ -42,9 +42,12 @@ const ProductDetails = () => {
             >
                 <Grid item md={12} xs={12} lg={11}>
                     <Grid container-fluid>
-                        <Grid item md={12} xs={12}>
+                       {/*  <Grid item md={12} xs={12}>
+                            <DeliveryDashboard  />
+                        </Grid> */}
+                       <Grid item md={12} xs={12}>
                             <PropertiesView nft={location.state.nft} />
-                        </Grid>
+                        </Grid> 
                         <Grid item md={12} xs={12}>
                             <Properties nft={location.state.nft} />
                         </Grid>        

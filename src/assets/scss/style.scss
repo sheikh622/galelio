@@ -531,11 +531,11 @@ body {
 }
 
 .Lux {
- 
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 35px;
+    text-transform: capitalize;
+   
+    font-weight: 500;
+    font-size: 28px;
+    
     text-align: left;
 
     padding: 0 15px;
@@ -561,10 +561,11 @@ body {
 
 .productdescription {
     // font-family: 'Public Sans';
-    font-style: normal;
+ 
     font-weight: 400;
-    font-size: 16px;
-    line-height: 34px;
+    font-size: 23px;
+    text-transform: capitalize;
+   
     text-align: left;
     letter-spacing: 0.02em;
     padding: 0 15px;
@@ -593,18 +594,16 @@ body {
 }
 
 .price {
-    font-family: 'Public Sans';
-    font-style: normal;
+   
     font-weight: 500;
-    font-size: 15px;
+    font-size: 20px;
     text-transform: capitalize;
 }
 
 .ETH {
-    font-family: 'Public Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
+   color: darkorange;
+    font-weight: 500;
+    font-size: 20px;
 }
 
 .timer {
@@ -624,7 +623,16 @@ body {
     /* border: 1px solid; */
     text-overflow: ellipsis;
 }
-
+.line{
+    background: #ccc;
+    width: 5px;
+    height: 300px;
+    color: transparent;
+    
+    margin-top: 13px;
+    margin-left: 36px;
+    border-radius: 20px;
+}
 .text {
     font-weight: 700;
     font-size: 22px;
@@ -767,7 +775,7 @@ body {
 .ProductimageSize {
     width: 100%;
    
-    height: 220px;
+    height: 280px;
     object-fit: cover;
 }
 .imageSize {
@@ -780,4 +788,15 @@ body {
     color: #2196f3;
     font-weight: 600;
     text-transform: capitalize;
+}
+.brand{
+font-size: 28px;
+color: #2196f3;
+text-transform: capitalize;
+}
+.creator{
+    font-size: 25px;
+    font-weight: 400;
+    margin-top: 7px;
+    color: gray;
 }
