@@ -237,7 +237,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         const signer = provider.getSigner();
         const signature = await signer._signTypedData(domain, types, voucher);
         const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
-        console.log("signature: ", signature)
+        console.log("signature: ", verifyAddr)
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
         const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);

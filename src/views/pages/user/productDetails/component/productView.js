@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft } from 'redux/nftManagement/actions';
+import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft, changeTokenId } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -180,23 +180,53 @@ const PropertiesView = ({ nft }) => {
             let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
             const token = new ethers.Contract(erc20Address, Erc20, signer);
             await (await token.approve(contractAddress, prices)).wait();
-            await await nfts.lazyMint(validatorAddress, voucher, signature, MarketplaceAddress.address).then((data) => {
-                    setBought(true);
-                    dispatch(
-                        buyNft({
-                            nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].id,
-                            buyerAddress: data.from,
-                            contractAddress: contractAddress
-                        })
-                    );
 
-                    console.log('NFT mint success lazy mint', data);
-                })
-                .catch((error) => {
-                    // console.log('error', error.message);
-                    toast.error(error.message);
-                });
+            //
+            try {
+                let mintedNFT = await (await nfts.lazyMint(validatorAddress, voucher, signature, MarketplaceAddress.address)).wait();
+                const id = parseInt(mintedNFT.events[0].args[2]);
+                console.log('Data: ', mintedNFT,id);
+         
+                
+                setBought(true);
+                dispatch(changeTokenId({
+                    id: nft.NFTTokens[0].id,
+                    tokenId: id.toString()
+                }))
+
+                dispatch(
+                    buyNft({
+                        nftId: nft.id,
+                        nftToken: nft.NFTTokens[0].id,
+                        buyerAddress: mintedNFT.from,
+                        contractAddress: contractAddress
+                    })
+                );
+
+            } catch (error) {
+                toast.error(error.message);
+            }
+
+            //
+
+            // await await nfts.lazyMint(validatorAddress, voucher, signature, MarketplaceAddress.address).then((data) => {
+            //         setBought(true);
+            //         dispatch(
+            //             buyNft({
+            //                 nftId: nft.id,
+            //                 nftToken: nft.NFTTokens[0].id,
+            //                 buyerAddress: data.from,
+            //                 contractAddress: contractAddress
+            //             })
+            //         );
+
+            //         console.log('NFT mint success lazy mint', data);
+            //     })
+            //     .catch((error) => {
+            //         // console.log('error', error.message);
+            //         toast.error(error.message);
+            //     });
+            // const id = parseInt(mintedNFT.events[0].args[2]);
         }
     };
 
