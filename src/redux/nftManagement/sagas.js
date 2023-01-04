@@ -158,7 +158,8 @@ function* addNftRequest({ payload }) {
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                type: payload.type
+                type: payload.type,
+                brandId: payload.brandId,
             })
         );
         payload.handleClose();
@@ -229,8 +230,8 @@ function* addDeliveryNftRequest({ payload }) {
     try {
         let data = {
             NftId: payload.NftId,
-            TokenId: payload.TokenId.toString(),
-            WalletAddress: payload.WalletAddress,
+            tokenId: payload.TokenId.toString(),
+            walletAddress: payload.WalletAddress,
             status: payload.status
         };
 
@@ -263,7 +264,7 @@ function* getAllNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(
-            `/nft/brandAdmin?page=${payload.page}&size=${payload.limit}&search=${payload.search}&categoryId=${payload.categoryId}&type=${payload.type}`,
+            `/nft/brandAdmin?page=${payload.page}&size=${payload.limit}&search=${payload.search}&categoryId=${payload.categoryId}&brandId=${payload.brandId}&type=${payload.type}`,
             headers
         );
         yield put(getAllNftSuccess(response.data.data));
@@ -288,7 +289,8 @@ function* requestNftForMintingRequest({ payload }) {
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                type: payload.type
+                type: payload.type,
+                brandId: payload.brandId
             })
         );
         yield setNotification('success', response.data.message);

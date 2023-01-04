@@ -8,7 +8,6 @@ import { IconSearch } from '@tabler/icons';
 import { getAllSubAdminList } from '../../../../redux/subAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
-import HeadingCard from 'shared/Card/HeadingCard';
 import AddUpdateSubAdminDialog from './component/addUpdateSubAdmin';
 
 const SubAdmin = () => {
@@ -24,7 +23,8 @@ const SubAdmin = () => {
         firstName: '',
         lastName: '',
         subAdminEmail: '',
-        subAdminPassword: ''
+        subAdminPassword: '',
+        walletAddress:""
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -89,7 +89,8 @@ const SubAdmin = () => {
                                         firstName: '',
                                         lastName: '',
                                         adminEmail: '',
-                                        adminPassword: ''
+                                        adminPassword: '',
+                                        walletAddress:''
                                     });
                                 }}
                             >

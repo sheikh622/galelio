@@ -16,17 +16,18 @@ import {
     CircularProgress
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import BlockIcon from '@mui/icons-material/Block';
 
 import Chip from 'ui-component/extended/Chip';
 import AddUpdateBrandAdminDialog from './addUpdateSubAdmin';
 import DeleteSubAdminDialog from './deleteSubAdminDialog';
 import ChangeSubAdminStatusDialog from './changeSubAdminStatus';
 import ChangeSubAdminMintingAccessDialog from './changeSubAdminMintingAccess';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 import UpdateIcon from '@mui/icons-material/Update';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAddUpdateOpen, subAdminData, setSubAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const theme = useTheme();
@@ -40,7 +41,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
         } else {
             setDetailId(id);
         }
-    };
+    }
 
     return (
         <TableContainer>
@@ -120,7 +121,8 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                                         <Tooltip placement="top" title="Change Status">
-                                                            <IconButton
+                                                            <BlockIcon
+                                                            style={{cursor:"pointer"}}
                                                                 color="primary"
                                                                 aria-label="detail"
                                                                 size="medium"
@@ -133,7 +135,25 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                 }}
                                                             >
                                                                 <UpdateIcon sx={{ fontSize: '1.5rem' }} />
-                                                            </IconButton>
+                                                            </BlockIcon>
+                                                        </Tooltip>
+                                                        <Tooltip placement="top" title="Change minting access" sx={{ml:1}}>
+                                                            <CurrencyExchangeIcon
+                                                            style={{cursor:"pointer"}}
+                                                                color="primary"
+                                                                aria-label="detail"
+                                                                size="medium"
+                                                                onClick={() => {
+                                                                    setChangeMintingAccessOpen(true);
+                                                                    setSubAdminData({
+                                                                        id: row.id,
+                                                                        walletAddress: row.walletAddress,
+                                                                        isActive: row.isActive
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <UpdateIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </CurrencyExchangeIcon>
                                                         </Tooltip>
                                                     
 

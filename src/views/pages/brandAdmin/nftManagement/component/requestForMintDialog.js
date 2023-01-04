@@ -1,8 +1,9 @@
 import { forwardRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { requestNftForMinting } from 'redux/nftManagement/actions';
+import { userStory } from 'store/kanban';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData,categoryId }) {
     const theme = useTheme();
@@ -10,7 +11,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
     const handleClose = () => {
         setOpen(false);
     };
-
+    const user = useSelector((state) => state.auth.user);
     return (
         <>
             <Dialog
@@ -50,7 +51,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                                     limit: limit,
                                     search: search,
                                     type: type,
-                                    handleClose: handleClose
+                                    handleClose: handleClose,
+                                    brandId: user.BrandId
                                 })
                             );
                         }}

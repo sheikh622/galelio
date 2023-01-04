@@ -1,5 +1,5 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -19,7 +19,6 @@ import {
     ListItemIcon,
     ListItemText,
     Typography,
-    ListItemSecondaryAction,
     IconButton,
     MenuItem
 } from '@mui/material';
@@ -53,6 +52,7 @@ const typeArray = [
 
 export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
     const [fieldDataArray, setFieldDataArray] = useState([]);
@@ -129,7 +129,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         limit: limit,
                         search: search,
                         categoryId: data.CategoryId,
-                        handleClose: handleClose
+                        handleClose: handleClose,
+                        brandId: user.BrandId
                     })
                 );
             }

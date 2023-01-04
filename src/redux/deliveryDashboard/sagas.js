@@ -10,7 +10,7 @@ import { setNotification } from 'shared/helperMethods/setNotification';
 function* getAllProductRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.get(`/delivery?WalletAddress=${payload.walletAddress}&page=1&size=10`, headers);
+        const response = yield axios.get(`/delivery?walletAddress=${payload.walletAddress}&page=1&size=10`, headers);
         yield put(getAllProductsSuccess(response.data.data.deliveries.rows));
         console.log(response.data.data.deliveries.rows,'response=?saga=>');
     } catch (error) {
