@@ -107,7 +107,7 @@ export function* watchDeleteSubAdmin() {
 }
 
 function* changeSubAdminStatusRequest({ payload }) {
-    console.log("payload",payload)
+    
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.patch(`admin/${payload.id}`,{}, headers);

@@ -54,7 +54,7 @@ export function* watchAddBrandAdmin() {
 }
 
 function* updateBrandAdminRequest({ payload }) {
-    console.log('payload', payload);
+   
     let data = {
         adminId: payload.id,
         firstName: payload.firstName,

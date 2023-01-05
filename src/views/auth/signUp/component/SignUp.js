@@ -31,14 +31,13 @@ import { useNavigate } from 'react-router-dom';
 import { setWallet } from 'redux/auth/actions';
 import { SNACKBAR_OPEN } from 'store/actions';
 
-
 const SignUpForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [checked, setChecked] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
-    const [walletAddress, setWalletAddress] = useState("");
+    const [walletAddress, setWalletAddress] = useState('');
 
     const handleConnect = async () => {
         if (!window.ethereum) {
@@ -49,14 +48,14 @@ const SignUpForm = ({ loginProp, ...others }) => {
                 variant: 'alert',
                 alertSeverity: 'info'
             });
-            console.log('No crypto wallet found. Please install it.');
+
             // toast.error('No crypto wallet found. Please install it.');
         }
 
         const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
         if (response) {
             const address = utils?.getAddress(response[0]);
-            // console.log("address from signup", address)
+
             setWalletAddress(address);
             dispatch({
                 type: SNACKBAR_OPEN,
@@ -66,7 +65,6 @@ const SignUpForm = ({ loginProp, ...others }) => {
                 alertSeverity: 'success'
             });
         } else {
-            console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
         }
     };
@@ -81,7 +79,6 @@ const SignUpForm = ({ loginProp, ...others }) => {
         dispatch(setWallet(walletAddress));
     }, [walletAddress]);
 
-
     return (
         <>
             <Formik
@@ -91,7 +88,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     email: '',
                     password: '',
                     confirmPassword: '',
-                    walletAddress:""
+                    walletAddress: ''
                 }}
                 validationSchema={Yup.object().shape({
                     name: Yup.string()
@@ -103,8 +100,6 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     confirmPassword: Yup.string().max(255).required('Confirm Password is required!')
                 })}
                 onSubmit={async (values) => {
-                    console.log("walletAddress from onsubmit formik", walletAddress)
-                    await console.log('login', values);
                     await dispatch(setLoader(true));
                     dispatch(
                         signup({

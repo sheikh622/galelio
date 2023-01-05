@@ -16,8 +16,6 @@ const Delivered = () => {
     const dispatch = useDispatch();
     const deliveryList = useSelector((state) => state.delivery.deliveryList);
     const user = useSelector((state) => state.auth.user);
-   
-    console.log(deliveryList,'INDEX =>');
 
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -41,7 +39,7 @@ const Delivered = () => {
     useEffect(() => {
         dispatch(
             getDeliveryDashboard({
-                brand:user.BrandId
+                brand: user.BrandId
                 // search: search,
                 // page: page,
                 // limit: limit
@@ -51,7 +49,7 @@ const Delivered = () => {
 
     return (
         <>
-        <HeadingCard title=" Delivery Dashboard" />
+            <HeadingCard title=" Delivery Dashboard" />
 
             <MainCard
                 title={
@@ -75,7 +73,7 @@ const Delivered = () => {
                 }
                 content={false}
             >
-                <DeliveryDashboard deliveryList={deliveryList} user={user}/>
+                <DeliveryDashboard deliveryList={deliveryList} user={user} />
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>

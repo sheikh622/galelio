@@ -43,7 +43,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let categoryId = nftData.CategoryId;
         let brandId = nftData.BrandId;
         let price = ethers.utils.parseEther(nftData.price.toString());
-        console.log('price', price);
         let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
         let tokenIdArray = [];
         let transactionHash;
@@ -57,7 +56,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 return tokenUri;
             });
 
-            console.log('MarketplaceAddress.address', MarketplaceAddress.address);
             if (uriArray.length == 1) {
                 let mintedNFT = await (
                     await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
@@ -71,7 +69,6 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                 await (
                     await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price).catch((error) => {
-                        console.log('error', error.message);
                         toast.error(error.message);
                     })
                 ).wait();
@@ -116,13 +113,10 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
                     counter = counter + 2;
                 }
-
-                console.log('myNftTokenIdArray', myNftTokenIdArray);
                 const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
 
                 await (
                     await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price).catch((error) => {
-                        console.log('error', error.message);
                         toast.error(error.message);
                     })
                 ).wait();

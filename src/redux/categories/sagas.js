@@ -48,7 +48,7 @@ export function* watchAddCategory() {
 }
 
 function* updateCategoryRequest({ payload }) {
-    console.log('payload', payload);
+  
     const formData = new FormData();
     formData.append('name', payload.name);
     formData.append('description', payload.description);

@@ -11,8 +11,7 @@ const UserGuard = ({ children }) => {
     const navigate = useNavigate();
 
     const user = useSelector((state) => state.auth.user);
-    console.log('user in user guard', user);
-    console.log('token in UserGuard', token);
+   
     useEffect(() => {
         if (token == null) {
             navigate('/', { replace: true });

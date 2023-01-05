@@ -12,8 +12,6 @@ const Marketplace = () => {
     const location = useLocation();
     const marketplaceCategories = useSelector((state) => state.marketplaceReducer.marketplaceCategories);
     const marketplaceNfts = useSelector((state) => state.marketplaceReducer.marketplaceNfts);
-    // console.log('marketplaceNfts', marketplaceNfts);
-    console.log('marketplaceCategories', marketplaceCategories);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -25,8 +23,7 @@ const Marketplace = () => {
 
     useEffect(() => {
         if (location.state) {
-            console.log('location', location.state);
-            setCategoryId(location.state.category.id)
+            setCategoryId(location.state.category.id);
         }
     }, []);
     useEffect(() => {
@@ -46,7 +43,7 @@ const Marketplace = () => {
             lg={11}
             xs={12}
             style={{
-                background:'tranparent',
+                background: 'tranparent',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >

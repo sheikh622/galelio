@@ -48,7 +48,7 @@ export function* watchAddBrand() {
 }
 
 function* updateBrandRequest({ payload }) {
-    console.log({payload})
+   
     const formData = new FormData();
     formData.append('name', payload.name);
     formData.append('location', payload.location);

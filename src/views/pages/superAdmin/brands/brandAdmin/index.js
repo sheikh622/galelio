@@ -23,12 +23,12 @@ const BrandAdmin = () => {
 
     const [addUpdateOpen, setAddUpdateOpen] = useState(false);
     const [brandAdminData, setBrandAdminData] = useState({
-        id:null,
+        id: null,
         brandId: location.state.brandData.id,
         firstName: '',
         lastName: '',
         adminEmail: '',
-        adminPassword: '',
+        adminPassword: ''
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -49,7 +49,7 @@ const BrandAdmin = () => {
             })
         );
     }, [search, page, limit]);
-    console.log('location.state', location.state);
+
     return (
         <>
             <AddUpdateBrandAdminDialog
@@ -62,8 +62,7 @@ const BrandAdmin = () => {
             />
             <MainCard
                 title={
-
-                    <Typography variant="h2" sx={{ fontWeight: 500, color: 'cadetblue'}}>
+                    <Typography variant="h2" sx={{ fontWeight: 500, color: 'cadetblue' }}>
                         Admin Management of : {location.state.brandData.name}
                     </Typography>
                 }
@@ -111,7 +110,7 @@ const BrandAdmin = () => {
                                         firstName: '',
                                         lastName: '',
                                         adminEmail: '',
-                                        adminPassword: '',
+                                        adminPassword: ''
                                     });
                                 }}
                             >

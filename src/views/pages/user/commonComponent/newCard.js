@@ -6,25 +6,25 @@ import { useNavigate } from 'react-router-dom';
 const NewCard = ({ data, nfts }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-    // console.log('nfts=>', nfts);
+
     return (
         <Grid
             item
             xs={12}
             mt={5}
-            sx={{ color: theme.palette.mode === 'dark' ? 'white' : 'black', textDecoration: 'none',   
-          
-             ml: { 
-                xs: nfts && nfts?.length > 5 ? 4 : 0,
-                sm: nfts && nfts?.length > 5 ? 2 : 0,
-                 md: nfts && nfts?.length > 5 ? 2 : 0 },
-            mr: { xs: nfts && nfts?.length > 5 ? 1 : 0 , md: nfts && nfts?.length > 5 ? 4 : 4},
-       
-         }}
+            sx={{
+                color: theme.palette.mode === 'dark' ? 'white' : 'black',
+                textDecoration: 'none',
+
+                ml: {
+                    xs: nfts && nfts?.length > 5 ? 4 : 0,
+                    sm: nfts && nfts?.length > 5 ? 2 : 0,
+                    md: nfts && nfts?.length > 5 ? 2 : 0
+                },
+                mr: { xs: nfts && nfts?.length > 5 ? 1 : 0, md: nfts && nfts?.length > 5 ? 4 : 4 }
+            }}
             md={nfts && nfts?.length > 5 ? 12 : 4}
             lg={nfts && nfts?.length > 5 ? 12 : 2}
-         
-            
             sm={nfts && nfts?.length > 5 ? 12 : 4}
             onClick={() => {
                 navigate('/productDetails', {
@@ -33,16 +33,15 @@ const NewCard = ({ data, nfts }) => {
                     }
                 });
             }}
-        
         >
             <Card
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     // maxWidth: nfts && nfts?.length > 3? 0 : 365,
-                    width: nfts && nfts?.length > 5? '100%' :{ lg:'188px'},
+                    width: nfts && nfts?.length > 5 ? '100%' : { lg: '188px' },
                     boxShadow: '1px 2px 6px #d3d3d3',
-                    borderRadius: '7px' ,
+                    borderRadius: '7px'
                 }}
             >
                 <CardActionArea>

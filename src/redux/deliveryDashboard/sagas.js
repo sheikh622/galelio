@@ -12,7 +12,7 @@ function* getAllProductRequest({ payload }) {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(`/delivery?WalletAddress=${payload.walletAddress}&page=1&size=10`, headers);
         yield put(getAllProductsSuccess(response.data.data.deliveries.rows));
-        // console.log(response.data.data.deliveries.rows,'response=?saga=>');
+  
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -26,8 +26,8 @@ function* getDeliveryDashRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(`/delivery/brand/${payload.brand}?page=1&size=10`, headers);
-        // yield put(getDeliveryDashboardSuccess(response.data.data.deliveries.rows));
-        console.log(response.data.data.deliveries.rows,'deliveries===>');
+        yield put(getDeliveryDashboardSuccess(response.data.data.deliveries.rows));
+       
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

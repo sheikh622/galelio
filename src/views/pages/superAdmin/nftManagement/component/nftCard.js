@@ -86,7 +86,6 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                         color="primary"
                                         sx={{ marginRight: '5px' }}
                                         onClick={() => {
-                                            console.log({ nftData });
                                             setRejectMintOpen(true);
                                         }}
                                     >
@@ -100,7 +99,6 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                         color="primary"
                                         sx={{ marginRight: '5px' }}
                                         onClick={() => {
-                                            console.log({ nftData });
                                             setOpenMint(true);
                                         }}
                                     >

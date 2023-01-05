@@ -56,7 +56,6 @@ const NftManagement = () => {
         setPage(1);
     };
 
-    console.log("location.state",location.state)
     useEffect(() => {
         dispatch(
             getAllNftSuperAdmin({
@@ -72,7 +71,6 @@ const NftManagement = () => {
 
     return (
         <>
-         
             <MainCard
                 className="yellow"
                 style={{ marginBottom: '15px' }}
@@ -124,13 +122,7 @@ const NftManagement = () => {
                                 nftList.nfts.rows.map((nft, index) => {
                                     return (
                                         <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                                            <NftCard
-                                                nftData={nft}
-                                                search={search}
-                                                page={page}
-                                                limit={limit}
-                                                type={type}
-                                            />
+                                            <NftCard nftData={nft} search={search} page={page} limit={limit} type={type} />
                                         </Grid>
                                     );
                                 })}

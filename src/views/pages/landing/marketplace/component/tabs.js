@@ -12,8 +12,7 @@ import solana from 'assets/images/coins/solana.png';
 // tab content
 function TabPanel({ children, value, index, ...other }) {
     return (
-        <div role="tabpanel" hidden={value !== index} 
-        id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+        <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
             {value === index && (
                 <Box
                     sx={{
@@ -45,7 +44,6 @@ export default function HorizontalTabs({ marketplaceCategories }) {
     const theme = useTheme();
     const [value, setValue] = useState(0);
 
-    console.log('marketplaceCategories', marketplaceCategories);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };

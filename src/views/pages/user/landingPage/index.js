@@ -9,7 +9,6 @@ import { getAllLandingPageData } from 'redux/landingPage/actions';
 const LandingPage = () => {
     const dispatch = useDispatch();
     const landingPageData = useSelector((state) => state.landingPageReducer.landingPageData);
-    console.log('landingPageData', landingPageData);
     useEffect(() => {
         dispatch(getAllLandingPageData());
     }, []);
