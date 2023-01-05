@@ -14,13 +14,13 @@ const Profile = () => {
     return (
         <>
             <Grid
-            md={11}
+            md={12} lg={11}
                 sx={{
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    background: 'tranparent',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' } }}>
+                <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' , lg:'flex' } }}>
                     <Grid item md={12} xs={12}>
                         <Grid container-fluid>
                             <Grid item md={12} xs={12}>

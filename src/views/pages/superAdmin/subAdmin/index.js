@@ -55,10 +55,9 @@ const SubAdmin = () => {
                 limit={limit}
                 search={search}
             />
+            <HeadingCard title="Sub Admin Management" />
 
-            <Typography variant="h1" sx={{m:2}}>
-            Sub Admin Management
-                </Typography>
+
 
             <MainCard
                 title={

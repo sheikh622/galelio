@@ -63,7 +63,7 @@ const Items = () => {
     ];
 
     const { nfts } = useSelector((state) => state.nftReducer.nftListUser);
-    console.log('nfts from creator profile', nfts);
+   
     const itemData = [];
     {
         nfts?.length > 0 &&
@@ -84,7 +84,8 @@ const Items = () => {
                     <Grid item md={1} xs={12}>
                         <MenuOpenIcon />
                     </Grid>
-                    <Grid item md={7} xs={12} sx={{ marginLeft: { md: '-88px', xl: '-88px' }, marginTop: { md: '-8px' } }}>
+                    <Grid item md={7} xs={12} sx={{ marginLeft: { md: '-88px', xl: '-88px' }, 
+                    marginTop: { md: '-8px' } }}>
                         <OutlinedInput
                             fullWidth
                             id="input-search-list-style1"
@@ -104,7 +105,8 @@ const Items = () => {
                         item
                         md={4}
                         xs={12}
-                        sx={{ marginLeft: { md: '6px', xl: '6px' }, marginTop: { md: '-8px', xs: '10px', sm: '10px' } }}
+                        sx={{ marginLeft: { md: '6px', xl: '6px' }, 
+                        marginTop: { md: '-8px', xs: '10px', sm: '10px' } }}
                     >
                         <TextField
                             sx={{ borderRadius: '4px' }}

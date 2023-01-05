@@ -43,7 +43,6 @@ const NftManagement = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const nftList = useSelector((state) => state.nftReducer.nftList);
-    console.log('nftList', nftList);
     const user = useSelector((state) => state.auth.user);
     const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
@@ -97,7 +96,7 @@ const NftManagement = () => {
                 title={
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={3}>
-                            <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue',marginTop:'12px' }}>
+                            <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue', marginTop: '12px' }}>
                                 NFT Management
                             </Typography>
                         </Grid>

@@ -106,8 +106,8 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                     subAdminList.admins.map((row, index) => (
                                         <>
                                             <TableRow>
-                                                <TableCell align="center">{row.firstName}</TableCell>
-                                                <TableCell align="center">{row.lastName}</TableCell>
+                                                <TableCell align="center" sx={{ textTransform: 'capitalize' }}>{row.firstName}</TableCell>
+                                                <TableCell align="center" sx={{ textTransform: 'capitalize' }}>{row.lastName}</TableCell>
                                                 <TableCell align="center">{row.email}</TableCell>
 
                                                 <TableCell align="center">
@@ -158,7 +158,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                     
 
                                                         <Tooltip placement="top" title="Edit">
-                                                            <IconButton color="primary" aria-label="Edit" size="large"
+                                                            <IconButton   sx={{color:"#008b04"}} aria-label="Edit" size="large"
                                                              onClick={() => {
                                                                 
                                                                 setAddUpdateOpen(true);

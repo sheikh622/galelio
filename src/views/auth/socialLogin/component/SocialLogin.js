@@ -63,7 +63,7 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                     password: Yup.string().max(255).required('Password is required!')
                 })}
                 onSubmit={async (values) => {
-                    await console.log('login', values);
+                   
                     await dispatch(setLoader(true));
                 }}
             >

@@ -24,7 +24,7 @@ const HeadingCard = forwardRef(({ title, role, value, setValue, options }) => {
             <Box sx={{ padding: '13px 20px 22px 20px' }}>
                 <Grid container alignItems="center" justifyContent="space-between" spacing={gridSpacing}>
                     <Grid item>
-                        <Typography variant="h3" sx={{ fontWeight: 500, color: '#000' }}>
+                        <Typography variant="h3" sx={{ marginTop:'10px' , fontWeight: 500, color: '#000' }}>
                             {title}
                         </Typography>
                     </Grid>

@@ -53,11 +53,10 @@ const Categories = () => {
                 page={page}
                 limit={limit}
                 search={search}
-            />
+            />            <HeadingCard title=" Category Management" />
 
-            <Typography variant="h1" sx={{ m: 2 }}>
-                Category Management
-            </Typography>
+
+            
             <MainCard
                 title={
                     <Grid container spacing={gridSpacing}>

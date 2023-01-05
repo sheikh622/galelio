@@ -14,7 +14,7 @@ import { gridSpacing } from 'store/constant';
 
 export default function DetailsDialog({ open, setOpen, nftData }) {
     const theme = useTheme();
-    console.log(nftData.name, 'nftData');
+
     const status = [
         {
             name: 'Name:',
@@ -127,7 +127,6 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
                     <Button sx={{ color: theme.palette.error.dark }} onClick={handleClose} color="secondary">
                         Close
                     </Button>
-                   
                 </DialogActions>
             </Dialog>
         </div>
