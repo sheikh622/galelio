@@ -39,6 +39,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     const directMintThenList = async (result) => {
         let nftTokens = nftData.NFTTokens;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
+        console.log(contractAddress)
         let nftId = nftData.id;
         let categoryId = nftData.CategoryId;
         let brandId = nftData.BrandId;
@@ -183,7 +184,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let categoryId = nftData.CategoryId;
         let nftId = nftData.id;
         let image = nftData.asset;
-        let price = nftData.price;
+        let prices = nftData.price;
+        let price = ethers.utils.parseEther(prices.toString());
         let name = nftData.name;
         let description = nftData.description;
         let projectName = 'Galelio';
@@ -192,24 +194,29 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let brandName = nftData.Brand.name;
         let metaData = nftData.NFTMetaData;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
+        // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0"
         let nftTokens = nftData.NFTTokens;
-
+        console.log('contractAddress', contractAddress);
         const result = await client.add(
             JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, metaData })
         );
         const uri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
         let token = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+        // const SIGNING_DOMAIN = 'Voucher';
+        // const SIGNATURE_VERSION = '4';
+        // const chainId = 5;
+
         const SIGNING_DOMAIN = 'Voucher';
         const SIGNATURE_VERSION = '4';
-        const chainId = 5;
 
         const domain = {
             name: SIGNING_DOMAIN,
             version: SIGNATURE_VERSION,
             verifyingContract: contractAddress,
-            chainId
+            chainId: 5
         };
+
         const types = {
             LazyNFTVoucher: [
                 { name: 'uri', type: 'string' },
@@ -217,13 +224,32 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 { name: 'token', type: 'address' }
             ]
         };
-        const prices = ethers.utils.parseEther(price.toString());
-        const voucher = { uri, price: prices, token };
+        //const prices = ethers.utils.parseEther(price.toString());
+        const voucher = { uri, price, token };
+        console.log("Voucher: ", voucher)
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const signature = await signer._signTypedData(domain, types, voucher);
+        const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
+        console.log("signature: ", signature)
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
+        const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+        let validatorAddress = "0x6f3b51bd5b67f3e5bca2fb32796215a796b79651"
+
+        // await await nfts.lazyMint(
+        //     validatorAddress,
+        //     voucher,
+        //     signature,
+        //     MarketplaceAddress.address
+        // );
+
+        console.log('domain', domain);
+        console.log('types', types);
+        console.log('voucher', voucher);
+        console.log('signature', signature);
+        console.log('verifyAddr', verifyAddr);
+        console.log('walletAddress', walletAddress);
         let nftDataArray = [
             {
                 nftId: nftId,

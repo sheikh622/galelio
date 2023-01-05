@@ -10,6 +10,7 @@ const DeliverD = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.delivery.productList);
+    const user = useSelector((state) => state.auth.user);
     useEffect(() => {
         dispatch(getAllProducts({ walletAddress: user?.walletAddress }));
     }, []);

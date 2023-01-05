@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack, Box } from '@mui/material';
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
-
 import { gridSpacing } from 'store/constant';
 import { ethers } from 'ethers';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
@@ -40,21 +39,23 @@ const PropertiesView = ({ nft }) => {
 
     const theme = useTheme();
 
-    if (user) {
-        useEffect(() => {
+    useEffect(() => {
+        if (user) {
             dispatch(
                 getNftBuyer({
                     walletAddress: user?.walletAddress,
-                    NFTTokenId: nft.NFTTokens[0]?.tokenId,
+                    NFTTokenId: nft.NFTTokens[0].id,
                     NftId: nft.id
                 })
             );
-        }, [bought, resell, redeem]);
-    }
+        }
+    }, [bought, resell, redeem]);
 
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
 
-    console.log('yo', JSON.stringify(buyerNft) === '{}');
+    console.log('buyerNft from product view', buyerNft);
+
+    console.log('nft from product view', nft);
 
     const [open, setOpen] = React.useState(false);
     let rprice = 0;
@@ -115,7 +116,7 @@ const PropertiesView = ({ nft }) => {
     const handleBuyNft = async () => {
         if (user == null) {
             navigate('/login');
-        } else {
+        } else if (nft.mintType == 'directMint') {
             let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
@@ -133,11 +134,56 @@ const PropertiesView = ({ nft }) => {
                     dispatch(
                         buyNft({
                             nftId: nft.id,
-                            nftToken: nft.NFTTokens[0]?.tokenId,
+                            nftToken: nft.NFTTokens[0].id,
                             buyerAddress: data.from,
                             contractAddress: contractAddress
                         })
                     );
+
+                    console.log('NFT mint success', data);
+                })
+                .catch((error) => {
+                    // console.log('error', error.message);
+                    toast.error(error.message);
+                });
+        } else if (nft.mintType == 'lazyMint') {
+            console.log('im in lazy mint else if');
+            let signers = nft.signerAddress;
+            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let signature = nft.NFTTokens[0].signature;
+            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0";
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+            console.log(nfts);
+            console.log(signers);
+            console.log(contractAddress);
+            console.log(signature);
+            let prices = ethers.utils.parseEther(nft.tokenPrice);
+
+            let voucher = {
+                uri: nft.tokenUri,
+                price: prices,
+                token: erc20Address
+            };
+
+            console.log('Marketplace: ', MarketplaceAddress.address);
+            let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
+            const token = new ethers.Contract(erc20Address, Erc20, signer);
+            await (await token.approve(contractAddress, prices)).wait();
+            await await nfts.lazyMint(validatorAddress, voucher, signature, MarketplaceAddress.address).then((data) => {
+                    setBought(true);
+                    dispatch(
+                        buyNft({
+                            nftId: nft.id,
+                            nftToken: nft.NFTTokens[0].id,
+                            buyerAddress: data.from,
+                            contractAddress: contractAddress
+                        })
+                    );
+
+                    console.log('NFT mint success lazy mint', data);
                 })
                 .catch((error) => {
                     toast.error(error.message);
@@ -152,15 +198,25 @@ const PropertiesView = ({ nft }) => {
             let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
-            let price = ethers.utils.parseEther(nft.price.toString());
+
+            rprice = ethers.utils.parseEther(rprice.toString());
+            console.log('erc20Address', erc20Address);
+            console.log('tokenId', tokenId);
+            console.log('contractAddress', contractAddress);
 
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
 
+            console.log('signer', signer);
+            console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
+            const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
             const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-
+            console.log(marketplace);
+            console.log(tokenId);
+            console.log(contractAddress);
+            await await nfts.approve(MarketplaceAddress.address, tokenId);
             await await marketplace
-                .resellItem(tokenId, contractAddress, rprice.toString())
+                .resellItem(tokenId, contractAddress, rprice)
                 .then((data) => {
                     dispatch(
                         resellNft({
@@ -212,6 +268,7 @@ const PropertiesView = ({ nft }) => {
                         })
                     );
                     setRedeem(true);
+                    toast.success('NFT Redeem successfully');
                 })
                 .catch((error) => {
                     toast.error(error.message);
