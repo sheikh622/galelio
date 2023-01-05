@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
+
 import { gridSpacing } from 'store/constant';
 import { ethers } from 'ethers';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
@@ -467,7 +468,7 @@ const PropertiesView = ({ nft }) => {
                                                                                 </>
                                                                             ) : (
                                                                                 <>
-                                                                                    {buyerNft?.status !== 'Resell' && (
+                                                                                    {(buyerNft?.status !== 'Resell' || redeem == true) && (
                                                                                         <Button
                                                                                             sx={{ float: { md: 'right' } }}
                                                                                             className="buy"
@@ -484,7 +485,7 @@ const PropertiesView = ({ nft }) => {
                                                                             )}
                                                                         </Grid>
                                                                         <Grid sx={{ mt: 3 }} item md={12} xs={12} sm={12} textAlign="right">
-                                                                            {buyerNft?.status == 'Resell' ? (
+                                                                            {(buyerNft?.status == 'Resell' || resell == true) ? (
                                                                                 <>
                                                                                     <Alert severity="info">
                                                                                         <b>This item is resold.</b>

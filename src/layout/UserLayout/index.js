@@ -39,10 +39,7 @@ const UserLayout = () => {
 
             <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
 
-            <Grid item md={10} xs={12} sx={{ pl: 3 ,  
-                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                color: theme.palette.mode === 'dark' ? 'white' : '#404040'
-            }}>
+            <Grid item md={10} xs={12} sx={{ pl: 3 }}>
                 <Footer />
             </Grid>
         </>
