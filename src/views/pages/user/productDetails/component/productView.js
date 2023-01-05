@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
-
 import { gridSpacing } from 'store/constant';
 import { ethers } from 'ethers';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
