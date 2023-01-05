@@ -11,9 +11,7 @@ const SimilarProducts = ({ marketplaceNfts }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left',
-                             sm: 'center' },
-                             textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
                         >
                             Similar Products
                         </Typography>
@@ -23,25 +21,19 @@ const SimilarProducts = ({ marketplaceNfts }) => {
 
             <Grid item xs={12}>
                 <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {marketplaceNfts?.nfts?.rows.length > 0
-                    ?
-                    <>
-                    {marketplaceNfts?.nfts?.rows.map((item) => (
-                        <NftCard data={item} />
-                    ))}
-                    
-                    </>
-                    :
-                    <>
-                     <Grid sx={{width:"100%", margin:"3%"}}>
-                   <h3 sx={{textAlign:"center"}}>
-                No Similar products found.
-
-                   </h3>
-
-                   </Grid>
-                    </>
-                    }
+                    {marketplaceNfts?.nfts?.rows.length > 0 ? (
+                        <>
+                            {marketplaceNfts?.nfts?.rows.map((item) => (
+                                <NftCard data={item} />
+                            ))}
+                        </>
+                    ) : (
+                        <>
+                            <Grid sx={{ width: '100%', margin: '3%' }}>
+                                <h3 sx={{ textAlign: 'center' }}>No Similar products found.</h3>
+                            </Grid>
+                        </>
+                    )}
                 </Grid>
             </Grid>
         </Grid>
