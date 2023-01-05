@@ -1,6 +1,6 @@
 import { forwardRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
+import { useFormik, validateYupSchema } from 'formik';
 import * as Yup from 'yup';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { addSubAdmin, updateSubAdmin } from 'redux/subAdmin/actions';
@@ -19,6 +19,9 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         }
     }, [subAdminData]);
 
+
+    console.log("subAdminData", subAdminData)
+
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
         firstName: Yup.string()
@@ -30,7 +33,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
             .max(42, 'Last Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-
+        walletAddress:Yup.string().required('Wallet Address is required!'), 
         adminPassword: Yup.mixed().when(['isUpdate'], {
             is: false,
             then: Yup.string()
@@ -50,6 +53,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         initialValues: subAdminData,
         validationSchema,
         onSubmit: (values) => {
+            console.log("values", values)
             if (subAdminData.id == null) {
                 dispatch(
                     addSubAdmin({
@@ -57,6 +61,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         lastName: values.lastName,
                         email: values.adminEmail,
                         password: values.adminPassword,
+                        walletAddress: values.walletAddress,
                         page: page,
                         limit: limit,
                         search: search,
@@ -71,6 +76,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         lastName: values.lastName,
                         email: values.adminEmail,
                         password: values.adminPassword,
+                        walletAddress: values.walletAddress,
                         page: page,
                         limit: limit,
                         search: search,
@@ -154,6 +160,19 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         helperText={formik.touched.adminPassword && formik.errors.adminPassword}
                                         fullWidth
                                         autoComplete="given-name"
+                                    />
+                                </Grid>
+                                <Grid item xs={6} pt={2}>
+                                    <InputLabel htmlFor="">Wallet Address</InputLabel>
+                                    <TextField
+                                        id="walletAddress"
+                                        name="walletAddress"
+                                        value={formik.values.walletAddress}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.walletAddress && Boolean(formik.errors.walletAddress)}
+                                        helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                        fullWidth
+                                        autoComplete=""
                                     />
                                 </Grid>
                             </>

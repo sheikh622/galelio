@@ -37,12 +37,13 @@ const typeArray = [
 ];
 
 const NftManagement = () => {
+
     const theme = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
     const nftList = useSelector((state) => state.nftReducer.nftList);
-
+    const user = useSelector((state) => state.auth.user);
     const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -62,7 +63,7 @@ const NftManagement = () => {
         setSearch('');
         setPage(1);
     };
-
+    
     useEffect(() => {
         dispatch(
             getAllNft({
@@ -70,10 +71,13 @@ const NftManagement = () => {
                 search: search,
                 page: page,
                 limit: limit,
-                type: type
+                type: type,
+                brandId: user.BrandId
+                
+                
             })
         );
-    }, [, search, page, limit, type]);
+    }, [search, page, limit, type]);
 
     return (
         <>

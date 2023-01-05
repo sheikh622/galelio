@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { changeSubAdminMintingAccess } from 'redux/subAdmin/actions';
-
+// import NFTAbi from '../../../../../contractAbi'
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page, limit, search, subAdminData }) {
     const theme = useTheme();
@@ -13,6 +13,18 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
         setOpen(false);
     };
 
+    const handleMintRole =()=>{
+
+        dispatch(
+            changeSubAdminMintingAccess({
+                id: subAdminData.id,
+                page: page,
+                limit: limit,
+                search: search,
+                handleClose: handleClose
+            })
+        );
+    }
     return (
         <>
             <Dialog
@@ -46,15 +58,8 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
                         variant="contained"
                         size="large"
                         onClick={() => {
-                            dispatch(
-                                changeSubAdminMintingAccess({
-                                    id: subAdminData.id,
-                                    page: page,
-                                    limit: limit,
-                                    search: search,
-                                    handleClose: handleClose
-                                })
-                            );
+                            handleMintRole()
+                            
                         }}
                     >
                         Yes

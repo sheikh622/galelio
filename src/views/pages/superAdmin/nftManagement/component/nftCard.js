@@ -5,6 +5,9 @@ import MintNftDialog from './mintNftDialog';
 import RejectNftDialog from './rejectNftDialog';
 
 const NftCard = ({ nftData, search, page, limit, type }) => {
+
+
+    console.log("nftData", nftData)
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
     const [rejectMintOpen, setRejectMintOpen] = useState(false);
@@ -93,7 +96,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                     </Button>
                                 )}
 
-                                {nftData.status == 'REQUESTED' && (
+                                {(nftData.status == 'REQUESTED') && (
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -105,6 +108,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                         Mint
                                     </Button>
                                 )}
+                              
                             </Stack>
                         </Grid>
                     </Grid>
