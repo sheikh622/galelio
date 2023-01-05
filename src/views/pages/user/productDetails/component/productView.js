@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack, Box } from '@mui/material';
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
+
 import { gridSpacing } from 'store/constant';
 import { ethers } from 'ethers';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
@@ -15,9 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import SubCard from 'ui-component/cards/SubCard';
-
-import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft } from 'redux/nftManagement/actions';
+import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft, changeTokenId } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -26,10 +25,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import  BLOCKCHAIN  from '../../../../../constants';
+import SubCard from 'ui-component/cards/SubCard';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({ nft }) => {
+
     const dispatch = useDispatch();
     const [bought, setBought] = useState(false);
     const [resell, setResell] = useState(false);
@@ -117,7 +119,7 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else if (nft.mintType == 'directMint') {
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
             let price = ethers.utils.parseEther(nft.price.toString());
@@ -149,7 +151,7 @@ const PropertiesView = ({ nft }) => {
         } else if (nft.mintType == 'lazyMint') {
             console.log('im in lazy mint else if');
             let signers = nft.signerAddress;
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let signature = nft.NFTTokens[0].signature;
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
             // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0";
@@ -172,22 +174,53 @@ const PropertiesView = ({ nft }) => {
             let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
             const token = new ethers.Contract(erc20Address, Erc20, signer);
             await (await token.approve(contractAddress, prices)).wait();
-            await await nfts.lazyMint(validatorAddress, voucher, signature, MarketplaceAddress.address).then((data) => {
-                    setBought(true);
-                    dispatch(
-                        buyNft({
-                            nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].id,
-                            buyerAddress: data.from,
-                            contractAddress: contractAddress
-                        })
-                    );
 
-                    console.log('NFT mint success lazy mint', data);
-                })
-                .catch((error) => {
-                    toast.error(error.message);
-                });
+            //
+            try {
+                let mintedNFT = await (await nfts.lazyMint(validatorAddress, voucher, signature, MarketplaceAddress.address)).wait();
+                const id = parseInt(mintedNFT.events[0].args[2]);
+                console.log('Data: ', mintedNFT,id);
+         
+                
+                setBought(true);
+                dispatch(changeTokenId({
+                    id: nft.NFTTokens[0].id,
+                    tokenId: id.toString()
+                }))
+
+                dispatch(
+                    buyNft({
+                        nftId: nft.id,
+                        nftToken: nft.NFTTokens[0].id,
+                        buyerAddress: mintedNFT.from,
+                        contractAddress: contractAddress
+                    })
+                );
+
+            } catch (error) {
+                toast.error(error.message);
+            }
+
+            //
+
+            // await await nfts.lazyMint(validatorAddress, voucher, signature, MarketplaceAddress.address).then((data) => {
+            //         setBought(true);
+            //         dispatch(
+            //             buyNft({
+            //                 nftId: nft.id,
+            //                 nftToken: nft.NFTTokens[0].id,
+            //                 buyerAddress: data.from,
+            //                 contractAddress: contractAddress
+            //             })
+            //         );
+
+            //         console.log('NFT mint success lazy mint', data);
+            //     })
+            //     .catch((error) => {
+            //         // console.log('error', error.message);
+            //         toast.error(error.message);
+            //     });
+            // const id = parseInt(mintedNFT.events[0].args[2]);
         }
     };
 
@@ -195,7 +228,7 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else {
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
@@ -240,7 +273,7 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else {
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -387,7 +420,7 @@ const PropertiesView = ({ nft }) => {
                                                                                 </>
                                                                             ) : (
                                                                                 <>
-                                                                                    {buyerNft?.status !== 'Resell' && (
+                                                                                    {(buyerNft?.status !== 'Resell' || redeem == true) && (
                                                                                         <Button
                                                                                             sx={{ float: { md: 'right' } }}
                                                                                             className="buy"
@@ -404,7 +437,7 @@ const PropertiesView = ({ nft }) => {
                                                                             )}
                                                                         </Grid>
                                                                         <Grid sx={{ mt: 3 }} item md={12} xs={12} sm={12} textAlign="right">
-                                                                            {buyerNft?.status == 'Resell' ? (
+                                                                            {(buyerNft?.status == 'Resell' || resell == true) ? (
                                                                                 <>
                                                                                     <Alert severity="info">
                                                                                         <b>This item is resold.</b>

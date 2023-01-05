@@ -17,7 +17,8 @@ import {
     REDEEM_NFT,
     GET_NFT_BUYER_SUCCESS,
     GET_NFT_BUYER,
-    ADD_DELIVERY_NFT
+    ADD_DELIVERY_NFT,
+    CHANGE_TOKEN_ID
 } from './constants';
 
 
@@ -88,6 +89,14 @@ export const buyNft = (data) => {
         payload: data
     };
 };
+
+export const changeTokenId = (data) => {
+    return {
+        type: CHANGE_TOKEN_ID,
+        payload: data
+    };
+};
+
 export const resellNft = (data) => {
     return {
         type: RESELL_NFT,
