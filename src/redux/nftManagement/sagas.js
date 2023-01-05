@@ -41,7 +41,8 @@ function* deleteNftRequest({ payload }) {
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                type: payload.type
+                type: payload.type,
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
@@ -324,7 +325,7 @@ function* requestChangeTokenId({ payload }) {
         );
         yield setNotification('success', response.data.message);
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+        yield sagaErrorHandler("An error occurred");
     }
 }
 
