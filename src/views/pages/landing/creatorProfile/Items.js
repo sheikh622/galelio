@@ -63,7 +63,7 @@ const Items = () => {
     ];
 
     const { nfts } = useSelector((state) => state.nftReducer.nftListUser);
-    console.log('nfts from creator profile', nfts);
+   
     const itemData = [];
     {
         nfts?.length > 0 &&
@@ -105,7 +105,8 @@ const Items = () => {
                         item
                         md={4}
                         xs={12}
-                        sx={{ marginLeft: { md: '6px', xl: '6px' }, marginTop: { md: '-8px', xs: '10px', sm: '10px' } }}
+                        sx={{ marginLeft: { md: '6px', xl: '6px' }, 
+                        marginTop: { md: '-8px', xs: '10px', sm: '10px' } }}
                     >
                         <TextField
                             sx={{ borderRadius: '4px' }}

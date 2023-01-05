@@ -34,6 +34,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell align="center"></TableCell>
                         <TableCell align="center">Name</TableCell>
                         <TableCell align="center">Location</TableCell>
                         <TableCell align="center">Description</TableCell>
@@ -48,27 +49,21 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                             {brandsList.brands != undefined &&
                                 brandsList.brands.map((row, index) => (
                                     <TableRow>
-                                        <TableCell align="center" justifyContent="center" alignItems="center">
-                                            <Grid container spacing={2} justifyContent="center" alignItems="center">
-                                                <Grid item>
-                                                    <Avatar alt="Brand Image" src={row.image} />
-                                                </Grid>
-                                                <Grid item>
-                                                    <Typography variant="subtitle1" component="div">
-                                                        {row.name}
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
+                                        <TableCell align="right">
+                                            <Avatar alt="Brand Image" src={row.image} sx={{ float: 'right' }} />
                                         </TableCell>
-                                        <TableCell align="center" sx={{ padding: '0px' }}>
+                                        <TableCell align="center" sx={{ padding: '0px', textTransform: 'capitalize' }}>
+                                            {row.name}
+                                        </TableCell>
+                                        <TableCell align="center" sx={{ padding: '0px', textTransform: 'capitalize'  }}>
                                             {row.location}
                                         </TableCell>
-                                        <TableCell align="center" sx={{ padding: '0px' }}>
+                                        <TableCell align="center" sx={{ padding: '0px',  textTransform: 'capitalize'  }}>
                                             {row.description}
                                         </TableCell>
                                         <TableCell align="center">{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
                                         <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
-                                        <TableCell align="center" sx={{ padding: '0px' }}>
+                                        <TableCell align="center" sx={{ padding: '0px' , textTransform: 'capitalize'  }}>
                                             <Stack direction="row" justifyContent="center" alignItems="center">
                                                 <Tooltip placement="top" title="Add Brand Admin">
                                                     <IconButton

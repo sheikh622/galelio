@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Slider from 'react-slick';
 
 const Categories = ({ categories }) => {
-    console.log('categories', categories);
+   
     var settings = {
         Arrows: false,
         dots: false,

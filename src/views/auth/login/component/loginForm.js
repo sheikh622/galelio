@@ -30,21 +30,16 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactFacebookLogin from 'react-facebook-login';
 import './loginForm.css';
-import { API_URL} from 'utils/axios';
+import { API_URL } from 'utils/axios';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 
-
-
 const LoginForm = ({ loginProp, ...others }) => {
-
-    
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const theme = useTheme();
 
     const loader = useSelector((state) => state.auth.loader);
-  
+
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -60,13 +55,12 @@ const LoginForm = ({ loginProp, ...others }) => {
     const googleAuthHandle = (data) => {
         const decoded_data = jwt.decode(data.credential);
         axios
-            .post(API_URL+'auth/google/callback/success', {
+            .post(API_URL + 'auth/google/callback/success', {
                 data: decoded_data
             })
             .then(function (response) {
-                console.log("response from google auth", response)
-                dispatch(loginSuccess(response.data.data))
-                navigate("/")
+                dispatch(loginSuccess(response.data.data));
+                navigate('/');
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -74,15 +68,14 @@ const LoginForm = ({ loginProp, ...others }) => {
     };
 
     const responseFacebook = (data) => {
-        console.log('facebook data', data);
         let { email, first_name, last_name } = data;
         axios
-            .post(API_URL+'auth/facebook/callback/success', {
+            .post(API_URL + 'auth/facebook/callback/success', {
                 data: { email, first_name, last_name }
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-            navigate("/")
+                navigate('/');
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -236,11 +229,11 @@ const LoginForm = ({ loginProp, ...others }) => {
                             />
                         </Grid>
                         <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                        <Button variant="contained" startIcon={<FacebookOutlinedIcon />}>
-                        Login with Facebook
-                      </Button>
+                            <Button variant="contained" startIcon={<FacebookOutlinedIcon />}>
+                                Login with Facebook
+                            </Button>
                         </Grid>
-                      {/*   <Grid
+                        {/*   <Grid
                             item
                             sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
                         >

@@ -71,7 +71,6 @@ const rows = [
 // ==============================|| DeliveryDashboard ||============================== //
 
 const DeliveryDashboard = ({ productList }) => {
-    console.log(productList, 'productList>==============');
     return (
         <Grid item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
@@ -92,8 +91,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                     >
                                                         <Grid item md={1} sm={12}></Grid>
 
-                                                        <Grid item md={4} lg={4} className="Productdetails" 
-                                                        sx={{ height: 'auto' }}>
+                                                        <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
                                                             <SubCard>
                                                                 <img
                                                                     src={row?.Nft.asset}

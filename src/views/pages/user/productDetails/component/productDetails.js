@@ -74,7 +74,6 @@ const rows = [
 // ==============================|| DeliveryDashboard ||============================== //
 
 const DeliveryDashboard = ({ productList }) => {
-    console.log(productList, 'productList>==============');
     return (
         <Grid mt={2} ml={2} item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
@@ -82,53 +81,39 @@ const DeliveryDashboard = ({ productList }) => {
                     <SubCard title="Product Details">
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
-                              
-                                    <Grid item xs={12}>
-                                      
-                                                <>
-                                                    <Grid
-                                                        container
-                                                        justifyContent="center"
-                                                        spacing={gridSpacing}
-                                                        sx={{ textAlign: 'center', marginBottom: '20px' }}
-                                                    >
-                                                        <Grid item md={1} sm={12}></Grid>
+                                <Grid item xs={12}>
+                                    <>
+                                        <Grid
+                                            container
+                                            justifyContent="center"
+                                            spacing={gridSpacing}
+                                            sx={{ textAlign: 'center', marginBottom: '20px' }}
+                                        >
+                                            <Grid item md={1} sm={12}></Grid>
 
-                                                        <Grid item md={4} lg={4} 
-                                                        className="Productdetails" 
-                                                        sx={{ height: 'auto' }}>
-                                                            <SubCard>
-                                                                <img
-                                                                    src={watch1}
-                                                                    alt="Statement Image"
-                                                                    className="ProductimageSize"
-                                                                />
-                                                            </SubCard>{' '}
-                                                        </Grid>
+                                            <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
+                                                <SubCard>
+                                                    <img src={watch1} alt="Statement Image" className="ProductimageSize" />
+                                                </SubCard>{' '}
+                                            </Grid>
 
-                                                        <Grid item md={6} sm={12} sx={{ height: 'auto' }}>
-                                                            <SubCard>
-                                                                <TableContainer sx={{}}>
-                                                                    <List component="nav" aria-label="main mailbox folders">
-                                                                        <ListItemButton>
-                                                                            <ListItemIcon>
-                                                                                <PersonIcon sx={{ fontSize: '1.3rem' }} />
-                                                                            </ListItemIcon>
-                                                                            <ListItemText
-                                                                                primary={<Typography variant="subtitle1">Name</Typography>}
-                                                                            />
-                                                                            <ListItemSecondaryAction>
-                                                                                <Typography
-                                                                                    sx={{ color: '#000' }}
-                                                                                    variant="subtitle1"
-                                                                                    align="right"
-                                                                                >
-                                                                                   aiman
-                                                                                </Typography>
-                                                                            </ListItemSecondaryAction>
-                                                                        </ListItemButton>
-                                                                        <Divider />
-                                                                        {/*   <ListItemButton>
+                                            <Grid item md={6} sm={12} sx={{ height: 'auto' }}>
+                                                <SubCard>
+                                                    <TableContainer sx={{}}>
+                                                        <List component="nav" aria-label="main mailbox folders">
+                                                            <ListItemButton>
+                                                                <ListItemIcon>
+                                                                    <PersonIcon sx={{ fontSize: '1.3rem' }} />
+                                                                </ListItemIcon>
+                                                                <ListItemText primary={<Typography variant="subtitle1">Name</Typography>} />
+                                                                <ListItemSecondaryAction>
+                                                                    <Typography sx={{ color: '#000' }} variant="subtitle1" align="right">
+                                                                        aiman
+                                                                    </Typography>
+                                                                </ListItemSecondaryAction>
+                                                            </ListItemButton>
+                                                            <Divider />
+                                                            {/*   <ListItemButton>
                                                                     <ListItemIcon>
                                                                         <ModeIcon sx={{ fontSize: '1.3rem' }} />
                                                                     </ListItemIcon>
@@ -142,75 +127,59 @@ const DeliveryDashboard = ({ productList }) => {
                                                                     </ListItemSecondaryAction>
                                                                 </ListItemButton>
                                                                 <Divider /> */}
-                                                                        <ListItemButton>
-                                                                            <ListItemIcon>
-                                                                                <DescriptionIcon sx={{ fontSize: '1.3rem' }} />
-                                                                            </ListItemIcon>
-                                                                            <ListItemText
-                                                                                primary={
-                                                                                    <Typography variant="subtitle1">Description</Typography>
-                                                                                }
-                                                                            />
-                                                                            <ListItemSecondaryAction>
-                                                                                <Typography
-                                                                                    sx={{ color: '#9e9e9e', textTransform: 'capitalize' }}
-                                                                                    variant="subtitle1"
-                                                                                    align="right"
-                                                                                >
-                                                                                aiman
-                                                                                </Typography>
-                                                                            </ListItemSecondaryAction>
-                                                                        </ListItemButton>
-                                                                        <Divider />
-                                                                        <ListItemButton>
-                                                                            <ListItemIcon>
-                                                                                <TourIcon sx={{ fontSize: '1.3rem' }} />
-                                                                            </ListItemIcon>
-                                                                            <ListItemText
-                                                                                primary={
-                                                                                    <Typography variant="subtitle1">Status</Typography>
-                                                                                }
-                                                                            />
-                                                                            <ListItemSecondaryAction>
-                                                                                <Typography
-                                                                                    color=
-                                                                                       'Orange'
-                                                                                    
-                                                                                    variant="subtitle1"
-                                                                                    align="right"
-                                                                                >
-                                                                                aiman
-                                                                                </Typography>
-                                                                            </ListItemSecondaryAction>
-                                                                        </ListItemButton>
-                                                                        <Divider />
-                                                                        <ListItemButton>
-                                                                            <ListItemIcon>
-                                                                                <MonetizationOnIcon sx={{ fontSize: '1.3rem' }} />
-                                                                            </ListItemIcon>
-                                                                            <ListItemText
-                                                                                primary={<Typography variant="subtitle1">Price</Typography>}
-                                                                            />
-                                                                            <ListItemSecondaryAction>
-                                                                                <Typography
-                                                                                    sx={{ color: 'Orange' }}
-                                                                                    variant="subtitle1"
-                                                                                    align="right"
-                                                                                >
-                                                                                aiman
-                                                                                </Typography>
-                                                                            </ListItemSecondaryAction>
-                                                                        </ListItemButton>
-                                                                    </List>
-                                                                </TableContainer>
-                                                            </SubCard>
-                                                        </Grid>
-                                                        <Grid item md={1} sm={12}></Grid>
-                                                    </Grid>
-                                                </>
-                                         
-                                    </Grid>
-                             
+                                                            <ListItemButton>
+                                                                <ListItemIcon>
+                                                                    <DescriptionIcon sx={{ fontSize: '1.3rem' }} />
+                                                                </ListItemIcon>
+                                                                <ListItemText
+                                                                    primary={<Typography variant="subtitle1">Description</Typography>}
+                                                                />
+                                                                <ListItemSecondaryAction>
+                                                                    <Typography
+                                                                        sx={{ color: '#9e9e9e', textTransform: 'capitalize' }}
+                                                                        variant="subtitle1"
+                                                                        align="right"
+                                                                    >
+                                                                        aiman
+                                                                    </Typography>
+                                                                </ListItemSecondaryAction>
+                                                            </ListItemButton>
+                                                            <Divider />
+                                                            <ListItemButton>
+                                                                <ListItemIcon>
+                                                                    <TourIcon sx={{ fontSize: '1.3rem' }} />
+                                                                </ListItemIcon>
+                                                                <ListItemText
+                                                                    primary={<Typography variant="subtitle1">Status</Typography>}
+                                                                />
+                                                                <ListItemSecondaryAction>
+                                                                    <Typography color="Orange" variant="subtitle1" align="right">
+                                                                        aiman
+                                                                    </Typography>
+                                                                </ListItemSecondaryAction>
+                                                            </ListItemButton>
+                                                            <Divider />
+                                                            <ListItemButton>
+                                                                <ListItemIcon>
+                                                                    <MonetizationOnIcon sx={{ fontSize: '1.3rem' }} />
+                                                                </ListItemIcon>
+                                                                <ListItemText
+                                                                    primary={<Typography variant="subtitle1">Price</Typography>}
+                                                                />
+                                                                <ListItemSecondaryAction>
+                                                                    <Typography sx={{ color: 'Orange' }} variant="subtitle1" align="right">
+                                                                        aiman
+                                                                    </Typography>
+                                                                </ListItemSecondaryAction>
+                                                            </ListItemButton>
+                                                        </List>
+                                                    </TableContainer>
+                                                </SubCard>
+                                            </Grid>
+                                            <Grid item md={1} sm={12}></Grid>
+                                        </Grid>
+                                    </>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </SubCard>
