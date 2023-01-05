@@ -25,10 +25,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import  BLOCKCHAIN  from '../../../../../constants';
+import SubCard from 'ui-component/cards/SubCard';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({ nft }) => {
+
     const dispatch = useDispatch();
     const [bought, setBought] = useState(false);
     const [resell, setResell] = useState(false);
@@ -116,7 +119,7 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else if (nft.mintType == 'directMint') {
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
             let price = ethers.utils.parseEther(nft.price.toString());
@@ -148,7 +151,7 @@ const PropertiesView = ({ nft }) => {
         } else if (nft.mintType == 'lazyMint') {
             console.log('im in lazy mint else if');
             let signers = nft.signerAddress;
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let signature = nft.NFTTokens[0].signature;
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
             // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0";
@@ -225,7 +228,7 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else {
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
@@ -270,7 +273,7 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else {
-            let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+            let erc20Address = BLOCKCHAIN.ERC20
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
             const provider = new ethers.providers.Web3Provider(window.ethereum);

@@ -10,6 +10,7 @@ import FactoryAbi from '../../../../../../contractAbi/Factory.json';
 import FactoryAddress from '../../../../../../contractAbi/Factory-address.json';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import  BLOCKCHAIN from '../../../../../../constants';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
@@ -42,11 +43,11 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         });
         const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
         const symbol = 'G' + brandName.substring(0, 1) + categoryName.substring(0, 1);
-        const admin = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
-        const validator = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
+        const admin = BLOCKCHAIN.WALLET_ADDRESS
+        const validator = BLOCKCHAIN.WALLET_ADDRESS
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const minterAddress = await signer.getAddress();
+        const minterAddress = BLOCKCHAIN.WALLET_ADDRESS
         const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
         let res = await (
             await factoryAddr.deployMintingContract(contractName, symbol, admin, minterAddress, validator).catch((error) => {
