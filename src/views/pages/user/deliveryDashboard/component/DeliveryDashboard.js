@@ -71,12 +71,11 @@ const rows = [
 // ==============================|| DeliveryDashboard ||============================== //
 
 const DeliveryDashboard = ({ productList }) => {
-    console.log(productList, 'productList>==============');
     return (
         <Grid item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <SubCard title="Product Details">
+                    <SubCard title="Delivery Dashboard">
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
                                 <Grid item xs={12}>
@@ -87,13 +86,16 @@ const DeliveryDashboard = ({ productList }) => {
                                             sx={{ textAlign: 'center', marginBottom:'20px' }}>
                                                 <Grid item md={1} sm={12}></Grid>
 
-                                                <Grid item md={4} lg={4} className="Productdetails" 
-                                                sx={{ height: 'auto' }}>
-                                                    <SubCard>
-                                                        <img src={row?.Nft.asset} alt="Statement Image" 
-                                                        className="ProductimageSize" />
-                                                    </SubCard>{' '}
-                                                </Grid>
+                                                        <Grid item md={4} lg={4} className="Productdetails" 
+                                                        sx={{ height: 'auto' }}>
+                                                            <SubCard>
+                                                                <img
+                                                                    src={row?.Nft.asset}
+                                                                    alt="Statement Image"
+                                                                    className="ProductimageSize"
+                                                                />
+                                                            </SubCard>{' '}
+                                                        </Grid>
 
                                                 <Grid item md={6} sm={12} sx={{ height: 'auto' }}>
                                                     <SubCard>

@@ -6,14 +6,13 @@ import { Grid } from '@mui/material';
 import Properties from './component/properties';
 import PropertiesView from './component/productView';
 import { getAllMarketplaceNftsByCategory } from 'redux/marketplace/actions';
-
+import DeliveryDashboard from './component/productDetails';
 
 const ProductDetails = () => {
     const theme = useTheme();
     const location = useLocation();
     const dispatch = useDispatch();
     const marketplaceNfts = useSelector((state) => state.marketplaceReducer.marketplaceNfts);
-    console.log('marketplaceNfts', marketplaceNfts);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -27,26 +26,29 @@ const ProductDetails = () => {
     //         })
     //     );
     // }, [search, page, limit]);
-    console.log("location.state",location.state)
     return (
         <>
             <Grid
                 container-fluid
-                md={11}
+                md={12}
+                lg={11}
                 sx={{
-                    display: { xs: 'block', sm: 'block', md: 'flex' },
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    display: { xs: 'block', sm: 'block', md: 'flex', lg: 'flex' },
+                    background: 'tranparent',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Grid item md={11} xs={12}>
+                <Grid item md={12} xs={12} lg={11}>
                     <Grid container-fluid>
+                        {/*  <Grid item md={12} xs={12}>
+                            <DeliveryDashboard  />
+                        </Grid> */}
                         <Grid item md={12} xs={12}>
                             <PropertiesView nft={location.state.nft} />
                         </Grid>
                         <Grid item md={12} xs={12}>
                             <Properties nft={location.state.nft} />
-                        </Grid>        
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>

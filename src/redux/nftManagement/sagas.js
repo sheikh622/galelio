@@ -103,7 +103,7 @@ export function* watchGetAllNftUser() {
 }
 
 function* editNftRequest({ payload }) {
-    console.log({ payload });
+   
     const formData = new FormData();
     if (payload.isFile) {
         formData.append('asset', payload.asset);

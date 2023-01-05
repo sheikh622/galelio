@@ -17,7 +17,36 @@ const FeaturedCreators = ({ brands }) => {
         autoplay: false,
         arrows: true,
         slidesToShow: 5,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 900,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 425,
+                settings: {
+                    fade: true,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
     };
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
@@ -53,7 +82,7 @@ const FeaturedCreators = ({ brands }) => {
                     </Grid>
                 </>
             ) : brands && brands?.length > 0 ? (
-                <Grid  container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
                     {brands?.map((item) => (
                         <BrandCard data={item} brands={brands} />
                     ))}

@@ -74,7 +74,7 @@ export function* watchAddBrandCategory() {
 }
 
 function* updateBrandCategoryRequest({ payload }) {
-    console.log({ payload });
+   
     let data = {
         categoryId: payload.categoryId,
         brandId: payload.brandId,

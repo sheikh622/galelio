@@ -27,7 +27,6 @@ import RedditIcon from '@mui/icons-material/Reddit';
 // ==============================|| SOCIAL PROFILE ||============================== //
 
 const SocialProfile = () => {
-
     const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
     const itemData = [
@@ -71,7 +70,7 @@ const SocialProfile = () => {
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{}}>
                 <CardMedia component="img" image={Cover} sx={{ borderRadius: '1px', overflow: 'hidden', mb: 3 }} />
 
                 <Grid container spacing={gridSpacing}>
@@ -107,7 +106,7 @@ const SocialProfile = () => {
                             className="text"
                             variant="h5"
                         >
-                            {user.firstName}{" "}{user.lastName}
+                            {user.firstName} {user.lastName}
                         </Typography>
                         <Typography
                             sx={{
@@ -137,8 +136,7 @@ const SocialProfile = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid mt={2} item xs={12} md={12} sx={{ display: 'flex',
-                 marginLeft: { md: '-9px' } }}>
+                <Grid mt={2} item xs={12} md={12} sx={{ display: 'flex', marginLeft: { md: '-9px' } }}>
                     <ul className="list">
                         <li className="item">
                             Items <b> 120</b>

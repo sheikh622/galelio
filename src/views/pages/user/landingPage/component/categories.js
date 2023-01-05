@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Slider from 'react-slick';
 
 const Categories = ({ categories }) => {
-    console.log('categories', categories);
+   
     var settings = {
         Arrows: false,
         dots: false,
@@ -18,7 +18,37 @@ const Categories = ({ categories }) => {
         autoplay: false,
         arrows: true,
         slidesToShow: 5,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 900,
+                settings: {
+                    // fade:true,
+                    slidesToShow: 5,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 425,
+                settings: {
+                    fade: true,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
     };
     // const responsive = {
     //     superLargeDesktop: {
@@ -70,19 +100,29 @@ const Categories = ({ categories }) => {
                                 {categories?.map((item) => (
                                     <>
                                         <Grid
-                                            sx={{ my: { xs: '10px', md: '0', sm: '10px' } }}
+                                            sx={{
+                                                my: { xs: '10px', md: '0', sm: '10px' },
+                                                ml: {
+                                                    xs: categories && categories?.length > 5 ? 5 : 0,
+                                                    sm: categories && categories?.length > 5 ? 2 : 0,
+                                                    md: categories && categories?.length > 5 ? 2 : 0
+                                                },
+                                                mr: {
+                                                    xs: categories && categories?.length > 5 ? 1 : 0,
+                                                    md: categories && categories?.length > 5 ? 4 : 0
+                                                }
+                                            }}
                                             item
-                                            sm={6}
-                                            md={categories && categories?.length > 5 ? 12 : 2}
-                                            ml={categories && categories?.length > 5 ? 2 : 0}
-                                            mr={categories && categories?.length > 5 ? 4 : 0}
+                                            xs={12}
+                                            sm={categories && categories?.length > 5 ? 12 : 4}
+                                            md={categories && categories?.length > 5 ? 12 : 4}
+                                            lg={categories && categories?.length > 5 ? 12 : 2}
                                         >
                                             <Card
                                                 sx={{
                                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                                                    // maxWidth: nfts && nfts?.length > 3? 0 : 365,
-                                                    // width: nfts && nfts?.length > 3? '0' : '250%',
+
                                                     boxShadow: '1px 2px 6px #d3d3d3',
                                                     borderRadius: '7px'
                                                 }}
@@ -137,20 +177,30 @@ const Categories = ({ categories }) => {
                         <Grid
                             mt={-3}
                             container
-                            justifyContent="left"
+                           
                             spacing={4}
-                            sx={{ textAlign: 'center', marginLeft: { md: '18px' }, width: { md: '100%' } }}
+                            sx={{ textAlign: 'center', marginLeft: { md: '2px' }, width: { md: '100%' },
+                                justifyContent:{md:"center" , lg:'left', xs:'center' , sm:'center'} }}
                         >
                             {categories?.map((item) => (
-                                <Grid sx={{ my: { xs: '10px', md: '0', sm: '10px' } }} item md={2} sm={6}>
+                                <Grid
+                                    sx={{ my: { xs: '10px', md: '0', sm: '10px' }, 
+                                    marginLeft:{xs:'15px'},
+                                     marginRight: {lg:'15px'} }}
+                                    item
+                                    md={4}
+                                    lg={2}
+                                    sm={4}
+                                    xs={10}
+                                >
                                     <Card
                                         sx={{
                                             color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                             background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                                            // maxWidth: nfts && nfts?.length > 3? 0 : 365,
-                                            // width: nfts && nfts?.length > 3? '0' : '250%',
+                                           
                                             boxShadow: '1px 2px 6px #d3d3d3',
-                                            borderRadius: '7px'
+                                            borderRadius: '7px',
+                                            width: { lg:'188px'}
                                         }}
                                         onClick={() => {
                                             navigate('/marketplace', {

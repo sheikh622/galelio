@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const NftCard = ({ data }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-    console.log('data from nft card navigate', data);
+
     return (
         <Grid
             item
@@ -33,7 +33,7 @@ const NftCard = ({ data }) => {
             >
                 <CardActionArea>
                     <CardMedia component="img" height="200" image={data.asset} />
-                    <CardContent style={{ padding: '6%' }}>
+                    <CardContent sx={{ padding: '6%' }}>
                         <Grid container>
                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                 <span style={{ fontWeight: '550', fontSize: '100%' }}>  {data.name} </span>
@@ -42,7 +42,7 @@ const NftCard = ({ data }) => {
                                 </div>
                             </Grid>
                             <Grid item xs={4} sx={{ background: '' }}>
-                                <span style={{ fontWeight: '40 !important ', fontSize: '110%', float: 'right', color: '#878787' }}>
+                                <span sx={{ fontWeight: '40 !important ', fontSize: '110%', float: 'right', color: '#878787' }}>
                                     Creator
                                 </span>
                             </Grid>
@@ -51,8 +51,8 @@ const NftCard = ({ data }) => {
                         <Divider sx={{ mt: 2, mb: 2 }} />
                         <Grid>
                             <Grid item md={12} xs={12} className="overflow" sx={{ marginTop: { xs: '10px', md: '0' } }}>
-                                <span style={{ float: 'left' }}>Current Price :</span>
-                                <span style={{ marginLeft: '2%' }}>
+                                <span sx={{ float: 'left' }}>Current Price :</span>
+                                <span sx={{ marginLeft: '2%' }}>
                                     <b>{data.currencyType + ' ' + data.price}</b>
                                 </span>
                             </Grid>

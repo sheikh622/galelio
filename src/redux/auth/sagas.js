@@ -15,7 +15,7 @@ function* loginUser({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
-        console.log("login user redux", response.data.data.user.role)
+       
         if(response.data.data.user.role == "User"){
             payload.navigate('/');
         }
@@ -37,7 +37,7 @@ function* signupUserRequest({ payload }) {
             walletAddress: payload.walletAddress
         };
         const response = yield axios.post(`/auth/signup`, data);
-        console.log('response', response.data.message);
+      
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupSuccess(response.data.data));
