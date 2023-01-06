@@ -460,8 +460,6 @@ const PropertiesView = ({ nft }) => {
                                                     <Typography align="left" variant="h3" className="creator">
                                                         Creator
                                                     </Typography>
-                                               
-
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -473,7 +471,11 @@ const PropertiesView = ({ nft }) => {
                                                 variant="h3"
                                             >
                                                 <span>{nft?.name}</span>
-                                                <div style={{fontSize:"60%", marginTop:"3%", color:"green"}}>{nft?.NFTTokens?.length} items left</div>
+                                                {nft?.NFTTokens?.length > 1 && (
+                                                    <div style={{ fontSize: '60%', marginTop: '3%', color: 'green' }}>
+                                                        {nft?.NFTTokens?.length} items left
+                                                    </div>
+                                                )}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
@@ -581,19 +583,19 @@ const PropertiesView = ({ nft }) => {
                                                             ) : (
                                                                 <>
                                                                     {/* {(bought || redeem || resell) !== true && ( */}
-                                                                        <Grid item md={8} xs={12} sm={12} textAlign="center">
-                                                                            <Button
-                                                                                sx={{ float: { md: 'right' } }}
-                                                                                className="buy"
-                                                                                variant="contained"
-                                                                                size="large"
-                                                                                onClick={() => {
-                                                                                    handleBuyNft();
-                                                                                }}
-                                                                            >
-                                                                                Buy Now
-                                                                            </Button>
-                                                                        </Grid>
+                                                                    <Grid item md={8} xs={12} sm={12} textAlign="center">
+                                                                        <Button
+                                                                            sx={{ float: { md: 'right' } }}
+                                                                            className="buy"
+                                                                            variant="contained"
+                                                                            size="large"
+                                                                            onClick={() => {
+                                                                                handleBuyNft();
+                                                                            }}
+                                                                        >
+                                                                            Buy Now
+                                                                        </Button>
+                                                                    </Grid>
                                                                     {/* )} */}
                                                                 </>
                                                             )}
