@@ -37,11 +37,11 @@ const SideBar = () => {
     }, [dispatch, navType]);
     return (
         <>
-            <Container sx={{ mt: 5 }}>
+            <Container sx={{ mt: 5}}>
                 <Grid item xs={12}  >
                     <Grid
                         xs={12}
-                        md={12}
+                        md={10}
                         container
                         alignItems="center"
                         spacing={3}

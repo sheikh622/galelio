@@ -34,39 +34,55 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     };
 
     const handleContractDeployment = async () => {
-        let brandName = brandCategoryData.brand.name;
-        let categoryName;
-        categoryArray.categories.map((data) => {
-            if (data.value == category) {
-                categoryName = data.label;
-            }
-        });
-        const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
-        const symbol = 'G' + brandName.substring(0, 1) + categoryName.substring(0, 1);
-        const admin = BLOCKCHAIN.WALLET_ADDRESS
-        const validator = BLOCKCHAIN.WALLET_ADDRESS
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const minterAddress = BLOCKCHAIN.WALLET_ADDRESS
-        const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
-        let res = await (
-            await factoryAddr.deployMintingContract(contractName, symbol, admin, minterAddress, validator).catch((error) => {
-                toast.error(error.message);
+        if (!window.ethereum) {
+            console.log("meta mask not connected")
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'No crypto wallet found. Please install it.',
+                variant: 'alert',
+                alertSeverity: 'info'
+                
             })
-        ).wait();
-        let addr = res.events[3].args[0];
-        dispatch(
-            addBrandCategory({
-                brandId: brandCategoryData.brandId,
-                categoryId: category,
-                profitPercentage: formik.values.profitPercentage,
-                contractAddress: addr,
-                page: page,
-                limit: limit,
-                search: search,
-                handleClose: handleClose
-            })
-        );
+            console.log("No crypto wallet found. Please install it.")
+            // toast.error('No crypto wallet found. Please install it.');
+        }else {
+            let brandName = brandCategoryData.brand.name;
+            let categoryName;
+            categoryArray.categories.map((data) => {
+                if (data.value == category) {
+                    categoryName = data.label;
+                }
+            });
+            const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
+            const symbol = 'G' + brandName.substring(0, 1) + categoryName.substring(0, 1);
+            const admin = BLOCKCHAIN.WALLET_ADDRESS
+            const validator = BLOCKCHAIN.WALLET_ADDRESS
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const minterAddress = BLOCKCHAIN.WALLET_ADDRESS
+            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
+            
+            let res = await (
+                await factoryAddr.deployMintingContract(contractName, symbol, admin, minterAddress, validator).catch((error) => {
+                    toast.error(error.message);
+                })
+            ).wait();
+            let addr = res.events[3].args[0];
+            dispatch(
+                addBrandCategory({
+                    brandId: brandCategoryData.brandId,
+                    categoryId: category,
+                    profitPercentage: formik.values.profitPercentage,
+                    contractAddress: addr,
+                    page: page,
+                    limit: limit,
+                    search: search,
+                    handleClose: handleClose
+                })
+            ); 
+        }
+      
     };
 
     const validationSchema = Yup.object({
