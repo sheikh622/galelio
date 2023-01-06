@@ -9,7 +9,7 @@ import { getAllSubAdminList } from '../../../../redux/subAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddUpdateSubAdminDialog from './component/addUpdateSubAdmin';
-
+import HeadingCard from 'shared/Card/HeadingCard';
 const SubAdmin = () => {
     const theme = useTheme();
     const dispatch = useDispatch();

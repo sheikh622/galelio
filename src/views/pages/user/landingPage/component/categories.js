@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
-import { Card, CardActionArea, CardContent, Divider } from '@mui/material';
+import { Card, CardActionArea,  } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
