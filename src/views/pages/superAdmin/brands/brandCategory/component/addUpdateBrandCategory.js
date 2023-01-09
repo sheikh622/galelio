@@ -114,14 +114,14 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                className="brandDialog dialog"
                 maxWidth="sm"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="form-dialog-title">
-                    {!isUpdate ? 'Assign Category to brand ' : ' Update Profit percentage of category'}
+                <DialogTitle id="form-dialog-title" className="assignheading">
+                    {!isUpdate ? 'Assign Category ' : ' Update Profit percentage '}
                 </DialogTitle>
                 <Divider />
                 <DialogContent>
@@ -129,15 +129,16 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         <Grid container>
                             <>
                                 {!isUpdate && (
-                                    <Grid item xs={12} pt={2} pr={4}>
+                                    <Grid item xs={12} pt={2} >
                                         <TextField
-                                            className="responsiveSelectfield"
+                                            className="responsiveSelectfield textfieldStyle"
                                             id="outlined-select-budget"
                                             select
                                             fullWidth
                                             label="Select Category"
                                             value={category}
                                             onChange={handleCategoryChange}
+                                            variant="standard"
                                         >
                                             <MenuItem value={0}>
                                             Choose Category
@@ -153,8 +154,10 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                     </Grid>
                                 )}
 
-                                <Grid item xs={12} pt={4} pr={4}>
+                                <Grid item xs={12} pt={2} >
                                     <TextField
+                                    className='textfieldStyle'
+                                    variant="standard"
                                         id="profitPercentage"
                                         name="profitPercentage"
                                         label="Enter Profit Percentage"
@@ -171,11 +174,12 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{ pr: 3 }}>
+                <DialogActions sx={{display:'block' }}>
                     <AnimateButton>
                         <Button
                             variant="contained"
-                            sx={{ my: 3, ml: 1 }}
+                            className="buttons"
+                            sx={{ my: 3, ml: 1 ,  my: 1, ml: 2,  padding: {md:'6px 140px', lg:'6px 140px'} }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -183,13 +187,14 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                 formik.handleSubmit();
                             }}
                         >
-                            {!isUpdate ? 'Add ' : 'Update '}
+                            {!isUpdate ? 'Create ' : 'Update '}
                         </Button>
                     </AnimateButton>
                     <AnimateButton>
                         <Button
+                        className="buttons"
                             variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            sx={{   my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'} ,color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

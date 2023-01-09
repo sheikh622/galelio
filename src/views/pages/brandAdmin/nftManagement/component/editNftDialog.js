@@ -196,64 +196,53 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                className="brandDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-            <Grid container spacing={2}>
-            <Grid item md={8} xs={12} textAlign="left">
-                <DialogTitle id="alert-dialog-slide-title1">Edit NFT</DialogTitle>
-            </Grid>
-            <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
-                <Button
-                    sx={{ marginRight: '10px' }}
-                    variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                    onClick={() => {
+            <DialogTitle id="alert-dialog-slide-title1 " className="adminname">Edit NFT</DialogTitle>
+            <Divider/>
+            <Grid container spacing={2} mt={2}>
+              
+               
+                 <Grid xs={12} md={6} lg={6} >
+                    <Button 
+                    className='nftButtons'
+                   
+                       sx={{marginLeft:{md:'35px', lg:'35px'  }}}
+                        variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                      
+                       onClick={() => {
                         setMintType('directMint');
                     }}
-                >
-                    Direct Mint
-                </Button>
-                <Button
-                    variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                    onClick={() => {
-                        setMintType('lazyMint');
-                    }}
-                >
-                    Lazy Minting
-                </Button>
+                    >
+                    Direct minting
+                    </Button>
+                    </Grid>
+                    
+                    <Grid xs={4} md={6} lg={6}>
+                    <Button 
+                    className='nftButtons'
+                        variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
+                        onClick={() => {
+                            setMintType('lazyMint');
+                        }}
+                    >
+                    Lazy manting
+                    </Button>
+                </Grid> 
             </Grid>
-        </Grid>
-        <Divider />
+       
 
                 <DialogContent>
-                    <Grid container spacing={2} textAlign="end">
-                        <Grid item xs={12}>
-                            <Button
-                                sx={{ marginRight: '10px' }}
-                                variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                                onClick={() => {
-                                    setMintType('directMint');
-                                }}
-                            >
-                                Direct Mint
-                            </Button>
-                            <Button
-                                variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                                onClick={() => {
-                                    setMintType('lazyMint');
-                                }}
-                            >
-                                Lazy Minting
-                            </Button>
-                        </Grid>
-                    </Grid>
+                   
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={2}>
-                            <Grid xs={4} mt={2} pr={3}>
+                        <Grid xs={4} md={5} lg={5} mt={2}>
                                 <TextField
+                                className='textfieldStyle'
                                     id="nftName"
                                     name="nftName"
                                     label="NFT Name"
@@ -266,9 +255,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid xs={12} md={2} lg={2} ></Grid>
+                            <Grid xs={4} md={5} lg={5} mt={2}>
                                 <TextField
+                                className='textfieldStyle'
                                     id="nftPrice"
                                     name="nftPrice"
                                     label="NFT Price"
@@ -281,13 +271,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid xs={12}  md={12} lg={12} mt={2} >
                                 <TextField
+                                className='textfieldStyle'
                                     id="outlined-select-budget"
                                     select
                                     fullWidth
-                                    label="Select Token"
+                                    variant='filled'
                                     value={currencyType}
                                     onChange={handleCurrencyType}
                                 >
@@ -298,8 +288,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            <Grid xs={12}  md={12} lg={12} mt={2} >
                                 <TextField
+                                className='textfieldStyle'
                                     multiline
                                     rows={2}
                                     id="nftDescription"
@@ -314,8 +305,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            <Grid xs={12} mt={2} >
                                 <Button
+                                className='fieldbutton'
                                     variant="contained"
                                     sx={{ float: 'right' }}
                                     onClick={() => {
@@ -328,18 +320,19 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                         ]);
                                     }}
                                 >
-                                    Add Fields
+                                Add more fields
                                 </Button>
                             </Grid>
                         </Grid>
 
                         {fieldDataArray.length != 0 && (
                             <>
-                                <Grid container spacing={4}>
+                                <Grid container spacing={4} mt={1}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
                                             <Grid item xs={5}>
                                                 <TextField
+                                                className='textfieldStyle'
                                                     id="field_name"
                                                     name="field_name"
                                                     label="Metadata Name"
@@ -354,6 +347,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
 
                                             <Grid item xs={5}>
                                                 <TextField
+                                                className='textfieldStyle'
                                                     id="field_value"
                                                     name="field_value"
                                                     label="Metadata Value"
@@ -430,13 +424,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                             <ListItemIcon>
                                                 <Icon icon={fileFill} width={32} height={32} />
                                             </ListItemIcon>
-                                            <ListItemText
+                                         {/*    <ListItemText
                                                 primary={file.image.name ? file.image.name : ''}
                                                 // secondary={fData(file.image.size) ? fData(file.image.size) : ''}
                                                 // primaryTypographyProps={{
                                                 //     variant: 'subtitle2'
                                                 // }}
-                                            />
+                                            /> */}
                                             <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
 
                                             <IconButton
@@ -454,12 +448,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ pr: 2.5 }}>
+                <DialogActions sx={{ display:'block'}}>
                     <AnimateButton>
                         <Button
                             type="submit"
                             variant="contained"
-                            sx={{ my: 3, ml: 1 }}
+                            className="buttons"
+                            sx={{ my: 1, ml: 2 , padding: {md:'6px 140px', lg:'6px 140px'}, }}
                             onClick={() => {
                                 formik.handleSubmit();
                             }}
@@ -472,7 +467,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                     <AnimateButton>
                         <Button
                             variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            className="buttons"
+                            sx={{ my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'},color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

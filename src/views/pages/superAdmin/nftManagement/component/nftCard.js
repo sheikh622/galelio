@@ -35,7 +35,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                 open={openMint}
                 setOpen={setOpenMint}
             />
-            <MainCard
+            <MainCard className='tableShadow'
                 content={false}
                 boxShadow
                 sx={{

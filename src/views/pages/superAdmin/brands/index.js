@@ -8,12 +8,12 @@ import {
     Button,
     Typography,
     Grid,
-    MenuItem,
+    MenuItem,TextField,
     Menu,
     Pagination,
     OutlinedInput,
     InputAdornment,
-    Divider
+    Divider, 
 } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { getAllBrands } from '../../../../redux/brand/actions';
@@ -68,17 +68,30 @@ const Brands = () => {
                 setOpen={setAddUpdateOpen}
             />
             <HeadingCard title="Brand Management" />
+         {/*    // <Grid container spacing={4} >
+            //         <Grid item xs={6} lg={8} >
+            //         <Typography className='mainheading' variant="h1" component="h2" sx={{marginLeft:{lg:'44px', md:'44px'}}}>
+            //         Brand Management
+            //       </Typography>
+            //       </Grid></Grid> */}
 
 
-            <MainCard
+            <MainCard className='tableShadow'
                 title={
-                    <Grid container spacing={gridSpacing}>
-                        <Grid item xs={6}>
+                    <Grid container spacing={4} >
+                    <Grid item xs={6} lg={8} >
+                    <Typography className='mainheading' variant="h1" component="h2"
+                     sx={{marginLeft:{lg:'44px', md:'44px'}}}>
+                   Brands
+                  </Typography>
+                    </Grid>
+                        <Grid item xs={3} lg={2} >
+                       
                             <OutlinedInput
                                 id="input-search-list-style1"
                                 placeholder="Search"
                                 startAdornment={
-                                    <InputAdornment position="start">
+                                    <InputAdornment position="end">
                                         <IconSearch stroke={1.5} size="1rem" />
                                     </InputAdornment>
                                 }
@@ -88,8 +101,8 @@ const Brands = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={6} textAlign="end">
-                            <Button
+                        <Grid item xs={3} lg={2} textAlign="start">
+                            <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
@@ -97,7 +110,7 @@ const Brands = () => {
                                     setBrandData({ id: null, name: '', description: '', location: '', image: null });
                                 }}
                             >
-                                Add Brand
+                            Create
                             </Button>
                         </Grid>
                     </Grid>
@@ -114,9 +127,10 @@ const Brands = () => {
                 />
 
                 <Grid item xs={12} sx={{ p: 3 }}>
-                    <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                    <Grid container justifyContent="center" spacing={gridSpacing}>
                         <Grid item>
                             <Pagination
+                            textAlign='center'
                                 color="primary"
                                 showFirstButton
                                 showLastButton
@@ -127,67 +141,7 @@ const Brands = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item>
-                            <Button
-                                size="large"
-                                sx={{ color: theme.palette.grey[900] }}
-                                color="secondary"
-                                endIcon={<ExpandMoreRoundedIcon />}
-                                onClick={handleClick}
-                            >
-                                {limit} Rows
-                            </Button>
-                            <Menu
-                                id="menu-user-list-style1"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleCloseMenu}
-                                variant="selectedMenu"
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right'
-                                }}
-                                transformOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'right'
-                                }}
-                            >
-                                <MenuItem
-                                    value={10}
-                                    onClick={(e) => {
-                                        setLimit(e.target.value);
-                                        setPage(1);
-                                        handleCloseMenu();
-                                    }}
-                                >
-                                    {' '}
-                                    10 Rows
-                                </MenuItem>
-                                <MenuItem
-                                    value={25}
-                                    onClick={(e) => {
-                                        setLimit(e.target.value);
-                                        setPage(1);
-                                        handleCloseMenu();
-                                    }}
-                                >
-                                    {' '}
-                                    25 Rows
-                                </MenuItem>
-                                <MenuItem
-                                    value={50}
-                                    onClick={(e) => {
-                                        setLimit(e.target.value);
-                                        setPage(1);
-                                        handleCloseMenu();
-                                    }}
-                                >
-                                    {' '}
-                                    50 Rows{' '}
-                                </MenuItem>
-                            </Menu>
-                        </Grid>
+                        
                     </Grid>
                 </Grid>
             </MainCard>

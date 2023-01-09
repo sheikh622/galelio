@@ -124,20 +124,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                             </ListItemSecondaryAction>
                                                                         </ListItemButton>
                                                                         <Divider />
-                                                                        {/*   <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <ModeIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Created At </Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:'#000'}} variant="subtitle1" align="right">
-                                                                        {moment(row?.createdAt).format('DD-MMM-YYYY')} 
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                                <Divider /> */}
+                                                                 
                                                                         <ListItemButton>
                                                                             <ListItemIcon>
                                                                                 <DescriptionIcon sx={{ fontSize: '1.3rem' }} />

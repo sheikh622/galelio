@@ -13,18 +13,15 @@ const HeadingCard = forwardRef(({ title, role, value, setValue, options }) => {
     const theme = useTheme();
 
     return (
-        <Card
-            sx={{
-                marginBottom: theme.spacing(gridSpacing),
-
-                borderColor: theme.palette.primary[200] + 75,
-                background: theme.palette.background.default
-            }}
-        >
+    
             <Box sx={{ padding: '13px 20px 22px 20px' }}>
                 <Grid container alignItems="center" justifyContent="space-between" spacing={gridSpacing}>
                     <Grid item>
-                        <Typography variant="h3" sx={{ marginTop:'10px' , fontWeight: 500, color: '#000' }}>
+                        <Typography variant="h1" component="h2" className='headingcard' 
+                        sx={{ marginTop:'10px' ,  
+                        fontWeight: 600, color: '#000' , marginLeft:{lg:'-20px', md:'-20px'} , 
+                        background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                        color: theme.palette.mode === 'dark' ? 'white' : '#404040', }}>
                             {title}
                         </Typography>
                     </Grid>
@@ -50,7 +47,7 @@ const HeadingCard = forwardRef(({ title, role, value, setValue, options }) => {
                     )}
                 </Grid>
             </Box>
-        </Card>
+       
     );
 });
 
