@@ -17,13 +17,14 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const [image, setImage] = useState([]);
     const [nftInfo, setNftInfo] = useState({
         id: null,
+        brandId: null,
         nftName: '',
         nftDescription: '',
         nftPrice: 0,
         mintType: 'directMint',
         currencyType: 'ETH',
         fieldDataArray: [],
-        fileDataArray:[],
+        fileDataArray: [],
         images: []
     });
 
@@ -90,8 +91,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
-                            <Typography variant="subtitle1"
-                             sx={{ textDecoration: 'none', textTransform: 'capitalize' }}>
+                            <Typography variant="subtitle1" sx={{ textDecoration: 'none', textTransform: 'capitalize' }}>
                                 {nftData.name}
                             </Typography>
                         </Grid>
@@ -149,6 +149,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                                 setEditNftOpen(true);
                                                 setNftInfo({
                                                     id: nftData.id,
+                                                    brandId: nftData.Brand.id,
                                                     nftName: nftData.name,
                                                     nftDescription: nftData.description,
                                                     nftPrice: nftData.price,

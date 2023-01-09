@@ -113,6 +113,7 @@ function* editNftRequest({ payload }) {
     formData.append('metaData', JSON.stringify(payload.metaDataArray));
     formData.append('mintType', payload.mintType);
     formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
+    formData.append('perviousUploadedItems', JSON.stringify(payload.perviousUploadedItems));
     for (let i = 0; i < payload.fileArray.length; i++) {
         formData.append('fileArray', payload.fileArray[i]);
     }
@@ -126,7 +127,8 @@ function* editNftRequest({ payload }) {
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                type: payload.type
+                type: payload.type,
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
@@ -168,7 +170,7 @@ function* addNftRequest({ payload }) {
                 page: payload.page,
                 limit: payload.limit,
                 type: payload.type,
-                brandId: payload.brandId,
+                brandId: payload.brandId
             })
         );
         payload.handleClose();

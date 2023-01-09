@@ -122,12 +122,20 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             let file = values.images[0].image;
             let isFile = file instanceof File;
             console.log('fileDataArray', fileDataArray);
-            let fileArray = fileDataArray.map((data) => {
-                console.log('data', data);
+
+            let perviousUploadedItems = fileDataArray.filter((data) => {
+                if (typeof data.fieldValue === 'string') return data;
+            });
+            console.log('perviousUploadedItems', perviousUploadedItems);
+
+            let newUploadedItems = fileDataArray.filter((data) => {
+                if (typeof data.fieldValue !== 'string') return data;
+            });
+
+            let fileArray = newUploadedItems.map((data) => {
                 return data.fieldValue;
             });
-            let fileNameArray = fileDataArray.map((data) => {
-                console.log('data', data);
+            let fileNameArray = newUploadedItems.map((data) => {
                 return data.fieldName;
             });
 
@@ -149,11 +157,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         metaDataArray: fieldDataArray,
                         fileNameArray: fileNameArray,
                         fileArray: fileArray,
+                        perviousUploadedItems: perviousUploadedItems,
                         type: type,
                         page: page,
                         limit: limit,
                         search: search,
                         categoryId: categoryId,
+                        brandId: nftInfo.brandId,
                         handleClose: handleClose
                     })
                 );
@@ -204,24 +214,24 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     };
 
     const handleRemoveField = (index) => {
-        let array = [...fieldDataArray];
+        let array = structuredClone(fileDataArray);
         array.splice(index, 1);
         setFieldDataArray(array);
     };
 
     const handleFileFieldNameChange = (value, index) => {
-        let array = [...fileDataArray];
+        let array = structuredClone(fileDataArray);
         array[index].fieldName = value;
         setFileDataArray(array);
     };
     const handleFileFieldValueChange = (value, index) => {
-        let array = [...fileDataArray];
+        let array = structuredClone(fileDataArray);
         array[index].fieldValue = value;
         setFileDataArray(array);
     };
 
     const handleFileRemoveField = (index) => {
-        let array = [...fileDataArray];
+        let array = structuredClone(fileDataArray);
         array.splice(index, 1);
         setFileDataArray(array);
     };
@@ -233,6 +243,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         setCurrencyType(nftInfo.currencyType);
         setUploadedImages(nftInfo.images);
     }, [nftInfo]);
+
+    useEffect(() => {
+        console.log('fileDataArray', fileDataArray);
+    }, [fileDataArray]);
 
     return (
         <>
@@ -273,27 +287,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 <Divider />
 
                 <DialogContent>
-                    <Grid container spacing={2} textAlign="end">
-                        <Grid item xs={12}>
-                            <Button
-                                sx={{ marginRight: '10px' }}
-                                variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                                onClick={() => {
-                                    setMintType('directMint');
-                                }}
-                            >
-                                Direct Mint
-                            </Button>
-                            <Button
-                                variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                                onClick={() => {
-                                    setMintType('lazyMint');
-                                }}
-                            >
-                                Lazy Minting
-                            </Button>
-                        </Grid>
-                    </Grid>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={2}>
                             <Grid xs={4} mt={2} pr={3}>
