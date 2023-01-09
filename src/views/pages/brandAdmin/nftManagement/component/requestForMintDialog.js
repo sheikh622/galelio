@@ -5,6 +5,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Dialo
 import { requestNftForMinting } from 'redux/nftManagement/actions';
 import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { ethers } from 'ethers';
+import BLOCKCHAIN from '../../../../../constants';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData, categoryId }) {
@@ -18,14 +19,19 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
     const handleMintRequest = async () => {
         console.log('nftData', nftData);
         let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
-        let price = nftData.price;
+        let quant = nftData.NFTTokens.length
+        let price = (quant * nftData.price);
         console.log('profitPercentage', profitPercentage);
         console.log('price', price);
         let amount = (price / 100) * profitPercentage;
         console.log('amount', amount);
+
+
+
+
         let prices = ethers.utils.parseEther(amount.toString());
 
-        let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+        let erc20Address = BLOCKCHAIN.ERC20
         let ownerAddress = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();

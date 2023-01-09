@@ -31,43 +31,57 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
     return (
         <TableContainer>
             <DeleteBrandDialog open={deleteOpen} setOpen={setDeleteOpen} brandId={brandId} page={page} limit={limit} search={search} />
+          
+            {(brandsList.brands != undefined && brandsList.count != 0) || undefined ? (
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center"></TableCell>
-                        <TableCell align="center">Name</TableCell>
-                        <TableCell align="center">Location</TableCell>
-                        <TableCell align="center">Description</TableCell>
-                        <TableCell align="center">Created At</TableCell>
-                        <TableCell align="center">Updated At</TableCell>
-                        <TableCell align="center">Actions</TableCell>
+                        <TableCell align="center" sx={{borderBottom:'none'}}></TableCell>
+                        <TableCell align="left " className='Tableheading' sx={{borderBottom:'none'}}>Brand name</TableCell>
+                      {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell>
+                        <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell> */}
+                       
+                        <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Created At</TableCell>
+                        <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Updated At</TableCell>
+                        <TableCell align='center'  className='Tableheading' sx={{borderBottom:'none'}}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(brandsList.brands != undefined && brandsList.count != 0) || undefined ? (
                         <>
                             {brandsList.brands != undefined &&
                                 brandsList.brands.map((row, index) => (
                                     <TableRow>
-                                        <TableCell align="right">
-                                            <Avatar alt="Brand Image" src={row.image} sx={{ float: 'right' }} />
+                                        <TableCell align="right" sx={{ borderBottom: 'none'}}>
                                         </TableCell>
-                                        <TableCell align="center" sx={{ padding: '0px', textTransform: 'capitalize' }}>
-                                            {row.name}
+                                        <TableCell
+                                           
+                                            sx={{display:'flex', borderBottom: 'none', textTransform: 'capitalize', 
+                                            borderBottom: 'none' }}
+                                        >
+                                        <Grid item lg={6}>
+                                        <Avatar alt="Brand Image" src={row.image} sx={{  }} />
+                                        </Grid>
+                                        <Grid item lg={6}  className='tableName'>
+                                        {row.name}
+                                         </Grid>
+
                                         </TableCell>
-                                        <TableCell align="center" sx={{ padding: '0px', textTransform: 'capitalize'  }}>
+                                  {/*       <TableCell  className='tablecell' sx={{ textTransform: 'capitalize' ,  borderBottom: 'none'}}>
                                             {row.location}
                                         </TableCell>
-                                        <TableCell align="center" sx={{ padding: '0px',  textTransform: 'capitalize'  }}>
+                                        <TableCell  className='tablecell' sx={{ textTransform: 'capitalize' ,  borderBottom: 'none'}}>
                                             {row.description}
-                                        </TableCell>
-                                        <TableCell align="center">{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
-                                        <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
-                                        <TableCell align="center" sx={{ padding: '0px' , textTransform: 'capitalize'  }}>
-                                            <Stack direction="row" justifyContent="center" alignItems="center">
+                                        </TableCell> */}
+                                      
+                                        <TableCell  className='tablecell'  sx={{ borderBottom: 'none'}}>{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
+                                        <TableCell  className='tablecell'  sx={{ borderBottom: 'none'}}>{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
+                                        <TableCell  className='tablecell'
+                                          sx={{  borderBottom: 'none', textTransform: 'capitalize' }}>
+                                            <Stack direction="row" className='tablecell' 
+                                             justifyContent="center" alignItems="center">
                                                 <Tooltip placement="top" title="Add Brand Admin">
                                                     <IconButton
-                                                        color="primary"
+                                                    className='color'
                                                         aria-label="detail"
                                                         size="medium"
                                                         onClick={() => {
@@ -83,7 +97,8 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                 </Tooltip>
                                                 <Tooltip placement="top" title="Add Brand Categories">
                                                     <IconButton
-                                                        sx={{ color: '#c71585' }}
+                                                    className='color'
+                                                        
                                                         aria-label="detail"
                                                         size="medium"
                                                         onClick={() => {
@@ -99,7 +114,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                 </Tooltip>
                                                 <Tooltip placement="top" title="Edit">
                                                     <IconButton
-                                                        sx={{ color: '#008b04' }}
+                                                    className='color'
                                                         aria-label="Edit"
                                                         size="large"
                                                         onClick={() => {
@@ -138,17 +153,19 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                     </TableRow>
                                 ))}
                         </>
-                    ) : (
-                        <>
-                            <Grid container justifyContent="center" sx={{ width: '400%', m: 5 }}>
-                                <Grid item>
-                                    <CircularProgress size={'4rem'} />
-                                </Grid>
-                            </Grid>
-                        </>
-                    )}
+                 
+                    
                 </TableBody>
             </Table>
+            ) : (
+                <>
+                <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
+                <Grid item>
+                    <CircularProgress size={'4rem'} />
+                </Grid>
+            </Grid>
+                </>
+            )}
         </TableContainer>
     );
 };

@@ -12,6 +12,7 @@ import { create } from 'ipfs-http-client';
 import { Buffer } from 'buffer';
 import MarketplaceAbi from '../../../../../contractAbi/Marketplace.json';
 import MarketplaceAddress from '../../../../../contractAbi/Marketplace-address.json';
+import  BLOCKCHAIN  from '../../../../../constants';
 const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
 const projectSecret = 'a09de1e8b20292cd87460290de554003';
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
@@ -44,7 +45,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let categoryId = nftData.CategoryId;
         let brandId = nftData.BrandId;
         let price = ethers.utils.parseEther(nftData.price.toString());
-        let erc20Address = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+        let erc20Address = BLOCKCHAIN.ERC20
         let tokenIdArray = [];
         let transactionHash;
         try {
@@ -202,7 +203,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         );
         const uri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
-        let token = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+        let token = BLOCKCHAIN.ERC20
         // const SIGNING_DOMAIN = 'Voucher';
         // const SIGNATURE_VERSION = '4';
         // const chainId = 5;
@@ -231,7 +232,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         const signer = provider.getSigner();
         const signature = await signer._signTypedData(domain, types, voucher);
         const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
-        console.log("signature: ", signature)
+        console.log("signature: ", verifyAddr)
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
         const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);

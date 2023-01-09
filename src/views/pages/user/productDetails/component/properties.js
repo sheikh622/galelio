@@ -89,7 +89,7 @@ const Properties = ({ nft }) => {
                     </>
                 ) : (
                     <>
-                        <Grid sx={{ width: '100%', marginTop: '3%' }}>
+                        <Grid sx={{ width: '100%', margin: '3%' }}>
                             <h3 sx={{ textAlign: 'center' }}>No properties found.</h3>
                         </Grid>
                     </>

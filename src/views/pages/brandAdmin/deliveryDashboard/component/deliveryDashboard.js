@@ -33,15 +33,26 @@ const DeliveryDashboard = ({ deliveryList , user }) => {
             <TableContainer>
                 <Table>
                     <TableHead>
-                        <TableRow>
-                            <TableCell align="center">Name</TableCell>
-                            <TableCell align="center">Price</TableCell>
-                            <TableCell align="center">Status</TableCell>
-                            <TableCell align="center">Description</TableCell>
-                            <TableCell align="center">Created At</TableCell>
-                            <TableCell align="center">Updated At</TableCell>
-                            <TableCell align="center">Actions</TableCell>
-                        </TableRow>
+                   
+                    <TableRow>
+                    <TableCell align="center" sx={{ borderBottom: 'none' }}></TableCell>
+                    <TableCell align="left " className="Tableheading" sx={{ borderBottom: 'none' }}>
+                        Product name{' '}
+                    </TableCell>
+                    {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell> */}
+                <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell>
+    
+                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                    Price
+                    </TableCell>
+                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                    Status
+                    </TableCell>
+                   
+                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                        Actions
+                    </TableCell>
+                </TableRow>
                     </TableHead>
                     <>
                         {(deliveryList == undefined && deliveryList?.length == 0) || undefined ? (
@@ -57,28 +68,34 @@ const DeliveryDashboard = ({ deliveryList , user }) => {
                             <TableBody>
                                 {deliveryList != undefined &&
                                     deliveryList?.map((row, index) => (
-                                        <>
+                                        <> 
+                                       
                                             <TableRow>
-                                                <TableCell align="center" justifyContent="center" alignItems="center">
-                                                    <Grid container spacing={2} justifyContent="center" alignItems="center">
-                                                        <Grid item>
-                                                            <Avatar alt="Image" src={row?.Nft.asset} />
-                                                        </Grid>
-                                                        <Grid item>
-                                                            <Typography variant="subtitle1" component="div">
-                                                                {row?.Nft.name}
-                                                            </Typography>
-                                                        </Grid>
-                                                    </Grid>
-                                                </TableCell>
+                                            <TableCell align="right" sx={{ borderBottom: 'none' }}></TableCell>
+                                      
+                                            <TableCell
+                                            sx={{
+                                                display: 'flex',
+                                                borderBottom: 'none',
+                                                textTransform: 'capitalize',
+                                                borderBottom: 'none'
+                                            }}
+                                        >
+                                            <Grid item lg={6}>
+                                                <Avatar alt="Brand Image" src={row?.Nft.asset} sx={{}} />
+                                            </Grid>
+                                            <Grid item lg={6} className="tableName">
+                                            {row?.Nft.name}
+                                            </Grid>
+                                        </TableCell>
 
-                                                <TableCell align="center" sx={{ padding: '0px' }}>
+                                                <TableCell className="tablecell"  sx={{ borderBottom: 'none' }}>
                                                     {row?.Nft.price} {row?.Nft.currencyType}
                                                 </TableCell>
                                                 <TableCell
-                                                    align="center"
+                                                    className="tablecell" 
                                                     sx={{
-                                                        padding: '0px',
+                                                        borderBottom: 'none',
                                                         color:
                                                             row?.status == 'Delivered'
                                                                 ? 'Green'
@@ -89,15 +106,14 @@ const DeliveryDashboard = ({ deliveryList , user }) => {
                                                 >
                                                     {row?.status}
                                                 </TableCell>
-                                                <TableCell align="center" sx={{ padding: '0px' }}>
+                                                <TableCell  className="tablecell" sx={{   borderBottom: 'none' }}>
                                                     {row?.Nft.description}
                                                 </TableCell>
-                                                <TableCell align="center">{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
-                                                <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
-                                                <TableCell align="center" sx={{ padding: '0px' }}>
-                                                    <Stack direction="row" justifyContent="center" alignItems="center">
+                                                <TableCell align="left" sx={{ borderBottom: 'none'  }}>
+                                                    <Stack direction="row" justifyContent="left" >
                                                         <Tooltip placement="top" title="Status">
-                                                        <Button variant="outlined" endIcon={<SendIcon />} 
+                                                        <Button variant="outlined" sx={{fontFamily: 'Poppins',
+                                                        fontStyle: 'normal'}} endIcon={<SendIcon />} 
                                                         onClick={() => {
                                                             setOpen(true);
                                                              setDeliveryId(row?.id);

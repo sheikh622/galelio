@@ -78,18 +78,13 @@ const DeliveryDashboard = ({ productList }) => {
                     <SubCard title="Delivery Dashboard">
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
-                                {productList?.length > 0 ? (
-                                    <Grid item xs={12}>
-                                        {productList?.length > 0 &&
-                                            productList?.map((row) => (
-                                                <>
-                                                    <Grid
-                                                        container
-                                                        justifyContent="center"
-                                                        spacing={gridSpacing}
-                                                        sx={{ textAlign: 'center', marginBottom: '20px' }}
-                                                    >
-                                                        <Grid item md={1} sm={12}></Grid>
+                                <Grid item xs={12}>
+                                    {productList?.length > 0 &&
+                                        productList?.map((row) => (
+                                            <>
+                                            <Grid container justifyContent="center" spacing={gridSpacing} 
+                                            sx={{ textAlign: 'center', marginBottom:'20px' }}>
+                                                <Grid item md={1} sm={12}></Grid>
 
                                                         <Grid item md={4} lg={4} className="Productdetails" 
                                                         sx={{ height: 'auto' }}>
@@ -124,20 +119,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                             </ListItemSecondaryAction>
                                                                         </ListItemButton>
                                                                         <Divider />
-                                                                        {/*   <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <ModeIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Created At </Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:'#000'}} variant="subtitle1" align="right">
-                                                                        {moment(row?.createdAt).format('DD-MMM-YYYY')} 
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                                <Divider /> */}
+                                                                 
                                                                         <ListItemButton>
                                                                             <ListItemIcon>
                                                                                 <DescriptionIcon sx={{ fontSize: '1.3rem' }} />

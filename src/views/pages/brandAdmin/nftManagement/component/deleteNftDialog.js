@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { deleteNft } from 'redux/nftManagement/actions';
@@ -10,6 +10,7 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
     const handleClose = () => {
         setOpen(false);
     };
+    const user = useSelector((state) => state.auth.user);
 
     return (
         <>
@@ -21,11 +22,11 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Delete Brand Admin</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1" className="statusHeading">Delete Brand Admin</DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
-                        <Typography variant="body2" component="span">
+                        <Typography variant="body2" component="span" className="statustypo">
                             Are you sure you want to delete this Admin?
                         </Typography>
                     </DialogContentText>
@@ -35,12 +36,14 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
                         color="secondary"
+                        className='buttonSize' size='large'
                     >
                         No
                     </Button>
                     <Button
                         variant="contained"
-                        size="large"
+                        className='buttonSize' size='large'
+                     
                         onClick={() => {
                             dispatch(
                                 deleteNft({
@@ -50,6 +53,7 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
                                     page: page,
                                     limit: limit,
                                     search: search,
+                                    brandId: user.BrandId,
                                     handleClose: handleClose
                                 })
                             );

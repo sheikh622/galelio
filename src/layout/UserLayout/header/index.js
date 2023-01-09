@@ -27,7 +27,7 @@ import Drawer from '../drawer/drawer';
 import { logout } from 'redux/auth/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
-
+import MetaMaskSection from "./MetaMaskSection"
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -216,7 +216,10 @@ export default function Header() {
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                     </Typography>
+                    
                     </Box>
+
+                 
                     <Grid container-fluid>
                         <Grid item sx={{ display: { lg: 'none', md: 'block' } }}>
                             <Drawer />
@@ -233,9 +236,16 @@ export default function Header() {
                             <StyledInputBase placeholder="Search" style={{ width: '100%' }} 
                             inputProps={{ 'aria-label': 'search' }} />
                         </Search>
+                        
                     </Grid>
+                    
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
+                        <div style={{marginRight:"3%"}}>
+
+                    <MetaMaskSection/>
+
+                        </div>
                         <IconButton size="large" aria-label="" color="inherit">
                             <Badge badgeContent={17} color="error">
                                 <NotificationsIcon sx={{ color: '#4dabf5' }} />

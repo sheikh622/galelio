@@ -54,7 +54,8 @@ const PropertiesView = () => {
                                                 <Grid item>
                                                     <Avatar alt="User 1" src={Avatar3} />
                                                 </Grid>
-                                                <Grid item xs zeroMinWidth component={RouterLink} sx={{textDecoration: 'none'}}
+                                                <Grid item xs zeroMinWidth component={RouterLink} 
+                                                sx={{textDecoration: 'none'}}
                                                 to="/companyPage">
                                                     <Typography align="left" fontWeight={600} variant="subtitle1">
                                                         Jacob & Co
