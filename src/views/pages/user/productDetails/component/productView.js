@@ -438,7 +438,7 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
-                        <SubCard>
+                        <SubCard  className="tableShadow">
                             <img src={nft?.asset} alt="Statement Image" className="ProductimageSize" />
                         </SubCard>{' '}
                     </Grid>

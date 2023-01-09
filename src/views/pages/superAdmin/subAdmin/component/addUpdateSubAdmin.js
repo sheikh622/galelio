@@ -76,10 +76,8 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         enableReinitialize: true,
         initialValues: subAdminData,
         validationSchema,
-        onSubmit: async (values) => {
+        onSubmit: async(values) => {
             console.log('values', values);
-            console.log('contractAddress', contractAddress);
-
             if (subAdminData.id == null) {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
@@ -141,20 +139,23 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                className="brandDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="form-dialog-title">{subAdminData.id == null ? 'Add Subadmin ' : ' Update Subadmin'}</DialogTitle>
+                <DialogTitle id="form-dialog-title" className="adminname">
+                    {subAdminData.id == null ? 'Create Admin' : ' Update Admin'}
+                </DialogTitle>
                 <Divider />
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
                             <>
-                                <Grid item xs={6} pt={2} pr={4}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login">First Name</InputLabel>
+                                <Grid item xs={12} md={12} lg={12} pt={2}>
+                                    <InputLabel  className='textfieldStyle' htmlFor="outlined-adornment-password-login">First Name</InputLabel>
+                                    
                                     <TextField
                                         id="firstName"
                                         name="firstName"
@@ -163,13 +164,15 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                                         helperText={formik.touched.firstName && formik.errors.firstName}
                                         fullWidth
+                                        variant="standard"
                                         autoComplete="given-name"
                                     />
                                 </Grid>
-                                <Grid item xs={6} pt={2}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login">Last Name</InputLabel>
+                                <Grid item xs={12} md={12} lg={12} pt={2}>
+                                    <InputLabel 
+                                    className='textfieldStyle' htmlFor="outlined-adornment-password-login">Last Name</InputLabel>
                                     <TextField
-                                        id="lastName"
+                                         id="lastName"
                                         name="lastName"
                                         value={formik.values.lastName}
                                         onChange={formik.handleChange}
@@ -177,11 +180,14 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         helperText={formik.touched.lastName && formik.errors.lastName}
                                         fullWidth
                                         autoComplete="given-name"
+                                        variant="standard"
                                     />
                                 </Grid>
-                                <Grid item xs={6} pt={2} pr={4}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login">Email</InputLabel>
+                                <Grid item xs={12} md={12} lg={12} pt={2}>
+                                    <InputLabel
+                                    className='textfieldStyle' htmlFor="outlined-adornment-password-login">Email</InputLabel>
                                     <TextField
+                                    variant="standard"
                                         id="adminEmail"
                                         name="adminEmail"
                                         value={formik.values.adminEmail}
@@ -193,9 +199,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
 
-                                <Grid item xs={6} pt={2}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
+                                <Grid item xs={12} md={12} lg={12} pt={2}>
+                                    <InputLabel 
+                                    className='textfieldStyle' htmlFor="outlined-adornment-password-login">Password</InputLabel>
                                     <TextField
+                                    variant="standard"
                                         id="adminPassword"
                                         name="adminPassword"
                                         value={formik.values.adminPassword}
@@ -206,9 +214,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         autoComplete="given-name"
                                     />
                                 </Grid>
-                                <Grid item xs={6} pt={2} pr={3}>
-                                    <InputLabel htmlFor="">Wallet Address</InputLabel>
+                                <Grid item xs={12} md={12} lg={12} pt={2}>
+                                    <InputLabel 
+                                    className='textfieldStyle' htmlFor="">Wallet Address</InputLabel>
                                     <TextField
+                                    variant="standard"
                                         id="walletAddress"
                                         name="walletAddress"
                                         value={formik.values.walletAddress}
@@ -243,12 +253,13 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         </Grid>
                     </form>
                 </DialogContent>
-
-                <DialogActions sx={{ pr: 3 }}>
+                <Divider />
+                <DialogActions sx={{ display: 'block' }}>
                     <AnimateButton>
                         <Button
+                            className="buttons"
                             variant="contained"
-                            sx={{ my: 3, ml: 1 }}
+                            sx={{ my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'} }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -256,13 +267,14 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                 formik.handleSubmit();
                             }}
                         >
-                            {subAdminData.id == null ? 'Add ' : 'Update '}
+                            {subAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
                     </AnimateButton>
                     <AnimateButton>
                         <Button
+                            className="buttons"
                             variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            sx={{ my: 1, ml: 0, padding: {md:'6px 140px', lg:'6px 140px'} , color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

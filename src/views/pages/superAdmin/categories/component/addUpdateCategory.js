@@ -105,22 +105,24 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                className="brandDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="form-dialog-title">{categoryData.id == null ? 'Add Category ' :
+                <DialogTitle id="form-dialog-title"   className="adminname">{categoryData.id == null ? 'Create Category ' :
                  ' Update Category '}</DialogTitle>
                 <Divider />
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
-                            <InputLabel htmlFor="outlined-adornment-password-login">Name</InputLabel>
-                            <TextField
+                            <InputLabel htmlFor="outlined-adornment-password-login"  className='textfieldStyle'>Name</InputLabel>
+                            <TextField 
+
                                 id="name"
                                 name="name"
+                                variant="standard"
                                 value={formik.values.name}
                                 onChange={formik.handleChange}
                                 error={formik.touched.name && Boolean(formik.errors.name)}
@@ -129,10 +131,12 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                                 autoComplete="given-name"
                             />
 
-                            <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login">
+                            <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login"
+                              className='textfieldStyle'>
                                 Description
                             </InputLabel>
                             <TextField
+                            variant="standard"
                                 id="description"
                                 name="description"
                                 value={formik.values.description}
@@ -144,28 +148,32 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                             />
                         </Grid>
 
-                        <Grid item xs={12} pt={2}>
-                            <FileInput formik={formik} accept="image/*" fieldName="image" placeHolder="Add Category Image" />
+                        <Grid item xs={12} pt={2} sx={{ml:{md:'-15px', lg:'-15px'}}}>
+                            <FileInput  className='textfieldStyle' formik={formik} accept="image/*" fieldName="image"
+                             placeHolder="Add Category Image"  variant="standard" />
                         </Grid>
                     </form>
                 </DialogContent>
-                <DialogActions sx={{ pr: 3 }}>
+                <DialogActions sx={{ display: 'block' }}>
                     <AnimateButton>
                         <Button
+                        sx={{ my: 1, ml: 2,  padding: {md:'6px 150px', lg:'6px 140px'} }}
+                        className="buttons"
                             variant="contained"
-                            sx={{ my: 3, ml: 1 }}
+                          
                             type="submit"
                             size="large"
                             onClick={formik.handleSubmit}
                             disableElevation
                         >
-                            {categoryData.name !== '' ? 'Update ' : 'Add '}
+                            {categoryData.name !== '' ? 'Update ' : 'Create '}
                         </Button>
                     </AnimateButton>
                     <AnimateButton>
                         <Button
+                        className="buttons"
                             variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            sx={{my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'}, color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

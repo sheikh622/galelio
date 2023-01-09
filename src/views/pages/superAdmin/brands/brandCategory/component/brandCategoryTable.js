@@ -25,6 +25,8 @@ import Avatar from 'ui-component/extended/Avatar';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import moment from 'moment';
+
 const BrandCategoryTable = ({
     brandCategoriesList,
     search,
@@ -67,40 +69,62 @@ const BrandCategoryTable = ({
                 search={search}
                 brandCategoryData={brandCategoryData}
             />
-
+            {brandCategoriesList.brandCategories != undefined && brandCategoriesList.count > 0 ? (
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">Category</TableCell>
-                        <TableCell align="center">Description</TableCell>
-                        <TableCell align="center">Profit percentage</TableCell>
-                        <TableCell align="center">Actions</TableCell>
+                        <TableCell align="center" sx={{ borderBottom: 'none' }}></TableCell>
+                        <TableCell align="left " className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Category name{' '}
+                        </TableCell>
+                          <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell>
+                    {/* <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell> */}
+
+                        <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Created At
+                        </TableCell>
+                        <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Updated At
+                        </TableCell>
+                        <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Actions
+                        </TableCell>
                     </TableRow>
                 </TableHead>
-                {brandCategoriesList.brandCategories != undefined && brandCategoriesList.count > 0 ? (
                     <TableBody sx={{ padding: '10px' }}>
                         {brandCategoriesList.brandCategories != undefined &&
                             brandCategoriesList.brandCategories.map((row, index) => (
                                 <>
                                     <TableRow>
-                                        <TableCell align="center" justifyContent="center" alignItems="center">
-                                            <Grid container spacing={2} justifyContent="center" alignItems="center">
-                                                <Grid item>
-                                                    <Avatar alt="Category Image" src={row.Category.image} />
-                                                </Grid>
-                                                <Grid item>
-                                                    <Typography variant="subtitle1" component="div">
-                                                        {row.Category.name}
-                                                    </Typography>
-                                                </Grid>
+                                        <TableCell align="right" sx={{ borderBottom: 'none' }}></TableCell>
+                                        <TableCell
+                                            sx={{
+                                                display: 'flex',
+                                                borderBottom: 'none',
+                                                textTransform: 'capitalize',
+                                                borderBottom: 'none'
+                                            }}
+                                        >
+                                            <Grid item lg={6}>
+                                                <Avatar alt="Brand Image" src={row.Category.image} sx={{}} />
+                                            </Grid>
+                                            <Grid item lg={6} className="tableName">
+                                                {row.Category.name}
                                             </Grid>
                                         </TableCell>
 
-                                        <TableCell align="center">{row.Category.description}</TableCell>
-                                        <TableCell align="center">{row.profitPercentage}</TableCell>
+                                        <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                            {row.profitPercentage}
+                                        </TableCell>
+                                        <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                            {moment(row.createdAt).format('DD-MMM-YYYY')}
+                                        </TableCell>
+                                        <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                            {moment(row.updatedAt).format('DD-MMM-YYYY')}
+                                        </TableCell>
 
-                                        <TableCell align="center" sx={{ padding: '0px' }}>
-                                            <Stack direction="row" justifyContent="center" alignItems="center">
+                                        <TableCell align="left" sx={{ padding: '0px', borderBottom: 'none' }}>
+                                            <Stack direction="row">
                                                 <Tooltip placement="top" title=" View NFT'S">
                                                     <IconButton
                                                         color="primary"
@@ -120,7 +144,7 @@ const BrandCategoryTable = ({
 
                                                 <Tooltip placement="top" title="Edit">
                                                     <IconButton
-                                                    sx={{color:"#008b04"}}
+                                                        sx={{ color: '#008b04' }}
                                                         aria-label="Edit"
                                                         size="large"
                                                         onClick={() => {
@@ -161,17 +185,16 @@ const BrandCategoryTable = ({
                                 </>
                             ))}
                     </TableBody>
-                ) : (
-                    <>
-                        <Grid item md={12}>
-                            <Divider />
-                        </Grid>
-                        <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
-                        </Grid>
-                    </>
-                )}
+          
             </Table>
+           ) : (
+                <>
+                  
+                    <Grid item>
+                        <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}> No Data Available</Typography>
+                    </Grid>
+                </>
+            )}
         </TableContainer>
     );
 };

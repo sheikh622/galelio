@@ -173,24 +173,12 @@ const DeliveryDashboard = ({ productList }) => {
                                                                         {row?.Nft.price}
                                                                         </Typography>
                                                                     </ListItemSecondaryAction>
-                                                                
                                                                 </ListItemButton>
-                                                        
-                                                                <Divider />
-                                                                <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <ContactMailIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Address</Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
+                                                                <ListItemSecondaryAction>
                                                                         <Typography sx={{color:''}} variant="subtitle1" align="right">
                                                                         {user.address}
                                                                         </Typography>
                                                                     </ListItemSecondaryAction>
-                                                                    
-                                                                </ListItemButton>
                                                              
                                                             </List>
                                                         </TableContainer>

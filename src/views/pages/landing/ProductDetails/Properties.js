@@ -53,7 +53,8 @@ const Properties = () => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, 
+                            textTransform: 'capitalize' }}
                         >
                             Properties
                         </Typography>

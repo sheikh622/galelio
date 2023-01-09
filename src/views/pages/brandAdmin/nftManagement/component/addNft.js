@@ -195,42 +195,51 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                className="brandDialog dialog "
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <Grid container spacing={2}>
-                    <Grid item md={8} xs={12} textAlign="left">
-                        <DialogTitle id="alert-dialog-slide-title1">Add NFT</DialogTitle>
-                    </Grid>
-                    <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
-                        <Button
-                            sx={{ marginRight: '10px' }}
+            <DialogTitle id="alert-dialog-slide-title1" className="adminname">Add NFT</DialogTitle>
+            <Divider/>
+                <Grid container spacing={2} mt={2}>
+                  
+                   
+                     <Grid xs={12} md={6} lg={6} >
+                        <Button 
+                        className='nftButtons'
+                       
+                           sx={{marginLeft:{md:'35px', lg:'35px'  }}}
                             variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                          
                             onClick={() => {
                                 setMintType('directMint');
                             }}
                         >
-                            Direct Mint
+                        Direct minting
                         </Button>
-                        <Button
+                        </Grid>
+                        
+                        <Grid xs={4} md={6} lg={6}>
+                        <Button 
+                        className='nftButtons'
                             variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
                             onClick={() => {
                                 setMintType('lazyMint');
                             }}
                         >
-                            Lazy Minting
+                        Lazy manting
                         </Button>
-                    </Grid>
+                    </Grid> 
                 </Grid>
-                <Divider />
+                
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={2}>
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid xs={4} md={5} lg={5} mt={2}>
                                 <TextField
+                                className='textfieldStyle'
                                     id="nftName"
                                     name="nftName"
                                     label="NFT Name"
@@ -243,9 +252,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid xs={12} md={2} lg={2} ></Grid>
+                            <Grid xs={4}  md={5} lg={5} mt={2} >
                                 <TextField
+                                className='textfieldStyle'
                                     id="nftPrice"
                                     name="nftPrice"
                                     label="NFT Price"
@@ -259,12 +269,14 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 />
                             </Grid>
 
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid xs={12}  md={12} lg={12} mt={2} >
                                 <TextField
+                                className='textfieldStyle'
+                                variant='filled'
                                     id="outlined-select-budget"
                                     select
                                     fullWidth
-                                    label="Select Token"
+                                    
                                     value={type}
                                     onChange={handleType}
                                 >
@@ -275,10 +287,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            <Grid xs={12} mt={1} >
                                 <TextField
                                     multiline
                                     rows={2}
+                                    className='textfieldStyle'
                                     id="nftDescription"
                                     name="nftDescription"
                                     label="NFT Description"
@@ -291,8 +304,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            <Grid xs={12} mt={2} >
                                 <Button
+                                className='fieldbutton'
                                     variant="contained"
                                     sx={{ float: 'right' }}
                                     onClick={() => {
@@ -305,7 +319,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                         ]);
                                     }}
                                 >
-                                    Add Fields
+                                Add more fields
                                 </Button>
                             </Grid>
                         </Grid>
@@ -318,6 +332,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             <Grid item xs={5}>
                                                 <TextField
                                                     id="field_name"
+                                                    className='textfieldStyle'
                                                     name="field_name"
                                                     label="Metadata Name"
                                                     value={data.fieldName}
@@ -331,6 +346,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
 
                                             <Grid item xs={5}>
                                                 <TextField
+                                                className='textfieldStyle'
                                                     id="field_value"
                                                     name="field_value"
                                                     label="Metadata Value"
@@ -434,30 +450,31 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 </DialogContent>
                 <Divider />
                 <DialogActions sx={{ pr: 2.5 }}>
-                    {loader ? (
+                {loader ? (
                         <Box display={'flex'}>
                             <CircularProgress  />
                         </Box>
                     ) : (
-                        <AnimateButton>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                sx={{ my: 3, ml: 1 }}
-                                onClick={() => {
-                                    formik.handleSubmit();
-                                }}
-                                size="large"
-                                disableElevation
-                            >
-                                Add
-                            </Button>
-                        </AnimateButton>
+                    <AnimateButton>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            sx={{ my: 3, ml: 1 }}
+                            onClick={() => {
+                                formik.handleSubmit();
+                            }}
+                            size="large"
+                            disableElevation
+                        >
+                            Add
+                        </Button>
+                    </AnimateButton>
                     )}
                     <AnimateButton>
                         <Button
                             variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            className="buttons"
+                            sx={{ my: 1, ml: 1, padding: {md:'6px 140px', lg:'6px 140px'}, color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

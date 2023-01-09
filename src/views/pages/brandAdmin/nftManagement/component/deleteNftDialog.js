@@ -22,12 +22,12 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Delete NFT</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1" className="statusHeading">Delete Brand Admin</DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
-                        <Typography variant="body2" component="span">
-                            Are you sure you want to delete this NFT?
+                        <Typography variant="body2" component="span" className="statustypo">
+                            Are you sure you want to delete this Admin?
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -36,12 +36,14 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
                         color="secondary"
+                        className='buttonSize' size='large'
                     >
                         No
                     </Button>
                     <Button
                         variant="contained"
-                        size="large"
+                        className='buttonSize' size='large'
+                     
                         onClick={() => {
                             dispatch(
                                 deleteNft({
