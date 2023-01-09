@@ -502,7 +502,7 @@ const PropertiesView = ({ nft }) => {
                                         </Grid>
                                         {buyerNft?.founded && (
                                             <div style={{ marginTop: '5%' }}>
-                                                {nft?.mintType == 'directMint' && (
+                                                {(nft?.transactionHash !== '' || nft?.transactionHash ) && (
                                                     <>
                                                         <Accordion>
                                                             <AccordionSummary

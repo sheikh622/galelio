@@ -174,11 +174,20 @@ const DeliveryDashboard = ({ productList }) => {
                                                                         </Typography>
                                                                     </ListItemSecondaryAction>
                                                                 </ListItemButton>
-                                                                <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:''}} variant="subtitle1" align="right">
-                                                                        {user.address}
+                                                                <ListItemButton>
+                                                                    <ListItemIcon>
+                                                                        <ContactMailIcon sx={{ fontSize: '1.3rem' }} />
+                                                                    </ListItemIcon>
+                                                                    <ListItemText
+                                                                        primary={<Typography variant="subtitle1">Address</Typography>}
+                                                                    />
+                                                                    <ListItemSecondaryAction>
+                                                                        <Typography variant="subtitle1" align="right">
+                                                                        {user?.address}
                                                                         </Typography>
                                                                     </ListItemSecondaryAction>
+                                                                </ListItemButton>
+                                                              
                                                              
                                                             </List>
                                                         </TableContainer>

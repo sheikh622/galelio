@@ -55,6 +55,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 handleClose: handleClose,
             })
         );
+        setLoader(false)
     };
     return (
         <>

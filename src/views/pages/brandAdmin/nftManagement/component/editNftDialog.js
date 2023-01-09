@@ -525,10 +525,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 Add Files
                             </Button>
                         </Grid>
-                        {fileDataArray.length != 0 && (
+                        {fileDataArray?.length != 0 && (
                             <>
                                 <Grid container spacing={4}>
-                                    {fileDataArray.map((data, index) => (
+                                    {fileDataArray?.map((data, index) => (
                                         <>
                                             <Grid item xs={5}>
                                                 <TextField

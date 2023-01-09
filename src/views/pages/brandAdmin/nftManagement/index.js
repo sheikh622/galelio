@@ -163,7 +163,7 @@ const NftManagement = () => {
                 content={false}
             >
                 <Grid container>
-                    {nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length > 0 ? (
+                    {(nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length >= 0) ? (
                         <>
                             {' '}
                             <Grid container spacing={gridSpacing} mt={2} sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
@@ -203,7 +203,7 @@ const NftManagement = () => {
                         </>
                     ) : (
                         <>
-                            <Grid item>
+                            <Grid item display={"flex"} justifyContent="center" sx={{width:"100%", m:5}}>
                                 <div>
                                     <CircularProgress
                                         disableShrink
