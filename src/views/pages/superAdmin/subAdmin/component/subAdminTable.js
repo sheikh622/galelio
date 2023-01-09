@@ -27,7 +27,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 import UpdateIcon from '@mui/icons-material/Update';
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
 const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAddUpdateOpen, subAdminData, setSubAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const theme = useTheme();
@@ -41,7 +41,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
         } else {
             setDetailId(id);
         }
-    }
+    };
 
     return (
         <TableContainer>
@@ -80,37 +80,61 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                 search={search}
                 subAdminData={subAdminData}
             />
-
+            {subAdminList.admins == undefined && (subAdminList.count == 0 || undefined) ? (
+                <>
+                      
+                <Grid item>
+                <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}> No Data Available</Typography>
+            </Grid>
+                </>
+            ) : (
+                <>
+                {subAdminList.count > 0 ? (
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">First Name</TableCell>
-                        <TableCell align="center">Last Name</TableCell>
-                        <TableCell align="center">Email</TableCell>
-                        <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">Actions</TableCell>
+                        <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}></TableCell>
+                        <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            First Name
+                        </TableCell>
+                        <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Last Name
+                        </TableCell>
+                        <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Email
+                        </TableCell>
+                        <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Status
+                        </TableCell>
+                        <TableCell align="center" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                            Actions
+                        </TableCell>
                     </TableRow>
                 </TableHead>
-                {subAdminList.admins == undefined && (subAdminList.count == 0 || undefined) ? (
+           
                     <>
-                        <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800', textAlign: 'center' }}> 
-                            No Data Available</Typography>
-                        </Grid>
-                    </>
-                ) : (
-                    <>
-                        {subAdminList.count > 0 ? (
+                        
                             <TableBody sx={{ padding: '10px' }}>
                                 {subAdminList.admins != undefined &&
                                     subAdminList.admins.map((row, index) => (
                                         <>
                                             <TableRow>
-                                                <TableCell align="center" sx={{ textTransform: 'capitalize' }}>{row.firstName}</TableCell>
-                                                <TableCell align="center" sx={{ textTransform: 'capitalize' }}>{row.lastName}</TableCell>
-                                                <TableCell align="center">{row.email}</TableCell>
+                                                <TableCell
+                                                    align="left"
+                                                    className="tableName"
+                                                    sx={{ textTransform: 'capitalize' }}
+                                                ></TableCell>
+                                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
+                                                    {row.firstName}
+                                                </TableCell>
+                                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
+                                                    {row.lastName}
+                                                </TableCell>
+                                                <TableCell align="left" className="tableName">
+                                                    {row.email}
+                                                </TableCell>
 
-                                                <TableCell align="center">
+                                                <TableCell align="left" sx={{ borderBottom: 'none' }}>
                                                     {row.isActive == false ? (
                                                         <Chip label="Blocked" size="small" chipcolor="orange" />
                                                     ) : (
@@ -118,11 +142,11 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                     )}
                                                 </TableCell>
 
-                                                <TableCell align="center" sx={{ padding: '0px' }}>
+                                                <TableCell align="center" sx={{ borderBottom: 'none' }}>
                                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                                         <Tooltip placement="top" title="Change Status">
                                                             <BlockIcon
-                                                            style={{cursor:"pointer"}}
+                                                               className='color'
                                                                 color="primary"
                                                                 aria-label="detail"
                                                                 size="medium"
@@ -137,40 +161,43 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                 <UpdateIcon sx={{ fontSize: '1.5rem' }} />
                                                             </BlockIcon>
                                                         </Tooltip>
-                                                        <Tooltip placement="top" title="Change minting access" sx={{ml:1}}>
-                                                            <CurrencyExchangeIcon
-                                                            style={{cursor:"pointer"}}
-                                                                color="primary"
-                                                                aria-label="detail"
-                                                                size="medium"
+                                                        <Tooltip placement="top" title="Change minting access" sx={{ ml: 1 }}>
+                                                        <IconButton
+                                                        className='color'
+                                                        aria-label="Edit"
+                                                        size="large"
+                                                        onClick={() => {
+                                                            setChangeMintingAccessOpen(true);
+                                                            setSubAdminData({
+                                                                id: row.id,
+                                                                walletAddress: row.walletAddress,
+                                                                isActive: row.isActive
+                                                            });
+                                                        }}
+                                                    >
+                                                    <img src={CurrencyExchangeIcon} />
+                                                      
+                                                    </IconButton>  
+                                                   
+                                                        </Tooltip>
+
+                                                        <Tooltip placement="top" title="Edit">
+                                                            <IconButton
+                                                            className='color'
+                                                                aria-label="Edit"
+                                                                size="large"
                                                                 onClick={() => {
-                                                                    setChangeMintingAccessOpen(true);
+                                                                    setAddUpdateOpen(true);
                                                                     setSubAdminData({
                                                                         id: row.id,
-                                                                        walletAddress: row.walletAddress,
-                                                                        isActive: row.isActive
+                                                                        firstName: row.firstName,
+                                                                        lastName: row.lastName,
+                                                                        adminEmail: row.email,
+                                                                        adminPassword: ''
                                                                     });
                                                                 }}
                                                             >
-                                                                <UpdateIcon sx={{ fontSize: '1.5rem' }} />
-                                                            </CurrencyExchangeIcon>
-                                                        </Tooltip>
-                                                    
-
-                                                        <Tooltip placement="top" title="Edit">
-                                                            <IconButton   sx={{color:"#008b04"}} aria-label="Edit" size="large"
-                                                             onClick={() => {
-                                                                
-                                                                setAddUpdateOpen(true);
-                                                                setSubAdminData({
-                                                                    id: row.id,
-                                                                    firstName: row.firstName,
-                                                                    lastName: row.lastName,
-                                                                    adminEmail: row.email,
-                                                                    adminPassword: ''
-                                                                });
-                                                             }}>
-                                                                <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                              <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
                                                             </IconButton>
                                                         </Tooltip>
                                                         <Tooltip placement="top" title="Delete">
@@ -194,22 +221,29 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                         </Tooltip>
                                                     </Stack>
                                                 </TableCell>
+                                                <TableCell
+                                                    align="left"
+                                                    className="tableName"
+                                                    sx={{ textTransform: 'capitalize' }}
+                                                ></TableCell>
                                             </TableRow>
                                         </>
                                     ))}
                             </TableBody>
-                        ) : (
-                            <>
-                                <Grid container justifyContent="center" sx={{ width: '300%', m: 5 }}>
-                                    <Grid item>
-                                        <CircularProgress size={'4rem'} />
-                                    </Grid>
-                                </Grid>
-                            </>
-                        )}
-                    </>
-                )}
+             
+              </>
             </Table>
+            ) : (
+              <>
+                <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
+                <Grid item>
+                    <CircularProgress size={'4rem'} />
+                </Grid>
+            </Grid>
+                </>
+            )}
+        </>
+            )}
         </TableContainer>
     );
 };

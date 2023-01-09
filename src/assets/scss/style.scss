@@ -532,10 +532,10 @@ body {
 
 .Lux {
     text-transform: capitalize;
-   
+
     font-weight: 500;
     font-size: 28px;
-    
+
     text-align: left;
 
     padding: 0 15px;
@@ -561,11 +561,11 @@ body {
 
 .productdescription {
     // font-family: 'Public Sans';
- 
+
     font-weight: 400;
     font-size: 23px;
     text-transform: capitalize;
-   
+
     text-align: left;
     letter-spacing: 0.02em;
     padding: 0 15px;
@@ -594,14 +594,13 @@ body {
 }
 
 .price {
-   
     font-weight: 500;
     font-size: 20px;
     text-transform: capitalize;
 }
 
 .ETH {
-   color: darkorange;
+    color: darkorange;
     font-weight: 500;
     font-size: 20px;
 }
@@ -623,12 +622,12 @@ body {
     /* border: 1px solid; */
     text-overflow: ellipsis;
 }
-.line{
+.line {
     background: #ccc;
     width: 5px;
     height: 300px;
     color: transparent;
-    
+
     margin-top: 13px;
     margin-left: 36px;
     border-radius: 20px;
@@ -769,12 +768,10 @@ body {
 }
 .Productdetails {
     overflow: hidden;
-  
-    
 }
 .ProductimageSize {
     width: 100%;
-   
+
     height: 280px;
     object-fit: cover;
 }
@@ -783,20 +780,238 @@ body {
     height: 300px;
     object-fit: cover;
 }
-.userName{
+.userName {
     font-size: 20px;
     color: #2196f3;
     font-weight: 600;
     text-transform: capitalize;
 }
-.brand{
-font-size: 28px;
-color: #2196f3;
-text-transform: capitalize;
+.brand {
+    font-size: 28px;
+    color: #2196f3;
+    text-transform: capitalize;
 }
-.creator{
+.creator {
     font-size: 25px;
     font-weight: 400;
     margin-top: 7px;
     color: gray;
+}
+// #################################################################
+.tableName {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: none;
+
+    color: #98a2b2;
+    margin: 9px 0px 0 7px !important;
+}
+.tablecell {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 500;
+
+    color: #98a2b2;
+    margin: 0px 0px 0 0px !important;
+}
+.Tableheading {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 19px !important;
+}
+.color {
+    color: #2f53ff;
+}
+.tableShadow {
+    box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
+    border-radius: 5px !important;
+}
+.mainheading {
+    font-weight: 600;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 27px;
+}
+.headingcard {
+    font-weight: 600;
+    font-family: 'Poppins';
+    font-style: normal;
+    background-color: transparent;
+}
+.buttonSize {
+    padding: 7px 28px !important;
+    
+font-family: 'Poppins';
+font-style: normal;
+    // padding:7px 29px !important;
+
+    // margin-left:10px !important;
+}
+.Adminheading {
+    background-color: transparent;
+    border: none !important ;
+}
+.stylingtitle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    // font-size: 16px;
+    letter-spacing: 0.5px;
+}
+.sidebartitle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    // font-size: 16px;
+    letter-spacing: 0.5px;
+}
+.css-bpi7ug-MuiButtonBase-root-MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+    color: #2f53ff !important;
+}
+
+.css-908h34-MuiTypography-root {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #212121;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.334;
+    color: #2f53ff !important;
+}
+.adminname {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+}
+.dialog {
+    width: 30%;
+    margin: 0 auto;
+}
+.buttons {
+    justify-content: center;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+.textfieldStyle {
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 19px !important;
+    /* line-height: 29px; */
+    color: #757575 !important;
+}
+.statustypo {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+}
+.statusHeading {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+}
+.css-c0hsol-MuiTypography-root {
+    margin: 0;
+    font-size: 0.875rem;
+
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    /* line-height: 1.334; */
+    margin-top: 24px;
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 19px !important;
+    /* line-height: 29px; */
+    color: #757575 !important;
+}
+.css-ix00ao-MuiInputBase-input-MuiInput-input {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentColor;
+    padding: 4px 0 5px;
+    border: 0;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0;
+    width: 100%;
+    -webkit-animation-name: mui-auto-fill-cancel;
+    animation-name: mui-auto-fill-cancel;
+    -webkit-animation-duration: 10ms;
+    animation-duration: 10ms;
+
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    /* line-height: 29px; */
+    color: #757575 !important;
+}
+
+.menustyle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.4545px;
+    /* line-height: 22px; */
+    /* display: flex; */
+    align-items: center;
+    color: #7778c2 !important;
+}
+.selectstyle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.4545px;
+    /* line-height: 22px; */
+    /* display: flex; */
+    align-items: center;
+    color: #2f53ff !important;
+    border: 2px solid #B9DDFF;
+    padding: 11px 10px 0 10px;
+    border-radius: 4px;
+}
+.nftButtons{
+    padding: 7px 30px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  
+    /* font-size: 19.0507px; */
+   
+
+border-radius: 4px;
+}
+.fieldbutton{
+    font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+background: linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%);
+border-radius: 4px;
+}
+.fontstyling{
+    font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+}
+.assignheading{
+    font-weight: 600;
+    font-family: "Poppins";
+    font-style: normal;
+    font-size: 25px;
 }

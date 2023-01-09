@@ -50,6 +50,8 @@ const MetaMaskSection = () => {
         <>
             <Button
                 variant="contained"
+                sx={{fontFamily: 'Poppins',
+                fontStyle: 'normal'}}
                 onClick={() => {
                     handleConnect();
                 }}

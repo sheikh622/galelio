@@ -91,72 +91,85 @@ const NftManagement = () => {
                 nftType={type}
             />
             <MainCard
-                className="yellow"
-                style={{ marginBottom: '15px' }}
+            className='Adminheading'
+
                 title={
-                    <Grid container spacing={gridSpacing}>
-                        <Grid item xs={3}>
-                            <Typography variant="h3" sx={{ fontWeight: 500, color: 'cadetblue', marginTop: '12px' }}>
-                                NFT Management
-                            </Typography>
+                    <Typography variant="h1" component="h2" className='headingcard' sx={{ marginTop:'10px' ,  
+                        fontWeight: 600, color: '#000' , marginLeft:{lg:'-20px', md:'-20px'} }}>
+                           
+                        Categories
+                    </Typography>
+                }
+                secondary={
+                    <Button className='buttonSize' sx={{float:'right'}}
+                    variant="contained"
+                    size="large"
+                    onClick={() => {
+                        navigate('/brands');
+                    }}
+                >
+                    Back
+                </Button>
+                }
+                content={false}
+            ></MainCard>
+            <MainCard 
+                className="yellow tableShadow"
+                
+                title={
+                    <Grid container spacing={4} >
+                    <Grid item xs={6} lg={8} >
+                    <Typography className='mainheading' variant="h1" component="h2"
+                     sx={{marginLeft:{lg:'48px', md:'48px'}}}>
+                     NFT Management
+                  </Typography>
+                    </Grid>
+                        <Grid item xs={3} lg={2} >
+                       
+                        <TextField
+                        className="selectField selectstyle"
+                        id="outlined-select-budget"
+                        select
+                        fullWidth
+                        
+                        value={type}
+                        onChange={handleType}
+                        variant='standard'
+                    >
+                        {typeArray.map((option, index) => (
+                            <MenuItem    className=" selectstyle" key={index} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                         </Grid>
-                        <Grid item xs={3}>
-                            <TextField
-                                className="selectField"
-                                id="outlined-select-budget"
-                                select
-                                fullWidth
-                                label="Select Type"
-                                value={type}
-                                onChange={handleType}
-                            >
-                                {typeArray.map((option, index) => (
-                                    <MenuItem key={index} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={6} style={{ textAlign: 'end' }}>
-                            <Button
-                                size="large"
-                                sx={{
-                                    marginRight: '10px',
-                                    ':hover': {
-                                        boxShadow: 'none'
-                                    }
-                                }}
+                        <Grid item xs={3} lg={2} textAlign="start">
+                            <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
                                 variant="contained"
+                                size="large"
                                 onClick={() => {
                                     setAddNftOpen(true);
                                 }}
                             >
-                                Add NFT
+                            Create
                             </Button>
-                            <Button
-                                variant="contained"
-                                size="large"
-                                onClick={() => {
-                                    navigate('/categories');
-                                }}
-                            >
-                                back
-                            </Button>
+                     
                         </Grid>
                     </Grid>
+     
                 }
                 content={false}
-            ></MainCard>
+            >
             <Grid container>
                 {nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length > 0 ? (
                     <>
                         {' '}
-                        <Grid container spacing={gridSpacing} mb={4} pl={2}>
+                        <Grid container spacing={gridSpacing} mt={2}   sx={{marginLeft:{lg:'48px', md:'48px'}}}>
                             {nftList.nfts.rows &&
                                 nftList.nfts.rows.map((nft, index) => {
                                     return (
                                         <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                                            <NftCard
+                                            <NftCard className='tableShadow'
                                                 nftData={nft}
                                                 categoryId={location.state.data.CategoryId}
                                                 search={search}
@@ -169,7 +182,7 @@ const NftManagement = () => {
                                 })}
                         </Grid>
                         <Grid item xs={12} sx={{ p: 3 }}>
-                            <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                            <Grid container justifyContent="center" spacing={gridSpacing}>
                                 <Grid item>
                                     <Pagination
                                         page={page}
@@ -182,78 +195,20 @@ const NftManagement = () => {
                                         }}
                                     />
                                 </Grid>
-                                <Grid item>
-                                    <Button
-                                        size="large"
-                                        sx={{ color: theme.palette.grey[900] }}
-                                        color="secondary"
-                                        endIcon={<ExpandMoreRoundedIcon />}
-                                        onClick={handleClick}
-                                    >
-                                        {limit} Rows
-                                    </Button>
-                                    <Menu
-                                        id="menu-user-list-style1"
-                                        anchorEl={anchorEl}
-                                        keepMounted
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleClose}
-                                        variant="selectedMenu"
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right'
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'right'
-                                        }}
-                                    >
-                                        <MenuItem
-                                            value={12}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleClose();
-                                            }}
-                                        >
-                                            {' '}
-                                            12 Rows
-                                        </MenuItem>
-                                        <MenuItem
-                                            value={24}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleClose();
-                                            }}
-                                        >
-                                            {' '}
-                                            24 Rows
-                                        </MenuItem>
-                                        <MenuItem
-                                            value={36}
-                                            onClick={(e) => {
-                                                setLimit(e.target.value);
-                                                setPage(1);
-                                                handleClose();
-                                            }}
-                                        >
-                                            {' '}
-                                            36 Rows{' '}
-                                        </MenuItem>
-                                    </Menu>
-                                </Grid>
+                             
                             </Grid>
                         </Grid>
                     </>
                 ) : (
                     <>
-                        <Grid item>
-                            <Typography style={{ padding: '20px' }}> No Data Available</Typography>
-                        </Grid>
+                    <Grid item>
+                    <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}>
+                     No Data Available</Typography>
+                </Grid>
                     </>
                 )}
             </Grid>
+            </MainCard>
         </>
     );
 };

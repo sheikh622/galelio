@@ -68,7 +68,10 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                                     <QuizIcon />
                                 </ListItemIcon>
                                 {/* <ListItemText > */}
-                                    <span style={{color:"#98A2B2 !important"}}>FAQ</span>
+                                <Typography className='icons sidebartitle' sx={{color: '#98A2B2'}}
+                                variant='body1' >
+                                FAQ
+                            </Typography>
                                 {/* </ListItemText > */}
                             </ListItemButton>
                         </ListItem>
@@ -78,7 +81,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                                     <ChatIcon />
                                 </ListItemIcon >
                                 {/* <ListItemText sx={{color:"#98A2B2"}} primary="Contact" /> */}
-                                <span style={{color:"#98A2B2 !important"}}>Contact</span>
+                                <Typography className='icons sidebartitle' sx={{color: '#98A2B2'}} >Contact</Typography>
                             </ListItemButton>
                         </ListItem>
 
@@ -117,7 +120,8 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                                 </ListItemIcon>
                                 {/* <ListItemText primary="Terms of Services" /> */}
 
-                                <span style={{color:"#98A2B2 !important"}}>Terms of services</span>
+                                <Typography className='icons sidebartitle' sx={{color: '#98A2B2'}} >Terms of services</Typography>
+                                
                             </ListItemButton>
                         </ListItem>
                     </List>

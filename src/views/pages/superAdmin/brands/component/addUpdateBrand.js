@@ -106,22 +106,27 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                className="brandDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">{brandData.id == null ? 'Add Brand' : 'Update Brand'}</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1" className="adminname">
+                    {brandData.id == null ? 'Create Brand' : 'Update Brand'}
+                </DialogTitle>
                 <Divider />
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container>
-                            <Grid item xs={6} pt={4} pr={4}>
-                                <InputLabel htmlFor="outlined-adornment-password-login">Name</InputLabel>
+                        <Grid item xs={12} md={12} lg={12} pt={2}>
+                                <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
+                                    Name
+                                </InputLabel>
                                 <TextField
                                     id="name"
                                     name="name"
+                                    variant="standard"
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
                                     error={formik.touched.name && Boolean(formik.errors.name)}
@@ -130,11 +135,11 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                                     autoComplete="given-name"
                                 />
                             </Grid>
-                            <Grid item xs={6} pt={4}>
-                                <InputLabel htmlFor="outlined-adornment-password-login">Location</InputLabel>
+                            <Grid item xs={12} md={12} lg={12} pt={2}>
+                                <InputLabel htmlFor="outlined-adornment-password-login"   className='textfieldStyle'>Location</InputLabel>
                                 <TextField
                                     id="location"
-                                    name="location"
+                                    name="location"  variant="standard"
                                     value={formik.values.location}
                                     onChange={formik.handleChange}
                                     error={formik.touched.location && Boolean(formik.errors.location)}
@@ -143,11 +148,11 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                                     autoComplete="given-name"
                                 />
                             </Grid>
-                            <Grid item xs={12} pt={2}>
-                                <InputLabel htmlFor="outlined-adornment-password-login">Description</InputLabel>
+                            <Grid item xs={12} md={12} lg={12} pt={2}>
+                                <InputLabel htmlFor="outlined-adornment-password-login"   className='textfieldStyle'>Description</InputLabel>
                                 <TextField
                                     id="description"
-                                    name="description"
+                                    name="description"  variant="standard"
                                     value={formik.values.description}
                                     onChange={formik.handleChange}
                                     error={formik.touched.description && Boolean(formik.errors.description)}
@@ -156,35 +161,36 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                                     autoComplete="given-name"
                                 />
                             </Grid>
-                            <Grid item xs={12} pt={2}>
-                                <FileInput formik={formik} accept="image/*" fieldName="image" placeHolder="Add Brand Image" />
+                            <Grid item xs={12} md={12} lg={12} pt={2} sx={{ml:{md:'-15px', lg:'-15px'}}}>
+                                <FileInput   className='textfieldStyle' variant="standard" formik={formik} accept="image/*" fieldName="image" placeHolder="Add Brand Image" />
                             </Grid>
                         </Grid>
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ pr: 2.5 }}>
+                <DialogActions sx={{ display:'block' }}>
                     <AnimateButton>
                         <Button
                             type="submit"
+                            className='buttons' size='large' 
                             variant="contained"
-                            sx={{ my: 3, ml: 1 }}
+                            sx={{ my: 1, ml: 2,  padding: {md:'6px 150px', lg:'6px 140px'} }}
                             onClick={() => {
                                 formik.handleSubmit();
                             }}
-                            size="large"
+                            
                             disableElevation
                         >
-                            {brandData.id == null ? 'Add' : 'Update'}
+                            {brandData.id == null ? 'Create' : 'Update'}
                         </Button>
                     </AnimateButton>
                     <AnimateButton>
                         <Button
                             variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            sx={{ my: 1, ml: 1,  padding: {md:'6px 150px', lg:'6px 140px'} , color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
-                            size="large"
+                            className='buttons' size='large' 
                         >
                             Cancel
                         </Button>

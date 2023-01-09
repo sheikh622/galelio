@@ -21,10 +21,10 @@ export default function DeleteCategoryDialog({ open, setOpen, page, limit, searc
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Delete Category</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1"  className="statusHeading">Delete Category</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
-                        <Typography variant="body2" component="span">
+                        <Typography variant="body2" component="span" className="statustypo">
                             Are you sure you want to delete this Category?
                         </Typography>
                     </DialogContentText>
@@ -33,13 +33,13 @@ export default function DeleteCategoryDialog({ open, setOpen, page, limit, searc
                     <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
-                        color="secondary"
+                        color="secondary"  className='buttonSize' size='large' 
                     >
                         No
                     </Button>
                     <Button
                         variant="contained"
-                        size="small"
+                        className='buttonSize' size='large' 
                         onClick={() => {
                             dispatch(
                                 deleteCategory({

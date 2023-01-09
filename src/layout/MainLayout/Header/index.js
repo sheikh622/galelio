@@ -44,7 +44,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
 
                     <LogoSection />
                 </Box>
-                <ButtonBase sx={{ borderRadius: '', overflow: 'hidden' }}>
+               {/*  <ButtonBase sx={{ borderRadius: '', overflow: 'hidden' }}>
                     <Avatar
                         variant="rounded"
                         sx={{
@@ -63,7 +63,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     >
                         <IconMenu2 stroke={1.5} size="1.3rem" />
                     </Avatar>
-                </ButtonBase>
+                </ButtonBase> */}
             </Box>
 
             {/* header search */}

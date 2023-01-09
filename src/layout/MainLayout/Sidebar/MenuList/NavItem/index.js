@@ -80,7 +80,7 @@ const NavItem = ({ item, level }) => {
             <ListItemIcon className='icons' sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36  , color:"#98A2B2"}}>{itemIcon}</ListItemIcon>
             <ListItemText
                 primary={
-                    <Typography className='icons' sx={{color:"#98A2B2"}} variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} >
+                    <Typography className='icons stylingtitle' sx={{color:"#98A2B2"}} variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} >
                         {item.title}
                     </Typography>
                 }

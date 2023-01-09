@@ -76,6 +76,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
             <DetailsDialog open={DetailsNftOpen} setOpen={setDetailsNftOpen} nftData={nftData} />
             <MainCard
                 content={false}
+                className='tableShadow'
                 boxShadow
                 sx={{
                     position: 'relative',
@@ -89,7 +90,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
-                            <Typography variant="subtitle1"
+                            <Typography variant="subtitle1" className='fontstyling'
                              sx={{ textDecoration: 'none', textTransform: 'capitalize' }}>
                                 {nftData.name}
                             </Typography>
@@ -97,6 +98,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
 
                         <Grid item xs={12} mt={-1.5}>
                             <Typography
+                            className='fontstyling'
                                 variant="body1"
                                 sx={{
                                     overflow: 'hidden',
@@ -110,25 +112,30 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
 
                         <Grid item xs={6}>
                             <Grid item xs={12}>
-                                <Typography variant="h6">
+                                <Typography variant="h6" className='fontstyling'>
                                     {nftData.price} {nftData.currencyType}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography variant="h6">{nftData.NFTTokens.length} Items</Typography>
+                                <Typography variant="h6" className='fontstyling'>{nftData.NFTTokens.length} Items</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={6}>
                             <Button
-                                size="small"
+                          
+                            variant="contained"
+                            size="small"
                                 sx={{
                                     marginRight: '10px',
                                     float: 'right',
                                     ':hover': {
                                         boxShadow: 'none'
-                                    }
+                                    },
+                                    color: '#2F5AFF',
+                                    background: '#B9DDFF',
+                                    
                                 }}
-                                variant="outlined"
+                                
                                 onClick={() => {
                                     setDetailsNftOpen(true);
                                 }}
@@ -141,6 +148,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                 {nftData.status !== 'MINTED' && (
                                     <>
                                         <Button
+                                        className='fontstyling'
                                             variant="contained"
                                             color="primary"
                                             sx={{ marginRight: '5px' }}
@@ -161,6 +169,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                             Edit
                                         </Button>
                                         <Button
+                                        className='fontstyling'
                                             variant="contained"
                                             color="primary"
                                             sx={{ marginRight: '5px' }}
@@ -185,6 +194,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
 
                                 {(nftData.status == 'DRAFT' || nftData.status == 'REJECTED') && (
                                     <Button
+                                    className='fontstyling'
                                         variant="contained"
                                         color="primary"
                                         sx={{ marginRight: '5px' }}
