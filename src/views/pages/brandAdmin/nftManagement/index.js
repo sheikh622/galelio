@@ -157,68 +157,68 @@ const NftManagement = () => {
                             >
                                 Add NFT
                             </Button>
-                     
                         </Grid>
                     </Grid>
-     
                 }
                 content={false}
             >
-            <Grid container>
-                {nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length > 0 ? (
-                    <>
-                        {' '}
-                        <Grid container spacing={gridSpacing} mt={2}   sx={{marginLeft:{lg:'48px', md:'48px'}}}>
-                            {nftList.nfts.rows &&
-                                nftList.nfts.rows.map((nft, index) => {
-                                    return (
-                                        <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-                                            <NftCard className='tableShadow'
-                                                nftData={nft}
-                                                categoryId={location.state.data.CategoryId}
-                                                search={search}
-                                                page={page}
-                                                limit={limit}
-                                                type={type}
-                                            />
-                                        </Grid>
-                                    );
-                                })}
-                        </Grid>
-                        <Grid item xs={12} sx={{ p: 3 }}>
-                            <Grid container justifyContent="center" spacing={gridSpacing}>
-                                <Grid item>
-                                    <Pagination
-                                        page={page}
-                                        color="primary"
-                                        showFirstButton
-                                        showLastButton
-                                        count={nftList && nftList.pages}
-                                        onChange={(event, newPage) => {
-                                            setPage(newPage);
-                                        }}
-                                    />
-                                </Grid>
-                             
+                <Grid container>
+                    {nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length > 0 ? (
+                        <>
+                            {' '}
+                            <Grid container spacing={gridSpacing} mt={2} sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
+                                {nftList.nfts.rows &&
+                                    nftList.nfts.rows.map((nft, index) => {
+                                        return (
+                                            <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                                                <NftCard
+                                                    className="tableShadow"
+                                                    nftData={nft}
+                                                    categoryId={location.state.data.CategoryId}
+                                                    search={search}
+                                                    page={page}
+                                                    limit={limit}
+                                                    type={type}
+                                                />
+                                            </Grid>
+                                        );
+                                    })}
                             </Grid>
-                        </Grid>
-                    </>
-                ) : (
-                    <>
-                    <Grid item>
-                    <div>
-                            <CircularProgress
-                            disableShrink
-                                size="5rem"
-                                style={{
-                                    // transitionDelay: '1000ms'
-                                }}
-                            />
-                        </div>
+                            <Grid item xs={12} sx={{ p: 3 }}>
+                                <Grid container justifyContent="center" spacing={gridSpacing}>
+                                    <Grid item>
+                                        <Pagination
+                                            page={page}
+                                            color="primary"
+                                            showFirstButton
+                                            showLastButton
+                                            count={nftList && nftList.pages}
+                                            onChange={(event, newPage) => {
+                                                setPage(newPage);
+                                            }}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </>
+                    ) : (
+                        <>
+                            <Grid item>
+                                <div>
+                                    <CircularProgress
+                                        disableShrink
+                                        size="5rem"
+                                        style={
+                                            {
+                                                // transitionDelay: '1000ms'
+                                            }
+                                        }
+                                    />
+                                </div>
+                            </Grid>
+                        </>
+                    )}
                 </Grid>
-                    </>
-                )}
-            </Grid>
             </MainCard>
         </>
     );
