@@ -145,9 +145,9 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                 ) : (
                     <>
                         <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
-                            <Grid item>
-                                <CircularProgress size={'4rem'} />
-                            </Grid>
+                        <Grid item>
+                    <CircularProgress disableShrink size={'4rem'} />
+                </Grid>
                         </Grid>
                     </>
                 )}

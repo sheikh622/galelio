@@ -172,7 +172,7 @@ const NftManagement = () => {
                 <>
                 
                          
-                <Grid item>
+                <Grid item display={"flex"} justifyContent="center">
                 {loader &&
                             <CircularProgress size={"5rem"} disableShrink />
                             

@@ -192,6 +192,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     return (
         <>
             <Dialog
+            
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
@@ -203,7 +204,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             >
             <DialogTitle id="alert-dialog-slide-title1" className="adminname">Add NFT</DialogTitle>
             <Divider/>
-                <Grid container spacing={2} mt={2}>
+                <Grid container spacing={2} mt={2} >
                   
                    
                      <Grid xs={12} md={6} lg={6} >
@@ -229,12 +230,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 setMintType('lazyMint');
                             }}
                         >
-                        Lazy manting
+                        Lazy minting
                         </Button>
                     </Grid> 
                 </Grid>
                 
-                <DialogContent>
+                <DialogContent >
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={2}>
                             <Grid xs={4} md={5} lg={5} mt={2}>
@@ -449,12 +450,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ pr: 2.5 }}>
-                {loader ? (
-                        <Box display={'flex'}>
-                            <CircularProgress  />
-                        </Box>
-                    ) : (
+                <Grid container>
+
+                <DialogActions>
+                    
                     <AnimateButton>
                         <Button
                             type="submit"
@@ -469,20 +468,21 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             Add
                         </Button>
                     </AnimateButton>
-                    )}
                     <AnimateButton>
-                        <Button
+                    <Button
+                            type="submit"
                             variant="contained"
-                            className="buttons"
-                            sx={{ my: 1, ml: 1, padding: {md:'6px 140px', lg:'6px 140px'}, color: '#fff' }}
+                            sx={{ my: 3, ml: 1 }}
                             onClick={handleClose}
-                            color="secondary"
                             size="large"
+                            color="error"
+                            disableElevation
                         >
                             Cancel
                         </Button>
                     </AnimateButton>
                 </DialogActions>
+                </Grid>
             </Dialog>
         </>
     );

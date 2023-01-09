@@ -422,7 +422,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                             <ListItemIcon>
                                                 <Icon icon={fileFill} width={32} height={32} />
                                             </ListItemIcon>
-                                         {/*    <ListItemText
+                                         <ListItemText
                                                 primary={file.image.name ? file.image.name : ''}
                                                 // secondary={fData(file.image.size) ? fData(file.image.size) : ''}
                                                 // primaryTypographyProps={{
