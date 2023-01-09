@@ -10,6 +10,7 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddUpdateSubAdminDialog from './component/addUpdateSubAdmin';
 import HeadingCard from 'shared/Card/HeadingCard';
+import { getAllBrandCategoriesAdmin } from 'redux/brandCategory/actions';
 const SubAdmin = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -41,9 +42,13 @@ const SubAdmin = () => {
                 search: search,
                 page: page,
                 limit: limit
-            })
+            }),
+            dispatch(  getAllBrandCategoriesAdmin())
+          
         );
     }, [search, page, limit]);
+
+    
 
     return (
         <>

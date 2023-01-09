@@ -20,7 +20,8 @@ import {
     ListItemText,
     Typography,
     IconButton,
-    MenuItem
+    MenuItem,
+    CircularProgress
 } from '@mui/material';
 
 import { useDropzone } from 'react-dropzone';
@@ -41,10 +42,6 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 const typeArray = [
     {
-        value: 'ETH',
-        label: 'ETH'
-    },
-    {
         value: 'USDT',
         label: 'USDT'
     }
@@ -56,7 +53,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
     const [fieldDataArray, setFieldDataArray] = useState([]);
-    const [type, setType] = useState('ETH');
+    const [type, setType] = useState('USDT');
+    const [loader, setLoader] = useState(false);
     const handleType = (event) => {
         setType(event.target.value);
     };
@@ -113,6 +111,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         onSubmit: (values) => {
             let isValid = handleError(fieldDataArray, values);
             if (isValid) {
+                setLoader(true);
                 dispatch(
                     addNft({
                         categoryId: data.CategoryId,
@@ -143,9 +142,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setOpen(false);
         formik.resetForm();
         setMintType('directMint');
-        setType('ETH');
+        setType('USDT');
         setUploadedImages([]);
         setFieldDataArray([]);
+        setLoader(false);
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {
@@ -414,7 +414,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         variant: 'subtitle2'
                                                     }}
                                                 />
-                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                {mintType == 'directMint' && (
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                )}
                                                 <IconButton
                                                     color="error"
                                                     edge="end"
@@ -432,20 +434,26 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 </DialogContent>
                 <Divider />
                 <DialogActions sx={{ pr: 2.5 }}>
-                    <AnimateButton>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{ my: 3, ml: 1 }}
-                            onClick={() => {
-                                formik.handleSubmit();
-                            }}
-                            size="large"
-                            disableElevation
-                        >
-                            Add
-                        </Button>
-                    </AnimateButton>
+                    {loader ? (
+                        <Box display={'flex'}>
+                            <CircularProgress  />
+                        </Box>
+                    ) : (
+                        <AnimateButton>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ my: 3, ml: 1 }}
+                                onClick={() => {
+                                    formik.handleSubmit();
+                                }}
+                                size="large"
+                                disableElevation
+                            >
+                                Add
+                            </Button>
+                        </AnimateButton>
+                    )}
                     <AnimateButton>
                         <Button
                             variant="contained"

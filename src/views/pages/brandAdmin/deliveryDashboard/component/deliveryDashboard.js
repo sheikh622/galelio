@@ -24,6 +24,8 @@ import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
 
 const DeliveryDashboard = ({ deliveryList , user }) => {
+
+    console.log('deliveryList', deliveryList);
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [deliveryId, setDeliveryId] = useState(0);
@@ -37,9 +39,8 @@ const DeliveryDashboard = ({ deliveryList , user }) => {
                             <TableCell align="center">Name</TableCell>
                             <TableCell align="center">Price</TableCell>
                             <TableCell align="center">Status</TableCell>
-                            <TableCell align="center">Description</TableCell>
-                            <TableCell align="center">Created At</TableCell>
-                            <TableCell align="center">Updated At</TableCell>
+                            <TableCell align="center">Description</TableCell>                            
+                            <TableCell align="center">Address</TableCell> 
                             <TableCell align="center">Actions</TableCell>
                         </TableRow>
                     </TableHead>
@@ -92,8 +93,9 @@ const DeliveryDashboard = ({ deliveryList , user }) => {
                                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                                     {row?.Nft.description}
                                                 </TableCell>
-                                                <TableCell align="center">{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
-                                                <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
+                                                {/* <TableCell align="center">{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell> */}
+                                                {/* <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell> */}
+                                                <TableCell align="center">{row?.User?.address}</TableCell>
                                                 <TableCell align="center" sx={{ padding: '0px' }}>
                                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                                         <Tooltip placement="top" title="Status">

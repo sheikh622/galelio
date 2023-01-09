@@ -26,16 +26,16 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
         isUpdate: Yup.boolean().default(isUpdate),
         name: Yup.string()
             .required('Brand Name is required!')
-            .max(42, 'Brand Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Brand name'),
+            .max(42, 'Brand Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Brand name'),
         location: Yup.string()
             .required('Location is required!')
-            .max(42, 'Location can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Location'),
+            .max(42, 'Location can not exceed 42 characters'),  
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Location'),
         description: Yup.string()
             .required('Brand is required!')
-            .max(42, 'Brand can not exceed 200 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
+            .max(42, 'Brand can not exceed 200 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
         image: Yup.mixed().when(['isUpdate'], {
             is: true,
             then: Yup.mixed(),

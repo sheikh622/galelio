@@ -1,6 +1,8 @@
 import {
     GET_ALL_BRAND_CATEGORIES,
     GET_ALL_BRAND_CATEGORIES_SUCCESS,
+    GET_ALL_BRAND_CATEGORIES_ADMIN,
+    GET_ALL_BRAND_CATEGORIES_ADMIN_SUCCESS,
     GET_ALL_CATEGORIES_DROPDOWN,
     GET_ALL_CATEGORIES_DROPDOWN_SUCCESS,
     ADD_BRAND_CATEGORY,
@@ -9,6 +11,19 @@ import {
 } from './constants';
 
 
+export const getAllBrandCategoriesAdmin = (data) => {
+    return {
+        type: GET_ALL_BRAND_CATEGORIES_ADMIN,
+        payload: data
+    };
+};
+
+export const getAllBrandCategoriesAdminSuccess = (data) => {
+    return {
+        type: GET_ALL_BRAND_CATEGORIES_ADMIN_SUCCESS,
+        payload: data
+    };
+};
 export const getAllCategoriesDropdown = (data) => {
     return {
         type: GET_ALL_CATEGORIES_DROPDOWN,

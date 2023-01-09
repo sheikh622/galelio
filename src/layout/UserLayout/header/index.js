@@ -71,6 +71,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogout = async () => {
@@ -242,8 +243,10 @@ export default function Header() {
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
                         <div style={{marginRight:"3%"}}>
+{user  &&
 
                     <MetaMaskSection/>
+}
 
                         </div>
                         <IconButton size="large" aria-label="" color="inherit">

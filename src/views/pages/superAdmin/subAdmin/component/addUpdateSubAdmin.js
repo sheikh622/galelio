@@ -1,15 +1,34 @@
 import { forwardRef, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik, validateYupSchema } from 'formik';
 import * as Yup from 'yup';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { addSubAdmin, updateSubAdmin } from 'redux/subAdmin/actions';
-import { Button, InputLabel, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider, Grid } from '@mui/material';
+import NFTAbi from '../../../../../contractAbi/NFT.json';
+import { ethers } from 'ethers';
+import {
+    Button,
+    InputLabel,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Slide,
+    TextField,
+    Divider,
+    Grid,
+    MenuItem
+} from '@mui/material';
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, page, limit, search }) {
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState(false);
+    const [contractAddress, setContractAddress] = useState('');
+    const [brandCategoryId, setBrandCategoryId] = useState(0);
+
+    const blockChainRole = '0xd2e4c2619ea6e0faebc405d89445161c041e30fe03373ea0473da142d57d4514';
 
     useEffect(() => {
         if (subAdminData.id == null) {
@@ -19,8 +38,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         }
     }, [subAdminData]);
 
-
-    console.log("subAdminData", subAdminData)
+    const handleBrandCategoryChange = (e) => {
+        setContractAddress(e.target.value.contractAddress);
+        setBrandCategoryId(e.target.value.id);
+        console.log('handleBrandCategoryChange', e.target.value);
+    };
 
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
@@ -33,7 +55,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
             .max(42, 'Last Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-        walletAddress:Yup.string().required('Wallet Address is required!'), 
+        walletAddress: Yup.string().required('Wallet Address is required!'),
         adminPassword: Yup.mixed().when(['isUpdate'], {
             is: false,
             then: Yup.string()
@@ -48,13 +70,32 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
             )
         })
     });
+
+    const grantRole = async () => {};
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: subAdminData,
         validationSchema,
-        onSubmit: (values) => {
-            console.log("values", values)
+        onSubmit: async (values) => {
+            console.log('values', values);
+            console.log('contractAddress', contractAddress);
+
             if (subAdminData.id == null) {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                console.log('signer', signer);
+                console.log('NFTAbi.abi', NFTAbi.abi);
+                const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
+                // console.log("NFTS:  ",nfts)
+                let mintedNFT = await (
+                    await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
+                        // toast.error(`${error.message}`);
+                        console.log('error.message', error.message);
+                    })
+                ).wait();
+                console.log('mintedNFT', mintedNFT);
+
                 dispatch(
                     addSubAdmin({
                         firstName: values.firstName,
@@ -62,6 +103,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         email: values.adminEmail,
                         password: values.adminPassword,
                         walletAddress: values.walletAddress,
+                        brandCategory: brandCategoryId,
                         page: page,
                         limit: limit,
                         search: search,
@@ -90,6 +132,8 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         setOpen(false);
         formik.resetForm();
     };
+    const { brandCategories } = useSelector((state) => state.brandCategoryReducer.brandCategoriesAdminList);
+    console.log('brandCategories', brandCategories);
 
     return (
         <>
@@ -162,7 +206,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         autoComplete="given-name"
                                     />
                                 </Grid>
-                                <Grid item xs={6} pt={2}>
+                                <Grid item xs={6} pt={2} pr={3}>
                                     <InputLabel htmlFor="">Wallet Address</InputLabel>
                                     <TextField
                                         id="walletAddress"
@@ -174,6 +218,26 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         fullWidth
                                         autoComplete=""
                                     />
+                                </Grid>
+
+                                <Grid item xs={6} sx={{ pt: '4%' }}>
+                                    {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
+                                    <TextField
+                                        className="responsiveSelectfield"
+                                        id="outlined-select-budget"
+                                        select
+                                        fullWidth
+                                        label="Select Brand Category"
+                                        // value={category}
+                                        onChange={handleBrandCategoryChange}
+                                    >
+                                        <MenuItem value={0}>Choose Category (Brand)</MenuItem>
+                                        {brandCategories?.map((data, index) => (
+                                            <MenuItem key={index} value={data}>
+                                                {data.Category.name} ({data.Brand.name})
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
                                 </Grid>
                             </>
                         </Grid>

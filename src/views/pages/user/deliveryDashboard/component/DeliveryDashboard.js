@@ -22,6 +22,7 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 
 // project imports
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -36,6 +37,8 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import PinDropTwoToneIcon from '@mui/icons-material/PinDropTwoTone';
 import DescriptionIcon from '@mui/icons-material/Description';
 import moment from 'moment';
+import { User } from '@auth0/auth0-spa-js';
+import { useSelector } from 'react-redux';
 // progress
 function LinearProgressWithLabel({ value, ...other }) {
     return (
@@ -71,6 +74,7 @@ const rows = [
 // ==============================|| DeliveryDashboard ||============================== //
 
 const DeliveryDashboard = ({ productList }) => {
+    const user = useSelector((state)=>state.auth.user)
     return (
         <Grid item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
@@ -169,6 +173,23 @@ const DeliveryDashboard = ({ productList }) => {
                                                                         {row?.Nft.price}
                                                                         </Typography>
                                                                     </ListItemSecondaryAction>
+                                                                
+                                                                </ListItemButton>
+                                                        
+                                                                <Divider />
+                                                                <ListItemButton>
+                                                                    <ListItemIcon>
+                                                                        <ContactMailIcon sx={{ fontSize: '1.3rem' }} />
+                                                                    </ListItemIcon>
+                                                                    <ListItemText
+                                                                        primary={<Typography variant="subtitle1">Address</Typography>}
+                                                                    />
+                                                                    <ListItemSecondaryAction>
+                                                                        <Typography sx={{color:''}} variant="subtitle1" align="right">
+                                                                        {user.address}
+                                                                        </Typography>
+                                                                    </ListItemSecondaryAction>
+                                                                    
                                                                 </ListItemButton>
                                                              
                                                             </List>

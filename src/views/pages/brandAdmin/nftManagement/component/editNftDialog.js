@@ -1,5 +1,5 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -36,13 +36,10 @@ import QuantitySelector from './quantitySelector';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
+import { userStory } from 'store/kanban';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const currencyTypeArray = [
-    {
-        value: 'ETH',
-        label: 'ETH'
-    },
     {
         value: 'USDT',
         label: 'USDT'
@@ -52,10 +49,10 @@ const currencyTypeArray = [
 export default function EditNftDialog({ nftInfo, categoryId, type, search, page, limit, loader, setLoader, open, setOpen }) {
     const dispatch = useDispatch();
     const [mintType, setMintType] = useState('directMint');
-    const [currencyType, setCurrencyType] = useState('ETH');
+    const [currencyType, setCurrencyType] = useState('USDT');
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [uploadedImages, setUploadedImages] = useState([]);
-
+    const user = useSelector((state) => state.auth.user);
     const handleCurrencyType = (event) => {
         setCurrencyType(event.target.value);
     };
@@ -128,7 +125,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         limit: limit,
                         search: search,
                         categoryId: categoryId,
-                        handleClose: handleClose
+                        handleClose: handleClose,
+                        brandId: user.BrandId
                     })
                 );
             }
@@ -206,7 +204,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             <Grid item md={8} xs={12} textAlign="left">
                 <DialogTitle id="alert-dialog-slide-title1">Edit NFT</DialogTitle>
             </Grid>
-            <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
+            {/* <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
                 <Button
                     sx={{ marginRight: '10px' }}
                     variant={mintType == 'directMint' ? 'contained' : 'outlined'}
@@ -224,7 +222,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 >
                     Lazy Minting
                 </Button>
-            </Grid>
+            </Grid> */}
         </Grid>
         <Divider />
 
@@ -437,7 +435,11 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 //     variant: 'subtitle2'
                                                 // }}
                                             />
+                                            {mintType == "directMint"
+                                            &&
+                                            
                                             <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                            }
 
                                             <IconButton
                                                 color="error"
