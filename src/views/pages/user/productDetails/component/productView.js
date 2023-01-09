@@ -288,47 +288,46 @@ const PropertiesView = ({ nft }) => {
                 });
         } else if (nft.mintType == 'lazyMint') {
             console.log('im in lazymint resell');
-        
-                let erc20Address = BLOCKCHAIN.ERC20;
-                let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
-                rprice = ethers.utils.parseEther(rprice.toString());
-                console.log('erc20Address', erc20Address);
-                console.log('tokenId', tokenId);
-                console.log('contractAddress', contractAddress);
+            let erc20Address = BLOCKCHAIN.ERC20;
+            let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
+            rprice = ethers.utils.parseEther(rprice.toString());
+            console.log('erc20Address', erc20Address);
+            console.log('tokenId', tokenId);
+            console.log('contractAddress', contractAddress);
 
-                console.log('signer', signer);
-                console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
-                const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-                console.log(marketplace);
-                console.log(tokenId);
-                console.log(contractAddress);
-                // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
-                await (await marketplace
-                    .makeItem(erc20Address, tokenId, contractAddress, nft.price)).wait()
-                    .then((data) => {
-                        dispatch(
-                            resellNft({
-                                nftId: nft.id,
-                                nftToken: nft.NFTTokens[0].id,
-                                buyerAddress: data.from,
-                                contractAddress: contractAddress
-                            })
-                        );
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
 
-                        toast.success('NFT is Resold');
-                    })
-                    .catch((error) => {
-                        toast.error(error.message);
-                    });
-                setResell(true);
-                setOpen(false);
-            
+            console.log('signer', signer);
+            console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
+            const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+            const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+            console.log(marketplace);
+            console.log(tokenId);
+            console.log(contractAddress);
+            // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
+            await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, nft.price))
+                .wait()
+                .then((data) => {
+                    dispatch(
+                        resellNft({
+                            nftId: nft.id,
+                            nftToken: nft.NFTTokens[0].id,
+                            buyerAddress: data.from,
+                            contractAddress: contractAddress
+                        })
+                    );
+
+                    toast.success('NFT is Resold');
+                })
+                .catch((error) => {
+                    toast.error(error.message);
+                });
+            setResell(true);
+            setOpen(false);
         }
     };
 
@@ -438,7 +437,7 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
-                        <SubCard  className="tableShadow">
+                        <SubCard className="tableShadow">
                             <img src={nft?.asset} alt="Statement Image" className="ProductimageSize" />
                         </SubCard>{' '}
                     </Grid>
@@ -500,9 +499,37 @@ const PropertiesView = ({ nft }) => {
                                                 {nft?.description}
                                             </Typography>
                                         </Grid>
+                                        {nft?.NFTMetaFiles.length > 0 && <h2>Proof of Authenticity</h2>}
+
+                                        <Accordion>
+                                        {nft?.NFTMetaFiles.map((data) => (
+                                            <>
+                                                  <AccordionSummary
+                                                  expandIcon={<ExpandMoreIcon />}
+                                                  aria-controls="panel1a-content"
+                                                  id="panel1a-header"
+                                              >
+                                                  <Typography>{data.fieldName}</Typography>
+                                              </AccordionSummary>
+                                              <AccordionDetails>
+                                                  <a target="_blank" href={nft?.transactionHash}>
+                                                      {data.fieldValue}
+                                                  </a>
+                                              </AccordionDetails>
+                                              </>
+                                            ))}
+                                         
+                                        </Accordion>
+                                        <Grid item xs={12}>
+                                            {nft?.NFTMetaFiles.map((data) => (
+                                                <a target="_blank" href={data.fieldValue}>
+                                                    {data.fieldName}
+                                                </a>
+                                            ))}
+                                        </Grid>
                                         {buyerNft?.founded && (
                                             <div style={{ marginTop: '5%' }}>
-                                                {(nft?.transactionHash !== '' || nft?.transactionHash ) && (
+                                                {(nft?.transactionHash !== '' || nft?.transactionHash) && (
                                                     <>
                                                         <Accordion>
                                                             <AccordionSummary
