@@ -1,0 +1,9 @@
+const BLOCKCHAIN = 
+    {
+        WALLET_ADDRESS: '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651',
+        ERC20: '0xa4f949079320f3C6fFBfdEcB1C8D6ffEb0E44113'
+    }
+    
+
+
+export default BLOCKCHAIN

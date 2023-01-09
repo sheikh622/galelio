@@ -24,7 +24,9 @@ import {
     RESELL_NFT,
     REDEEM_NFT,
     ADD_DELIVERY_NFT,
-    GET_NFT_BUYER
+    GET_NFT_BUYER,
+    REQUEST_CHANGE_NFT,
+    CHANGE_TOKEN_ID
 } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
@@ -39,7 +41,8 @@ function* deleteNftRequest({ payload }) {
                 search: payload.search,
                 page: payload.page,
                 limit: payload.limit,
-                type: payload.type
+                type: payload.type,
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
@@ -299,6 +302,36 @@ function* requestNftForMintingRequest({ payload }) {
     }
 }
 
+function* requestChangeTokenId({ payload }) {
+ 
+    console.log("data from requestChangeTokenId", payload)
+    try {
+        let data = {
+            tokenId : payload.tokenId
+        };
+        
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.put(`update/nftToken/${payload.id}`,data, headers);
+        payload.handleClose();
+        yield put(
+            getAllNft({
+                categoryId: payload.categoryId,
+                search: payload.search,
+                page: payload.page,
+                limit: payload.limit,
+                type: payload.type,
+                brandId: payload.brandId
+            })
+        );
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler("An error occurred");
+    }
+}
+
+export function* watchChangeTokenId() {
+    yield takeLatest(CHANGE_TOKEN_ID, requestChangeTokenId);
+}
 export function* watchRequestNftForMinting() {
     yield takeLatest(REQUEST_NFT_FOR_MINTING, requestNftForMintingRequest);
 }
@@ -404,6 +437,7 @@ export default function* nftSaga() {
         fork(watchEditNft),
         fork(watchDeleteNft),
         fork(watchRejectNft),
-        fork(watchGetNftBuyer)
+        fork(watchGetNftBuyer),
+        fork(watchChangeTokenId)
     ]);
 }

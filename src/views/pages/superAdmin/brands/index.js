@@ -76,12 +76,12 @@ const Brands = () => {
             //       </Grid></Grid> */}
 
 
-            <MainCard className='tableShadow'
-                title={
+            <MainCard className='tableShadow' 
+                title={ 
                     <Grid container spacing={4} >
                     <Grid item xs={6} lg={8} >
                     <Typography className='mainheading' variant="h1" component="h2"
-                     sx={{marginLeft:{lg:'44px', md:'44px'}}}>
+                     sx={{marginLeft:{lg:'44px', md:'44px' }}}>
                    Brands
                   </Typography>
                     </Grid>

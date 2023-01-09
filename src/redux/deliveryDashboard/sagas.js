@@ -14,7 +14,7 @@ function* getAllProductRequest({ payload }) {
         yield put(getAllProductsSuccess(response.data.data.deliveries.rows));
   
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+        // yield sagaErrorHandler(error.response.data.data);
     }
 }
 
@@ -29,7 +29,7 @@ function* getDeliveryDashRequest({ payload }) {
         yield put(getDeliveryDashboardSuccess(response.data.data.deliveries.rows));
        
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+        // yield sagaErrorHandler(error.response.data.data);
     }
 }
 
@@ -55,7 +55,7 @@ function* changeStatusRequest({ payload }) {
         payload.handleClose();
         yield setNotification('success', response.data.message);
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+        // yield sagaErrorHandler(error.response.data.data);
     }
 }
 

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
 import { deleteNft } from 'redux/nftManagement/actions';
@@ -10,6 +10,7 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
     const handleClose = () => {
         setOpen(false);
     };
+    const user = useSelector((state) => state.auth.user);
 
     return (
         <>
@@ -52,6 +53,7 @@ export default function DeleteNFTDialog({ nftInfo, categoryId, type, search, pag
                                     page: page,
                                     limit: limit,
                                     search: search,
+                                    brandId: user.BrandId,
                                     handleClose: handleClose
                                 })
                             );
