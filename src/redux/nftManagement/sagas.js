@@ -294,7 +294,7 @@ function* requestNftForMintingRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.patch(`nft/brandAdmin/mintRequest/${payload.id}`, data, headers);
-        payload.handleClose();
+       
         yield put(
             getAllNft({
                 categoryId: payload.categoryId,
@@ -305,6 +305,7 @@ function* requestNftForMintingRequest({ payload }) {
                 brandId: payload.brandId
             })
         );
+        payload.handleClose();
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);

@@ -51,8 +51,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 limit: limit,
                 search: search,
                 type: type,
+                brandId: user.BrandId,
                 handleClose: handleClose,
-                brandId: user.BrandId
             })
         );
     };
