@@ -116,6 +116,11 @@ function* editNftRequest({ payload }) {
     formData.append('quantity', payload.quantity);
     formData.append('metaData', JSON.stringify(payload.metaDataArray));
     formData.append('mintType', payload.mintType);
+    formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
+    formData.append('perviousUploadedItems', JSON.stringify(payload.perviousUploadedItems));
+    for (let i = 0; i < payload.fileArray.length; i++) {
+        formData.append('fileArray', payload.fileArray[i]);
+    }
 
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -143,6 +148,8 @@ export function* watchEditNft() {
 }
 
 function* addNftRequest({ payload }) {
+    console.log('fileNameArray', payload.fileNameArray);
+    console.log('fileArray', payload.fileArray);
     const formData = new FormData();
     formData.append('asset', payload.asset);
     formData.append('name', payload.name);
@@ -153,7 +160,10 @@ function* addNftRequest({ payload }) {
     formData.append('quantity', payload.quantity);
     formData.append('metaData', JSON.stringify(payload.metaDataArray));
     formData.append('mintType', payload.mintType);
-
+    formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
+    for (let i = 0; i < payload.fileArray.length; i++) {
+        formData.append('fileArray', payload.fileArray[i]);
+    }
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/nft/brandAdmin`, formData, headers);
@@ -164,7 +174,7 @@ function* addNftRequest({ payload }) {
                 page: payload.page,
                 limit: payload.limit,
                 type: payload.type,
-                brandId: payload.brandId,
+                brandId: payload.brandId
             })
         );
         payload.handleClose();
