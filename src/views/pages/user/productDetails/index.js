@@ -51,7 +51,7 @@ const ProductDetails = () => {
                             <Activity  />
                         </Grid>
                         <Grid item md={12} xs={12}>
-                            <SimilarProducts />
+                            <SimilarProducts nft={location.state.nft}/>
                         </Grid>
                     </Grid>
                 </Grid>

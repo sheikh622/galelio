@@ -1,9 +1,14 @@
 import produce from 'immer';
-import { GET_ALL_MARKETPLACE_CATEGORIES_SUCCESS, GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY_SUCCESS } from './constants';
+import {
+    GET_ALL_MARKETPLACE_CATEGORIES_SUCCESS,
+    GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY_SUCCESS,
+    GET_ALL_SIMILAR_PRODUCTS_SUCCESS
+} from './constants';
 
 const INITIAL_STATE = {
     marketplaceCategories: [],
-    marketplaceNfts: []
+    marketplaceNfts: [],
+    similarProductNfts: []
 };
 
 const marketplaceReducer = produce((draft, action) => {
@@ -13,6 +18,9 @@ const marketplaceReducer = produce((draft, action) => {
             break;
         case GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY_SUCCESS:
             draft.marketplaceNfts = action.payload;
+            break;
+        case GET_ALL_SIMILAR_PRODUCTS_SUCCESS:
+            draft.similarProductNfts = action.payload;
             break;
 
         default:

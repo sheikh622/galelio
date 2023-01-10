@@ -2,8 +2,28 @@ import {
     GET_ALL_MARKETPLACE_CATEGORIES,
     GET_ALL_MARKETPLACE_CATEGORIES_SUCCESS,
     GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY,
-    GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY_SUCCESS
+    GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY_SUCCESS,
+    GET_ALL_SIMILAR_PRODUCTS,
+    GET_ALL_SIMILAR_PRODUCTS_SUCCESS
 } from './constants';
+
+
+export const getAllSimilarProducts = (data) => {
+    return {
+        type: GET_ALL_SIMILAR_PRODUCTS,
+        payload: data
+    };
+};
+
+export const getAllSimilarProductsSuccess = (data) => {
+    return {
+        type: GET_ALL_SIMILAR_PRODUCTS_SUCCESS,
+        payload: data
+    };
+};
+
+
+
 
 export const getAllMarketplaceCategories = () => {
     return {

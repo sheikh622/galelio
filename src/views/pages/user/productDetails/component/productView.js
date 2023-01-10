@@ -432,6 +432,10 @@ const PropertiesView = ({ nft }) => {
         }
     }, [useSelector, dispatch, resell, bought, redeem]);
     console.log('buyerNft', buyerNft);
+
+    useEffect(() => {
+        console.log('nft to watch', nft);
+    }, []);
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
@@ -499,10 +503,10 @@ const PropertiesView = ({ nft }) => {
                                                 {nft?.description}
                                             </Typography>
                                         </Grid>
-                                        {nft?.NFTMetaFiles.length > 0 && <h2>Proof of Authenticity</h2>}
+                                        {nft?.NFTMetaFiles?.length > 0 && <h2>Proof of Authenticity</h2>}
 
                                         <Accordion>
-                                        {nft?.NFTMetaFiles.map((data) => (
+                                        {nft?.NFTMetaFiles && nft?.NFTMetaFiles?.length > 0 && nft?.NFTMetaFiles.map((data) => (
                                             <>
                                                   <AccordionSummary
                                                   expandIcon={<ExpandMoreIcon />}
@@ -512,7 +516,7 @@ const PropertiesView = ({ nft }) => {
                                                   <Typography>{data.fieldName}</Typography>
                                               </AccordionSummary>
                                               <AccordionDetails>
-                                                  <a target="_blank" href={nft?.transactionHash}>
+                                                  <a target="_blank" href={data.fieldValue}>
                                                       {data.fieldValue}
                                                   </a>
                                               </AccordionDetails>
@@ -521,11 +525,12 @@ const PropertiesView = ({ nft }) => {
                                          
                                         </Accordion>
                                         <Grid item xs={12}>
-                                            {nft?.NFTMetaFiles.map((data) => (
-                                                <a target="_blank" href={data.fieldValue}>
-                                                    {data.fieldName}
-                                                </a>
-                                            ))}
+                                            {nft?.NFTMetaFiles &&
+                                                nft?.NFTMetaFiles.map((data) => (
+                                                    <a target="_blank" href={data.fieldValue}>
+                                                        {data.fieldName}
+                                                    </a>
+                                                ))}
                                         </Grid>
                                         {buyerNft?.founded && (
                                             <div style={{ marginTop: '5%' }}>
