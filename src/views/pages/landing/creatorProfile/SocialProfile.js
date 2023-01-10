@@ -106,7 +106,7 @@ const SocialProfile = () => {
                             className="text"
                             variant="h5"
                         >
-                            {user.firstName} {user.lastName}
+                            {user?.firstName} {user?.lastName}
                         </Typography>
                         <Typography
                             sx={{

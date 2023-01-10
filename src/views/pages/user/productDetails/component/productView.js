@@ -40,17 +40,11 @@ const PropertiesView = ({ nft }) => {
     const [resell, setResell] = useState(false);
     const [bought, setBought] = useState(false);
     const [redeem, setRedeem] = useState(false);
-    const [lazyResell, setLazyResell] = useState(false);
-    const [lazyResellAgain, setLazyResellAgain] = useState(false);
     const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
     const theme = useTheme();
-
-    console.log('lazyResell', lazyResell);
-    console.log('lazyResellAgain', lazyResellAgain);
-
     console.log('nft from product view', nft);
 
     const [open, setOpen] = React.useState(false);
@@ -72,9 +66,9 @@ const PropertiesView = ({ nft }) => {
                     variant="contained"
                     size="large"
                     onClick={() => {
-                        if (lazyResell) {
+                        if (nft.mintType == 'directMint') {
                             setOpen(true);
-                        } else if (lazyResell == false) {
+                        } else if (nft.mintType == 'lazyMint') {
                             handleResellNft();
                         }
                     }}
@@ -274,6 +268,7 @@ const PropertiesView = ({ nft }) => {
                 .then((data) => {
                     dispatch(
                         resellNft({
+                            rprice: rprice,
                             nftId: nft.id,
                             nftToken: nft.NFTTokens[0].id,
                             buyerAddress: data.from,
@@ -426,9 +421,6 @@ const PropertiesView = ({ nft }) => {
                     NftId: nft.id
                 })
             );
-            if (nft?.UserNfts?.length > 1) {
-                setLazyResellAgain(true);
-            }
         }
     }, [useSelector, dispatch, resell, bought, redeem]);
     console.log('buyerNft', buyerNft);
@@ -507,26 +499,23 @@ const PropertiesView = ({ nft }) => {
 
                                         {nft?.NFTMetaFiles.map((data) => (
                                             <>
-                                            
-                                        <Accordion>
-                                                  <AccordionSummary
-                                                  expandIcon={<ExpandMoreIcon />}
-                                                  aria-controls="panel1a-content"
-                                                  id="panel1a-header"
-                                              >
-                                                  <Typography>{data.fieldName}</Typography>
-                                              </AccordionSummary>
-                                              <AccordionDetails>
-                                                  <a target="_blank" href={data.fieldValue}>
-                                                      {data.fieldValue}
-                                                  </a>
-                                              </AccordionDetails>
-                                              </Accordion>
-                                              </>
-                                            ))}
-                                         
-                                        
-                                  
+                                                <Accordion>
+                                                    <AccordionSummary
+                                                        expandIcon={<ExpandMoreIcon />}
+                                                        aria-controls="panel1a-content"
+                                                        id="panel1a-header"
+                                                    >
+                                                        <Typography>{data.fieldName}</Typography>
+                                                    </AccordionSummary>
+                                                    <AccordionDetails>
+                                                        <a target="_blank" href={data.fieldValue}>
+                                                            {data.fieldValue}
+                                                        </a>
+                                                    </AccordionDetails>
+                                                </Accordion>
+                                            </>
+                                        ))}
+
                                         {buyerNft?.founded && (
                                             <div style={{ marginTop: '5%' }}>
                                                 {(nft?.transactionHash !== '' || nft?.transactionHash) && (

@@ -6,7 +6,7 @@ import { Grid } from '@mui/material';
 import Properties from './component/properties';
 import PropertiesView from './component/productView';
 import { getAllMarketplaceNftsByCategory } from 'redux/marketplace/actions';
-import SimilarProducts from '../../landing/ProductDetails/SimilarProducts';
+import SimilarProducts from '../../user/productDetails/component/similarProducts';
 import Activity from '../../landing/ProductDetails/Activity';
 const ProductDetails = () => {
     const theme = useTheme();
