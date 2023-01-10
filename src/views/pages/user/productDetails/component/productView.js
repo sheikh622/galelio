@@ -513,7 +513,7 @@ const PropertiesView = ({ nft }) => {
                                                   <Typography>{data.fieldName}</Typography>
                                               </AccordionSummary>
                                               <AccordionDetails>
-                                                  <a target="_blank" href={nft?.transactionHash}>
+                                                  <a target="_blank" href={data.fieldValue}>
                                                       {data.fieldValue}
                                                   </a>
                                               </AccordionDetails>
