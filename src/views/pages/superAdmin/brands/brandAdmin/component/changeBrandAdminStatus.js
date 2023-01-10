@@ -22,11 +22,11 @@ export default function ChangeBrandAdminStatusDialog({ open, setOpen, page, limi
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Change Brand Admin Status </DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1"   className="statusHeading">Change Brand Admin Status </DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
-                        <Typography variant="body2" component="span">
+                        <Typography variant="body2" component="span"  className="statustypo">
                             {brandAdminData.isActive == false
                                 ? 'Are you sure you want to unblock this Admin?'
                                 : 'Are you sure you want to block  this Admin?'}
@@ -37,13 +37,13 @@ export default function ChangeBrandAdminStatusDialog({ open, setOpen, page, limi
                     <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
-                        color="secondary"
+                        color="secondary" className='buttonSize' size='large' 
                     >
                         No
                     </Button>
                     <Button
                         variant="contained"
-                        size="large"
+                        className='buttonSize' size='large' 
                         onClick={() => {
                             dispatch(
                                 changeBrandAdminStatus({
