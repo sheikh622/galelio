@@ -1,17 +1,12 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Container, Card, Grid, Typography, CardActionArea, CardContent, Divider } from '@mui/material';
-
-// project imports
-
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
-
 import CardMedia from '@mui/material/CardMedia';
-
-
-// =============================|| LANDING - FEATURE PAGE ||============================= //
-
-const SimilarProducts = () => {
+import {getAllSimilarProducts} from '../../../../redux/marketplace/actions'
+const SimilarProducts = ({nft}) => {
     const theme = useTheme();
     const itemData = [
         {
@@ -87,6 +82,26 @@ const SimilarProducts = () => {
             creator: 'Creator'
         }
     ];
+
+    const dispatch = useDispatch();
+    const similarProductNfts = useSelector((state) => state.marketplaceReducer.similarProductNfts);
+    const [search, setSearch] = useState('');
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(12);
+    useEffect(() => {
+        dispatch(
+            getAllSimilarProducts({
+                search: search,
+                page: page,
+                limit: limit,
+                categoryId: nft.CategoryId,
+                nftId:nft.id
+            })
+        );
+    }, [search, page, limit]);
+
+    console.log("nftnftnftnftnftnftnft",nft)
+    console.log("similarProductNfts",similarProductNfts)
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>

@@ -40,8 +40,6 @@ const PropertiesView = ({ nft }) => {
     const [resell, setResell] = useState(false);
     const [bought, setBought] = useState(false);
     const [redeem, setRedeem] = useState(false);
-    const [lazyResell, setLazyResell] = useState(false);
-    const [lazyResellAgain, setLazyResellAgain] = useState(false);
     const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
@@ -87,9 +85,9 @@ const PropertiesView = ({ nft }) => {
                     variant="contained"
                     size="large"
                     onClick={() => {
-                        if (lazyResell) {
+                        if (nft.mintType == 'directMint') {
                             setOpen(true);
-                        } else if (lazyResell == false) {
+                        } else if (nft.mintType == 'lazyMint') {
                             handleResellNft();
                         }
                     }}
@@ -289,6 +287,7 @@ const PropertiesView = ({ nft }) => {
                 .then((data) => {
                     dispatch(
                         resellNft({
+                            rprice: rprice,
                             nftId: nft.id,
                             nftToken: nft.NFTTokens[0].id,
                             buyerAddress: data.from,
@@ -441,12 +440,13 @@ const PropertiesView = ({ nft }) => {
                     NftId: nft.id
                 })
             );
-            if (nft?.UserNfts?.length > 1) {
-                setLazyResellAgain(true);
-            }
         }
     }, [useSelector, dispatch, resell, bought, redeem]);
     console.log('buyerNft', buyerNft);
+
+    useEffect(() => {
+        console.log('nft to watch', nft);
+    }, []);
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>

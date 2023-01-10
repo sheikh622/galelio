@@ -214,7 +214,8 @@ function* resellNftRequest({ payload }) {
             nftToken: payload.nftToken,
             buyerAddress: payload.buyerAddress,
             contractAddress: payload.contractAddress,
-            status: 'Resell'
+            status: 'Resell',
+            rprice : payload.rprice
         };
 
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
