@@ -24,7 +24,7 @@ export default function ChangeStatusDialog({ open, setOpen, page, limit, search,
     };
     const state = [
         {
-            value: 'Delivered',
+            value: 'Status',
             label: 'Status'
         },
         {
@@ -67,8 +67,7 @@ export default function ChangeStatusDialog({ open, setOpen, page, limit, search,
                                 <InputLabel id="demo-simple-select-label">Status</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={status}
+                                    id="demo-simple-select"                                
                                     label="Status"
                                     onChange={handleChange}
                                 >

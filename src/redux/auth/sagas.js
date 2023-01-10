@@ -34,7 +34,8 @@ function* signupUserRequest({ payload }) {
             name: payload.name,
             email: payload.email,
             password: payload.password,
-            walletAddress: payload.walletAddress
+            walletAddress: payload.walletAddress,
+            address: payload.address
         };
         const response = yield axios.post(`/auth/signup`, data);
       

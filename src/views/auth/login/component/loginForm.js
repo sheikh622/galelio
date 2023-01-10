@@ -216,7 +216,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                        {/* <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                             <GoogleLogin
                                 select_account={false}
                                 auto_select={false}
@@ -232,7 +232,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                             <Button variant="contained" startIcon={<FacebookOutlinedIcon />}>
                                 Login with Facebook
                             </Button>
-                        </Grid>
+                        </Grid> */}
                         {/*   <Grid
                             item
                             sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}

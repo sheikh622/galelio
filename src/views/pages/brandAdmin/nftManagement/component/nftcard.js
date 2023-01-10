@@ -17,12 +17,14 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const [image, setImage] = useState([]);
     const [nftInfo, setNftInfo] = useState({
         id: null,
+        brandId: null,
         nftName: '',
         nftDescription: '',
         nftPrice: 0,
         mintType: 'directMint',
         currencyType: 'ETH',
         fieldDataArray: [],
+        fileDataArray: [],
         images: []
     });
 
@@ -156,12 +158,14 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                                 setEditNftOpen(true);
                                                 setNftInfo({
                                                     id: nftData.id,
+                                                    brandId: nftData.Brand.id,
                                                     nftName: nftData.name,
                                                     nftDescription: nftData.description,
                                                     nftPrice: nftData.price,
                                                     mintType: nftData.mintType,
                                                     currencyType: nftData.currencyType,
                                                     fieldDataArray: nftData.NFTMetaData,
+                                                    fileDataArray: nftData.NFTMetaFiles,
                                                     images: image
                                                 });
                                             }}

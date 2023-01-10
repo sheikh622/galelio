@@ -20,7 +20,8 @@ import {
     ListItemText,
     Typography,
     IconButton,
-    MenuItem
+    MenuItem,
+    CircularProgress
 } from '@mui/material';
 
 import { useDropzone } from 'react-dropzone';
@@ -36,14 +37,11 @@ import closeFill from '@iconify-icons/eva/close-fill';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
+import { DataArraySharp } from '@mui/icons-material';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const typeArray = [
-    {
-        value: 'ETH',
-        label: 'ETH'
-    },
     {
         value: 'USDT',
         label: 'USDT'
@@ -56,12 +54,14 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
     const [fieldDataArray, setFieldDataArray] = useState([]);
-    const [type, setType] = useState('ETH');
+    const [type, setType] = useState('USDT');
+    const [loader, setLoader] = useState(false);
+    const [fileDataArray, setFileDataArray] = useState([]);
     const handleType = (event) => {
         setType(event.target.value);
     };
 
-    const handleError = (fieldDataArray, values) => {
+    const handleError = (fieldDataArray, fileDataArray, values) => {
         let isValid = true;
         if (parseInt(values.images[0].quantity) < 1) {
             toast.error('NFT Quantity must be greater than zero');
@@ -83,6 +83,18 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 toast.error(`Metadata value fields are mandatory`);
             }
         });
+
+        fileDataArray.forEach((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`File name fields are mandatory`);
+            }
+            if (array.fieldValue == null) {
+                isValid = false;
+                toast.error(`File value fields are mandatory`);
+            }
+        });
+
         return isValid;
     };
 
@@ -111,13 +123,28 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         },
         validationSchema,
         onSubmit: (values) => {
-            let isValid = handleError(fieldDataArray, values);
+            console.log('fileDataArray', fileDataArray);
+            let fileArray = fileDataArray.map((data) => {
+                console.log('data', data);
+                return data.fieldValue;
+            });
+            let fileNameArray = fileDataArray.map((data) => {
+                console.log('data', data);
+                return data.fieldName;
+            });
+
+            console.log('fileArray', fileArray);
+            console.log('fileNameArray', fileNameArray);
+            let isValid = handleError(fieldDataArray, fileDataArray, values);
             if (isValid) {
+                setLoader(true);
                 dispatch(
                     addNft({
                         categoryId: data.CategoryId,
                         mintType: mintType,
                         metaDataArray: fieldDataArray,
+                        fileNameArray: fileNameArray,
+                        fileArray: fileArray,
                         name: values.nftName,
                         price: values.nftPrice,
                         description: values.nftDescription,
@@ -143,9 +170,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setOpen(false);
         formik.resetForm();
         setMintType('directMint');
-        setType('ETH');
+        setType('USDT');
         setUploadedImages([]);
         setFieldDataArray([]);
+        setLoader(false);
+        setFileDataArray([]);
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {
@@ -189,9 +218,27 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFieldDataArray(array);
     };
 
+    const handleFileFieldNameChange = (value, index) => {
+        let array = [...fileDataArray];
+        array[index].fieldName = value;
+        setFileDataArray(array);
+    };
+    const handleFileFieldValueChange = (value, index) => {
+        let array = [...fileDataArray];
+        array[index].fieldValue = value;
+        setFileDataArray(array);
+    };
+
+    const handleFileRemoveField = (index) => {
+        let array = [...fileDataArray];
+        array.splice(index, 1);
+        setFileDataArray(array);
+    };
+
     return (
         <>
             <Dialog
+            
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
@@ -203,7 +250,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             >
             <DialogTitle id="alert-dialog-slide-title1" className="adminname">Add NFT</DialogTitle>
             <Divider/>
-                <Grid container spacing={2} mt={2}>
+                <Grid container spacing={2} mt={2} >
                   
                    
                      <Grid xs={12} md={6} lg={6} >
@@ -229,12 +276,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 setMintType('lazyMint');
                             }}
                         >
-                        Lazy manting
+                        Lazy minting
                         </Button>
                     </Grid> 
                 </Grid>
                 
-                <DialogContent>
+                <DialogContent >
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={2}>
                             <Grid xs={4} md={5} lg={5} mt={2}>
@@ -414,6 +461,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 </div>
                             </Grid>
                         )}
+
                         <Grid item lg={12} mt={3}>
                             <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
                                 <AnimatePresence>
@@ -430,7 +478,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         variant: 'subtitle2'
                                                     }}
                                                 />
-                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                {mintType == 'directMint' && (
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                )}
                                                 <IconButton
                                                     color="error"
                                                     edge="end"
@@ -445,37 +495,108 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             </List>
                         </Grid>
                     </form>
+
+                    <Grid container>
+                        <Grid xs={12} mt={2} pr={3}>
+                            <Button
+                                variant="contained"
+                                sx={{ float: 'right' }}
+                                onClick={() => {
+                                    setFileDataArray([
+                                        ...fileDataArray,
+                                        {
+                                            fieldName: '',
+                                            fieldValue: null
+                                        }
+                                    ]);
+                                }}
+                            >
+                                Add Files
+                            </Button>
+                        </Grid>
+                        {fileDataArray.length != 0 && (
+                            <>
+                                <Grid container spacing={4}>
+                                    {fileDataArray.map((data, index) => (
+                                        <>
+                                            <Grid item xs={5}>
+                                                <TextField
+                                                    id="field_name"
+                                                    name="field_name"
+                                                    label="File Name"
+                                                    value={data.fieldName}
+                                                    onChange={(e) => {
+                                                        handleFileFieldNameChange(e.target.value, index);
+                                                    }}
+                                                    variant="standard"
+                                                    fullWidth
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={5}>
+                                                <input
+                                                    type="file"
+                                                    id="avatar"
+                                                    name="avatar"
+                                                    accept="image/*,.pdf"
+                                                    onChange={(event) => {
+                                                        handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                    }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={2} mt={2}>
+                                                <IconButton
+                                                    color="error"
+                                                    edge="end"
+                                                    size="small"
+                                                    onClick={() => {
+                                                        handleFileRemoveField(index);
+                                                    }}
+                                                >
+                                                    <Icon icon={closeFill} width={28} height={28} />
+                                                </IconButton>
+                                            </Grid>
+                                        </>
+                                    ))}
+                                </Grid>
+                            </>
+                        )}
+                    </Grid>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ display:'block' }}>
+                <Grid container>
+
+                <DialogActions>
+                    
                     <AnimateButton>
                         <Button
                             type="submit"
-                            className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 2 , padding: {md:'6px 140px', lg:'6px 140px'},  }}
+                            sx={{ my: 3, ml: 1 }}
                             onClick={() => {
                                 formik.handleSubmit();
                             }}
                             size="large"
                             disableElevation
                         >
-                           Create
+                            Add
                         </Button>
                     </AnimateButton>
                     <AnimateButton>
-                        <Button
+                    <Button
+                            type="submit"
                             variant="contained"
-                            className="buttons"
-                            sx={{ my: 1, ml: 1, padding: {md:'6px 140px', lg:'6px 140px'}, color: '#fff' }}
+                            sx={{ my: 3, ml: 1 }}
                             onClick={handleClose}
-                            color="secondary"
                             size="large"
+                            color="error"
+                            disableElevation
                         >
                             Cancel
                         </Button>
                     </AnimateButton>
                 </DialogActions>
+                </Grid>
             </Dialog>
         </>
     );

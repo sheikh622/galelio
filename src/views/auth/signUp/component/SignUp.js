@@ -38,6 +38,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
     const [checked, setChecked] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const [walletAddress, setWalletAddress] = useState('');
+    const [address, setAddress] = useState('');
 
     const handleConnect = async () => {
         if (!window.ethereum) {
@@ -88,7 +89,8 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     email: '',
                     password: '',
                     confirmPassword: '',
-                    walletAddress: ''
+                    walletAddress: '',
+                    address: ''
                 }}
                 validationSchema={Yup.object().shape({
                     name: Yup.string()
@@ -97,9 +99,20 @@ const SignUpForm = ({ loginProp, ...others }) => {
                         .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     password: Yup.string().max(255).required('Password is required!'),
-                    confirmPassword: Yup.string().max(255).required('Confirm Password is required!')
+                    confirmPassword: Yup.string().max(255).required('Confirm Password is required!'),
+                    address: Yup.string().max(255).required('Address is required!'),
                 })}
                 onSubmit={async (values) => {
+                    if(walletAddress == ""){
+                        console.log('wallet address not found');
+                        dispatch({
+                            type: SNACKBAR_OPEN,
+                            open: true,
+                            message: 'Please connect to your wallet',
+                            variant: 'alert',
+                            alertSeverity: 'info'
+                        });
+                    }
                     await dispatch(setLoader(true));
                     dispatch(
                         signup({
@@ -107,6 +120,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                             email: values.email,
                             password: values.password,
                             walletAddress: walletAddress,
+                            address: values.address,
                             navigate: navigate
                         })
                     );
@@ -214,6 +228,23 @@ const SignUpForm = ({ loginProp, ...others }) => {
                             {touched.confirmPassword && errors.confirmPassword && (
                                 <FormHelperText error id="standard-weight-helper-text-password-login">
                                     {errors.confirmPassword}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Address </InputLabel>
+                            <OutlinedInput
+                                type="address"
+                                value={values.address}
+                                name="address"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                label="Address"
+                                inputProps={{}}
+                            />
+                            {touched.address && errors.address && (
+                                <FormHelperText error id="standard-weight-helper-text-name-login">
+                                    {errors.address}
                                 </FormHelperText>
                             )}
                         </FormControl>
