@@ -21,11 +21,11 @@ export default function DeleteBrandAdminDialog({ open, setOpen, page, limit, sea
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">Delete Brand Admin</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1"   className="statusHeading">Delete Brand Admin</DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
-                        <Typography variant="body2" component="span">
+                        <Typography variant="body2" component="span"  className="statustypo">
                             Are you sure you want to delete this Admin?
                         </Typography>
                     </DialogContentText>
@@ -34,13 +34,13 @@ export default function DeleteBrandAdminDialog({ open, setOpen, page, limit, sea
                     <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
-                        color="secondary"
+                        color="secondary" className='buttonSize' size='large' 
                     >
                         No
                     </Button>
                     <Button
                         variant="contained"
-                        size="large"
+                        className='buttonSize' size='large' 
                         onClick={() => {
                             dispatch(
                                 deleteBrandAdmin({
