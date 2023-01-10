@@ -432,6 +432,10 @@ const PropertiesView = ({ nft }) => {
         }
     }, [useSelector, dispatch, resell, bought, redeem]);
     console.log('buyerNft', buyerNft);
+
+    useEffect(() => {
+        console.log('nft to watch', nft);
+    }, []);
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
@@ -499,7 +503,7 @@ const PropertiesView = ({ nft }) => {
                                                 {nft?.description}
                                             </Typography>
                                         </Grid>
-                                        {nft?.NFTMetaFiles.length > 0 && <h2>Proof of Authenticity</h2>}
+                                        {nft?.NFTMetaFiles?.length > 0 && <h2>Proof of Authenticity</h2>}
 
                                         {nft?.NFTMetaFiles.map((data) => (
                                             <>

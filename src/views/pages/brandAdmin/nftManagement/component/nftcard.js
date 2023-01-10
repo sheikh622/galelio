@@ -22,7 +22,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
         nftDescription: '',
         nftPrice: 0,
         mintType: 'directMint',
-        currencyType: 'ETH',
+        currencyType: 'USDT',
         fieldDataArray: [],
         fileDataArray: [],
         images: []
