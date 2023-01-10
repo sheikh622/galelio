@@ -241,7 +241,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog dialog "
+                className="brandDialog Nftdialog "
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted

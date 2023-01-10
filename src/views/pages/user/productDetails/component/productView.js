@@ -61,10 +61,10 @@ const PropertiesView = ({ nft }) => {
             label: 'LCX Certificate'
         }
     ];
-    console.log('lazyResell', lazyResell);
-    console.log('lazyResellAgain', lazyResellAgain);
+    // console.log('lazyResell', lazyResell);
+    // console.log('lazyResellAgain', lazyResellAgain);
 
-    console.log('nft from product view', nft);
+    // console.log('nft from product view', nft);
 
     const [open, setOpen] = React.useState(false);
     let rprice = 0;
