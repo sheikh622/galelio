@@ -501,9 +501,10 @@ const PropertiesView = ({ nft }) => {
                                         </Grid>
                                         {nft?.NFTMetaFiles.length > 0 && <h2>Proof of Authenticity</h2>}
 
-                                        <Accordion>
                                         {nft?.NFTMetaFiles.map((data) => (
                                             <>
+                                            
+                                        <Accordion>
                                                   <AccordionSummary
                                                   expandIcon={<ExpandMoreIcon />}
                                                   aria-controls="panel1a-content"
@@ -516,17 +517,12 @@ const PropertiesView = ({ nft }) => {
                                                       {data.fieldValue}
                                                   </a>
                                               </AccordionDetails>
+                                              </Accordion>
                                               </>
                                             ))}
                                          
-                                        </Accordion>
-                                        <Grid item xs={12}>
-                                            {nft?.NFTMetaFiles.map((data) => (
-                                                <a target="_blank" href={data.fieldValue}>
-                                                    {data.fieldName}
-                                                </a>
-                                            ))}
-                                        </Grid>
+                                        
+                                  
                                         {buyerNft?.founded && (
                                             <div style={{ marginTop: '5%' }}>
                                                 {(nft?.transactionHash !== '' || nft?.transactionHash) && (
