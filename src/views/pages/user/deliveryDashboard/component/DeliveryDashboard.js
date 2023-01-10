@@ -22,7 +22,6 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
 
 // project imports
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -37,8 +36,6 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import PinDropTwoToneIcon from '@mui/icons-material/PinDropTwoTone';
 import DescriptionIcon from '@mui/icons-material/Description';
 import moment from 'moment';
-import { User } from '@auth0/auth0-spa-js';
-import { useSelector } from 'react-redux';
 // progress
 function LinearProgressWithLabel({ value, ...other }) {
     return (
@@ -74,7 +71,6 @@ const rows = [
 // ==============================|| DeliveryDashboard ||============================== //
 
 const DeliveryDashboard = ({ productList }) => {
-    const user = useSelector((state)=>state.auth.user)
     return (
         <Grid item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
@@ -82,6 +78,7 @@ const DeliveryDashboard = ({ productList }) => {
                     <SubCard title="Delivery Dashboard">
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
+                            {productList?.length > 0 ?(
                                 <Grid item xs={12}>
                                     {productList?.length > 0 &&
                                         productList?.map((row) => (
@@ -101,104 +98,106 @@ const DeliveryDashboard = ({ productList }) => {
                                                             </SubCard>{' '}
                                                         </Grid>
 
-                                                <Grid item md={6} sm={12} sx={{ height: 'auto' }}>
-                                                    <SubCard>
-                                                        <TableContainer sx={{}}>
-                                                            <List component="nav" aria-label="main mailbox folders">
-                                                                <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <PersonIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Name</Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:'#000'}} variant="subtitle1" align="right" >
-                                                                            {row?.Nft.name}
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                                <Divider />
-                                                              {/*   <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <ModeIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Created At </Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:'#000'}} variant="subtitle1" align="right">
-                                                                        {moment(row?.createdAt).format('DD-MMM-YYYY')} 
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                                <Divider /> */}
-                                                                <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <DescriptionIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Description</Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:'#9e9e9e' , textTransform:'capitalize'}} variant="subtitle1" align="right">
-                                                                        {row?.Nft.description}
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                                <Divider />
-                                                                <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <TourIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Status</Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography color = { row?.status == 'Delivered'? 'Green' : row?.status == 'pending'?  'Blue' : 'Orange'} variant="subtitle1" align="right">
-                                                                        {row?.status}
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                                <Divider />
-                                                                <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <MonetizationOnIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Price</Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography sx={{color:'Orange'}} variant="subtitle1" align="right">
-                                                                        {row?.Nft.price}
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                                <ListItemButton>
-                                                                    <ListItemIcon>
-                                                                        <ContactMailIcon sx={{ fontSize: '1.3rem' }} />
-                                                                    </ListItemIcon>
-                                                                    <ListItemText
-                                                                        primary={<Typography variant="subtitle1">Address</Typography>}
-                                                                    />
-                                                                    <ListItemSecondaryAction>
-                                                                        <Typography variant="subtitle1" align="right">
-                                                                        {user?.address}
-                                                                        </Typography>
-                                                                    </ListItemSecondaryAction>
-                                                                </ListItemButton>
-                                                              
-                                                             
-                                                            </List>
-                                                        </TableContainer>
-                                                    </SubCard>
-                                                </Grid>
-                                                <Grid item md={1} sm={12}></Grid>
-                                            </Grid>
-                                          
-                                            </>
-                                        ))}
-                                </Grid>
+                                                        <Grid item md={6} sm={12} sx={{ height: 'auto' }}>
+                                                            <SubCard>
+                                                                <TableContainer sx={{}}>
+                                                                    <List component="nav" aria-label="main mailbox folders">
+                                                                        <ListItemButton>
+                                                                            <ListItemIcon>
+                                                                                <PersonIcon sx={{ fontSize: '1.3rem' }} />
+                                                                            </ListItemIcon>
+                                                                            <ListItemText
+                                                                                primary={<Typography variant="subtitle1">Name</Typography>}
+                                                                            />
+                                                                            <ListItemSecondaryAction>
+                                                                                <Typography
+                                                                                    sx={{ color: '#000' }}
+                                                                                    variant="subtitle1"
+                                                                                    align="right"
+                                                                                >
+                                                                                    {row?.Nft.name}
+                                                                                </Typography>
+                                                                            </ListItemSecondaryAction>
+                                                                        </ListItemButton>
+                                                                        <Divider />
+                                                                 
+                                                                        <ListItemButton>
+                                                                            <ListItemIcon>
+                                                                                <DescriptionIcon sx={{ fontSize: '1.3rem' }} />
+                                                                            </ListItemIcon>
+                                                                            <ListItemText
+                                                                                primary={
+                                                                                    <Typography variant="subtitle1">Description</Typography>
+                                                                                }
+                                                                            />
+                                                                            <ListItemSecondaryAction>
+                                                                                <Typography
+                                                                                    sx={{ color: '#9e9e9e', textTransform: 'capitalize' }}
+                                                                                    variant="subtitle1"
+                                                                                    align="right"
+                                                                                >
+                                                                                    {row?.Nft.description}
+                                                                                </Typography>
+                                                                            </ListItemSecondaryAction>
+                                                                        </ListItemButton>
+                                                                        <Divider />
+                                                                        <ListItemButton>
+                                                                            <ListItemIcon>
+                                                                                <TourIcon sx={{ fontSize: '1.3rem' }} />
+                                                                            </ListItemIcon>
+                                                                            <ListItemText
+                                                                                primary={
+                                                                                    <Typography variant="subtitle1">Status</Typography>
+                                                                                }
+                                                                            />
+                                                                            <ListItemSecondaryAction>
+                                                                                <Typography
+                                                                                    color={
+                                                                                        row?.status == 'Delivered'
+                                                                                            ? 'Green'
+                                                                                            : row?.status == 'pending'
+                                                                                            ? 'Blue'
+                                                                                            : 'Orange'
+                                                                                    }
+                                                                                    variant="subtitle1"
+                                                                                    align="right"
+                                                                                >
+                                                                                    {row?.status}
+                                                                                </Typography>
+                                                                            </ListItemSecondaryAction>
+                                                                        </ListItemButton>
+                                                                        <Divider />
+                                                                        <ListItemButton>
+                                                                            <ListItemIcon>
+                                                                                <MonetizationOnIcon sx={{ fontSize: '1.3rem' }} />
+                                                                            </ListItemIcon>
+                                                                            <ListItemText
+                                                                                primary={<Typography variant="subtitle1">Price</Typography>}
+                                                                            />
+                                                                            <ListItemSecondaryAction>
+                                                                                <Typography
+                                                                                    sx={{ color: 'Orange' }}
+                                                                                    variant="subtitle1"
+                                                                                    align="right"
+                                                                                >
+                                                                                    {row?.Nft.price}
+                                                                                </Typography>
+                                                                            </ListItemSecondaryAction>
+                                                                        </ListItemButton>
+                                                                    </List>
+                                                                </TableContainer>
+                                                            </SubCard>
+                                                        </Grid>
+                                                        <Grid item md={1} sm={12}></Grid>
+                                                    </Grid>
+                                                </>
+                                            ))}
+                                    </Grid>
+                                ) : (
+                                    <Grid item xs={12}>
+                                        <Typography>No data available</Typography>
+                                    </Grid>
+                                )}
                             </Grid>
                         </Grid>
                     </SubCard>

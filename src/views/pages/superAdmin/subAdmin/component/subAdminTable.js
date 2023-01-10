@@ -89,7 +89,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                 </>
             ) : (
                 <>
-                {subAdminList.count > 0 ? (
+                {subAdminList?.count > 0 ? (
             <Table>
                 <TableHead>
                     <TableRow>
@@ -235,14 +235,10 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
             </Table>
             ) : (
               <>
-                <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
-                 
-                <Grid item>
-                    <CircularProgress size={'4rem'} />
-                </Grid>
-                    
-                 
-            </Grid>
+              <Grid item>
+              <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}>
+               No Data Available</Typography>
+          </Grid>
                 </>
             )}
         </>
