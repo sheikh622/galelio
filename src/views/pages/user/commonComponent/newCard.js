@@ -39,7 +39,7 @@ const NewCard = ({ data, nfts }) => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     // maxWidth: nfts && nfts?.length > 3? 0 : 365,
-                    width: nfts && nfts?.length > 5 ? '100%' : { lg: '188px' },
+                    width: nfts && nfts?.length > 5 ? '100%' : { lg: '220px' },
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px'
                 }}
