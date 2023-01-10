@@ -77,7 +77,7 @@ const BrandCategoryTable = ({
                         <TableCell align="left " className="Tableheading" sx={{ borderBottom: 'none' }}>
                             Category name{' '}
                         </TableCell>
-                          <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell>
+                          <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Profit Percentage</TableCell>
                     {/* <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell> */}
 
                         <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
@@ -114,7 +114,7 @@ const BrandCategoryTable = ({
                                         </TableCell>
 
                                         <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
-                                            {row.profitPercentage}
+                                            {row.profitPercentage}%
                                         </TableCell>
                                         <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
                                             {moment(row.createdAt).format('DD-MMM-YYYY')}

@@ -237,7 +237,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         id="outlined-select-budget"
                                         select
                                         fullWidth
-                                        label="Select Brand Category"
+                                        label="Select Category"
                                         // value={category}
                                         onChange={handleBrandCategoryChange}
                                     >
