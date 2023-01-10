@@ -216,7 +216,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                 </Grid>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
                                     <InputLabel 
-                                    className='textfieldStyle' htmlFor="">Wallet Address</InputLabel>
+                                   htmlFor="">Wallet Address</InputLabel>
                                     <TextField
                                     variant="standard"
                                         id="walletAddress"
@@ -230,10 +230,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
 
-                                <Grid item xs={6} sx={{ pt: '4%' }}>
+                                <Grid item xs={6} md={12} lg={12} pt={2}>
                                     {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
-                                    <TextField
-                                        className="responsiveSelectfield"
+                                    <TextField 
+                                    variant="standard"
+                                        className="responsiveSelectfield textfieldStyle"
                                         id="outlined-select-budget"
                                         select
                                         fullWidth
