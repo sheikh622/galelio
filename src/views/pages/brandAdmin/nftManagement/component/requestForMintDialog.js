@@ -78,9 +78,9 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
                    
-                  {loader ?
+                  {/* {loader ?
                < CircularProgress/>
-               :
+               : */}
                <>
                 <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
@@ -100,7 +100,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                     </Button>
                     </>
                 
-                }
+                {/* } */}
                 </DialogActions>
             </Dialog>
         </>

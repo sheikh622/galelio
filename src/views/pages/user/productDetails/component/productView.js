@@ -531,7 +531,7 @@ const PropertiesView = ({ nft }) => {
                                                             aria-controls="panel1a-content"
                                                             id="panel1a-header"
                                                         >
-                                                            <Typography>{data.fieldName}</Typography>
+                                                            <Typography variant="h4">{data.fieldName}</Typography>
                                                         </AccordionSummary>
 
                                                         <AccordionDetails>
@@ -548,18 +548,21 @@ const PropertiesView = ({ nft }) => {
                                             <Grid item xs={12} md={12} className='prdpadding' >
                                                 {(nft?.transactionHash !== '' || nft?.transactionHash) && (
                                                     <>
-                                                        <Accordion sx={{ border: '2px solid', borderRadius: '4px' }}>
+                                                        <Accordion sx={{ border: '2px solid', borderRadius: '4px'}}>
                                                             <AccordionSummary
                                                                 expandIcon={<ExpandMoreIcon />}
                                                                 aria-controls="panel1a-content"
                                                                 id="panel1a-header"
                                                             >
-                                                                <Typography>Transaction hash</Typography>
+                                                                <Typography variant="h4">Transaction hash</Typography>
                                                             </AccordionSummary>
                                                             <AccordionDetails>
+                                                                <p>
                                                                 <a target="_blank" href={nft?.transactionHash}>
-                                                                    {nft?.transactionHash}
+                                                                    {nft?.transactionHash.substring(0,70)}
                                                                 </a>
+
+                                                                </p>
                                                             </AccordionDetails>
                                                         </Accordion>
                                                     </>
@@ -572,10 +575,10 @@ const PropertiesView = ({ nft }) => {
                                                         aria-controls="panel2a-content"
                                                         id="panel2a-header"
                                                     >
-                                                        <Typography>Contract address</Typography>
+                                                        <Typography variant="h4">Contract address</Typography>
                                                     </AccordionSummary>
                                                     <AccordionDetails>
-                                                        <Typography>{nft?.Category?.BrandCategories[0].contractAddress}</Typography>
+                                                        <a target="_blank" href={`https://goerli.etherscan.io/address/${nft?.Category?.BrandCategories[0].contractAddress}`}>https://goerli.etherscan.io/address/{nft?.Category?.BrandCategories[0].contractAddress}</a>
                                                     </AccordionDetails>
                                                 </Accordion>
                                             </Grid>
