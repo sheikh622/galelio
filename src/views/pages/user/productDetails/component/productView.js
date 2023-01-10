@@ -61,8 +61,7 @@ const PropertiesView = ({ nft }) => {
             label: 'LCX Certificate'
         }
     ];
-    console.log('lazyResell', lazyResell);
-    console.log('lazyResellAgain', lazyResellAgain);
+
 
     console.log('nft from product view', nft);
 
