@@ -365,7 +365,7 @@ function* lazyMintNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`nft/admin/lazyMint`, data, headers);
-        payload.handleClose();
+   
         yield put(
             getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
@@ -377,6 +377,7 @@ function* lazyMintNftRequest({ payload }) {
             })
         );
         yield setNotification('success', response.data.message);
+        payload.handleClose();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -408,6 +409,7 @@ function* mintNftRequest({ payload }) {
             })
         );
         yield setNotification('success', response.data.message);
+        payload.handleClose()
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
