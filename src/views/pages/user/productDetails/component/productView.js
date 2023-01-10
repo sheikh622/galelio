@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack, Box } from '@mui/material';
+import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack, Box, MenuItem } from '@mui/material';
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
 
@@ -47,7 +47,22 @@ const PropertiesView = ({ nft }) => {
     const user = useSelector((state) => state.auth.user);
 
     const theme = useTheme();
+    const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
 
+    const status = [
+        {
+            value: 'PROOF OF AUTHENTICITY',
+            label: 'PROOF OF AUTHENTICITY'
+        },
+        {
+            value: 'gia certificate',
+            label: 'gia certificate'
+        },
+        {
+            value: 'LCX Certificate',
+            label: 'LCX Certificate'
+        }
+    ];
     console.log('lazyResell', lazyResell);
     console.log('lazyResellAgain', lazyResellAgain);
 
@@ -457,7 +472,7 @@ const PropertiesView = ({ nft }) => {
                                                     <Avatar
                                                         alt="User 1"
                                                         src={nft?.Brand?.image}
-                                                        sx={{ width: 80, height: 80, objectFit: 'fill' }}
+                                                        sx={{ width: 56, height: 56, objectFit: 'fill' }}
                                                     />
                                                 </Grid>
 
@@ -467,7 +482,7 @@ const PropertiesView = ({ nft }) => {
                                                     xs
                                                     zeroMinWidth
                                                     // component={RouterLink}
-                                                    sx={{ textDecoration: 'none' }}
+                                                    sx={{ textDecoration: 'none' , marginLeft:'-29px'}}
                                                     // to="/companyPage"
                                                 >
                                                     <Typography align="left" fontWeight={900} variant="h2" className="brand">
@@ -479,7 +494,6 @@ const PropertiesView = ({ nft }) => {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-
                                         <Grid item mt={1} xs={12}>
                                             <Typography
                                                 className="Lux"
@@ -494,44 +508,49 @@ const PropertiesView = ({ nft }) => {
                                                 )}
                                             </Typography>
                                         </Grid>
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} >
                                             <Typography className="productdescription" variant="h3">
                                                 {nft?.description}
                                             </Typography>
                                         </Grid>
-                                        {nft?.NFTMetaFiles.length > 0 && <h2>Proof of Authenticity</h2>}
-
-                                        <Accordion>
-                                        {nft?.NFTMetaFiles.map((data) => (
-                                            <>
-                                                  <AccordionSummary
-                                                  expandIcon={<ExpandMoreIcon />}
-                                                  aria-controls="panel1a-content"
-                                                  id="panel1a-header"
-                                              >
-                                                  <Typography>{data.fieldName}</Typography>
-                                              </AccordionSummary>
-                                              <AccordionDetails>
-                                                  <a target="_blank" href={nft?.transactionHash}>
-                                                      {data.fieldValue}
-                                                  </a>
-                                              </AccordionDetails>
-                                              </>
-                                            ))}
-                                         
-                                        </Accordion>
                                         <Grid item xs={12}>
+                                            {nft?.NFTMetaFiles?.length > 0 && (
+                                                <Typography
+                                                    className="Lux"
+                                                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                    variant="h3"
+                                                >
+                                                    Proof of Authenticity
+                                                </Typography>
+                                            )}
+                                        </Grid>
+                                        <Grid item xs={12} md={12} className='prdpadding' >
                                             {nft?.NFTMetaFiles.map((data) => (
-                                                <a target="_blank" href={data.fieldValue}>
-                                                    {data.fieldName}
-                                                </a>
+                                                <>
+                                                    <Accordion sx={{ border: '2px solid', borderRadius: '4px' }}>
+                                                        <AccordionSummary
+                                                            expandIcon={<ExpandMoreIcon />}
+                                                            aria-controls="panel1a-content"
+                                                            id="panel1a-header"
+                                                        >
+                                                            <Typography>{data.fieldName}</Typography>
+                                                        </AccordionSummary>
+
+                                                        <AccordionDetails>
+                                                            <a target="_blank" href={nft?.transactionHash}>
+                                                                {data.fieldValue}
+                                                            </a>
+                                                        </AccordionDetails>
+                                                    </Accordion>
+                                                </>
                                             ))}
                                         </Grid>
-                                        {buyerNft?.founded && (
-                                            <div style={{ marginTop: '5%' }}>
+                                        {buyerNft?.founded && ( 
+                                        <>
+                                            <Grid item xs={12} md={12} className='prdpadding' >
                                                 {(nft?.transactionHash !== '' || nft?.transactionHash) && (
                                                     <>
-                                                        <Accordion>
+                                                        <Accordion sx={{ border: '2px solid', borderRadius: '4px' }}>
                                                             <AccordionSummary
                                                                 expandIcon={<ExpandMoreIcon />}
                                                                 aria-controls="panel1a-content"
@@ -547,7 +566,9 @@ const PropertiesView = ({ nft }) => {
                                                         </Accordion>
                                                     </>
                                                 )}
-                                                <Accordion>
+                                            </Grid>
+                                            <Grid item xs={12} md={12}  className='prdpadding'>
+                                                <Accordion sx={{ border: '2px solid', borderRadius: '4px' }}>
                                                     <AccordionSummary
                                                         expandIcon={<ExpandMoreIcon />}
                                                         aria-controls="panel2a-content"
@@ -559,9 +580,9 @@ const PropertiesView = ({ nft }) => {
                                                         <Typography>{nft?.Category?.BrandCategories[0].contractAddress}</Typography>
                                                     </AccordionDetails>
                                                 </Accordion>
-                                            </div>
-                                        )}
-
+                                            </Grid>
+                                        </>
+                                        )} 
                                         <Grid item mt={1} mb={2} xs={12}>
                                             <Grid container>
                                                 <Grid item md={4} xs={12} sm={12}>
