@@ -34,7 +34,8 @@ function* addSubAdminRequest({ payload }) {
         lastName: payload.lastName,
         email: payload.email,
         password: payload.password,
-        walletAddress: payload.walletAddress
+        walletAddress: payload.walletAddress,
+        brandCategory: payload.brandCategory
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };

@@ -534,7 +534,7 @@ body {
     text-transform: capitalize;
 
     font-weight: 500;
-    font-size: 28px;
+    font-size: 23px;
 
     text-align: left;
 
@@ -625,7 +625,7 @@ body {
 .line {
     background: #ccc;
     width: 5px;
-    height: 300px;
+    height: 420px;
     color: transparent;
 
     margin-top: 13px;
@@ -772,7 +772,7 @@ body {
 .ProductimageSize {
     width: 100%;
 
-    height: 280px;
+    height: 410px;
     object-fit: cover;
 }
 .imageSize {
@@ -787,12 +787,12 @@ body {
     text-transform: capitalize;
 }
 .brand {
-    font-size: 28px;
+    font-size: 23px;
     color: #2196f3;
     text-transform: capitalize;
 }
 .creator {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 400;
     margin-top: 7px;
     color: gray;
@@ -843,9 +843,9 @@ body {
 }
 .buttonSize {
     padding: 7px 28px !important;
-    
-font-family: 'Poppins';
-font-style: normal;
+
+    font-family: 'Poppins';
+    font-style: normal;
     // padding:7px 29px !important;
 
     // margin-left:10px !important;
@@ -888,7 +888,7 @@ font-style: normal;
     font-size: 26px;
 }
 .dialog {
-    width: 30%;
+    width: 40%;
     margin: 0 auto;
 }
 .buttons {
@@ -980,38 +980,60 @@ font-style: normal;
     /* display: flex; */
     align-items: center;
     color: #2f53ff !important;
-    border: 2px solid #B9DDFF;
+    border: 2px solid #b9ddff;
     padding: 11px 10px 0 10px;
     border-radius: 4px;
 }
-.nftButtons{
+.nftButtons {
     padding: 7px 30px;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-  
-    /* font-size: 19.0507px; */
-   
 
-border-radius: 4px;
+    /* font-size: 19.0507px; */
+
+    border-radius: 4px;
 }
-.fieldbutton{
+.lazyButtons {
+    padding: 7px 34px;
     font-family: 'Poppins';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-background: linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%);
-border-radius: 4px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+
+    /* font-size: 19.0507px; */
+
+    border-radius: 4px;
 }
-.fontstyling{
+.fieldbutton {
     font-family: 'Poppins';
-font-style: normal;
-font-weight: 600;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    background: linear-gradient(97.63deg, #2f57ff 0%, #2fa3ff 108.45%);
+    border-radius: 4px;
 }
-.assignheading{
+.fontstyling {
+    font-family: 'Poppins';
+    font-style: normal;
     font-weight: 600;
-    font-family: "Poppins";
+}
+.assignheading {
+    font-weight: 600;
+    font-family: 'Poppins';
     font-style: normal;
     font-size: 25px;
+}
+.css-17c4ftt {
+    background: #fff9f9 !important;
+}
+.encap {
+    white-space: nowrap;
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.prdpadding {
+    padding: 10px 8px 0 25px !important;
 }

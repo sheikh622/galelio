@@ -8,6 +8,8 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import { getAllNftSuperAdmin } from '../../../../redux/nftManagement/actions';
 import NftCard from './component/nftCard';
+import CircularProgress from '@mui/material/CircularProgress';
+import { setLoader } from 'redux/auth/actions';
 const typeArray = [
     {
         value: 'all',
@@ -42,12 +44,14 @@ const NftManagement = () => {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(12);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [loader, setLoader] = useState(true);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
     const handleClose = () => {
         setAnchorEl(null);
+        setLoader(false)
     };
     const handleType = (event) => {
         setType(event.target.value);
@@ -64,10 +68,12 @@ const NftManagement = () => {
                 search: search,
                 page: page,
                 limit: limit,
-                type: type
+                type: type,
+                handleClose: handleClose
             })
         );
-    }, [, search, page, limit, type]);
+        
+    }, [search, page, limit, type]);
 
     return (
         <>
@@ -166,8 +172,11 @@ const NftManagement = () => {
                 <>
                 
                          
-                <Grid item>
-                <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}> No Data Available</Typography>
+                <Grid item display={"flex"} justifyContent="center">
+                {loader &&
+                            <CircularProgress size={"5rem"} disableShrink />
+                            
+                            }
             </Grid>
                 
                 </>

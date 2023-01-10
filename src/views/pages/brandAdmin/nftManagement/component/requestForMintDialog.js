@@ -1,7 +1,7 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography, CircularProgress } from '@mui/material';
 import { requestNftForMinting } from 'redux/nftManagement/actions';
 import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { ethers } from 'ethers';
@@ -10,13 +10,16 @@ import BLOCKCHAIN from '../../../../../constants';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData, categoryId }) {
     const theme = useTheme();
+    const [loader, setLoader] = useState(false)
     const dispatch = useDispatch();
     const handleClose = () => {
         setOpen(false);
+        setLoader(false)
     };
     const user = useSelector((state) => state.auth.user);
 
     const handleMintRequest = async () => {
+        setLoader(true)
         console.log('nftData', nftData);
         let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
         let quant = nftData.NFTTokens.length
@@ -48,10 +51,11 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 limit: limit,
                 search: search,
                 type: type,
+                brandId: user.BrandId,
                 handleClose: handleClose,
-                brandId: user.BrandId
             })
         );
+        setLoader(false)
     };
     return (
         <>
@@ -73,7 +77,12 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
-                    <Button
+                   
+                  {loader ?
+               < CircularProgress/>
+               :
+               <>
+                <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
                         color="secondary"
@@ -89,6 +98,9 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                     >
                         Yes
                     </Button>
+                    </>
+                
+                }
                 </DialogActions>
             </Dialog>
         </>

@@ -34,7 +34,8 @@ function* signupUserRequest({ payload }) {
             name: payload.name,
             email: payload.email,
             password: payload.password,
-            walletAddress: payload.walletAddress
+            walletAddress: payload.walletAddress,
+            address: payload.address
         };
         const response = yield axios.post(`/auth/signup`, data);
       
@@ -55,7 +56,7 @@ function* forgetPasswordRequest({ payload }) {
         const response = yield axios.post(`auth/forgetPassword`, data);
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
-        payload.navigate('/');
+        payload.navigate('/login');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
@@ -70,7 +71,7 @@ function* resetPasswordRequest({ payload }) {
     try {
         const response = yield axios.put(`auth/resetPassword`, data);
         yield setNotification('success', response.data.message);
-        payload.navigate('/');
+        payload.navigate('/login');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

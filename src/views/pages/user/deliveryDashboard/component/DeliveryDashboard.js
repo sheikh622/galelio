@@ -78,6 +78,7 @@ const DeliveryDashboard = ({ productList }) => {
                     <SubCard title="Delivery Dashboard">
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
+                            {productList?.length > 0 ?(
                                 <Grid item xs={12}>
                                     {productList?.length > 0 &&
                                         productList?.map((row) => (

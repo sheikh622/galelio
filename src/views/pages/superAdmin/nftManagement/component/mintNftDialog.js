@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { ethers } from 'ethers';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
+import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
 // import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +12,8 @@ import { create } from 'ipfs-http-client';
 import { Buffer } from 'buffer';
 import MarketplaceAbi from '../../../../../contractAbi/Marketplace.json';
 import MarketplaceAddress from '../../../../../contractAbi/Marketplace-address.json';
-import  BLOCKCHAIN  from '../../../../../constants';
+import BLOCKCHAIN from '../../../../../constants';
+import { Oval } from 'react-loader-spinner';
 const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
 const projectSecret = 'a09de1e8b20292cd87460290de554003';
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
@@ -40,12 +41,12 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     const directMintThenList = async (result) => {
         let nftTokens = nftData.NFTTokens;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
-        console.log(contractAddress)
+        console.log(contractAddress);
         let nftId = nftData.id;
         let categoryId = nftData.CategoryId;
         let brandId = nftData.BrandId;
         let price = ethers.utils.parseEther(nftData.price.toString());
-        let erc20Address = BLOCKCHAIN.ERC20
+        let erc20Address = BLOCKCHAIN.ERC20;
         let tokenIdArray = [];
         let transactionHash;
         try {
@@ -158,6 +159,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     };
 
     const handleDirectMint = async () => {
+        setLoader(true)
         let image = nftData.asset;
         let price = nftData.price;
         let name = nftData.name;
@@ -203,13 +205,13 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         );
         const uri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
-        let token = BLOCKCHAIN.ERC20
+        let token = BLOCKCHAIN.ERC20;
         // const SIGNING_DOMAIN = 'Voucher';
         // const SIGNATURE_VERSION = '4';
         // const chainId = 5;
 
-        const SIGNING_DOMAIN = 'Voucher';
-        const SIGNATURE_VERSION = '4';
+      const  SIGNING_DOMAIN = "Galileo-Protocol";
+      const SIGNATURE_VERSION = "1";
 
         const domain = {
             name: SIGNING_DOMAIN,
@@ -219,7 +221,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         };
 
         const types = {
-            LazyNFTVoucher: [
+            GalileoVoucher: [
                 { name: 'uri', type: 'string' },
                 { name: 'price', type: 'uint256' },
                 { name: 'token', type: 'address' }
@@ -227,16 +229,16 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         };
         //const prices = ethers.utils.parseEther(price.toString());
         const voucher = { uri, price, token };
-        console.log("Voucher: ", voucher)
+        console.log('Voucher: ', voucher);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const signature = await signer._signTypedData(domain, types, voucher);
         const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
-        console.log("signature: ", verifyAddr)
+        console.log('signature: ', verifyAddr);
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
         const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-        let validatorAddress = "0x6f3b51bd5b67f3e5bca2fb32796215a796b79651"
+        let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
 
         // await await nfts.lazyMint(
         //     validatorAddress,
@@ -251,12 +253,13 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         console.log('signature', signature);
         console.log('verifyAddr', verifyAddr);
         console.log('walletAddress', walletAddress);
+        console.log('signer', signer);
         let nftDataArray = [
             {
                 nftId: nftId,
                 tokenUri: uri,
                 tokenPrice: prices.toString(),
-                signerAddress: signerAddr // save wallet address
+                signerAddress: signerAddr// save wallet address
             }
         ];
 
@@ -302,51 +305,45 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 </DialogContent>
 
                 <DialogActions sx={{ pr: 2.5 }}>
-                    {loader ? (
-                        <Button variant="contained" size="small">
-                            <Oval
-                                ariaLabel="loading-indicator"
-                                height={20}
-                                width={20}
-                                strokeWidth={5}
-                                strokeWidthSecondary={1}
-                                color="blue"
-                                secondaryColor="white"
-                            />
-                        </Button>
-                    ) : (
+
                         <>
-                            <Button
+                        
+                            {loader ? (
+                                <CircularProgress />
+                            ) : (
+                                <>
+                                <Button
                                 sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                                 onClick={handleClose}
                                 color="secondary"
                             >
                                 No
                             </Button>
-
-                            <Button
-                                variant="contained"
-                                size="small"
-                                onClick={() => {
-                                    if (!loader) {
-                                        if (walletAddress == undefined) {
-                                            setOpen(false);
-                                            toast.error('Connect Metamask');
-                                        } else {
-                                            if (nftData.mintType == 'directMint') {
-                                                handleDirectMint();
-                                            } else if (nftData.mintType == 'lazyMint') {
-                                                handleLazyMint();
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    onClick={() => {
+                                        if (!loader) {
+                                            if (walletAddress == undefined) {
+                                                setOpen(false);
+                                                toast.error('Connect Metamask');
+                                            } else {
+                                                if (nftData.mintType == 'directMint') {
+                                                    handleDirectMint();
+                                                } else if (nftData.mintType == 'lazyMint') {
+                                                    handleLazyMint();
+                                                }
                                             }
                                         }
-                                    }
-                                }}
-                            >
-                                {' '}
-                                Yes
-                            </Button>
+                                    }}
+                                >
+                                    {' '}
+                                    Yes
+                                </Button>
+                                </>
+                            )}
                         </>
-                    )}
+                    
                 </DialogActions>
             </Dialog>
         </>
