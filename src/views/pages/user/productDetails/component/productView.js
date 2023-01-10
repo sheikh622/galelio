@@ -62,8 +62,7 @@ const PropertiesView = ({ nft }) => {
         }
     ];
 
-
-    console.log('nft from product view', nft);
+    // console.log('nft from product view', nft);
 
     const [open, setOpen] = React.useState(false);
     let rprice = 0;
