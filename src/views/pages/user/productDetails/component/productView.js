@@ -525,7 +525,7 @@ const PropertiesView = ({ nft }) => {
                                         <Grid item xs={12} md={12} className='prdpadding' >
                                             {nft?.NFTMetaFiles.map((data) => (
                                                 <>
-                                                    <Accordion sx={{ border: '2px solid', borderRadius: '4px' }}>
+                                                    <Accordion sx={{margin:'10px', border: '2px solid', borderRadius: '4px' }}>
                                                         <AccordionSummary
                                                             expandIcon={<ExpandMoreIcon />}
                                                             aria-controls="panel1a-content"
@@ -545,10 +545,10 @@ const PropertiesView = ({ nft }) => {
                                         </Grid>
                                         {buyerNft?.founded && ( 
                                         <>
-                                            <Grid item xs={12} md={12} className='prdpadding' >
+                                            <Grid item xs={12} md={12} mt={1} className='prdpadding' >
                                                 {(nft?.transactionHash !== '' || nft?.transactionHash) && (
                                                     <>
-                                                        <Accordion sx={{ border: '2px solid', borderRadius: '4px' }}>
+                                                        <Accordion sx={{margin:'10px', border: '2px solid', borderRadius: '4px' }}>
                                                             <AccordionSummary
                                                                 expandIcon={<ExpandMoreIcon />}
                                                                 aria-controls="panel1a-content"
@@ -566,7 +566,7 @@ const PropertiesView = ({ nft }) => {
                                                 )}
                                             </Grid>
                                             <Grid item xs={12} md={12}  className='prdpadding'>
-                                                <Accordion sx={{ border: '2px solid', borderRadius: '4px' }}>
+                                                <Accordion sx={{margin:'10px', border: '2px solid', borderRadius: '4px' }}>
                                                     <AccordionSummary
                                                         expandIcon={<ExpandMoreIcon />}
                                                         aria-controls="panel2a-content"
