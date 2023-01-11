@@ -550,7 +550,7 @@ body {
 .Lux {
   text-transform: capitalize;
   font-weight: 500;
-  font-size: 28px;
+  font-size: 23px;
   text-align: left;
   padding: 0 15px;
 }
@@ -573,7 +573,7 @@ body {
 
 .productdescription {
   font-weight: 400;
-  font-size: 23px;
+  font-size: 17px;
   text-transform: capitalize;
   text-align: left;
   letter-spacing: 0.02em;
@@ -585,6 +585,10 @@ body {
   border-radius: 4px !important;
   padding: 0 17px;
   text-align: left;
+}
+
+.textfield {
+  text-decoration: none !important;
 }
 
 .buy {
@@ -603,14 +607,14 @@ body {
 
 .price {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 19px;
   text-transform: capitalize;
 }
 
 .ETH {
   color: darkorange;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .timer {
@@ -634,7 +638,7 @@ body {
 .line {
   background: #ccc;
   width: 5px;
-  height: 300px;
+  height: 420px;
   color: transparent;
   margin-top: 13px;
   margin-left: 36px;
@@ -779,7 +783,7 @@ body {
 
 .ProductimageSize {
   width: 100%;
-  height: 280px;
+  height: 410px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -799,13 +803,13 @@ body {
 }
 
 .brand {
-  font-size: 28px;
+  font-size: 21px;
   color: #2196f3;
   text-transform: capitalize;
 }
 
 .creator {
-  font-size: 25px;
+  font-size: 17px;
   font-weight: 400;
   margin-top: 7px;
   color: gray;
@@ -838,6 +842,17 @@ body {
 
 .color {
   color: #2f53ff;
+}
+
+.tableShadow {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 5px !important;
+}
+
+.propertyShadow {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 5px !important;
+  border-color: #2F53FF !important;
 }
 
 .tableShadow {
@@ -907,6 +922,11 @@ body {
 
 .dialog {
   width: 30%;
+  margin: 0 auto;
+}
+
+.Nftdialog {
+  width: 40%;
   margin: 0 auto;
 }
 
@@ -1002,7 +1022,7 @@ body {
   /* display: flex; */
   align-items: center;
   color: #2f53ff !important;
-  border: 2px solid #B9DDFF;
+  border: 2px solid #b9ddff;
   padding: 11px 10px 0 10px;
   border-radius: 4px;
 }
@@ -1017,12 +1037,22 @@ body {
   border-radius: 4px;
 }
 
+.lazyButtons {
+  padding: 7px 34px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  /* font-size: 19.0507px; */
+  border-radius: 4px;
+}
+
 .fieldbutton {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  background: linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%);
+  background: linear-gradient(97.63deg, #2f57ff 0%, #2fa3ff 108.45%);
   border-radius: 4px;
 }
 
@@ -1041,4 +1071,26 @@ body {
 
 .css-17c4ftt {
   background: #fff9f9 !important;
+}
+
+.encap {
+  white-space: nowrap;
+  width: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prdpadding {
+  padding: 10px 8px 0 25px !important;
+}
+
+.css-bpi7ug-MuiButtonBase-root-MuiListItemButton-root.Mui-selected:hover {
+  background-color: transparent !important;
+  border-right: 10px solid #2F53FF !important;
+}
+
+.circul {
+  color: #fff !important;
+  width: 35px !important;
+  height: 35px !important;
 }/*# sourceMappingURL=style.css.map */

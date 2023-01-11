@@ -63,7 +63,7 @@ const Items = () => {
     ];
 
     const { nfts } = useSelector((state) => state.nftReducer.nftListUser);
-   
+   console.log(nfts, 'nfts.......')
     const itemData = [];
     {
         nfts?.length > 0 &&

@@ -519,7 +519,7 @@ const PropertiesView = ({ nft }) => {
                                                 >
                                                     {nft?.NFTMetaFiles.map((option) => (
                                                         <MenuItem key={option.fieldValue} value={option.fieldValue}>
-                                                            {option.fieldName}
+                                                          <a className='textfield' href={option.fieldValue}>  {option.fieldName}</a> 
                                                         </MenuItem>
                                                     ))}
                                                 </Select>

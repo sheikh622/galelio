@@ -103,8 +103,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
-            .max(500, 'Invalid NFT description can not exceed 500 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
+            .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
         nftPrice: Yup.number()
             .min(0.000001, 'Price should not less than zero')
             .required('NFT Price is required')
