@@ -563,7 +563,7 @@ body {
     // font-family: 'Public Sans';
 
     font-weight: 400;
-    font-size: 23px;
+    font-size: 17px;
     text-transform: capitalize;
 
     text-align: left;
@@ -595,14 +595,14 @@ body {
 
 .price {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 19px;
     text-transform: capitalize;
 }
 
 .ETH {
     color: darkorange;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .timer {
@@ -787,12 +787,12 @@ body {
     text-transform: capitalize;
 }
 .brand {
-    font-size: 23px;
+    font-size: 21px;
     color: #2196f3;
     text-transform: capitalize;
 }
 .creator {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 400;
     margin-top: 7px;
     color: gray;
@@ -1045,4 +1045,10 @@ body {
     background-color: transparent !important;
     
     border-right: 10px solid #2F53FF !important;
+}
+.circul{
+    
+    color: #fff !important;
+    width: 35px !important;
+    height: 35px !important;
 }

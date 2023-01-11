@@ -10,7 +10,9 @@ import { gridSpacing } from 'store/constant';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const Properties = () => {
+const Properties = ({nft}) => {
+    
+    console.log(nft, 'nft product data');
     const theme = useTheme();
     const property = [
         {
@@ -45,6 +47,7 @@ const Properties = () => {
         }
     ];
     return (
+
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -61,19 +64,21 @@ const Properties = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            {nft.NFTMetaData?.length > 0 ? (
+                <>
             <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {property.map((item) => (
+                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                {nft?.NFTMetaData.map((item) => (
                         <Grid item md={2} sm={6}>
-                            <SubCard className="property" sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}>
+                            <SubCard className="property tableShadow" sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}>
                                 <Grid container justifyContent="center" spacing={2}>
                                     <Grid item xs={12}>
                                         <Typography className="pbackground" variant="body">
-                                            {item.heading}
+                                        {item.fieldName}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Typography variant="h3">{item.title} </Typography>
+                                        <Typography variant="h3">{item.fieldValue}  </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Typography
@@ -81,7 +86,7 @@ const Properties = () => {
                                             className="plight"
                                             variant="body2"
                                         >
-                                            {item.title2}
+                                        94% Have this trait
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -90,6 +95,24 @@ const Properties = () => {
                     ))}
                 </Grid>
             </Grid>
+            </>
+            ) : (
+                <>
+                <Grid container spacing={2} >
+                <Grid item xs={12}>
+                    <Typography
+                        variant="h3"
+                        mt={2}
+                        component="div"
+                        sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, 
+                        textTransform: 'capitalize' , color:'#9498aa' }}
+                    >
+                       No  Property Found..!
+                    </Typography>
+                </Grid>
+            </Grid>
+                </>
+            )}
         </Grid>
     );
 };

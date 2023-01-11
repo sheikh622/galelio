@@ -3,11 +3,16 @@ import { useTheme } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
-import Properties from './component/properties';
+// import Properties from './component/properties';
 import PropertiesView from './component/productView';
-import { getAllMarketplaceNftsByCategory } from 'redux/marketplace/actions';
-import SimilarProducts from '../../user/productDetails/component/similarProducts';
+// import { getAllMarketplaceNftsByCategory } from 'redux/marketplace/actions';
+// import SimilarProducts from '../../user/productDetails/component/similarProducts';
+// import Activity from '../../landing/ProductDetails/Activity';
+// project imports
+import SimilarProducts from '../../landing/ProductDetails/SimilarProducts';
 import Activity from '../../landing/ProductDetails/Activity';
+import Properties from '../../landing/ProductDetails/Properties';
+// import PropertiesView from '../../landing/ProductDetails/ProductView';
 const ProductDetails = () => {
     const theme = useTheme();
     const location = useLocation();
@@ -40,19 +45,23 @@ const ProductDetails = () => {
             >
                 <Grid item md={12} xs={12} lg={11}>
                     <Grid container-fluid>
-                       
+                    <Grid item md={12} xs={12}>
+                    <Grid container>
                         <Grid item md={12} xs={12}>
                             <PropertiesView nft={location.state.nft} />
                         </Grid>
-                        <Grid item md={12} xs={12}>
-                            <Properties nft={location.state.nft} />
+                        <Grid item md={12} xs={12} >
+                            <Properties  nft={location.state.nft}/>
                         </Grid>
                         <Grid item md={12} xs={12}>
-                            <Activity  />
+                            <Activity  nft={location.state.nft}/>
                         </Grid>
+
                         <Grid item md={12} xs={12}>
                             <SimilarProducts nft={location.state.nft}/>
                         </Grid>
+                    </Grid>
+                </Grid>
                     </Grid>
                 </Grid>
             </Grid>

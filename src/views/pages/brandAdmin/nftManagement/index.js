@@ -139,7 +139,7 @@ const NftManagement = () => {
                                 variant="standard"
                             >
                                 {typeArray.map((option, index) => (
-                                    <MenuItem className=" selectstyle" key={index} value={option.value}>
+                                    <MenuItem  key={index} value={option.value}>
                                         {option.label}
                                     </MenuItem>
                                 ))}

@@ -81,6 +81,7 @@ const Activity = () => {
                 <Grid item xs={12}>
                     <Grid item md={12} sm={12}>
                         <MainCard
+                         className='tableShadow'
                             sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
                             title={
                                 <Grid container spacing={gridSpacing}>

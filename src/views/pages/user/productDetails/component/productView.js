@@ -1,6 +1,10 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { CardMedia, Grid, Typography, Button, Alert, AlertTitle, Stack, Box, MenuItem } from '@mui/material';
+import { CardMedia, Grid, Typography, Button, Alert,  InputLabel,
+    Select,
+   
+    FormControl, AlertTitle, Stack, Box, MenuItem } from '@mui/material';
+
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
 
@@ -44,6 +48,11 @@ const PropertiesView = ({ nft }) => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
+    const [age, setAge] = useState('');
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
     const theme = useTheme();
     const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
 
@@ -447,103 +456,137 @@ const PropertiesView = ({ nft }) => {
     }, []);
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
-            <Grid item xs={12}>
-                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    <Grid item md={4} lg={4} className="Productdetails" sx={{ height: 'auto' }}>
-                        <SubCard className="tableShadow">
-                            <img src={nft?.asset} alt="Statement Image" className="ProductimageSize" />
-                        </SubCard>{' '}
-                    </Grid>
+        <Grid item xs={12}>
+            <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
+                    <CardMedia component="img" sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
+                </Grid>
 
-                    <Grid item md={1} lg={1} sm={12} sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }}>
-                        {' '}
-                        <Box className="line">h</Box>{' '}
-                    </Grid>
-                    <Grid item md={6} sm={12}>
-                        <Grid item xs={12}>
-                            <Grid container>
-                                <Grid item md={12} sm={12}>
-                                    <Grid container spacing={2}>
-                                        <Grid mt={2} ml={1} item md={12} xs={12}>
-                                            <Grid container spacing={2} alignItems="center">
-                                                <Grid item md={2}>
-                                                    <Avatar
-                                                        alt="User 1"
-                                                        src={nft?.Brand?.image}
-                                                        sx={{ width: 56, height: 56, objectFit: 'fill' }}
-                                                    />
-                                                </Grid>
+                <Grid item md={6} sm={12}>
+                    <Grid item xs={12}>
+                        <Grid container>
+                            <Grid item md={12} sm={12}>
+                                <Grid container spacing={2}>
+                                    <Grid mt={4} ml={2} item xs={12}>
+                                        <Grid container spacing={2} alignItems="center">
+                                            <Grid item>
+                                                <Avatar
+                                                    alt="User 1"
+                                                    src={nft?.Brand?.image}
+                                                    sx={{ width: 56, height: 56, objectFit: 'fill' }}
+                                                />
+                                            </Grid>
+                                            <Grid
+                                                item
+                                                xs
+                                                zeroMinWidth
+                                                component={RouterLink}
+                                                sx={{ textDecoration: 'none' }}
+                                                to="/companyPage"
+                                            >
+                                                <Typography align="left" fontWeight={600} variant="h2" className="brand">
+                                                    {nft?.Brand?.name}
+                                                </Typography>
+                                                <Typography align="left" variant="h3" className="creator">
+                                                    Creator
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
 
-                                                <Grid
-                                                    item
-                                                    md={9}
-                                                    xs
-                                                    zeroMinWidth
-                                                    // component={RouterLink}
-                                                    sx={{ textDecoration: 'none', marginLeft: '-29px' }}
-                                                    // to="/companyPage"
+                                    <Grid item mt={2} xs={12}>
+                                        <Typography
+                                            className="Lux"
+                                            color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                            variant="h3"
+                                        >
+                                            {nft?.name ? nft?.name : 'Luxury Stainless Watch'}{' '}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography className="productdescription" variant="body2">
+                                            {nft?.description} , Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae
+                                            sollicitudin justo, cursus maecenas. Lorem ipsum dolor sit amet, consectetur adipiscing
+                                            elit. Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae sollicitudin
+                                            justo, cursus maecenas. In rhoncus aliquam dui, vitae sollicitudin justo, cursus maecenas.
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto' }}>
+                                            <FormControl fullWidth>
+                                                <InputLabel id="demo-simple-select-label">PROOF OF AUTHENTICITY</InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    value={age}
+                                                    onChange={handleChange}
                                                 >
-                                                    <Typography align="left" fontWeight={900} variant="h2" className="brand">
-                                                        {nft?.Brand?.name}
+                                                    {nft?.NFTMetaFiles.map((option) => (
+                                                        <MenuItem key={option.fieldValue} value={option.fieldValue}>
+                                                            {option.fieldName}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </Box>
+                                        {/*     // <TextField
+                                        //     sx={{ borderRadius: '4px' }}
+                                        //     className="select"
+                                        //     fullWidth
+                                        //     id="standard-select-currency"
+                                        //     select
+                                        //     lable='PROOF OF AUTHENTICITY'
+                                        //     value={fieldValue}
+                                        //     onChange={(e) => setFieldValue(e.target.value)}
+                                        // >
+                                        
+                                        //     {nft?.NFTMetaFiles.map((option) => (
+                                        //         <MenuItem key={option.fieldValue} value={option.fieldValue}>
+                                        //             {option.fieldName}
+                                        //         </MenuItem>
+                                        //     ))}
+                                        // </TextField> */}
+                                    </Grid>
+                                    <Grid item mt={2} mb={2} className="timer" xs={12}>
+                                        <Grid className="auction" container>
+                                            <Grid item md={6} xs={12} sm={12}>
+                                                <Typography color="black" variant="body">
+                                                    Auction Time{' '}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item md={6} xs={12} sm={12}>
+                                                <Typography color="black" variant="body">
+                                                    {' '}
+                                                    2h : 40m : 03s
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item mt={0}  xs={12}>
+                                        <Grid container>
+                                            <Grid mt={-1} item md={2} xs={12} sm={12}>
+                                                <Grid item xs={12}>
+                                                    <Typography
+                                                        color={theme.palette.mode === 'dark' ? 'white' : '#404040'}
+                                                        sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
+                                                        className="price"
+                                                        variant="body2"
+                                                    >
+                                                        Price
                                                     </Typography>
-                                                    <Typography align="left" variant="h3" className="creator">
-                                                        Creator
+                                                </Grid>
+                                                <Grid item xs={12}>
+                                                    <Typography
+                                                        color={theme.palette.mode === 'dark' ? 'white' : '#262626'}
+                                                        sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
+                                                        className="ETH"
+                                                        variant="h3"
+                                                    >
+                                                        {nft.price} {nft.currencyType}
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
-                                        </Grid>
-                                        <Grid item mt={1} xs={12}>
-                                            <Typography
-                                                className="Lux"
-                                                color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                                variant="h3"
-                                            >
-                                                <span>{nft?.name}</span>
-                                                {nft?.NFTTokens?.length > 1 && (
-                                                    <div style={{ fontSize: '60%', marginTop: '3%', color: 'green' }}>
-                                                        {nft?.NFTTokens?.length} items left
-                                                    </div>
-                                                )}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            <Typography className="productdescription" variant="h3">
-                                                {nft?.description}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            {nft?.NFTMetaFiles?.length > 0 && (
-                                                <Typography
-                                                    className="Lux"
-                                                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                                    variant="h3"
-                                                >
-                                                    Proof of Authenticity
-                                                </Typography>
-                                            )}
-                                        </Grid>
-                                        <Grid item xs={12} md={12}>
-                                            {nft?.NFTMetaFiles.map((data) => (
-                                                <>
-                                                    <Accordion sx={{ margin: '10px', border: '2px solid', borderRadius: '4px' }}>
-                                                        <AccordionSummary
-                                                            expandIcon={<ExpandMoreIcon />}
-                                                            aria-controls="panel1a-content"
-                                                            id="panel1a-header"
-                                                        >
-                                                            <Typography>{data.fieldName}</Typography>
-                                                        </AccordionSummary>
-
-                                                        <AccordionDetails>
-                                                            <a target="_blank" href={nft?.transactionHash}>
-                                                                {data.fieldValue}
-                                                            </a>
-                                                        </AccordionDetails>
-                                                    </Accordion>
-                                                </>
-                                            ))}
-                                        </Grid>
-                                        {buyerNft?.founded && (
+                                   {/*      {buyerNft?.founded && (
                                             <>
                                                 <Grid item xs={12} md={12} mt={1}>
                                                     {(nft?.transactionHash !== '' || nft?.transactionHash) && (
@@ -580,34 +623,12 @@ const PropertiesView = ({ nft }) => {
                                                     </Accordion>
                                                 </Grid>
                                             </>
-                                        )}
-                                        <Grid item mt={1} mb={2} xs={12}>
-                                            <Grid container>
-                                                <Grid item md={4} xs={12} sm={12}>
-                                                    <Grid item xs={12}>
-                                                        <Typography
-                                                            color={theme.palette.mode === 'dark' ? 'white' : '#404040'}
-                                                            sx={{ paddingLeft: { md: '16px' }, textAlign: 'left' }}
-                                                            className="price"
-                                                            variant="h3"
-                                                        >
-                                                            Price
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={12}>
-                                                        <Typography
-                                                            color={theme.palette.mode === 'dark' ? 'white' : '#262626'}
-                                                            sx={{ paddingLeft: { md: '15px' }, textAlign: 'left' }}
-                                                            className="ETH"
-                                                            variant="h3"
-                                                        >
-                                                            {nft.price} {nft.currencyType}
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
+                                        )} */}
+                                    
 
                                                 <>
-                                                    {(bought == true || nft?.isSold == true) && JSON.stringify(buyerNft) === '{}' ? (
+                                                    {(bought == true || nft?.isSold == true) && 
+                                                        JSON.stringify(buyerNft) === '{}' ? (
                                                         <>
                                                             <Grid item md={8} xs={12} sm={12} textAlign="center">
                                                                 <Alert severity="error">
@@ -620,7 +641,8 @@ const PropertiesView = ({ nft }) => {
                                                             {buyerNft?.founded ? (
                                                                 <>
                                                                     <>
-                                                                        <Grid sx={{ mt: 4 }} item md={12} xs={12} sm={12} textAlign="right">
+                                                                    <Grid item md={12}  sx={{ mt: 1 ,  display:'flex' }}>
+                                                                        <Grid item md={6} xs={12} sm={12} >
                                                                             {buyerNft?.status == 'Redeem' || redeem ? (
                                                                                 <>
                                                                                     <Alert severity="success">
@@ -653,7 +675,7 @@ const PropertiesView = ({ nft }) => {
                                                                                 </>
                                                                             )}
                                                                         </Grid>
-                                                                        <Grid sx={{ mt: 3 }} item md={12} xs={12} sm={12} textAlign="right">
+                                                                        <Grid  item md={6} xs={12} sm={12}>
                                                                             {buyerNft?.status == 'Resell' || resell == true ? (
                                                                                 <>
                                                                                     <Alert severity="info">
@@ -674,28 +696,31 @@ const PropertiesView = ({ nft }) => {
                                                                                 </>
                                                                             )}
                                                                         </Grid>
+                                                                        </Grid>
                                                                     </>
                                                                 </>
                                                             ) : (
                                                                 <>
                                                                     {(bought || redeem || resell) !== true && (
-                                                                        <Grid item md={8} xs={12} sm={12} textAlign="center">
-                                                                            <Button
-                                                                                sx={{ float: { md: 'right' } }}
-                                                                                className="buy"
-                                                                                variant="contained"
-                                                                                size="large"
-                                                                                onClick={() => {
-                                                                                    handleBuyNft();
-                                                                                }}
-                                                                            >
-                                                                                {loader ? (
-                                                                                    <CircularProgress sx={{ color: 'white' }} />
-                                                                                ) : (
-                                                                                    <span>Buy Now</span>
-                                                                                )}
-                                                                            </Button>
-                                                                        </Grid>
+                                                                        <Grid mt={-1} item md={10} xs={12} sm={12} textAlign="center">
+                                                                        <Button
+                                                                            sx={{ float: { md: 'right' } }}
+                                                                            className="buy"
+                                                                            variant="contained"
+                                                                            size="large"
+                                                                            onClick={() => {
+                                                                                handleBuyNft();
+                                                                            }}
+                                                                        >
+                                                                        {loader ? (
+                                                                            <CircularProgress className='circul'
+                                                                            />
+                                                                       
+                                                                        ) : (
+                                                                            <span>Buy Now</span>
+                                                                        )}
+                                                                        </Button>
+                                                                    </Grid>
                                                                     )}
                                                                 </>
                                                             )}
@@ -720,6 +745,7 @@ const PropertiesView = ({ nft }) => {
                 </Grid>
             </Grid>
         </Grid>
+        
     );
 };
 
