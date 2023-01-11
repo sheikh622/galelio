@@ -122,6 +122,7 @@ const Categories = ({ categories }) => {
                                                 sx={{
                                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                                                    width: categories && categories?.length > 5 ? '100%' : { lg: '220px' },
 
                                                     boxShadow: '1px 2px 6px #d3d3d3',
                                                     borderRadius: '7px'
@@ -200,7 +201,7 @@ const Categories = ({ categories }) => {
                                            
                                             boxShadow: '1px 2px 6px #d3d3d3',
                                             borderRadius: '7px',
-                                            width: { lg:'188px'}
+                                            width: { lg:'220px'}
                                         }}
                                         onClick={() => {
                                             navigate('/marketplace', {
