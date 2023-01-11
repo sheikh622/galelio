@@ -505,11 +505,7 @@ const PropertiesView = ({ nft }) => {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Typography className="productdescription" variant="body2">
-                                            {nft?.description} , Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae
-                                            sollicitudin justo, cursus maecenas. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit. Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae sollicitudin
-                                            justo, cursus maecenas. In rhoncus aliquam dui, vitae sollicitudin justo, cursus maecenas.
-                                        </Typography>
+                                            {nft?.description} </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto' }}>
@@ -523,7 +519,7 @@ const PropertiesView = ({ nft }) => {
                                                 >
                                                     {nft?.NFTMetaFiles.map((option) => (
                                                         <MenuItem key={option.fieldValue} value={option.fieldValue}>
-                                                            {option.fieldName}
+                                                          <a className='textfield' href={option.fieldValue}>  {option.fieldName}</a> 
                                                         </MenuItem>
                                                     ))}
                                                 </Select>
@@ -675,7 +671,7 @@ const PropertiesView = ({ nft }) => {
                                                                                 </>
                                                                             )}
                                                                         </Grid>
-                                                                        <Grid  item md={6} xs={12} sm={12}>
+                                                                        <Grid mt={-6} item md={6} xs={12} sm={12}>
                                                                             {buyerNft?.status == 'Resell' || resell == true ? (
                                                                                 <>
                                                                                     <Alert severity="info">

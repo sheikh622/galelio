@@ -577,6 +577,9 @@ body {
     padding: 0 17px;
     text-align: left;
 }
+.textfield{
+    text-decoration: none !important;
+}
 
 .buy {
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
@@ -824,6 +827,15 @@ body {
 }
 .color {
     color: #2f53ff;
+}
+.tableShadow {
+    box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
+    border-radius: 5px !important;
+}
+.propertyShadow {
+    box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
+    border-radius: 5px !important;
+    border-color: #2F53FF !important;
 }
 .tableShadow {
     box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
