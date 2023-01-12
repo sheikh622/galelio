@@ -1,4 +1,8 @@
-import { LOGIN, LOGIN_SUCCESS,SIGN_UP,SIGN_UP_SUCCESS, LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD, SET_WALLET_ADDRESS, SET_LOADER } from './constants';
+import { LOGIN, LOGIN_SUCCESS
+    ,SIGN_UP,SIGN_UP_SUCCESS, 
+    SIGN_UP_SOCIAL,SIGN_UP_SOCIAL_SUCCESS, 
+    LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD, 
+    SET_WALLET_ADDRESS, SET_LOADER } from './constants';
 
 
 
@@ -26,6 +30,19 @@ export const signup = (data) => {
 export const signupSuccess = (data) => {
     return {
         type: SIGN_UP_SUCCESS,
+        payload: data
+    };
+};
+export const signupsocial = (data) => {
+    return {
+        type: SIGN_UP_SOCIAL,
+        payload: data
+    };
+};
+
+export const signupsocialSuccess = (data) => {
+    return {
+        type: SIGN_UP_SOCIAL_SUCCESS,
         payload: data
     };
 };

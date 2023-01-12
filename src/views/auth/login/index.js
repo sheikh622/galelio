@@ -21,7 +21,8 @@ const Login = () => {
                 alignItems="center"
                 sx={{ minHeight: '100vh', background: theme.palette.mode === 'dark' ? '#fff' : '#fff' }}
             >
-                <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
+                <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch',
+                 display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
                         <Grid item container alignItems="flex-end" justifyContent="center" spacing={3}>
                             <Grid item xs={12}>
@@ -50,7 +51,8 @@ const Login = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Grid item container direction="column" alignItems="center" xs={12}>
-                                    <Typography component={Link} to="/signUp" variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                                    <Typography component={Link} to="/signUp" variant="subtitle1"
+                                     sx={{ textDecoration: 'none' }}>
                                         Don&apos;t have an account?
                                     </Typography>
                                 </Grid>

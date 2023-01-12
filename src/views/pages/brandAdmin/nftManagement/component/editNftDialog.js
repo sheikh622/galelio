@@ -103,8 +103,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
-            .max(500, 'Invalid NFT description can not exceed 500 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
+            .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
         nftPrice: Yup.number()
             .min(0.000001, 'Price should not less than zero')
             .required('NFT Price is required')
@@ -161,7 +161,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         search: search,
                         categoryId: categoryId,
                         brandId: nftInfo.brandId,
-                        handleClose: handleClose,
+                        handleClose: handleClose
                         // brandId: user.BrandId
                     })
                 );
@@ -258,49 +258,49 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-            <DialogTitle id="alert-dialog-slide-title1 " className="adminname">Edit NFT</DialogTitle>
-            <Divider/>
-           <Grid container spacing={2} mt={2} >
-                  
-                   
-                     <Grid xs={12} md={12} lg={12} >
-                        <Button 
-                        className='nftButtons'
-                       
-                           sx={{marginLeft:{md:'35px', lg:'35px'  }}}
-                            variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                          
-                            onClick={() => {
-                                setMintType('directMint');
-                            }}
-                        >
-                        Direct minting
-                        </Button>
-                        </Grid>
-                        
-                        <Grid xs={4} md={12} lg={12} mt={1}> 
-                        <Button 
-                        sx={{marginLeft:{md:'35px', lg:'35px'  }}}
-                        className='lazyButtons'
-                            variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                            onClick={() => {
-                                setMintType('lazyMint');
-                            }}
-                        >
-                        Lazy minting
-                        </Button>
-                    </Grid> 
+                <DialogTitle id="alert-dialog-slide-title1 " className="adminname">
+                    Edit NFT
+                </DialogTitle>
+                <Divider />
+                <Grid container>
+                    <DialogActions>
+                        <AnimateButton>
+                            <Button
+                                type="submit"
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                                className="buttons"
+                                size="large"
+                                onClick={() => {
+                                    setMintType('directMint');
+                                }}
+                            >
+                                Direct minting
+                            </Button>
+                        </AnimateButton>
+                        <AnimateButton>
+                            <Button
+                                className="buttons"
+                                size="large"
+                                type="submit"
+                                variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                onClick={() => {
+                                    setMintType('lazyMint');
+                                }}
+                            >
+                                Lazy minting
+                            </Button>
+                        </AnimateButton>
+                    </DialogActions>
                 </Grid>
-                
-       
 
                 <DialogContent>
-                   
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={1}>
-                        <Grid xs={4} md={5} lg={5} >
+                            <Grid xs={4} md={5} lg={5}>
                                 <TextField
-                                className='textfieldStyle'
+                                    className="textfieldStyle"
                                     id="nftName"
                                     name="nftName"
                                     label="NFT Name"
@@ -313,10 +313,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} md={2} lg={2} ></Grid>
-                            <Grid xs={4} md={5} lg={5} >
+                            <Grid xs={12} md={2} lg={2}></Grid>
+                            <Grid xs={4} md={5} lg={5}>
                                 <TextField
-                                className='textfieldStyle'
+                                    className="textfieldStyle"
                                     id="nftPrice"
                                     name="nftPrice"
                                     label="NFT Price"
@@ -329,13 +329,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12}  md={12} lg={12} mt={2} >
+                            <Grid xs={12} md={12} lg={12} mt={2}>
                                 <TextField
-                                className='textfieldStyle'
+                                    className="textfieldStyle"
                                     id="outlined-select-budget"
                                     select
                                     fullWidth
-                                    variant='filled'
+                                    variant="filled"
                                     value={currencyType}
                                     onChange={handleCurrencyType}
                                 >
@@ -346,9 +346,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid xs={12}  md={12} lg={12} mt={2} >
+                            <Grid xs={12} md={12} lg={12} mt={2}>
                                 <TextField
-                                className='textfieldStyle'
+                                    className="textfieldStyle"
                                     multiline
                                     rows={2}
                                     id="nftDescription"
@@ -363,9 +363,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} mt={2} >
+                            <Grid xs={12} mt={2}>
                                 <Button
-                                className='fieldbutton'
+                                    className="fieldbutton"
                                     variant="contained"
                                     sx={{ float: 'right' }}
                                     onClick={() => {
@@ -378,7 +378,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                         ]);
                                     }}
                                 >
-                                Add more fields
+                                    Add more fields
                                 </Button>
                             </Grid>
                         </Grid>
@@ -390,7 +390,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                         <>
                                             <Grid item xs={5}>
                                                 <TextField
-                                                className='textfieldStyle'
+                                                    className="textfieldStyle"
                                                     id="field_name"
                                                     name="field_name"
                                                     label="Metadata Name"
@@ -405,7 +405,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
 
                                             <Grid item xs={5}>
                                                 <TextField
-                                                className='textfieldStyle'
+                                                    className="textfieldStyle"
                                                     id="field_value"
                                                     name="field_value"
                                                     label="Metadata Value"
@@ -478,25 +478,22 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                             <AnimatePresence>
                                 {formik.values.images &&
                                     formik.values.images.map((file, index) => (
-                                        
                                         <ListItem key={file.image.name} component={motion.div} className="listItem">
                                             <ListItemIcon>
                                                 <Icon icon={fileFill} width={32} height={32} />
                                             </ListItemIcon>
 
-                                         <ListItemText
-                                         className='encap'
+                                            <ListItemText
+                                                className="encap"
                                                 primary={file.image.name ? file.image.name : ''}
                                                 // secondary={fData(file.image.size) ? fData(file.image.size) : ''}
                                                 // primaryTypographyProps={{
-                                                //     variant: 'subtitle2'
+                                                //     variant: 'body2'
                                                 // }}
                                             />
-                                            {mintType == "directMint"
-                                            &&
-                                            
-                                            <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
-                                            }
+                                            {mintType == 'directMint' && (
+                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                            )}
 
                                             <IconButton
                                                 color="error"
@@ -516,7 +513,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         <Grid xs={12} mt={2} pr={3}>
                             <Button
                                 variant="contained"
-                                className='fieldbutton'
+                                className="fieldbutton"
                                 sx={{ float: 'right' }}
                                 onClick={() => {
                                     setFileDataArray([
@@ -550,7 +547,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} mt={3}>
                                                 <input
                                                     type="file"
                                                     id="avatar"
@@ -582,38 +579,38 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 </DialogContent>
                 <Divider />
                 <Grid container>
-                <DialogActions>
-                    <AnimateButton>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
-                            onClick={() => {
-                                formik.handleSubmit();
-                            }}
-                            className="buttons"
-                            size="large"
-                            disableElevation
-                        >
-                            Edit
-                        </Button>
-                    </AnimateButton>
-                    <AnimateButton>
-                        <Button
-                            className="buttons"
-                            size="large"
-                            type="submit"
-                            variant="contained"
-                            sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
-                            onClick={handleClose}
-                            color="error"
-                            disableElevation
-                        >
-                            Cancel
-                        </Button>
-                    </AnimateButton>
-                </DialogActions>
-            </Grid>
+                    <DialogActions>
+                        <AnimateButton>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                onClick={() => {
+                                    formik.handleSubmit();
+                                }}
+                                className="buttons"
+                                size="large"
+                                disableElevation
+                            >
+                                Edit
+                            </Button>
+                        </AnimateButton>
+                        <AnimateButton>
+                            <Button
+                                className="buttons"
+                                size="large"
+                                type="submit"
+                                variant="contained"
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                onClick={handleClose}
+                                color="error"
+                                disableElevation
+                            >
+                                Cancel
+                            </Button>
+                        </AnimateButton>
+                    </DialogActions>
+                </Grid>
             </Dialog>
         </>
     );

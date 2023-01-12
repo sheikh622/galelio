@@ -30,8 +30,8 @@ const BrandCategoryTable = ({ brandCategoriesList }) => {
                 <TableCell align="left " className="Tableheading" sx={{ borderBottom: 'none' }}>
                     Category name{' '}
                 </TableCell>
-                {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell>
-            <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell> */}
+                <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Profit Percentage</TableCell>
+            {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell> */}
 
                 <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
                     Created At
@@ -65,7 +65,9 @@ const BrandCategoryTable = ({ brandCategoriesList }) => {
                                             {row.Category.name}
                                         </Grid>
                                     </TableCell>
-
+                                    <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                    {row.profitPercentage}%
+                                </TableCell>
                                     <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
                                         {moment(row.createdAt).format('DD-MMM-YYYY')}
                                     </TableCell>

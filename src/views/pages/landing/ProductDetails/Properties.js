@@ -70,7 +70,7 @@ const Properties = ({nft}) => {
                 <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                 {nft?.NFTMetaData.map((item) => (
                         <Grid item md={2} sm={6}>
-                            <SubCard className="property tableShadow" sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}>
+                            <SubCard className="property propertyShadow" sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}>
                                 <Grid container justifyContent="center" spacing={2}>
                                     <Grid item xs={12}>
                                         <Typography className="pbackground" variant="body">

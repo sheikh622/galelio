@@ -1,7 +1,7 @@
 import axios from '../../utils/axios';
 import { all, fork, put, takeLatest } from 'redux-saga/effects';
-import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_UP } from './constants';
-import { loginSuccess, signupSuccess, setLoader } from './actions';
+import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_UP,SIGN_UP_SOCIAL } from './constants';
+import { loginSuccess, signupSuccess,signupsocialSuccess, setLoader } from './actions';
 import { sagaErrorHandler } from '../../shared/helperMethods/sagaErrorHandler';
 import { setNotification } from '../../shared/helperMethods/setNotification';
 
@@ -31,7 +31,8 @@ function* loginUser({ payload }) {
 function* signupUserRequest({ payload }) {
     try {
         let data = {
-            name: payload.name,
+            firstName: payload.firstName,
+            lastName: payload.lastName,
             email: payload.email,
             password: payload.password,
             walletAddress: payload.walletAddress,
@@ -43,6 +44,26 @@ function* signupUserRequest({ payload }) {
         yield setNotification('success', response.data.message);
         yield put(signupSuccess(response.data.data));
         payload.navigate('/login');
+    } catch (error) {
+        yield put(setLoader(false));
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+function* signupSocialUserRequest({ payload }) {
+    try {
+        let data = {
+            firstName: payload.firstName,
+            lastName: payload.lastName,
+            email: payload.email,
+            walletAddress: payload.walletAddress,
+            address: payload.address
+        };
+        const response = yield axios.post(`/auth/socialSignup`, data);
+      
+        yield put(setLoader(false));
+        yield setNotification('success', response.data.message);
+        yield put(signupsocialSuccess(response.data.data));
+        payload.navigate('/');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
@@ -84,6 +105,9 @@ export function* watchLogin() {
 export function* watchSignup() {
     yield takeLatest(SIGN_UP, signupUserRequest);
 }
+export function* watchSocialSignup() {
+    yield takeLatest(SIGN_UP_SOCIAL, signupSocialUserRequest);
+}
 
 export function* watchForgot() {
     yield takeLatest(FORGOT_PASSWORD, forgetPasswordRequest);
@@ -93,5 +117,8 @@ export function* watchReset() {
 }
 
 export default function* authSaga() {
-    yield all([fork(watchLogin), fork(watchForgot), fork(watchReset), fork(watchSignup)]);
+    yield all([fork(watchLogin), fork(watchForgot), fork(watchReset), 
+        fork(watchSignup),
+        fork(watchSocialSignup),
+    ]);
 }
