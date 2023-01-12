@@ -11,6 +11,7 @@ import { setWallet } from '../../../../redux/auth/actions';
 const MetaMaskSection = () => {
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
+    const [reload, setReload] = useState(false);
     const handleConnect = async () => {
         if (!window.ethereum) {
             dispatch({
@@ -41,7 +42,14 @@ const MetaMaskSection = () => {
         }
     };
 
+    window.ethereum.on('accountsChanged', function (accounts) {
+        // Time to reload your interface with accounts[0]!
+        // setReload(true)
+        handleConnect()
+      })
+
     useEffect(() => {
+ 
         dispatch(setWallet(walletAddress));
         handleConnect()
     }, [dispatch, walletAddress]);
