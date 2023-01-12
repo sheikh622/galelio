@@ -16,7 +16,7 @@ const UserGuard = ({ children }) => {
         if (token == null) {
             navigate('/', { replace: true });
         }
-        else if (token && user.role=="User" ) {
+        else if (token && user?.role=="User" ) {
             navigate('/', { replace: true });
         }
     }, [token]);

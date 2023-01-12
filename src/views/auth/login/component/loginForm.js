@@ -63,12 +63,12 @@ const LoginForm = ({ loginProp, ...others }) => {
                 dispatch(loginSuccess(response.data.data));
                 console.log(response.data.data.profileCompleted, 'response=====google');
 
-                if (data) {
-                    navigate('/', {
+                if (!response.data.data.profileCompleted) {
+                    navigate('/socialLogin', {
                         state: { socal: response.data.data }
                     });
                 } else {
-                    navigate('/socialLogin', {
+                    navigate('/', {
                         state: { socal: response.data.data }
                     });
                 }
@@ -86,8 +86,17 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                // console.log(response, 'response=====google');
-                navigate('/socialLogin');
+                console.log(response.data.data.profileCompleted, 'response=====facebook');
+
+                if (!response.data.data.profileCompleted) {
+                    navigate('/socialLogin', {
+                        state: { socal: response.data.data }
+                    });
+                } else {
+                    navigate('/', {
+                        state: { socal: response.data.data }
+                    });
+                }
             })
             .catch(function (error) {
                 toast.error(error.message);

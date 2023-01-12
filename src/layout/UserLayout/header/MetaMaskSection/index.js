@@ -23,35 +23,37 @@ const MetaMaskSection = () => {
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
+
+            const response = await window.ethereum?.request({ method: 'eth_requestAccounts' });
+            if (response) {
+                const address = utils?.getAddress(response[0]);
+                setWalletAddress(address);
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Success',
+                    variant: 'alert',
+                    alertSeverity: 'success'
+                });
+            } else {
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
         }
 
-        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        if (response) {
-            const address = utils?.getAddress(response[0]);
-            setWalletAddress(address);
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Success',
-                variant: 'alert',
-                alertSeverity: 'success'
-            });
-        } else {
-            console.log('No crypto wallet found. Please install it.');
-            // toast.error('No crypto wallet found. Please install it.');
-        }
+      
     };
-
-    window.ethereum.on('accountsChanged', function (accounts) {
-        // Time to reload your interface with accounts[0]!
-        // setReload(true)
-        handleConnect()
-      })
+    if (window.ethereum) {
+        window.ethereum.on('accountsChanged', function (accounts) {
+            // Time to reload your interface with accounts[0]!
+            // setReload(true)
+            handleConnect();
+        });
+    }
 
     useEffect(() => {
- 
         dispatch(setWallet(walletAddress));
-        handleConnect()
+        handleConnect();
     }, [dispatch, walletAddress]);
 
     // const wa = useSelector((state) => state.auth.walletAddress);
