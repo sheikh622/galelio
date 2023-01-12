@@ -216,10 +216,10 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        {/* <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                             <GoogleLogin
                                 select_account={false}
-                                auto_select={false}
+                                auto_select={false}                    
                                 onSuccess={(data) => {
                                     googleAuthHandle(data);
                                 }}
@@ -228,12 +228,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 }}
                             />
                         </Grid>
-                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                            <Button variant="contained" startIcon={<FacebookOutlinedIcon />}>
-                                Login with Facebook
-                            </Button>
-                        </Grid> */}
-                        {/*   <Grid
+                        <Grid
                             item
                             sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
                         >
@@ -247,7 +242,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 cssClass="my-facebook-button-class"
                                 textButton=" Login with Facebook"
                             />
-                        </Grid> */}
+                        </Grid>
                     </form>
                 )}
             </Formik>
