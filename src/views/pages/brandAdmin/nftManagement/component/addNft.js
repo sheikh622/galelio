@@ -251,34 +251,44 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                     Add NFT
                 </DialogTitle>
                 <Divider />
-                <Grid container spacing={2} mt={2}>
-                    <Grid xs={12} md={12} lg={12}>
-                        <Button
-                            className="nftButtons"
-                            sx={{ marginLeft: { md: '35px', lg: '35px' } }}
-                            variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                            onClick={() => {
-                                setMintType('directMint');
-                            }}
-                        >
-                            Direct minting
-                        </Button>
-                    </Grid>
-
-                    <Grid xs={4} md={12} lg={12} mt={1}>
-                        <Button
-                            sx={{ marginLeft: { md: '35px', lg: '35px' } }}
-                            className="lazyButtons"
-                            variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                            onClick={() => {
-                                setMintType('lazyMint');
-                            }}
-                        >
-                            Lazy minting
-                        </Button>
-                    </Grid>
+                <Grid container>
+                    <DialogActions>
+                        <AnimateButton>
+                            <Button
+                                type="submit"
+                               
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                                className="buttons"
+                                size="large"
+                               
+                                onClick={() => {
+                                    setMintType('directMint');
+                                }}
+                            >
+                                Direct minting
+                            </Button>
+                        </AnimateButton>
+                        <AnimateButton>
+                            <Button
+                                className="buttons"
+                                size="large"
+                                type="submit"
+                                variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                               
+                               
+                                onClick={() => {
+                                    setMintType('lazyMint');
+                                }}
+                            >
+                                Lazy minting
+                            </Button>
+                        </AnimateButton>
+                    </DialogActions>
                 </Grid>
-
+               
+             
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={1}>
@@ -373,7 +383,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <Grid container spacing={4}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5}> 
                                                 <TextField
                                                     id="field_name"
                                                     className="textfieldStyle"
@@ -464,24 +474,23 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <AnimatePresence>
                                     {formik.values.images &&
                                         formik.values.images.map((file, index) => (
-                                            <ListItem key={file.image.name} component={motion.div} className="listItem">
+                                            <ListItem  key={file.image.name} component={motion.div} className="listItem">
                                                 <ListItemIcon>
                                                     <Icon icon={fileFill} width={32} height={32} />
                                                 </ListItemIcon>
                                                 <ListItemText 
-                                               
                                                     primary={ 
                                                         
                                                         file.image.name ? file.image.name : ''}
-                                                    secondary={
-
-                                                        fData(file.image.size) ? fData(file.image.size) : ''}
+                                                   
                                                     primaryTypographyProps={{
-                                                        variant: 'subtitle2'
+                                                        variant: 'h6',
+                                                       
                                                     }}
                                                 />
                                                 {mintType == 'directMint' && (
-                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                    <QuantitySelector formik={formik} 
+                                                    fileArray={formik.values.images} index={index} />
                                                 )}
                                                 <IconButton
                                                     color="error"
@@ -536,7 +545,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={5}>
+                                            <Grid item mt={3} xs={5}>
                                                 <input
                                               
                                                     type="file"

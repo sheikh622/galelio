@@ -81,6 +81,7 @@ const NftManagement = () => {
     }, [search, page, limit, type]);
 
     const nftList = useSelector((state) => state.nftReducer.nftList);
+    
     return (
         <>
             <AddNft
@@ -99,7 +100,8 @@ const NftManagement = () => {
                         variant="h1"
                         component="h2"
                         className="headingcard"
-                        sx={{ marginTop: '10px', fontWeight: 600, color: '#000', marginLeft: { lg: '-20px', md: '-20px' } }}
+                        sx={{ marginTop: '10px', fontWeight: 600, color:  theme.palette.mode === 'dark' ? '#fff' : '#000' ,
+                         marginLeft: { lg: '-20px', md: '-20px' } }}
                     >
                         Categories
                     </Typography>
@@ -111,7 +113,7 @@ const NftManagement = () => {
                         variant="contained"
                         size="large"
                         onClick={() => {
-                            navigate('/brands');
+                            navigate('/categories');
                         }}
                     >
                         Back
@@ -165,6 +167,8 @@ const NftManagement = () => {
                 <Grid container>
                     {(nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length >= 0) ? (
                         <>
+                       { nftList.nfts.rows.length >= 0?(
+                        <>
                             {' '}
                             <Grid container spacing={gridSpacing} mt={2} sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
                                 {nftList.nfts.rows &&
@@ -200,6 +204,15 @@ const NftManagement = () => {
                                     </Grid>
                                 </Grid>
                             </Grid>
+                            </>
+                       )
+                       :
+                       (
+                        <Grid item>
+                        <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}>
+                         No Data Available</Typography>
+                    </Grid>
+                       )}
                         </>
                     ) : (
                         <>
