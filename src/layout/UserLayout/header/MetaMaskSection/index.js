@@ -19,9 +19,8 @@ const MetaMaskSection = () => {
                 message: 'No crypto wallet found. Please install it.',
                 variant: 'alert',
                 alertSeverity: 'info'
-                
-            })
-            console.log("No crypto wallet found. Please install it.")
+            });
+            console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
         }
 
@@ -35,17 +34,20 @@ const MetaMaskSection = () => {
                 message: 'Success',
                 variant: 'alert',
                 alertSeverity: 'success'
-            })
-        
+            });
         } else {
-            console.log("No crypto wallet found. Please install it.");
+            console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
         }
     };
 
     useEffect(() => {
         dispatch(setWallet(walletAddress));
-    }, [walletAddress]);
+        handleConnect()
+    }, [dispatch, walletAddress]);
+
+    // const wa = useSelector((state) => state.auth.walletAddress);
+    // console.log('wa', wa);
     return (
         <>
             <Button
@@ -53,11 +55,15 @@ const MetaMaskSection = () => {
                 onClick={() => {
                     handleConnect();
                 }}
-                    
             >
+                {/* {wa ? (
+                    <>{walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}</>
+                ) : (
+                    <>{wa ? wa.slice(0, 5) + '...' + wa.slice(38, 42) : 'Connect'}</>
+                )} */}
+                {/* {wa ? wa.slice(0, 5) + '...' + wa.slice(38, 42) : 'Connect'} */}
                 {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
             </Button>
-    
         </>
     );
 };

@@ -69,21 +69,25 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 await factoryAddr.deployMintingContract(contractName, symbol).catch((error) => {
                     toast.error(error.message);
                 })
-            ).wait();
+            )
+
             console.log("res",res);
-            let addr = res.events[2].args[0];
-            dispatch(
-                addBrandCategory({
-                    brandId: brandCategoryData.brandId,
-                    categoryId: category,
-                    profitPercentage: formik.values.profitPercentage,
-                    contractAddress: addr,
-                    page: page,
-                    limit: limit,
-                    search: search,
-                    handleClose: handleClose
-                })
-            );
+            let addr = res?.events[2].args[0];
+            if(res){
+                dispatch(
+                    addBrandCategory({
+                        brandId: brandCategoryData.brandId,
+                        categoryId: category,
+                        profitPercentage: formik.values.profitPercentage,
+                        contractAddress: addr,
+                        page: page,
+                        limit: limit,
+                        search: search,
+                        handleClose: handleClose
+                    })
+                );
+
+            }
         }
     };
 
