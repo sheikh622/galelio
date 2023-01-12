@@ -39,6 +39,7 @@ const LoginForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
 
     const loader = useSelector((state) => state.auth.loader);
+    const auth = useSelector((state) => state.auth);
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -60,7 +61,17 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                navigate('/');
+                console.log(response.data.data.profileCompleted, 'response=====google');
+
+                if (data) {
+                    navigate('/', {
+                        state: { socal: response.data.data }
+                    });
+                } else {
+                    navigate('/socialLogin', {
+                        state: { socal: response.data.data }
+                    });
+                }
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -75,7 +86,8 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                navigate('/');
+                // console.log(response, 'response=====google');
+                navigate('/socialLogin');
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -166,7 +178,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 variant="subtitle1"
                                 component={Link}
                                 to={'/forgetPassword'}
-                                sx={{ textDecoration: 'none', color: '#000 ' }}
+                                sx={{ textDecoration: 'none', color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
                             >
                                 Forgot Password?
                             </Typography>
@@ -216,7 +228,12 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        {/* <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                        <Grid
+                            item
+                            component={Link}
+                            to="/socialLogin"
+                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}
+                        >
                             <GoogleLogin
                                 select_account={false}
                                 auto_select={false}
@@ -228,12 +245,13 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 }}
                             />
                         </Grid>
-                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                            <Button variant="contained" startIcon={<FacebookOutlinedIcon />}>
+                       {/*  <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                            <Button component={Link} to="/socialLogin" variant="contained" startIcon={<FacebookOutlinedIcon />}>
                                 Login with Facebook
                             </Button>
                         </Grid> */}
-                        {/*   <Grid
+
+                          <Grid
                             item
                             sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
                         >
@@ -247,7 +265,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 cssClass="my-facebook-button-class"
                                 textButton=" Login with Facebook"
                             />
-                        </Grid> */}
+                        </Grid> 
                     </form>
                 )}
             </Formik>

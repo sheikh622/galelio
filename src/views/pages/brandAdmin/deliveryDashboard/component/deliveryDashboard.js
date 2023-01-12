@@ -25,7 +25,7 @@ import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
 
 const DeliveryDashboard = ({ deliveryList, user }) => {
-    console.log('deliveryList', deliveryList);
+    console.log('deliveryList.lenght', deliveryList);
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [deliveryId, setDeliveryId] = useState(0);
@@ -33,6 +33,17 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
         <>
             <ChangeStatusDialog setOpen={setOpen} open={open} user={user} setDeliveryId={setDeliveryId} deliveryId={deliveryId} />
             <TableContainer>
+            <>
+            {( deliveryList?.length == 0) ? (
+                <>
+                    <Grid item className='tableshadow'>
+                        <Typography variant='h3' style={{ padding: '20px', fontWeight: '800',color:'red', justifyContent: 'center' }}>
+                            {' '}
+                            No Data Available
+                        </Typography>
+                    </Grid>
+                </>
+            ) : (
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -60,17 +71,7 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                             </TableCell>
                         </TableRow>
                     </TableHead>
-                    <>
-                        {(deliveryList == undefined && deliveryList?.length == 0) || undefined ? (
-                            <>
-                                <Grid item>
-                                    <Typography style={{ padding: '20px', fontWeight: '800', justifyContent: 'center' }}>
-                                        {' '}
-                                        No Data Available
-                                    </Typography>
-                                </Grid>
-                            </>
-                        ) : (
+                  
                             <TableBody>
                                 {deliveryList != undefined &&
                                     deliveryList?.map((row, index) => (
@@ -149,9 +150,10 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                                         </>
                                     ))}
                             </TableBody>
-                        )}
-                    </>
+                     
                 </Table>
+                )}
+                </>
                 <Divider />
             </TableContainer>
         </>

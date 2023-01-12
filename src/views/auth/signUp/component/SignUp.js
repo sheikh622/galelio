@@ -85,7 +85,8 @@ const SignUpForm = ({ loginProp, ...others }) => {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    name: '',
+                    firstName: '',
+                    lastName: '',
                     email: '',
                     password: '',
                     confirmPassword: '',
@@ -93,9 +94,13 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     address: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    name: Yup.string()
-                        .required('Name is required!')
-                        .max(42, 'Name can not exceed 42 characters')
+                    firstName: Yup.string()
+                        .required('First Name is required!')
+                        .max(42, 'First Name can not exceed 42 characters')
+                        .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                        lastName: Yup.string()
+                        .required('Last Name is required!')
+                        .max(42, 'Last Name can not exceed 42 characters')
                         .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     password: Yup.string().max(255).required('Password is required!'),
@@ -116,7 +121,8 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     await dispatch(setLoader(true));
                     dispatch(
                         signup({
-                            name: values.name,
+                            firstName: values.firstName,
+                            lastName: values.lastName,
                             email: values.email,
                             password: values.password,
                             walletAddress: walletAddress,
@@ -129,19 +135,36 @@ const SignUpForm = ({ loginProp, ...others }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Name </InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">First Name </InputLabel>
                             <OutlinedInput
                                 type="name"
-                                value={values.name}
-                                name="name"
+                                value={values.firstName}
+                                name="firstName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Name"
+                                label="firstName"
                                 inputProps={{}}
                             />
-                            {touched.name && errors.name && (
+                            {touched.firstName && errors.firstName && (
                                 <FormHelperText error id="standard-weight-helper-text-name-login">
-                                    {errors.name}
+                                    {errors.firstName}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Last Name </InputLabel>
+                            <OutlinedInput
+                                type="lastName"
+                                value={values.name}
+                                name="lastName"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                label="lastName"
+                                inputProps={{}}
+                            />
+                            {touched.lastName && errors.lastName && (
+                                <FormHelperText error id="standard-weight-helper-text-name-login">
+                                    {errors.lastName}
                                 </FormHelperText>
                             )}
                         </FormControl>

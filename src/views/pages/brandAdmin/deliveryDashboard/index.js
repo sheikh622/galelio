@@ -59,7 +59,7 @@ const Delivered = () => {
                 <DeliveryDashboard deliveryList={deliveryList} user={user} />
 
                 <>
-                    <Grid item xs={12} sx={{ p: 3 }}>
+                 {  /*  <Grid item xs={12} sx={{ p: 3 }}>
                         <Grid container justifyContent="center" spacing={gridSpacing}>
                             <Grid item>
                                 <Pagination
@@ -75,7 +75,7 @@ const Delivered = () => {
                             </Grid>
                            
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </>
             </MainCard>
         </>

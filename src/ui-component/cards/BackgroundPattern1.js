@@ -18,7 +18,7 @@ const BackgroundPattern1 = ({ children }) => {
             sx={{
                 display: 'flex',
                 minHeight: '97%',
-                bgcolor: theme.palette.mode === 'dark' ? theme.palette.dark.dark : '#fff',
+                bgcolor: theme.palette.mode === 'dark' ? '#fff': '#fff',
                 backgroundImage: theme.palette.mode === 'dark' ? `url(${AuthPatternDark})` : `url(${AuthPattern})`,
                
                 backgroundPosition: 'center',
