@@ -71,26 +71,28 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
             <Dialog
                 open={open}
                 onClose={handleClose}
-                scroll={scroll}
+                scroll={scroll} 
+                className='dialog_details'
                 aria-labelledby="scroll-dialog-title"
                 aria-describedby="scroll-dialog-description"
             >
-                <DialogTitle id="scroll-dialog-title">NFT Details</DialogTitle>
+                <DialogTitle id="scroll-dialog-title" className="statusHeading">NFT Details</DialogTitle>
                 <DialogContent dividers={scroll === 'paper'}>
                     <Grid container spacing={3}>
                         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
-                            <Grid item xs={12}>
-                                <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                                    <Grid item lg={6} className="NFTdetails">
+                            <Grid mt={1} item xs={12}>
+                                <Grid container justifyContent="center" 
+                                 sx={{ textAlign: 'center', }}>
+                                    <Grid p={4} item lg={6} className="NFTdetails">
                                         <img src={nftData?.asset} alt="Statement Image" className="imageSize" />
                                     </Grid>
 
-                                    <Grid item md={6} sm={12}>
-                                        <Grid item xs={12}>
+                                    <Grid  mt={1} item md={6} sm={12} >
+                                        
                                             <Grid container justifyContent="left">
                                                 <Grid item md={12} sm={12}>
                                                     {status.map((option) => (
-                                                        <Grid container spacing={2}>
+                                                        <Grid container spacing={2} sx={{marginLeft:{lg:'10px'}}} >
                                                             <Grid item md={6} xs={12}>
                                                                 <Typography
                                                                     mt={1}
@@ -102,10 +104,11 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
                                                                 </Typography>
                                                             </Grid>
 
-                                                            <Grid item md={6} xs={12} sx={{ marginTop: '12px', textAlign: 'left' }}>
+                                                            <Grid item md={6} xs={12}  className=" encap"
+                                                            sx={{ marginTop: '12px', textAlign: 'left' , textTransform:'' }}>
                                                                 <Typography
                                                                     mt={1}
-                                                                    className="nftText"
+                                                                    className="nftText encap"
                                                                     color={theme.palette.mode === 'dark' ? 'white' : '#767676'}
                                                                     variant="body"
                                                                 >
@@ -116,7 +119,7 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
                                                     ))}
                                                 </Grid>
                                             </Grid>
-                                        </Grid>
+                                      
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -124,7 +127,7 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
                     </Grid>
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5, pt: 2.5 }}>
-                    <Button sx={{ color: theme.palette.error.dark }} onClick={handleClose} color="secondary">
+                    <Button  className='buttonSize' size='large' sx={{ color: theme.palette.error.dark }} onClick={handleClose} color="secondary">
                         Close
                     </Button>
                 </DialogActions>
