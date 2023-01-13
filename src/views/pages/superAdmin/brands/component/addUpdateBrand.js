@@ -106,7 +106,7 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog dialog"
+                className=" dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted

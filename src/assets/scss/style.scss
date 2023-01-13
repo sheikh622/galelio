@@ -542,7 +542,7 @@ body {
 }
 
 .nftHead {
-    font-family: 'Public Sans';
+    font-family: '"Poppins"';
     font-style: normal;
     font-weight: 500;
     font-size: 21px;
@@ -551,7 +551,7 @@ body {
 }
 
 .nftText {
-    font-family: 'Public Sans';
+    font-family: '"Poppins"';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -691,6 +691,9 @@ body {
         }
     }
 }
+.categoryDialog{
+    width: 77%;
+}
 
 .responsiveSelectfield {
     @media only screen and (min-width: 320px) and (max-width: 480px) {
@@ -780,7 +783,7 @@ body {
 }
 .imageSize {
     width: 100%;
-    height: 300px;
+    height: 250px;
     object-fit: cover;
 }
 .userName {
@@ -900,8 +903,9 @@ body {
     font-size: 26px;
 }
 .dialog {
-    width: 30%;
+    width: 27% !important;
     margin: 0 auto;
+    // border: 2px solid red;
 }
 .Nftdialog {
     width: 40%;
@@ -1049,6 +1053,9 @@ body {
     width: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.dialog_details{
+   height: 520px;
 }
 .prdpadding {
     padding: 10px 8px 0 25px !important;

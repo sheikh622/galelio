@@ -1,5 +1,7 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
+
 import {
     CardMedia,
     Grid,
@@ -515,10 +517,7 @@ const PropertiesView = ({ nft }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                                {nft?.description} , Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae
-                                                sollicitudin justo, cursus maecenas. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae sollicitudin
-                                                justo, cursus maecenas. In rhoncus aliquam dui, vitae sollicitudin justo, cursus maecenas.
+                                                {nft?.description}{' '}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
@@ -532,7 +531,12 @@ const PropertiesView = ({ nft }) => {
                                                         onChange={handleChange}
                                                     >
                                                         {nft?.NFTMetaFiles.map((option) => (
-                                                            <MenuItem key={option.fieldValue} value={option.fieldValue}>
+                                                            <MenuItem
+                                                                component={RouterLink}
+                                                                to={option.fieldValue}
+                                                                key={option.fieldValue}
+                                                                value={option.fieldValue}
+                                                            >
                                                                 {option.fieldName}
                                                             </MenuItem>
                                                         ))}
@@ -713,23 +717,23 @@ const PropertiesView = ({ nft }) => {
                                                             ) : (
                                                                 <>
                                                                     {/* {(bought || redeem || resell) !== true && ( */}
-                                                                        <Grid mt={-1} item md={10} xs={12} sm={12} textAlign="center">
-                                                                            <Button
-                                                                                sx={{ float: { md: 'right' } }}
-                                                                                className="buy"
-                                                                                variant="contained"
-                                                                                size="large"
-                                                                                onClick={() => {
-                                                                                    handleBuyNft();
-                                                                                }}
-                                                                            >
-                                                                                {loader ? (
-                                                                                    <CircularProgress className="circul" />
-                                                                                ) : (
-                                                                                    <span>Buy Now</span>
-                                                                                )}
-                                                                            </Button>
-                                                                        </Grid>
+                                                                    <Grid mt={-1} item md={10} xs={12} sm={12} textAlign="center">
+                                                                        <Button
+                                                                            sx={{ float: { md: 'right' } }}
+                                                                            className="buy"
+                                                                            variant="contained"
+                                                                            size="large"
+                                                                            onClick={() => {
+                                                                                handleBuyNft();
+                                                                            }}
+                                                                        >
+                                                                            {loader ? (
+                                                                                <CircularProgress className="circul" />
+                                                                            ) : (
+                                                                                <span>Buy Now</span>
+                                                                            )}
+                                                                        </Button>
+                                                                    </Grid>
                                                                     {/* // )} */}
                                                                 </>
                                                             )}

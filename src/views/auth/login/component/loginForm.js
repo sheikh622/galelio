@@ -61,7 +61,8 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                console.log(response.data.data.profileCompleted, 'response=====google');
+                console.log(data, 'response=====google');
+                
 
                 if (!response.data.data.profileCompleted) {
                     navigate('/socialLogin', {
@@ -86,7 +87,7 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                console.log(response.data.data.profileCompleted, 'response=====facebook');
+                // console.log(response.data.data.profileCompleted, 'response=====facebook');
 
                 if (!response.data.data.profileCompleted) {
                     navigate('/socialLogin', {
@@ -130,7 +131,8 @@ const LoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)}
+                         sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput
                                 type="email"
@@ -251,7 +253,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                         </Grid>
                         <Grid
                             item
-                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
+                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', 
+                            paddingRight: '21%' }}
                         >
                             <ReactFacebookLogin
                                 appId="851727442768362"

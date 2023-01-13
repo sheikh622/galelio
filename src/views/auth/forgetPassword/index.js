@@ -17,7 +17,7 @@ const ForgotPassword = () => {
                 container
                 justifyContent="space-between"
                 alignItems="center"
-                sx={{ minHeight: '100vh', background: theme.palette.mode === 'dark' ? '#fff' : '#fff' }}
+                sx={{ minHeight: '100vh',background: theme.palette.mode === 'dark' ? '#000' : '#fff' }}
             >
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
