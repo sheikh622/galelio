@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import BLOCKCHAIN from '../../../../../../constants';
 import { SNACKBAR_OPEN } from 'store/actions';
 
-
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCategoryData, page, limit, search }) {
@@ -62,18 +61,18 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
             const symbol = 'G' + brandName.substring(0, 1) + categoryName.substring(0, 1);
             const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();            
+            const signer = provider.getSigner();
             const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
 
             let res = await (
                 await factoryAddr.deployMintingContract(contractName, symbol).catch((error) => {
                     toast.error(error.message);
                 })
-            )
+            ).wait();
 
-            console.log("res",res);
-            let addr = res?.events[2].args[0];
-            if(res){
+            console.log('res', res);
+            let addr = res?.events[2]?.args[0];
+            if (res) {
                 dispatch(
                     addBrandCategory({
                         brandId: brandCategoryData.brandId,
@@ -86,7 +85,6 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         handleClose: handleClose
                     })
                 );
-
             }
         }
     };
@@ -152,7 +150,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         <Grid container>
                             <>
                                 {!isUpdate && (
-                                    <Grid item xs={12} pt={2} >
+                                    <Grid item xs={12} pt={2}>
                                         <TextField
                                             className="responsiveSelectfield textfieldStyle"
                                             id="outlined-select-budget"
@@ -175,10 +173,10 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                     </Grid>
                                 )}
 
-                                <Grid item xs={12} pt={2} >
+                                <Grid item xs={12} pt={2}>
                                     <TextField
-                                    className='textfieldStyle'
-                                    variant="standard"
+                                        className="textfieldStyle"
+                                        variant="standard"
                                         id="profitPercentage"
                                         name="profitPercentage"
                                         label="Enter Profit Percentage"
@@ -195,12 +193,12 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{display:'block' }}>
+                <DialogActions sx={{ display: 'block' }}>
                     <AnimateButton>
                         <Button
                             variant="contained"
                             className="buttons"
-                            sx={{ my: 3, ml: 1 ,  my: 1, ml: 2,  padding: {md:'6px 140px', lg:'6px 140px'} }}
+                            sx={{ my: 3, ml: 1, my: 1, ml: 2, padding: { md: '6px 140px', lg: '6px 140px' } }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -213,9 +211,9 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                     </AnimateButton>
                     <AnimateButton>
                         <Button
-                        className="buttons"
+                            className="buttons"
                             variant="contained"
-                            sx={{   my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'} ,color: '#fff' }}
+                            sx={{ my: 1, ml: 1, padding: { md: '6px 140px', lg: '6px 140px' }, color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

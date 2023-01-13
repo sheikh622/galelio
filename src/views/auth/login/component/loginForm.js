@@ -61,14 +61,15 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                console.log(response.data.data.profileCompleted, 'response=====google');
+                console.log(data, 'response=====google');
+                
 
-                if (data) {
-                    navigate('/', {
+                if (!response.data.data.profileCompleted) {
+                    navigate('/socialLogin', {
                         state: { socal: response.data.data }
                     });
                 } else {
-                    navigate('/socialLogin', {
+                    navigate('/', {
                         state: { socal: response.data.data }
                     });
                 }
@@ -86,8 +87,17 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                // console.log(response, 'response=====google');
-                navigate('/socialLogin');
+                // console.log(response.data.data.profileCompleted, 'response=====facebook');
+
+                if (!response.data.data.profileCompleted) {
+                    navigate('/socialLogin', {
+                        state: { socal: response.data.data }
+                    });
+                } else {
+                    navigate('/', {
+                        state: { socal: response.data.data }
+                    });
+                }
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -121,7 +131,8 @@ const LoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)}
+                         sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput
                                 type="email"
@@ -228,15 +239,10 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid
-                            item
-                            component={Link}
-                            to="/socialLogin"
-                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}
-                        >
+                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                             <GoogleLogin
                                 select_account={false}
-                                auto_select={false}
+                                auto_select={false}                    
                                 onSuccess={(data) => {
                                     googleAuthHandle(data);
                                 }}
@@ -245,15 +251,10 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 }}
                             />
                         </Grid>
-                       {/*  <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                            <Button component={Link} to="/socialLogin" variant="contained" startIcon={<FacebookOutlinedIcon />}>
-                                Login with Facebook
-                            </Button>
-                        </Grid> */}
-
-                          <Grid
+                        <Grid
                             item
-                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
+                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', 
+                            paddingRight: '21%' }}
                         >
                             <ReactFacebookLogin
                                 appId="851727442768362"
@@ -265,7 +266,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 cssClass="my-facebook-button-class"
                                 textButton=" Login with Facebook"
                             />
-                        </Grid> 
+                        </Grid>
                     </form>
                 )}
             </Formik>
