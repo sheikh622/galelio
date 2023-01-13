@@ -23,7 +23,8 @@ import {
     IconButton,
     MenuItem
 } from '@mui/material';
-
+import { create } from 'ipfs-http-client';
+import { Buffer } from 'buffer';
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
@@ -36,6 +37,21 @@ import QuantitySelector from './quantitySelector';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
+import { ethers } from 'ethers';
+import NFTAbi from '../../../../../contractAbi/NFT.json';
+const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
+const projectSecret = 'a09de1e8b20292cd87460290de554003';
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+
+const client = create({
+    host: 'ipfs.infura.io',
+    port: 5001,
+    protocol: 'https',
+    headers: {
+        authorization: auth
+    }
+});
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const currencyTypeArray = [
@@ -52,8 +68,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [fileDataArray, setFileDataArray] = useState([]);
     const [uploadedImages, setUploadedImages] = useState([]);
-
- 
 
     const handleCurrencyType = (event) => {
         setCurrencyType(event.target.value);
@@ -163,7 +177,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         search: search,
                         categoryId: categoryId,
                         brandId: nftInfo.brandId,
-                        handleDynamicMetaData:handleDynamicMetaData,
+                        handleDynamicMetaData: handleDynamicMetaData,
                         handleClose: handleClose
                     })
                 );
@@ -248,11 +262,78 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         console.log('fileDataArray', fileDataArray);
     }, [fileDataArray]);
 
+    const handleDynamicMetaData = async (nftData) => {
+        console.log('nftData in my function', nftData);
+        let nftTokens = nftData.nft.NFTTokens;
+        const tokenId = await nftTokens.map((data) => {
+            return parseInt(data.tokenId);
+        });
 
-   
+        let image = null;
+        if (nftData.asset) {
+            image = nftData.asset;
+        } else {
+            image = nftData.nft.asset;
+        }
 
-    const handleDynamicMetaData = async(nftData) => {
-        console.log("nftData in my function",nftData)
+        let price = nftData.price;
+        let name = nftData.name;
+        let description = nftData.description;
+        let projectName = 'Galelio';
+        let mintedDate = new Date().valueOf();
+        let categoryName = nftData.nft.Category.name;
+        let brandName = nftData.nft.Brand.name;
+        let metaData = nftData.NFTMetaData;
+        let proofOfAuthenticity = nftData.NFTMetaFiles;
+        let contractAddress = nftData.nft.Category.BrandCategories[0].contractAddress;
+        // setLoader(true);
+        if (!image || !price || !name || !description) return;
+        try {
+            const result = await client.add(
+                JSON.stringify({
+                    projectName,
+                    brandName,
+                    categoryName,
+                    image,
+                    name,
+                    description,
+                    price,
+                    mintedDate,
+                    metaData,
+                    proofOfAuthenticity
+                })
+            );
+            const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
+            console.log('tokenUri', tokenUri);
+            console.log('tokenId', tokenId);
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+
+            if (tokenId.length > 1) {
+                let mintedNFT = await (
+                    await nft.updateBulkUri(tokenId, tokenUri).catch((error) => {
+                        toast.error(`${error.message}`);
+                    })
+                ).wait();
+                console.log("mintedNFT",mintedNFT)
+            } else {
+                let mintedNFT = await (
+                    await nft.updateUri(tokenId, tokenUri).catch((error) => {
+                        toast.error(`${error.message}`);
+                    })
+                ).wait();
+                console.log("mintedNFT",mintedNFT)
+            }
+
+
+
+
+
+
+        } catch (error) {
+            setLoader(false);
+        }
     };
 
     return (

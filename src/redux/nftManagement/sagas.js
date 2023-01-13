@@ -46,6 +46,7 @@ function* getEditedNftDataRequest({ payload }) {
     formData.append('mintType', payload.mintType);
     formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
     formData.append('perviousUploadedItems', JSON.stringify(payload.perviousUploadedItems));
+    formData.append('brandId', JSON.stringify(payload.brandId));
     for (let i = 0; i < payload.fileArray.length; i++) {
         formData.append('fileArray', payload.fileArray[i]);
     }
