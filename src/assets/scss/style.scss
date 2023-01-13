@@ -691,6 +691,9 @@ body {
         }
     }
 }
+.categoryDialog{
+    width: 77%;
+}
 
 .responsiveSelectfield {
     @media only screen and (min-width: 320px) and (max-width: 480px) {
@@ -900,8 +903,9 @@ body {
     font-size: 26px;
 }
 .dialog {
-    width: 30%;
+    width: 27% !important;
     margin: 0 auto;
+    // border: 2px solid red;
 }
 .Nftdialog {
     width: 40%;
