@@ -26,10 +26,44 @@ import {
     ADD_DELIVERY_NFT,
     GET_NFT_BUYER,
     REQUEST_CHANGE_NFT,
-    CHANGE_TOKEN_ID
+    CHANGE_TOKEN_ID,
+    GET_EDITED_NFT_DATA
 } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
+
+function* getEditedNftDataRequest({ payload }) {
+    const formData = new FormData();
+    if (payload.isFile) {
+        formData.append('asset', payload.asset);
+    }
+    formData.append('name', payload.name);
+    formData.append('price', payload.price);
+    formData.append('currencyType', payload.currencyType);
+    formData.append('description', payload.description);
+    formData.append('quantity', payload.quantity);
+    formData.append('metaData', JSON.stringify(payload.metaDataArray));
+    formData.append('mintType', payload.mintType);
+    formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
+    formData.append('perviousUploadedItems', JSON.stringify(payload.perviousUploadedItems));
+    for (let i = 0; i < payload.fileArray.length; i++) {
+        formData.append('fileArray', payload.fileArray[i]);
+    }
+
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.put(`/nft/getUpdatedNftData/${payload.id}`, formData, headers);
+        console.log('response', response.data.data);
+        payload.handleDynamicMetaData(response.data.data);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+        // payload.setLoader(false);
+    }
+}
+
+export function* watchGetEditedNftData() {
+    yield takeLatest(GET_EDITED_NFT_DATA, getEditedNftDataRequest);
+}
 
 function* deleteNftRequest({ payload }) {
     try {
@@ -64,7 +98,7 @@ function* getAllNftSuperAdminRequest({ payload }) {
             headers
         );
         yield put(getAllNftSuccessSuperAdmin(response.data.data));
-        payload.handleClose()
+        payload.handleClose();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -104,7 +138,6 @@ export function* watchGetAllNftUser() {
 }
 
 function* editNftRequest({ payload }) {
-   
     const formData = new FormData();
     if (payload.isFile) {
         formData.append('asset', payload.asset);
@@ -192,15 +225,13 @@ function* buyNftRequest({ payload }) {
             nftToken: payload.nftToken,
             buyerAddress: payload.buyerAddress,
             contractAddress: payload.contractAddress,
-            status: 'Buy',
-            
+            status: 'Buy'
         };
 
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/users/nftOperation`, data, headers);
         yield setNotification('success', response.data.message);
-        payload.buyNftResolve()
-        
+        payload.buyNftResolve();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
         payload.setLoader(false);
@@ -215,13 +246,13 @@ function* resellNftRequest({ payload }) {
             buyerAddress: payload.buyerAddress,
             contractAddress: payload.contractAddress,
             status: 'Resell',
-            rprice : payload.rprice
+            rprice: payload.rprice
         };
 
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/users/nftOperation`, data, headers);
         yield setNotification('success', response.data.message);
-        payload.resellNftResolve()
+        payload.resellNftResolve();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
         payload.setLoader(false);
@@ -259,7 +290,7 @@ function* addDeliveryNftRequest({ payload }) {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/addDelivery`, data, headers);
         yield setNotification('success', response.data.message);
-        payload.redeemNftResolve()
+        payload.redeemNftResolve();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
         payload.setLoader(false);
@@ -290,7 +321,7 @@ function* getAllNftRequest({ payload }) {
             headers
         );
         yield put(getAllNftSuccess(response.data.data));
-        payload.handleClose()
+        payload.handleClose();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -305,7 +336,7 @@ function* requestNftForMintingRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.patch(`nft/brandAdmin/mintRequest/${payload.id}`, data, headers);
-       
+
         yield put(
             getAllNft({
                 categoryId: payload.categoryId,
@@ -324,15 +355,14 @@ function* requestNftForMintingRequest({ payload }) {
 }
 
 function* requestChangeTokenId({ payload }) {
- 
-    console.log("data from requestChangeTokenId", payload)
+    console.log('data from requestChangeTokenId', payload);
     try {
         let data = {
-            tokenId : payload.tokenId
+            tokenId: payload.tokenId
         };
-        
+
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.put(`update/nftToken/${payload.id}`,data, headers);
+        const response = yield axios.put(`update/nftToken/${payload.id}`, data, headers);
         payload.handleClose();
         yield put(
             getAllNft({
@@ -346,7 +376,7 @@ function* requestChangeTokenId({ payload }) {
         );
         yield setNotification('success', response.data.message);
     } catch (error) {
-        yield sagaErrorHandler("An error occurred");
+        yield sagaErrorHandler('An error occurred');
     }
 }
 
@@ -365,7 +395,7 @@ function* lazyMintNftRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`nft/admin/lazyMint`, data, headers);
-   
+
         yield put(
             getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
@@ -409,7 +439,7 @@ function* mintNftRequest({ payload }) {
             })
         );
         yield setNotification('success', response.data.message);
-        payload.handleClose()
+        payload.handleClose();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -461,6 +491,7 @@ export default function* nftSaga() {
         fork(watchDeleteNft),
         fork(watchRejectNft),
         fork(watchGetNftBuyer),
-        fork(watchChangeTokenId)
+        fork(watchChangeTokenId),
+        fork(watchGetEditedNftData)
     ]);
 }

@@ -18,8 +18,20 @@ import {
     GET_NFT_BUYER_SUCCESS,
     GET_NFT_BUYER,
     ADD_DELIVERY_NFT,
-    CHANGE_TOKEN_ID
+    CHANGE_TOKEN_ID,
+    GET_EDITED_NFT_DATA
+    
 } from './constants';
+
+
+export const getEditedNftData = (data) => {
+    return {
+        type: GET_EDITED_NFT_DATA,
+        payload: data
+    };
+};
+
+
 
 
 

@@ -1,18 +1,52 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
 import RejectNftDialog from './rejectNftDialog';
+import EditNftDialog from './editNftDialog';
 
 const NftCard = ({ nftData, search, page, limit, type }) => {
-
-
-    console.log("nftData", nftData)
+    console.log('nftData', nftData);
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
     const [rejectMintOpen, setRejectMintOpen] = useState(false);
+    const [editNftOpen, setEditNftOpen] = useState(false);
+    const [image, setImage] = useState([]);
+    const [nftInfo, setNftInfo] = useState({
+        id: null,
+        brandId: null,
+        nftName: '',
+        nftDescription: '',
+        nftPrice: 0,
+        mintType: 'directMint',
+        currencyType: 'USDT',
+        fieldDataArray: [],
+        fileDataArray: [],
+        images: []
+    });
+    useEffect(() => {
+        const length = nftData.asset.split('/').length;
+        setImage([
+            {
+                image: { name: nftData.asset.split('/')[length - 1] },
+                quantity: nftData.NFTTokens.length
+            }
+        ]);
+    }, [nftData]);
     return (
         <>
+            <EditNftDialog
+                nftInfo={nftInfo}
+                categoryId={nftData.Category.id}
+                type={type}
+                search={search}
+                page={page}
+                limit={limit}
+                loader={loader}
+                setLoader={setLoader}
+                open={editNftOpen}
+                setOpen={setEditNftOpen}
+            />
             <RejectNftDialog
                 nftData={nftData}
                 type={type}
@@ -35,7 +69,9 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                 open={openMint}
                 setOpen={setOpenMint}
             />
-            <MainCard className='tableShadow'
+
+            <MainCard
+                className="tableShadow"
                 content={false}
                 boxShadow
                 sx={{
@@ -83,6 +119,33 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                         </Grid>
                         <Grid item xs={6}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
+                                {nftData.status == 'MINTED' && (
+                                    <>
+                                        <Button
+                                            className="fontstyling"
+                                            variant="contained"
+                                            color="primary"
+                                            sx={{ marginRight: '5px' }}
+                                            onClick={() => {
+                                                setEditNftOpen(true);
+                                                setNftInfo({
+                                                    id: nftData.id,
+                                                    brandId: nftData.Brand.id,
+                                                    nftName: nftData.name,
+                                                    nftDescription: nftData.description,
+                                                    nftPrice: nftData.price,
+                                                    mintType: nftData.mintType,
+                                                    currencyType: nftData.currencyType,
+                                                    fieldDataArray: nftData.NFTMetaData,
+                                                    fileDataArray: nftData.NFTMetaFiles,
+                                                    images: image
+                                                });
+                                            }}
+                                        >
+                                            Edit
+                                        </Button>
+                                    </>
+                                )}
                                 {nftData.status == 'REQUESTED' && (
                                     <Button
                                         variant="contained"
@@ -96,7 +159,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                     </Button>
                                 )}
 
-                                {(nftData.status == 'REQUESTED') && (
+                                {nftData.status == 'REQUESTED' && (
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -108,7 +171,6 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                         Mint
                                     </Button>
                                 )}
-                              
                             </Stack>
                         </Grid>
                     </Grid>

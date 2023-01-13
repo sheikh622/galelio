@@ -27,7 +27,7 @@ import {
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import { editNft } from 'redux/nftManagement/actions';
+import { getEditedNftData } from 'redux/nftManagement/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import fileFill from '@iconify-icons/eva/file-fill';
@@ -36,7 +36,6 @@ import QuantitySelector from './quantitySelector';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
-import { userStory } from 'store/kanban';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const currencyTypeArray = [
@@ -53,7 +52,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [fileDataArray, setFileDataArray] = useState([]);
     const [uploadedImages, setUploadedImages] = useState([]);
-    const user = useSelector((state) => state.auth.user);
+
+ 
+
     const handleCurrencyType = (event) => {
         setCurrencyType(event.target.value);
     };
@@ -142,14 +143,14 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
 
             if (isValid) {
                 dispatch(
-                    editNft({
+                    getEditedNftData({
                         id: nftInfo.id,
                         name: values.nftName,
                         price: values.nftPrice,
                         description: values.nftDescription,
                         quantity: values.images[0].quantity,
                         asset: isFile ? values.images[0].image : null,
-                        isFile:isFile,
+                        isFile: isFile,
                         currencyType: currencyType,
                         mintType: mintType,
                         metaDataArray: fieldDataArray,
@@ -162,8 +163,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         search: search,
                         categoryId: categoryId,
                         brandId: nftInfo.brandId,
+                        handleDynamicMetaData:handleDynamicMetaData,
                         handleClose: handleClose
-                        // brandId: user.BrandId
                     })
                 );
             }
@@ -246,6 +247,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     useEffect(() => {
         console.log('fileDataArray', fileDataArray);
     }, [fileDataArray]);
+
+
+   
+
+    const handleDynamicMetaData = async(nftData) => {
+        console.log("nftData in my function",nftData)
+    };
 
     return (
         <>
