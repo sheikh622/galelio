@@ -61,9 +61,10 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                console.log(response.data.data.profileCompleted, 'response=====google');
+                console.log(data, 'response=====google');
+                
 
-                if (data) {
+                if (response.data.data.profileCompleted==true) {
                     navigate('/', {
                         state: { socal: response.data.data }
                     });
@@ -253,7 +254,8 @@ const LoginForm = ({ loginProp, ...others }) => {
 
                           <Grid
                             item
-                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
+                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', 
+                            paddingRight: '21%' }}
                         >
                             <ReactFacebookLogin
                                 appId="851727442768362"
