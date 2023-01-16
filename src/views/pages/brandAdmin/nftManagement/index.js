@@ -8,7 +8,7 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import AddNft from './component/addNft';
 import { getAllNft } from '../../../../redux/nftManagement/actions';
-import NftCard from './component/nftcard';
+import NftCard from './component/Nftcard';
 import CircularProgress from '@mui/material/CircularProgress';
 const typeArray = [
     {
