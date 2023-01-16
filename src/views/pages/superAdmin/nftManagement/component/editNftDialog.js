@@ -28,7 +28,7 @@ import { Buffer } from 'buffer';
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import { getEditedNftData } from 'redux/nftManagement/actions';
+import { getEditedNftData, updateNftDynamicMetaData } from 'redux/nftManagement/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import fileFill from '@iconify-icons/eva/file-fill';
@@ -283,10 +283,12 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         let mintedDate = new Date().valueOf();
         let categoryName = nftData.nft.Category.name;
         let brandName = nftData.nft.Brand.name;
-        let metaData = nftData.NFTMetaData;
-        let proofOfAuthenticity = nftData.NFTMetaFiles;
+        let metaData = nftData.nftMetaData;
+        let proofOfAuthenticity = nftData.nftFiles;
         let contractAddress = nftData.nft.Category.BrandCategories[0].contractAddress;
         // setLoader(true);
+        console.log('metaData', metaData);
+        console.log('proofOfAuthenticity', proofOfAuthenticity);
         if (!image || !price || !name || !description) return;
         try {
             const result = await client.add(
@@ -316,21 +318,37 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         toast.error(`${error.message}`);
                     })
                 ).wait();
-                console.log("mintedNFT",mintedNFT)
+                console.log('mintedNFT', mintedNFT);
             } else {
                 let mintedNFT = await (
                     await nft.updateUri(tokenId, tokenUri).catch((error) => {
                         toast.error(`${error.message}`);
                     })
                 ).wait();
-                console.log("mintedNFT",mintedNFT)
+                console.log('mintedNFT', mintedNFT);
             }
-
-
-
-
-
-
+            dispatch(
+                updateNftDynamicMetaData({
+                    id: nftData.nft.id,
+                    asset: image,
+                    name: name,
+                    price: price,
+                    currencyType: nftData.currencyType,
+                    description: nftData.description,
+                    quantity: nftData.quantity,
+                    mintType: nftData.mintType,
+                    metaData: metaData,
+                    metaFiles: proofOfAuthenticity,
+                    tokenUri:tokenUri,
+                    type: type,
+                    search: search,
+                    page: page,
+                    limit: limit,
+                    categoryId: nftData.nft.Category.id,
+                    brandId: nftData.nft.Brand.id,
+                    handleClose: handleClose
+                })
+            );
         } catch (error) {
             setLoader(false);
         }
