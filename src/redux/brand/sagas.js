@@ -9,7 +9,8 @@ import { setNotification } from 'shared/helperMethods/setNotification';
 function* getAllBrandsRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.get(`brand?size=${payload.limit}&page=${payload.page}&search=${payload.search}`, headers);
+        const response = yield axios.get(`brand?size=${payload.limit}&page=${payload.page}&search=${payload.search}`,
+         headers);
         yield put(getAllBrandsSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);

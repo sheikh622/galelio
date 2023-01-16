@@ -7,6 +7,7 @@ import AdminGuard from './RouteGuard/AdminGuard';
 
 
 const SubAdminDashboard = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
+const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
 const BrandCategory = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandCategory')));
@@ -28,6 +29,10 @@ const SubAdminRoutes = {
         {
             path: '/dashboard',
             element: <SubAdminDashboard />
+        },
+        {
+            path: '/ChangePassword',
+            element: <ChangePassword />
         },
 
         {
