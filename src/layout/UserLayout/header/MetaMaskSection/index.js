@@ -11,7 +11,6 @@ import { setWallet } from '../../../../redux/auth/actions';
 const MetaMaskSection = () => {
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
-    const [reload, setReload] = useState(false);
     const handleConnect = async () => {
         if (!window.ethereum) {
             dispatch({
@@ -20,29 +19,34 @@ const MetaMaskSection = () => {
                 message: 'No crypto wallet found. Please install it.',
                 variant: 'alert',
                 alertSeverity: 'info'
-            });
-            console.log('No crypto wallet found. Please install it.');
+                
+            })
+            console.log("No crypto wallet found. Please install it.")
             // toast.error('No crypto wallet found. Please install it.');
-
-            const response = await window.ethereum?.request({ method: 'eth_requestAccounts' });
-            if (response) {
-                const address = utils?.getAddress(response[0]);
-                setWalletAddress(address);
-                dispatch({
-                    type: SNACKBAR_OPEN,
-                    open: true,
-                    message: 'Success',
-                    variant: 'alert',
-                    alertSeverity: 'success'
-                });
-            } else {
-                console.log('No crypto wallet found. Please install it.');
-                // toast.error('No crypto wallet found. Please install it.');
-            }
         }
 
-      
+        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (response) {
+            const address = utils?.getAddress(response[0]);
+            setWalletAddress(address);
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Success',
+                variant: 'alert',
+                alertSeverity: 'success'
+            })
+        
+        } else {
+            console.log("No crypto wallet found. Please install it.");
+            // toast.error('No crypto wallet found. Please install it.');
+        }
     };
+
+    useEffect(() => {
+        dispatch(setWallet(walletAddress));
+    }, [walletAddress]);
+
     if (window.ethereum) {
         window.ethereum.on('accountsChanged', function (accounts) {
             // Time to reload your interface with accounts[0]!
@@ -51,13 +55,6 @@ const MetaMaskSection = () => {
         });
     }
 
-    useEffect(() => {
-        dispatch(setWallet(walletAddress));
-        handleConnect();
-    }, [dispatch, walletAddress]);
-
-    // const wa = useSelector((state) => state.auth.walletAddress);
-    // console.log('wa', wa);
     return (
         <>
             <Button
@@ -66,14 +63,9 @@ const MetaMaskSection = () => {
                     handleConnect();
                 }}
             >
-                {/* {wa ? (
-                    <>{walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}</>
-                ) : (
-                    <>{wa ? wa.slice(0, 5) + '...' + wa.slice(38, 42) : 'Connect'}</>
-                )} */}
-                {/* {wa ? wa.slice(0, 5) + '...' + wa.slice(38, 42) : 'Connect'} */}
                 {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
             </Button>
+    
         </>
     );
 };
