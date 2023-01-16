@@ -1,7 +1,7 @@
 import axios from '../../utils/axios';
-import { all, fork, put, takeLatest , select} from 'redux-saga/effects';
-import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_UP,SIGN_UP_SOCIAL , CHANGE_PASSWORD, DASHBOARD, BRAND_DASHBOARD} from './constants';
-import { loginSuccess, signupSuccess,signupsocialSuccess, setLoader, dashboardSuccess,branddashboardSuccess } from './actions';
+import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
+import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_UP, SIGN_UP_SOCIAL, CHANGE_PASSWORD, DASHBOARD, BRAND_DASHBOARD } from './constants';
+import { loginSuccess, signupSuccess, signupsocialSuccess, setLoader, dashboardSuccess, branddashboardSuccess } from './actions';
 import { makeSelectAuthToken } from 'store/Selector';
 
 import { sagaErrorHandler } from '../../shared/helperMethods/sagaErrorHandler';
@@ -17,11 +17,10 @@ function* loginUser({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
-       
-        if(response.data.data.user.role == "User"){
+
+        if (response.data.data.user.role == 'User') {
             payload.navigate('/');
-        }
-        else{
+        } else {
             payload.navigate('/dashboard');
         }
     } catch (error) {
@@ -29,17 +28,14 @@ function* loginUser({ payload }) {
         yield sagaErrorHandler(error.response.data.data);
     }
 }
-function* dashboard({ payload }) {
+function* dashboard({}) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(`/adminDashboard`, headers);
-       
+
         yield setNotification('success', response.data.message);
         yield put(dashboardSuccess(response.data.data));
-       console.log(response.data.data, 'dashboard=>>>');
-     
     } catch (error) {
-       
         yield sagaErrorHandler(error.response.data.data);
     }
 }
@@ -47,13 +43,10 @@ function* branddashboard({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(`/brandAdminDashboard/${payload.brandId}`, headers);
-       
+
         yield setNotification('success', response.data.message);
         yield put(branddashboardSuccess(response.data.data));
-       console.log(response.data.data, 'brand dashboard=>>>');
-     
     } catch (error) {
-       
         yield sagaErrorHandler(error.response.data.data);
     }
 }
@@ -69,7 +62,7 @@ function* signupUserRequest({ payload }) {
             address: payload.address
         };
         const response = yield axios.post(`/auth/signup`, data);
-      
+
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupSuccess(response.data.data));
@@ -89,7 +82,7 @@ function* signupSocialUserRequest({ payload }) {
             address: payload.address
         };
         const response = yield axios.post(`/auth/socialSignup`, data);
-      
+
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupsocialSuccess(response.data.data));
@@ -129,14 +122,13 @@ function* resetPasswordRequest({ payload }) {
 }
 function* changePasswordRequest({ payload }) {
     let data = {
-        newPassword: payload.newPassword, 
-        currentPassword: payload.currentPassword, 
-        // token: payload.token
+        newPassword: payload.newPassword,
+        currentPassword: payload.currentPassword
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-       
-        const response = yield axios.put(`auth/changePassword`, data , headers);
+
+        const response = yield axios.put(`auth/changePassword`, data, headers);
         yield setNotification('success', response.data.message);
         payload.navigate('/dashboard');
     } catch (error) {
@@ -172,11 +164,14 @@ export function* watchchangePassword() {
 }
 
 export default function* authSaga() {
-    yield all([fork(watchLogin), fork(watchForgot), fork(watchReset), 
+    yield all([
+        fork(watchLogin),
+        fork(watchForgot),
+        fork(watchReset),
         fork(watchSignup),
         fork(watchSocialSignup),
         fork(watchchangePassword),
         fork(watchDashboard),
-        fork(watchBrandDashboard),
+        fork(watchBrandDashboard)
     ]);
 }
