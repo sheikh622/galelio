@@ -39,7 +39,7 @@ const LoginForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
 
     const loader = useSelector((state) => state.auth.loader);
-    const auth = useSelector((state) => state.auth);
+   
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
