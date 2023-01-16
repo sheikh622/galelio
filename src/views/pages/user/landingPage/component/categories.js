@@ -100,6 +100,7 @@ const Categories = ({ categories }) => {
                                 {categories?.map((item) => (
                                     <>
                                         <Grid
+                                       
                                             sx={{
                                                 my: { xs: '10px', md: '0', sm: '10px' },
                                                 ml: {
@@ -119,13 +120,14 @@ const Categories = ({ categories }) => {
                                             lg={categories && categories?.length > 5 ? 12 : 2}
                                         >
                                             <Card
+                                         
                                                 sx={{
                                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                                                    width: categories && categories?.length > 5 ? '100%' : { lg: '220px' },
-
-                                                    boxShadow: '1px 2px 6px #d3d3d3',
-                                                    borderRadius: '7px'
+                                                    width: categories && categories?.length > 5 ? '100%' : 
+                                                    { lg: '220px' }, boxShadow: '1px 2px 6px #d3d3d3',
+                                                    borderRadius: '7px',
+                                                    
                                                 }}
                                                 onClick={() => {
                                                     navigate('/marketplace', {

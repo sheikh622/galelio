@@ -46,6 +46,8 @@ import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
+    const userData = useSelector((state) => state.auth);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [sdm, setSdm] = useState(true);
@@ -256,6 +258,31 @@ const ProfileSection = () => {
                                                     }
                                                 }}
                                             >
+                                            {userData.user && userData.user.role == 'Admin' &&
+                                            <ListItemButton
+                                            sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                            selected={selectedIndex === 0}
+                                            onClick={(event) => handleListItemClick(event, 0, '/ChangePassword')}
+                                        >
+                                            <ListItemIcon>
+                                                <IconSettings stroke={1.5} size="1.3rem" />
+                                            </ListItemIcon>
+                                            <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
+                                        </ListItemButton>
+                                     }
+                                            {userData.user && userData.user.role == 'Brand Admin' &&
+                                            <ListItemButton
+                                            sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                            selected={selectedIndex === 0}
+                                            onClick={(event) => handleListItemClick(event, 0, '/ChangePassword')}
+                                        >
+                                            <ListItemIcon>
+                                                <IconSettings stroke={1.5} size="1.3rem" />
+                                            </ListItemIcon>
+                                            <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
+                                        </ListItemButton>
+                                     }
+                                          
                                                 {/* <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                     selected={selectedIndex === 0}
