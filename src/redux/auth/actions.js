@@ -2,7 +2,7 @@ import { LOGIN, LOGIN_SUCCESS
     ,SIGN_UP,SIGN_UP_SUCCESS, 
     SIGN_UP_SOCIAL,SIGN_UP_SOCIAL_SUCCESS, 
     LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD, 
-    SET_WALLET_ADDRESS, SET_LOADER } from './constants';
+    SET_WALLET_ADDRESS, SET_LOADER, CHANGE_PASSWORD, DASHBOARD, DASHBOARD_SUCCESS, BRAND_DASHBOARD, BRAND_DASHBOARD_SUCCESS } from './constants';
 
 
 
@@ -16,6 +16,32 @@ export const login = (data) => {
 export const loginSuccess = (data) => {
     return {
         type: LOGIN_SUCCESS,
+        payload: data
+    };
+};
+export const dashboard = (data) => {
+    return {
+        type: DASHBOARD,
+        payload: data
+    };
+};
+
+export const dashboardSuccess = (data) => {
+    return {
+        type: DASHBOARD_SUCCESS,
+        payload: data
+    };
+};
+export const branddashboard = (data) => {
+    return {
+        type: BRAND_DASHBOARD,
+        payload: data
+    };
+};
+
+export const branddashboardSuccess = (data) => {
+    return {
+        type: BRAND_DASHBOARD_SUCCESS,
         payload: data
     };
 };
@@ -70,6 +96,12 @@ export const forgotPassword = (data) => {
 export const resetPassword = (data) => {
     return {
         type: RESET_PASSWORD,
+        payload: data
+    };
+};
+export const changePassword = (data) => {
+    return {
+        type: CHANGE_PASSWORD,
         payload: data
     };
 };

@@ -1,7 +1,9 @@
 import axios from '../../utils/axios';
-import { all, fork, put, takeLatest } from 'redux-saga/effects';
-import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_UP,SIGN_UP_SOCIAL } from './constants';
-import { loginSuccess, signupSuccess,signupsocialSuccess, setLoader } from './actions';
+import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
+import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_UP, SIGN_UP_SOCIAL, CHANGE_PASSWORD, DASHBOARD, BRAND_DASHBOARD } from './constants';
+import { loginSuccess, signupSuccess, signupsocialSuccess, setLoader, dashboardSuccess, branddashboardSuccess } from './actions';
+import { makeSelectAuthToken } from 'store/Selector';
+
 import { sagaErrorHandler } from '../../shared/helperMethods/sagaErrorHandler';
 import { setNotification } from '../../shared/helperMethods/setNotification';
 
@@ -15,15 +17,36 @@ function* loginUser({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
-       
-        if(response.data.data.user.role == "User"){
+
+        if (response.data.data.user.role == 'User') {
             payload.navigate('/');
-        }
-        else{
+        } else {
             payload.navigate('/dashboard');
         }
     } catch (error) {
         yield put(setLoader(false));
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+function* dashboard({}) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.get(`/adminDashboard`, headers);
+
+        yield setNotification('success', response.data.message);
+        yield put(dashboardSuccess(response.data.data));
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+function* branddashboard({ payload }) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.get(`/brandAdminDashboard/${payload.brandId}`, headers);
+
+        yield setNotification('success', response.data.message);
+        yield put(branddashboardSuccess(response.data.data));
+    } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
 }
@@ -39,7 +62,7 @@ function* signupUserRequest({ payload }) {
             address: payload.address
         };
         const response = yield axios.post(`/auth/signup`, data);
-      
+
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupSuccess(response.data.data));
@@ -59,7 +82,7 @@ function* signupSocialUserRequest({ payload }) {
             address: payload.address
         };
         const response = yield axios.post(`/auth/socialSignup`, data);
-      
+
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupsocialSuccess(response.data.data));
@@ -97,9 +120,30 @@ function* resetPasswordRequest({ payload }) {
         yield sagaErrorHandler(error.response.data.data);
     }
 }
+function* changePasswordRequest({ payload }) {
+    let data = {
+        newPassword: payload.newPassword,
+        currentPassword: payload.currentPassword
+    };
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+
+        const response = yield axios.put(`auth/changePassword`, data, headers);
+        yield setNotification('success', response.data.message);
+        payload.navigate('/dashboard');
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
 
 export function* watchLogin() {
     yield takeLatest(LOGIN, loginUser);
+}
+export function* watchDashboard() {
+    yield takeLatest(DASHBOARD, dashboard);
+}
+export function* watchBrandDashboard() {
+    yield takeLatest(BRAND_DASHBOARD, branddashboard);
 }
 
 export function* watchSignup() {
@@ -115,10 +159,19 @@ export function* watchForgot() {
 export function* watchReset() {
     yield takeLatest(RESET_PASSWORD, resetPasswordRequest);
 }
+export function* watchchangePassword() {
+    yield takeLatest(CHANGE_PASSWORD, changePasswordRequest);
+}
 
 export default function* authSaga() {
-    yield all([fork(watchLogin), fork(watchForgot), fork(watchReset), 
+    yield all([
+        fork(watchLogin),
+        fork(watchForgot),
+        fork(watchReset),
         fork(watchSignup),
         fork(watchSocialSignup),
+        fork(watchchangePassword),
+        fork(watchDashboard),
+        fork(watchBrandDashboard)
     ]);
 }
