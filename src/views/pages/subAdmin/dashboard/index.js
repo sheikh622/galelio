@@ -12,7 +12,6 @@ const Dashboard = () => {
     const dispatch = useDispatch();
 
     const dashboardAdmin = useSelector((state) => state.auth.dahboardUser);
-    console.log(dashboardAdmin, 'dashboard data')
     useEffect(() => {
         dispatch(
             dashboard({

@@ -61,7 +61,6 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                console.log(data, 'response=====google');
                 
 
                 if (!response.data.data.profileCompleted) {

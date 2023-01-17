@@ -33,7 +33,6 @@ function* dashboard({}) {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(`/adminDashboard`, headers);
 
-        yield setNotification('success', response.data.message);
         yield put(dashboardSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -44,7 +43,6 @@ function* branddashboard({ payload }) {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(`/brandAdminDashboard/${payload.brandId}`, headers);
 
-        yield setNotification('success', response.data.message);
         yield put(branddashboardSuccess(response.data.data));
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);

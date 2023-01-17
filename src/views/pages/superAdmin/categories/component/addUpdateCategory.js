@@ -157,7 +157,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 <DialogActions sx={{ display: 'block' }}>
                     <AnimateButton>
                         <Button
-                        sx={{ my: 1, ml: 2,  padding: {md:'6px 150px', lg:'6px 140px'} }}
+                        sx={{ my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'} }}
                         className="buttons"
                             variant="contained"
                           
@@ -173,7 +173,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                         <Button
                         className="buttons"
                             variant="contained"
-                            sx={{my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'}, color: '#fff' }}
+                            sx={{my: 1, ml: 0,  padding: {md:'6px 124px', lg:'6px 124px'}, color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

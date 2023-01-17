@@ -3,7 +3,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { FormattedMessage } from 'react-intl';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 // assets
-import image from 'assets/images/IconUserCheck.png';
 import {
     IconDashboard,
     IconCheckbox,
@@ -33,7 +32,6 @@ const icons = {
     DashboardIcon,
     AccountCircleIcon
 };
-import GridViewIcon from '@mui/icons-material/GridView';
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -48,7 +46,7 @@ const superAdminMenu = {
             type: 'item',
             url: '/dashboard',
             icon: icons.DashboardIcon,
-            
+
             breadcrumbs: false
         },
 
@@ -76,8 +74,7 @@ const superAdminMenu = {
             icon: icons.IconBuildingStore,
             url: '/brands',
             breadcrumbs: false
-        },
-       
+        }
     ]
 };
 

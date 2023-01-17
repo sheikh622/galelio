@@ -5,7 +5,8 @@ import {
     UPDATE_SUBADMIN,
     DELETE_SUBADMIN,
     CHANGE_SUBADMIN_STATUS,
-    CHANGE_SUBADMIN_MINTING_ACCESS
+    CHANGE_SUBADMIN_MINTING_ACCESS,
+    CHANGE_ROLE
 } from './constants';
 
 // Admin
@@ -47,6 +48,12 @@ export const deleteSubAdmin = (data) => {
 export const changeSubAdminStatus = (data) => {
     return {
         type: CHANGE_SUBADMIN_STATUS,
+        payload: data
+    };
+};
+export const changeRole = (data) => {
+    return {
+        type: CHANGE_ROLE,
         payload: data
     };
 };
