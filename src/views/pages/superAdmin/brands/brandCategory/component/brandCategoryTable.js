@@ -15,7 +15,8 @@ import {
     Button,
     TableRow,
     Tooltip,
-    Stack
+    Stack,
+    CircularProgress
 } from '@mui/material';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -69,6 +70,12 @@ const BrandCategoryTable = ({
                 search={search}
                 brandCategoryData={brandCategoryData}
             />
+            {brandCategoriesList.brandCategories == undefined ? (
+                <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
+            <Grid item>
+        <CircularProgress disableShrink size={'4rem'} />
+    </Grid>
+            </Grid>):(<>
             {brandCategoriesList.brandCategories != undefined && brandCategoriesList.count > 0 ? (
             <Table>
                 <TableHead>
@@ -191,10 +198,12 @@ const BrandCategoryTable = ({
                 <>
                   
                     <Grid item>
-                        <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}> No Data Available</Typography>
+                        <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', 
+                        fontWeight: '500' }}> No Data Available</Typography>
                     </Grid>
                 </>
             )}
+            </>)}
         </TableContainer>
     );
 };
