@@ -2,11 +2,13 @@ import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, DialogContentText, Typography } from '@mui/material';
-import { deleteSubAdmin } from 'redux/subAdmin/actions';
+import { changeRole } from 'redux/subAdmin/actions';
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function DeleteSubAdminDialog({ open, setOpen, page, limit, search, subAdminData , setSubAdminData}) {
+export default function ChangeRoleDialog({ open, setOpen, page, limit, search, subAdminData, setSubAdminData }) {
     const theme = useTheme();
     const dispatch = useDispatch();
+    console.log(subAdminData, 'subAdminData');
     const handleClose = () => {
         setOpen(false);
         setSubAdminData({ id: null,
@@ -18,7 +20,6 @@ export default function DeleteSubAdminDialog({ open, setOpen, page, limit, searc
             role:'',
             isActive:'',
             walletAddress:''});
-
     };
 
     return (
@@ -31,12 +32,16 @@ export default function DeleteSubAdminDialog({ open, setOpen, page, limit, searc
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1"  className="statusHeading">Delete Subadmin</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title1" className="statusHeading">
+                    Change Role
+                </DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span" className="statustypo">
-                            Are you sure you want to delete this Subadmin?
+                            {subAdminData.role == 'User'
+                                ? 'Are you sure you want to change the role of User?'
+                                : 'Are you sure you want to change the role of Admin?'}
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
@@ -44,16 +49,20 @@ export default function DeleteSubAdminDialog({ open, setOpen, page, limit, searc
                     <Button
                         sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
-                        color="secondary"  className='buttonSize' size='large' 
+                        className="buttonSize"
+                        size="large"
+                        color="secondary"
                     >
                         No
                     </Button>
                     <Button
                         variant="contained"
-                        className='buttonSize' size='large' 
+                        className="buttonSize"
+                        size="large"
+                       
                         onClick={() => {
                             dispatch(
-                                deleteSubAdmin({
+                                changeRole({
                                     id: subAdminData.id,
                                     page: page,
                                     limit: limit,

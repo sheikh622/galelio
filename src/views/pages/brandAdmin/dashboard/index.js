@@ -12,14 +12,12 @@ const Dashboard = () => {
     const dispatch = useDispatch();
 
     const brandId = useSelector((state) => state.auth.user.BrandId);
-    // console.log(brandId, 'brand id');
 
     const dashboardBrandadmin = useSelector((state) => state.auth.branddahboardUser);
-    console.log(dashboardBrandadmin, 'brand dashboard data')
     useEffect(() => {
         dispatch(
             branddashboard({
-               brandId: brandId
+                brandId: brandId
             })
         );
     }, []);
@@ -28,24 +26,34 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={3} md={6} sm={6} xs={12}>
-                        <UserCountCard primary="Total Brand Categories" 
-                        secondary={dashboardBrandadmin.totalBrandCategories} 
-                        color={theme.palette.primary.main} />
+                        <UserCountCard
+                            primary="Total Brand Categories"
+                            secondary={dashboardBrandadmin.totalBrandCategories}
+                            color={theme.palette.primary.main}
+                        />
                     </Grid>
 
                     <Grid item lg={3} md={6} sm={6} xs={12}>
-                        <UserCountCard primary="Total Nfts" secondary={dashboardBrandadmin.totalNfts} 
-                        color={theme.palette.secondary.main} />
+                        <UserCountCard
+                            primary="Total Nfts"
+                            secondary={dashboardBrandadmin.totalNfts}
+                            color={theme.palette.secondary.main}
+                        />
                     </Grid>
                     <Grid item lg={3} md={6} sm={6} xs={12}>
-                        <UserCountCard primary="Total Redeem Nfts"
-                         secondary={dashboardBrandadmin.redeemNfts
-                         } color={theme.palette.error.main} />
+                        <UserCountCard
+                            primary="Total Redeem Nfts"
+                            secondary={dashboardBrandadmin.redeemNfts}
+                            color={theme.palette.error.main}
+                        />
                     </Grid>
 
                     <Grid item lg={3} md={6} sm={6} xs={12}>
-                        <UserCountCard primary="Total Sold Nfts" secondary={dashboardBrandadmin.soldNfts} 
-                        color={theme.palette.success.main} />
+                        <UserCountCard
+                            primary="Total Sold Nfts"
+                            secondary={dashboardBrandadmin.soldNfts}
+                            color={theme.palette.success.main}
+                        />
                     </Grid>
                 </Grid>
             </Grid>
