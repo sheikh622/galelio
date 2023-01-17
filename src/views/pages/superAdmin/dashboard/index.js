@@ -11,14 +11,14 @@ const Dashboard = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
-    const dashboardAdmin = useSelector((state) => state.auth.dahboardUser);
     useEffect(() => {
         dispatch(
             dashboard({
-               
+                
             })
-        );
-    }, []);
+            );
+        }, []);
+        const dashboardAdmin = useSelector((state) => state.auth.dahboardUser);
     return (
         <Grid container spacing={gridSpacing}>
         <Grid item xs={12}>

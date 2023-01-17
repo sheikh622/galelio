@@ -45,6 +45,7 @@ const MetaMaskSection = () => {
 
     useEffect(() => {
         dispatch(setWallet(walletAddress));
+        handleConnect();    
     }, [walletAddress]);
 
     if (window.ethereum) {

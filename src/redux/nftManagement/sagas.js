@@ -393,8 +393,8 @@ function* requestNftForMintingRequest({ payload }) {
                 brandId: payload.brandId
             })
         );
-        payload.handleClose();
         yield setNotification('success', response.data.message);
+        payload.handleClose();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

@@ -29,7 +29,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
     const user = useSelector((state) => state.auth.user);
 
     const handleMintRequest = async () => {
-        setLoader(true);
+        try{
+            setLoader(true);
         console.log('nftData', nftData);
         let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
         let quant = nftData.NFTTokens.length;
@@ -52,7 +53,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
         let data = await (await token.transfer(ownerAddress, prices)).wait();
         console.log('data', data);
 
-        dispatch(
+        await dispatch(
             requestNftForMinting({
                 id: nftData.id,
                 categoryId: categoryId,
@@ -65,6 +66,11 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
             })
         );
         setLoader(false);
+        }
+        catch(error){
+            console.log('error', error);
+        }
+        
     };
     return (
         <>
@@ -86,9 +92,9 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
-                    {/* {loader ?
+                    {loader ?
                < CircularProgress/>
-               : */}
+               :
                     <>
                         <Button
                             sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
@@ -108,7 +114,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                         </Button>
                     </>
 
-                    {/* } */}
+                     } 
                 </DialogActions>
             </Dialog>
         </>
