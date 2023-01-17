@@ -98,13 +98,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                 search={search}
                 subAdminData={subAdminData}
             />
-            {subAdminList.admins == undefined && (subAdminList.count == 0 || undefined) ? (
-                <>
-                    <Grid item>
-                        <CircularProgress disableShrink size={'4rem'} />
-                    </Grid>
-                </>
-            ) : (
+            {subAdminList?.admins != undefined ? (
                 <>
                     {subAdminList?.count > 0 ? (
                         <Table>
@@ -313,7 +307,14 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                         </>
                     )}
                 </>
-            )}
+            )
+        :(
+            <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
+                        <Grid item>
+                    <CircularProgress disableShrink size={'4rem'} />
+                </Grid>
+                        </Grid>
+        )}
         </TableContainer>
     );
 };
