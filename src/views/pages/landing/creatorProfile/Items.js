@@ -130,7 +130,8 @@ const Items = () => {
 
             <Grid mt={4} item xs={12}>
                 <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    {nfts?.map((data) => (
+                {nfts.length > 0? (<>
+                    {nfts?.map((data) => ( 
                         <Grid item md={2} sm={6} onClick={()=>{
                             navigate('/productDetails', {
                                 state: {
@@ -171,8 +172,21 @@ const Items = () => {
                                     </CardContent>
                                 </CardActionArea>
                             </Card>
+
                         </Grid>
                     ))}
+                    </> ):(
+                        <Grid item xs={12}>
+                        <Typography
+                            variant="h3"
+                            mt={1}
+                            component="div"
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' , color:'gray' }, textTransform: 'capitalize' }}
+                        >
+                         No bought nfts found..!
+                        </Typography>
+                    </Grid>
+                    )}
                 </Grid>
             </Grid>
         </Grid>

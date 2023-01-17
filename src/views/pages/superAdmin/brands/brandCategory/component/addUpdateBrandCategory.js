@@ -142,7 +142,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 aria-describedby="alert-dialog-slide-description1"
             >
                 <DialogTitle id="form-dialog-title" className="assignheading">
-                    {!isUpdate ? 'Assign Category ' : ' Update Profit percentage '}
+                    {!isUpdate ? 'Assign Category ' : ' Update Profit '}
                 </DialogTitle>
                 <Divider />
                 <DialogContent>
@@ -198,7 +198,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         <Button
                             variant="contained"
                             className="buttons"
-                            sx={{ my: 3, ml: 1, my: 1, ml: 2, padding: { md: '6px 140px', lg: '6px 140px' } }}
+                            sx={{ my: 3, ml: 1, my: 1, ml: 1, padding: { md: '6px 124px', lg: '6px 124px' } }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -213,7 +213,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         <Button
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 1, padding: { md: '6px 140px', lg: '6px 140px' }, color: '#fff' }}
+                            sx={{ my: 1, ml: 0, padding: { md: '6px 124px', lg: '6px 124px' }, color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

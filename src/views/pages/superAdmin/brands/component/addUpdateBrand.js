@@ -174,7 +174,7 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                             type="submit"
                             className='buttons' size='large' 
                             variant="contained"
-                            sx={{ my: 1, ml: 2,  padding: {md:'6px 150px', lg:'6px 140px'} }}
+                            sx={{ my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'} }}
                             onClick={() => {
                                 formik.handleSubmit();
                             }}
@@ -187,7 +187,7 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                     <AnimateButton>
                         <Button
                             variant="contained"
-                            sx={{ my: 1, ml: 1,  padding: {md:'6px 150px', lg:'6px 140px'} , color: '#fff' }}
+                            sx={{ my: 1, ml: 0,  padding: {md:'6px 124px', lg:'6px 124px'} , color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             className='buttons' size='large' 
