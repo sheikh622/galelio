@@ -239,7 +239,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
 
-                          {subAdminData.id == null && 
+                          {subAdminData?.id == null && 
                             <Grid item xs={6} md={12} lg={12} pt={2}>
                             {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
                             <TextField 
