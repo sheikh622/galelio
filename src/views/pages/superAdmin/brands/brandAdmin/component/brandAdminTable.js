@@ -14,7 +14,8 @@ import {
     Button,
     TableRow,
     Tooltip,
-    Stack
+    Stack,
+    CircularProgress 
 } from '@mui/material';
 import DeleteBrandAdminDialog from './deleteBrandAdminDialog';
 import Chip from 'ui-component/extended/Chip';
@@ -68,198 +69,202 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                 search={search}
                 brandAdminData={brandAdminData}
             />
-
-            {brandAdminList.admins != undefined && brandAdminList.count > 0 ? (
-            <Table>
-                <TableHead>
-                <TableRow>
-                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}></TableCell>
-                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                    First Name
-                </TableCell>
-                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                    Last Name
-                </TableCell>
-                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                    Email
-                </TableCell>
-                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                    Status
-                </TableCell>
-                <TableCell align="center" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                    Actions
-                </TableCell>
-            </TableRow>
-                </TableHead>
-                    <TableBody sx={{ padding: '10px' }}>
-                        {brandAdminList.admins != undefined &&
-                            brandAdminList.admins.map((row, index) => (
-                                <>
-                                    <TableRow>
-                                    <TableCell
-                                    align="left"
-                                    className="tableName"
-                                    sx={{ textTransform: 'capitalize' }}
-                                ></TableCell>
-                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
-                                    {row.firstName}
-                                </TableCell>
-                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
-                                    {row.lastName}
-                                </TableCell>
-                                <TableCell align="left" className="tableName">
-                                    {row.email}
-                                </TableCell>
-
-                                <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                                    {row.isActive == false ? (
-                                        <Chip label="Blocked" size="small" chipcolor="orange" />
-                                    ) : (
-                                        <Chip label="Unblocked" size="small" chipcolor="success" />
-                                    )}
-                                </TableCell>
-                                <TableCell align="center" sx={{ borderBottom: 'none' }}>
-                                <Stack direction="row" justifyContent="center" alignItems="center">
-                                    <Tooltip placement="top" title="Change Status">
-                                    <IconButton
-                                   className='color'
-                                    aria-label="Edit"
-                                    size="large"
-                                    onClick={() => {
-                                        setChangeStatusOpen(true);
-                                        setBrandAdminData({
-                                            id: row.id,
-                                            brandId: row.BrandId,
-                                            isActive: row.isActive
-                                        });
-                                    }}
-                                >
-                                  <BlockIcon  sx={{ fontSize: '1.5rem' }} />
-                                </IconButton>
-                                    </Tooltip>
-                                 
-
-                                    <Tooltip placement="top" title="Edit">
-                                        <IconButton
-                                        className='color'
-
-                                            aria-label="Edit"
-                                            size="large"
-                                            onClick={() => {
-                                                setAddUpdateOpen(true);
-                                                setBrandAdminData({
-                                                    id: row.id,
-                                                    brandId: row.BrandId,
-                                                    firstName: row.firstName,
-                                                    lastName: row.lastName,
-                                                    adminEmail: row.email,
-                                                    adminPassword: ''
-                                                });
-                                            }}
-                                        >
-                                          <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Tooltip placement="top" title="Delete">
-                                        <IconButton
-                                            color="primary"
-                                            sx={{
-                                                color: theme.palette.orange.dark,
-                                                borderColor: theme.palette.orange.main,
-                                                '&:hover ': { background: theme.palette.orange.light }
-                                            }}
-                                            size="large"
-                                            onClick={() => {
-                                                setDeleteOpen(true);
-                                                setBrandAdminData({
-                                                    id: row.id,
-                                                    brandId: row.BrandId
-                                                });
-                                            }}
-                                        >
-                                            <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                        </IconButton>
-                                    </Tooltip>
-                                </Stack>
-                            </TableCell>
-                            <TableCell
-                                align="left"
-                                className="tableName"
-                                sx={{ textTransform: 'capitalize' }}
-                            ></TableCell>
-
-                                    </TableRow>
-                                    <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
-                                        <TableCell sx={{ pl: 12 }} colSpan={12}>
-                                            <div>
-                                                <Grid container spacing={4}>
-                                                    <Grid item xs={4} md={4}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setAddUpdateOpen(true);
-                                                                setBrandAdminData({
-                                                                    id: row.id,
-                                                                    brandId: row.BrandId,
-                                                                    firstName: row.firstName,
-                                                                    lastName: row.lastName,
-                                                                    adminEmail: row.email,
-                                                                    adminPassword: ''
-                                                                });
-                                                            }}
-                                                        >
-                                                            Edit
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item xs={4} md={4}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setDeleteOpen(true);
-                                                                setBrandAdminData({
-                                                                    id: row.id,
-                                                                    brandId: row.BrandId
-                                                                });
-                                                            }}
-                                                        >
-                                                            Delete
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item xs={4} md={4}>
-                                                        <Button
-                                                            variant="outlined"
-                                                            size="large"
-                                                            onClick={() => {
-                                                                setChangeStatusOpen(true);
-                                                                setBrandAdminData({
-                                                                    id: row.id,
-                                                                    brandId: row.BrandId,
-                                                                    isActive: row.isActive
-                                                                });
-                                                            }}
-                                                        >
-                                                            Change Status
-                                                        </Button>
-                                                    </Grid>
-                                                </Grid>
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
-                                </>
-                            ))}
-                    </TableBody>
-              
-            </Table>
+            {brandAdminList?.admins == undefined ? (
+                <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto ' }}>
+                    <Grid item>
+                        <CircularProgress disableShrink size={'4rem'} />
+                    </Grid>
+                </Grid>
             ) : (
                 <>
-                  
-                      
-                <Grid item>
-                <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}>
-                 No Data Available</Typography>
-            </Grid>
+                    {brandAdminList.count > 0 ? (
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}></TableCell>
+                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        First Name
+                                    </TableCell>
+                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Last Name
+                                    </TableCell>
+                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Email
+                                    </TableCell>
+                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Status
+                                    </TableCell>
+                                    <TableCell align="center" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Actions
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody sx={{ padding: '10px' }}>
+                                {brandAdminList.admins != undefined &&
+                                    brandAdminList.admins.map((row, index) => (
+                                        <>
+                                            <TableRow>
+                                                <TableCell
+                                                    align="left"
+                                                    className="tableName"
+                                                    sx={{ textTransform: 'capitalize' }}
+                                                ></TableCell>
+                                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
+                                                    {row.firstName}
+                                                </TableCell>
+                                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
+                                                    {row.lastName}
+                                                </TableCell>
+                                                <TableCell align="left" className="tableName">
+                                                    {row.email}
+                                                </TableCell>
+
+                                                <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                                                    {row.isActive == false ? (
+                                                        <Chip label="Blocked" size="small" chipcolor="orange" />
+                                                    ) : (
+                                                        <Chip label="Unblocked" size="small" chipcolor="success" />
+                                                    )}
+                                                </TableCell>
+                                                <TableCell align="center" sx={{ borderBottom: 'none' }}>
+                                                    <Stack direction="row" justifyContent="center" alignItems="center">
+                                                        <Tooltip placement="top" title="Change Status">
+                                                            <IconButton
+                                                                className="color"
+                                                                aria-label="Edit"
+                                                                size="large"
+                                                                onClick={() => {
+                                                                    setChangeStatusOpen(true);
+                                                                    setBrandAdminData({
+                                                                        id: row.id,
+                                                                        brandId: row.BrandId,
+                                                                        isActive: row.isActive
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <BlockIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </IconButton>
+                                                        </Tooltip>
+
+                                                        <Tooltip placement="top" title="Edit">
+                                                            <IconButton
+                                                                className="color"
+                                                                aria-label="Edit"
+                                                                size="large"
+                                                                onClick={() => {
+                                                                    setAddUpdateOpen(true);
+                                                                    setBrandAdminData({
+                                                                        id: row.id,
+                                                                        brandId: row.BrandId,
+                                                                        firstName: row.firstName,
+                                                                        lastName: row.lastName,
+                                                                        adminEmail: row.email,
+                                                                        adminPassword: ''
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                        <Tooltip placement="top" title="Delete">
+                                                            <IconButton
+                                                                color="primary"
+                                                                sx={{
+                                                                    color: theme.palette.orange.dark,
+                                                                    borderColor: theme.palette.orange.main,
+                                                                    '&:hover ': { background: theme.palette.orange.light }
+                                                                }}
+                                                                size="large"
+                                                                onClick={() => {
+                                                                    setDeleteOpen(true);
+                                                                    setBrandAdminData({
+                                                                        id: row.id,
+                                                                        brandId: row.BrandId
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </Stack>
+                                                </TableCell>
+                                                <TableCell
+                                                    align="left"
+                                                    className="tableName"
+                                                    sx={{ textTransform: 'capitalize' }}
+                                                ></TableCell>
+                                            </TableRow>
+                                            <TableRow style={{ display: detailId !== row.id ? 'none' : '' }}>
+                                                <TableCell sx={{ pl: 12 }} colSpan={12}>
+                                                    <div>
+                                                        <Grid container spacing={4}>
+                                                            <Grid item xs={4} md={4}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    size="large"
+                                                                    onClick={() => {
+                                                                        setAddUpdateOpen(true);
+                                                                        setBrandAdminData({
+                                                                            id: row.id,
+                                                                            brandId: row.BrandId,
+                                                                            firstName: row.firstName,
+                                                                            lastName: row.lastName,
+                                                                            adminEmail: row.email,
+                                                                            adminPassword: ''
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Edit
+                                                                </Button>
+                                                            </Grid>
+                                                            <Grid item xs={4} md={4}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    size="large"
+                                                                    onClick={() => {
+                                                                        setDeleteOpen(true);
+                                                                        setBrandAdminData({
+                                                                            id: row.id,
+                                                                            brandId: row.BrandId
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Delete
+                                                                </Button>
+                                                            </Grid>
+                                                            <Grid item xs={4} md={4}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    size="large"
+                                                                    onClick={() => {
+                                                                        setChangeStatusOpen(true);
+                                                                        setBrandAdminData({
+                                                                            id: row.id,
+                                                                            brandId: row.BrandId,
+                                                                            isActive: row.isActive
+                                                                        });
+                                                                    }}
+                                                                >
+                                                                    Change Status
+                                                                </Button>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </div>
+                                                </TableCell>
+                                            </TableRow>
+                                        </>
+                                    ))}
+                            </TableBody>
+                        </Table>
+                    ) : (
+                        <>
+                            <Grid item>
+                                <Typography className="statustypo" style={{ padding: '20px 20px 20px 70px', fontWeight: '500' }}>
+                                    No Data Available
+                                </Typography>
+                            </Grid>
+                        </>
+                    )}
                 </>
             )}
         </TableContainer>
