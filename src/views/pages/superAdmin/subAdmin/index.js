@@ -23,9 +23,12 @@ const SubAdmin = () => {
         id: null,
         firstName: '',
         lastName: '',
-        subAdminEmail: '',
-        subAdminPassword: '',
-        walletAddress:""
+        adminEmail: '',
+        adminPassword: '',
+        walletAddress: '',
+        role: '',
+        isActive: '',
+        walletAddress: ''
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -43,12 +46,9 @@ const SubAdmin = () => {
                 page: page,
                 limit: limit
             }),
-            dispatch(  getAllBrandCategoriesAdmin())
-          
+            dispatch(getAllBrandCategoriesAdmin())
         );
     }, [search, page, limit]);
-
-    
 
     return (
         <>
@@ -62,36 +62,34 @@ const SubAdmin = () => {
             />
             <HeadingCard title="Admin Management" />
 
-
-
             <MainCard
-            className='tableShadow'
+                className="tableShadow"
                 title={
-                    <Grid container spacing={4} >
-                    <Grid item xs={6} lg={8} >
-                    <Typography className='mainheading' variant="h1" component="h2"
-                     sx={{marginLeft:{lg:'38px', md:'38px'}}}>
-                   Admins
-                  </Typography>
-                    </Grid>
-                        <Grid item xs={3} lg={2} >
-                       
-                        <OutlinedInput
-                        id="input-search-list-style1"
-                        placeholder="Search"
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <IconSearch stroke={1.5} size="1rem" />
-                            </InputAdornment>
-                        }
-                        size="small"
-                        onChange={(e) => {
-                            setSearch(e.target.value);
-                        }}
-                    />
+                    <Grid container spacing={4}>
+                        <Grid item xs={6} lg={8}>
+                            <Typography className="mainheading" variant="h1" component="h2" sx={{ marginLeft: { lg: '38px', md: '38px' } }}>
+                                Admins
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={3} lg={2}>
+                            <OutlinedInput
+                                id="input-search-list-style1"
+                                placeholder="Search"
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <IconSearch stroke={1.5} size="1rem" />
+                                    </InputAdornment>
+                                }
+                                size="small"
+                                onChange={(e) => {
+                                    setSearch(e.target.value);
+                                }}
+                            />
                         </Grid>
                         <Grid item xs={3} lg={2} textAlign="start">
-                            <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
+                            <Button
+                                className="buttonSize"
+                                sx={{ marginLeft: { lg: '-16px', md: '-16px' } }}
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
@@ -102,15 +100,17 @@ const SubAdmin = () => {
                                         lastName: '',
                                         adminEmail: '',
                                         adminPassword: '',
-                                        walletAddress:''
+                                        walletAddress: '',
+                                        role: '',
+                                        isActive: '',
+                                        walletAddress: ''
                                     });
                                 }}
                             >
-                            Create
+                                Create Admin
                             </Button>
                         </Grid>
                     </Grid>
-                 
                 }
                 content={false}
             >
@@ -140,7 +140,6 @@ const SubAdmin = () => {
                                     }}
                                 />
                             </Grid>
-                            
                         </Grid>
                     </Grid>
                 </>

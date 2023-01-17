@@ -10,6 +10,7 @@ import {
     UPDATE_SUBADMIN,
     DELETE_SUBADMIN,
     CHANGE_SUBADMIN_STATUS,
+    CHANGE_ROLE,
     CHANGE_SUBADMIN_MINTING_ACCESS
 } from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
@@ -131,6 +132,28 @@ function* changeSubAdminStatusRequest({ payload }) {
 export function* watchChangeSubAdminStatus() {
     yield takeLatest(CHANGE_SUBADMIN_STATUS, changeSubAdminStatusRequest);
 }
+function* changeSubadminRoleRequest({ payload }) {
+    
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.patch(`/admin/changeRole/${payload.id}`,{}, headers);
+        yield put(
+            getAllSubAdminList({
+                page: payload.page,
+                limit: payload.limit,
+                search: payload.search
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchChangeSubAdminRole() {
+    yield takeLatest(CHANGE_ROLE, changeSubadminRoleRequest);
+}
 
 function* changeSubAdminMintingAccessRequest({ payload }) {
     try {
@@ -161,6 +184,7 @@ export default function* subAdminSaga() {
         fork(watchUpdateSubAdmin),
         fork(watchDeleteSubAdmin),
         fork(watchChangeSubAdminStatus),
+        fork(watchChangeSubAdminRole),
         fork(watchChangeSubAdminMintingAccess)
     ]);
 }
