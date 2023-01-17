@@ -182,7 +182,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     };
 
     const handleLazyMint = async () => {
-        // setLoader(true);
+        setLoader(true);
         let brandId = nftData.BrandId;
         let categoryId = nftData.CategoryId;
         let nftId = nftData.id;

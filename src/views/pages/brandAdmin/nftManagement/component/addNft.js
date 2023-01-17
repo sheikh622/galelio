@@ -586,7 +586,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 <Grid container>
                     <DialogActions>
                         {loader?
-                    <CircularProgress disableShrink sx={{ml:3}}/>
+                    <CircularProgress disableShrink sx={{ml:3, mt:1}}/>
                     
                     :
 <>

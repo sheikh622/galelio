@@ -53,7 +53,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
         let data = await (await token.transfer(ownerAddress, prices)).wait();
         console.log('data', data);
 
-        await dispatch(
+         dispatch(
             requestNftForMinting({
                 id: nftData.id,
                 categoryId: categoryId,
