@@ -126,7 +126,8 @@ const NftManagement = () => {
                 title={
                     <Grid container spacing={4}>
                         <Grid item xs={6} lg={8}>
-                            <Typography className="mainheading" variant="h1" component="h2" sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
+                            <Typography className="mainheading" variant="h1" component="h2" 
+                            sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
                                 NFT Management
                             </Typography>
                         </Grid>
@@ -170,7 +171,8 @@ const NftManagement = () => {
                        { nftList.nfts.rows.length >= 0?(
                         <>
                             {' '}
-                            <Grid container spacing={gridSpacing} mt={2} sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
+                            <Grid container spacing={gridSpacing} mt={2}
+                             sx={{ marginLeft: { lg: '5px', md: '5px' } , marginRight: { lg: '25px', md: '25px' } }}>
                                 {nftList.nfts.rows &&
                                     nftList.nfts.rows.map((nft, index) => {
                                         return (
@@ -216,20 +218,13 @@ const NftManagement = () => {
                         </>
                     ) : (
                         <>
-                            <Grid item display={"flex"} justifyContent="center" sx={{width:"100%", m:5}}>
-                                <div>
-                                    <CircularProgress
-                                        disableShrink
-                                        size="5rem"
-                                        style={
-                                            {
-                                                // transitionDelay: '1000ms'
-                                            }
-                                        }
-                                    />
-                                </div>
-                            </Grid>
+                        <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
+                                <Grid item>
+                            <CircularProgress disableShrink size={'4rem'} />
+                        </Grid>
+                                </Grid>
                         </>
+                  
                     )}
                 </Grid>
             </MainCard>

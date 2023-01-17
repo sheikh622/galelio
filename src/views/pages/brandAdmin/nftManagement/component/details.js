@@ -83,20 +83,20 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
                             <Grid mt={1} item xs={12}>
                                 <Grid container justifyContent="center" 
                                  sx={{ textAlign: 'center', }}>
-                                    <Grid p={4} item lg={6} className="NFTdetails">
+                                    <Grid p={4} item md={7} lg={5} className="NFTdetails">
                                         <img src={nftData?.asset} alt="Statement Image" className="imageSize" />
                                     </Grid>
 
-                                    <Grid  mt={1} item md={6} sm={12} >
+                                    <Grid  mt={1} item md={7} lg={7} sm={12} >
                                         
                                             <Grid container justifyContent="left">
                                                 <Grid item md={12} sm={12}>
                                                     {status.map((option) => (
                                                         <Grid container spacing={2} sx={{marginLeft:{lg:'10px'}}} >
-                                                            <Grid item md={6} xs={12}>
+                                                            <Grid item md={7} xs={12}>
                                                                 <Typography
-                                                                    mt={1}
-                                                                    className="nftHead"
+                                                                    mt={1} 
+                                                                    className="nftHead "
                                                                     color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                                     variant="h3"
                                                                 >
@@ -104,10 +104,11 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
                                                                 </Typography>
                                                             </Grid>
 
-                                                            <Grid item md={6} xs={12}  className=" encap"
+                                                            <Grid item md={5} xs={12}  className=" encap"
                                                             sx={{ marginTop: '12px', textAlign: 'left' , textTransform:'' }}>
                                                                 <Typography
-                                                                    mt={1}
+                                                               
+                                                                    mt={1} 
                                                                     className="nftText encap"
                                                                     color={theme.palette.mode === 'dark' ? 'white' : '#767676'}
                                                                     variant="body"

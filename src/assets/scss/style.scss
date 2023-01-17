@@ -542,7 +542,7 @@ body {
 }
 
 .nftHead {
-    font-family: '"Poppins"';
+    font-family: 'Poppins' !important;
     font-style: normal;
     font-weight: 500;
     font-size: 21px;
@@ -551,11 +551,12 @@ body {
 }
 
 .nftText {
-    font-family: '"Poppins"';
+
+    font-family: 'Poppins' !important;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-
+color:#2f53ff !important;
     text-align: left;
 }
 
@@ -903,7 +904,7 @@ body {
     font-size: 26px;
 }
 .dialog {
-    width: 27% !important;
+    width: 90% !important;
     margin: 0 auto;
     // border: 2px solid red;
 }
@@ -1056,6 +1057,7 @@ body {
 }
 .dialog_details{
    height: 520px;
+  
 }
 .prdpadding {
     padding: 10px 8px 0 25px !important;

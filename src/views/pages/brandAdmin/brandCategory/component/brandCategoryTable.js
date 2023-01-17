@@ -75,7 +75,7 @@ const BrandCategoryTable = ({ brandCategoriesList }) => {
                                         {moment(row.updatedAt).format('DD-MMM-YYYY')}
                                     </TableCell>
 
-                                    <TableCell align="left" >
+                                    <TableCell align="left" sx={{ borderBottom: 'none' }} >
                                             <Tooltip placement="top" title="View NFT's">
                                                 <IconButton
                                                     className='color'
