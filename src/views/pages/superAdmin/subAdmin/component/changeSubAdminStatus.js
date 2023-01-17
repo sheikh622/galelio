@@ -5,12 +5,21 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Dialo
 import { changeSubAdminStatus } from 'redux/subAdmin/actions';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function ChangeSubAdminStatusDialog({ open, setOpen, page, limit, search, subAdminData }) {
+export default function ChangeSubAdminStatusDialog({ open, setOpen, page, limit, search, subAdminData , setSubAdminData}) {
     const theme = useTheme();
     const dispatch = useDispatch();
 
     const handleClose = () => {
         setOpen(false);
+        setSubAdminData({ id: null,
+            firstName: '',
+            lastName: '',
+            adminEmail: '',
+            adminPassword: '',
+            walletAddress:"",
+            role:'',
+            isActive:'',
+            walletAddress:''});
     };
 
     return (

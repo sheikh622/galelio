@@ -1,10 +1,21 @@
-import { LOGIN, LOGIN_SUCCESS
-    ,SIGN_UP,SIGN_UP_SUCCESS, 
-    SIGN_UP_SOCIAL,SIGN_UP_SOCIAL_SUCCESS, 
-    LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD, 
-    SET_WALLET_ADDRESS, SET_LOADER, CHANGE_PASSWORD, DASHBOARD, DASHBOARD_SUCCESS, BRAND_DASHBOARD, BRAND_DASHBOARD_SUCCESS } from './constants';
-
-
+import {
+    LOGIN,
+    LOGIN_SUCCESS,
+    SIGN_UP,
+    SIGN_UP_SUCCESS,
+    SIGN_UP_SOCIAL,
+    SIGN_UP_SOCIAL_SUCCESS,
+    LOGOUT,
+    FORGOT_PASSWORD,
+    RESET_PASSWORD,
+    SET_WALLET_ADDRESS,
+    SET_LOADER,
+    CHANGE_PASSWORD,
+    DASHBOARD,
+    DASHBOARD_SUCCESS,
+    BRAND_DASHBOARD,
+    BRAND_DASHBOARD_SUCCESS
+} from './constants';
 
 export const login = (data) => {
     return {
@@ -72,7 +83,6 @@ export const signupsocialSuccess = (data) => {
         payload: data
     };
 };
-
 
 export const setLoader = (data) => {
     return {

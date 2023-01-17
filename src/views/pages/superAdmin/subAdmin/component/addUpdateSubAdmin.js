@@ -22,7 +22,7 @@ import {
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, page, limit, search }) {
+export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, page, limit, search, setSubAdminData }) {
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState(false);
     const [contractAddress, setContractAddress] = useState('');
@@ -128,6 +128,15 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
     });
     const handleClose = () => {
         setOpen(false);
+        setSubAdminData({ id: null,
+            firstName: '',
+            lastName: '',
+            adminEmail: '',
+            adminPassword: '',
+            walletAddress:"",
+            role:'',
+            isActive:'',
+            walletAddress:''});
         formik.resetForm();
     };
     const { brandCategories } = useSelector((state) => state.brandCategoryReducer.brandCategoriesAdminList);
@@ -230,26 +239,28 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
 
-                                <Grid item xs={6} md={12} lg={12} pt={2}>
-                                    {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
-                                    <TextField 
-                                    variant="standard"
-                                        className="responsiveSelectfield textfieldStyle"
-                                        id="outlined-select-budget"
-                                        select
-                                        fullWidth
-                                        label="Select Category"
-                                        // value={category}
-                                        onChange={handleBrandCategoryChange}
-                                    >
-                                        <MenuItem value={0}>Choose Category (Brand)</MenuItem>
-                                        {brandCategories?.map((data, index) => (
-                                            <MenuItem key={index} value={data}>
-                                                {data.Category.name} ({data.Brand.name})
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
-                                </Grid>
+                          {subAdminData?.id == null && 
+                            <Grid item xs={6} md={12} lg={12} pt={2}>
+                            {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
+                            <TextField 
+                            variant="standard"
+                                className="responsiveSelectfield textfieldStyle"
+                                id="outlined-select-budget"
+                                select
+                                fullWidth
+                                label="Select Category"
+                                // value={category}
+                                onChange={handleBrandCategoryChange}
+                            >
+                                <MenuItem value={0}>Choose Category (Brand)</MenuItem>
+                                {brandCategories?.map((data, index) => (
+                                    <MenuItem key={index} value={data}>
+                                        {data.Category.name} ({data.Brand.name})
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </Grid>
+                    }     
                             </>
                         </Grid>
                     </form>
@@ -260,7 +271,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         <Button
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'} }}
+                            sx={{ my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'} }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -275,7 +286,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         <Button
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 0, padding: {md:'6px 140px', lg:'6px 140px'} , color: '#fff' }}
+                            sx={{ my: 1, ml: 0, padding: {md:'6px 124px', lg:'6px 124px'} , color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

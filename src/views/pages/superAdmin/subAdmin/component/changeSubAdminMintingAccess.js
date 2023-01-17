@@ -5,12 +5,21 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Dialo
 import { changeSubAdminMintingAccess } from 'redux/subAdmin/actions';
 // import NFTAbi from '../../../../../contractAbi'
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page, limit, search, subAdminData }) {
+export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page, limit, search, subAdminData , setSubAdminData}) {
     const theme = useTheme();
     const dispatch = useDispatch();
 
     const handleClose = () => {
         setOpen(false);
+        setSubAdminData({ id: null,
+            firstName: '',
+            lastName: '',
+            adminEmail: '',
+            adminPassword: '',
+            walletAddress:"",
+            role:'',
+            isActive:'',
+            walletAddress:''});
     };
 
     const handleMintRole =()=>{
