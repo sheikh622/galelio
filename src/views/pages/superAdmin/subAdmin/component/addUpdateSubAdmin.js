@@ -260,7 +260,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         <Button
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 1,  padding: {md:'6px 140px', lg:'6px 140px'} }}
+                            sx={{ my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'} }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -275,7 +275,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         <Button
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 0, padding: {md:'6px 140px', lg:'6px 140px'} , color: '#fff' }}
+                            sx={{ my: 1, ml: 0, padding: {md:'6px 124px', lg:'6px 124px'} , color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"
