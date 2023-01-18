@@ -134,7 +134,7 @@ const NftManagement = () => {
                 content={false}
             >
                 <Grid container>
-                    {nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length > 0 ? (
+                    {nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length >0 ? (
                         <>
                             {' '}
                             <Grid container spacing={gridSpacing} mt={2} sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
@@ -173,8 +173,15 @@ const NftManagement = () => {
                         </>
                     ) : (
                         <>
-                            <Grid item display={'flex'} justifyContent="center">
-                                {loader && <CircularProgress size={'5rem'} disableShrink />}
+                            <Grid item display={'flex'} justifyContent="center" sx={{width:"100%", mt:3, mb:3}}>
+                                {nftList?.nfts?.rows?.length == 0
+                                ?
+                                <>
+                                <h2>No data found</h2>
+                                </>
+                                :
+                                <CircularProgress size={'5rem'}  disableShrink  />
+                                }
                             </Grid>
                         </>
                     )}

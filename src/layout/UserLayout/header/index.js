@@ -27,7 +27,7 @@ import Drawer from '../drawer/drawer';
 import { logout } from 'redux/auth/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
-import MetaMaskSection from "./MetaMaskSection"
+import MetaMaskSection from './MetaMaskSection';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -71,7 +71,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogout = async () => {
@@ -125,10 +124,8 @@ export default function Header() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem component={RouterLink}
-           className='userName'
-             >
-            {user?.firstName} {user?.lastName}
+            <MenuItem component={RouterLink} className="userName">
+                {user?.firstName} {user?.lastName}
             </MenuItem>
             <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
                 My Profile
@@ -191,105 +188,89 @@ export default function Header() {
     const theme = useTheme();
 
     return (
-
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" 
-            sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
-                <Toolbar >
-                <Box
-                sx={{                    
-                    height: '4em',
-                    paddingTop: '1em',
-                    width: '100%',
-                    marginLeft: '2%',
-                    display: 'flex',
-                    [theme.breakpoints.down('md')]: {
-                        width: 'auto'
-                    }
-                }}
-            >
-                <Box sx={{ display: { xs: 'block', md: 'block' },  }}>
-                    <Typography variant="h6" noWrap component="div" 
-                    sx={{ marginTop:'5px', display: { xs: '', sm: 'block' } }}>
-                        {theme.palette.mode === 'dark' ? (
-                            <img src={galileoWhite} alt="Galileo White Logo" width="100" />
-                        ) : (
-                            <img src={galileo} alt="Galileo Dark Logo" width="100" />
-                        )}
-                    </Typography>
-                    
-                    </Box>
+            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
+                <Toolbar>
+                    <Box
+                        sx={{
+                            height: '4em',
+                            paddingTop: '1em',
+                            width: '100%',
+                            marginLeft: '2%',
+                            display: 'flex',
+                            [theme.breakpoints.down('md')]: {
+                                width: 'auto'
+                            }
+                        }}
+                    >
+                        <Box sx={{ display: { xs: 'block', md: 'block' } }}>
+                            <Typography variant="h6" noWrap component="div" sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
+                                {theme.palette.mode === 'dark' ? (
+                                    <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                                ) : (
+                                    <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                                )}
+                            </Typography>
+                        </Box>
 
-                 
-                    <Grid container-fluid>
-                        <Grid item sx={{ display: { lg: 'none', md: 'block' } }}>
-                            <Drawer />
+                        <Grid container-fluid>
+                            <Grid item sx={{ display: { lg: 'none', md: 'block' } }}>
+                                <Drawer />
+                            </Grid>
+
+                            <Search
+                                sx={{ width: '50rem !important', display: { xs: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
+                                className={styles.search}
+                            >
+                                <SearchIconWrapper>
+                                    <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
+                                </SearchIconWrapper>
+                                <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
+                            </Search>
                         </Grid>
 
-                        <Search
-                            sx={{ width: '50rem !important', 
-                            display: { xs: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
-                            className={styles.search}
-                        >
-                            <SearchIconWrapper>
-                                <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
-                            </SearchIconWrapper>
-                            <StyledInputBase placeholder="Search" style={{ width: '100%' }} 
-                            inputProps={{ 'aria-label': 'search' }} />
-                        </Search>
-                        
-                    </Grid>
-                    
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
-                        <div style={{marginRight:"3%"}}>
-{user  &&
-
-                    <MetaMaskSection/>
-}
-
-                        </div>
-                        <IconButton size="large" aria-label="" color="inherit">
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon sx={{ color: '#4dabf5' }} />
-                            </Badge>
-                        </IconButton>
-                        <IconButton size="large" aria-label="" color="inherit">
-                            <AccountBalanceWalletIcon sx={{ color: '#4dabf5' }} />
-                        </IconButton>
-                        <IconButton size="large" aria-label="" color="inherit">
-                            <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
-                        </IconButton>
-                    </Box>
-                    {user == null && (
-                        <Button
-                            variant="outlined"
-                            onClick={() => {
-                                navigate('/login');
-                            }}
-                        >
-                            Login
-                        </Button>
-                    )}
-                    {user !== null && (
-                        <>
-                            <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
-
-                           
-
-                            <IconButton
-                                size="large"
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
+                            <div style={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
+                            <IconButton size="large" aria-label="" color="inherit">
+                                <Badge badgeContent={17} color="error">
+                                    <NotificationsIcon sx={{ color: '#4dabf5' }} />
+                                </Badge>
                             </IconButton>
-                        </>
-                    )}
+                            <IconButton size="large" aria-label="" color="inherit">
+                                <AccountBalanceWalletIcon sx={{ color: '#4dabf5' }} />
+                            </IconButton>
+                            <IconButton size="large" aria-label="" color="inherit">
+                                <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
+                            </IconButton>
+                        </Box>
+                        {user == null && (
+                            <Button
+                                variant="outlined"
+                                onClick={() => {
+                                    navigate('/login');
+                                }}
+                            >
+                                Login
+                            </Button>
+                        )}
+                        {user !== null && (
+                            <>
+                                <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+
+                                <IconButton
+                                    size="large"
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-controls={menuId}
+                                    aria-haspopup="true"
+                                    onClick={handleProfileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <KeyboardArrowDownIcon sx={{ color: '#4dabf5' }} />
+                                </IconButton>
+                            </>
+                        )}
                     </Box>
                 </Toolbar>
             </AppBar>

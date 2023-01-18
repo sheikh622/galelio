@@ -201,7 +201,7 @@ const LoginForm = ({ loginProp, ...others }) => {
 
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
-                                {loader ? (
+                                {/* {loader ? (
                                     <Button
                                         className="signbuttonMarket"
                                         disableElevation
@@ -214,7 +214,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     >
                                         Sign in
                                     </Button>
-                                ) : (
+                                ) : ( */}
                                     <Button
                                         className="signbuttonMarket"
                                         disableElevation
@@ -227,7 +227,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     >
                                         Sign in
                                     </Button>
-                                )}
+                                {/* )} */}
                             </AnimateButton>
                         </Box>
 

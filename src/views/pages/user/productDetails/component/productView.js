@@ -57,6 +57,8 @@ const PropertiesView = ({ nft }) => {
     const [bought, setBought] = useState(false);
     const [redeem, setRedeem] = useState(false);
     const [loader, setLoader] = useState(false);
+    const [redeemLoader, setRedeemLoader] = useState(false);
+    const [resellLoader, setResellLoader] = useState(false);
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
@@ -152,12 +154,12 @@ const PropertiesView = ({ nft }) => {
 
     const redeemNftResolve = () => {
         setRedeem(true);
-        setLoader(false);
+        setRedeemLoader(false);
     };
 
     const resellNftResolve = () => {
         setResell(true);
-        setLoader(false);
+        setResellLoader(false);
         setOpen(false);
     };
 
@@ -207,12 +209,10 @@ const PropertiesView = ({ nft }) => {
                     // console.log('error', error.message);
                     toast.error(error.message);
                 });
-            setBought(true);
+            
         } else if (nft.mintType == 'lazyMint') {
             setLoader(true);
             console.log('Im in buy now lazy mint');
-            setLoader(true);
-            console.log('im in buy now lazy mint else if');
             let signers = nft.signerAddress;
             let erc20Address = BLOCKCHAIN.ERC20;
             let signature = nft.NFTTokens[0].signature;
@@ -226,7 +226,7 @@ const PropertiesView = ({ nft }) => {
             console.log(signers);
             console.log(contractAddress);
             console.log(signature);
-            let prices = ethers.utils.parseEther(nft.tokenPrice);
+            let prices = ethers.utils.parseEther(nft.price.toString());
 
             let voucher = {
                 uri: nft.tokenUri,
@@ -237,6 +237,10 @@ const PropertiesView = ({ nft }) => {
             console.log('Marketplace: ', MarketplaceAddress.address);
             let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
             const token = new ethers.Contract(erc20Address, Erc20, signer);
+            //const signature = await signer._signTypedData(domain, types, voucher);
+            // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
+            // console.log("verifyAddr",verifyAddr);
+            // console.log('nft.tokenUri,prices, erc20Address', nft.tokenUri,prices, erc20Address);
 
             let approvalAmount = await token.allowance(address, contractAddress);
             console.log('Approval Amount: ', approvalAmount.toString());
@@ -264,14 +268,15 @@ const PropertiesView = ({ nft }) => {
                         nftId: nft.id,
                         nftToken: nft.NFTTokens[0].id,
                         buyerAddress: mintedNFT.from,
-                        contractAddress: contractAddress
+                        contractAddress: contractAddress,
+                        buyNftResolve: buyNftResolve
                     })
                 );
             } catch (error) {
                 toast.error(error.message);
             }
-            setBought(true);
-            setLoader(false);
+            
+            
         }
     };
 
@@ -280,12 +285,12 @@ const PropertiesView = ({ nft }) => {
             navigate('/login');
         } else if (nft.mintType == 'directMint') {
             console.log('im in directmint resell');
-            setLoader(true);
+            setResellLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
-            rprice = ethers.utils.parseEther(rprice.toString());
+            let rrprice = ethers.utils.parseEther(rprice.toString());
             console.log('erc20Address', erc20Address);
             console.log('tokenId', tokenId);
             console.log('contractAddress', contractAddress);
@@ -301,7 +306,7 @@ const PropertiesView = ({ nft }) => {
             console.log(tokenId);
             console.log(contractAddress);
             await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
-            await (await marketplace.resellItem(tokenId, contractAddress, rprice))
+            await (await marketplace.resellItem(tokenId, contractAddress, rrprice))
                 .wait()
                 .then((data) => {
                     dispatch(
@@ -326,7 +331,7 @@ const PropertiesView = ({ nft }) => {
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
-            rprice = ethers.utils.parseEther(rprice.toString());
+            let rrprice = ethers.utils.parseEther(nft.price.toString());
             console.log('erc20Address', erc20Address);
             console.log('tokenId', tokenId);
             console.log('contractAddress', contractAddress);
@@ -342,7 +347,7 @@ const PropertiesView = ({ nft }) => {
             console.log(tokenId);
             console.log(contractAddress);
             // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
-            await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, nft.price))
+            await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, rrprice))
                 .wait()
                 .then((data) => {
                     dispatch(
@@ -350,7 +355,8 @@ const PropertiesView = ({ nft }) => {
                             nftId: nft.id,
                             nftToken: nft.NFTTokens[0].id,
                             buyerAddress: data.from,
-                            contractAddress: contractAddress
+                            contractAddress: contractAddress,
+                            resellNftResolve: resellNftResolve
                         })
                     );
 
@@ -359,7 +365,6 @@ const PropertiesView = ({ nft }) => {
                 .catch((error) => {
                     toast.error(error.message);
                 });
-            setResell(true);
             setOpen(false);
         }
     };
@@ -371,7 +376,7 @@ const PropertiesView = ({ nft }) => {
             navigate('/login');
         } else if (nft.mintType == 'directMint') {
             console.log('im in directmint redeem');
-            setLoader(true);
+            setRedeemLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
@@ -409,7 +414,7 @@ const PropertiesView = ({ nft }) => {
                 });
         } else if (nft.mintType == 'lazyMint') {
             console.log('im in redeem lazymint');
-            setLoader(true);
+            setRedeemLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
@@ -417,8 +422,9 @@ const PropertiesView = ({ nft }) => {
             const signer = provider.getSigner();
 
             const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+            let rrprice = ethers.utils.parseEther((nft.price).toString());
 
-            await (await marketplace.redeem(erc20Address, tokenId, contractAddress, nft.price))
+            await (await marketplace.redeem(erc20Address, tokenId, contractAddress, rrprice))
                 .wait()
                 .then((data) => {
                     dispatch(
@@ -675,7 +681,7 @@ const PropertiesView = ({ nft }) => {
                                                                                                         handleRedeemNft();
                                                                                                     }}
                                                                                                 >
-                                                                                                    {loader ? (
+                                                                                                    {redeemLoader ? (
                                                                                                         <CircularProgress
                                                                                                             sx={{ color: 'white' }}
                                                                                                         />
@@ -688,37 +694,43 @@ const PropertiesView = ({ nft }) => {
                                                                                     </>
                                                                                 )}
                                                                             </Grid>
-                                                                            <Grid item md={6} xs={12} sm={12}>
-                                                                                {buyerNft?.status == 'Resell' || resell == true ? (
-                                                                                    <>
-                                                                                        <Alert severity="info">
-                                                                                            <b>This item is resold.</b>
+                                                                            {buyerNft?.status == 'Resell' || resell == true ? (
+                                                                                <>
+                                                                                    <Grid
+                                                                                        item
+                                                                                        md={12}
+                                                                                        xs={12}
+                                                                                        sm={12}
+                                                                                        textAlign="center"
+                                                                                        sx={{}}
+                                                                                    >
+                                                                                        <Alert severity="info" sx={{ float: 'left' }}>
+                                                                                            <b>This item is resold by you!</b>
                                                                                         </Alert>
-                                                                                    </>
-                                                                                ) : (
-                                                                                    <>
-                                                                                        {buyerNft?.status !== 'Redeem' &&
-                                                                                            redeem == false && (
-                                                                                                <>
-                                                                                                    {loader ? (
-                                                                                                        <CircularProgress
-                                                                                                            sx={{ color: 'white' }}
-                                                                                                        />
-                                                                                                    ) : (
-                                                                                                        <ResellDialog />
-                                                                                                    )}
-                                                                                                </>
+                                                                                    </Grid>
+                                                                                </>
+                                                                            ) : (
+                                                                                <>
+                                                                                    {buyerNft?.status !== 'Redeem' && redeem == false && (
+                                                                                        <>
+                                                                                            {resellLoader ? (
+                                                                                                <CircularProgress sx={{ color: 'white' }} />
+                                                                                            ) : (
+                                                                                                <ResellDialog />
                                                                                             )}
-                                                                                    </>
-                                                                                )}
-                                                                            </Grid>
+                                                                                        </>
+                                                                                    )}
+                                                                                </>
+                                                                            )}
                                                                         </Grid>
                                                                     </>
                                                                 </>
                                                             ) : (
                                                                 <>
-                                                                    {/* {(bought || redeem || resell) !== true && ( */}
-                                                                    <Grid mt={-1} item md={9} xs={12} sm={12} textAlign="center">
+
+                                                                    {bought !== true && (
+                                                                    <Grid mt={-1} item md={10} xs={12} sm={12} textAlign="center">
+
                                                                         <Button
                                                                             sx={{ float: { md: 'right' } }}
                                                                             className="buy"
@@ -735,7 +747,7 @@ const PropertiesView = ({ nft }) => {
                                                                             )}
                                                                         </Button>
                                                                     </Grid>
-                                                                    {/* // )} */}
+                                                                     )}
                                                                 </>
                                                             )}
                                                         </>

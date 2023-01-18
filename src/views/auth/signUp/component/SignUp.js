@@ -78,8 +78,16 @@ const SignUpForm = ({ loginProp, ...others }) => {
 
     useEffect(() => {
         dispatch(setWallet(walletAddress));
+        handleConnect();
     }, [walletAddress]);
 
+    if (window.ethereum) {
+        window.ethereum.on('accountsChanged', function (accounts) {
+            // Time to reload your interface with accounts[0]!
+            // setReload(true)
+            handleConnect();
+        });
+    }
     return (
         <>
             <Formik

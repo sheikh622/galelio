@@ -136,7 +136,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             console.log('fileArray', fileArray);
             console.log('fileNameArray', fileNameArray);
             let isValid = handleError(fieldDataArray, fileDataArray, values);
-            if (isValid) {
+            if(fileDataArray.length == 0){
+                toast.error('Proof of authenticity is required');
+            }
+            else if(values.images.length == 0){
+                toast.error('NFT Image is required');
+            }
+           else if (isValid) {
                 setLoader(true);
                 dispatch(
                     addNft({
@@ -579,6 +585,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 <Divider />
                 <Grid container>
                     <DialogActions>
+                        {loader?
+                    <CircularProgress disableShrink sx={{ml:3, mt:1}}/>
+                    
+                    :
+<>
                         <AnimateButton>
                             <Button
                                 type="submit"
@@ -608,6 +619,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 Cancel
                             </Button>
                         </AnimateButton>
+                        </>
+                    }
                     </DialogActions>
                 </Grid>
             </Dialog>
