@@ -528,6 +528,7 @@ body {
 .pbackground {
     color: #2194ff;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .Lux {
@@ -1061,6 +1062,14 @@ color:#2f53ff !important;
     width: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.encapPropertry {
+    text-align: center;
+    white-space: nowrap;
+    width: 145px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
 }
 .dialog_details{
    height: 520px;

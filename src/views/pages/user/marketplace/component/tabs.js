@@ -3,11 +3,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Box, Grid, Tab, Tabs, Typography } from '@mui/material';
-import binance from 'assets/images/coins/binance.png';
-import eth from 'assets/images/coins/eth.png';
-import polygon from 'assets/images/coins/polygon.png';
-import xdc from 'assets/images/coins/xdc.png';
-import solana from 'assets/images/coins/solana.png';
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {

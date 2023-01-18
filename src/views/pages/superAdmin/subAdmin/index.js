@@ -28,7 +28,8 @@ const SubAdmin = () => {
         walletAddress: '',
         role: '',
         isActive: '',
-        walletAddress: ''
+        walletAddress: '',
+        hasMintingAccess:''
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -67,7 +68,8 @@ const SubAdmin = () => {
                 title={
                     <Grid container spacing={4}>
                         <Grid item xs={6} lg={8}>
-                            <Typography className="mainheading" variant="h1" component="h2" sx={{ marginLeft: { lg: '38px', md: '38px' } }}>
+                            <Typography className="mainheading" variant="h1" component="h2" 
+                            sx={{ marginLeft: { lg: '38px', md: '38px' } }}>
                                 Admins
                             </Typography>
                         </Grid>

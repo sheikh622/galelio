@@ -203,7 +203,10 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                             setSubAdminData({
                                                                                 id: row.id,
                                                                                 walletAddress: row.walletAddress,
-                                                                                isActive: row.isActive
+                                                                                isActive: row.isActive,
+                                                                                hasMintingAccess: row.hasMintingAccess
+
+
                                                                             });
                                                                         }}
                                                                     >

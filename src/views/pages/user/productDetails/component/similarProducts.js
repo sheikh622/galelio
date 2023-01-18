@@ -85,7 +85,6 @@ const SimilarProducts = ({nft}) => {
 
     const dispatch = useDispatch();
     const similarProductNfts = useSelector((state) => state.marketplaceReducer.similarProductNfts);
-    console.log('similarProductNfts', similarProductNfts);
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(12);

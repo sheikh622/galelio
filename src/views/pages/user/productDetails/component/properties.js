@@ -73,12 +73,12 @@ const Properties = ({nft}) => {
                             <SubCard className="property propertyShadow" sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}>
                                 <Grid container justifyContent="center" spacing={2}>
                                     <Grid item xs={12}>
-                                        <Typography className="pbackground" variant="body">
+                                        <Typography className="pbackground" variant="h3">
                                         {item.fieldName}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Typography variant="h3">{item.fieldValue}  </Typography>
+                                        <Typography className='encapPropertry' variant="h3">{item.fieldValue}  </Typography>
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Typography

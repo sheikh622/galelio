@@ -91,7 +91,8 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
-                            <Typography variant="body1" sx={{ textDecoration: 'none' }}>
+                            <Typography variant="body1" sx={{ textDecoration: 'none',  textAlign:'center'
+                           }}>
                                 {nftData.mintType == 'lazyMint' ? 'Lazy Mint' : 'Mint'}
                             </Typography>
                         </Grid>
