@@ -502,7 +502,8 @@ const PropertiesView = ({ nft }) => {
                                                     sx={{ textDecoration: 'none' }}
                                                     to="/companyPage"
                                                 >
-                                                    <Typography align="left" fontWeight={600} variant="h2" className="brand">
+                                                    <Typography align="left" fontWeight={600} variant="h2" 
+                                                    className="brand">
                                                         {nft?.Brand?.name}
                                                     </Typography>
                                                     <Typography align="left" variant="h3" className="creator">
@@ -582,9 +583,9 @@ const PropertiesView = ({ nft }) => {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid item mt={0} xs={12}>
+                                        <Grid item xs={12}>
                                             <Grid container>
-                                                <Grid mt={-1} item md={2} xs={12} sm={12}>
+                                                <Grid mt={-2} item md={3} xs={12} sm={12}>
                                                     <Grid item xs={12}>
                                                         <Typography
                                                             color={theme.palette.mode === 'dark' ? 'white' : '#404040'}
@@ -599,7 +600,7 @@ const PropertiesView = ({ nft }) => {
                                                         <Typography
                                                             color={theme.palette.mode === 'dark' ? 'white' : '#262626'}
                                                             sx={{ paddingLeft: { md: '22px' }, textAlign: { md: 'left' } }}
-                                                            className="ETH"
+                                                            className="ETH "
                                                             variant="h3"
                                                         >
                                                             {nft.price} {nft.currencyType}
@@ -726,8 +727,10 @@ const PropertiesView = ({ nft }) => {
                                                                 </>
                                                             ) : (
                                                                 <>
+
                                                                     {bought !== true && (
                                                                     <Grid mt={-1} item md={10} xs={12} sm={12} textAlign="center">
+
                                                                         <Button
                                                                             sx={{ float: { md: 'right' } }}
                                                                             className="buy"
