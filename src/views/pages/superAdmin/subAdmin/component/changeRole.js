@@ -47,7 +47,8 @@ export default function ChangeRoleDialog({ open, setOpen, page, limit, search, s
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
                     <Button
-                        sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
+                        sx={{ color: theme.palette.error.dark, 
+                            borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
                         className="buttonSize"
                         size="large"
