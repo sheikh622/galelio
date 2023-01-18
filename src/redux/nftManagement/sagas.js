@@ -265,6 +265,7 @@ function* addNftRequest({ payload }) {
 }
 
 function* buyNftRequest({ payload }) {
+    console.log('payload from buy', payload);
     try {
         let data = {
             nftId: payload.nftId,
@@ -279,8 +280,8 @@ function* buyNftRequest({ payload }) {
         yield setNotification('success', response.data.message);
         payload.buyNftResolve();
     } catch (error) {
+        console.log('error from 282', error);
         yield sagaErrorHandler(error.response.data.data);
-        payload.setLoader(false);
     }
 }
 
@@ -367,9 +368,8 @@ function* getAllNftRequest({ payload }) {
             headers
         );
         yield put(getAllNftSuccess(response.data.data));
-        payload.handleClose();
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+        yield sagaErrorHandler(error);
     }
 }
 
@@ -393,8 +393,8 @@ function* requestNftForMintingRequest({ payload }) {
                 brandId: payload.brandId
             })
         );
-        payload.handleClose();
         yield setNotification('success', response.data.message);
+        payload.handleClose();
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
