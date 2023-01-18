@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 // material-ui
 import {
     Box,
-    Button,
-    CardContent,
-    Chip,
-    Stack,
     Divider,
     Grid,
     LinearProgress,
@@ -15,11 +11,7 @@ import {
     ListItemIcon,
     ListItemSecondaryAction,
     ListItemText,
-    Table,
-    TableBody,
-    TableCell,
     TableContainer,
-    TableRow,
     Typography
 } from '@mui/material';
 
@@ -29,14 +21,8 @@ import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
 import PersonIcon from '@mui/icons-material/Person';
 import TourIcon from '@mui/icons-material/Tour';
-import ModeIcon from '@mui/icons-material/Mode';
 // assets
-import { IconEdit } from '@tabler/icons';
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
-import PinDropTwoToneIcon from '@mui/icons-material/PinDropTwoTone';
 import DescriptionIcon from '@mui/icons-material/Description';
-import moment from 'moment';
-import { Watch } from 'react-loader-spinner';
 import watch1 from 'assets/images/watch3.png';
 
 // progress

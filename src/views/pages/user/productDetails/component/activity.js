@@ -6,24 +6,19 @@ import { useTheme } from '@mui/material/styles';
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import {
-    Button,
     Typography,
     Grid,
     Select,
     InputLabel,
     FormControl,
     MenuItem,
-    Menu,
-    Pagination,
-    OutlinedInput,
-    InputAdornment,
+   
     Divider
 } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 
 import MainCard from 'ui-component/cards/MainCard';
-import HeadingCard from 'shared/Card/HeadingCard';
 const Activity = () => {
     const theme = useTheme();
     const itemData = [

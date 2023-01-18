@@ -19,7 +19,8 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
             walletAddress:"",
             role:'',
             isActive:'',
-            walletAddress:''});
+            walletAddress:'',
+            hasMintingAccess:''});
     };
 
     const handleMintRole =()=>{

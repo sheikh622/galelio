@@ -1,6 +1,5 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
 
 import {
     CardMedia,
@@ -11,8 +10,6 @@ import {
     InputLabel,
     Select,
     FormControl,
-    AlertTitle,
-    Stack,
     Box,
     MenuItem
 } from '@mui/material';
@@ -31,7 +28,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft, changeTokenId } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
 import TextField from '@mui/material/TextField';
@@ -40,13 +36,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import BLOCKCHAIN from '../../../../../constants';
-import SubCard from 'ui-component/cards/SubCard';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CircularProgress from '@mui/material/CircularProgress';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //

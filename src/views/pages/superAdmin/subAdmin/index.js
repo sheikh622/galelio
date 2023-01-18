@@ -28,7 +28,8 @@ const SubAdmin = () => {
         walletAddress: '',
         role: '',
         isActive: '',
-        walletAddress: ''
+        walletAddress: '',
+        hasMintingAccess:''
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
