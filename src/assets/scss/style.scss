@@ -776,6 +776,12 @@ color:#2f53ff !important;
 .Productdetails {
     overflow: hidden;
 }
+.deliveryimageSize {
+    width: 100%;
+
+    height: 350px;
+    object-fit: cover;
+}
 .ProductimageSize {
     width: 100%;
 
@@ -834,6 +840,7 @@ color:#2f53ff !important;
 }
 .tableShadow {
     box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
+    
     border-radius: 5px !important;
 }
 .propertyShadow {
@@ -904,7 +911,7 @@ color:#2f53ff !important;
     font-size: 26px;
 }
 .dialog {
-    width: 90% !important;
+    width: 27% !important;
     margin: 0 auto;
     // border: 2px solid red;
 }

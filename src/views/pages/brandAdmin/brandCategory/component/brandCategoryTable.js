@@ -103,7 +103,8 @@ const BrandCategoryTable = ({ brandCategoriesList }) => {
                 <>
                   
                 <Grid item>
-                <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}>
+                <Typography className="statustypo" style={{   
+                      padding: '20px 20px 20px 70px', fontWeight: '500' }}>
                  No Data Available</Typography>
             </Grid>
                 </>
