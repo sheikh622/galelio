@@ -42,7 +42,7 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                     <Grid item>
                          
                     <Grid item>
-                    <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}> No Data Available</Typography>
+                    <Typography className="statustypo" style={{   padding: '20px 20px 20px 70px', fontWeight: '500' }}> No Data Available</Typography>
                 </Grid>
                     </Grid>
                 </>
