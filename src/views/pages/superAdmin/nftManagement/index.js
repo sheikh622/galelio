@@ -137,7 +137,8 @@ const NftManagement = () => {
                     {nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length >0 ? (
                         <>
                             {' '}
-                            <Grid container spacing={gridSpacing} mt={2} sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
+                            <Grid container spacing={gridSpacing} mt={2}  
+                              sx={{ marginLeft: { lg: '5px', md: '5px' } , marginRight: { lg: '25px', md: '25px' } }}>
                                 {nftList.nfts.rows &&
                                     nftList.nfts.rows.map((nft, index) => {
                                         return (

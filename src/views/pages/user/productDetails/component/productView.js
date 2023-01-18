@@ -729,7 +729,7 @@ const PropertiesView = ({ nft }) => {
                                                                 <>
 
                                                                     {bought !== true && (
-                                                                    <Grid mt={-1} item md={10} xs={12} sm={12} textAlign="center">
+                                                                    <Grid mt={-1} item md={9} xs={12} sm={12} textAlign="center">
 
                                                                         <Button
                                                                             sx={{ float: { md: 'right' } }}
