@@ -50,10 +50,9 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
         const signer = provider.getSigner();
         const token = new ethers.Contract(erc20Address, Erc20, signer);
         console.log('signer', signer);
-        let data = await (await token.transfer(ownerAddress, prices)).wait();
-        console.log('data', data);
-
-         dispatch(
+        let data = await token.transfer(ownerAddress, prices);
+        console.log('data from request nft to admin', data);
+        await dispatch(
             requestNftForMinting({
                 id: nftData.id,
                 categoryId: categoryId,

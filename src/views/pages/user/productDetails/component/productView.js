@@ -226,7 +226,8 @@ const PropertiesView = ({ nft }) => {
             console.log(signers);
             console.log(contractAddress);
             console.log(signature);
-            let prices = ethers.utils.parseEther(nft.tokenPrice);
+            let prices = ethers.utils.parseEther(nft.price.toString());
+            
 
             let voucher = {
                 uri: nft.tokenUri,
@@ -237,7 +238,11 @@ const PropertiesView = ({ nft }) => {
             console.log('Marketplace: ', MarketplaceAddress.address);
             let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
             const token = new ethers.Contract(erc20Address, Erc20, signer);
-
+            //const signature = await signer._signTypedData(domain, types, voucher);
+       // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
+        // console.log("verifyAddr",verifyAddr);
+        // console.log('nft.tokenUri,prices, erc20Address', nft.tokenUri,prices, erc20Address);
+     
             let approvalAmount = await token.allowance(address, contractAddress);
             console.log('Approval Amount: ', approvalAmount.toString());
             let approvePrice = ethers.utils.parseEther('10000');
@@ -247,7 +252,7 @@ const PropertiesView = ({ nft }) => {
             // await (await token.approve(contractAddress, prices)).wait();
 
             //
-            try {
+             try {
                 let mintedNFT = await (await nfts.buyNft(voucher, signature, MarketplaceAddress.address)).wait();
                 const id = parseInt(mintedNFT.events[0].args[2]);
                 console.log('Data: ', mintedNFT, id);

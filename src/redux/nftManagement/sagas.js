@@ -276,9 +276,10 @@ function* buyNftRequest({ payload }) {
 
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/users/nftOperation`, data, headers);
-        yield setNotification('success', response.data.message);
         payload.buyNftResolve();
+        yield setNotification('success', response.data.message);
     } catch (error) {
+        console.log('error from 282', error);
         yield sagaErrorHandler(error.response.data.data);
         payload.setLoader(false);
     }
@@ -367,9 +368,8 @@ function* getAllNftRequest({ payload }) {
             headers
         );
         yield put(getAllNftSuccess(response.data.data));
-        payload.handleClose();
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+        yield sagaErrorHandler(error);
     }
 }
 
