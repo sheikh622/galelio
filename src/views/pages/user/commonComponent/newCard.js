@@ -41,12 +41,13 @@ const NewCard = ({ data, nfts }) => {
                     // maxWidth: nfts && nfts?.length > 3? 0 : 365,
                     width: nfts && nfts?.length > 5 ? '100%' : { lg: '220px' },
                     boxShadow: '1px 2px 6px #d3d3d3',
-                    borderRadius: '7px'
+                    borderRadius: '7px',
+                    marginBottom: '10px'
                 }}
             >
                 <CardActionArea>
                     <CardMedia component="img" height="200" image={data.asset} />
-                    <CardContent style={{ padding: '6%' }}>
+                    <CardContent  style={{ padding: '6%' }}>
                         <Grid container>
                             <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                 <span style={{ fontWeight: '550', fontSize: '130%' }}> {data.Brand.name}</span>

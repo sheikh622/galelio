@@ -11,7 +11,7 @@ import star from 'assets/images/companypageIcons/star.png';
 import twitter from 'assets/images/companypageIcons/twitter.png';
 import warn from 'assets/images/companypageIcons/warn.png';
 import styles from './companypage.module.css';
-import NFTS from '../marketplace/component/nfts';
+import NFTS from 'views/pages/user/marketplace/component/nfts';
 const CompanyPage = () => {
     const theme = useTheme();
     return (

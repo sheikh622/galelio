@@ -130,7 +130,7 @@ const Items = () => {
 
             <Grid mt={4} item xs={12}>
                 <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                {nfts.length > 0? (<>
+                {nfts?.length > 0? (<>
                     {nfts?.map((data) => ( 
                         <Grid item md={2} sm={6} onClick={()=>{
                             navigate('/productDetails', {

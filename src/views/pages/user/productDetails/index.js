@@ -12,8 +12,7 @@ const ProductDetails = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const marketplaceNfts = useSelector((state) => state.marketplaceReducer.marketplaceNfts);
-    console.log(marketplaceNfts, 'marketplaceNfts');
-    console.log(location.state.nft, 'location.state.nft');
+
     return (
         <>
             <Grid

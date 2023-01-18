@@ -5,7 +5,6 @@ import UserGuard from './RouteGuard/UserGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
-import CompanyPage from 'views/pages/landing/companyPage';
 
 //New Routing
 const LandingPage = Loadable(lazy(() => import('views/pages/user/landingPage')));
@@ -14,7 +13,8 @@ const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetai
 const DeliveryDashboard = Loadable(lazy(() => import('views/pages/user/deliveryDashboard')));
 //Old Routing
 
-const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
+const Profile = Loadable(lazy(() => import('views/pages/staticCode/creatorProfile')));
+const CompanyPage = Loadable(lazy(() => import('views/pages/staticCode/companyPage')));
 
 
 // ==============================|| market  ROUTING ||============================== //

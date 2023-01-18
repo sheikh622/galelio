@@ -75,7 +75,9 @@ const DeliveryDashboard = ({ productList }) => {
         <Grid item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <SubCard title="Delivery Dashboard">
+                    <SubCard 
+                    className='tableShadow'
+                    title="Delivery Dashboard">
                         <Grid container direction="column" spacing={2}>
                             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
                             {productList?.length > 0 ?(
@@ -89,17 +91,17 @@ const DeliveryDashboard = ({ productList }) => {
 
                                                         <Grid item md={4} lg={4} className="Productdetails" 
                                                         sx={{ height: 'auto' }}>
-                                                            <SubCard>
+                                                            <SubCard  className='tableShadow'> 
                                                                 <img
                                                                     src={row?.Nft.asset}
                                                                     alt="Statement Image"
-                                                                    className="ProductimageSize"
+                                                                    className="deliveryimageSize"
                                                                 />
                                                             </SubCard>{' '}
                                                         </Grid>
 
                                                         <Grid item md={6} sm={12} sx={{ height: 'auto' }}>
-                                                            <SubCard>
+                                                            <SubCard  className='tableShadow'>
                                                                 <TableContainer sx={{}}>
                                                                     <List component="nav" aria-label="main mailbox folders">
                                                                         <ListItemButton>
