@@ -100,7 +100,8 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                                 </span>
                             </ListItemButton>
                             <ListItemButton 
-                             sx={{  ml:2, background: customization.navType == 'dark' ? '#181C1F':'', borderRadius: '150px'}}
+                             sx={{  ml:2, background: customization.navType == 'dark' ? '#181C1F':'',
+                              borderRadius: '150px'}}
                             onClick={() => setNavType('dark')}
                             >
                                 <ListItemIcon>
