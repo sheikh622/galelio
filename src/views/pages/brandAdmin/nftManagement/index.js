@@ -166,9 +166,9 @@ const NftManagement = () => {
                 content={false}
             >
                 <Grid container>
-                    {(nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows.length >= 0) ? (
+                    {(nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows != undefined) ? (
                         <>
-                       { nftList.nfts.rows.length >= 0?(
+                       { nftList.nfts.rows.length > 0?(
                         <>
                             {' '}
                             <Grid container spacing={gridSpacing} mt={2}
@@ -211,7 +211,7 @@ const NftManagement = () => {
                        :
                        (
                         <Grid item>
-                        <Typography className="statustypo" style={{     padding: '20px 20px 20px 70px', fontWeight: '500' }}>
+                        <Typography className="statustypo" style={{  padding: '20px 20px 20px 70px', fontWeight: '500' }}>
                          No Data Available</Typography>
                     </Grid>
                        )}

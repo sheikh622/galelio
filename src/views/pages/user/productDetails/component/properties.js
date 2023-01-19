@@ -12,7 +12,7 @@ import { gridSpacing } from 'store/constant';
 
 const Properties = ({nft}) => {
     
-    console.log(nft, 'nft product data');
+    // console.log(nft, 'nft product data');
     const theme = useTheme();
     const property = [
         {

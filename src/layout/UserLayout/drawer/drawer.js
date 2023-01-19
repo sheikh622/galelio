@@ -16,8 +16,11 @@ import DownloadIcon from '@mui/icons-material/Download';
 import DiscountIcon from '@mui/icons-material/Discount';
 import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Drawer() {
+    const navigate = useNavigate();
+
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -47,7 +50,12 @@ export default function Drawer() {
                         <ListItemIcon>
                             <DashboardIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Overview'} />
+                        <ListItemText
+                            primary={'Overview'}
+                            onClick={() => {
+                                navigate('/');
+                            }}
+                        />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -63,7 +71,12 @@ export default function Drawer() {
                         <ListItemIcon>
                             <StorefrontIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Marketplace'} />
+                        <ListItemText
+                            primary={'Marketplace'}
+                            onClick={() => {
+                                navigate('/marketplace');
+                            }}
+                        />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

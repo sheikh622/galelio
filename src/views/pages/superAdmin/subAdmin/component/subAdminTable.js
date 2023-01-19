@@ -104,8 +104,10 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}></TableCell>
-                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                    <TableCell align="left" className="Tableheading" 
+                                    sx={{ borderBottom: 'none' }}></TableCell>
+                                    <TableCell align="left" className="Tableheading" 
+                                    sx={{ borderBottom: 'none' }}>
                                         First Name
                                     </TableCell>
                                     <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
