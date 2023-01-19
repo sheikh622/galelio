@@ -11,7 +11,9 @@ const NftCard = ({ data }) => {
         <Grid
             item
             md={2}
+            lg={2}
             sm={6}
+            xs={12}
             onClick={() => {
                 navigate('/productDetails', {
                     state: {
@@ -35,7 +37,7 @@ const NftCard = ({ data }) => {
                     <CardMedia component="img" height="200" image={data.asset} />
                     <CardContent sx={{ padding: '6%' }}>
                         <Grid container>
-                            <Grid item xs={8} sx={{ textAlign: 'left' }}>
+                            <Grid item xs={8}  className='encap' sx={{ textAlign: 'left' }}>
                                 <span style={{ fontWeight: '550', fontSize: '100%' }}>  {data.name} </span>
                                 <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
                                 {data.Brand.name}
