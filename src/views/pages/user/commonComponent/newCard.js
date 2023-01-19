@@ -40,6 +40,7 @@ const NewCard = ({ data, nfts }) => {
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     // maxWidth: nfts && nfts?.length > 3? 0 : 365,
                     width: nfts && nfts?.length > 5 ? '100%' : { lg: '220px' },
+                    
                     boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '7px',
                     marginBottom: '10px'
@@ -47,10 +48,10 @@ const NewCard = ({ data, nfts }) => {
             >
                 <CardActionArea>
                     <CardMedia component="img" height="200" image={data.asset} />
-                    <CardContent  style={{ padding: '6%' }}>
-                        <Grid container>
-                            <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                                <span style={{ fontWeight: '550', fontSize: '130%' }}> {data.name} </span>
+                    <CardContent  style={{ padding: '6%' ,  }}>
+                        <Grid container >
+                            <Grid item className='encap' xs={8} sx={{ textAlign: 'left' }}>
+                                <span  style={{ fontWeight: '550', fontSize: '130%' }}> {data.name} </span>
                                 <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
                                    
                                     {data.Brand.name}

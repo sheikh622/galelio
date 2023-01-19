@@ -917,7 +917,7 @@ color:#2f53ff !important;
     // border: 2px solid red;
 }
 .Nftdialog {
-    width: 40%;
+    width: 100% !important;
     margin: 0 auto;
 }
 .buttons {
@@ -1059,7 +1059,7 @@ color:#2f53ff !important;
 }
 .encap {
     white-space: nowrap;
-    width: 50px;
+    width: 50px !important;
     overflow: hidden;
     text-overflow: ellipsis;
 }
