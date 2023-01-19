@@ -52,7 +52,8 @@ const NftCard = ({ data }) => {
 
                         <Divider sx={{ mt: 2, mb: 2 }} />
                         <Grid>
-                            <Grid item md={12} xs={12} className="overflow" sx={{ marginTop: { xs: '10px', md: '0' } }}>
+                            <Grid item md={12} xs={12} className="overflow" 
+                            sx={{ marginTop: { xs: '10px', md: '0' } }}>
                                 <span sx={{ float: 'left' }}>Current Price :</span>
                                 <span sx={{ marginLeft: '2%' }}>
                                     <b>{data.currencyType + ' ' + data.price}</b>

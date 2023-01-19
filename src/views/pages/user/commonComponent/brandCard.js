@@ -17,7 +17,8 @@ const BrandCard = ({ data, brands }) => {
                     sm: brands && brands?.length > 5 ? 2 : 0,
                     md: brands && brands?.length > 5 ? 2 : 2
                 },
-                mr: { xs: brands && brands?.length > 5 ? 1 : 0, md: brands && brands?.length > 5 ? 4 : 2 }
+                mr: { xs: brands && brands?.length > 5 ? 1 : 0,
+                     md: brands && brands?.length > 5 ? 4 : 2 }
             }}
             item
             lg={brands && brands?.length > 5 ? 12 : 2}
