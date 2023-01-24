@@ -5,6 +5,8 @@ import AuthCardWrapper from 'shared/component/AuthCardWrapper';
 
 import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
 
+import galileo from 'assets/images/galileo.png';
+import galileoWhite from 'assets/images/galileo-white.png';
 import ForgotForm from './component/ForgetForm';
 import React from 'react';
 
@@ -19,7 +21,8 @@ const ForgotPassword = () => {
                 alignItems="center"
                 sx={{ minHeight: '100vh',background: theme.palette.mode === 'dark' ? '#000' : '#fff' }}
             >
-                <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
+                <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', 
+                display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
                         <Grid item container alignItems="flex-end" justifyContent="center" spacing={3}>
                             <Grid item xs={12}>
@@ -31,6 +34,18 @@ const ForgotPassword = () => {
                 <Grid item container justifyContent="center" md={6} lg={7}>
                     <AuthCardWrapper>
                         <Grid container direction="column" justifyContent="center" spacing={2}>
+                        <Grid item xs={12} container alignItems="center" justifyContent="center">
+                        <Box sx={{ display: { xs: 'block',sm:'block', md: 'none', lg:'none' } }}>
+                        <Typography variant="h6" noWrap component="div"
+                         sx={{ marginTop: '5px', }}>
+                            {theme.palette.mode === 'dark' ? (
+                                <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                            ) : (
+                                <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                            )}
+                        </Typography>
+                    </Box>
+                        </Grid>
                             <Grid item xs={12} container alignItems="center" justifyContent="center">
                                 <Box sx={{ mb: 2 }}>
                                     <Typography className="signInMarket" variant="subtitle1">

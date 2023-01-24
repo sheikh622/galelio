@@ -512,7 +512,7 @@ body {
 // ===========================================================================================================>
 .mainBackground {
     // background-color: #212121;
-    min-height: 100vh;
+    min-height: auto;
     width: 99%;
     background-image: url(../images/background1.png);
     background-position: center;
@@ -522,7 +522,14 @@ body {
 
 .create {
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
-    padding: 8px 32px;
+    padding: 10px 32px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: #FFFFFF;
 }
 
 .pbackground {
@@ -640,6 +647,7 @@ color:#2f53ff !important;
 .text {
     font-weight: 700;
     font-size: 22px;
+    text-transform: capitalize;
 }
 
 .creator {
@@ -763,11 +771,13 @@ color:#2f53ff !important;
     font-size: 18px;
     font-weight: 400px;
     margin-left: 82px;
+    color: #f44336;
 }
 .noDatacat {
     font-size: 18px;
     font-weight: 400px;
     margin-left: 68px;
+    color: #f44336;
 }
 .NFTdetails {
     overflow: hidden;

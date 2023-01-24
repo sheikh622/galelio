@@ -39,7 +39,6 @@ const LoginForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
 
     const loader = useSelector((state) => state.auth.loader);
-   
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -61,7 +60,6 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                
 
                 if (!response.data.data.profileCompleted) {
                     navigate('/socialLogin', {
@@ -130,8 +128,7 @@ const LoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)}
-                         sx={{ ...theme.typography.customInput }}>
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput
                                 type="email"
@@ -215,18 +212,18 @@ const LoginForm = ({ loginProp, ...others }) => {
                                         Sign in
                                     </Button>
                                 ) : ( */}
-                                    <Button
-                                        className="signbuttonMarket"
-                                        disableElevation
-                                        disabled={isSubmitting}
-                                        fullWidth
-                                        size="large"
-                                        type="submit"
-                                        variant="contained"
-                                        color="secondary"
-                                    >
-                                        Sign in
-                                    </Button>
+                                <Button
+                                    className="signbuttonMarket"
+                                    disableElevation
+                                    disabled={isSubmitting}
+                                    fullWidth
+                                    size="large"
+                                    type="submit"
+                                    variant="contained"
+                                    color="secondary"
+                                >
+                                    Sign in
+                                </Button>
                                 {/* )} */}
                             </AnimateButton>
                         </Box>
@@ -238,10 +235,21 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                        <Grid
+                            item
+                            xs={12}
+                            md={12}
+                            className="google"
+                            sx={{
+                                width: { xs: '80%', sm: '50%', md: ' 50%', lg: '50%' },
+                                margin: { xs: '5px auto', sm: '5px auto', md: ' 8px auto', lg: ' 8px auto' },
+                                justifyContent: 'center',
+                                marginBottom: '15px'
+                            }}
+                        >
                             <GoogleLogin
                                 select_account={false}
-                                auto_select={false}                    
+                                auto_select={false}
                                 onSuccess={(data) => {
                                     googleAuthHandle(data);
                                 }}
@@ -252,19 +260,32 @@ const LoginForm = ({ loginProp, ...others }) => {
                         </Grid>
                         <Grid
                             item
-                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', 
-                            paddingRight: '21%' }}
+                            xs={12}
+                            md={12}
+                            className="facebook"
+                            sx={{
+                                width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },
+                                margin: { xs: '0 auto', sm: '0 auto', sm: '0 auto' }
+                            }}
                         >
-                            <ReactFacebookLogin
-                                appId="851727442768362"
-                                // autoLoad={true}
-                                fields="first_name, last_name,email"
-                                callback={responseFacebook}
-                                onFailure={responseFacebookFailure}
-                                icon="fa-facebook"
-                                cssClass="my-facebook-button-class"
-                                textButton=" Login with Facebook"
-                            />
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                fullWidth
+                                size="large"
+                                className="signbuttonMarket"
+                                startIcon={<FacebookOutlinedIcon />}
+                            >
+                                <ReactFacebookLogin
+                                    appId="851727442768362"
+                                    // autoLoad={true}
+                                    fields="first_name, last_name,email"
+                                    callback={responseFacebook}
+                                    onFailure={responseFacebookFailure}
+                                    cssClass="my-facebook-button-class"
+                                    textButton=" Login with Facebook"
+                                />
+                            </Button>
                         </Grid>
                     </form>
                 )}
