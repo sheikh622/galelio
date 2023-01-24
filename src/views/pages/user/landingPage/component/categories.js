@@ -127,6 +127,7 @@ const Categories = ({ categories }) => {
                                                     width: categories && categories?.length > 5 ? '100%' : 
                                                     { lg: '220px' }, boxShadow: '1px 2px 6px #d3d3d3',
                                                     borderRadius: '7px',
+                                                    marginBottom: '10px'
                                                     
                                                 }}
                                                 onClick={() => {
@@ -148,7 +149,8 @@ const Categories = ({ categories }) => {
                                                         }}
                                                         sx={{
                                                             position: 'relative',
-                                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : '#f3f3f3',
+                                                            background: theme.palette.mode === 'dark' ? 
+                                                            theme.palette.dark.main : '#f3f3f3',
                                                             boxShadow: '1px 2px 9px #d3d3d3'
                                                         }}
                                                     >

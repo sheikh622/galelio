@@ -45,9 +45,14 @@ const Header = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '4rem' },
-                                            fontWeight: 900,
-                                            lineHeight: 1.4,
+                                            fontFamily: 'Public Sans !important',
+                                            fontStyle: 'normal !important',
+                                            fontWeight: '600',
+                                           
+                                       
+                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px' , lg:'78px' },
+                                            lineHeight: { xs: '1', sm: '1', md: '84px' , lg:'84px' },
+                                           
                                             color: '#000'
                                         }}
                                     >
@@ -74,8 +79,12 @@ const Header = () => {
                                         component="div"
                                         color="inherit"
                                         sx={{
-                                            textTransform: 'capitalize',
-                                            fontSize: { xs: '1rem', md: '1.125rem' },
+                                            color: '#000',
+                                            fontFamily: 'Public Sans  !important',
+                                            fontStyle: 'normal',                                        
+                                         
+                                            textTransform: 'capitalize  !important',
+                                            fontSize: { xs: '1rem', md: '27px' , lg:'27px' },
                                             fontWeight: 400,
                                             lineHeight: 1.4
                                         }}

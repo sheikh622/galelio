@@ -133,7 +133,7 @@ export default function Header() {
             <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
                 Delivery Dashboard
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
@@ -204,7 +204,8 @@ export default function Header() {
                         }}
                     >
                         <Box sx={{ display: { xs: 'block', md: 'block' } }}>
-                            <Typography variant="h6" noWrap component="div" sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
+                            <Typography variant="h6" noWrap component="div" sx={{ marginTop: '5px',
+                             display: { xs: '', sm: 'block' } }}>
                                 {theme.palette.mode === 'dark' ? (
                                     <img src={galileoWhite} alt="Galileo White Logo" width="100" />
                                 ) : (
@@ -256,7 +257,7 @@ export default function Header() {
                         )}
                         {user !== null && (
                             <>
-                                <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock',  border:'2px solid red'}} />
 
                                 <IconButton
                                     size="large"
