@@ -235,10 +235,18 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} md={12} className="google"
-                         sx={{ 
-                            width:{xs:'80%' , sm:'80%' , md:' 80%', lg:'80%'},
- margin:{xs:'5px auto' , sm:'5px auto' , md:' 8px auto' , lg:' 8px auto'}, justifyContent: 'center', marginBottom: '15px' }}>
+                        <Grid
+                            item
+                            xs={12}
+                            md={12}
+                            className="google"
+                            sx={{
+                                width: { xs: '80%', sm: '50%', md: ' 50%', lg: '50%' },
+                                margin: { xs: '5px auto', sm: '5px auto', md: ' 8px auto', lg: ' 8px auto' },
+                                justifyContent: 'center',
+                                marginBottom: '15px'
+                            }}
+                        >
                             <GoogleLogin
                                 select_account={false}
                                 auto_select={false}
@@ -250,8 +258,16 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={12} md={12} className="facebook" sx={{ width:{xs:'80%' , sm:'80%' , md:' 80%', lg:'80%'},
-                        margin:{xs:'0 auto' , sm:'0 auto' , sm:'0 auto'}, }}>
+                        <Grid
+                            item
+                            xs={12}
+                            md={12}
+                            className="facebook"
+                            sx={{
+                                width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },
+                                margin: { xs: '0 auto', sm: '0 auto', sm: '0 auto' }
+                            }}
+                        >
                             <Button
                                 variant="contained"
                                 color="secondary"
