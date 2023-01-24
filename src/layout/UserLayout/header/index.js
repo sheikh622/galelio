@@ -133,7 +133,6 @@ export default function Header() {
             <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
                 Delivery Dashboard
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );

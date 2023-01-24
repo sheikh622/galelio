@@ -48,7 +48,7 @@ const BrandCard = ({ data, brands }) => {
                     <CardMedia component="img" height="200" image={data.image} />
                     <CardContent style={{ padding: '6%' }}>
                         <Grid container>
-                            <Grid item xs={8} sx={{ textAlign: 'left' }}>
+                            <Grid item xs={8}  className='encap' sx={{ textAlign: 'left' }}>
                                 <span style={{ fontWeight: '550', fontSize: '130%' }}> {data?.name}</span>
                                 <Grid className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
                                     34

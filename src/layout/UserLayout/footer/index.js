@@ -45,7 +45,8 @@ const Footer = () => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Grid container alignItems="center" sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' } }} spacing={gridSpacing}>
+                <Grid container alignItems="center" sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' } }} 
+                spacing={gridSpacing}>
                     <Grid item xs={12} md={4} sm={6}>
                         {theme.palette.mode === 'dark' ? (
                             <img src={galileoWhite} alt="Galileo White Logo" width="100" />
