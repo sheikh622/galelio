@@ -197,9 +197,9 @@ export default function Header() {
                             width: '100%',
                             marginLeft: '2%',
                             display: 'flex',
-                            [theme.breakpoints.down('md')]: {
-                                width: 'auto'
-                            }
+                            // [theme.breakpoints.down('md')]: {
+                            //     width: 'auto'
+                            // }
                         }}
                     >
                         <Box sx={{ display: { xs: 'block', md: 'block' } }}>
@@ -218,19 +218,20 @@ export default function Header() {
                             </Grid>
 
                             <Search
-                                sx={{ width: '50rem !important', display: { xs: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
+                                sx={{ width: '50rem !important', display: { xs: 'none', sm:'none', md: 'none', lg: 'flex', xl: 'flex' } }}
                                 className={styles.search}
                             >
                                 <SearchIconWrapper>
                                     <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                                 </SearchIconWrapper>
-                                <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
+                                <StyledInputBase placeholder="Search" style={{ width: '100%' }} 
+                                inputProps={{ 'aria-label': 'search' }} />
                             </Search>
                         </Grid>
 
                         <Box sx={{ flexGrow: 1 }} />
-                        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
-                            <div style={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
+                        <Box sx={{ display: { xs: 'none', sm:'flex', md: 'flex' }, mr: 3 }}>
+                            <div sx={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
                             <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />

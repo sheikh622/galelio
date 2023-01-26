@@ -18,7 +18,7 @@ const ResetPassword = () => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
-    console.log("params",params)
+   
     return (
         <AuthWrapper1 >
         <Grid container justifyContent="space-between" alignItems="center" sx={{ minHeight: '100vh', 

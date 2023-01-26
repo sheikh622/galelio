@@ -106,7 +106,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         nftDescription: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
-            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
         nftPrice: Yup.number()
             .min(0.000001, 'Price should not less than zero')
             .required('NFT Price is required')
@@ -123,26 +123,19 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         },
         validationSchema,
         onSubmit: (values) => {
-            console.log('fileDataArray', fileDataArray);
             let fileArray = fileDataArray.map((data) => {
-                console.log('data', data);
                 return data.fieldValue;
             });
             let fileNameArray = fileDataArray.map((data) => {
-                console.log('data', data);
                 return data.fieldName;
             });
 
-            console.log('fileArray', fileArray);
-            console.log('fileNameArray', fileNameArray);
             let isValid = handleError(fieldDataArray, fileDataArray, values);
-            if(fileDataArray.length == 0){
+            if (fileDataArray.length == 0) {
                 toast.error('Proof of authenticity is required');
-            }
-            else if(values.images.length == 0){
+            } else if (values.images.length == 0) {
                 toast.error('NFT Image is required');
-            }
-           else if (isValid) {
+            } else if (isValid) {
                 setLoader(true);
                 dispatch(
                     addNft({
@@ -262,12 +255,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         <AnimateButton>
                             <Button
                                 type="submit"
-                               
                                 sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
                                 variant={mintType == 'directMint' ? 'contained' : 'outlined'}
                                 className="buttons"
                                 size="large"
-                               
                                 onClick={() => {
                                     setMintType('directMint');
                                 }}
@@ -282,8 +273,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 type="submit"
                                 variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
                                 sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
-                               
-                               
                                 onClick={() => {
                                     setMintType('lazyMint');
                                 }}
@@ -293,8 +282,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         </AnimateButton>
                     </DialogActions>
                 </Grid>
-               
-             
+
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={1}>
@@ -368,7 +356,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <Button
                                     className="fieldbutton"
                                     variant="contained"
-                                    sx={{ float: 'left',  padding:{md:' 6px 38px' , lg:'6px 38px'}  }}
+                                    sx={{ float: 'left', padding: { md: ' 6px 38px', lg: '6px 38px' } }}
                                     onClick={() => {
                                         setFieldDataArray([
                                             ...fieldDataArray,
@@ -389,7 +377,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <Grid container spacing={4}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5}> 
+                                            <Grid item xs={5}>
                                                 <TextField
                                                     id="field_name"
                                                     className="textfieldStyle"
@@ -436,74 +424,73 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             </>
                         )}
                         <Grid container>
-                        <Grid xs={12} mt={2} >
-                        <Button
-                        className="fieldbutton"
-                        variant="contained"
-                        sx={{ float: 'left'}}
-                            onClick={() => {
-                                setFileDataArray([
-                                    ...fileDataArray,
-                                    {
-                                        fieldName: '',
-                                        fieldValue: null
-                                    }
-                                ]);
-                            }}
-                        >
-                          Add Authenticity Files
-                        </Button>
-                    </Grid>
-                        {fileDataArray.length != 0 && (
-                            <>
-                                <Grid container spacing={2} mt={2}>
-                                    {fileDataArray.map((data, index) => (
-                                        <>
-                                            <Grid item xs={5}>
-                                                <TextField
-                                                    id="field_name"
-                                                    name="field_name"
-                                                    label="File Name"
-                                                    value={data.fieldName}
-                                                    onChange={(e) => {
-                                                        handleFileFieldNameChange(e.target.value, index);
-                                                    }}
-                                                    variant="standard"
-                                                    fullWidth
-                                                />
-                                            </Grid>
+                            <Grid xs={12} mt={2}>
+                                <Button
+                                    className="fieldbutton"
+                                    variant="contained"
+                                    sx={{ float: 'left' }}
+                                    onClick={() => {
+                                        setFileDataArray([
+                                            ...fileDataArray,
+                                            {
+                                                fieldName: '',
+                                                fieldValue: null
+                                            }
+                                        ]);
+                                    }}
+                                >
+                                    Add Authenticity Files
+                                </Button>
+                            </Grid>
+                            {fileDataArray.length != 0 && (
+                                <>
+                                    <Grid container spacing={2} mt={2}>
+                                        {fileDataArray.map((data, index) => (
+                                            <>
+                                                <Grid item xs={5}>
+                                                    <TextField
+                                                        id="field_name"
+                                                        name="field_name"
+                                                        label="File Name"
+                                                        value={data.fieldName}
+                                                        onChange={(e) => {
+                                                            handleFileFieldNameChange(e.target.value, index);
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
 
-                                            <Grid item mt={3} xs={5}>
-                                                <input
-                                              
-                                                    type="file"
-                                                    id="avatar"
-                                                    name="avatar"
-                                                    accept="image/*,.pdf"
-                                                    onChange={(event) => {
-                                                        handleFileFieldValueChange(event.currentTarget.files[0], index);
-                                                    }}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={2} mt={2}>
-                                                <IconButton
-                                                    color="error"
-                                                    edge="end"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        handleFileRemoveField(index);
-                                                    }}
-                                                >
-                                                    <Icon icon={closeFill} width={28} height={28} />
-                                                </IconButton>
-                                            </Grid>
-                                        </>
-                                    ))}
-                                </Grid>
-                            </>
-                        )}
-                    </Grid>
-                  
+                                                <Grid item mt={3} xs={5}>
+                                                    <input
+                                                        type="file"
+                                                        id="avatar"
+                                                        name="avatar"
+                                                        accept="image/*,.pdf"
+                                                        onChange={(event) => {
+                                                            handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                        }}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={2} mt={2}>
+                                                    <IconButton
+                                                        color="error"
+                                                        edge="end"
+                                                        size="small"
+                                                        onClick={() => {
+                                                            handleFileRemoveField(index);
+                                                        }}
+                                                    >
+                                                        <Icon icon={closeFill} width={28} height={28} />
+                                                    </IconButton>
+                                                </Grid>
+                                            </>
+                                        ))}
+                                    </Grid>
+                                </>
+                            )}
+                        </Grid>
+
                         {uploadedImages.length !== 1 && (
                             <Grid
                                 sx={{ background: '#c5cbe9', borderRadius: '5px', paddingBottom: '2rem', paddingTop: '2rem' }}
@@ -548,23 +535,18 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <AnimatePresence>
                                     {formik.values.images &&
                                         formik.values.images.map((file, index) => (
-                                            <ListItem  key={file.image.name} component={motion.div} className="listItem">
+                                            <ListItem key={file.image.name} component={motion.div} className="listItem">
                                                 <ListItemIcon>
                                                     <Icon icon={fileFill} width={32} height={32} />
                                                 </ListItemIcon>
-                                                <ListItemText 
-                                                    primary={ 
-                                                        
-                                                        file.image.name ? file.image.name : ''}
-                                                   
+                                                <ListItemText
+                                                    primary={file.image.name ? file.image.name : ''}
                                                     primaryTypographyProps={{
-                                                        variant: 'h6',
-                                                       
+                                                        variant: 'h6'
                                                     }}
                                                 />
                                                 {mintType == 'directMint' && (
-                                                    <QuantitySelector formik={formik} 
-                                                    fileArray={formik.values.images} index={index} />
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
                                                 )}
                                                 <IconButton
                                                     color="error"
@@ -580,48 +562,45 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             </List>
                         </Grid>
                     </form>
-
-                   
                 </DialogContent>
                 <Divider />
                 <Grid container>
                     <DialogActions>
-                        {loader?
-                    <CircularProgress disableShrink sx={{ml:3, mt:1}}/>
-                    
-                    :
-<>
-                        <AnimateButton>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
-                                onClick={() => {
-                                    formik.handleSubmit();
-                                }}
-                                className="buttons"
-                                size="large"
-                                disableElevation
-                            >
-                                Add
-                            </Button>
-                        </AnimateButton>
-                        <AnimateButton>
-                            <Button
-                                className="buttons"
-                                size="large"
-                                type="submit"
-                                variant="contained"
-                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
-                                onClick={handleClose}
-                                color="error"
-                                disableElevation
-                            >
-                                Cancel
-                            </Button>
-                        </AnimateButton>
-                        </>
-                    }
+                        {loader ? (
+                            <CircularProgress disableShrink sx={{ ml: 3, mt: 1 }} />
+                        ) : (
+                            <>
+                                <AnimateButton>
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                        onClick={() => {
+                                            formik.handleSubmit();
+                                        }}
+                                        className="buttons"
+                                        size="large"
+                                        disableElevation
+                                    >
+                                        Add
+                                    </Button>
+                                </AnimateButton>
+                                <AnimateButton>
+                                    <Button
+                                        className="buttons"
+                                        size="large"
+                                        type="submit"
+                                        variant="contained"
+                                        sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                        onClick={handleClose}
+                                        color="error"
+                                        disableElevation
+                                    >
+                                        Cancel
+                                    </Button>
+                                </AnimateButton>
+                            </>
+                        )}
                     </DialogActions>
                 </Grid>
             </Dialog>

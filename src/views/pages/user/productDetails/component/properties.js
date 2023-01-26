@@ -10,9 +10,7 @@ import { gridSpacing } from 'store/constant';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const Properties = ({nft}) => {
-    
-    // console.log(nft, 'nft product data');
+const Properties = ({ nft }) => {
     const theme = useTheme();
     const property = [
         {
@@ -47,7 +45,6 @@ const Properties = ({nft}) => {
         }
     ];
     return (
-
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -56,8 +53,7 @@ const Properties = ({nft}) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, 
-                            textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
                         >
                             Properties
                         </Typography>
@@ -66,51 +62,59 @@ const Properties = ({nft}) => {
             </Grid>
             {nft.NFTMetaData?.length > 0 ? (
                 <>
-            <Grid item xs={12}>
-                <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                {nft?.NFTMetaData.map((item) => (
-                        <Grid item md={2} sm={6}>
-                            <SubCard className="property propertyShadow" sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}>
-                                <Grid container justifyContent="center" spacing={2}>
-                                    <Grid item xs={12}>
-                                        <Typography className="pbackground" variant="h3">
-                                        {item.fieldName}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography className='encapPropertry' variant="h3">{item.fieldValue}  </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography
-                                            color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                            className="plight"
-                                            variant="body2"
-                                        >
-                                        94% Have this trait
-                                        </Typography>
-                                    </Grid>
+                    <Grid item xs={12}>
+                        <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                            {nft?.NFTMetaData.map((item) => (
+                                <Grid item md={2} sm={6}>
+                                    <SubCard
+                                        className="property propertyShadow"
+                                        sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
+                                    >
+                                        <Grid container justifyContent="center" spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Typography className="pbackground" variant="h3">
+                                                    {item.fieldName}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography className="encapPropertry" variant="h3">
+                                                    {item.fieldValue}{' '}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography
+                                                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                    className="plight"
+                                                    variant="body2"
+                                                >
+                                                    94% Have this trait
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </SubCard>
                                 </Grid>
-                            </SubCard>
+                            ))}
                         </Grid>
-                    ))}
-                </Grid>
-            </Grid>
-            </>
+                    </Grid>
+                </>
             ) : (
                 <>
-                <Grid container spacing={2} >
-                <Grid item xs={12}>
-                    <Typography
-                        variant="h3"
-                        mt={2}
-                        component="div"
-                        sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, 
-                        textTransform: 'capitalize' , color:'#9498aa' }}
-                    >
-                       No  Property Found..!
-                    </Typography>
-                </Grid>
-            </Grid>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Typography
+                                variant="h3"
+                                mt={2}
+                                component="div"
+                                sx={{
+                                    textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                                    textTransform: 'capitalize',
+                                    color: '#9498aa'
+                                }}
+                            >
+                                No Property Found..!
+                            </Typography>
+                        </Grid>
+                    </Grid>
                 </>
             )}
         </Grid>

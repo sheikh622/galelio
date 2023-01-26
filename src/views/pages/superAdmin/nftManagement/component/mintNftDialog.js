@@ -41,7 +41,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     const directMintThenList = async (result) => {
         let nftTokens = nftData.NFTTokens;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
-        console.log(contractAddress);
+
         let nftId = nftData.id;
         let categoryId = nftData.CategoryId;
         let brandId = nftData.BrandId;
@@ -159,7 +159,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     };
 
     const handleDirectMint = async () => {
-        setLoader(true)
+        setLoader(true);
         let image = nftData.asset;
         let price = nftData.price;
         let name = nftData.name;
@@ -199,7 +199,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
         // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0"
         let nftTokens = nftData.NFTTokens;
-        console.log('contractAddress', contractAddress);
+
         const result = await client.add(
             JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, metaData })
         );
@@ -210,8 +210,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         // const SIGNATURE_VERSION = '4';
         // const chainId = 5;
 
-      const  SIGNING_DOMAIN = "Galileo-Protocol";
-      const SIGNATURE_VERSION = "1";
+        const SIGNING_DOMAIN = 'Galileo-Protocol';
+        const SIGNATURE_VERSION = '1';
 
         const domain = {
             name: SIGNING_DOMAIN,
@@ -229,12 +229,12 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         };
         //const prices = ethers.utils.parseEther(price.toString());
         const voucher = { uri, price, token };
-        console.log('Voucher: ', voucher);
+
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const signature = await signer._signTypedData(domain, types, voucher);
         const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
-        console.log('signature: ', verifyAddr);
+
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
         const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
@@ -247,19 +247,12 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         //     MarketplaceAddress.address
         // );
 
-        console.log('domain', domain);
-        console.log('types', types);
-        console.log('voucher', voucher);
-        console.log('signature', signature);
-        console.log('verifyAddr', verifyAddr);
-        console.log('walletAddress', walletAddress);
-        console.log('signer', signer);
         let nftDataArray = [
             {
                 nftId: nftId,
                 tokenUri: uri,
                 tokenPrice: prices.toString(),
-                signerAddress: signerAddr// save wallet address
+                signerAddress: signerAddr // save wallet address
             }
         ];
 
@@ -305,20 +298,18 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 </DialogContent>
 
                 <DialogActions sx={{ pr: 2.5 }}>
-
-                        <>
-                        
-                            {loader ? (
-                                <CircularProgress />
-                            ) : (
-                                <>
+                    <>
+                        {loader ? (
+                            <CircularProgress />
+                        ) : (
+                            <>
                                 <Button
-                                sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
-                                onClick={handleClose}
-                                color="secondary"
-                            >
-                                No
-                            </Button>
+                                    sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
+                                    onClick={handleClose}
+                                    color="secondary"
+                                >
+                                    No
+                                </Button>
                                 <Button
                                     variant="contained"
                                     size="small"
@@ -340,10 +331,9 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     {' '}
                                     Yes
                                 </Button>
-                                </>
-                            )}
-                        </>
-                    
+                            </>
+                        )}
+                    </>
                 </DialogActions>
             </Dialog>
         </>

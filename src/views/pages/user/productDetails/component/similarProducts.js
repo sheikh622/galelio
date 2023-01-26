@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import CardMedia from '@mui/material/CardMedia';
 import { getAllSimilarProducts } from 'redux/marketplace/actions';
-const SimilarProducts = ({nft}) => {
+const SimilarProducts = ({ nft }) => {
     const theme = useTheme();
     const itemData = [
         {
@@ -90,17 +90,16 @@ const SimilarProducts = ({nft}) => {
     const [limit, setLimit] = useState(12);
     const [click, setClick] = useState(false);
     useEffect(() => {
-        console.log('useeffect from similar products ran');
         dispatch(
             getAllSimilarProducts({
                 search: search,
                 page: page,
                 limit: limit,
                 categoryId: nft.CategoryId,
-                nftId:nft.id
+                nftId: nft.id
             })
         );
-        setClick(false)
+        setClick(false);
     }, [click, search, page, limit]);
 
     return (
@@ -119,109 +118,110 @@ const SimilarProducts = ({nft}) => {
                     </Grid>
                 </Grid>
             </Grid>
-{similarProductNfts?.nfts?.rows.lenght > 0 ? (
-    <Grid item xs={12}>
-    <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
- 
-    {similarProductNfts?.nfts?.rows.map((data) => (
-            <Grid item md={2} sm={6}>
-            <Card
-            sx={{
-                color: theme.palette.mode === 'dark' ? 'white' : '#404040',
-                background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                maxWidth: 365,
-                width: '105%',
-                boxShadow: '1px 2px 6px #d3d3d3',
-                borderRadius: '7px'
-            }}
-        >
-            <CardActionArea>
-                <CardMedia component="img" height="200" image={data.asset} />
-                <CardContent style={{ padding: '6%' }}>
-                    <Grid container>
-                        <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                            <span style={{ fontWeight: '550', fontSize: '130%' }}>
-                            {data.Brand.name}
-                            </span>
-                            <div className='overflow' style={{ marginTop: '5%' }}>
-                            {data.name}
-                            </div>
-                        </Grid>
-                        <Grid item xs={4}  sx={{ background: '' }}>
-                            <span style={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
-                            Creator
-                            </span>
-                        </Grid>
-                    </Grid>
+            {similarProductNfts?.nfts?.rows.lenght > 0 ? (
+                <Grid item xs={12}>
+                    <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
+                        {similarProductNfts?.nfts?.rows.map((data) => (
+                            <Grid item md={2} sm={6}>
+                                <Card
+                                    sx={{
+                                        color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                                        background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                                        maxWidth: 365,
+                                        width: '105%',
+                                        boxShadow: '1px 2px 6px #d3d3d3',
+                                        borderRadius: '7px'
+                                    }}
+                                >
+                                    <CardActionArea>
+                                        <CardMedia component="img" height="200" image={data.asset} />
+                                        <CardContent style={{ padding: '6%' }}>
+                                            <Grid container>
+                                                <Grid item xs={8} sx={{ textAlign: 'left' }}>
+                                                    <span style={{ fontWeight: '550', fontSize: '130%' }}>{data.Brand.name}</span>
+                                                    <div className="overflow" style={{ marginTop: '5%' }}>
+                                                        {data.name}
+                                                    </div>
+                                                </Grid>
+                                                <Grid item xs={4} sx={{ background: '' }}>
+                                                    <span style={{ fontWeight: '50 !important ', fontSize: '110%', 
+                                                    float: 'right' }}>
+                                                        Creator
+                                                    </span>
+                                                </Grid>
+                                            </Grid>
 
-                    <Divider sx={{ mt: 2, mb: 2 }} />
-                    <Grid container sx={{ background: '' }}>
-                        <Grid item md={6} xs={12} className='overflow' sx={{ pt: 1, }}>
-                            <span
-                                style={{
-                                    background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
-                                    padding: '3% 4%',
-                                    borderRadius: '10%',
-                                    color: 'white',
-                                    fontSize: '80%'
-                                }}
-                            >
-                                02h
-                            </span>{' '}
-                            :{' '}
-                            <span
-                                style={{
-                                    background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
-                                    padding: '3% 4%',
-                                    borderRadius: '10%',
-                                    color: 'white',
-                                    fontSize: '80%'
-                                }}
-                            >
-                                25m
-                            </span>{' '}
-                            :{' '}
-                            <span
-                                style={{
-                                    background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
-                                    padding: '3% 4%  ',
-                                    borderRadius: '10%',
-                                    color: 'white',
-                                    fontSize: '80%'
-                                }}
-                            >
-                                04s
-                            </span>
-                        </Grid>
-                        <Grid item md={6} xs={12} className='overflow' sx={{ pl: 1, marginTop:{xs:'10px', md:'0'} , 
-                          }}>
-                            Current Bid
-                            <div style={{ marginTop: '5%', fontSize: '110%' }}>
-                            {data.currencyType + ' ' + data.price}
-                            </div>
-                        </Grid>
+                                            <Divider sx={{ mt: 2, mb: 2 }} />
+                                            <Grid container sx={{ background: '' }}>
+                                                <Grid item md={6} xs={12} className="overflow" sx={{ pt: 1 }}>
+                                                    <span
+                                                        style={{
+                                                            background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
+                                                            padding: '3% 4%',
+                                                            borderRadius: '10%',
+                                                            color: 'white',
+                                                            fontSize: '80%'
+                                                        }}
+                                                    >
+                                                        02h
+                                                    </span>{' '}
+                                                    :{' '}
+                                                    <span
+                                                        style={{
+                                                            background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
+                                                            padding: '3% 4%',
+                                                            borderRadius: '10%',
+                                                            color: 'white',
+                                                            fontSize: '80%'
+                                                        }}
+                                                    >
+                                                        25m
+                                                    </span>{' '}
+                                                    :{' '}
+                                                    <span
+                                                        style={{
+                                                            background: theme.palette.mode === 'dark' ? 'black' : '#d9d9d9',
+                                                            padding: '3% 4%  ',
+                                                            borderRadius: '10%',
+                                                            color: 'white',
+                                                            fontSize: '80%'
+                                                        }}
+                                                    >
+                                                        04s
+                                                    </span>
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    md={6}
+                                                    xs={12}
+                                                    className="overflow"
+                                                    sx={{ pl: 1, marginTop: { xs: '10px', md: '0' } }}
+                                                >
+                                                    Current Bid
+                                                    <div style={{ marginTop: '5%', fontSize: '110%' }}>
+                                                        {data.currencyType + ' ' + data.price}
+                                                    </div>
+                                                </Grid>
+                                            </Grid>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        ))}
                     </Grid>
-                </CardContent>
-            </CardActionArea>
-        </Card>
-            </Grid>
-        ))}
-        
-    </Grid>
-</Grid>
-) : (
-    <Grid item xs={12}>
-    <Typography
-        variant="h3"
-        mt={1}
-        component="div"
-        sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' , color:'gray' }, textTransform: 'capitalize' }}
-    >
-    No similar product found..!
-    </Typography>
-</Grid>
-)}
-           
+                </Grid>
+            ) : (
+                <Grid item xs={12}>
+                    <Typography
+                        variant="h3"
+                        mt={1}
+                        component="div"
+                        sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center', color: 'gray' }, textTransform: 'capitalize' }}
+                    >
+                        No similar product found..!
+                    </Typography>
+                </Grid>
+            )}
         </Grid>
     );
 };

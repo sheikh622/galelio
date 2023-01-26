@@ -84,7 +84,6 @@ const LoginForm = ({ loginProp, ...others }) => {
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                // console.log(response.data.data.profileCompleted, 'response=====facebook');
 
                 if (!response.data.data.profileCompleted) {
                     navigate('/socialLogin', {

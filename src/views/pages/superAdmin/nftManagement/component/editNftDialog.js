@@ -133,12 +133,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         onSubmit: (values) => {
             let file = values.images[0].image;
             let isFile = file instanceof File;
-            console.log('fileDataArray', fileDataArray);
 
             let perviousUploadedItems = fileDataArray.filter((data) => {
                 if (typeof data.fieldValue === 'string') return data;
             });
-            console.log('perviousUploadedItems', perviousUploadedItems);
 
             let newUploadedItems = fileDataArray.filter((data) => {
                 if (typeof data.fieldValue !== 'string') return data;
@@ -151,8 +149,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 return data.fieldName;
             });
 
-            console.log('fileArray', fileArray);
-            console.log('fileNameArray', fileNameArray);
             let isValid = handleError(fieldDataArray, fileDataArray, values, isFile);
 
             if (isValid) {
@@ -258,12 +254,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         setUploadedImages(nftInfo.images);
     }, [nftInfo]);
 
-    useEffect(() => {
-        console.log('fileDataArray', fileDataArray);
-    }, [fileDataArray]);
+    useEffect(() => {}, [fileDataArray]);
 
     const handleDynamicMetaData = async (nftData) => {
-        console.log('nftData in my function', nftData);
         let nftTokens = nftData.nft.NFTTokens;
         const tokenId = await nftTokens.map((data) => {
             return parseInt(data.tokenId);
@@ -287,8 +280,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         let proofOfAuthenticity = nftData.nftFiles;
         let contractAddress = nftData.nft.Category.BrandCategories[0].contractAddress;
         // setLoader(true);
-        console.log('metaData', metaData);
-        console.log('proofOfAuthenticity', proofOfAuthenticity);
+
         if (!image || !price || !name || !description) return;
         try {
             const result = await client.add(
@@ -306,8 +298,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 })
             );
             const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
-            console.log('tokenUri', tokenUri);
-            console.log('tokenId', tokenId);
+
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
@@ -318,14 +309,12 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         toast.error(`${error.message}`);
                     })
                 ).wait();
-                console.log('mintedNFT', mintedNFT);
             } else {
                 let mintedNFT = await (
                     await nft.updateUri(tokenId, tokenUri).catch((error) => {
                         toast.error(`${error.message}`);
                     })
                 ).wait();
-                console.log('mintedNFT', mintedNFT);
             }
             dispatch(
                 updateNftDynamicMetaData({
@@ -339,7 +328,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                     mintType: nftData.mintType,
                     metaData: metaData,
                     metaFiles: proofOfAuthenticity,
-                    tokenUri:tokenUri,
+                    tokenUri: tokenUri,
                     type: type,
                     search: search,
                     page: page,
@@ -475,7 +464,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 <Button
                                     className="fieldbutton"
                                     variant="contained"
-                                    sx={{ float: 'left',  padding:{md:' 6px 38px' , lg:'6px 38px'}  }}
+                                    sx={{ float: 'left', padding: { md: ' 6px 38px', lg: '6px 38px' } }}
                                     onClick={() => {
                                         setFieldDataArray([
                                             ...fieldDataArray,
@@ -543,72 +532,72 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                             </>
                         )}
                         <Grid container>
-                        <Grid xs={12} mt={2} pr={3}>
-                        <Button
-                        className="fieldbutton"
-                        variant="contained"
-                        sx={{ float: 'left'}}
-                            onClick={() => {
-                                setFileDataArray([
-                                    ...fileDataArray,
-                                    {
-                                        fieldName: '',
-                                        fieldValue: null
-                                    }
-                                ]);
-                            }}
-                        >
-                          Add Authenticity Files
-                        </Button>
-                        </Grid>
-                        {fileDataArray?.length != 0 && (
-                            <>
-                                <Grid container spacing={2} mt={1}>
-                                    {fileDataArray?.map((data, index) => (
-                                        <>
-                                            <Grid item xs={5}>
-                                                <TextField
-                                                    id="field_name"
-                                                    name="field_name"
-                                                    label="File Name"
-                                                    value={data.fieldName}
-                                                    onChange={(e) => {
-                                                        handleFileFieldNameChange(e.target.value, index);
-                                                    }}
-                                                    variant="standard"
-                                                    fullWidth
-                                                />
-                                            </Grid>
+                            <Grid xs={12} mt={2} pr={3}>
+                                <Button
+                                    className="fieldbutton"
+                                    variant="contained"
+                                    sx={{ float: 'left' }}
+                                    onClick={() => {
+                                        setFileDataArray([
+                                            ...fileDataArray,
+                                            {
+                                                fieldName: '',
+                                                fieldValue: null
+                                            }
+                                        ]);
+                                    }}
+                                >
+                                    Add Authenticity Files
+                                </Button>
+                            </Grid>
+                            {fileDataArray?.length != 0 && (
+                                <>
+                                    <Grid container spacing={2} mt={1}>
+                                        {fileDataArray?.map((data, index) => (
+                                            <>
+                                                <Grid item xs={5}>
+                                                    <TextField
+                                                        id="field_name"
+                                                        name="field_name"
+                                                        label="File Name"
+                                                        value={data.fieldName}
+                                                        onChange={(e) => {
+                                                            handleFileFieldNameChange(e.target.value, index);
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
 
-                                            <Grid item xs={5} mt={3}>
-                                                <input
-                                                    type="file"
-                                                    id="avatar"
-                                                    name="avatar"
-                                                    accept="image/*,.pdf"
-                                                    onChange={(event) => {
-                                                        handleFileFieldValueChange(event.currentTarget.files[0], index);
-                                                    }}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={2} mt={2}>
-                                                <IconButton
-                                                    color="error"
-                                                    edge="end"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        handleFileRemoveField(index);
-                                                    }}
-                                                >
-                                                    <Icon icon={closeFill} width={28} height={28} />
-                                                </IconButton>
-                                            </Grid>
-                                        </>
-                                    ))}
-                                </Grid>
-                            </>
-                        )}
-                    </Grid>
+                                                <Grid item xs={5} mt={3}>
+                                                    <input
+                                                        type="file"
+                                                        id="avatar"
+                                                        name="avatar"
+                                                        accept="image/*,.pdf"
+                                                        onChange={(event) => {
+                                                            handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                        }}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={2} mt={2}>
+                                                    <IconButton
+                                                        color="error"
+                                                        edge="end"
+                                                        size="small"
+                                                        onClick={() => {
+                                                            handleFileRemoveField(index);
+                                                        }}
+                                                    >
+                                                        <Icon icon={closeFill} width={28} height={28} />
+                                                    </IconButton>
+                                                </Grid>
+                                            </>
+                                        ))}
+                                    </Grid>
+                                </>
+                            )}
+                        </Grid>
                         {uploadedImages.length !== 1 && (
                             <Grid
                                 sx={{ background: '#c5cbe9', borderRadius: '5px', paddingBottom: '2rem', paddingTop: '2rem' }}
@@ -682,8 +671,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                             </AnimatePresence>
                         </List>
                     </form>
-
-                  
                 </DialogContent>
                 <Divider />
                 <Grid container>

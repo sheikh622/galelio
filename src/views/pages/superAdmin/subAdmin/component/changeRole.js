@@ -8,18 +8,20 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 export default function ChangeRoleDialog({ open, setOpen, page, limit, search, subAdminData, setSubAdminData }) {
     const theme = useTheme();
     const dispatch = useDispatch();
-    console.log(subAdminData, 'subAdminData');
+
     const handleClose = () => {
         setOpen(false);
-        setSubAdminData({ id: null,
+        setSubAdminData({
+            id: null,
             firstName: '',
             lastName: '',
             adminEmail: '',
             adminPassword: '',
-            walletAddress:"",
-            role:'',
-            isActive:'',
-            walletAddress:''});
+            walletAddress: '',
+            role: '',
+            isActive: '',
+            walletAddress: ''
+        });
     };
 
     return (
@@ -47,8 +49,7 @@ export default function ChangeRoleDialog({ open, setOpen, page, limit, search, s
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
                     <Button
-                        sx={{ color: theme.palette.error.dark, 
-                            borderColor: theme.palette.error.dark }}
+                        sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
                         className="buttonSize"
                         size="large"
@@ -60,7 +61,6 @@ export default function ChangeRoleDialog({ open, setOpen, page, limit, search, s
                         variant="contained"
                         className="buttonSize"
                         size="large"
-                       
                         onClick={() => {
                             dispatch(
                                 changeRole({

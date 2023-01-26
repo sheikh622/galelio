@@ -41,7 +41,6 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
     const handleBrandCategoryChange = (e) => {
         setContractAddress(e.target.value.contractAddress);
         setBrandCategoryId(e.target.value.id);
-        console.log('handleBrandCategoryChange', e.target.value);
     };
 
     const validationSchema = Yup.object({
@@ -76,23 +75,19 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         enableReinitialize: true,
         initialValues: subAdminData,
         validationSchema,
-        onSubmit: async(values) => {
-            console.log('values', values);
+        onSubmit: async (values) => {
             if (subAdminData.id == null) {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
-                console.log('signer', signer);
-                console.log('NFTAbi.abi', NFTAbi.abi);
+
                 const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
                 // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
-                // console.log("NFTS:  ",nfts)
+
                 let mintedNFT = await (
                     await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
                         // toast.error(`${error.message}`);
-                        console.log('error.message', error.message);
                     })
                 ).wait();
-                console.log('mintedNFT', mintedNFT);
 
                 dispatch(
                     addSubAdmin({
@@ -128,19 +123,20 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
     });
     const handleClose = () => {
         setOpen(false);
-        setSubAdminData({ id: null,
+        setSubAdminData({
+            id: null,
             firstName: '',
             lastName: '',
             adminEmail: '',
             adminPassword: '',
-            walletAddress:"",
-            role:'',
-            isActive:'',
-            walletAddress:''});
+            walletAddress: '',
+            role: '',
+            isActive: '',
+            walletAddress: ''
+        });
         formik.resetForm();
     };
     const { brandCategories } = useSelector((state) => state.brandCategoryReducer.brandCategoriesAdminList);
-    console.log('brandCategories', brandCategories);
 
     return (
         <>
@@ -163,8 +159,10 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         <Grid container>
                             <>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel  className='textfieldStyle' htmlFor="outlined-adornment-password-login">First Name</InputLabel>
-                                    
+                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
+                                        First Name
+                                    </InputLabel>
+
                                     <TextField
                                         id="firstName"
                                         name="firstName"
@@ -178,10 +176,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel 
-                                    className='textfieldStyle' htmlFor="outlined-adornment-password-login">Last Name</InputLabel>
+                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
+                                        Last Name
+                                    </InputLabel>
                                     <TextField
-                                         id="lastName"
+                                        id="lastName"
                                         name="lastName"
                                         value={formik.values.lastName}
                                         onChange={formik.handleChange}
@@ -193,10 +192,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel
-                                    className='textfieldStyle' htmlFor="outlined-adornment-password-login">Email</InputLabel>
+                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
+                                        Email
+                                    </InputLabel>
                                     <TextField
-                                    variant="standard"
+                                        variant="standard"
                                         id="adminEmail"
                                         name="adminEmail"
                                         value={formik.values.adminEmail}
@@ -209,10 +209,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                 </Grid>
 
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel 
-                                    className='textfieldStyle' htmlFor="outlined-adornment-password-login">Password</InputLabel>
+                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
+                                        Password
+                                    </InputLabel>
                                     <TextField
-                                    variant="standard"
+                                        variant="standard"
                                         id="adminPassword"
                                         name="adminPassword"
                                         value={formik.values.adminPassword}
@@ -224,10 +225,9 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel 
-                                   htmlFor="">Wallet Address</InputLabel>
+                                    <InputLabel htmlFor="">Wallet Address</InputLabel>
                                     <TextField
-                                    variant="standard"
+                                        variant="standard"
                                         id="walletAddress"
                                         name="walletAddress"
                                         value={formik.values.walletAddress}
@@ -239,28 +239,28 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     />
                                 </Grid>
 
-                          {subAdminData?.id == null && 
-                            <Grid item xs={6} md={12} lg={12} pt={2}>
-                            {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
-                            <TextField 
-                            variant="standard"
-                                className="responsiveSelectfield textfieldStyle"
-                                id="outlined-select-budget"
-                                select
-                                fullWidth
-                                label="Select Category"
-                                // value={category}
-                                onChange={handleBrandCategoryChange}
-                            >
-                                <MenuItem value={0}>Choose Category (Brand)</MenuItem>
-                                {brandCategories?.map((data, index) => (
-                                    <MenuItem key={index} value={data}>
-                                        {data.Category.name} ({data.Brand.name})
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-                    }     
+                                {subAdminData?.id == null && (
+                                    <Grid item xs={6} md={12} lg={12} pt={2}>
+                                        {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
+                                        <TextField
+                                            variant="standard"
+                                            className="responsiveSelectfield textfieldStyle"
+                                            id="outlined-select-budget"
+                                            select
+                                            fullWidth
+                                            label="Select Category"
+                                            // value={category}
+                                            onChange={handleBrandCategoryChange}
+                                        >
+                                            <MenuItem value={0}>Choose Category (Brand)</MenuItem>
+                                            {brandCategories?.map((data, index) => (
+                                                <MenuItem key={index} value={data}>
+                                                    {data.Category.name} ({data.Brand.name})
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
+                                    </Grid>
+                                )}
                             </>
                         </Grid>
                     </form>
@@ -271,7 +271,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         <Button
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'} }}
+                            sx={{ my: 1, ml: 1, padding: { md: '6px 124px', lg: '6px 124px' } }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -286,7 +286,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         <Button
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 0, padding: {md:'6px 124px', lg:'6px 124px'} , color: '#fff' }}
+                            sx={{ my: 1, ml: 0, padding: { md: '6px 124px', lg: '6px 124px' }, color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

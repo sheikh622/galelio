@@ -16,10 +16,7 @@ import {
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    Stack,
-    Typography,
-    useMediaQuery,
-    Divider
+    Stack
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -106,18 +103,17 @@ const SignUpForm = ({ loginProp, ...others }) => {
                         .required('First Name is required!')
                         .max(42, 'First Name can not exceed 42 characters')
                         .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
-                        lastName: Yup.string()
+                    lastName: Yup.string()
                         .required('Last Name is required!')
                         .max(42, 'Last Name can not exceed 42 characters')
                         .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     password: Yup.string().max(255).required('Password is required!'),
                     confirmPassword: Yup.string().max(255).required('Confirm Password is required!'),
-                    address: Yup.string().max(255).required('Address is required!'),
+                    address: Yup.string().max(255).required('Address is required!')
                 })}
                 onSubmit={async (values) => {
-                    if(walletAddress == ""){
-                        console.log('wallet address not found');
+                    if (walletAddress == '') {
                         dispatch({
                             type: SNACKBAR_OPEN,
                             open: true,
