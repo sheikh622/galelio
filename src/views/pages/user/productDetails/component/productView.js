@@ -47,22 +47,7 @@ const PropertiesView = ({ nft }) => {
         setAge(event.target.value);
     };
     const theme = useTheme();
-    const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
-
-    const status = [
-        {
-            value: 'PROOF OF AUTHENTICITY',
-            label: 'PROOF OF AUTHENTICITY'
-        },
-        {
-            value: 'gia certificate',
-            label: 'gia certificate'
-        },
-        {
-            value: 'LCX Certificate',
-            label: 'LCX Certificate'
-        }
-    ];
+  
 
     const [open, setOpen] = React.useState(false);
     let rprice = 0;
@@ -76,7 +61,7 @@ const PropertiesView = ({ nft }) => {
         };
 
         return (
-            <Grid style={{ width: '100%' }}>
+            <Grid sx={{ width: '100%' }}>
                 <Button
                     sx={{ float: { md: 'right' } }}
                     className="buy"
@@ -416,7 +401,8 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
+                        <CardMedia component="img" 
+                        sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
