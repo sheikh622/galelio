@@ -29,47 +29,37 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
     const user = useSelector((state) => state.auth.user);
 
     const handleMintRequest = async () => {
-        try{
+        try {
             setLoader(true);
-        console.log('nftData', nftData);
-        let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
-        let quant = nftData.NFTTokens.length;
-        let price = quant * nftData.price;
-        console.log('profitPercentage', profitPercentage);
-        console.log('price', price);
-        let amount = (price / 100) * profitPercentage;
-        console.log('amount', amount);
+            let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
+            let quant = nftData.NFTTokens.length;
+            let price = quant * nftData.price;
+            let amount = (price / 100) * profitPercentage;
+            let prices = ethers.utils.parseEther(amount.toString());
+            let erc20Address = BLOCKCHAIN.ERC20;
+            let ownerAddress = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const token = new ethers.Contract(erc20Address, Erc20, signer);
 
-        console.log('im here');
-        let prices = ethers.utils.parseEther(amount.toString());
-        console.log('prices', prices);
-        console.log('im here2');
-        let erc20Address = BLOCKCHAIN.ERC20;
-        let ownerAddress = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const token = new ethers.Contract(erc20Address, Erc20, signer);
-        console.log('signer', signer);
-        let data = await token.transfer(ownerAddress, prices);
-        console.log('data from request nft to admin', data);
-        await dispatch(
-            requestNftForMinting({
-                id: nftData.id,
-                categoryId: categoryId,
-                page: page,
-                limit: limit,
-                search: search,
-                type: type,
-                brandId: user.BrandId,
-                handleClose: handleClose
-            })
-        );
-        setLoader(false);
-        }
-        catch(error){
+            let data = await token.transfer(ownerAddress, prices);
+
+            await dispatch(
+                requestNftForMinting({
+                    id: nftData.id,
+                    categoryId: categoryId,
+                    page: page,
+                    limit: limit,
+                    search: search,
+                    type: type,
+                    brandId: user.BrandId,
+                    handleClose: handleClose
+                })
+            );
+            setLoader(false);
+        } catch (error) {
             console.log('error', error);
         }
-        
     };
     return (
         <>
@@ -91,29 +81,28 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
-                    {loader ?
-               < CircularProgress/>
-               :
-                    <>
-                        <Button
-                            sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
-                            onClick={handleClose}
-                            color="secondary"
-                        >
-                            No
-                        </Button>
-                        <Button
-                            variant="contained"
-                            size="large"
-                            onClick={() => {
-                                handleMintRequest();
-                            }}
-                        >
-                            Yes
-                        </Button>
-                    </>
-
-                     } 
+                    {loader ? (
+                        <CircularProgress />
+                    ) : (
+                        <>
+                            <Button
+                                sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
+                                onClick={handleClose}
+                                color="secondary"
+                            >
+                                No
+                            </Button>
+                            <Button
+                                variant="contained"
+                                size="large"
+                                onClick={() => {
+                                    handleMintRequest();
+                                }}
+                            >
+                                Yes
+                            </Button>
+                        </>
+                    )}
                 </DialogActions>
             </Dialog>
         </>

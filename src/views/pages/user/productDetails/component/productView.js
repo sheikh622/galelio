@@ -1,18 +1,7 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
 
-import {
-    CardMedia,
-    Grid,
-    Typography,
-    Button,
-    Alert,
-    InputLabel,
-    Select,
-    FormControl,
-    Box,
-    MenuItem
-} from '@mui/material';
+import { CardMedia, Grid, Typography, Button, Alert, InputLabel, Select, FormControl, Box, MenuItem } from '@mui/material';
 
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
@@ -58,24 +47,7 @@ const PropertiesView = ({ nft }) => {
         setAge(event.target.value);
     };
     const theme = useTheme();
-    const [value, setValue] = React.useState('PROOF OF AUTHENTICITY');
-
-    const status = [
-        {
-            value: 'PROOF OF AUTHENTICITY',
-            label: 'PROOF OF AUTHENTICITY'
-        },
-        {
-            value: 'gia certificate',
-            label: 'gia certificate'
-        },
-        {
-            value: 'LCX Certificate',
-            label: 'LCX Certificate'
-        }
-    ];
-
-    // console.log('nft from product view', nft);
+  
 
     const [open, setOpen] = React.useState(false);
     let rprice = 0;
@@ -89,7 +61,7 @@ const PropertiesView = ({ nft }) => {
         };
 
         return (
-            <Grid style={{ width: '100%' }}>
+            <Grid sx={{ width: '100%' }}>
                 <Button
                     sx={{ float: { md: 'right' } }}
                     className="buy"
@@ -158,7 +130,7 @@ const PropertiesView = ({ nft }) => {
             navigate('/login');
         } else if (nft.mintType == 'directMint') {
             setLoader(true);
-            console.log('Im in by now direct mint');
+
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
@@ -173,7 +145,7 @@ const PropertiesView = ({ nft }) => {
 
             // -------------
             let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
-            console.log('Approval Amount: ', approvalAmount.toString());
+
             let approvePrice = ethers.utils.parseEther('10000');
             if (approvalAmount.toString() < nft.price.toString()) {
                 await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
@@ -192,17 +164,13 @@ const PropertiesView = ({ nft }) => {
                             buyNftResolve: buyNftResolve
                         })
                     );
-
-                    console.log('NFT buy success', data);
                 })
                 .catch((error) => {
-                    // console.log('error', error.message);
                     toast.error(error.message);
                 });
-            
         } else if (nft.mintType == 'lazyMint') {
             setLoader(true);
-            console.log('Im in buy now lazy mint');
+
             let signers = nft.signerAddress;
             let erc20Address = BLOCKCHAIN.ERC20;
             let signature = nft.NFTTokens[0].signature;
@@ -212,10 +180,7 @@ const PropertiesView = ({ nft }) => {
             const signer = provider.getSigner();
             const address = signer.getAddress();
             const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-            console.log(nfts);
-            console.log(signers);
-            console.log(contractAddress);
-            console.log(signature);
+
             let prices = ethers.utils.parseEther(nft.price.toString());
 
             let voucher = {
@@ -224,16 +189,13 @@ const PropertiesView = ({ nft }) => {
                 token: erc20Address
             };
 
-            console.log('Marketplace: ', MarketplaceAddress.address);
             let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
             const token = new ethers.Contract(erc20Address, Erc20, signer);
             //const signature = await signer._signTypedData(domain, types, voucher);
             // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
-            // console.log("verifyAddr",verifyAddr);
-            // console.log('nft.tokenUri,prices, erc20Address', nft.tokenUri,prices, erc20Address);
 
             let approvalAmount = await token.allowance(address, contractAddress);
-            console.log('Approval Amount: ', approvalAmount.toString());
+
             let approvePrice = ethers.utils.parseEther('10000');
             if (approvalAmount.toString() < nft.price.toString()) {
                 await (await token.approve(contractAddress, approvePrice)).wait();
@@ -244,7 +206,6 @@ const PropertiesView = ({ nft }) => {
             try {
                 let mintedNFT = await (await nfts.buyNft(voucher, signature, MarketplaceAddress.address)).wait();
                 const id = parseInt(mintedNFT.events[0].args[2]);
-                console.log('Data: ', mintedNFT, id);
 
                 dispatch(
                     changeTokenId({
@@ -265,8 +226,6 @@ const PropertiesView = ({ nft }) => {
             } catch (error) {
                 toast.error(error.message);
             }
-            
-            
         }
     };
 
@@ -274,27 +233,19 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else if (nft.mintType == 'directMint') {
-            console.log('im in directmint resell');
             setResellLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
             let rrprice = ethers.utils.parseEther(rprice.toString());
-            console.log('erc20Address', erc20Address);
-            console.log('tokenId', tokenId);
-            console.log('contractAddress', contractAddress);
 
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
 
-            console.log('signer', signer);
-            console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
             const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
             const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-            console.log(marketplace);
-            console.log(tokenId);
-            console.log(contractAddress);
+
             await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
             await (await marketplace.resellItem(tokenId, contractAddress, rrprice))
                 .wait()
@@ -315,27 +266,18 @@ const PropertiesView = ({ nft }) => {
                     toast.error(error.message);
                 });
         } else if (nft.mintType == 'lazyMint') {
-            console.log('im in lazymint resell');
-
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
             let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
             let rrprice = ethers.utils.parseEther(nft.price.toString());
-            console.log('erc20Address', erc20Address);
-            console.log('tokenId', tokenId);
-            console.log('contractAddress', contractAddress);
 
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
 
-            console.log('signer', signer);
-            console.log('MarketplaceAbi.abi', MarketplaceAbi.abi);
             const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
             const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-            console.log(marketplace);
-            console.log(tokenId);
-            console.log(contractAddress);
+
             // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
             await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, rrprice))
                 .wait()
@@ -360,12 +302,9 @@ const PropertiesView = ({ nft }) => {
     };
 
     const handleRedeemNft = async () => {
-        console.log('handleRedeemNft', handleRedeemNft);
-
         if (user == null) {
             navigate('/login');
         } else if (nft.mintType == 'directMint') {
-            console.log('im in directmint redeem');
             setRedeemLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
@@ -403,7 +342,6 @@ const PropertiesView = ({ nft }) => {
                     toast.error(error.message);
                 });
         } else if (nft.mintType == 'lazyMint') {
-            console.log('im in redeem lazymint');
             setRedeemLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
@@ -412,7 +350,7 @@ const PropertiesView = ({ nft }) => {
             const signer = provider.getSigner();
 
             const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-            let rrprice = ethers.utils.parseEther((nft.price).toString());
+            let rrprice = ethers.utils.parseEther(nft.price.toString());
 
             await (await marketplace.redeem(erc20Address, tokenId, contractAddress, rrprice))
                 .wait()
@@ -446,7 +384,6 @@ const PropertiesView = ({ nft }) => {
 
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
     useEffect(() => {
-        console.log('useffect ran');
         if (user) {
             dispatch(
                 getNftBuyer({
@@ -457,17 +394,15 @@ const PropertiesView = ({ nft }) => {
             );
         }
     }, [useSelector, dispatch, resell, bought, redeem]);
-    console.log('buyerNft', buyerNft);
 
-    useEffect(() => {
-        console.log('nft to watch', nft);
-    }, []);
+    useEffect(() => {}, []);
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
+                        <CardMedia component="img" 
+                        sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
@@ -492,8 +427,7 @@ const PropertiesView = ({ nft }) => {
                                                     sx={{ textDecoration: 'none' }}
                                                     to="/companyPage"
                                                 >
-                                                    <Typography align="left" fontWeight={600} variant="h2" 
-                                                    className="brand">
+                                                    <Typography align="left" fontWeight={600} variant="h2" className="brand">
                                                         {nft?.Brand?.name}
                                                     </Typography>
                                                     <Typography align="left" variant="h3" className="creator">
@@ -717,29 +651,32 @@ const PropertiesView = ({ nft }) => {
                                                                 </>
                                                             ) : (
                                                                 <>
-
                                                                     {bought !== true && (
-                                                                    <Grid  item md={9} xs={12} sm={12} 
-                                                                    sx={{marginTop:{md:'-10px' , lg:'-10px'}}}
-                                                                    textAlign="center">
-
-                                                                        <Button
-                                                                            sx={{ float: { md: 'right' } }}
-                                                                            className="buy"
-                                                                            variant="contained"
-                                                                            size="large"
-                                                                            onClick={() => {
-                                                                                handleBuyNft();
-                                                                            }}
+                                                                        <Grid
+                                                                            item
+                                                                            md={9}
+                                                                            xs={12}
+                                                                            sm={12}
+                                                                            sx={{ marginTop: { md: '-10px', lg: '-10px' } }}
+                                                                            textAlign="center"
                                                                         >
-                                                                            {loader ? (
-                                                                                <CircularProgress className="circul" />
-                                                                            ) : (
-                                                                                <span>Buy Now</span>
-                                                                            )}
-                                                                        </Button>
-                                                                    </Grid>
-                                                                     )}
+                                                                            <Button
+                                                                                sx={{ float: { md: 'right' } }}
+                                                                                className="buy"
+                                                                                variant="contained"
+                                                                                size="large"
+                                                                                onClick={() => {
+                                                                                    handleBuyNft();
+                                                                                }}
+                                                                            >
+                                                                                {loader ? (
+                                                                                    <CircularProgress className="circul" />
+                                                                                ) : (
+                                                                                    <span>Buy Now</span>
+                                                                                )}
+                                                                            </Button>
+                                                                        </Grid>
+                                                                    )}
                                                                 </>
                                                             )}
                                                         </>

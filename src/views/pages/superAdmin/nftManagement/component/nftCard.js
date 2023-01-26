@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
@@ -6,7 +6,6 @@ import RejectNftDialog from './rejectNftDialog';
 import EditNftDialog from './editNftDialog';
 
 const NftCard = ({ nftData, search, page, limit, type }) => {
-    console.log('nftData', nftData);
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
     const [rejectMintOpen, setRejectMintOpen] = useState(false);
@@ -91,8 +90,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                             </Typography>
                         </Grid>
                         <Grid item xs={4}>
-                            <Typography variant="body1" sx={{ textDecoration: 'none',  textAlign:'center'
-                           }}>
+                            <Typography variant="body1" sx={{ textDecoration: 'none', textAlign: 'center' }}>
                                 {nftData.mintType == 'lazyMint' ? 'Lazy Mint' : 'Mint'}
                             </Typography>
                         </Grid>

@@ -35,12 +35,9 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     };
 
     const handleContractDeployment = async () => {
-        console.log('window.ethereum', typeof window.ethereum);
         let connectWallet = await ethereum._metamask.isUnlocked();
-        console.log('connectWallet', connectWallet);
-        if ((window.ethereum && connectWallet) == false) {
-            console.log('meta mask not connected');
 
+        if ((window.ethereum && connectWallet) == false) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,
@@ -70,7 +67,6 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 })
             ).wait();
 
-            console.log('res', res);
             let addr = res?.events[2]?.args[0];
             if (res) {
                 dispatch(

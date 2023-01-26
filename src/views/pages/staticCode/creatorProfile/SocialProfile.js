@@ -28,7 +28,7 @@ import RedditIcon from '@mui/icons-material/Reddit';
 
 const SocialProfile = () => {
     const user = useSelector((state) => state.auth.user);
-    console.log('user data for profile', user);
+
     const theme = useTheme();
     const itemData = [
         {

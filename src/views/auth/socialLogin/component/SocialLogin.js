@@ -43,7 +43,6 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
     const [address, setAddress] = useState('');
     const location = useLocation();
 
-    console.log(location.state , 'location data');
     const handleConnect = async () => {
         if (!window.ethereum) {
             dispatch({
@@ -90,28 +89,27 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                 enableReinitialize
                 initialValues={{
                     first_name: location.state?.socal?.user?.firstName,
-                   last_name: location.state?.socal?.user?.lastName,
+                    last_name: location.state?.socal?.user?.lastName,
                     email: location.state?.socal?.user?.email,
                     walletAddress: '',
-                    address: '',
+                    address: ''
                 }}
                 validationSchema={Yup.object().shape({
                     first_name: Yup.string()
                         .required('First Name is required!')
                         .max(42, 'First Name can not exceed 42 characters')
                         .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
-               
-                        last_name: Yup.string()
+
+                    last_name: Yup.string()
                         .required('Last Name is required!')
                         .max(42, 'Last Name can not exceed 42 characters')
                         .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-                   
-                    address: Yup.string().max(255).required('Address is required!'),
+
+                    address: Yup.string().max(255).required('Address is required!')
                 })}
                 onSubmit={async (values) => {
-                    if(walletAddress == ""){
-                        console.log('wallet address not found');
+                    if (walletAddress == '') {
                         dispatch({
                             type: SNACKBAR_OPEN,
                             open: true,
@@ -136,7 +134,6 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                         
                             <OutlinedInput
                                 type="name"
                                 value={values.first_name}
@@ -153,7 +150,6 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                             )}
                         </FormControl>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                         
                             <OutlinedInput
                                 type="name"
                                 value={values.last_name}
@@ -169,9 +165,7 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)}
-                         sx={{ ...theme.typography.customInput }}>
-                            
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                             <OutlinedInput
                                 type="email"
                                 value={values.email}

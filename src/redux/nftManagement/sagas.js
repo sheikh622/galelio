@@ -34,7 +34,7 @@ import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
 function* updateNftDynamicMetaDataRequest({ payload }) {
-    console.log("payload",payload)
+   
     const formData = new FormData();
 
     formData.append('id', payload.id);
@@ -97,7 +97,6 @@ function* getEditedNftDataRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.put(`/nft/getUpdatedNftData/${payload.id}`, formData, headers);
-        console.log('response', response.data.data);
         payload.handleDynamicMetaData(response.data.data);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
@@ -135,14 +134,13 @@ export function* watchDeleteNft() {
 }
 
 function* getAllNftSuperAdminRequest({ payload }) {
-    console.log("payload",payload)
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(
             `/nft/admin?page=${payload.page}&size=${payload.limit}&search=${payload.search}&brandId=${payload.brandId}&categoryId=${payload.categoryId}&type=${payload.type}`,
             headers
         );
-        console.log("response",response.data)
+     
         yield put(getAllNftSuccessSuperAdmin(response.data.data));
         
     } catch (error) {
@@ -227,8 +225,7 @@ export function* watchEditNft() {
 }
 
 function* addNftRequest({ payload }) {
-    console.log('fileNameArray', payload.fileNameArray);
-    console.log('fileArray', payload.fileArray);
+   
     const formData = new FormData();
     formData.append('asset', payload.asset);
     formData.append('name', payload.name);
@@ -265,7 +262,7 @@ function* addNftRequest({ payload }) {
 }
 
 function* buyNftRequest({ payload }) {
-    console.log('payload from buy', payload);
+    
     try {
         let data = {
             nftId: payload.nftId,
@@ -280,7 +277,7 @@ function* buyNftRequest({ payload }) {
         yield setNotification('success', response.data.message);
         payload.buyNftResolve();
     } catch (error) {
-        console.log('error from 282', error);
+      
         yield sagaErrorHandler(error.response.data.data);
     }
 }
@@ -401,7 +398,7 @@ function* requestNftForMintingRequest({ payload }) {
 }
 
 function* requestChangeTokenId({ payload }) {
-    console.log('data from requestChangeTokenId', payload);
+   
     try {
         let data = {
             tokenId: payload.tokenId

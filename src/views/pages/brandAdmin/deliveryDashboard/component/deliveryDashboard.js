@@ -25,7 +25,6 @@ import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
 
 const DeliveryDashboard = ({ deliveryList, user }) => {
-    console.log('deliveryList.lenght', deliveryList);
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [deliveryId, setDeliveryId] = useState(0);
@@ -33,45 +32,48 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
         <>
             <ChangeStatusDialog setOpen={setOpen} open={open} user={user} setDeliveryId={setDeliveryId} deliveryId={deliveryId} />
             <TableContainer>
-            <>
-            {( deliveryList?.length == 0) ? (
                 <>
-                    <Grid item className='tableshadow'>
-                        <Typography variant='h3' style={{ padding: '20px', fontWeight: '800',color:'red', justifyContent: 'center' }}>
-                            {' '}
-                            No Data Available
-                        </Typography>
-                    </Grid>
-                </>
-            ) : (
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center" sx={{ borderBottom: 'none' }}></TableCell>
-                            <TableCell align="left " className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                Product name{' '}
-                            </TableCell>
-                            {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell> */}
-                            <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                Description
-                            </TableCell>
+                    {deliveryList?.length == 0 ? (
+                        <>
+                            <Grid item className="tableshadow">
+                                <Typography
+                                    variant="h3"
+                                    style={{ padding: '20px', fontWeight: '800', color: 'red', justifyContent: 'center' }}
+                                >
+                                    {' '}
+                                    No Data Available
+                                </Typography>
+                            </Grid>
+                        </>
+                    ) : (
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center" sx={{ borderBottom: 'none' }}></TableCell>
+                                    <TableCell align="left " className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Product name{' '}
+                                    </TableCell>
+                                    {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell> */}
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Description
+                                    </TableCell>
 
-                            <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                Price
-                            </TableCell>
-                            <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                Status
-                            </TableCell>
-                            <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                Address
-                            </TableCell>
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Price
+                                    </TableCell>
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Status
+                                    </TableCell>
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Address
+                                    </TableCell>
 
-                            <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                Actions
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                  
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Actions
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+
                             <TableBody>
                                 {deliveryList != undefined &&
                                     deliveryList?.map((row, index) => (
@@ -96,7 +98,7 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                                                 </TableCell>
 
                                                 <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
-                                                    {row?.Nft.description} 
+                                                    {row?.Nft.description}
                                                 </TableCell>
                                                 <TableCell
                                                     className="tablecell"
@@ -127,7 +129,7 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                                                     {row?.status}
                                                 </TableCell>
                                                 <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
-                                                {row?.User?.address}
+                                                    {row?.User?.address}
                                                 </TableCell>
                                                 <TableCell align="left" sx={{ borderBottom: 'none' }}>
                                                     <Stack direction="row" justifyContent="left">
@@ -150,9 +152,8 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                                         </>
                                     ))}
                             </TableBody>
-                     
-                </Table>
-                )}
+                        </Table>
+                    )}
                 </>
                 <Divider />
             </TableContainer>
