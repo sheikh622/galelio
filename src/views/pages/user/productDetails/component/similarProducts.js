@@ -111,7 +111,8 @@ const SimilarProducts = ({ nft }) => {
                             variant="h2"
                             mt={4}
                             component="div"
-                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
+                            sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
+                             textTransform: 'capitalize' }}
                         >
                             Similar Products
                         </Typography>
@@ -135,13 +136,14 @@ const SimilarProducts = ({ nft }) => {
                                 >
                                     <CardActionArea>
                                         <CardMedia component="img" height="200" image={data.asset} />
-                                        <CardContent style={{ padding: '6%' }}>
+                                        <CardContent sx={{ padding: '6%' }}>
                                             <Grid container>
                                                 <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                                                    <span style={{ fontWeight: '550', fontSize: '130%' }}>{data.Brand.name}</span>
-                                                    <div className="overflow" style={{ marginTop: '5%' }}>
+                                                    <span style={{ fontWeight: '550', fontSize: '130%' }}>
+                                                    {data.Brand.name}</span>
+                                                    <Grid className="overflow" sx={{ marginTop: '5%' }}>
                                                         {data.name}
-                                                    </div>
+                                                    </Grid>
                                                 </Grid>
                                                 <Grid item xs={4} sx={{ background: '' }}>
                                                     <span style={{ fontWeight: '50 !important ', fontSize: '110%', 

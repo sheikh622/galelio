@@ -529,7 +529,7 @@ body {
 }
 
 .mainBackground {
-  min-height: 100vh;
+  min-height: auto;
   width: 99%;
   background-image: url(../images/background1.png);
   background-position: center;
@@ -539,12 +539,20 @@ body {
 
 .create {
   background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
-  padding: 8px 32px;
+  padding: 10px 32px;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: capitalize;
+  color: #ffffff;
 }
 
 .pbackground {
   color: #2194ff;
   font-weight: 600;
+  text-transform: capitalize;
 }
 
 .Lux {
@@ -556,7 +564,7 @@ body {
 }
 
 .nftHead {
-  font-family: "Public Sans";
+  font-family: "Poppins" !important;
   font-style: normal;
   font-weight: 500;
   font-size: 21px;
@@ -564,10 +572,11 @@ body {
 }
 
 .nftText {
-  font-family: "Public Sans";
+  font-family: "Poppins" !important;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
+  color: #2f53ff !important;
   text-align: left;
 }
 
@@ -648,6 +657,7 @@ body {
 .text {
   font-weight: 700;
   font-size: 22px;
+  text-transform: capitalize;
 }
 
 .creator {
@@ -696,6 +706,10 @@ body {
     width: 100%;
     max-height: 530px;
   }
+}
+
+.categoryDialog {
+  width: 77%;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
@@ -757,18 +771,21 @@ body {
   font-size: 18px;
   font-weight: 400px;
   margin-left: 50px;
+  color: #f44336;
 }
 
 .noDataNew {
   font-size: 18px;
   font-weight: 400px;
   margin-left: 82px;
+  color: #f44336;
 }
 
 .noDatacat {
   font-size: 18px;
   font-weight: 400px;
   margin-left: 68px;
+  color: #f44336;
 }
 
 .NFTdetails {
@@ -781,6 +798,13 @@ body {
   overflow: hidden;
 }
 
+.deliveryimageSize {
+  width: 100%;
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .ProductimageSize {
   width: 100%;
   height: 410px;
@@ -790,7 +814,7 @@ body {
 
 .imageSize {
   width: 100%;
-  height: 300px;
+  height: 250px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -852,7 +876,7 @@ body {
 .propertyShadow {
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25) !important;
   border-radius: 5px !important;
-  border-color: #2F53FF !important;
+  border-color: #2f53ff !important;
 }
 
 .tableShadow {
@@ -861,10 +885,10 @@ body {
 }
 
 .mainheading {
-  font-weight: 600;
-  font-family: "Poppins";
-  font-style: normal;
-  font-size: 27px;
+  font-weight: 600 !important;
+  font-family: "Poppins" !important;
+  font-style: normal !important;
+  font-size: 27px !important;
 }
 
 .headingcard {
@@ -921,12 +945,12 @@ body {
 }
 
 .dialog {
-  width: 30%;
+  width: 27% !important;
   margin: 0 auto;
 }
 
 .Nftdialog {
-  width: 40%;
+  width: 100% !important;
   margin: 0 auto;
 }
 
@@ -1075,9 +1099,22 @@ body {
 
 .encap {
   white-space: nowrap;
-  width: 50px;
+  width: 50px !important;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.encapPropertry {
+  text-align: center;
+  white-space: nowrap;
+  width: 145px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
+.dialog_details {
+  height: 520px;
 }
 
 .prdpadding {
@@ -1086,7 +1123,7 @@ body {
 
 .css-bpi7ug-MuiButtonBase-root-MuiListItemButton-root.Mui-selected:hover {
   background-color: transparent !important;
-  border-right: 10px solid #2F53FF !important;
+  border-right: 10px solid #2f53ff !important;
 }
 
 .circul {

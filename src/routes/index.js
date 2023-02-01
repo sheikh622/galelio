@@ -13,7 +13,7 @@ export default function ThemeRoutes() {
     if (userData.user && userData.user.role == 'Super Admin') {
         return useRoutes([SuperAdminRoutes]);
     } else if (userData.user && userData.user.role == 'Admin') {
-        return useRoutes([SubAdminRoutes]);
+        return useRoutes([SubAdminRoutes , UserRoutes ]);
     } else if (userData.user && userData.user.role == 'Brand Admin') {
         return useRoutes([BrandAdminRoutes]);
     } else if (userData.user && userData.user.role == 'User') {

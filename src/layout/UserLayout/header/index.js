@@ -83,6 +83,7 @@ export default function Header() {
     };
 
     const user = useSelector((state) => state.auth.user);
+    console.log(user?.role,'user dashboard link');
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -230,6 +231,18 @@ export default function Header() {
                         </Grid>
 
                         <Box sx={{ flexGrow: 1 }} />
+                        
+                        {user?.role ==  "Admin" && (
+                            <Button sx={{marginRight:'20px'}}
+                                variant="text"
+                                onClick={() => {
+                                    navigate('/dashboard');
+                                }}
+                            >
+                                Dashboard
+                            </Button>
+                        )}
+                       
                         <Box sx={{ display: { xs: 'none', sm:'flex', md: 'flex' }, mr: 3 }}>
                             <div sx={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
                             <IconButton size="large" aria-label="" color="inherit">

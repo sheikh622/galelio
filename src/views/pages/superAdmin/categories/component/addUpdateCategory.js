@@ -106,7 +106,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 onClose={handleClose} 
                 aria-labelledby="form-dialog-title"
                 className=" dialog"
-                maxWidth="md"
+               
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
@@ -117,7 +117,8 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
-                            <InputLabel htmlFor="outlined-adornment-password-login"  className='textfieldStyle'>Name</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-password-login"  
+                            className='textfieldStyle'>Name</InputLabel>
                             <TextField 
 
                                 id="name"
@@ -157,7 +158,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 <DialogActions sx={{ display: 'block' }}>
                     <AnimateButton>
                         <Button
-                        sx={{ my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'} }}
+                        sx={{ my: 1, ml: 1,  padding: {xs:'6px 130px', sm:'6px 110px', md:'6px 124px', lg:'6px 124px'} }}
                         className="buttons"
                             variant="contained"
                           
@@ -173,7 +174,8 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                         <Button
                         className="buttons"
                             variant="contained"
-                            sx={{my: 1, ml: 0,  padding: {md:'6px 124px', lg:'6px 124px'}, color: '#fff' }}
+                            sx={{my: 1, ml: 0,  padding: {xs:'6px 130px', sm:'6px 110px', md:'6px 124px',
+                             lg:'6px 124px'}, color: '#fff' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"
