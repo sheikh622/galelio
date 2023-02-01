@@ -14,10 +14,10 @@ const UserGuard = ({ children }) => {
    
     useEffect(() => {
         if (token == null) {
-            navigate('/', { replace: true });
+            navigate('/landingPage', { replace: true });
         }
         else if (token && user?.role=="User" ) {
-            navigate('/', { replace: true });
+            navigate('/landingPage', { replace: true });
         }
     }, [token]);
     

@@ -18,10 +18,10 @@ function* loginUser({ payload }) {
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
 
-        if (response.data.data.user.role == 'User') {
-            payload.navigate('/');
+        if (response.data.data.user.role == "Super Admin") {
+            payload.navigate('/dashboard'); 
         } else {
-            payload.navigate('/dashboard');
+            payload.navigate('/landingPage');
         }
     } catch (error) {
         yield put(setLoader(false));
@@ -84,7 +84,7 @@ function* signupSocialUserRequest({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupsocialSuccess(response.data.data));
-        payload.navigate('/');
+        payload.navigate('/landingPage');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);

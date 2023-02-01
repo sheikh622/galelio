@@ -66,7 +66,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                         state: { socal: response.data.data }
                     });
                 } else {
-                    navigate('/', {
+                    navigate('/landingPage', {
                         state: { socal: response.data.data }
                     });
                 }
@@ -90,7 +90,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                         state: { socal: response.data.data }
                     });
                 } else {
-                    navigate('/', {
+                    navigate('/landingPage', {
                         state: { socal: response.data.data }
                     });
                 }
@@ -153,7 +153,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                             <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
                             <OutlinedInput
                                 type={showPassword ? 'text' : 'password'}
-                                // value={values.password}
+                                value={values.password}
                                 name="password"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
@@ -184,7 +184,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 variant="subtitle1"
                                 component={Link}
                                 to={'/forgetPassword'}
-                                sx={{ textDecoration: 'none', color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
+                                sx={{ textDecoration: 'none', color: theme.palette.mode === 'dark' ? 
+                                '#fff' : '#000' }}
                             >
                                 Forgot Password?
                             </Typography>
@@ -260,7 +261,9 @@ const LoginForm = ({ loginProp, ...others }) => {
                         <Grid
                             item
                             xs={12}
+                            sm={12}
                             md={12}
+                            lg={12}
                             className="facebook"
                             sx={{
                                 width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },

@@ -30,7 +30,7 @@ const UserRoutes = {
     ),
     children: [
         {
-            path: '/',
+            path: '/landingPage',
             element: <LandingPage />
         },
         {

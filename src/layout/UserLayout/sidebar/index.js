@@ -61,10 +61,10 @@ const SideBar = () => {
                                  marginLeft:'-5px',
                                   cursor: 'pointer' }}
                             onClick={() => {
-                                navigate('/');
+                                navigate('/landingPage');
                             }}
                         >
-                            {pathName == '/' ? (
+                            {pathName == '/landingPage' ? (
                                 <>
                                     <Tooltip title="Landing Page" placement="right" arrow>
                                         <DashboardIcon sx={{ color: `${color}` }} />
@@ -78,9 +78,9 @@ const SideBar = () => {
                                 </>
                             )}
                         </Grid>
-                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
+                     {/*    <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <PieChartIcon />
-                        </Grid>
+                        </Grid> */}
                         <Grid
                             item
                             sx={{ mt: 2, marginLeft:'-5px', cursor: 'pointer' }}
@@ -102,7 +102,7 @@ const SideBar = () => {
                                 </>
                             )}
                         </Grid>
-                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
+                        {/* <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <BookmarkIcon />
                         </Grid>
                         <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
@@ -113,10 +113,10 @@ const SideBar = () => {
                         </Grid>
                         <Grid item sx={{ mt: 2 , marginLeft:'-5px', }}>
                             <SettingsIcon />
-                        </Grid>
-                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
+                        </Grid> */}
+                    {/*     <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <LogoutIcon />
-                        </Grid>
+                        </Grid> */}
                         <Grid item sx={{ mt: 5 ,  marginLeft:'-5px',}}>
                             {customization.navType == 'dark' ? (
                                 <>

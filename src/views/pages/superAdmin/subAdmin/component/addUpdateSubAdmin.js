@@ -252,7 +252,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                             // value={category}
                                             onChange={handleBrandCategoryChange}
                                         >
-                                            <MenuItem value={0}>Choose Category (Brand)</MenuItem>
+                                           
                                             {brandCategories?.map((data, index) => (
                                                 <MenuItem key={index} value={data}>
                                                     {data.Category.name} ({data.Brand.name})

@@ -104,7 +104,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                 variant="body1"
                                 sx={{
                                     overflow: 'hidden',
-                                    height: 30,
+                                    height: 34,
                                     textTransform: 'capitalize'
                                 }}
                             >
