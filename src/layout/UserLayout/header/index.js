@@ -83,7 +83,7 @@ export default function Header() {
     };
 
     const user = useSelector((state) => state.auth.user);
-    console.log(user?.role,'user dashboard link');
+    console.log(user?.role, 'user dashboard link');
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -197,7 +197,7 @@ export default function Header() {
                             paddingTop: '1em',
                             width: '100%',
                             marginLeft: '2%',
-                            display: 'flex',
+                            display: 'flex'
                             // [theme.breakpoints.down('md')]: {
                             //     width: 'auto'
                             // }
@@ -219,22 +219,23 @@ export default function Header() {
                             </Grid>
 
                             <Search
-                                sx={{ width: '50rem !important', display: { xs: 'none', sm:'none', md: 'none', lg: 'flex', xl: 'flex' } }}
+                                sx={{ width: '40rem !important', display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
                                 className={styles.search}
                             >
                                 <SearchIconWrapper>
                                     <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                                 </SearchIconWrapper>
-                                <StyledInputBase placeholder="Search" style={{ width: '100%' }} 
-                                inputProps={{ 'aria-label': 'search' }} />
+                                <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
                             </Search>
                         </Grid>
 
                         <Box sx={{ flexGrow: 1 }} />
-                        
-                        {(user?.role == "Admin" || "Brand Admin" || 'Super Admin') && (user?.role != "User") &&
-                         (
-                            <Button sx={{marginRight:'20px'}}
+                        <Box sx={{ flexGrow: 1 }} />
+
+                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && (user?.role != 'User' && user != null)
+                       && (
+                            <Button
+                                sx={{ marginRight: '10px' }}
                                 variant="text"
                                 onClick={() => {
                                     navigate('/dashboard');
@@ -243,8 +244,8 @@ export default function Header() {
                                 Dashboard
                             </Button>
                         )}
-                       
-                        <Box sx={{ display: { xs: 'none', sm:'flex', md: 'flex' }, mr: 3 }}>
+
+                        <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
                             <div sx={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
                             <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
