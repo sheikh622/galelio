@@ -19,7 +19,7 @@ function* loginUser({ payload }) {
         yield put(loginSuccess(response.data.data));
 
         if (response.data.data.user.role == "Super Admin" || "Brand Admin") {
-            payload.navigate('/dashboard'); 
+            payload.navigate('/landingPage'); 
         } else {
             payload.navigate('/landingPage');
         }

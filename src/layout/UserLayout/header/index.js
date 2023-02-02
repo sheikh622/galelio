@@ -232,7 +232,8 @@ export default function Header() {
 
                         <Box sx={{ flexGrow: 1 }} />
                         
-                        {user?.role ==  "Admin" && (
+                        {(user?.role == "Admin" || "Brand Admin" || 'Super Admin') && (user?.role != "User") &&
+                         (
                             <Button sx={{marginRight:'20px'}}
                                 variant="text"
                                 onClick={() => {
