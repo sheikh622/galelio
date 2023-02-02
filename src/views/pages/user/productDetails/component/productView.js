@@ -15,7 +15,7 @@ import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate,redirect } from 'react-router-dom';
 import { useState } from 'react';
 import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft, changeTokenId } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
@@ -463,12 +463,21 @@ const PropertiesView = ({ nft }) => {
                                                     >
                                                         {nft?.NFTMetaFiles.map((option) => (
                                                             <MenuItem
-                                                                component={RouterLink}
-                                                                to={option.fieldValue}
-                                                                key={option.fieldValue}
-                                                                value={option.fieldValue}
+                                                                // component={redirect}
+                                                                // to={option.fieldValue}
+                                                                // key={option.fieldValue}
+                                                                // value={option.fieldValue}
+                                                                // onClick={useNavigate(option.fieldValue)}
+                                                                onClick={()=>{
+                                                                    // useNavigate(option.fieldValue)
+                                                                    window.open(option.fieldValue,'_blank')
+                                                                }}
                                                             >
+                                                                
                                                                 {option.fieldName}
+
+
+                                                                
                                                             </MenuItem>
                                                         ))}
                                                     </Select>
