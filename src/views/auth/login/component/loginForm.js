@@ -236,6 +236,38 @@ const LoginForm = ({ loginProp, ...others }) => {
                             </Grid>
                         </Grid>
                         <Grid
+                        item
+                        mt={1}
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        className="facebook"
+                        // sx={{
+                        //     width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },
+                        //     margin: { xs: '0 auto', sm: '0 auto', sm: '0 auto' }
+                        // }}
+                    >
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            fullWidth
+                            size="large"
+                            className="signbuttonMarket"
+                            startIcon={<FacebookOutlinedIcon />}
+                        >
+                            <ReactFacebookLogin
+                                appId="851727442768362"
+                                // autoLoad={true}
+                                fields="first_name, last_name,email"
+                                callback={responseFacebook}
+                                onFailure={responseFacebookFailure}
+                                cssClass="my-facebook-button-class"
+                                textButton=" Login with Facebook"
+                            />
+                        </Button>
+                    </Grid>
+                        <Grid
                             item
                             xs={12}
                             md={12}
@@ -258,37 +290,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 }}
                             />
                         </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={12}
-                            md={12}
-                            lg={12}
-                            className="facebook"
-                            sx={{
-                                width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },
-                                margin: { xs: '0 auto', sm: '0 auto', sm: '0 auto' }
-                            }}
-                        >
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                fullWidth
-                                size="large"
-                                className="signbuttonMarket"
-                                startIcon={<FacebookOutlinedIcon />}
-                            >
-                                <ReactFacebookLogin
-                                    appId="851727442768362"
-                                    // autoLoad={true}
-                                    fields="first_name, last_name,email"
-                                    callback={responseFacebook}
-                                    onFailure={responseFacebookFailure}
-                                    cssClass="my-facebook-button-class"
-                                    textButton=" Login with Facebook"
-                                />
-                            </Button>
-                        </Grid>
+                     
                     </form>
                 )}
             </Formik>
