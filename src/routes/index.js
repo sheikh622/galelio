@@ -11,11 +11,11 @@ export default function ThemeRoutes() {
     const userData = useSelector((state) => state.auth);
 
     if (userData.user && userData.user.role == 'Super Admin') {
-        return useRoutes([SuperAdminRoutes]);
+        return useRoutes([SuperAdminRoutes , UserRoutes]);
     } else if (userData.user && userData.user.role == 'Admin') {
         return useRoutes([SubAdminRoutes , UserRoutes ]);
     } else if (userData.user && userData.user.role == 'Brand Admin') {
-        return useRoutes([BrandAdminRoutes]);
+        return useRoutes([BrandAdminRoutes , UserRoutes]);
     } else if (userData.user && userData.user.role == 'User') {
         return useRoutes([UserRoutes, LoginRoutes]);
     } else {
