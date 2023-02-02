@@ -294,7 +294,8 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 handleConnect();
                             }}
                         >
-                            {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
+                            {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 
+                            'Connect with wallet'}
                         </Button>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
