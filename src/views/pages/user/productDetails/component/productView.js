@@ -47,7 +47,6 @@ const PropertiesView = ({ nft }) => {
         setAge(event.target.value);
     };
     const theme = useTheme();
-  
 
     const [open, setOpen] = React.useState(false);
     let rprice = 0;
@@ -401,8 +400,7 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" 
-                        sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
+                        <CardMedia component="img" sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
@@ -651,32 +649,38 @@ const PropertiesView = ({ nft }) => {
                                                                 </>
                                                             ) : (
                                                                 <>
-                                                                    {bought !== true && (
-                                                                        <Grid
-                                                                            item
-                                                                            md={9}
-                                                                            xs={12}
-                                                                            sm={12}
-                                                                            sx={{ marginTop: { md: '-10px', lg: '-10px' } }}
-                                                                            textAlign="center"
-                                                                        >
-                                                                            <Button
-                                                                                sx={{ float: { md: 'right' } }}
-                                                                                className="buy"
-                                                                                variant="contained"
-                                                                                size="large"
-                                                                                onClick={() => {
-                                                                                    handleBuyNft();
-                                                                                }}
-                                                                            >
-                                                                                {loader ? (
-                                                                                    <CircularProgress className="circul" />
-                                                                                ) : (
-                                                                                    <span>Buy Now</span>
+                                                                    {user?.role != 'Super Admin' &&
+                                                                        user?.role != 'Admin' &&
+                                                                        user?.role != 'Brand Admin' && (
+                                                                            <>
+                                                                                {bought !== true && (
+                                                                                    <Grid
+                                                                                        item
+                                                                                        md={9}
+                                                                                        xs={12}
+                                                                                        sm={12}
+                                                                                        sx={{ marginTop: { md: '-10px', lg: '-10px' } }}
+                                                                                        textAlign="center"
+                                                                                    >
+                                                                                        <Button
+                                                                                            sx={{ float: { md: 'right' } }}
+                                                                                            className="buy"
+                                                                                            variant="contained"
+                                                                                            size="large"
+                                                                                            onClick={() => {
+                                                                                                handleBuyNft();
+                                                                                            }}
+                                                                                        >
+                                                                                            {loader ? (
+                                                                                                <CircularProgress className="circul" />
+                                                                                            ) : (
+                                                                                                <span>Buy Now</span>
+                                                                                            )}
+                                                                                        </Button>
+                                                                                    </Grid>
                                                                                 )}
-                                                                            </Button>
-                                                                        </Grid>
-                                                                    )}
+                                                                            </>
+                                                                        )}
                                                                 </>
                                                             )}
                                                         </>

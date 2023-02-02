@@ -17,6 +17,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import userHeader from 'assets/images/userHeader.png';
+import personuser from 'assets/images/person_user.png';
 import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
 import styles from './header.module.css';
@@ -189,7 +190,8 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
+            <AppBar position="static" 
+            sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
                 <Toolbar>
                     <Box
                         sx={{
@@ -219,7 +221,7 @@ export default function Header() {
                             </Grid>
 
                             <Search
-                                sx={{ width: '40rem !important', display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
+                                sx={{ width: '46rem !important', display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
                                 className={styles.search}
                             >
                                 <SearchIconWrapper>
@@ -232,17 +234,20 @@ export default function Header() {
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ flexGrow: 1 }} />
 
-                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && (user?.role != 'User' && user != null)
+                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') &&
+                         (user?.role != 'User' && user != null)
                        && (
+                        <Box>
                             <Button
-                                sx={{ marginRight: '10px' }}
-                                variant="text"
+                                sx={{ marginRight: '10px' ,  }}
+                                variant="outlined"
                                 onClick={() => {
                                     navigate('/dashboard');
                                 }}
                             >
                                 Dashboard
                             </Button>
+                            </Box>
                         )}
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
@@ -271,7 +276,12 @@ export default function Header() {
                         )}
                         {user !== null && (
                             <>
+                            {theme.palette.mode === 'dark' ? (
                                 <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                            ) : (
+                                <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                            )}
+                               
 
                                 <IconButton
                                     size="large"
