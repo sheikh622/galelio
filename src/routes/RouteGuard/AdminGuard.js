@@ -16,10 +16,11 @@ const AdminGuard = ({ children }) => {
     useEffect(() => {
         if (token == null) {
             navigate('/login', { replace: true });
-        } else if (token) {
-           
-            navigate('/dashboard', { replace: true });
         }
+        //  else if (token) {
+           
+        //     navigate('/dashboard', { replace: true });
+        // }
     }, [token]);
     return children;
 };
