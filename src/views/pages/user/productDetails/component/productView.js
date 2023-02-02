@@ -31,6 +31,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({ nft }) => {
+
+
+    console.log('nft from product view',nft);
     const dispatch = useDispatch();
     const [resell, setResell] = useState(false);
     const [bought, setBought] = useState(false);
@@ -133,7 +136,7 @@ const PropertiesView = ({ nft }) => {
 
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
             let price = ethers.utils.parseEther(nft.price.toString());
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
@@ -151,7 +154,7 @@ const PropertiesView = ({ nft }) => {
                 await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
             }
             // ---------------
-
+console.log('tokenId, contractAddress, price from product view',tokenId, contractAddress, price);
             await (await marketplace.purchaseItem(tokenId, contractAddress, price))
                 .wait()
                 .then((data) => {
@@ -174,7 +177,7 @@ const PropertiesView = ({ nft }) => {
             let signers = nft.signerAddress;
             let erc20Address = BLOCKCHAIN.ERC20;
             let signature = nft.NFTTokens[0].signature;
-            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
             // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0";
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
@@ -236,7 +239,7 @@ const PropertiesView = ({ nft }) => {
             setResellLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
 
             let rrprice = ethers.utils.parseEther(rprice.toString());
 
@@ -268,7 +271,7 @@ const PropertiesView = ({ nft }) => {
         } else if (nft.mintType == 'lazyMint') {
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
 
             let rrprice = ethers.utils.parseEther(nft.price.toString());
 
@@ -308,7 +311,7 @@ const PropertiesView = ({ nft }) => {
             setRedeemLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
 
@@ -345,7 +348,7 @@ const PropertiesView = ({ nft }) => {
             setRedeemLoader(true);
             let erc20Address = BLOCKCHAIN.ERC20;
             let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
 

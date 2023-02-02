@@ -278,7 +278,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         let brandName = nftData.nft.Brand.name;
         let metaData = nftData.nftMetaData;
         let proofOfAuthenticity = nftData.nftFiles;
-        let contractAddress = nftData.nft.Category.BrandCategories[0].contractAddress;
+        let contractAddress = nftData.nft.Brand.BrandCategories[0].contractAddress;
         // setLoader(true);
 
         if (!image || !price || !name || !description) return;
