@@ -6,18 +6,21 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import { addSubAdmin, updateSubAdmin } from 'redux/subAdmin/actions';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
 import { ethers } from 'ethers';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
     Button,
     InputLabel,
     Dialog,
     DialogActions,
     DialogContent,
+    OutlinedInput,
     DialogTitle,
     Slide,
     TextField,
     Divider,
-    Grid,
-    MenuItem
+    Grid,Input,
+    MenuItem , InputAdornment,IconButton
 } from '@mui/material';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
@@ -27,7 +30,13 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
     const [isUpdate, setIsUpdate] = useState(false);
     const [contractAddress, setContractAddress] = useState('');
     const [brandCategoryId, setBrandCategoryId] = useState(0);
-
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     const blockChainRole = '0xd2e4c2619ea6e0faebc405d89445161c041e30fe03373ea0473da142d57d4514';
 
     useEffect(() => {
@@ -209,20 +218,31 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                 </Grid>
 
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
-                                        Password
-                                    </InputLabel>
-                                    <TextField
-                                        variant="standard"
-                                        id="adminPassword"
-                                        name="adminPassword"
-                                        value={formik.values.adminPassword}
-                                        onChange={formik.handleChange}
-                                        error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
-                                        helperText={formik.touched.adminPassword && formik.errors.adminPassword}
-                                        fullWidth
-                                        autoComplete="given-name"
-                                    />
+                                <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                  id="standard-adornment-password adminPassword"
+                                  type={showPassword ? 'text' : 'password'}
+                                  name="adminPassword"
+                                  value={formik.values.adminPassword}
+                                  onChange={formik.handleChange}
+                                  error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
+                                  helperText={formik.touched.adminPassword && formik.errors.adminPassword}
+                                  fullWidth
+                                  autoComplete="given-name"
+                                  endAdornment={
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                      >
+                                        {showPassword ? <Visibility /> :  <VisibilityOff />}
+                                      </IconButton>
+                                    </InputAdornment>
+                                  }
+                                />
+                      
+                             
                                 </Grid>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
                                     <InputLabel htmlFor="">Wallet Address</InputLabel>
