@@ -18,7 +18,7 @@ function* loginUser({ payload }) {
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
 
-        if (response.data.data.user.role == "Super Admin") {
+        if (response.data.data.user.role == "Super Admin" || "Brand Admin") {
             payload.navigate('/dashboard'); 
         } else {
             payload.navigate('/landingPage');
