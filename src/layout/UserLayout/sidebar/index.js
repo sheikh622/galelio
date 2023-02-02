@@ -78,9 +78,9 @@ const SideBar = () => {
                                 </>
                             )}
                         </Grid>
-                     {/*    <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
-                            <PieChartIcon />
-                        </Grid> */}
+                     {/*   <Grid item sx={{ mt: 2 ,  marginLeft:'-5px', }}>
+                            <PieChartIcon  />
+                        </Grid>  */}
                         <Grid
                             item
                             sx={{ mt: 2, marginLeft:'-5px', cursor: 'pointer' }}
@@ -97,26 +97,26 @@ const SideBar = () => {
                             ) : (
                                 <>
                                     <Tooltip title="Marketplace" placement="right" arrow>
-                                        <StorefrontIcon />
+                                        <StorefrontIcon  />
                                     </Tooltip>
                                 </>
                             )}
                         </Grid>
-                        {/* <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
-                            <BookmarkIcon />
+                         <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
+                            <BookmarkIcon sx={{ color: 'transparent' }} />
                         </Grid>
                         <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
-                            <DownloadIcon />
+                            <DownloadIcon  sx={{ color: 'transparent' }}/>
                         </Grid>
                         <Grid item sx={{ mt: 2 , marginLeft:'-5px', }}>
-                            <DiscountIcon />
+                            <DiscountIcon sx={{ color: 'transparent' }} />
                         </Grid>
                         <Grid item sx={{ mt: 2 , marginLeft:'-5px', }}>
-                            <SettingsIcon />
-                        </Grid> */}
-                    {/*     <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
-                            <LogoutIcon />
-                        </Grid> */}
+                            <SettingsIcon  sx={{ color: 'transparent' }}/>
+                        </Grid>
+                       <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
+                            <LogoutIcon sx={{ color: 'transparent' }} />
+                        </Grid> 
                         <Grid item sx={{ mt: 5 ,  marginLeft:'-5px',}}>
                             {customization.navType == 'dark' ? (
                                 <>
