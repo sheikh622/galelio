@@ -25,7 +25,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
         <>
             {/* logo & toggler button */}
             <Box
-                sx={{                    
+                sx={{
+                    backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}`,                
                     height: '4em',
                     paddingTop: '1em',
                     width: 200,
