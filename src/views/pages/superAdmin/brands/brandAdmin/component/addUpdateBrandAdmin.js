@@ -4,13 +4,21 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { updateBrandAdmin, addBrandAdmin } from 'redux/brandAdmin/actions';
-import { Button, InputLabel, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField, Divider, Grid } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Button, InputLabel,InputAdornment,IconButton, Dialog, DialogActions,Input, DialogContent, DialogTitle, Slide, TextField, Divider, Grid } from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminData, page, limit, search }) {
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState(false);
-
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     useEffect(() => {
         if (brandAdminData.id == null) {
             setIsUpdate(false);
@@ -150,17 +158,53 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                 </Grid>
                                 
                                 <Grid item xs={6} pt={2} md={12} lg={12}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">Password</InputLabel>
-                                    <TextField
-                                        id="adminPassword"
+                      {/*           <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                  id="standard-adornment-password adminPassword"
+                                  type={showPassword ? 'text' : 'password'}
+                                  name="adminPassword"
+                                  value={formik.values.adminPassword}
+                                  onChange={formik.handleChange}
+                                  error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
+                                  helperText={formik.touched.adminPassword && formik.errors.adminPassword}
+                                  fullWidth
+                                  autoComplete="given-name"
+                                  endAdornment={
+                                    <InputAdornment position="end">
+                                      <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                      >
+                                        {showPassword ? <Visibility /> :  <VisibilityOff />}
+                                      </IconButton>
+                                    </InputAdornment>
+                                  }
+                                /> */}
+                                    <InputLabel  htmlFor="standard-adornment-password"
+                                    className="textfieldStyle">Password</InputLabel>
+                                    <Input
+                                        id="standard-adornment-password adminPassword"
                                         name="adminPassword"
-                                        value={formik.values.adminPassword}
+                                        type={showPassword ? 'text' : 'password'}
+                                          value={formik.values.adminPassword}
                                         onChange={formik.handleChange}
                                         error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
                                         helperText={formik.touched.adminPassword && formik.errors.adminPassword}
                                         fullWidth
-                                        autoComplete="given-name"
+                                        autoComplete=""
                                         variant="standard"
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                              <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                              >
+                                                {showPassword ? <Visibility /> :  <VisibilityOff />}
+                                              </IconButton>
+                                            </InputAdornment>
+                                          }
                                     />
                                 </Grid>
                             </>
