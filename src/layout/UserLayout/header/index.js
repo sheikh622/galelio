@@ -219,7 +219,7 @@ export default function Header() {
                             </Grid>
 
                             <Search
-                                sx={{ width: '40rem !important', display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
+                                sx={{ width: '46rem !important', display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
                                 className={styles.search}
                             >
                                 <SearchIconWrapper>
@@ -232,17 +232,20 @@ export default function Header() {
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ flexGrow: 1 }} />
 
-                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && (user?.role != 'User' && user != null)
+                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') &&
+                         (user?.role != 'User' && user != null)
                        && (
+                        <Box>
                             <Button
-                                sx={{ marginRight: '10px' }}
-                                variant="text"
+                                sx={{ marginRight: '10px' ,  }}
+                                variant="outlined"
                                 onClick={() => {
                                     navigate('/dashboard');
                                 }}
                             >
                                 Dashboard
                             </Button>
+                            </Box>
                         )}
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
