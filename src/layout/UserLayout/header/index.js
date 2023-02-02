@@ -17,6 +17,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import userHeader from 'assets/images/userHeader.png';
+import personuser from 'assets/images/person_user.png';
 import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
 import styles from './header.module.css';
@@ -189,7 +190,8 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
+            <AppBar position="static" 
+            sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
                 <Toolbar>
                     <Box
                         sx={{
@@ -274,7 +276,12 @@ export default function Header() {
                         )}
                         {user !== null && (
                             <>
+                            {theme.palette.mode === 'dark' ? (
                                 <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                            ) : (
+                                <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                            )}
+                               
 
                                 <IconButton
                                     size="large"
