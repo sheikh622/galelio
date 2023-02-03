@@ -135,6 +135,7 @@ const ResetPasswordForm = ({ token, ...others }) => {
                             </Box>
                         )}
 
+<div>* Password should be 8 characters long containing 1 Uppercase, 1 Numeric and 1 special character</div>
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
                                 <Button

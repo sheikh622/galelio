@@ -23,7 +23,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { login, loginSuccess } from '../../../../redux/auth/actions';
 import { useNavigate } from 'react-router-dom';
 import { setLoader } from '../../../../redux/auth/actions';
-import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin,GoogleLogin } from '@react-oauth/google';
 let jwt = require('jsonwebtoken');
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -102,6 +102,11 @@ const LoginForm = ({ loginProp, ...others }) => {
     const responseFacebookFailure = () => {
         toast.error('Facebook login failed');
     };
+
+
+      
+
+
     return (
         <>
             <Formik
@@ -263,7 +268,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 callback={responseFacebook}
                                 onFailure={responseFacebookFailure}
                                 cssClass="my-facebook-button-class"
-                                textButton=" Login with Facebook"
+                                textButton="Login with Facebook"
                             />
                         </Button>
                     </Grid>
@@ -279,10 +284,13 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 marginBottom: '15px'
                             }}
                         >
+
+                            
                             <GoogleLogin
                                 select_account={false}
                                 auto_select={false}
                                 onSuccess={(data) => {
+                                    console.log('datafrom google login',data);
                                     googleAuthHandle(data);
                                 }}
                                 onError={() => {
@@ -290,7 +298,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 }}
                             />
                         </Grid>
-                     
+
+
                     </form>
                 )}
             </Formik>
