@@ -50,9 +50,9 @@ const SideBar = () => {
                             pb: 3,
                             ml: 1,
                             mr: 1,
-                            boxShadow: '1px 2px 9px #d3d3d3',
+                            boxShadow: '1px 2px 2px 2px #d3d3d391',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
-                            borderRadius: '4px'
+                            borderRadius: '2px'
                         }}
                     >
                         <Grid
