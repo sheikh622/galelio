@@ -42,6 +42,8 @@ const SideBar = () => {
                     <Grid
                         xs={12}
                         md={10}
+                        lg={10}
+                        xl={6}
                         container
                         alignItems="center"
                         spacing={3}
@@ -50,9 +52,10 @@ const SideBar = () => {
                             pb: 3,
                             ml: 1,
                             mr: 1,
+                            display:'block',
                             boxShadow: '1px 2px 2px 2px #d3d3d391',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
-                            borderRadius: '2px'
+                            borderRadius: '4px'
                         }}
                     >
                         <Grid
