@@ -23,7 +23,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { login, loginSuccess } from '../../../../redux/auth/actions';
 import { useNavigate } from 'react-router-dom';
 import { setLoader } from '../../../../redux/auth/actions';
-import { useGoogleLogin,GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 let jwt = require('jsonwebtoken');
 import axios from 'axios';
 import { toast } from 'react-toastify';

@@ -14,7 +14,6 @@ function* loginUser({ payload }) {
             password: payload.password
         };
         const response = yield axios.post(`/auth/login`, data);
-        window.ethereum.request({method:'eth_requestAccounts'})
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
