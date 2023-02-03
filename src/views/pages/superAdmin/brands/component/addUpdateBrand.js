@@ -106,7 +106,7 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className=" dialog"
+                className="createDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
@@ -115,15 +115,16 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                 <DialogTitle id="alert-dialog-slide-title1" className="adminname">
                     {brandData.id == null ? 'Create Brand' : 'Update Brand'}
                 </DialogTitle>
-                <Divider />
+                
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container>
-                        <Grid item xs={12} md={12} lg={12} pt={2}>
+                        <Grid item xs={12} md={12} lg={12} >
                                 <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
                                     Name
                                 </InputLabel>
                                 <TextField
+                                className='field'
                                     id="name"
                                     name="name"
                                     variant="standard"
@@ -138,6 +139,7 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                             <Grid item xs={12} md={12} lg={12} pt={2}>
                                 <InputLabel htmlFor="outlined-adornment-password-login"   className='textfieldStyle'>Location</InputLabel>
                                 <TextField
+                                className='field'
                                     id="location"
                                     name="location"  variant="standard"
                                     value={formik.values.location}
@@ -145,12 +147,13 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                                     error={formik.touched.location && Boolean(formik.errors.location)}
                                     helperText={formik.touched.location && formik.errors.location}
                                     fullWidth
-                                    autoComplete="given-name"
+                                  
                                 />
                             </Grid>
                             <Grid item xs={12} md={12} lg={12} pt={2}>
                                 <InputLabel htmlFor="outlined-adornment-password-login"   className='textfieldStyle'>Description</InputLabel>
                                 <TextField
+                                className='field'
                                     id="description"
                                     name="description"  variant="standard"
                                     value={formik.values.description}
@@ -158,7 +161,7 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                                     error={formik.touched.description && Boolean(formik.errors.description)}
                                     helperText={formik.touched.description && formik.errors.description}
                                     fullWidth
-                                    autoComplete="given-name"
+                                  
                                 />
                             </Grid>
                             <Grid item xs={12} md={12} lg={12} pt={2} sx={{ml:{md:'-15px', lg:'-15px'}}}>
@@ -168,13 +171,16 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ display:'block' }}>
+                <DialogActions sx={{ display:'block',  margin:'0px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             type="submit"
                             className='buttons' size='large' 
                             variant="contained"
-                            sx={{ my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'} }}
+                            sx={{ width: '95%',
+                            margin: '10px 0px 10px 0px', 
+                            background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' ,
+                           }}
                             onClick={() => {
                                 formik.handleSubmit();
                             }}
@@ -183,13 +189,13 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                         >
                             {brandData.id == null ? 'Create' : 'Update'}
                         </Button>
-                    </AnimateButton>
-                    <AnimateButton>
+                    
                         <Button
-                            variant="contained"
-                            sx={{ my: 1, ml: 0,  padding: {md:'6px 124px', lg:'6px 124px'} , color: '#fff' }}
+                            variant="outlined"
+                            sx={{ width: '95%',
+                            margin: '10px 0px 10px 0px',   color: '#4044ED'  }}
                             onClick={handleClose}
-                            color="secondary"
+                            
                             className='buttons' size='large' 
                         >
                             Cancel

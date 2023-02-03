@@ -6,7 +6,21 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import { updateBrandAdmin, addBrandAdmin } from 'redux/brandAdmin/actions';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Button, InputLabel,InputAdornment,IconButton, Dialog, DialogActions,Input, DialogContent, DialogTitle, Slide, TextField, Divider, Grid } from '@mui/material';
+import {
+    Button,
+    InputLabel,
+    InputAdornment,
+    IconButton,
+    Dialog,
+    DialogActions,
+    Input,
+    DialogContent,
+    DialogTitle,
+    Slide,
+    TextField,
+    Divider,
+    Grid
+} from '@mui/material';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminData, page, limit, search }) {
@@ -102,21 +116,26 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title "
-                className="brandDialog dialog"
+                className="createDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="form-dialog-title" className="adminname" >{brandAdminData.id == null ? 'Add Brand Admin ' : ' Update Brand Admin '}</DialogTitle>
-                <Divider />
+                <DialogTitle id="form-dialog-title" className="adminname">
+                    {brandAdminData.id == null ? 'Create Brand Admin ' : ' Update Brand Admin '}
+                </DialogTitle>
+
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
                             <>
-                                <Grid item xs={6} pt={2} md={12} lg={12}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">First Name</InputLabel>
+                                <Grid item xs={6} md={12} lg={12}>
+                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
+                                        First Name
+                                    </InputLabel>
                                     <TextField
+                                        className="field"
                                         id="firstName"
                                         name="firstName"
                                         value={formik.values.firstName}
@@ -124,13 +143,16 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                                         helperText={formik.touched.firstName && formik.errors.firstName}
                                         fullWidth
-                                        autoComplete="given-name"
                                         variant="standard"
                                     />
                                 </Grid>
                                 <Grid item xs={6} pt={2} md={12} lg={12}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">Last Name</InputLabel>
+                                    <InputLabel htmlFor="outlined-adornment-password-login" 
+                                    className="textfieldStyle">
+                                        Last Name
+                                    </InputLabel>
                                     <TextField
+                                        className="field"
                                         id="lastName"
                                         name="lastName"
                                         value={formik.values.lastName}
@@ -138,13 +160,15 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                                         helperText={formik.touched.lastName && formik.errors.lastName}
                                         fullWidth
-                                        autoComplete="given-name"
                                         variant="standard"
                                     />
                                 </Grid>
-                                <Grid item xs={6} pt={2}  md={12} lg={12}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">Email</InputLabel>
+                                <Grid item xs={6} pt={2} md={12} lg={12}>
+                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
+                                        Email
+                                    </InputLabel>
                                     <TextField
+                                        className="field"
                                         id="adminEmail"
                                         name="adminEmail"
                                         value={formik.values.adminEmail}
@@ -152,13 +176,12 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         error={formik.touched.adminEmail && Boolean(formik.errors.adminEmail)}
                                         helperText={formik.touched.adminEmail && formik.errors.adminEmail}
                                         fullWidth
-                                        autoComplete="given-name"
                                         variant="standard"
                                     />
                                 </Grid>
-                                
+
                                 <Grid item xs={6} pt={2} md={12} lg={12}>
-                      {/*           <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
+                                    {/*           <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
                                 <Input
                                   id="standard-adornment-password adminPassword"
                                   type={showPassword ? 'text' : 'password'}
@@ -181,30 +204,31 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                     </InputAdornment>
                                   }
                                 /> */}
-                                    <InputLabel  htmlFor="standard-adornment-password"
-                                    className="textfieldStyle">Password</InputLabel>
+                                    <InputLabel htmlFor="standard-adornment-password" className="textfieldStyle">
+                                        Password
+                                    </InputLabel>
                                     <Input
+                                        className="field"
                                         id="standard-adornment-password adminPassword"
                                         name="adminPassword"
                                         type={showPassword ? 'text' : 'password'}
-                                          value={formik.values.adminPassword}
+                                        value={formik.values.adminPassword}
                                         onChange={formik.handleChange}
                                         error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
                                         helperText={formik.touched.adminPassword && formik.errors.adminPassword}
                                         fullWidth
-                                        autoComplete=""
                                         variant="standard"
                                         endAdornment={
                                             <InputAdornment position="end">
-                                              <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                              >
-                                                {showPassword ? <Visibility /> :  <VisibilityOff />}
-                                              </IconButton>
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
                                             </InputAdornment>
-                                          }
+                                        }
                                     />
                                 </Grid>
                             </>
@@ -212,13 +236,18 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{ display:'block'}}>
+                <DialogActions sx={{ display: 'block', margin: '0px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             variant="contained"
-                            sx={{  my: 1, ml: 1,  padding: {md:'6px 124px', lg:'6px 124px'}  }}
+                            sx={{
+                                width: '95%',
+                                margin: '10px 0px 10px 0px',
+                                background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
+                            }}
                             type="submit"
-                            className='buttons' size='large' 
+                            className="buttons"
+                            size="large"
                             disableElevation
                             onClick={() => {
                                 formik.handleSubmit();
@@ -226,14 +255,13 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                         >
                             {brandAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
-                    </AnimateButton>
-                    <AnimateButton>
+
                         <Button
-                            variant="contained"
-                            sx={{ my: 1, ml: 0,  padding: {md:'6px 124px', lg:'6px 124px'} , color: '#fff' }}
+                            variant="outlined"
+                            sx={{ width: '95%', margin: '10px 0px 10px 0px', color: '#4044ED' }}
                             onClick={handleClose}
-                            color="secondary"
-                            className='buttons' size='large' 
+                            className="buttons"
+                            size="large"
                         >
                             Cancel
                         </Button>

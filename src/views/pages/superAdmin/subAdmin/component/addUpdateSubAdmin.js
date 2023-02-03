@@ -153,7 +153,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog dialog"
+                className="adminDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
@@ -162,17 +162,18 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 <DialogTitle id="form-dialog-title" className="adminname">
                     {subAdminData.id == null ? 'Create Admin' : ' Update Admin'}
                 </DialogTitle>
-                <Divider />
+                
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
                             <>
-                                <Grid item xs={12} md={12} lg={12} pt={2}>
+                                <Grid item xs={12} md={12} lg={12} >
                                     <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
                                         First Name
                                     </InputLabel>
 
                                     <TextField
+                                    className='field'
                                         id="firstName"
                                         name="firstName"
                                         value={formik.values.firstName}
@@ -188,7 +189,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
                                         Last Name
                                     </InputLabel>
-                                    <TextField
+                                    <TextField className='field'
                                         id="lastName"
                                         name="lastName"
                                         value={formik.values.lastName}
@@ -205,6 +206,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         Email
                                     </InputLabel>
                                     <TextField
+                                    className='field'
                                         variant="standard"
                                         id="adminEmail"
                                         name="adminEmail"
@@ -213,13 +215,14 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         error={formik.touched.adminEmail && Boolean(formik.errors.adminEmail)}
                                         helperText={formik.touched.adminEmail && formik.errors.adminEmail}
                                         fullWidth
-                                        autoComplete="given-name"
+                                        
                                     />
                                 </Grid>
 
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
                                 <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
                                 <Input
+                                className='field'
                                   id="standard-adornment-password adminPassword"
                                   type={showPassword ? 'text' : 'password'}
                                   name="adminPassword"
@@ -228,7 +231,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                   error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
                                   helperText={formik.touched.adminPassword && formik.errors.adminPassword}
                                   fullWidth
-                                  autoComplete="given-name"
+                                 
                                   endAdornment={
                                     <InputAdornment position="end">
                                       <IconButton
@@ -245,8 +248,9 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                              
                                 </Grid>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel htmlFor="">Wallet Address</InputLabel>
+                                    <InputLabel className="textfieldStyle" htmlFor="">Wallet Address</InputLabel>
                                     <TextField
+                                    className='field'
                                         variant="standard"
                                         id="walletAddress"
                                         name="walletAddress"
@@ -261,14 +265,15 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
 
                                 {subAdminData?.id == null && (
                                     <Grid item xs={6} md={12} lg={12} pt={2}>
-                                        {/* <InputLabel htmlFor="">Select Brand Category</InputLabel> */}
+                                        <InputLabel className="textfieldStyle" htmlFor="">Select Category</InputLabel> 
                                         <TextField
+                                        
                                             variant="standard"
-                                            className="responsiveSelectfield textfieldStyle"
+                                            className="responsiveSelectfield textfieldStyle field"
                                             id="outlined-select-budget"
                                             select
                                             fullWidth
-                                            label="Select Category"
+                                            // label="Select Category"
                                             // value={category}
                                             onChange={handleBrandCategoryChange}
                                         >
@@ -286,12 +291,16 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ display: 'block' }}>
-                    <AnimateButton>
-                        <Button
+                <DialogActions sx={{ display: 'block' , margin:'0px 10px 0px 20px'}}>
+               <AnimateButton>
+                    
+                        <Button 
+                        
                             className="buttons"
                             variant="contained"
-                            sx={{ my: 1, ml: 1, padding: { md: '6px 124px', lg: '6px 124px' } }}
+                            sx={{  width: '95%',
+                                margin: '10px 0px 10px 0px',
+                            background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -301,12 +310,13 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         >
                             {subAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
-                    </AnimateButton>
-                    <AnimateButton>
-                        <Button
+                      
+                    
+                        <Button 
                             className="buttons"
-                            variant="contained"
-                            sx={{ my: 1, ml: 0, padding: { md: '6px 124px', lg: '6px 124px' }, color: '#fff' }}
+                            variant="outlined"
+                            sx={{  width: '95%',
+                            margin: '10px 0px 10px 0px', color: '#4044ED' , }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"
