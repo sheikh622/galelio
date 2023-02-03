@@ -131,7 +131,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog dialog"
+                className="adminDialog dialog"
                 maxWidth="sm"
                 TransitionComponent={Transition}
                 keepMounted
@@ -148,7 +148,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                 {!isUpdate && (
                                     <Grid item xs={12} pt={2}>
                                         <TextField
-                                            className="responsiveSelectfield textfieldStyle"
+                                            className="responsiveSelectfield textfieldStyle field"
                                             id="outlined-select-budget"
                                             select
                                             fullWidth
@@ -171,7 +171,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
 
                                 <Grid item xs={12} pt={2}>
                                     <TextField
-                                        className="textfieldStyle"
+                                        className="textfieldStyle field"
                                         variant="standard"
                                         id="profitPercentage"
                                         name="profitPercentage"
@@ -181,7 +181,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                         error={formik.touched.profitPercentage && Boolean(formik.errors.profitPercentage)}
                                         helperText={formik.touched.profitPercentage && formik.errors.profitPercentage}
                                         fullWidth
-                                        autoComplete="given-name"
+                                       
                                     />
                                 </Grid>
                             </>
@@ -189,12 +189,14 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{ display: 'block' }}>
+                <DialogActions sx={{ display: 'block' ,  margin:'0px 10px 0px 20px'}}>
                     <AnimateButton>
                         <Button
                             variant="contained"
                             className="buttons"
-                            sx={{ my: 3, ml: 1, my: 1, ml: 1, padding: { md: '6px 124px', lg: '6px 124px' } }}
+                            sx={{ width: '95%',
+                            margin: '10px 0px 10px 0px', 
+                             background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' }}
                             type="submit"
                             size="large"
                             disableElevation
@@ -204,12 +206,12 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         >
                             {!isUpdate ? 'Create ' : 'Update '}
                         </Button>
-                    </AnimateButton>
-                    <AnimateButton>
+                    
                         <Button
                             className="buttons"
-                            variant="contained"
-                            sx={{ my: 1, ml: 0, padding: { md: '6px 124px', lg: '6px 124px' }, color: '#fff' }}
+                            variant="outlined"
+                            sx={{ my: 1, ml: 0,width: '95%',
+                            margin: '10px 0px 10px 0px',  color: '#4044ED' }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"

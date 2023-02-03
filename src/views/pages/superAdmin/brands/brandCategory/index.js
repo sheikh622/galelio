@@ -62,7 +62,9 @@ const BrandCategory = () => {
 
                 title={
                     <Typography variant="h1" component="h2" className='headingcard' sx={{ marginTop:'10px' ,  
-                        fontWeight: 600, color: '#000' , marginLeft:{lg:'-20px', md:'-20px'} }}>
+                        fontWeight: 600, color: '#000' , marginLeft:{lg:'-20px', md:'-20px'}, 
+                        background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                        color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}>
                            
                         Brand Management
                     </Typography>
