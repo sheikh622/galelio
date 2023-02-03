@@ -190,8 +190,7 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" 
-            sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
+            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
                 <Toolbar>
                     <Box
                         sx={{
@@ -208,9 +207,13 @@ export default function Header() {
                         <Box sx={{ display: { xs: 'block', md: 'block' } }}>
                             <Typography variant="h6" noWrap component="div" sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                                    <img  src={galileoWhite}    onClick={() => {
+                                        navigate('/landingPage');
+                                    }} alt="Galileo White Logo" width="100" />
                                 ) : (
-                                    <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                                    <img  src={galileo}    onClick={() => {
+                                        navigate('/landingPage');
+                                    }} alt="Galileo Dark Logo" width="100" />
                                 )}
                             </Typography>
                         </Box>
@@ -234,19 +237,17 @@ export default function Header() {
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ flexGrow: 1 }} />
 
-                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') &&
-                         (user?.role != 'User' && user != null)
-                       && (
-                        <Box>
-                            <Button
-                                sx={{ marginRight: '10px' ,  }}
-                                variant="outlined"
-                                onClick={() => {
-                                    navigate('/dashboard');
-                                }}
-                            >
-                                Dashboard
-                            </Button>
+                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && user?.role != 'User' && user != null && (
+                            <Box>
+                                <Button
+                                    sx={{ marginRight: '10px' }}
+                                    variant="outlined"
+                                    onClick={() => {
+                                        navigate('/dashboard');
+                                    }}
+                                >
+                                    Dashboard
+                                </Button>
                             </Box>
                         )}
 
@@ -276,12 +277,11 @@ export default function Header() {
                         )}
                         {user !== null && (
                             <>
-                            {theme.palette.mode === 'dark' ? (
-                                <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
-                            ) : (
-                                <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
-                            )}
-                               
+                                {theme.palette.mode === 'dark' ? (
+                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                ) : (
+                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                )}
 
                                 <IconButton
                                     size="large"
