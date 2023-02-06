@@ -697,9 +697,11 @@ text-transform: capitalize;
     border-radius: 20px;
 }
 .text {
-    font-weight: 700;
     font-size: 22px;
     text-transform: capitalize;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
 }
 
 .creator {
@@ -1327,7 +1329,7 @@ text-transform: capitalize;
 }
 .MuiInputBase-input {
     font: inherit;
-    // color: currentColor;
+    color: currentColor;
     width: 100%;
     border: 0;
     height: 1.1876em;
@@ -1341,5 +1343,5 @@ text-transform: capitalize;
     letter-spacing: inherit;
     animation-duration: 10ms;
     -webkit-tap-highlight-color: transparent;
-    color: white !important;
+ 
 }

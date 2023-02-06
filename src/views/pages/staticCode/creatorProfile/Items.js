@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import SearchIcon from '@material-ui/icons/Search';
 import {
     Container,
     Card,
@@ -13,7 +14,8 @@ import {
     OutlinedInput,
     InputAdornment,
     TextField,
-    MenuItem
+    MenuItem,
+    IconButton
 } from '@mui/material';
 import React from 'react';
 // project imports
@@ -22,8 +24,8 @@ import { IconSearch } from '@tabler/icons';
 import { gridSpacing } from 'store/constant';
 
 import CardMedia from '@mui/material/CardMedia';
-
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import MenuOpenIcon from 'assets/images/clearData.png'
+// import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllNftUser } from 'redux/nftManagement/actions';
 import { useNavigate } from 'react-router-dom';
@@ -81,10 +83,27 @@ const Items = () => {
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container sx={{ mb: 2 }}>
                     <Grid item md={1} xs={12}>
-                        <MenuOpenIcon />
+                        <img src={MenuOpenIcon} />
                     </Grid>
-                    <Grid item md={7} xs={12} sx={{ marginLeft: { md: '-88px', xl: '-88px' }, marginTop: { md: '-8px' } }}>
-                        <OutlinedInput
+                    <Grid item md={7} xs={12} sx={{ marginLeft: { md: '-74px', xl: '-74px' },
+                     marginTop: { md: '-11px' } }}>
+                        <TextField sx={{  backgroundColor: theme.palette.mode === 'dark' ?'#181C1F' : '#ccc',
+                        color: theme.palette.mode === 'dark' ?'#fff' : '#000',
+                        borderRadius: '4px' , padding:'20px 3px 0 0'}}
+                        fullWidth
+                        variant='standard'
+                            placeholder='Search by name or attribute'
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment>
+                                        <IconButton>
+                                            <SearchIcon />
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}
+                        />
+                    {/*     <OutlinedInput
                             fullWidth
                             id="input-search-list-style1"
                             placeholder="Search by name or attribute"
@@ -97,17 +116,23 @@ const Items = () => {
                             // onChange={(e) => {
                             //     setSearch(e.target.value);
                             // }}
-                        />
+                        /> */}
                     </Grid>
                     <Grid
                         item
-                        md={4}
+                        md={3}
                         xs={12}
-                        sx={{ marginLeft: { md: '6px', xl: '6px' }, marginTop: { md: '-8px', xs: '10px', sm: '10px' } }}
+                        sx={{
+                        backgroundColor: theme.palette.mode === 'dark' ?'#181C1F' : '#ccc',
+                        color: theme.palette.mode === 'dark' ?'#fff' : '#000',
+                        marginLeft: { md: '6px', xl: '6px' }, 
+                        marginTop: { md: '-11px', xs: '10px', sm: '10px' } }}
                     >
                         <TextField
-                            sx={{ borderRadius: '4px' }}
-                            className="select"
+                        variant='standard'
+                        sx={{  backgroundColor: theme.palette.mode === 'dark' ?'#181C1F' : '#ccc', border:'2px solid #181C1F !important',
+                        borderRadius: '4px' , padding:'15px 3px 0 3px !important'}}
+                            // className="select"
                             fullWidth
                             size="small"
                             id="standard-select-currency"
