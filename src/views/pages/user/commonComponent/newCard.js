@@ -41,8 +41,8 @@ const NewCard = ({ data, nfts }) => {
                     // maxWidth: nfts && nfts?.length > 3? 0 : 365,
                     width: nfts && nfts?.length > 5 ? '100%' : { lg: '220px' },
                     
-                    boxShadow: '1px 2px 6px #d3d3d3',
-                    borderRadius: '7px',
+                    // boxShadow: '1px 2px 6px #d3d3d3',
+                    borderRadius: '3px',
                     marginBottom: '10px'
                 }}
             >
