@@ -75,6 +75,7 @@ const SubAdmin = () => {
                         </Grid>
                         <Grid item xs={3} lg={2}>
                             <OutlinedInput
+                            variant='standard'
                                 id="input-search-list-style1"
                                 placeholder="Search"
                                 startAdornment={
