@@ -127,8 +127,9 @@ const Categories = ({ categories }) => {
                                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                                                     width: categories && categories?.length > 5 ? '100%' : 
-                                                    { lg: '220px' }, boxShadow: '1px 2px 6px #d3d3d3',
-                                                    borderRadius: '7px',
+                                                    { lg: '220px' },
+                                                    //  boxShadow: '1px 2px 6px #d3d3d3',
+                                                    borderRadius: '3px',
                                                     marginBottom: '10px'
                                                     
                                                 }}
@@ -153,7 +154,7 @@ const Categories = ({ categories }) => {
                                                             position: 'relative',
                                                             background: theme.palette.mode === 'dark' ? 
                                                             theme.palette.dark.main : '#f3f3f3',
-                                                            boxShadow: '1px 2px 9px #d3d3d3'
+                                                            // boxShadow: '1px 2px 9px #d3d3d3'
                                                         }}
                                                     >
                                                         <CardMedia component="img" height="200" image={item.image} />
