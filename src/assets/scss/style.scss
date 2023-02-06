@@ -362,15 +362,18 @@ body {
     background: #2F5AFF !important;
     color: #e3f2fd !important;
 }
-.css-1pqm26d-MuiAvatar-img {
-    width: 100% !important;
-    height: 56px !important;
-    text-align: center;
-    object-fit: cover !important;
-    color: transparent;
-    background: transparent !important;
-    text-indent: 10000px;
+.avatarStyle{
+    
 }
+// .css-1pqm26d-MuiAvatar-img {
+//     width: 100% !important;
+//     height: 56px !important;
+//     text-align: center;
+//     object-fit: cover !important;
+//     color: transparent;
+//     background: transparent !important;
+//     text-indent: 10000px;
+// }
 .css-1qed7u8-MuiButtonBase-root-MuiListItemButton-root:hover {
     color: #fff !important;
     background-color:rgba(47, 83, 255, 0.1411764706) !important;
@@ -1321,4 +1324,22 @@ text-transform: capitalize;
     text-align: center !important;
     text-transform: capitalize !important;
     color: #CDCDCD !important;
+}
+.MuiInputBase-input {
+    font: inherit;
+    // color: currentColor;
+    width: 100%;
+    border: 0;
+    height: 1.1876em;
+    margin: 0;
+    display: block;
+    padding: 6px 0 7px;
+    min-width: 0;
+    background: none;
+    box-sizing: content-box;
+    animation-name: mui-auto-fill-cancel;
+    letter-spacing: inherit;
+    animation-duration: 10ms;
+    -webkit-tap-highlight-color: transparent;
+    color: white !important;
 }
