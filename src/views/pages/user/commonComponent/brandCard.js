@@ -39,8 +39,8 @@ const BrandCard = ({ data, brands }) => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     width: brands && brands?.length > 5 ? '100%' : { lg: '220px' },
-                    boxShadow: '1px 2px 6px #d3d3d3',
-                    borderRadius: '7px',
+                    // boxShadow: '1px 2px 6px #d3d3d3',
+                    borderRadius: '3px',
                     marginBottom: '10px'
                 }}
             >
