@@ -40,7 +40,7 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
             />
             <DeleteCategoryDialog />
             <TableContainer>
-            {(categoryList.categories == undefined && categoryList.categories?.length == 0) || undefined ? (
+            {( categoryList.categories?.length == 0) || undefined ? (
                 <>
                     <Grid item>
                          
@@ -51,7 +51,8 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                 </>
             ) : (
                 <>
-                {categoryList.categories?.length > 0 ? (
+
+                {categoryList.categories !== undefined || categoryList.categories?.length > 0 ? (
                 <Table>
                     <TableHead>
                     <TableRow>

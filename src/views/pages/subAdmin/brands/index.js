@@ -25,10 +25,10 @@ import HeadingCard from 'shared/Card/HeadingCard';
 
 const Brands = () => {
     const user = useSelector((state) => state.auth.user);
-    console.log('user', user);
+    
     const theme = useTheme();
     const dispatch = useDispatch();
-    const brandsList = useSelector((state) => state.brand.brandsList);
+    const brandsList = useSelector((state) => state.brand.brandsByAdminList);
 
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -55,10 +55,11 @@ const Brands = () => {
         
 
             dispatch(
-                getAllBrands({
+                getAllBrandsByAdmin({
                     search: search,
                     page: page,
-                    limit: limit
+                    limit: limit,
+                    id: user.id
                 })
             );
         
@@ -82,18 +83,16 @@ const Brands = () => {
             //       </Typography>
             //       </Grid></Grid> */}
 
-
-            <MainCard className='tableShadow' 
-                title={ 
-                    <Grid container spacing={4} >
-                    <Grid item xs={12} lg={8} >
-                    <Typography className='mainheading' variant="h1" component="h2"
-                     sx={{marginLeft:{lg:'44px', md:'44px' }}}>
-                   Brands
-                  </Typography>
-                    </Grid>
-                        <Grid item xs={6} lg={2} >
-                       
+            <MainCard
+                className="tableShadow"
+                title={
+                    <Grid container spacing={4}>
+                        <Grid item xs={6} lg={8}>
+                            <Typography className="mainheading" variant="h1" component="h2" sx={{ marginLeft: { lg: '44px', md: '44px' } }}>
+                                Brands
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={3} lg={2}>
                             <OutlinedInput
                                 id="input-search-list-style1"
                                 placeholder="Search"
@@ -108,18 +107,20 @@ const Brands = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={6} lg={2} textAlign="start">
-                            <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
-                                variant="contained"
-                                size="large"
-                                onClick={() => {
-                                    setAddUpdateOpen(true);
-                                    setBrandData({ id: null, name: '', description: '', location: '', image: null });
-                                }}
-                            >
-                                Create
-                            </Button>
-                        </Grid>
+                            {/* <Grid item xs={3} lg={2} textAlign="start">
+                                <Button
+                                    className="buttonSize"
+                                    sx={{ marginLeft: { lg: '-16px', md: '-16px' } }}
+                                    variant="contained"
+                                    size="large"
+                                    onClick={() => {
+                                        setAddUpdateOpen(true);
+                                        setBrandData({ id: null, name: '', description: '', location: '', image: null });
+                                    }}
+                                >
+                                    Create
+                                </Button>
+                            </Grid> */}
                     </Grid>
                 }
                 content={false}

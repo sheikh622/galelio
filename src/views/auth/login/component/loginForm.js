@@ -102,6 +102,11 @@ const LoginForm = ({ loginProp, ...others }) => {
     const responseFacebookFailure = () => {
         toast.error('Facebook login failed');
     };
+
+
+      
+
+
     return (
         <>
             <Formik
@@ -256,6 +261,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                             //     width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },
                             //     margin: { xs: '0 auto', sm: '0 auto', sm: '0 auto' }
                             // }}
+                            
                         >
                             <Button
                                 variant="outlined"
@@ -289,10 +295,12 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 marginTop: '10px'
                             }}
                         >
+
+                            
                             <GoogleLogin
-                                select_account={false}
-                                auto_select={false}
+                                
                                 onSuccess={(data) => {
+                                    console.log('datafrom google login',data);
                                     googleAuthHandle(data);
                                 }}
                                 onError={() => {

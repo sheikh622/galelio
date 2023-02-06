@@ -228,6 +228,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
+                 
                         <FormControl
                             fullWidth
                             error={Boolean(touched.password && errors.password)}
@@ -262,17 +263,19 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
+                        <div>* Password should be 8 characters long containing 1 Uppercase, 1 Numeric and 1 special character</div>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Address </InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Delivery Address </InputLabel>
                             <OutlinedInput
                                 type="address"
                                 value={values.address}
-                                name="address"
+                                name="delivery_address"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Address"
+                                label="Delivery Address"
+                                    // helperText="Some important text"
                                 inputProps={{}}
-                            />
+                                />
                             {touched.address && errors.address && (
                                 <FormHelperText error id="standard-weight-helper-text-name-login">
                                     {errors.address}
