@@ -1,59 +1,45 @@
 import { forwardRef, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useFormik, validateYupSchema } from 'formik';
+import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import { addSubAdmin, updateSubAdmin } from 'redux/subAdmin/actions';
-import NFTAbi from '../../../../../contractAbi/NFT.json';
-import { ethers } from 'ethers';
+import { updateBrandAdmin, addBrandAdmin } from 'redux/brandAdmin/actions';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
     Button,
     InputLabel,
+    InputAdornment,
+    IconButton,
     Dialog,
     DialogActions,
+    Input,
     DialogContent,
-    OutlinedInput,
     DialogTitle,
     Slide,
     TextField,
     Divider,
-    Grid,Input,
-    MenuItem , InputAdornment,IconButton, CircularProgress
+    Grid
 } from '@mui/material';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, page, limit, search, setSubAdminData }) {
+export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminData, page, limit, search }) {
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState(false);
-    const [contractAddress, setContractAddress] = useState('');
-    const [brandCategoryId, setBrandCategoryId] = useState(0);
     const [showPassword, setShowPassword] = useState(false);
-    const [loader, setLoader] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const blockChainRole = '0xd2e4c2619ea6e0faebc405d89445161c041e30fe03373ea0473da142d57d4514';
-
     useEffect(() => {
-        if (subAdminData.id == null) {
+        if (brandAdminData.id == null) {
             setIsUpdate(false);
         } else {
             setIsUpdate(true);
         }
-    }, [subAdminData]);
-
-    const handleBrandCategoryChange = (e) => {
-        setContractAddress(e.target.value.contractAddress);
-        setBrandCategoryId(e.target.value.id);
-    };
+    }, [brandAdminData]);
 
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
@@ -66,7 +52,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
             .max(42, 'Last Name can not exceed 42 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-        walletAddress: Yup.string().required('Wallet Address is required!'),
+
         adminPassword: Yup.mixed().when(['isUpdate'], {
             is: false,
             then: Yup.string()
@@ -82,36 +68,19 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         })
     });
 
-    const grantRole = async () => {};
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: subAdminData,
+        initialValues: brandAdminData,
         validationSchema,
-        onSubmit: async (values) => {
-            if (subAdminData.id == null) {
-                setLoader(true)
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
-
-                const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
-
-                let mintedNFT = await (
-                    await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
-                        toast.error(`${error.message}`);
-                        setLoader(false)
-                        setOpen(false)
-                    })
-                ).wait();
-
+        onSubmit: (values) => {
+            if (brandAdminData.id == null) {
                 dispatch(
-                    addSubAdmin({
+                    addBrandAdmin({
+                        brandId: brandAdminData.brandId,
                         firstName: values.firstName,
                         lastName: values.lastName,
                         email: values.adminEmail,
                         password: values.adminPassword,
-                        walletAddress: values.walletAddress,
-                        brandCategory: brandCategoryId,
                         page: page,
                         limit: limit,
                         search: search,
@@ -120,13 +89,13 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 );
             } else {
                 dispatch(
-                    updateSubAdmin({
-                        id: subAdminData.id,
+                    updateBrandAdmin({
+                        id: brandAdminData.id,
+                        brandId: brandAdminData.brandId,
                         firstName: values.firstName,
                         lastName: values.lastName,
                         email: values.adminEmail,
                         password: values.adminPassword,
-                        walletAddress: values.walletAddress,
                         page: page,
                         limit: limit,
                         search: search,
@@ -136,56 +105,37 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
             }
         }
     });
-
-    
     const handleClose = () => {
         setOpen(false);
-        setLoader(false)
-        setSubAdminData({
-            id: null,
-            firstName: '',
-            lastName: '',
-            adminEmail: '',
-            adminPassword: '',
-            walletAddress: '',
-            role: '',
-            isActive: '',
-            walletAddress: ''
-        });
         formik.resetForm();
     };
-    const { brandCategories } = useSelector((state) => state.brandCategoryReducer.brandCategoriesAdminList);
 
     return (
         <>
-          
             <Dialog
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="form-dialog-title"
-                className="adminDialog dialog"
+                aria-labelledby="form-dialog-title "
+                className="createDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-              
                 <DialogTitle id="form-dialog-title" className="adminname">
-                    {subAdminData.id == null ? 'Create Admin' : ' Update Admin'}
+                    {brandAdminData.id == null ? 'Create Brand Admin ' : ' Update Brand Admin '}
                 </DialogTitle>
-                    
-                
+
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
                             <>
-                                <Grid item xs={12} md={12} lg={12} >
-                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
+                                <Grid item xs={6} md={12} lg={12}>
+                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
                                         First Name
                                     </InputLabel>
-
                                     <TextField
-                                    className='field'
+                                        className="field"
                                         id="firstName"
                                         name="firstName"
                                         value={formik.values.firstName}
@@ -194,14 +144,15 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         helperText={formik.touched.firstName && formik.errors.firstName}
                                         fullWidth
                                         variant="standard"
-                                        autoComplete="given-name"
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
+                                <Grid item xs={6} pt={2} md={12} lg={12}>
+                                    <InputLabel htmlFor="outlined-adornment-password-login" 
+                                    className="textfieldStyle">
                                         Last Name
                                     </InputLabel>
-                                    <TextField className='field'
+                                    <TextField
+                                        className="field"
                                         id="lastName"
                                         name="lastName"
                                         value={formik.values.lastName}
@@ -209,17 +160,15 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                                         helperText={formik.touched.lastName && formik.errors.lastName}
                                         fullWidth
-                                        autoComplete="given-name"
                                         variant="standard"
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
+                                <Grid item xs={6} pt={2} md={12} lg={12}>
+                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
                                         Email
                                     </InputLabel>
                                     <TextField
-                                    className='field'
-                                        variant="standard"
+                                        className="field"
                                         id="adminEmail"
                                         name="adminEmail"
                                         value={formik.values.adminEmail}
@@ -227,14 +176,13 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         error={formik.touched.adminEmail && Boolean(formik.errors.adminEmail)}
                                         helperText={formik.touched.adminEmail && formik.errors.adminEmail}
                                         fullWidth
-                                        
+                                        variant="standard"
                                     />
                                 </Grid>
 
-                                <Grid item xs={12} md={12} lg={12} pt={2}>
-                                <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Grid item xs={6} pt={2} md={12} lg={12}>
+                                    {/*           <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
                                 <Input
-                                className='field'
                                   id="standard-adornment-password adminPassword"
                                   type={showPassword ? 'text' : 'password'}
                                   name="adminPassword"
@@ -243,7 +191,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                   error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
                                   helperText={formik.touched.adminPassword && formik.errors.adminPassword}
                                   fullWidth
-                                 
+                                  autoComplete="given-name"
                                   endAdornment={
                                     <InputAdornment position="end">
                                       <IconButton
@@ -255,100 +203,71 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                       </IconButton>
                                     </InputAdornment>
                                   }
-                                />
-                      
-                             
-                                </Grid>
-                                <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel className="textfieldStyle" htmlFor="">Wallet Address</InputLabel>
-                                    <TextField
-                                    className='field'
-                                        variant="standard"
-                                        id="walletAddress"
-                                        name="walletAddress"
-                                        value={formik.values.walletAddress}
+                                /> */}
+                                    <InputLabel htmlFor="standard-adornment-password" className="textfieldStyle">
+                                        Password
+                                    </InputLabel>
+                                    <Input
+                                        className="field"
+                                        id="standard-adornment-password adminPassword"
+                                        name="adminPassword"
+                                        type={showPassword ? 'text' : 'password'}
+                                        value={formik.values.adminPassword}
                                         onChange={formik.handleChange}
-                                        error={formik.touched.walletAddress && Boolean(formik.errors.walletAddress)}
-                                        helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                        error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
+                                        helperText={formik.touched.adminPassword && formik.errors.adminPassword}
                                         fullWidth
-                                        autoComplete=""
+                                        variant="standard"
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
                                     />
                                 </Grid>
-
-                                {subAdminData?.id == null && (
-                                    <Grid item xs={6} md={12} lg={12} pt={2}>
-                                        <InputLabel className="textfieldStyle" htmlFor="">Select Category</InputLabel> 
-                                        <TextField
-                                        
-                                            variant="standard"
-                                            className="responsiveSelectfield textfieldStyle field"
-                                            id="outlined-select-budget"
-                                            select
-                                            fullWidth
-                                            // label="Select Category"
-                                            // value={category}
-                                            onChange={handleBrandCategoryChange}
-                                        >
-                                           
-                                            {brandCategories?.map((data, index) => (
-                                                <MenuItem key={index} value={data}>
-                                                    {data.Category.name} ({data.Brand.name})
-                                                </MenuItem>
-                                            ))}
-                                        </TextField>
-                                    </Grid>
-                                )}
                             </>
                         </Grid>
                     </form>
                 </DialogContent>
-                <Divider />
-                {loader ? (
-                        <CircularProgress
-                        
-                        sx={{mt:6, mb:6,ml:2}}
-                        
-                        />
-                    ) : (
-                <DialogActions sx={{ display: 'block' , margin:'0px 10px 0px 20px'}}>
-               <AnimateButton>
-           
-                        <>
-                        <Button 
-                        
-                            className="buttons"
+
+                <DialogActions sx={{ display: 'block', margin: '0px 10px 0px 20px' }}>
+                    <AnimateButton>
+                        <Button
                             variant="contained"
-                            sx={{  width: '95%',
+                            sx={{
+                                width: '95%',
                                 margin: '10px 0px 10px 0px',
-                            background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' }}
+                                background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
+                            }}
                             type="submit"
+                            className="buttons"
                             size="large"
                             disableElevation
                             onClick={() => {
                                 formik.handleSubmit();
                             }}
                         >
-                            {subAdminData.id == null ? 'Create ' : 'Update '}
+                            {brandAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
-                      
-                    
-                        <Button 
-                            className="buttons"
+
+                        <Button
                             variant="outlined"
-                            sx={{  width: '95%',
-                            margin: '10px 0px 10px 0px', color: '#4044ED' , }}
+                            sx={{ width: '95%', margin: '10px 0px 10px 0px', color: '#4044ED' }}
                             onClick={handleClose}
-                            color="secondary"
+                            className="buttons"
                             size="large"
                         >
                             Cancel
                         </Button>
-                        </>
                     </AnimateButton>
                 </DialogActions>
-                    )}
             </Dialog>
-                 
         </>
     );
 }

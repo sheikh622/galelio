@@ -6,6 +6,8 @@ import {
     ADD_BRAND,
     UPDATE_BRAND,
     DELETE_BRAND,
+    GET_ALL_BRANDS_BY_ADMIN,
+    GET_ALL_BRANDS_BY_ADMIN_SUCCESS
 
 } from './constants';
 
@@ -18,9 +20,24 @@ export const getAllBrands = (data) => {
     };
 };
 
+
+export const getAllBrandsByAdmin = (data) => {
+    return {
+        type: GET_ALL_BRANDS_BY_ADMIN,
+        payload: data
+    };
+};
+
 export const getAllBrandsSuccess = (data) => {
     return {
         type: GET_ALL_BRANDS_SUCCESS,
+        payload: data
+    };
+};
+
+export const getAllBrandsByAdminSuccess = (data) => {
+    return {
+        type: GET_ALL_BRANDS_BY_ADMIN_SUCCESS,
         payload: data
     };
 };

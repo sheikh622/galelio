@@ -16,6 +16,8 @@ import { requestNftForMinting } from 'redux/nftManagement/actions';
 import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { ethers } from 'ethers';
 import BLOCKCHAIN from '../../../../../constants';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData, categoryId }) {
@@ -40,7 +42,15 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
             let ownerAddress = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
-            const token = new ethers.Contract(erc20Address, Erc20, signer);
+            
+            // const token = await (
+            //     await new ethers.Contract(erc20Address, Erc20, signer).catch((error) => {
+            //     toast.error(error.message);
+            //     setOpen(false)
+            //     setLoader(false)
+            // }))?.wait()
+
+                const token = new ethers.Contract(erc20Address, Erc20, signer)
 
             let data = await token.transfer(ownerAddress, prices);
 
@@ -59,6 +69,9 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
             setLoader(false);
         } catch (error) {
             console.log('error', error);
+            toast.error(error);
+            setOpen(false)
+            setLoader(false)
         }
     };
     return (

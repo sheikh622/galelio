@@ -9,6 +9,7 @@ import { Button } from '@mui/material';
 // import 'react-toastify/dist/ReactToastify.css';
 import { setWallet } from '../../../../redux/auth/actions';
 const MetaMaskSection = () => {
+    
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
     const handleConnect = async () => {

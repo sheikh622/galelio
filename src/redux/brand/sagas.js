@@ -2,10 +2,24 @@ import axios from 'utils/axios';
 import { all, call, fork, put, retry, takeLatest, select } from 'redux-saga/effects';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { makeSelectAuthToken } from 'store/Selector';
-import { getAllBrands, getAllBrandsSuccess } from './actions';
-import { GET_ALL_BRANDS, ADD_BRAND, UPDATE_BRAND, DELETE_BRAND } from './constants';
+import { getAllBrands, getAllBrandsSuccess, getAllBrandsByAdmin, getAllBrandsByAdminSuccess } from './actions';
+import { GET_ALL_BRANDS, ADD_BRAND, UPDATE_BRAND, DELETE_BRAND, GET_ALL_BRANDS_BY_ADMIN } from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
+function* getAllBrandsByAdminRequest({ payload }) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.get(`brandsByAdmin/${payload.id}?size=${payload.limit}&page=${payload.page}&search=${payload.search}`,
+         headers);
+        yield put(getAllBrandsByAdminSuccess(response.data.data));
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchGetAllBrandsByAdmin() {
+    yield takeLatest(GET_ALL_BRANDS_BY_ADMIN, getAllBrandsByAdminRequest);
+}
 function* getAllBrandsRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -100,5 +114,5 @@ export function* watchDeleteBrand() {
 }
 
 export default function* brandSaga() {
-    yield all([fork(watchGetAllBrands), fork(watchAddBrand), fork(watchDeleteBrand), fork(watchUpdateBrand)]);
+    yield all([fork(watchGetAllBrands), fork(watchAddBrand), fork(watchDeleteBrand), fork(watchUpdateBrand),fork(watchGetAllBrandsByAdmin)]);
 }

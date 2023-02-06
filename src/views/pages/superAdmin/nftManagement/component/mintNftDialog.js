@@ -62,7 +62,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             if (uriArray.length == 1) {
                 let mintedNFT = await (
                     await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
-                        toast.error(`${error.message}`);
+                        setLoader(false)
+                        setOpen(false)                            
                     })
                 ).wait();
 
@@ -72,7 +73,9 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                 await (
                     await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price).catch((error) => {
-                        toast.error(error.message);
+ 
+                        setOpen(false)
+                        setLoader(false)
                     })
                 ).wait();
 
@@ -105,6 +108,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 let mintedNFT = await (
                     await nft.bulkMint(uriArray, MarketplaceAddress.address).catch((error) => {
                         toast.error('NFT minting  unsuccessfull');
+                        setOpen(false)
+                        setLoader(false)
                     })
                 ).wait();
 
@@ -120,7 +125,10 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                 await (
                     await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price).catch((error) => {
-                        toast.error(error.message);
+          
+                        toast.error('NFT minting  unsuccessfull');
+                        setOpen(false)
+                        setLoader(false)
                     })
                 ).wait();
 
@@ -155,6 +163,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             }
         } catch (error) {
             setLoader(false);
+            setOpen(false)
         }
     };
 
@@ -177,7 +186,9 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             );
             directMintThenList(result);
         } catch (error) {
+            console.log('im here 3');
             setLoader(false);
+            setOpen(false)
         }
     };
 
