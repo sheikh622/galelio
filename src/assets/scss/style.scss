@@ -362,7 +362,19 @@ body {
     background: #2F5AFF !important;
     color: #e3f2fd !important;
 }
-
+.css-1pqm26d-MuiAvatar-img {
+    width: 100% !important;
+    height: 56px !important;
+    text-align: center;
+    object-fit: cover !important;
+    color: transparent;
+    background: transparent !important;
+    text-indent: 10000px;
+}
+.css-1qed7u8-MuiButtonBase-root-MuiListItemButton-root:hover {
+    color: #fff !important;
+    background-color:rgba(47, 83, 255, 0.1411764706) !important;
+}
 .icons:hover {
     // background-color: #ede7f6 !important;
     // color: #9c6a36 !important;

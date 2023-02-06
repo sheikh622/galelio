@@ -35,7 +35,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import UpgradePlanCard from './UpgradePlanCard';
 // import useAuth from 'hooks/useAuth';
-import User1 from 'assets/images/users/user-round.svg';
+import User1 from 'assets/images/Ellipse.png';
 import { logout } from '../../../../redux/auth/actions';
 
 // assets
