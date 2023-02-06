@@ -24,8 +24,12 @@ import DeleteSubAdminDialog from './deleteSubAdminDialog';
 import ChangeSubAdminStatusDialog from './changeSubAdminStatus';
 import ChangeRoleDialog from './changeRole';
 import ChangeSubAdminMintingAccessDialog from './changeSubAdminMintingAccess';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+// import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from 'assets/images/edit.png';
+
+// import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import DeleteOutlineOutlinedIcon from 'assets/images/delete.png';
+
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import UpdateIcon from '@mui/icons-material/Update';
 import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
@@ -233,7 +237,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                             });
                                                                         }}
                                                                     >
-                                                                        <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                                    <img src={EditOutlinedIcon} /> 
                                                                     </IconButton>
                                                                 </Tooltip>
                                                                 <Tooltip placement="top" title="Change Role">
@@ -271,7 +275,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                             });
                                                                         }}
                                                                     >
-                                                                        <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                                    <img src={DeleteOutlineOutlinedIcon}  />
                                                                     </IconButton>
                                                                 </Tooltip>
                                                             </Stack>

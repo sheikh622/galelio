@@ -55,9 +55,9 @@ const Header = ({ handleLeftDrawerToggle }) => {
                             ...theme.typography.mediumAvatar,
                             transition: 'all .2s ease-in-out',
                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.secondary.light,
-                            color: '#604223',
+                            color: '#2F5AFF',
                             '&:hover': {
-                                background: '#604223',
+                                background: '#2F5AFF',
                                 color: '#FFF'
                             }
                         }}

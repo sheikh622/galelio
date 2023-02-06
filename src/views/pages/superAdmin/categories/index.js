@@ -61,13 +61,13 @@ const Categories = () => {
             className='tableShadow'
                 title={
                     <Grid container spacing={4} >
-                    <Grid item xs={6} lg={8} >
+                    <Grid item xs={12} lg={8} >
                     <Typography className='mainheading' variant="h1" component="h2"
                      sx={{marginLeft:{lg:'48px', md:'48px'}}}>
                      Categories
                   </Typography>
                     </Grid>
-                        <Grid item xs={3} lg={2} >
+                        <Grid item xs={6} lg={2} >
                        
                         <OutlinedInput
                         id="input-search-list-style1"
@@ -83,7 +83,7 @@ const Categories = () => {
                         }}
                     />
                         </Grid>
-                        <Grid item xs={3} lg={2} textAlign="start">
+                        <Grid item xs={6} lg={2} textAlign="start">
                             <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
                                 variant="contained"
                                 size="large"

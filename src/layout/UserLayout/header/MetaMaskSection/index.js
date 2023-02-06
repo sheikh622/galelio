@@ -9,6 +9,7 @@ import { Button } from '@mui/material';
 // import 'react-toastify/dist/ReactToastify.css';
 import { setWallet } from '../../../../redux/auth/actions';
 const MetaMaskSection = () => {
+    
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
     const handleConnect = async () => {
@@ -25,7 +26,7 @@ const MetaMaskSection = () => {
             // toast.error('No crypto wallet found. Please install it.');
         }
 
-        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
         if (response) {
             const address = utils?.getAddress(response[0]);
             setWalletAddress(address);

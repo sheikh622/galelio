@@ -7,6 +7,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import React from 'react';
 import Slider from 'react-slick';
+import "@fontsource/public-sans";
 import BrandCard from '../../commonComponent/brandCard';
 const FeaturedCreators = ({ brands }) => {
     const theme = useTheme();
@@ -54,6 +55,8 @@ const FeaturedCreators = ({ brands }) => {
                 <Grid container spacing={2} sx={{ mb: 4 }}>
                     <Grid item xs={12}>
                         <Typography
+                        color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
+                        className='fontfigma'
                             variant="h2"
                             mt={4}
                             component="div"

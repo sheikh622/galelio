@@ -8,21 +8,24 @@ import {
     Button,
     Typography,
     Grid,
-    MenuItem,TextField,
+    MenuItem,
+    TextField,
     Menu,
     Pagination,
     OutlinedInput,
     InputAdornment,
-    Divider, 
+    Divider
 } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { getAllBrands } from '../../../../redux/brand/actions';
+import { getAllBrands, getAllBrandsByAdmin } from '../../../../redux/brand/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import AddUpdateBrandDialog from './component/addUpdateBrand';
 import MainCard from 'ui-component/cards/MainCard';
 import HeadingCard from 'shared/Card/HeadingCard';
 
 const Brands = () => {
+    const user = useSelector((state) => state.auth.user);
+    console.log('user', user);
     const theme = useTheme();
     const dispatch = useDispatch();
     const brandsList = useSelector((state) => state.brand.brandsList);
@@ -47,14 +50,18 @@ const Brands = () => {
         setAnchorEl(null);
     };
 
+
     useEffect(() => {
-        dispatch(
-            getAllBrands({
-                search: search,
-                page: page,
-                limit: limit
-            })
-        );
+        
+
+            dispatch(
+                getAllBrands({
+                    search: search,
+                    page: page,
+                    limit: limit
+                })
+            );
+        
     }, [search, page, limit]);
 
     return (
@@ -68,7 +75,7 @@ const Brands = () => {
                 setOpen={setAddUpdateOpen}
             />
             <HeadingCard title="Brand Management" />
-         {/*    // <Grid container spacing={4} >
+            {/*    // <Grid container spacing={4} >
             //         <Grid item xs={6} lg={8} >
             //         <Typography className='mainheading' variant="h1" component="h2" sx={{marginLeft:{lg:'44px', md:'44px'}}}>
             //         Brand Management
@@ -79,13 +86,13 @@ const Brands = () => {
             <MainCard className='tableShadow' 
                 title={ 
                     <Grid container spacing={4} >
-                    <Grid item xs={6} lg={8} >
+                    <Grid item xs={12} lg={8} >
                     <Typography className='mainheading' variant="h1" component="h2"
                      sx={{marginLeft:{lg:'44px', md:'44px' }}}>
                    Brands
                   </Typography>
                     </Grid>
-                        <Grid item xs={3} lg={2} >
+                        <Grid item xs={6} lg={2} >
                        
                             <OutlinedInput
                                 id="input-search-list-style1"
@@ -101,7 +108,7 @@ const Brands = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={3} lg={2} textAlign="start">
+                        <Grid item xs={6} lg={2} textAlign="start">
                             <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
                                 variant="contained"
                                 size="large"
@@ -110,7 +117,7 @@ const Brands = () => {
                                     setBrandData({ id: null, name: '', description: '', location: '', image: null });
                                 }}
                             >
-                            Create
+                                Create
                             </Button>
                         </Grid>
                     </Grid>
@@ -130,7 +137,7 @@ const Brands = () => {
                     <Grid container justifyContent="center" spacing={gridSpacing}>
                         <Grid item>
                             <Pagination
-                            textAlign='center'
+                                textAlign="center"
                                 color="primary"
                                 showFirstButton
                                 showLastButton
@@ -141,7 +148,6 @@ const Brands = () => {
                                 }}
                             />
                         </Grid>
-                        
                     </Grid>
                 </Grid>
             </MainCard>

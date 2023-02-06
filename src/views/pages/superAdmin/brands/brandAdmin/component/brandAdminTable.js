@@ -23,8 +23,10 @@ import AddUpdateBrandAdminDialog from './addUpdateBrandAdmin';
 import UpdateIcon from '@mui/icons-material/Update';
 import ChangeBrandAdminStatusDialog from './changeBrandAdminStatus';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+// import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from 'assets/images/edit.png';
+import DeleteOutlineOutlinedIcon from 'assets/images/delete.png';
+// import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import BlockIcon from '@mui/icons-material/Block';
 
 const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit, brandAdminList, setBrandAdminData, brandAdminData }) => {
@@ -163,7 +165,7 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                                     });
                                                                 }}
                                                             >
-                                                                <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            <img src={EditOutlinedIcon} />  
                                                             </IconButton>
                                                         </Tooltip>
                                                         <Tooltip placement="top" title="Delete">
@@ -183,7 +185,8 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                                     });
                                                                 }}
                                                             >
-                                                                <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            <img src={DeleteOutlineOutlinedIcon} />
+                                                                 
                                                             </IconButton>
                                                         </Tooltip>
                                                     </Stack>

@@ -59,27 +59,31 @@ const BrandCategory = () => {
             />
             <MainCard
             className='Adminheading'
-
-                title={
+           
+                title= {
+                    <Grid container spacing={4} >
+                    <Grid item xs={12} lg={10} >
                     <Typography variant="h1" component="h2" className='headingcard' sx={{ marginTop:'10px' ,  
-                        fontWeight: 600, color: '#000' , marginLeft:{lg:'-20px', md:'-20px'}, 
-                        background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                        color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}>
-                           
-                        Brand Management
-                    </Typography>
-                }
-                secondary={
-                    <Button className='buttonSize' sx={{float:'right'}}
-                    variant="contained"
-                    size="large"
-                    onClick={() => {
-                        navigate('/brands');
-                    }}
-                >
-                    Back
-                </Button>
-                }
+                    fontWeight: 600, color: '#000' , marginLeft:{lg:'-20px', md:'-20px'}, 
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}>
+                       
+                    Brand Management
+                </Typography>
+                    </Grid>
+                     
+                        <Grid item xs={12} lg={2} >
+                        <Button className='buttonSize' sx={{float:{md:'right' , lg:'right'}}}
+                        variant="contained"
+                        size="large"
+                        onClick={() => {
+                            navigate('/brands');
+                        }}
+                    >
+                        Back
+                    </Button>
+                        </Grid>
+                    </Grid> }
                 content={false}
             ></MainCard>
 
@@ -87,13 +91,13 @@ const BrandCategory = () => {
             className='tableShadow'
             title={
                 <Grid container spacing={4} >
-                <Grid item xs={6} lg={8} >
+                <Grid item xs={12} lg={8} >
                 <Typography className='mainheading' variant="h1" component="h2"
                  sx={{marginLeft:{lg:'48px', md:'48px'}}}>
                  Category Management of : {location?.state?.brandData?.name}
               </Typography>
                 </Grid>
-                    <Grid item xs={3} lg={2} >
+                    <Grid item xs={6} lg={2} >
                    
                     <OutlinedInput
                     id="input-search-list-style1"
@@ -109,7 +113,7 @@ const BrandCategory = () => {
                     }}
                 />
                     </Grid>
-                    <Grid item xs={3} lg={2} textAlign="start">
+                    <Grid item xs={6} lg={2} textAlign="start">
                         <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
                             variant="contained"
                             size="large"

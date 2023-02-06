@@ -428,7 +428,8 @@ console.log('tokenId, contractAddress, price from product view',tokenId, contrac
                                                     sx={{ textDecoration: 'none' }}
                                                     to="/companyPage"
                                                 >
-                                                    <Typography align="left" fontWeight={600} variant="h2" className="brand">
+                                                    <Typography align="left" fontWeight={600} variant="h2" 
+                                                    className="brand">
                                                         {nft?.Brand?.name}
                                                     </Typography>
                                                     <Typography align="left" variant="h3" className="creator">
@@ -454,9 +455,13 @@ console.log('tokenId, contractAddress, price from product view',tokenId, contrac
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto' }}>
-                                                <FormControl fullWidth>
-                                                    <InputLabel id="demo-simple-select-label">PROOF OF AUTHENTICITY</InputLabel>
-                                                    <Select
+                                                <FormControl sx={{ background:theme.palette.mode === 'dark' ? '#181C1F'
+                                                 : '#d9d9d9',color:theme.palette.mode === 'dark' ? '#ffff'
+                                                 : 'black', borderRadius:'4px'}} fullWidth>
+                                                    <InputLabel
+                                                    sx={{ color:theme.palette.mode === 'dark' ? '#ffff'
+                                                 : 'black'}} id="demo-simple-select-label">PROOF OF AUTHENTICITY</InputLabel>
+                                                    <Select variant='standard'
                                                         labelId="demo-simple-select-label"
                                                         id="demo-simple-select"
                                                         value={age}
@@ -502,15 +507,17 @@ console.log('tokenId, contractAddress, price from product view',tokenId, contrac
                                         //     ))}
                                         // </TextField> */}
                                         </Grid>
-                                        <Grid item mt={2} mb={2} className="timer" xs={12}>
-                                            <Grid className="auction" container>
+                                        <Grid item mt={2} mb={2}  className="timer" xs={12}>
+                                            <Grid sx={{ background:theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9'}}
+                                             className="auction" container>
                                                 <Grid item md={6} xs={12} sm={12}>
-                                                    <Typography color="black" variant="body">
+                                                    <Typography  color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                     variant="body">
                                                         Auction Time{' '}
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item md={6} xs={12} sm={12}>
-                                                    <Typography color="black" variant="body">
+                                                    <Typography  color={theme.palette.mode === 'dark' ? 'white' : 'black'} variant="body">
                                                         {' '}
                                                         2h : 40m : 03s
                                                     </Typography>

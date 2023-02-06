@@ -2,14 +2,15 @@ import axios from 'utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
 
 import { makeSelectAuthToken } from 'store/Selector';
-import { getAllBrandCategoriesAdminSuccess, getAllBrandCategories, getAllBrandCategoriesSuccess, getAllCategoriesDropdownSuccess } from './actions';
+import { getAllBrandCategoriesAdminSuccess, getAllBrandCategories, getAllBrandCategoriesSuccess, getAllCategoriesDropdownSuccess, getAllBrandCategoriesByAdminSuccess } from './actions';
 import {
     GET_ALL_BRAND_CATEGORIES,
     ADD_BRAND_CATEGORY,
     UPDATE_BRAND_CATEGORY,
     DELETE_BRAND_CATEGORY,
     GET_ALL_CATEGORIES_DROPDOWN,
-    GET_ALL_BRAND_CATEGORIES_ADMIN
+    GET_ALL_BRAND_CATEGORIES_ADMIN,
+    GET_ALL_BRAND_CATEGORIES_BY_ADMIN
 } from './constants';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { setNotification } from 'shared/helperMethods/setNotification';
@@ -26,6 +27,23 @@ function* getAllCategoriesDropdownRequest({ payload }) {
 
 export function* watchGetAllCategoriesDropdown() {
     yield takeLatest(GET_ALL_CATEGORIES_DROPDOWN, getAllCategoriesDropdownRequest);
+}
+
+function* getAllBrandCategoriesByAdminRequest({ payload }) {
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.get(
+            `brand/${payload.brandId}/admin/${payload.adminId}/category?&size=${payload.limit}&page=${payload.page}&search=${payload.search}`,
+            headers
+        );
+        yield put(getAllBrandCategoriesByAdminSuccess(response.data.data));
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchGetAllBrandCategoriesByAdmin() {
+    yield takeLatest(GET_ALL_BRAND_CATEGORIES_BY_ADMIN, getAllBrandCategoriesByAdminRequest);
 }
 
 function* getAllBrandCategoryRequest({ payload }) {
@@ -154,5 +172,6 @@ export default function* brandCategorySaga() {
         fork(watchUpdateBrandCategory),
         fork(watchGetAllCategoriesDropdown),
         fork(watchGetAllBrandCategoryAdmin),
+        fork(watchGetAllBrandCategoriesByAdmin),
     ]);
 }

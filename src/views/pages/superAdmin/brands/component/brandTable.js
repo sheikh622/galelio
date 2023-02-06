@@ -15,8 +15,11 @@ import {
     Typography,
     CircularProgress
 } from '@mui/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+// import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from 'assets/images/edit.png';
+
+// import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import DeleteOutlineOutlinedIcon from 'assets/images/delete.png';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteBrandDialog from './deleteBrandDialog';
 import Avatar from 'ui-component/extended/Avatar';
@@ -145,7 +148,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                                     });
                                                                 }}
                                                             >
-                                                                <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                            <img src={EditOutlinedIcon} /> 
                                                             </IconButton>
                                                         </Tooltip>
                                                         <Tooltip placement="top" title="Delete">
@@ -162,7 +165,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                                     setBrandId(row.id);
                                                                 }}
                                                             >
-                                                                <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                                <img src={DeleteOutlineOutlinedIcon} />
                                                             </IconButton>
                                                         </Tooltip>
                                                     </Stack>

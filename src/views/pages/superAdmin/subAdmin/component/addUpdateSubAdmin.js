@@ -20,8 +20,10 @@ import {
     TextField,
     Divider,
     Grid,Input,
-    MenuItem , InputAdornment,IconButton
+    MenuItem , InputAdornment,IconButton, CircularProgress
 } from '@mui/material';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
@@ -31,6 +33,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
     const [contractAddress, setContractAddress] = useState('');
     const [brandCategoryId, setBrandCategoryId] = useState(0);
     const [showPassword, setShowPassword] = useState(false);
+    const [loader, setLoader] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -86,6 +89,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         validationSchema,
         onSubmit: async (values) => {
             if (subAdminData.id == null) {
+                setLoader(true)
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
 
@@ -94,7 +98,9 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
 
                 let mintedNFT = await (
                     await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
-                        // toast.error(`${error.message}`);
+                        toast.error(`${error.message}`);
+                        setLoader(false)
+                        setOpen(false)
                     })
                 ).wait();
 
@@ -130,8 +136,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
             }
         }
     });
+
+    
     const handleClose = () => {
         setOpen(false);
+        setLoader(false)
         setSubAdminData({
             id: null,
             firstName: '',
@@ -149,6 +158,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
 
     return (
         <>
+          
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -159,9 +169,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
+              
                 <DialogTitle id="form-dialog-title" className="adminname">
                     {subAdminData.id == null ? 'Create Admin' : ' Update Admin'}
                 </DialogTitle>
+                    
                 
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
@@ -291,9 +303,17 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                     </form>
                 </DialogContent>
                 <Divider />
+                {loader ? (
+                        <CircularProgress
+                        
+                        sx={{mt:6, mb:6,ml:2}}
+                        
+                        />
+                    ) : (
                 <DialogActions sx={{ display: 'block' , margin:'0px 10px 0px 20px'}}>
                <AnimateButton>
-                    
+           
+                        <>
                         <Button 
                         
                             className="buttons"
@@ -323,9 +343,12 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         >
                             Cancel
                         </Button>
+                        </>
                     </AnimateButton>
                 </DialogActions>
+                    )}
             </Dialog>
+                 
         </>
     );
 }
