@@ -112,7 +112,11 @@ const LoginForm = ({ loginProp, ...others }) => {
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-                    password: Yup.string().max(255).required('Password is required!')
+                    // .matches(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/, 'Invalid Email'),
+                    // .matches(/^[a-zA-Z0-9]/, '* This email cannot contain white space and special character'),
+   
+                    password: Yup.string().max(255).required('Password is required!'),
+
                 })}
                 onSubmit={async (values) => {
                     await dispatch(setLoader(true));
@@ -242,13 +246,19 @@ const LoginForm = ({ loginProp, ...others }) => {
                             md={12}
                             lg={12}
                             className="facebook"
+                               sx={{
+                                color:'white',
+                                width:{lg:'50%' }, margin:'0 auto',
+                                justifyContent: 'center',
+                                marginTop: '10px'
+                            }}
                             // sx={{
                             //     width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },
                             //     margin: { xs: '0 auto', sm: '0 auto', sm: '0 auto' }
                             // }}
                         >
                             <Button
-                                variant="contained"
+                                variant="outlined"
                                 color="secondary"
                                 fullWidth
                                 size="large"
@@ -272,8 +282,9 @@ const LoginForm = ({ loginProp, ...others }) => {
                             sm={12}
                             md={12}
                             lg={12}
-                            className="google"
+                            // className="google"
                             sx={{
+                                width:{md:'50% ', lg:'50%' }, margin:'0 auto',
                                 justifyContent: 'center',
                                 marginTop: '10px'
                             }}

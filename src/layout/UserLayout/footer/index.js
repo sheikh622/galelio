@@ -22,7 +22,7 @@ import Divider from '@mui/material/Divider';
 import { makeStyles } from '@mui/styles';
 // styles
 const FooterWrapper = styled('div')(({ theme }) => ({
-    padding: '35px 0',
+    padding: '28px 0 0 0',
     color: 'black',
 
     // background: '#f5f5f5',

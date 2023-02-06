@@ -110,6 +110,10 @@ const SignUpForm = ({ loginProp, ...others }) => {
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     password: Yup.string().max(255).required('Password is required!'),
                     confirmPassword: Yup.string().max(255).required('Confirm Password is required!'),
+                    confirmPassword:  Yup.string().oneOf(
+                        [Yup.ref("password")],
+                        "Both password need to be the same"
+                      ),
                     address: Yup.string().max(255).required('Address is required!')
                 })}
                 onSubmit={async (values) => {

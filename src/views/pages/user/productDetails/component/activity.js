@@ -32,23 +32,23 @@ const Activity = () => {
         {
             title: 'List',
             price: '0.006 ETH',
-            from: 'Vlad556 ',
-            to: 'Vlad556 ',
-            days: '9 Days ago '
+            from: 'Alex 67 ',
+            to: 'Alex 67 ',
+            days: '6 Days ago '
+        },
+        {
+            title: 'List',
+            price: '0.006 ETH',
+            from: 'cynthia321 ',
+            to: 'cynthia321 ',
+            days: '60 Days ago '
         },
         {
             title: 'List',
             price: '0.006 ETH',
             from: 'Vlad556 ',
             to: 'Vlad556 ',
-            days: '9 Days ago '
-        },
-        {
-            title: 'List',
-            price: '0.006 ETH',
-            from: 'Vlad556 ',
-            to: 'Vlad556 ',
-            days: '9 Days ago '
+            days: '79 Days ago '
         }
     ];
     const [search, setSearch] = useState('');
@@ -60,6 +60,8 @@ const Activity = () => {
                     <Grid container spacing={2} sx={{ mb: 2 }}>
                         <Grid item xs={12}>
                             <Typography
+                            color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
+                            className='productfigmastyl'
                                 variant="h2"
                                 mt={4}
                                 component="div"
@@ -81,9 +83,12 @@ const Activity = () => {
                             title={
                                 <Grid container spacing={gridSpacing}>
                                     <Grid item xs={12}>
-                                        <FormControl fullWidth>
-                                            <InputLabel id="age-select">Filter</InputLabel>
+                                        <FormControl  sx={{ background:theme.palette.mode === 'dark' ? '#181C1F'
+                                        : '#d9d9d9',color:theme.palette.mode === 'dark' ? '#ffff'
+                                        : 'black', border: '2px solid #CDCDCD' , borderRadius:'4px'}} fullWidth>
+                                            <InputLabel sx={{color:'#CDCDCD'}} id="age-select">Filter</InputLabel>
                                             <Select
+                                            variant='standard'
                                                 fullWidth
                                                 labelId="age-select"
                                                 id="age"

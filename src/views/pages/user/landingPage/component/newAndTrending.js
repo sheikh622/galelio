@@ -3,9 +3,13 @@ import { gridSpacing } from 'store/constant';
 import NewCard from '../../commonComponent/newCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { useTheme } from '@mui/material/styles';
+
 import React from 'react';
 import Slider from 'react-slick';
 const NewAndTrendingNfts = ({ nfts }) => {
+    const theme = useTheme();
+
     var settings = {
         dots: false,
         infinite: true,
@@ -51,6 +55,8 @@ const NewAndTrendingNfts = ({ nfts }) => {
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
                         <Typography
+                        color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
+                        className='fontfigma'
                             variant="h2"
                             mt={4}
                             component="div"

@@ -50,6 +50,8 @@ const Properties = ({ nft }) => {
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
                         <Typography
+                        color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
+                        className='productfigmastyl'
                             variant="h2"
                             mt={4}
                             component="div"
@@ -65,7 +67,7 @@ const Properties = ({ nft }) => {
                     <Grid item xs={12}>
                         <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                             {nft?.NFTMetaData.map((item) => (
-                                <Grid item md={2} sm={6}>
+                                <Grid item md={4} lg={2} xs={12} sm={6} >
                                     <SubCard
                                         className="property propertyShadow"
                                         sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
@@ -77,13 +79,16 @@ const Properties = ({ nft }) => {
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography className="encapPropertry" variant="h3">
+                                            
+                                                <Typography  color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                 className="centerText encapPropertry" variant="h3">
                                                     {item.fieldValue}{' '}
                                                 </Typography>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Typography
-                                                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                
+                                                    // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                     className="plight"
                                                     variant="body2"
                                                 >

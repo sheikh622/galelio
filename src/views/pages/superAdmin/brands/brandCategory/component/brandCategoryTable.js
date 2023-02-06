@@ -23,8 +23,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddUpdateBrandCategoryDialog from './addUpdateBrandCategory';
 import DeleteBrandCategoryDialog from './deleteBrandCategoryDialog';
 import Avatar from 'ui-component/extended/Avatar';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+// import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from 'assets/images/edit.png';
+
+// import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
+import DeleteOutlineOutlinedIcon from 'assets/images/delete.png';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import moment from 'moment';
 
@@ -163,7 +167,7 @@ const BrandCategoryTable = ({
                                                             });
                                                         }}
                                                     >
-                                                        <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                    <img src={EditOutlinedIcon} /> 
                                                     </IconButton>
                                                 </Tooltip>
                                                 <Tooltip placement="top" title="Delete">
@@ -183,7 +187,7 @@ const BrandCategoryTable = ({
                                                             });
                                                         }}
                                                     >
-                                                        <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                        <img src={DeleteOutlineOutlinedIcon}  />
                                                     </IconButton>
                                                 </Tooltip>
                                             </Stack>

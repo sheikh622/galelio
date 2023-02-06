@@ -77,7 +77,9 @@ const Categories = ({ categories }) => {
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Typography
+                        <Typography 
+                        color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
+                        className='fontfigma'
                             variant="h2"
                             mt={4}
                             component="div"

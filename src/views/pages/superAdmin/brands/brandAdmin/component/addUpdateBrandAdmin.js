@@ -177,6 +177,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         helperText={formik.touched.adminEmail && formik.errors.adminEmail}
                                         fullWidth
                                         variant="standard"
+                                        
                                     />
                                 </Grid>
 

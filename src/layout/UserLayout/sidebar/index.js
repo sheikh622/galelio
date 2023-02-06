@@ -42,7 +42,7 @@ const SideBar = () => {
                     <Grid
                         xs={12}
                         md={10}
-                        lg={10}
+                        lg={12}
                         xl={6}
                         container
                         alignItems="center"
@@ -61,7 +61,7 @@ const SideBar = () => {
                         <Grid
                             item
                             sx={{ mt: 2, 
-                                 marginLeft:'-5px',
+                                 paddingLeft:'0 ! important', textAlign:'center',
                                   cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/landingPage');
@@ -86,7 +86,7 @@ const SideBar = () => {
                         </Grid>  */}
                         <Grid
                             item
-                            sx={{ mt: 2, marginLeft:'-5px', cursor: 'pointer' }}
+                            sx={{ mt: 2, paddingLeft:'0 ! important', textAlign:'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/marketplace');
                             }}
@@ -120,7 +120,7 @@ const SideBar = () => {
                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
                             <LogoutIcon sx={{ color: 'transparent' }} />
                         </Grid> 
-                        <Grid item sx={{ mt: 5 ,  marginLeft:'-5px',}}>
+                        <Grid item sx={{ mt: 5 ,  paddingLeft:'0 ! important', textAlign:'center',}}>
                             {customization.navType == 'dark' ? (
                                 <>
                                     <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />

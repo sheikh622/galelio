@@ -108,6 +108,8 @@ const SimilarProducts = ({ nft }) => {
                 <Grid container spacing={2} sx={{ mb: 2 }}>
                     <Grid item xs={12}>
                         <Typography
+                        color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
+                        className='productfigmastyl'
                             variant="h2"
                             mt={4}
                             component="div"

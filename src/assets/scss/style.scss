@@ -533,16 +533,25 @@ body {
 }
 
 .pbackground {
-    color: #2194ff;
-    font-weight: 600;
-    text-transform: capitalize;
+    font-family: 'Public Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 16px;
+text-align: center;
+text-transform: capitalize;
+
+color: #2194FF;
+
 }
 
 .Lux {
     text-transform: capitalize;
 
-    font-weight: 500;
-    font-size: 23px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
 
     text-align: left;
 
@@ -569,13 +578,19 @@ body {
 
 .productdescription {
     // font-family: 'Public Sans';
-
+    font-family: 'Public Sans';
+    font-style: normal;
     font-weight: 400;
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 34px;
+    display: flex;
+    /* align-items: center; */
+    letter-spacing: 0.02em;
+    
     text-transform: capitalize;
 
     text-align: left;
-    letter-spacing: 0.02em;
+  
     padding: 0 15px;
     color: #9498aa;
 }
@@ -593,6 +608,11 @@ body {
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
     border-radius: 4px;
     width: 90%;
+    margin-right: 15px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
 
     margin-right: 15px;
 }
@@ -605,6 +625,8 @@ body {
 }
 
 .price {
+    font-family: 'Public Sans';
+    font-style: normal;
     font-weight: 500;
     font-size: 19px;
     text-transform: capitalize;
@@ -612,6 +634,8 @@ body {
 
 .ETH {
     color: darkorange;
+    font-family: 'Public Sans';
+    font-style: normal;
     font-weight: 500;
     font-size: 16px;
 }
@@ -621,11 +645,25 @@ body {
 }
 
 .auction {
-    padding: 12px 32px;
-    background: #d9d9d9;
-    border-radius: 4px;
+    padding: 15px 36px;
+  
+        border-radius: 4px;
+        font-family: 'Public Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
 }
+#proofstyle{
+    font-family: 'Public Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
 
+text-align: center;
+text-transform: capitalize;
+}
 .overflow {
     width: 200px;
     white-space: nowrap;
@@ -851,12 +889,17 @@ body {
     font-size: 21px;
     color: #2196f3;
     text-transform: capitalize;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
 }
 .creator {
-    font-size: 17px;
-    font-weight: 400;
     margin-top: 7px;
-    color: gray;
+    color: #CDCDCD;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
 }
 // #################################################################
 .tableName {
@@ -1153,7 +1196,7 @@ body {
 .encapPropertry {
     text-align: center;
     white-space: nowrap;
-    width: 145px;
+    width: auto !important;
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: capitalize;
@@ -1173,4 +1216,97 @@ body {
     color: #fff !important;
     width: 35px !important;
     height: 35px !important;
+}
+
+.nsm7Bb-HzV7m-LgbsSe {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background-color .218s,border-color .218s;
+    transition: background-color .218s,border-color .218s;
+    -webkit-user-select: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #dadce0;
+    color: #3c4043;
+    cursor: pointer;
+    font-family: "Google Sans",arial,sans-serif;
+    font-size: 14px;
+    height: 40px;
+    letter-spacing: 0.25px;
+    outline: none;
+    overflow: hidden;
+    padding: 0 23px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 50% !important;
+    /* padding: 20px; */
+    margin: 0 auto !important;
+   
+}
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+    color: #2F53FF !important;
+}
+.css-dj8axb-MuiTypography-root {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #d7dcec;
+    font-weight: 500;
+    font-family: 'Roboto',sans-serif;
+    line-height: 1.334;
+    color: #2F53FF !important;
+   
+}
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+    color: #2F53FF !important;
+    background-color: transparent !important;
+}
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root:hover {
+    background-color: #2f53ff24 !important;
+    color: #2F53FF !important;
+}
+.fontfigma{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    line-height: 26px !important;
+
+}
+.centerText{
+    
+font-family: 'Public Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+text-align: center;
+text-transform: capitalize;
+
+}
+.productfigmastyl{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 24px !important;
+    line-height: 28px !important;
+    /* text-align: center; */
+    text-transform: capitalize !important;
+  
+}
+.plight{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    text-align: center !important;
+    text-transform: capitalize !important;
+    color: #CDCDCD !important;
 }
