@@ -35,13 +35,14 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                 <>
                     {deliveryList?.length == 0 ? (
                         <>
-                            <Grid item className="tableshadow">
+                            <Grid item >
                                 <Typography
                                     variant="h3"
-                                    style={{ padding: '20px', fontWeight: '800', color: 'red', justifyContent: 'center' }}
+                                    style={{ padding: '20px', fontWeight: '800', color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2',
+                                     justifyContent: 'center' }}
                                 >
                                     {' '}
-                                    No Data Available
+                                    No Deliveries found.
                                 </Typography>
                             </Grid>
                         </>

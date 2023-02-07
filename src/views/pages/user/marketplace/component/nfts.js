@@ -19,7 +19,7 @@ const NFTS = ({ marketplaceNfts }) => {
                             spacing={gridSpacing}
                             sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}
                         >
-                            <h3 style={{ textAlign: 'center' }}>No Data found.</h3>
+                            <h3 style={{ textAlign: 'center' }}> No product available.</h3>
                         </Grid>
                     </>
                 )}

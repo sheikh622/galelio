@@ -82,7 +82,8 @@ const MainLayout = () => {
     }, [matchDownMd]);
 
     return (
-        <Box sx={{ display: 'flex',  backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
+        <Box sx={{ display: 'flex', 
+         backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
             {/* <CssBaseline /> */}
             {/* header */}
             <AppBar

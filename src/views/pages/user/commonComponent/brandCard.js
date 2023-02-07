@@ -37,7 +37,7 @@ const BrandCard = ({ data, brands }) => {
             <Card
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
-                    background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                    background: theme.palette.mode === 'dark' ? '#000' : 'white',
                     width: brands && brands?.length > 5 ? '100%' : { lg: '220px' },
                     // boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '3px',
@@ -49,9 +49,11 @@ const BrandCard = ({ data, brands }) => {
                     <CardContent style={{ padding: '6%' }}>
                         <Grid container>
                             <Grid item xs={8}  className='encap' sx={{ textAlign: 'left' }}>
-                                <span style={{ fontWeight: '550', fontSize: '130%' }}> {data?.name}</span>
-                                <Grid className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
-                                    34
+                                <span className='cardHeading' style={{ fontSize: '130%' }}> {data?.name}</span>
+                                <Grid className="overflow Creationstyling" 
+                                style={{ marginTop: '5%',
+                                color: theme.palette.mode === 'dark' ? ' #a99d9d ' : '#404040', }}>
+                                     20 Creations
                                 </Grid>
                             </Grid>
                         </Grid>

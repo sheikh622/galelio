@@ -31,7 +31,18 @@ const NewAndTrendingNfts = ({ nfts }) => {
             {
                 breakpoint: 900,
                 settings: {
-                    slidesToShow: 5,
+                    slidesToShow: 4,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    fade: true,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 3,
                     slidesToScroll: 2,
                     initialSlide: 2
                 }
