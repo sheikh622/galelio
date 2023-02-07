@@ -57,13 +57,13 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                     }}
                 >
                     <div style={{ paddingBottom: '50%' }}>
-                        <MenuList sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
+                        <MenuList sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }} />
                     </div>
                     <List>
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon sx={{ color: '#98A2B2' }}>
-                                    <QuizIcon sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
+                                    <QuizIcon sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }} />
                                 </ListItemIcon>
                                 {/* <ListItemText > */}
                                 <Typography
@@ -79,7 +79,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon sx={{ color: '#98A2B2' }}>
-                                    <ChatIcon sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
+                                    <ChatIcon sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }} />
                                 </ListItemIcon>
                                 {/* <ListItemText sx={{color:"#98A2B2"}} primary="Contact" /> */}
                                 <Typography
@@ -105,8 +105,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                                 sx={{ background: customization.navType == 'light' ? 'white' : '', borderRadius: '150px' }}
                             >
                                 <ListItemIcon>
-                                    <LightModeIcon
-                                    sx={{ color: customization.navType == 'light' ? '#000' : '#98A2B2' }} />
+                                    <LightModeIcon sx={{ color: customization.navType == 'light' ? '#000' : '#98A2B2' }} />
                                 </ListItemIcon>
 
                                 <span style={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }}>Light</span>
@@ -116,8 +115,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                                 onClick={() => setNavType('dark')}
                             >
                                 <ListItemIcon>
-                                    <DarkModeIcon
-                                     sx={{ color: customization.navType == 'dark' ? '#98A2B2' : '#000' }} />
+                                    <DarkModeIcon sx={{ color: customization.navType == 'dark' ? '#98A2B2' : '#000' }} />
                                 </ListItemIcon>
                                 <span style={{ color: customization.navType == 'dark' ? '#98A2B2' : '#000' }}>Dark</span>
                             </ListItemButton>
@@ -126,7 +124,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         <ListItem disablePadding sx={{ mt: 3 }}>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <ArticleIcon  sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
+                                    <ArticleIcon sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }} />
                                 </ListItemIcon>
                                 {/* <ListItemText primary="Terms of Services" /> */}
 

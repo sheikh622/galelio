@@ -21,7 +21,7 @@ const NFTS = ({ marketplaceNfts }) => {
                         sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center', color: 'gray' },
                           }}
                     >
-                    There are no Items available in this company...!
+                    There are no Items available..!
                     </Typography>
                 </Grid>
                     </>

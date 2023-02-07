@@ -278,7 +278,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     callback={responseFacebook}
                                     onFailure={responseFacebookFailure}
                                     cssClass="my-facebook-button-class"
-                                    textButton=" Login with Facebook"
+                                    textButton=""
                                 />
                             </Button>
                         </Grid>
