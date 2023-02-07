@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid , Typography} from '@mui/material';
 import { gridSpacing } from 'store/constant';
 import NftCard from '../../commonComponent/nftCard';
 const NFTS = ({ marketplaceNfts }) => {
@@ -13,14 +13,17 @@ const NFTS = ({ marketplaceNfts }) => {
                     </Grid>
                 ) : (
                     <>
-                        <Grid
-                            container
-                            justifyContent="center"
-                            spacing={gridSpacing}
-                            sx={{ mt: 2, textAlign: 'center', paddingRight: '1%' }}
-                        >
-                            <h3 style={{ textAlign: 'center' }}>No Data found.</h3>
-                        </Grid>
+                    <Grid item xs={12}>
+                    <Typography
+                        variant="h3"
+                        mt={1}
+                        component="div"
+                        sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center', color: 'gray' },
+                          }}
+                    >
+                    There are no Items available in this company...!
+                    </Typography>
+                </Grid>
                     </>
                 )}
             </Grid>

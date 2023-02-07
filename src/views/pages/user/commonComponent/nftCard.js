@@ -38,13 +38,14 @@ const NftCard = ({ data }) => {
                     <CardContent sx={{ padding: '6%' }}>
                         <Grid container>
                             <Grid item xs={8}  className='encap' sx={{ textAlign: 'left' }}>
-                                <span style={{ fontWeight: '550', fontSize: '100%' }}>  {data.name} </span>
-                                <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
+                                <span className='cardHeading' style={{  fontSize: '100%' }}>  {data.name} </span>
+                                <div className="overflow brandName" style={{ marginTop: '5%', color: '#656565' }}>
                                 {data.Brand.name}
                                 </div>
                             </Grid>
                             <Grid item xs={4} sx={{ background: '' }}>
-                                <span sx={{ fontWeight: '40 !important ', fontSize: '110%', float: 'right', color: '#878787' }}>
+                                <span  className='newCreator' sx={{
+                                fontSize: '110%', float: 'right',  color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#404040' }}>
                                     Creator
                                 </span>
                             </Grid>

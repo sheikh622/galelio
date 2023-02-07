@@ -47,14 +47,15 @@ const Footer = () => {
             >
                 <Grid container alignItems="center" sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' } }} 
                 spacing={gridSpacing}>
-                    <Grid item xs={12} md={4} sm={6}>
+                <Grid item xs={12} md={1} lg={1} xl={1} sm={12}></Grid>
+                    <Grid item xs={12} md={3} lg={3}  xl={3} sm={6}>
                         {theme.palette.mode === 'dark' ? (
                             <img src={galileoWhite} alt="Galileo White Logo" width="100" />
                         ) : (
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                         <Grid style={{ marginTop: '5%' }}>
-                            <span style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
+                            <span className='footerDownloadTag' style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
                         </Grid>
 
                         <Grid container sx={{ mt: 3 }}>
@@ -68,8 +69,8 @@ const Footer = () => {
                     </Grid>
 
                     <Grid item xs={12} md={2} sm={6}>
-                        <Grid sx={{ marginTop: { md: '-10px' } }}>
-                            <h2>Company</h2>
+                        <Grid sx={{ marginTop: { md: '-5px' } }}>
+                            <h2 className='footerElement'>Company</h2>
                         </Grid>
                         <Grid>
                             <span className={styles.link}>About</span>
@@ -85,7 +86,7 @@ const Footer = () => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={2} sm={6} sx={{ marginTop: { md: '-37px' } }}>
-                        <h2>Service</h2>
+                        <h2  className='footerElement'>Service</h2>
                         <Grid>
                             <Grid>
                                 <span className={styles.link}>FAQ</span>
@@ -100,7 +101,7 @@ const Footer = () => {
                     </Grid>
 
                     <Grid item xs={12} md={2} sm={6} sx={{ marginTop: { md: '-37px' } }}>
-                        <h2>Contact</h2>
+                        <h2  className='footerElement'>Contact</h2>
 
                         <Grid>
                             <Grid>
@@ -142,7 +143,7 @@ const Footer = () => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={2}  sm={6} sx={{ paddingBottom: { md: '6.5%' } }}>
-                        <h2>Social Media</h2>
+                        <h2  className='footerElement'>Social Media</h2>
 
                         <Grid style={{}}>
                             <span>

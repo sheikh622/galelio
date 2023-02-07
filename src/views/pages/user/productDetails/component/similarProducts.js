@@ -222,7 +222,7 @@ const SimilarProducts = ({ nft }) => {
                         component="div"
                         sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center', color: 'gray' }, textTransform: 'capitalize' }}
                     >
-                        No similar product found..!
+                         Not any similar product available..!
                     </Typography>
                 </Grid>
             )}

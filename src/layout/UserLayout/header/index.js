@@ -190,7 +190,8 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F;' : 'white'}` }}>
+            <AppBar position="static"
+             sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
                 <Toolbar>
                     <Box
                         sx={{
@@ -205,13 +206,15 @@ export default function Header() {
                         }}
                     >
                         <Box sx={{ display: { xs: 'block', md: 'block' } }}>
-                            <Typography variant="h6" noWrap component="div" sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
+                            <Typography variant="h6" noWrap component="div" 
+                            sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img  src={galileoWhite}    onClick={() => {
+                                    <img sx={{cursor:'pointer'}} src={galileoWhite}    
+                                    onClick={() => {
                                         navigate('/landingPage');
                                     }} alt="Galileo White Logo" width="100" />
                                 ) : (
-                                    <img  src={galileo}    onClick={() => {
+                                    <img sx={{cursor:'pointer'}} src={galileo}    onClick={() => {
                                         navigate('/landingPage');
                                     }} alt="Galileo Dark Logo" width="100" />
                                 )}

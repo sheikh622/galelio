@@ -403,7 +403,8 @@ console.log('tokenId, contractAddress, price from product view',tokenId, contrac
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" sx={{ height: '592px' }} image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
+                        <CardMedia component="img" sx={{ height: '592px' , objectFit:'fill'}} 
+                        image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
                     </Grid>
 
                     <Grid item md={6} sm={12}>
@@ -433,7 +434,7 @@ console.log('tokenId, contractAddress, price from product view',tokenId, contrac
                                                         {nft?.Brand?.name}
                                                     </Typography>
                                                     <Typography align="left" variant="h3" className="creator">
-                                                        Creator
+                                                        Brand
                                                     </Typography>
                                                 </Grid>
                                             </Grid>

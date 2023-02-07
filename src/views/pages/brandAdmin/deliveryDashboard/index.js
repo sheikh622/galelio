@@ -53,7 +53,7 @@ const Delivered = () => {
 
             <MainCard
             className=" tableShadow"
-              
+              sx={{ borderRadius: '5px !important' , boxShadow:'none'}}
                 content={false}
             >
                 <DeliveryDashboard deliveryList={deliveryList} user={user} />

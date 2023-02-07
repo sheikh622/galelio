@@ -40,7 +40,6 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
         dispatch({ type: MENU_TYPE, navType });
     }, [dispatch, navType]);
 
-   
     const drawer = (
         <>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -57,72 +56,86 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
                         paddingRight: '16px'
                     }}
                 >
-                    <div  style={{ paddingBottom:"50%"}}>
-                    <MenuList />
-
+                    <div style={{ paddingBottom: '50%' }}>
+                        <MenuList sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
                     </div>
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton >
-                                <ListItemIcon  sx={{color:"#98A2B2"}}> 
-                                    <QuizIcon />
+                            <ListItemButton>
+                                <ListItemIcon sx={{ color: '#98A2B2' }}>
+                                    <QuizIcon sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
                                 </ListItemIcon>
                                 {/* <ListItemText > */}
-                                <Typography className='icons sidebartitle' sx={{color: '#98A2B2'}}
-                                variant='body1' >
-                                FAQ
-                            </Typography>
+                                <Typography
+                                    className="icons sidebartitle"
+                                    sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }}
+                                    variant="body1"
+                                >
+                                    FAQ
+                                </Typography>
                                 {/* </ListItemText > */}
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablePadding>
                             <ListItemButton>
-                                <ListItemIcon  sx={{color:"#98A2B2"}}>
-                                    <ChatIcon />
-                                </ListItemIcon >
+                                <ListItemIcon sx={{ color: '#98A2B2' }}>
+                                    <ChatIcon sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
+                                </ListItemIcon>
                                 {/* <ListItemText sx={{color:"#98A2B2"}} primary="Contact" /> */}
-                                <Typography className='icons sidebartitle' sx={{color: '#98A2B2'}} >Contact</Typography>
+                                <Typography
+                                    className="icons sidebartitle"
+                                    sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }}
+                                >
+                                    Contact
+                                </Typography>
                             </ListItemButton>
                         </ListItem>
 
-                        <ListItem disablePadding sx={{ background: customization.navType == 'light' ? '#f3f3f3':'#020508', borderRadius: '120px', mb: 3, padding: '3%' }}>
-                              
+                        <ListItem
+                            disablePadding
+                            sx={{
+                                background: customization.navType == 'light' ? '#f3f3f3' : '#020508',
+                                borderRadius: '120px',
+                                mb: 3,
+                                padding: '3%'
+                            }}
+                        >
                             <ListItemButton
-                            onClick={() => setNavType('light')}
-                            sx={{  background: customization.navType == 'light' ? 'white':'', borderRadius: '150px'}}>
-                                <ListItemIcon>
-                                    <LightModeIcon sx={{color: customization.navType == 'light' ? '#2196f3':''}}/>
-                                </ListItemIcon>
-
-                                <span  style={{color: customization.navType == 'light' ? '#2196f3':''}}>
-                                Light
-
-                                </span>
-                            </ListItemButton>
-                            <ListItemButton 
-                             sx={{  ml:2, background: customization.navType == 'dark' ? '#181C1F':'',
-                              borderRadius: '150px'}}
-                            onClick={() => setNavType('dark')}
+                                onClick={() => setNavType('light')}
+                                sx={{ background: customization.navType == 'light' ? 'white' : '', borderRadius: '150px' }}
                             >
                                 <ListItemIcon>
-                                    <DarkModeIcon sx={{color: customization.navType == 'dark' ? '#2196f3':''}}/>
+                                    <LightModeIcon
+                                    sx={{ color: customization.navType == 'light' ? '#000' : '#98A2B2' }} />
                                 </ListItemIcon>
-                                <span  style={{color: customization.navType == 'dark' ? '#2196f3':''}}>
-                                Dark
 
-                                </span>
+                                <span style={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }}>Light</span>
+                            </ListItemButton>
+                            <ListItemButton
+                                sx={{ ml: 2, background: customization.navType == 'dark' ? '#181C1F' : '', borderRadius: '150px' }}
+                                onClick={() => setNavType('dark')}
+                            >
+                                <ListItemIcon>
+                                    <DarkModeIcon
+                                     sx={{ color: customization.navType == 'dark' ? '#98A2B2' : '#000' }} />
+                                </ListItemIcon>
+                                <span style={{ color: customization.navType == 'dark' ? '#98A2B2' : '#000' }}>Dark</span>
                             </ListItemButton>
                         </ListItem>
                         <Divider></Divider>
                         <ListItem disablePadding sx={{ mt: 3 }}>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <ArticleIcon />
+                                    <ArticleIcon  sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}/>
                                 </ListItemIcon>
                                 {/* <ListItemText primary="Terms of Services" /> */}
 
-                                <Typography className='icons sidebartitle' sx={{color: '#98A2B2'}} >Terms of services</Typography>
-                                
+                                <Typography
+                                    className="icons sidebartitle"
+                                    sx={{ color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2' }}
+                                >
+                                    Terms of services
+                                </Typography>
                             </ListItemButton>
                         </ListItem>
                     </List>
