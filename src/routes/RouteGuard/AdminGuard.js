@@ -17,10 +17,10 @@ const AdminGuard = ({ children }) => {
         if (token == null) {
             navigate('/login', { replace: true });
         }
-        //  else if (token) {
+         else if (token) {
            
-        //     navigate('/dashboard', { replace: true });
-        // }
+            navigate('/dashboard', { replace: true });
+        }
     }, [token]);
     return children;
 };

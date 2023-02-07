@@ -33,7 +33,18 @@ const Categories = ({ categories }) => {
                 breakpoint: 900,
                 settings: {
                     // fade:true,
-                    slidesToShow: 5,
+                    slidesToShow: 3,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    fade: true,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: 3,
                     slidesToScroll: 2,
                     initialSlide: 2
                 }
@@ -107,7 +118,7 @@ const Categories = ({ categories }) => {
                                                 my: { xs: '10px', md: '0', sm: '10px' },
                                                 ml: {
                                                     xs: categories && categories?.length > 5 ? 5 : 0,
-                                                    sm: categories && categories?.length > 5 ? 2 : 0,
+                                                    sm: categories && categories?.length > 5 ? 3 : 0,
                                                     md: categories && categories?.length > 5 ? 2 : 0
                                                 },
                                                 mr: {
@@ -169,7 +180,7 @@ const Categories = ({ categories }) => {
                                                                 color: 'white'
                                                             }}
                                                         >
-                                                            <Typography variant="h4" color="#fff" sx={{ mt: 11 }}>
+                                                            <Typography className='categoreyName' variant="h4" color="#fff" sx={{ mt: 11 }}>
                                                                 {item.name}
                                                             </Typography>
                                                         </Box>
@@ -256,8 +267,11 @@ const Categories = ({ categories }) => {
                             ))}
                         </Grid>
                     ) : (
-                        <Grid mt={0} container justifyContent="left" spacing={2}>
-                            <h3 className="noDatacat">No data found...!</h3>
+                        <Grid mt={0} container  spacing={2}>
+                            <h3 className="noDatacat" 
+                            sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
+                            > No product found...! 
+                            </h3>
                         </Grid>
                     )}
                 </Grid>

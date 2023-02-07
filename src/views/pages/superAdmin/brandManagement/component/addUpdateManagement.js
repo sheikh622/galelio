@@ -61,7 +61,7 @@ export default function AddUpdateDialog({
     const validationSchema = Yup.object({
         firstName: Yup.string()
             .required('First Name is required!')
-            .max(42, 'First Name can not exceed 42 characters')
+            .max(200, 'First Name can not exceed 200 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
         lastName: Yup.string()
             .required('Last Name is required!')
