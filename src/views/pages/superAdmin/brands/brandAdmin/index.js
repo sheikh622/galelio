@@ -124,7 +124,8 @@ const BrandAdmin = () => {
                                         firstName: '',
                                         lastName: '',
                                         adminEmail: '',
-                                        adminPassword: ''
+                                        adminPassword: '',
+                                        walletAddress: ''
                                     });
                                 }}
                             >

@@ -65,7 +65,9 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                 /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                 'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
             )
-        })
+        }),
+        walletAddress: Yup.string()
+        .required('Wallet address is required!')
     });
 
     const formik = useFormik({
@@ -84,6 +86,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                         page: page,
                         limit: limit,
                         search: search,
+                        walletAddress:values.walletAddress,
                         handleClose: handleClose
                     })
                 );
@@ -234,6 +237,22 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                 </Grid>
                             </>
                         </Grid>
+                        <Grid item xs={6} md={12} lg={12} sx={{mt:1}}>
+                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
+                                       Wallet Address
+                                    </InputLabel>
+                                    <TextField
+                                        className="field"
+                                        id="walletAddress"
+                                        name="walletAddress"
+                                        value={formik.values.walletAddress}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.walletAddress && Boolean(formik.errors.walletAddress)}
+                                        helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                        fullWidth
+                                        variant="standard"
+                                    />
+                                </Grid>
                     </form>
                 </DialogContent>
 
