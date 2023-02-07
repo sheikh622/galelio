@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid , Box} from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import StorefrontIcon from '@mui/icons-material/Storefront';
@@ -69,9 +69,11 @@ const SideBar = () => {
                         >
                             {pathName == '/landingPage' ? (
                                 <>
-                                    <Tooltip title="Landing Page" placement="right" arrow>
-                                        <DashboardIcon sx={{ color: `${color}` }} />
-                                    </Tooltip>
+                                <Box sx={{borderLeft:'6px solid #2196f3'}}>
+                                    <Tooltip title="Landing Page" placement="right" arrow 
+                                    >
+                                        <DashboardIcon sx={{ color: `${color}` ,  }} />
+                                    </Tooltip></Box>
                                 </>
                             ) : (
                                 <>
@@ -92,10 +94,12 @@ const SideBar = () => {
                             }}
                         >
                             {pathName.includes('marketplace') ? (
-                                <>
+                                <> 
+                                <Box sx={{borderLeft:'6px solid #2196f3'}}>
                                     <Tooltip title="Marketplace" placement="right" arrow>
                                         <StorefrontIcon style={{ color: `${color}` }} />
                                     </Tooltip>
+                                    </Box>
                                 </>
                             ) : (
                                 <>
@@ -123,7 +127,9 @@ const SideBar = () => {
                         <Grid item sx={{ mt: 5 ,  paddingLeft:'0 ! important', textAlign:'center',}}>
                             {customization.navType == 'dark' ? (
                                 <>
-                                    <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
+                                <Box sx={{borderLeft:'6px solid #2196f3'}}>
+                                <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
+                               </Box>
                                 </>
                             ) : (
                                 <>

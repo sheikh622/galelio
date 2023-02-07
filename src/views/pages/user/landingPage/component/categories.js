@@ -267,8 +267,11 @@ const Categories = ({ categories }) => {
                             ))}
                         </Grid>
                     ) : (
-                        <Grid mt={0} container justifyContent="left" spacing={2}>
-                            <h3 className="noDatacat" sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },}}>No data found...!</h3>
+                        <Grid mt={0} container  spacing={2}>
+                            <h3 className="noDatacat" 
+                            sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
+                            > No product found...! 
+                            </h3>
                         </Grid>
                     )}
                 </Grid>

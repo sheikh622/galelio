@@ -22,7 +22,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
             {
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 5,
+                    slidesToShow: 4,
                     slidesToScroll: 3,
                     infinite: true,
                     dots: false
@@ -31,7 +31,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
             {
                 breakpoint: 900,
                 settings: {
-                    slidesToShow: 4,
+                    slidesToShow: 3,
                     slidesToScroll: 2,
                     initialSlide: 2
                 }
@@ -99,8 +99,9 @@ const NewAndTrendingNfts = ({ nfts }) => {
                             ))}
                         </Grid>
                     ) : (
-                        <Grid mt={4} container justifyContent="left" spacing={4} >
-                        <h3 className='noDataNew'>No data found...!</h3>
+                        <Grid mt={4} container  sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
+                         spacing={4} >
+                        <h3 className='noDataNew'> No product found...!</h3>
                     </Grid>
                     )}
                 </Grid>
