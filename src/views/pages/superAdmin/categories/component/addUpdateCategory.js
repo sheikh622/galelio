@@ -27,11 +27,11 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
         isUpdate: Yup.boolean().default(isUpdate),
         name: Yup.string()
             .required('Category Name is required!')
-            .max(42, 'Category Name can not exceed 42 characters')
+            .max(200, 'Category Name can not exceed 200 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
         description: Yup.string()
             .required('Description is required!')
-            .max(42, 'Description can not exceed 200 characters')
+            .max(200, 'Description can not exceed 200 characters')
             .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
         image: Yup.mixed().when(['isUpdate'], {
             is: true,
