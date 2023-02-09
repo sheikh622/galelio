@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import "@fontsource/public-sans";
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -26,6 +27,8 @@ import { setLoader } from '../../../../redux/auth/actions';
 import { GoogleLogin } from '@react-oauth/google';
 let jwt = require('jsonwebtoken');
 import axios from 'axios';
+import { gridSpacing } from 'store/constant';
+
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactFacebookLogin from 'react-facebook-login';
@@ -103,10 +106,6 @@ const LoginForm = ({ loginProp, ...others }) => {
         toast.error('Facebook login failed');
     };
 
-
-      
-
-
     return (
         <>
             <Formik
@@ -119,9 +118,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
                     // .matches(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/, 'Invalid Email'),
                     // .matches(/^[a-zA-Z0-9]/, '* This email cannot contain white space and special character'),
-   
-                    password: Yup.string().max(255).required('Password is required!'),
 
+                    password: Yup.string().max(255).required('Password is required!')
                 })}
                 onSubmit={async (values) => {
                     await dispatch(setLoader(true));
@@ -190,10 +188,13 @@ const LoginForm = ({ loginProp, ...others }) => {
                         </FormControl>
                         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                             <Typography
+                            className='Forgot'
                                 variant="subtitle1"
                                 component={Link}
                                 to={'/forgetPassword'}
-                                sx={{ textDecoration: 'none', color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
+                                sx={{ textDecoration: 'none',
+                               
+                                 color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
                             >
                                 Forgot Password?
                             </Typography>
@@ -232,24 +233,61 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 >
                                     Sign in
                                 </Button>
-                                {/* )} */}
+                                {/ )} /}
                             </AnimateButton>
                         </Box>
 
                         <Grid item xs={12}>
-                            <Grid mt={2} item container direction="column" alignItems="center" xs={12}>
-                                <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                            <Grid mt={2} mb={-2} item container direction="column" alignItems="center" xs={12}>
+                                <Typography className='fontfamily' variant="subtitle1" sx={{ textDecoration: 'none',
+                                fontSize: '16px' }}>
                                     or continue with
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid
+                        <Grid mt={1} container spacing={gridSpacing}>
+                            <Grid item xs={12}>
+                                <Grid container spacing={gridSpacing}>
+                                    <Grid item lg={6} md={6} sm={6} xs={12} >
+                                        <Box sx={{ float: 'right' }}>
+                                            <ReactFacebookLogin
+                                                appId="851727442768362"
+                                                // autoLoad={true}
+                                                fields="first_name, last_name,email"
+                                                callback={responseFacebook}
+                                                onFailure={responseFacebookFailure}
+                                                cssClass="my-facebook-button-class"
+                                                icon="fa-facebook"
+                                                textButton=""
+                                            />
+                                        </Box>
+                                    </Grid>
+
+                                    <Grid item lg={6} md={6} sm={6} xs={12} >
+                                        <Box sx={{ float: 'left' }}>
+                                            {' '}
+                                            <GoogleLogin
+                                                type="icon"
+                                                onSuccess={(data) => {
+                                                    console.log('datafrom google login', data);
+                                                    googleAuthHandle(data);
+                                                }}
+                                                onError={() => {
+                                                    toast.error('Google Auth Failed');
+                                                }}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        {/*  <Grid
                             item
                             mt={1}
                             xs={12}
                             sm={12}
                             md={12}
-                            lg={12}
+                            lg={6}
                             className="facebook"
                                sx={{
                                 color:'white',
@@ -263,14 +301,14 @@ const LoginForm = ({ loginProp, ...others }) => {
                             // }}
                             
                         >
-                            {/* <Button
-                                variant="outlined"
-                                color="secondary"
+                            <Button
+                                variant="text"
+                              
                                 fullWidth
                                 size="large"
-                                className="signbuttonMarket"
-                                startIcon={<FacebookOutlinedIcon />}
-                            > */}
+                              
+                                // startIcon={<FacebookOutlinedIcon sx={{color:'#2f53ff' , fontSize:'38px !important'     }}/>}
+                            >
                                 <ReactFacebookLogin
                                     appId="851727442768362"
                                     // autoLoad={true}
@@ -278,17 +316,17 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     callback={responseFacebook}
                                     onFailure={responseFacebookFailure}
                                     cssClass="my-facebook-button-class"
-                                    textButton="Sin in with Facebook"
-                                    // icon="fa-facebook"
+                                    icon="fa-facebook"
+                                    textButton=""
                                 />
-                            {/* </Button> */}
+                            </Button>
                         </Grid>
                         <Grid
                             item
                             xs={12}
                             sm={12}
                             md={12}
-                            lg={12}
+                            lg={6}
                             // className="google"
                             sx={{
                                 width:{md:'50% ', lg:'50%' }, margin:'0 auto',
@@ -310,7 +348,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     toast.error('Google Auth Failed');
                                 }}
                             />
-                        </Grid>
+                        </Grid> */}
                     </form>
                 )}
             </Formik>

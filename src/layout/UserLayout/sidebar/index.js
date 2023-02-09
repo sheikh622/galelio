@@ -127,7 +127,7 @@ const SideBar = () => {
                         <Grid item sx={{ mt: 5 ,  paddingLeft:'0 ! important', textAlign:'center',}}>
                             {customization.navType == 'dark' ? (
                                 <>
-                                <Box sx={{borderLeft:'6px solid #2196f3'}}>
+                                <Box >
                                 <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
                                </Box>
                                 </>

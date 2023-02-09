@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-
+import "@fontsource/public-sans";
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import {
@@ -86,7 +86,7 @@ const Activity = () => {
                                         <FormControl  sx={{ background:theme.palette.mode === 'dark' ? '#181C1F'
                                         : '#d9d9d9',color:theme.palette.mode === 'dark' ? '#ffff'
                                         : 'black', border: '2px solid #CDCDCD' , borderRadius:'4px'}} fullWidth>
-                                            <InputLabel sx={{color:'#CDCDCD'}} id="age-select">Filter</InputLabel>
+                                            <InputLabel className='activityTable'  sx={{color:'#CDCDCD'}} id="age-select">Filter</InputLabel>
                                             <Select
                                             variant='standard'
                                                 fullWidth
@@ -98,7 +98,7 @@ const Activity = () => {
                                                 label="Age"
                                             >
                                                 <MenuItem value="">
-                                                    <em>Filter</em>
+                                                    <em className='activityTable' >Filter</em>
                                                 </MenuItem>
                                                 <MenuItem value={10}>Ten</MenuItem>
                                                 <MenuItem value={20}>Twenty</MenuItem>
@@ -115,25 +115,25 @@ const Activity = () => {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell align="center">Event </TableCell>
-                                            <TableCell align="center">Price </TableCell>
-                                            <TableCell align="center">From</TableCell>
-                                            <TableCell align="center">To </TableCell>
-                                            <TableCell align="center">Date</TableCell>
+                                            <TableCell className='activityTable' sx={{fontSize:'18px !important'}}  align="center">Event </TableCell>
+                                            <TableCell className='activityTable'  sx={{fontSize:'18px !important'}}   align="center">Price </TableCell>
+                                            <TableCell className='activityTable' sx={{fontSize:'18px !important'}}    align="center">From</TableCell>
+                                            <TableCell  className='activityTable' sx={{fontSize:'18px !important'}}   align="center">To </TableCell>
+                                            <TableCell className='activityTable' sx={{fontSize:'18px !important'}}    align="center">Date</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     {itemData.map((item) => (
                                         <TableBody>
                                             <TableRow>
-                                                <TableCell align="center">{item.title}</TableCell>
-                                                <TableCell align="center">{item.price}</TableCell>
-                                                <TableCell sx={{ color: '#2194FF' }} align="center">
+                                                <TableCell className='activityTable'  sx={{fontSize:'15px'}}   align="center">{item.title}</TableCell>
+                                                <TableCell className='activityTable'   sx={{fontSize:'15px'}}    align="center">{item.price}</TableCell>
+                                                <TableCell className='activityTable'      sx={{fontSize:'15px', color: '#2194FF' }} align="center">
                                                     {item.from}
                                                 </TableCell>
-                                                <TableCell sx={{ color: '#2194FF' }} align="center">
+                                                <TableCell className='activityTable'      sx={{ fontSize:'15px',color: '#2194FF' }} align="center">
                                                     {item.to}
                                                 </TableCell>
-                                                <TableCell align="center">{item.days}</TableCell>
+                                                <TableCell className='activityTable'  sx={{fontSize:'15px'}}     align="center">{item.days}</TableCell>
                                             </TableRow>
                                         </TableBody>
                                     ))}

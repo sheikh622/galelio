@@ -480,8 +480,12 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                        <CardMedia component="img" sx={{ height: '592px' , objectFit:'fill'}} 
-                        image={nft?.asset ? nft?.asset : watch1} alt="green iguana" />
+                        <CardMedia
+                            component="img"
+                            sx={{ height: '592px', objectFit: 'fill' }}
+                            image={nft?.asset ? nft?.asset : watch1}
+                            alt="green iguana"
+                        />
                     </Grid>
 
                     <Grid item md={6} sm={12}>

@@ -289,11 +289,15 @@ body {
     margin: -20px;
     font-size: 35px;
     color: #212121 !important;
-    font-weight: 900;
-    font-family: 'Roboto', sans-serif;
+    // font-weight: 900;
+  
+font-family: 'Public Sans';
+font-style: normal;
+font-weight: 700;
+// font-size: 30px;
     line-height: 1.2;
     margin-bottom: 0.35em;
-    color: #816a51 !important;
+  
 }
 
 .signbutton {
@@ -638,7 +642,14 @@ color: #2194FF;
 
     margin-right: 15px;
 }
+.Forgot{
 
+    
+font-family: 'Public Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+}
 .price {
     font-family: 'Public Sans';
     font-style: normal;
@@ -731,12 +742,20 @@ text-transform: capitalize;
     font-weight: 700;
     font-size: 30px;
     line-height: 100%;
+    
+font-family: 'Public Sans';
+font-style: normal;
+
     /* identical to box height, or 30px */
 
     text-align: center;
 }
 
 .signbuttonMarket {
+    
+font-family: 'Public Sans';
+font-style: normal;
+
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
     border-radius: 4px;
     color: #fff;
@@ -1376,6 +1395,19 @@ font-weight: 200;
 // font-size: 8px;
 
 }
+.fontfamily{
+    font-family: 'Public Sans';
+font-style: normal;
+font-weight: 400;
+
+}
+.activityTable{
+    font-family: 'Public Sans';
+    font-style: normal;
+}
+
+
+
 .newCreator{
     font-family: 'Public Sans';
 font-style: normal;
