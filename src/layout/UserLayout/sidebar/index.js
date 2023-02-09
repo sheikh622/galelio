@@ -41,6 +41,7 @@ const SideBar = () => {
                 <Grid item xs={12}>
                     <Grid
                         xs={12}
+                        sm={10}
                         md={10}
                         lg={12}
                         xl={6}
@@ -51,7 +52,7 @@ const SideBar = () => {
                             pt: 1,
                             pb: 3,
                             ml: 1,
-                            mr: 1,
+                            mr: 1, maxWidth:'93% !important',
                             display: 'block',
                             boxShadow: '1px 2px 2px 2px #d3d3d391',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
