@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import "@fontsource/public-sans";
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Box, Stack, Typography, useMediaQuery } from '@mui/material';
@@ -65,7 +65,7 @@ const Login = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Grid item container direction="column" alignItems="center" xs={12}>
-                                    <Typography component={Link} to="/signUp" variant="subtitle1"
+                                    <Typography className='fontfamily' component={Link} to="/signUp" variant="subtitle1"
                                      sx={{ textDecoration: 'none' }}>
                                         Don&apos;t have an account?
                                     </Typography>

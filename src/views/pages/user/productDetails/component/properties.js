@@ -107,16 +107,17 @@ const Properties = ({ nft }) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography
+                            className='fontfamily'
                                 variant="h3"
                                 mt={2}
                                 component="div"
                                 sx={{
                                     textAlign: { xs: 'center', md: 'left', sm: 'center' },
                                     textTransform: 'capitalize',
-                                    color: '#9498aa'
+                                    color: ' #9498AA'
                                 }}
                             >
-                                No Property Found..!
+                                No Property Found.
                             </Typography>
                         </Grid>
                     </Grid>
