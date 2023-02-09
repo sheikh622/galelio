@@ -8,45 +8,75 @@ import { Button } from '@mui/material';
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 import { setWallet } from '../../../../redux/auth/actions';
-const MetaMaskSection = () => {
+const MetaMaskSection =  () => {
     
+    const user = useSelector((state) => state.auth.user);
+    // console.log('user.walletAddress', user.walletAddress);
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
     const handleConnect = async () => {
-        if (!window.ethereum) {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'No crypto wallet found. Please install it.',
-                variant: 'alert',
-                alertSeverity: 'info'
-                
-            })
-            console.log("No crypto wallet found. Please install it.")
-            // toast.error('No crypto wallet found. Please install it.');
-        }
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' })
+        if(response){
 
-        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
-        if (response) {
-            const address = utils?.getAddress(response[0]);
-            setWalletAddress(address);
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Success',
-                variant: 'alert',
-                alertSeverity: 'success'
-            })
-        
-        } else {
-            console.log("No crypto wallet found. Please install it.");
-            // toast.error('No crypto wallet found. Please install it.');
+            if (!window.ethereum) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'No crypto wallet found. Please install it.',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            } else if (window?.ethereum?.networkVersion !== '5') {
+              console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Please change your Chain ID to Goerli',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('Please change your Chain ID to Goerli');
+                setWalletAddress()
+            }
+            else if(utils?.getAddress(response[0])!==user.walletAddress) {
+               
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Please connect your registered Wallet Address',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('Please connect your registered Wallet Address');
+                setWalletAddress()
+            }
+
+    
+            else {
+                
+                    const address = utils?.getAddress(response[0]);
+                    setWalletAddress(address);
+                    dispatch({
+                        type: SNACKBAR_OPEN,
+                        open: true,
+                        message: 'Success',
+                        variant: 'alert',
+                        alertSeverity: 'success'
+                    });
+                }
         }
+            else {
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
+
     };
 
     useEffect(() => {
         dispatch(setWallet(walletAddress));
-        handleConnect();    
+        handleConnect();
     }, [walletAddress]);
 
     if (window.ethereum) {
@@ -67,9 +97,9 @@ const MetaMaskSection = () => {
             >
                 {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
             </Button>
-    
         </>
     );
 };
 
 export default MetaMaskSection;
+    

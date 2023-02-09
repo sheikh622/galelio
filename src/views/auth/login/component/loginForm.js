@@ -243,13 +243,14 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
+                        <Box></Box>
                         <Grid
                             item
                             mt={1}
                             xs={12}
                             sm={12}
                             md={12}
-                            lg={12}
+                            lg={6}
                             className="facebook"
                                sx={{
                                 color:'white',
@@ -264,12 +265,12 @@ const LoginForm = ({ loginProp, ...others }) => {
                             
                         >
                             <Button
-                                variant="outlined"
-                                color="secondary"
+                                variant="text"
+                              
                                 fullWidth
                                 size="large"
-                                className="signbuttonMarket"
-                                startIcon={<FacebookOutlinedIcon />}
+                              
+                                // startIcon={<FacebookOutlinedIcon sx={{color:'#2f53ff' , fontSize:'38px !important'     }}/>}
                             >
                                 <ReactFacebookLogin
                                     appId="851727442768362"
@@ -278,6 +279,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     callback={responseFacebook}
                                     onFailure={responseFacebookFailure}
                                     cssClass="my-facebook-button-class"
+                                    icon="fa-facebook"
                                     textButton=""
                                 />
                             </Button>
@@ -287,7 +289,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                             xs={12}
                             sm={12}
                             md={12}
-                            lg={12}
+                            lg={6}
                             // className="google"
                             sx={{
                                 width:{md:'50% ', lg:'50%' }, margin:'0 auto',
@@ -298,7 +300,9 @@ const LoginForm = ({ loginProp, ...others }) => {
 
                             
                             <GoogleLogin
-                                
+                                 
+                                 type="icon"
+                                 
                                 onSuccess={(data) => {
                                     console.log('datafrom google login',data);
                                     googleAuthHandle(data);

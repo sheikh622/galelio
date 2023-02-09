@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
 
 import { gridSpacing } from 'store/constant';
-import { ethers } from 'ethers';
+import { ethers, utils } from 'ethers';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
 import MarketplaceAbi from '../../../../../contractAbi/Marketplace.json';
 import MarketplaceAddress from '../../../../../contractAbi/Marketplace-address.json';
@@ -15,7 +15,7 @@ import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link as RouterLink, useNavigate, redirect } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft, changeTokenId } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
@@ -27,6 +27,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import BLOCKCHAIN from '../../../../../constants';
 import CircularProgress from '@mui/material/CircularProgress';
+import { SNACKBAR_OPEN } from 'store/actions';
+import { setLoader } from 'redux/auth/actions';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
@@ -125,106 +127,157 @@ const PropertiesView = ({ nft }) => {
         setOpen(false);
     };
 
+    const checkWallet = async () => {
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
+        let connectWallet = await ethereum._metamask.isUnlocked();
+
+        if ((window.ethereum && connectWallet) == false) {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'No crypto wallet found. Please connect one',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('No crypto wallet found. Please install it.');
+            // toast.error('No crypto wallet found. Please install it.');
+        } else if (window?.ethereum?.networkVersion !== '5') {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Please change your Chain ID to Goerli',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('Please change your Chain ID to Goerli');
+        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Please connect your registered Wallet Address',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('Please connect your registered Wallet Address');
+        } else {
+            return true;
+        }
+    };
+
     const handleBuyNft = async () => {
         if (user == null) {
             navigate('/login');
-        } else if (nft.mintType == 'directMint') {
-            setLoader(true);
+        } else if (await checkWallet()) {
+            if (nft.mintType == 'directMint') {
+                try {
+                    setLoader(true);
 
-            let erc20Address = BLOCKCHAIN.ERC20;
-            let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
-            let price = ethers.utils.parseEther(nft.price.toString());
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            const address = signer.getAddress();
+                    let erc20Address = BLOCKCHAIN.ERC20;
+                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let price = ethers.utils.parseEther(nft.price.toString());
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+                    const address = signer.getAddress();
 
-            const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-            const token = new ethers.Contract(erc20Address, Erc20, signer);
-            // await (await token.approve(MarketplaceAddress.address, price)).wait();
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const token = new ethers.Contract(erc20Address, Erc20, signer);
+                    // await (await token.approve(MarketplaceAddress.address, price)).wait();
 
-            // -------------
-            let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
+                    // -------------
+                    let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
 
-            let approvePrice = ethers.utils.parseEther('10000');
-            if (approvalAmount.toString() < nft.price.toString()) {
-                await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
-            }
-            // ---------------
-            console.log('tokenId, contractAddress, price from product view', tokenId, contractAddress, price);
-            await (await marketplace.purchaseItem(tokenId, contractAddress, price))
-                .wait()
-                .then((data) => {
-                    dispatch(
-                        buyNft({
-                            nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].id,
-                            buyerAddress: data.from,
-                            contractAddress: contractAddress,
-                            buyNftResolve: buyNftResolve
+                    let approvePrice = ethers.utils.parseEther('10000');
+                    if (approvalAmount.toString() < nft.price.toString()) {
+                        await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
+                    }
+                    // ---------------
+                    console.log('tokenId, contractAddress, price from product view', tokenId, contractAddress, price);
+                    await (await marketplace.purchaseItem(tokenId, contractAddress, price))
+                        .wait()
+                        .then((data) => {
+                            console.log('im in then');
+                            dispatch(
+                                buyNft({
+                                    nftId: nft.id,
+                                    nftToken: nft.NFTTokens[0].id,
+                                    buyerAddress: data.from,
+                                    contractAddress: contractAddress,
+                                    buyNftResolve: buyNftResolve
+                                })
+                            );
                         })
-                    );
-                })
-                .catch((error) => {
+                        .catch((error) => {
+                            console.log('im here now');
+                            setLoader(false);
+                            toast.error(error.message);
+                        });
+                } catch (error) {
+                    setLoader(false);
                     toast.error(error.message);
-                });
-        } else if (nft.mintType == 'lazyMint') {
-            setLoader(true);
+                }
+            } else if (nft.mintType == 'lazyMint') {
+                try {
+                    setLoader(true);
+                    let signers = nft.signerAddress;
+                    let erc20Address = BLOCKCHAIN.ERC20;
+                    let signature = nft.NFTTokens[0].signature;
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0";
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+                    const address = signer.getAddress();
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
 
-            let signers = nft.signerAddress;
-            let erc20Address = BLOCKCHAIN.ERC20;
-            let signature = nft.NFTTokens[0].signature;
-            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
-            // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0";
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            const address = signer.getAddress();
-            const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                    let prices = ethers.utils.parseEther(nft.price.toString());
 
-            let prices = ethers.utils.parseEther(nft.price.toString());
+                    let voucher = {
+                        uri: nft.tokenUri,
+                        price: prices,
+                        token: erc20Address
+                    };
 
-            let voucher = {
-                uri: nft.tokenUri,
-                price: prices,
-                token: erc20Address
-            };
+                    let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
+                    const token = new ethers.Contract(erc20Address, Erc20, signer);
+                    //const signature = await signer._signTypedData(domain, types, voucher);
+                    // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
 
-            let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
-            const token = new ethers.Contract(erc20Address, Erc20, signer);
-            //const signature = await signer._signTypedData(domain, types, voucher);
-            // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
+                    let approvalAmount = await token.allowance(address, contractAddress);
 
-            let approvalAmount = await token.allowance(address, contractAddress);
+                    let approvePrice = ethers.utils.parseEther('10000');
+                    if (approvalAmount.toString() < nft.price.toString()) {
+                        await (await token.approve(contractAddress, approvePrice)).wait();
+                    }
+                    // await (await token.approve(contractAddress, prices)).wait();
 
-            let approvePrice = ethers.utils.parseEther('10000');
-            if (approvalAmount.toString() < nft.price.toString()) {
-                await (await token.approve(contractAddress, approvePrice)).wait();
-            }
-            // await (await token.approve(contractAddress, prices)).wait();
+                    //
+                    try {
+                        let mintedNFT = await (await nfts.buyNft(voucher, signature, MarketplaceAddress.address)).wait();
+                        const id = parseInt(mintedNFT.events[0].args[2]);
 
-            //
-            try {
-                let mintedNFT = await (await nfts.buyNft(voucher, signature, MarketplaceAddress.address)).wait();
-                const id = parseInt(mintedNFT.events[0].args[2]);
+                        dispatch(
+                            changeTokenId({
+                                id: nft.NFTTokens[0].id,
+                                tokenId: id.toString()
+                            })
+                        );
 
-                dispatch(
-                    changeTokenId({
-                        id: nft.NFTTokens[0].id,
-                        tokenId: id.toString()
-                    })
-                );
-
-                dispatch(
-                    buyNft({
-                        nftId: nft.id,
-                        nftToken: nft.NFTTokens[0].id,
-                        buyerAddress: mintedNFT.from,
-                        contractAddress: contractAddress,
-                        buyNftResolve: buyNftResolve
-                    })
-                );
-            } catch (error) {
-                toast.error(error.message);
+                        dispatch(
+                            buyNft({
+                                nftId: nft.id,
+                                nftToken: nft.NFTTokens[0].id,
+                                buyerAddress: mintedNFT.from,
+                                contractAddress: contractAddress,
+                                buyNftResolve: buyNftResolve
+                            })
+                        );
+                    } catch (error) {
+                        toast.error(error.message);
+                    }
+                } catch (error) {
+                    setLoader(false);
+                    toast.error(error.message);
+                }
             }
         }
     };
@@ -232,153 +285,179 @@ const PropertiesView = ({ nft }) => {
     const handleResellNft = async () => {
         if (user == null) {
             navigate('/login');
-        } else if (nft.mintType == 'directMint') {
-            setResellLoader(true);
-            let erc20Address = BLOCKCHAIN.ERC20;
-            let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+        } else if (await checkWallet()) {
+            if (nft.mintType == 'directMint') {
+                try {
+                    setResellLoader(true);
+                    let erc20Address = BLOCKCHAIN.ERC20;
+                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
 
-            let rrprice = ethers.utils.parseEther(rprice.toString());
+                    let rrprice = ethers.utils.parseEther(rprice.toString());
 
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
 
-            const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-            const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
 
-            await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
-            await (await marketplace.resellItem(tokenId, contractAddress, rrprice))
-                .wait()
-                .then((data) => {
-                    dispatch(
-                        resellNft({
-                            rprice: rprice,
-                            nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].id,
-                            buyerAddress: data.from,
-                            contractAddress: contractAddress,
-                            resellNftResolve: resellNftResolve
+                    await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
+                    await (await marketplace.resellItem(tokenId, contractAddress, rrprice))
+                        .wait()
+                        .then((data) => {
+                            dispatch(
+                                resellNft({
+                                    rprice: rprice,
+                                    nftId: nft.id,
+                                    nftToken: nft.NFTTokens[0].id,
+                                    buyerAddress: data.from,
+                                    contractAddress: contractAddress,
+                                    resellNftResolve: resellNftResolve
+                                })
+                            );
+                            toast.success('NFT is Resold');
                         })
-                    );
-                    toast.success('NFT is Resold');
-                })
-                .catch((error) => {
+                        .catch((error) => {
+                            toast.error(error.message);
+                        });
+                } catch (error) {
+                    setResellLoader(false);
                     toast.error(error.message);
-                });
-        } else if (nft.mintType == 'lazyMint') {
-            let erc20Address = BLOCKCHAIN.ERC20;
-            let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                }
+            } else if (nft.mintType == 'lazyMint') {
+                try {
+                    let erc20Address = BLOCKCHAIN.ERC20;
+                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
 
-            let rrprice = ethers.utils.parseEther(nft.price.toString());
+                    let rrprice = ethers.utils.parseEther(nft.price.toString());
 
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
 
-            const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-            const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
 
-            // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
-            await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, rrprice))
-                .wait()
-                .then((data) => {
-                    dispatch(
-                        resellNft({
-                            nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].id,
-                            buyerAddress: data.from,
-                            contractAddress: contractAddress,
-                            resellNftResolve: resellNftResolve
+                    // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
+                    await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, rrprice))
+                        .wait()
+                        .then((data) => {
+                            dispatch(
+                                resellNft({
+                                    nftId: nft.id,
+                                    nftToken: nft.NFTTokens[0].id,
+                                    buyerAddress: data.from,
+                                    contractAddress: contractAddress,
+                                    resellNftResolve: resellNftResolve
+                                })
+                            );
+
+                            toast.success('NFT is Resold');
                         })
-                    );
-
-                    toast.success('NFT is Resold');
-                })
-                .catch((error) => {
+                        .catch((error) => {
+                            toast.error(error.message);
+                        });
+                    setOpen(false);
+                } catch (error) {
+                    setResellLoader(false);
                     toast.error(error.message);
-                });
-            setOpen(false);
+                }
+            }
         }
     };
 
     const handleRedeemNft = async () => {
         if (user == null) {
             navigate('/login');
-        } else if (nft.mintType == 'directMint') {
-            setRedeemLoader(true);
-            let erc20Address = BLOCKCHAIN.ERC20;
-            let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-
-            const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-
-            await (await marketplace.redeemNft(tokenId, contractAddress))
-                .wait()
-                .then((data) => {
-                    dispatch(
-                        redeemNft({
-                            nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].id,
-                            buyerAddress: data.from,
-                            contractAddress: contractAddress
+        } else if (await checkWallet()) {
+            if (nft.mintType == 'directMint') {
+                try{
+                    setRedeemLoader(true);
+                    let erc20Address = BLOCKCHAIN.ERC20;
+                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+    
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+    
+                    await (await marketplace.redeemNft(tokenId, contractAddress))
+                        .wait()
+                        .then((data) => {
+                            dispatch(
+                                redeemNft({
+                                    nftId: nft.id,
+                                    nftToken: nft.NFTTokens[0].id,
+                                    buyerAddress: data.from,
+                                    contractAddress: contractAddress
+                                })
+                            );
+                            dispatch(
+                                addDeliveryNft({
+                                    status: 'Pending',
+                                    TokenId: nft.NFTTokens[0].id,
+                                    WalletAddress: data.from,
+                                    NftId: nft.id,
+                                    UserId: user.id,
+                                    redeemNftResolve: redeemNftResolve
+                                })
+                            );
+    
+                            toast.success('NFT Redeem successfully');
                         })
-                    );
-                    dispatch(
-                        addDeliveryNft({
-                            status: 'Pending',
-                            TokenId: nft.NFTTokens[0].id,
-                            WalletAddress: data.from,
-                            NftId: nft.id,
-                            UserId: user.id,
-                            redeemNftResolve: redeemNftResolve
-                        })
-                    );
-
-                    toast.success('NFT Redeem successfully');
-                })
-                .catch((error) => {
+                        .catch((error) => {
+                            toast.error(error.message);
+                        });
+                }catch(error){
+                    setRedeemLoader(false);
                     toast.error(error.message);
-                });
-        } else if (nft.mintType == 'lazyMint') {
-            setRedeemLoader(true);
-            let erc20Address = BLOCKCHAIN.ERC20;
-            let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-            let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-
-            const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-            let rrprice = ethers.utils.parseEther(nft.price.toString());
-
-            await (await marketplace.redeem(erc20Address, tokenId, contractAddress, rrprice))
-                .wait()
-                .then((data) => {
-                    dispatch(
-                        redeemNft({
-                            nftId: nft.id,
-                            nftToken: nft.NFTTokens[0].id,
-                            buyerAddress: data.from,
-                            contractAddress: contractAddress
+                }
+                
+            } else if (nft.mintType == 'lazyMint') {
+                try{
+                    setRedeemLoader(true);
+                    let erc20Address = BLOCKCHAIN.ERC20;
+                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+    
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    let rrprice = ethers.utils.parseEther(nft.price.toString());
+    
+                    await (await marketplace.redeem(erc20Address, tokenId, contractAddress, rrprice))
+                        .wait()
+                        .then((data) => {
+                            dispatch(
+                                redeemNft({
+                                    nftId: nft.id,
+                                    nftToken: nft.NFTTokens[0].id,
+                                    buyerAddress: data.from,
+                                    contractAddress: contractAddress
+                                })
+                            );
+                            dispatch(
+                                addDeliveryNft({
+                                    status: 'Pending',
+                                    TokenId: nft.NFTTokens[0].id,
+                                    WalletAddress: data.from,
+                                    NftId: nft.id,
+                                    UserId: user.id,
+                                    redeemNftResolve: redeemNftResolve
+                                })
+                            );
+    
+                            toast.success('NFT Redeem successfully');
                         })
-                    );
-                    dispatch(
-                        addDeliveryNft({
-                            status: 'Pending',
-                            TokenId: nft.NFTTokens[0].id,
-                            WalletAddress: data.from,
-                            NftId: nft.id,
-                            UserId: user.id,
-                            redeemNftResolve: redeemNftResolve
-                        })
-                    );
-
-                    toast.success('NFT Redeem successfully');
-                })
-                .catch((error) => {
+                        .catch((error) => {
+                            toast.error(error.message);
+                        });
+                }catch(error){
+                    setRedeemLoader(false);
                     toast.error(error.message);
-                });
+                }
+                
+            }
         }
     };
 
