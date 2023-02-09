@@ -1,12 +1,12 @@
 .my-facebook-button-class {
-    background: transparent;
- 
+  background: #2f53ff;
     color: white;
-   
-    font-size: 24px;
+    font-size: 22px;
     text-align: center;
     border: none;
     cursor: pointer;
+    padding: 10px 13px 4px 13px;
+    border-radius: 4px;
 }
 .facebook{
    font-size: 38px !important;

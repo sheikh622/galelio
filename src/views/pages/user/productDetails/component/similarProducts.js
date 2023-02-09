@@ -217,12 +217,13 @@ const SimilarProducts = ({ nft }) => {
             ) : (
                 <Grid item xs={12}>
                     <Typography
+                    className='fontfamily'
                         variant="h3"
                         mt={1}
                         component="div"
-                        sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center', color: 'gray' }, textTransform: 'capitalize' }}
+                        sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center', color: ' #9498AA' }, textTransform: 'capitalize' }}
                     >
-                         Not any similar product available..!
+                         Not any similar product available.
                     </Typography>
                 </Grid>
             )}
