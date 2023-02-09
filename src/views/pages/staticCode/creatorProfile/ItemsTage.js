@@ -75,7 +75,7 @@ export default function HorizontalTabs() {
                     }
                 }}
             >
-                <Tab  component={Link} to="#" label="Items" {...a11yProps(0)} />
+                <Tab component={Link} to="#" label="Items" {...a11yProps(0)} />
                 <Tab component={Link} to="#" label="Activity" {...a11yProps(1)} />
             </Tabs>
 

@@ -132,8 +132,8 @@ const SimilarProducts = ({ nft }) => {
                                         background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                                         maxWidth: 365,
                                         width: '105%',
-                                        boxShadow: '1px 2px 6px #d3d3d3',
-                                        borderRadius: '7px'
+                                       
+                                        borderRadius: '4px !important'
                                     }}
                                 >
                                     <CardActionArea>

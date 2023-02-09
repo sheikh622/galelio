@@ -24,7 +24,7 @@ import { IconSearch } from '@tabler/icons';
 import { gridSpacing } from 'store/constant';
 
 import CardMedia from '@mui/material/CardMedia';
-import MenuOpenIcon from 'assets/images/clearData.png'
+import MenuOpenIcon from 'assets/images/clearData.png';
 // import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllNftUser } from 'redux/nftManagement/actions';
@@ -85,14 +85,17 @@ const Items = () => {
                     <Grid item md={1} xs={12}>
                         <img src={MenuOpenIcon} />
                     </Grid>
-                    <Grid item md={7} xs={12} sx={{ marginLeft: { md: '-74px', xl: '-74px' },
-                     marginTop: { md: '-11px' } }}>
-                        <TextField sx={{  backgroundColor: theme.palette.mode === 'dark' ?'#181C1F' : '#ccc',
-                        color: theme.palette.mode === 'dark' ?'#fff' : '#000',
-                        borderRadius: '4px' , padding:'20px 3px 0 0'}}
-                        fullWidth
-                        variant='standard'
-                            placeholder='Search by name or attribute'
+                    <Grid item md={7} xs={12} sx={{ marginLeft: { md: '-74px', xl: '-74px' }, marginTop: { md: '-11px' } }}>
+                        <TextField
+                            sx={{
+                                backgroundColor: theme.palette.mode === 'dark' ? '#181C1F' : '#ccc',
+                                color: theme.palette.mode === 'dark' ? '#fff' : '#000',
+                                borderRadius: '4px',
+                                padding: '20px 3px 0 0'
+                            }}
+                            fullWidth
+                            variant="standard"
+                            placeholder="Search by name or attribute"
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment>
@@ -103,7 +106,7 @@ const Items = () => {
                                 )
                             }}
                         />
-                    {/*     <OutlinedInput
+                        {/*     <OutlinedInput
                             fullWidth
                             id="input-search-list-style1"
                             placeholder="Search by name or attribute"
@@ -123,15 +126,20 @@ const Items = () => {
                         md={3}
                         xs={12}
                         sx={{
-                        backgroundColor: theme.palette.mode === 'dark' ?'#181C1F' : '#ccc',
-                        color: theme.palette.mode === 'dark' ?'#fff' : '#000',
-                        marginLeft: { md: '6px', xl: '6px' }, 
-                        marginTop: { md: '-11px', xs: '10px', sm: '10px' } }}
+                            backgroundColor: theme.palette.mode === 'dark' ? '#181C1F' : '#ccc',
+                            color: theme.palette.mode === 'dark' ? '#fff' : '#000',
+                            marginLeft: { md: '6px', xl: '6px' },
+                            marginTop: { md: '-11px', xs: '10px', sm: '10px' }
+                        }}
                     >
                         <TextField
-                        variant='standard'
-                        sx={{  backgroundColor: theme.palette.mode === 'dark' ?'#181C1F' : '#ccc', border:'2px solid #181C1F !important',
-                        borderRadius: '4px' , padding:'15px 3px 0 3px !important'}}
+                            variant="standard"
+                            sx={{
+                                backgroundColor: theme.palette.mode === 'dark' ? '#181C1F' : '#ccc',
+                                border: '2px solid #181C1F !important',
+                                borderRadius: '4px',
+                                padding: '15px 3px 0 3px !important'
+                            }}
                             // className="select"
                             fullWidth
                             size="small"
@@ -173,8 +181,8 @@ const Items = () => {
                                             background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                                             maxWidth: 365,
                                             width: '105%',
-                                            boxShadow: '1px 2px 6px #d3d3d3',
-                                            borderRadius: '7px'
+
+                                            borderRadius: '3px'
                                         }}
                                     >
                                         <CardActionArea>
@@ -182,12 +190,12 @@ const Items = () => {
                                             <CardContent sx={{ padding: '6%' }}>
                                                 <Grid container>
                                                     <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                                                        <span sx={{ fontWeight: '750', fontSize: '180%' }}>
-                                                            <b style={{}}>{data.name}</b>
+                                                        <span className="cardHeading" style={{ fontSize: '130%' }}>
+                                                            {data.name}{' '}
                                                         </span>
-                                                        <Grid className="overflow" sx={{ marginTop: '5%' }}>
+                                                        <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>
                                                             {data.price} {data.currencyType}
-                                                        </Grid>
+                                                        </div>
                                                     </Grid>
                                                     <Grid item xs={4} sx={{ background: '' }}>
                                                         <span sx={{ fontWeight: '50 !important ', fontSize: '110%', float: 'right' }}>
