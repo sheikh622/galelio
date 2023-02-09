@@ -105,10 +105,11 @@ const FeaturedCreators = ({ brands }) => {
                 <Grid
                     mt={4}
                     container
+
                     sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
                     spacing={4}
                 >
-                    <h3 className="noData"> No product found...!</h3>
+                    <h3 className="noData fontfamily"> No featured product found.</h3>
                 </Grid>
             )}
         </Grid>

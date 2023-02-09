@@ -101,7 +101,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
                     ) : (
                         <Grid mt={4} container  sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
                          spacing={4} >
-                        <h3 className='noDataNew'> No product found...!</h3>
+                        <h3 className='noDataNew fontfamily'> No trending product available.</h3>
                     </Grid>
                     )}
                 </Grid>
