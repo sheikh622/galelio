@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 
 // material-ui
 import {
@@ -71,6 +72,7 @@ const rows = [
 // ==============================|| DeliveryDashboard ||============================== //
 
 const DeliveryDashboard = ({ productList }) => {
+    const theme = useTheme();
     return (
         <Grid item lg={12} md={12} xs={12}>
             <Grid container direction="column" spacing={gridSpacing}>
@@ -113,7 +115,7 @@ const DeliveryDashboard = ({ productList }) => {
                                                                             />
                                                                             <ListItemSecondaryAction>
                                                                                 <Typography
-                                                                                    sx={{ color: '#000' }}
+                                                                                    sx={{  color:theme.palette.mode === 'dark' ? '#FFFFFF' : 'black' ,  textTransform: 'capitalize' }}
                                                                                     variant="subtitle1"
                                                                                     align="right"
                                                                                 >

@@ -376,16 +376,16 @@ const PropertiesView = ({ nft }) => {
             navigate('/login');
         } else if (await checkWallet()) {
             if (nft.mintType == 'directMint') {
-                try{
+                try {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
                     let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
-    
+
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-    
+
                     await (await marketplace.redeemNft(tokenId, contractAddress))
                         .wait()
                         .then((data) => {
@@ -407,29 +407,28 @@ const PropertiesView = ({ nft }) => {
                                     redeemNftResolve: redeemNftResolve
                                 })
                             );
-    
+
                             toast.success('NFT Redeem successfully');
                         })
                         .catch((error) => {
                             toast.error(error.message);
                         });
-                }catch(error){
+                } catch (error) {
                     setRedeemLoader(false);
                     toast.error(error.message);
                 }
-                
             } else if (nft.mintType == 'lazyMint') {
-                try{
+                try {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
                     let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
-    
+
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     let rrprice = ethers.utils.parseEther(nft.price.toString());
-    
+
                     await (await marketplace.redeem(erc20Address, tokenId, contractAddress, rrprice))
                         .wait()
                         .then((data) => {
@@ -451,17 +450,16 @@ const PropertiesView = ({ nft }) => {
                                     redeemNftResolve: redeemNftResolve
                                 })
                             );
-    
+
                             toast.success('NFT Redeem successfully');
                         })
                         .catch((error) => {
                             toast.error(error.message);
                         });
-                }catch(error){
+                } catch (error) {
                     setRedeemLoader(false);
                     toast.error(error.message);
                 }
-                
             }
         }
     };
@@ -485,11 +483,13 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
+                     
                         <CardMedia
+                            
                             component="img"
-                            sx={{ height: '592px', objectFit: 'fill' }}
                             image={nft?.asset ? nft?.asset : watch1}
-                            alt="green iguana"
+                            sx={{ minheight: 'auto', maxHeight:'570px',
+                             overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
 
@@ -540,28 +540,35 @@ const PropertiesView = ({ nft }) => {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
-                                            <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto' }}>
+                                            <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
                                                 <FormControl
                                                     sx={{
                                                         background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
                                                         color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
+                                                        padding: '10px 10px 10px 10px',
                                                         borderRadius: '4px'
                                                     }}
                                                     fullWidth
                                                 >
-                                                    <InputLabel
-                                                        sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                                        id="demo-simple-select-label"
-                                                    >
-                                                        PROOF OF AUTHENTICITY
-                                                    </InputLabel>
                                                     <Select
                                                         variant="standard"
                                                         labelId="demo-simple-select-label"
                                                         id="demo-simple-select"
                                                         value={age}
                                                         onChange={handleChange}
+                                                        fullWidth
+                                                        displayEmpty
+                                                        renderValue={(selected) => {
+                                                            if (selected.length === 0) {
+                                                                return <em className="fontfamily">PROOF OF AUTHENTICITY</em>;
+                                                            }
+
+                                                            return selected.join(', ');
+                                                        }}
                                                     >
+                                                        {/* <MenuItem disabled value="">
+                                      <em>aiman</em>
+                                    </MenuItem> */}
                                                         {nft?.NFTMetaFiles.map((option) => (
                                                             <MenuItem
                                                                 // component={redirect}
@@ -598,7 +605,7 @@ const PropertiesView = ({ nft }) => {
                                         //     ))}
                                         // </TextField> */}
                                         </Grid>
-                                        <Grid item mt={2} mb={2} className="timer" xs={12}>
+                                       {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid
                                                 sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9' }}
                                                 className="auction"
@@ -616,8 +623,8 @@ const PropertiesView = ({ nft }) => {
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
-                                        </Grid>
-                                        <Grid item xs={12}>
+                                        </Grid> */}
+                                        <Grid  mt={2} item xs={12}>
                                             <Grid container>
                                                 <Grid mt={-2} item md={3} xs={12} sm={12}>
                                                     <Grid item xs={12}>

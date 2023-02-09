@@ -97,7 +97,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                         justifyContent="center"
                                                         alignItems="center"
                                                     >
-                                                        <Tooltip placement="top" title="Add Brand Admin">
+                                                        <Tooltip placement="top" title="Brand Admin">
                                                             <IconButton
                                                                 className="color"
                                                                 aria-label="detail"

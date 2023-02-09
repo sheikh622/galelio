@@ -221,7 +221,7 @@ export default function Header() {
                             </Typography>
                         </Box>
 
-                        <Grid container-fluid>
+                      {/*   <Grid container-fluid>
                             <Grid item sx={{ display: { lg: 'none', md: 'block' } }}>
                                 <Drawer />
                             </Grid>
@@ -235,7 +235,7 @@ export default function Header() {
                                 </SearchIconWrapper>
                                 <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
                             </Search>
-                        </Grid>
+                        </Grid> */}
 
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ flexGrow: 1 }} />
@@ -261,12 +261,12 @@ export default function Header() {
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                 </Badge>
                             </IconButton>
-                            <IconButton size="large" aria-label="" color="inherit">
+                           {/*  <IconButton size="large" aria-label="" color="inherit">
                                 <AccountBalanceWalletIcon sx={{ color: '#4dabf5' }} />
                             </IconButton>
                             <IconButton size="large" aria-label="" color="inherit">
                                 <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
-                            </IconButton>
+                            </IconButton> */}
                         </Box>
                         {user == null && (
                             <Button

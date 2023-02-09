@@ -48,7 +48,7 @@ const NewCard = ({ data, nfts }) => {
                 }}
             >
                 <CardActionArea>
-                    <CardMedia component="img" height="200" sx={{objectFit:'revert'}}  image={data.asset} />
+                    <CardMedia component="img" height="200" sx={{objectFit:'cover'}}  image={data.asset} />
                     <CardContent  style={{ padding: '6%' ,  }}>
                         <Grid container >
                             <Grid item className='encap' xs={8} sx={{ textAlign: 'left' }}>
@@ -60,7 +60,7 @@ const NewCard = ({ data, nfts }) => {
                             </Grid>
                             <Grid item xs={4} sx={{ background: '' }}>
                                 <span className='newCreator' style={{ fontSize: '110%', float: 'right', color: '#878787' }}>
-                                    Creator
+                                    Brand
                                 </span>
                             </Grid>
                         </Grid>

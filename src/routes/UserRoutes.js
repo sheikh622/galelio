@@ -5,8 +5,8 @@ import UserGuard from './RouteGuard/UserGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
-
 //New Routing
+const ComingSoon = Loadable(lazy(() => import('views/pages/staticCode/comingSoon/ComingSoon')));
 const LandingPage = Loadable(lazy(() => import('views/pages/user/landingPage')));
 const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetails')));
@@ -32,6 +32,10 @@ const UserRoutes = {
         {
             path: '/landingPage',
             element: <LandingPage />
+        },
+        {
+            path: '/ComingSoon',
+            element: <ComingSoon />
         },
         {
             path: '/marketplace',
