@@ -268,9 +268,9 @@ const Categories = ({ categories }) => {
                         </Grid>
                     ) : (
                         <Grid mt={0} container  spacing={2}>
-                            <h3 className="noDatacat" 
+                            <h3 className="noDatacat fontfamily" 
                             sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
-                            > No product found...! 
+                            > No category found. 
                             </h3>
                         </Grid>
                     )}
