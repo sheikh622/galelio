@@ -80,7 +80,7 @@ const Items = () => {
 
     return (
         <Grid mt={2} container-fluid spacing={gridSpacing}>
-            <Grid item xs={12} lg={12} md={12}>
+          {/*   <Grid item xs={12} lg={12} md={12}>
                 <Grid container sx={{ mb: 2 }}>
                     <Grid item md={1} xs={12}>
                         <img src={MenuOpenIcon} />
@@ -106,20 +106,7 @@ const Items = () => {
                                 )
                             }}
                         />
-                        {/*     <OutlinedInput
-                            fullWidth
-                            id="input-search-list-style1"
-                            placeholder="Search by name or attribute"
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <IconSearch stroke={1.5} size="1rem" />
-                                </InputAdornment>
-                            }
-                            size="small"
-                            // onChange={(e) => {
-                            //     setSearch(e.target.value);
-                            // }}
-                        /> */}
+               
                     </Grid>
                     <Grid
                         item
@@ -156,7 +143,7 @@ const Items = () => {
                         </TextField>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
 
             <Grid mt={4} item xs={12}>
                 <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>

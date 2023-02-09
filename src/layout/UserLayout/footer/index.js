@@ -58,12 +58,14 @@ const Footer = () => {
                             <span className='footerDownloadTag' style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
                         </Grid>
 
-                        <Grid container sx={{ mt: 3 }}>
+                        <Grid container sx={{ mt: 3  }}>
                             <Grid item md={4} xs={12}>
-                                <img src={googlePlay} alt="Google Play" width="120" />
+                                <img src={googlePlay}  alt="Google Play" width="120" />
                             </Grid>
-                            <Grid item md={8} xs={12}>
-                                <img src={appleStore} alt="Apple Store" width="120" />
+                            <Grid item md={1} xs={12} >
+                            </Grid>
+                            <Grid item md={7} xs={12} >
+                                <img src={appleStore}  alt="Apple Store" width="120" />
                             </Grid>
                         </Grid>
                     </Grid>

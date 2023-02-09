@@ -1,4 +1,4 @@
-import { Container, Grid , Box} from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import StorefrontIcon from '@mui/icons-material/Storefront';
@@ -37,8 +37,8 @@ const SideBar = () => {
     }, [dispatch, navType]);
     return (
         <>
-            <Container sx={{ mt: 5}}>
-                <Grid item xs={12}  >
+            <Container sx={{ mt: 5 }}>
+                <Grid item xs={12}>
                     <Grid
                         xs={12}
                         md={10}
@@ -52,7 +52,7 @@ const SideBar = () => {
                             pb: 3,
                             ml: 1,
                             mr: 1,
-                            display:'block',
+                            display: 'block',
                             boxShadow: '1px 2px 2px 2px #d3d3d391',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
                             borderRadius: '4px'
@@ -60,20 +60,18 @@ const SideBar = () => {
                     >
                         <Grid
                             item
-                            sx={{ mt: 2, 
-                                 paddingLeft:'0 ! important', textAlign:'center',
-                                  cursor: 'pointer' }}
+                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/landingPage');
                             }}
                         >
                             {pathName == '/landingPage' ? (
                                 <>
-                                <Box sx={{borderLeft:'6px solid #2196f3'}}>
-                                    <Tooltip title="Landing Page" placement="right" arrow 
-                                    >
-                                        <DashboardIcon sx={{ color: `${color}` ,  }} />
-                                    </Tooltip></Box>
+                                    <Box sx={{ borderLeft: '6px solid #2196f3' }}>
+                                        <Tooltip title="Landing Page" placement="right" arrow>
+                                            <DashboardIcon sx={{ color: `${color}` }} />
+                                        </Tooltip>
+                                    </Box>
                                 </>
                             ) : (
                                 <>
@@ -83,53 +81,176 @@ const SideBar = () => {
                                 </>
                             )}
                         </Grid>
-                     {/*   <Grid item sx={{ mt: 2 ,  marginLeft:'-5px', }}>
+                        {/*   <Grid item sx={{ mt: 2 ,  marginLeft:'-5px', }}>
                             <PieChartIcon  />
                         </Grid>  */}
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft:'0 ! important', textAlign:'center', cursor: 'pointer' }}
+                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/marketplace');
                             }}
                         >
                             {pathName.includes('marketplace') ? (
-                                <> 
-                                <Box sx={{borderLeft:'6px solid #2196f3'}}>
-                                    <Tooltip title="Marketplace" placement="right" arrow>
-                                        <StorefrontIcon style={{ color: `${color}` }} />
-                                    </Tooltip>
+                                <>
+                                    <Box sx={{ borderLeft: '6px solid #2196f3' }}>
+                                        <Tooltip title="Marketplace" placement="right" arrow>
+                                            <StorefrontIcon style={{ color: `${color}` }} />
+                                        </Tooltip>
                                     </Box>
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip title="Marketplace" placement="right" arrow>
-                                        <StorefrontIcon  />
+                                    <Tooltip 
+                                    title="Marketplace" 
+                                    placement="right" 
+                                    arrow>
+                                        <StorefrontIcon />
                                     </Tooltip>
                                 </>
                             )}
                         </Grid>
-                         <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
-                            <BookmarkIcon sx={{ color: 'transparent' }} />
+                        <Grid
+                            item
+                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            onClick={() => {
+                                navigate('/ComingSoon');
+                            }}
+                        >
+                        {pathName.includes('ComingSoon') ? (
+                            <>
+                                <Box >
+                                    <Tooltip title="Coming Soon" placement="right" arrow>
+                                        <BookmarkIcon  />
+                                    </Tooltip>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Tooltip 
+                                title="ComingSoon" 
+                                placement="right" 
+                                arrow>
+                                <BookmarkIcon />
+                                </Tooltip>
+                            </>
+                        )}
+                          
                         </Grid>
-                        <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
-                            <DownloadIcon  sx={{ color: 'transparent' }}/>
+                        <Grid
+                            item
+                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            onClick={() => {
+                                navigate('/ComingSoon');
+                            }}
+                        >
+                        {pathName.includes('ComingSoon') ? (
+                            <>
+                                <Box >
+                                    <Tooltip title="Coming Soon" placement="right" arrow>
+                                        <DownloadIcon  />
+                                    </Tooltip>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Tooltip 
+                                title="Marketplace" 
+                                placement="right" 
+                                arrow>
+                                <DownloadIcon />
+                                </Tooltip>
+                            </>
+                        )}
+                           
                         </Grid>
-                        <Grid item sx={{ mt: 2 , marginLeft:'-5px', }}>
-                            <DiscountIcon sx={{ color: 'transparent' }} />
+                        <Grid
+                            item
+                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            onClick={() => {
+                                navigate('/ComingSoon');
+                            }}
+                        >
+                        {pathName.includes('ComingSoon') ? (
+                            <>
+                                <Box >
+                                    <Tooltip title="Coming Soon" placement="right" arrow>
+                                        <DiscountIcon  />
+                                    </Tooltip>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Tooltip 
+                                title="ComingSoon" 
+                                placement="right" 
+                                arrow>
+                                <DiscountIcon />
+                                </Tooltip>
+                            </>
+                        )}
+                           
                         </Grid>
-                        <Grid item sx={{ mt: 2 , marginLeft:'-5px', }}>
-                            <SettingsIcon  sx={{ color: 'transparent' }}/>
+                        <Grid
+                            item
+                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            onClick={() => {
+                                navigate('/ComingSoon');
+                            }}
+                        >
+                        {pathName.includes('ComingSoon') ? (
+                            <>
+                                <Box >
+                                    <Tooltip title="Coming Soon" placement="right" arrow>
+                                        <SettingsIcon  />
+                                    </Tooltip>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Tooltip 
+                                title="ComingSoon" 
+                                placement="right" 
+                                arrow>
+                                <SettingsIcon />
+                                </Tooltip>
+                            </>
+                        )}
+                            
                         </Grid>
-                       <Grid item sx={{ mt: 2 ,  marginLeft:'-5px',}}>
-                            <LogoutIcon sx={{ color: 'transparent' }} />
-                        </Grid> 
-                        <Grid item sx={{ mt: 5 ,  paddingLeft:'0 ! important', textAlign:'center',}}>
+                        <Grid
+                            item
+                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            onClick={() => {
+                                navigate('/ComingSoon');
+                            }}
+                        >
+                        {pathName.includes('ComingSoon') ? (
+                            <>
+                                <Box >
+                                    <Tooltip title="Coming Soon" placement="right" arrow>
+                                        <LogoutIcon  />
+                                    </Tooltip>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Tooltip 
+                                title="ComingSoon" 
+                                placement="right" 
+                                arrow>
+                                <LogoutIcon />
+                                </Tooltip>
+                            </>
+                        )}
+                           
+                        </Grid>
+                        <Grid item sx={{ mt: 5, paddingLeft: '0 ! important', textAlign: 'center' }}>
                             {customization.navType == 'dark' ? (
                                 <>
-                                <Box >
-                                <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
-                               </Box>
+                                    <Box>
+                                        <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
+                                    </Box>
                                 </>
                             ) : (
                                 <>

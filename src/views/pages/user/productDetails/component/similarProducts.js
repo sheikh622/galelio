@@ -150,7 +150,7 @@ const SimilarProducts = ({ nft }) => {
                                                 <Grid item xs={4} sx={{ background: '' }}>
                                                     <span style={{ fontWeight: '50 !important ', fontSize: '110%', 
                                                     float: 'right' }}>
-                                                        Creator
+                                                        Brand
                                                     </span>
                                                 </Grid>
                                             </Grid>

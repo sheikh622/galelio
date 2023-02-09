@@ -598,7 +598,7 @@ const PropertiesView = ({ nft }) => {
                                         //     ))}
                                         // </TextField> */}
                                         </Grid>
-                                        <Grid item mt={2} mb={2} className="timer" xs={12}>
+                                       {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid
                                                 sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9' }}
                                                 className="auction"
@@ -616,8 +616,8 @@ const PropertiesView = ({ nft }) => {
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
-                                        </Grid>
-                                        <Grid item xs={12}>
+                                        </Grid> */}
+                                        <Grid  mt={2} item xs={12}>
                                             <Grid container>
                                                 <Grid mt={-2} item md={3} xs={12} sm={12}>
                                                     <Grid item xs={12}>

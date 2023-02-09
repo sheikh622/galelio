@@ -76,15 +76,15 @@ export default function HorizontalTabs() {
                 }}
             >
                 <Tab component={Link} to="#" label="Items" {...a11yProps(0)} />
-                <Tab component={Link} to="#" label="Activity" {...a11yProps(1)} />
+               {/*  <Tab component={Link} to="#" label="Activity" {...a11yProps(1)} /> */}
             </Tabs>
 
             <TabPanel value={value} index={0}>
                 <Items />
             </TabPanel>
-            <TabPanel value={value} index={1}>
+           {/*  <TabPanel value={value} index={1}>
                 Activity
-            </TabPanel>
+            </TabPanel> */}
         </>
     );
 }

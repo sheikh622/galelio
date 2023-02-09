@@ -120,7 +120,7 @@ const SocialProfile = () => {
                             {user.role}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                  {/*   <Grid item xs={12} md={6}>
                         <Grid container sx={{ justifyContent: 'flex-end', [theme.breakpoints.down('md')]: { justifyContent: 'center' } }}>
                             {itemData.map((item) => (
                                 <Grid item sx={{ margin: { xs: '3px', sm: '3px', md: '7px', xl: '7px' } }}>
@@ -135,7 +135,7 @@ const SocialProfile = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid mt={2} item xs={12} md={12} sx={{ display: 'flex', marginLeft: { md: '-9px' } }}>
                     <ul className="list">
