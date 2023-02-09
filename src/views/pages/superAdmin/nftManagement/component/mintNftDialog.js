@@ -30,6 +30,8 @@ const client = create({
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function MintNftDialog({ open, setOpen, page, limit, search, loader, setLoader, nftData, type }) {
+
+    
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
@@ -62,6 +64,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             if (uriArray.length == 1) {
                 let mintedNFT = await (
                     await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
+                        toast.error(error.message)
                         setLoader(false)
                         setOpen(false)                            
                     })
@@ -72,10 +75,12 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                 const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                 await (
-                    await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price).catch((error) => {
- 
+                    await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress).catch((error) => {
+                
+                        toast.error(error.message);
                         setOpen(false)
                         setLoader(false)
+
                     })
                 ).wait();
 
@@ -107,7 +112,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             } else if (uriArray.length > 1) {
                 let mintedNFT = await (
                     await nft.bulkMint(uriArray, MarketplaceAddress.address).catch((error) => {
-                        toast.error('NFT minting  unsuccessfull');
+                        toast.error(error.message);
                         setOpen(false)
                         setLoader(false)
                     })
@@ -126,7 +131,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 await (
                     await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price).catch((error) => {
           
-                        toast.error('NFT minting  unsuccessfull');
+                        toast.error(error.message);
                         setOpen(false)
                         setLoader(false)
                     })
@@ -162,6 +167,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 );
             }
         } catch (error) {
+            
             setLoader(false);
             setOpen(false)
         }
@@ -186,7 +192,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             );
             directMintThenList(result);
         } catch (error) {
-            console.log('im here 3');
+            toast.error(error.message);
+
             setLoader(false);
             setOpen(false)
         }

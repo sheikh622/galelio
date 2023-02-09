@@ -27,6 +27,7 @@ const client = create({
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function MintNftDialog({ open, setOpen, page, limit, search, categoryId, loader, setLoader, nftData, type }) {
+
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);

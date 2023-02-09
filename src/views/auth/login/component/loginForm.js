@@ -263,14 +263,14 @@ const LoginForm = ({ loginProp, ...others }) => {
                             // }}
                             
                         >
-                            <Button
+                            {/* <Button
                                 variant="outlined"
                                 color="secondary"
                                 fullWidth
                                 size="large"
                                 className="signbuttonMarket"
                                 startIcon={<FacebookOutlinedIcon />}
-                            >
+                            > */}
                                 <ReactFacebookLogin
                                     appId="851727442768362"
                                     // autoLoad={true}
@@ -278,9 +278,10 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     callback={responseFacebook}
                                     onFailure={responseFacebookFailure}
                                     cssClass="my-facebook-button-class"
-                                    textButton=""
+                                    textButton="Sin in with Facebook"
+                                    // icon="fa-facebook"
                                 />
-                            </Button>
+                            {/* </Button> */}
                         </Grid>
                         <Grid
                             item

@@ -14,10 +14,11 @@ import {
 } from '@mui/material';
 import { requestNftForMinting } from 'redux/nftManagement/actions';
 import Erc20 from '../../../../../contractAbi/Erc20.json';
-import { ethers } from 'ethers';
+import { ethers,utils } from 'ethers';
 import BLOCKCHAIN from '../../../../../constants';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData, categoryId }) {
@@ -30,49 +31,93 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
     };
     const user = useSelector((state) => state.auth.user);
 
-    const handleMintRequest = async () => {
-        try {
-            setLoader(true);
-            let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
-            let quant = nftData.NFTTokens.length;
-            let price = quant * nftData.price;
-            let amount = (price / 100) * profitPercentage;
-            let prices = ethers.utils.parseEther(amount.toString());
-            let erc20Address = BLOCKCHAIN.ERC20;
-            let ownerAddress = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            
-            // const token = await (
-            //     await new ethers.Contract(erc20Address, Erc20, signer).catch((error) => {
-            //     toast.error(error.message);
-            //     setOpen(false)
-            //     setLoader(false)
-            // }))?.wait()
 
-                const token = new ethers.Contract(erc20Address, Erc20, signer)
+    
+    const checkWallet = async () => {
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
+        let connectWallet = await ethereum._metamask.isUnlocked();
 
-            let data = await token.transfer(ownerAddress, prices);
-
-            await dispatch(
-                requestNftForMinting({
-                    id: nftData.id,
-                    categoryId: categoryId,
-                    page: page,
-                    limit: limit,
-                    search: search,
-                    type: type,
-                    brandId: user.BrandId,
-                    handleClose: handleClose
-                })
-            );
-            setLoader(false);
-        } catch (error) {
-            console.log('error', error);
-            toast.error(error);
-            setOpen(false)
-            setLoader(false)
+        if ((window.ethereum && connectWallet) == false) {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'No crypto wallet found. Please connect one',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('No crypto wallet found. Please install it.');
+            // toast.error('No crypto wallet found. Please install it.');
+        } else if (window?.ethereum?.networkVersion !== '5') {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Please change your Chain ID to Goerli',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('Please change your Chain ID to Goerli');
+        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Please connect your registered Wallet Address',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('Please connect your registered Wallet Address');
+        } else {
+            return true;
         }
+    };
+
+    
+
+    const handleMintRequest = async () => {
+        if(await checkWallet()){
+            try {
+                setLoader(true);
+                let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
+                let quant = nftData.NFTTokens.length;
+                let price = quant * nftData.price;
+                let amount = (price / 100) * profitPercentage;
+                let prices = ethers.utils.parseEther(amount.toString());
+                let erc20Address = BLOCKCHAIN.ERC20;
+                let ownerAddress = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                
+                // const token = await (
+                //     await new ethers.Contract(erc20Address, Erc20, signer).catch((error) => {
+                //     toast.error(error.message);
+                //     setOpen(false)
+                //     setLoader(false)
+                // }))?.wait()
+    
+                    const token = new ethers.Contract(erc20Address, Erc20, signer)
+    
+                let data = await token.transfer(ownerAddress, prices);
+    
+                await dispatch(
+                    requestNftForMinting({
+                        id: nftData.id,
+                        categoryId: categoryId,
+                        page: page,
+                        limit: limit,
+                        search: search,
+                        type: type,
+                        brandId: user.BrandId,
+                        handleClose: handleClose
+                    })
+                );
+                setLoader(false);
+            } catch (error) {
+                console.log('error', error);
+                toast.error(error);
+                setOpen(false)
+                setLoader(false)
+            }
+        }
+     
     };
     return (
         <>
