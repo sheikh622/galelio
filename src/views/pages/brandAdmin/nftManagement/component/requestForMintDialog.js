@@ -18,6 +18,7 @@ import { ethers,utils } from 'ethers';
 import BLOCKCHAIN from '../../../../../constants';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SNACKBAR_OPEN } from 'store/actions';
 
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
@@ -47,6 +48,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
+            setOpen(false)
+            setLoader(false)
         } else if (window?.ethereum?.networkVersion !== '5') {
             dispatch({
                 type: SNACKBAR_OPEN,
@@ -56,6 +59,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 alertSeverity: 'info'
             });
             console.log('Please change your Chain ID to Goerli');
+            setOpen(false)
+            setLoader(false)
         } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
@@ -65,6 +70,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 alertSeverity: 'info'
             });
             console.log('Please connect your registered Wallet Address');
+            setOpen(false)
+            setLoader(false)
         } else {
             return true;
         }

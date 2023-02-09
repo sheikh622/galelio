@@ -77,7 +77,11 @@ const PropertiesView = ({ nft }) => {
                         }
                     }}
                 >
-                    Resell
+                     
+                            
+
+                                Resell
+                         
                 </Button>
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>NFT Resell Price</DialogTitle>
@@ -323,6 +327,7 @@ const PropertiesView = ({ nft }) => {
                 } catch (error) {
                     setResellLoader(false);
                     toast.error(error.message);
+                    setOpen(false)
                 }
             } else if (nft.mintType == 'lazyMint') {
                 try {
@@ -743,7 +748,7 @@ const PropertiesView = ({ nft }) => {
                                                                                     {buyerNft?.status !== 'Redeem' && redeem == false && (
                                                                                         <>
                                                                                             {resellLoader ? (
-                                                                                                <CircularProgress sx={{ color: 'white' }} />
+                                                                                                <CircularProgress sx={{ color: 'blue', ml:3}} />
                                                                                             ) : (
                                                                                                 <ResellDialog />
                                                                                             )}

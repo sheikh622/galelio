@@ -233,7 +233,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 >
                                     Sign in
                                 </Button>
-                                {/ )} /}
+                                {/* )} */}
                             </AnimateButton>
                         </Box>
 
@@ -301,54 +301,17 @@ const LoginForm = ({ loginProp, ...others }) => {
                             // }}
                             
                         >
-                            <Button
-                                variant="text"
-                              
+                            {/* <Button
+                                variant="outlined"
+                                color="secondary"
                                 fullWidth
                                 size="large"
-                              
-                                // startIcon={<FacebookOutlinedIcon sx={{color:'#2f53ff' , fontSize:'38px !important'     }}/>}
-                            >
-                                <ReactFacebookLogin
-                                    appId="851727442768362"
-                                    // autoLoad={true}
-                                    fields="first_name, last_name,email"
-                                    callback={responseFacebook}
-                                    onFailure={responseFacebookFailure}
-                                    cssClass="my-facebook-button-class"
-                                    icon="fa-facebook"
-                                    textButton=""
-                                />
-                            </Button>
-                        </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={12}
-                            md={12}
-                            lg={6}
-                            // className="google"
-                            sx={{
-                                width:{md:'50% ', lg:'50%' }, margin:'0 auto',
-                                justifyContent: 'center',
-                                marginTop: '10px'
-                            }}
-                        >
-
-                            
-                            <GoogleLogin
-                                 
-                                 type="icon"
-                                 
-                                onSuccess={(data) => {
-                                    console.log('datafrom google login',data);
-                                    googleAuthHandle(data);
-                                }}
-                                onError={() => {
-                                    toast.error('Google Auth Failed');
-                                }}
-                            />
-                        </Grid> */}
+                                className="signbuttonMarket"
+                                startIcon={<FacebookOutlinedIcon />}
+                            > */}
+                       
+                            {/* </Button> */}
+              
                     </form>
                 )}
             </Formik>
