@@ -100,7 +100,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                         justifyContent="center"
                                                         alignItems="center"
                                                     >
-                                                        <Tooltip placement="top" title="Add Brand Admin">
+                                                        <Tooltip placement="top" title="Brand Admin">
                                                             <IconButton
                                                                 className="color"
                                                                 aria-label="detail"
@@ -116,7 +116,7 @@ const BrandTable = ({ brandsList, page, limit, search, setAddUpdateOpen, setBran
                                                                 <AccountCircleIcon sx={{ fontSize: '1.5rem' }} />
                                                             </IconButton>
                                                         </Tooltip>
-                                                        <Tooltip placement="top" title="Add Brand Categories">
+                                                        <Tooltip placement="top" title="Brand Categories">
                                                             <IconButton
                                                                 className="color"
                                                                 aria-label="detail"
