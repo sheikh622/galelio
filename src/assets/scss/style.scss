@@ -538,7 +538,19 @@ font-weight: 700;
     background-size: cover;
     margin-top: 15px;
 }
-
+.TextField-without-border-radius fieldset {
+    border-radius: 4px;
+    // background-color: transparent ;
+   
+  }
+.TextField-without-border-radius input {
+    border-radius: 4px;
+    // background-color: #266798 ;
+   
+  }
+.TextField-without-border-radius OutlinedInput {
+    border-radius: 4px;
+  }
 .create {
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
     padding: 10px 32px;
@@ -939,6 +951,14 @@ font-style: normal;
     font-style: normal;
     font-weight: 400;
     font-size: 22px;
+}
+.AdminRole {
+    margin-top: 7px;
+    color: rgb(169, 157, 157);
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
 }
 // #################################################################
 .tableName {

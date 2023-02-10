@@ -63,7 +63,9 @@ export default function Drawer() {
                         <ListItemIcon>
                             <PieChartIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Statistics'} />
+                        <ListItemText primary={'Dashboard'}  onClick={() => {
+                                navigate('/dashboard');
+                            }}/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

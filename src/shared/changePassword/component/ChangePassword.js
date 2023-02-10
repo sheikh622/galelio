@@ -25,6 +25,8 @@ import { changePassword } from 'redux/auth/actions';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React from 'react';
+import { logout } from 'redux/auth/actions';
+
 // ========================|| FIREBASE - RESET PASSWORD ||======================== //
 
 const ChangePassword = ({ token, ...others }) => {
@@ -88,7 +90,13 @@ const ChangePassword = ({ token, ...others }) => {
                                     // token: token,
                                     navigate: navigate
                                 })
+                              
+                                  
+                                  
+                               
                             );
+                            dispatch(logout());
+                            navigate('/login');
                         }}
                     >
                         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (

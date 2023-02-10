@@ -150,7 +150,7 @@ const SimilarProducts = ({ nft }) => {
                                                 <Grid item xs={4} sx={{ background: '' }}>
                                                     <span style={{ fontWeight: '50 !important ', fontSize: '110%', 
                                                     float: 'right' }}>
-                                                        Brand
+                                                    20 Creators
                                                     </span>
                                                 </Grid>
                                             </Grid>
@@ -223,7 +223,7 @@ const SimilarProducts = ({ nft }) => {
                         component="div"
                         sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center', color: ' #9498AA' }, textTransform: 'capitalize' }}
                     >
-                         Not any similar product available.
+                         Not any similar products found.
                     </Typography>
                 </Grid>
             )}

@@ -53,7 +53,7 @@ const BrandCard = ({ data, brands }) => {
                                 <Grid className="overflow Creationstyling" 
                                 style={{ marginTop: '5%',
                                 color: theme.palette.mode === 'dark' ? ' #a99d9d ' : '#404040', }}>
-                                     Brand
+                                     20 Creators
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -33,6 +33,7 @@ import DeleteOutlineOutlinedIcon from 'assets/images/delete.png';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import UpdateIcon from '@mui/icons-material/Update';
 import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
+import mintingIcon from 'assets/images/mintingIcon.png';
 const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAddUpdateOpen, subAdminData, setSubAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const theme = useTheme();
@@ -59,7 +60,6 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                 limit={limit}
                 search={search}
                 setSubAdminData={setSubAdminData}
-
             />
 
             <DeleteSubAdminDialog
@@ -70,7 +70,6 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                 search={search}
                 subAdminData={subAdminData}
                 setSubAdminData={setSubAdminData}
-
             />
 
             <ChangeSubAdminStatusDialog
@@ -81,7 +80,6 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                 search={search}
                 subAdminData={subAdminData}
                 setSubAdminData={setSubAdminData}
-
             />
             <ChangeRoleDialog
                 open={changeRoleOpen}
@@ -94,7 +92,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
             />
 
             <ChangeSubAdminMintingAccessDialog
-            setSubAdminData={setSubAdminData}
+                setSubAdminData={setSubAdminData}
                 open={changeMintingAccessOpen}
                 setOpen={setChangeMintingAccessOpen}
                 page={page}
@@ -108,10 +106,8 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell align="left" className="Tableheading" 
-                                    sx={{ borderBottom: 'none' }}></TableCell>
-                                    <TableCell align="left" className="Tableheading" 
-                                    sx={{ borderBottom: 'none' }}>
+                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}></TableCell>
+                                    <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
                                         First Name
                                     </TableCell>
                                     <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
@@ -201,7 +197,6 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                 </Tooltip>
                                                                 <Tooltip placement="top" title="Change minting access" sx={{ ml: 1 }}>
                                                                     <IconButton
-                                                                        className="color"
                                                                         aria-label="Edit"
                                                                         size="large"
                                                                         onClick={() => {
@@ -211,12 +206,14 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                                 walletAddress: row.walletAddress,
                                                                                 isActive: row.isActive,
                                                                                 hasMintingAccess: row.hasMintingAccess
-
-
                                                                             });
                                                                         }}
                                                                     >
-                                                                        <img src={CurrencyExchangeIcon} />
+                                                                        {row.hasMintingAccess == true ? (
+                                                                            <img src={mintingIcon} />
+                                                                        ) : (
+                                                                            <img src={CurrencyExchangeIcon} />
+                                                                        )}
                                                                     </IconButton>
                                                                 </Tooltip>
 
@@ -233,11 +230,11 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                                 lastName: row.lastName,
                                                                                 adminEmail: row.email,
                                                                                 adminPassword: '',
-                                                                                walletAddress: row.walletAddress,
+                                                                                walletAddress: row.walletAddress
                                                                             });
                                                                         }}
                                                                     >
-                                                                    <img src={EditOutlinedIcon} /> 
+                                                                        <img src={EditOutlinedIcon} />
                                                                     </IconButton>
                                                                 </Tooltip>
                                                                 <Tooltip placement="top" title="Change Role">
@@ -275,7 +272,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                             });
                                                                         }}
                                                                     >
-                                                                    <img src={DeleteOutlineOutlinedIcon}  />
+                                                                        <img src={DeleteOutlineOutlinedIcon} />
                                                                     </IconButton>
                                                                 </Tooltip>
                                                             </Stack>
@@ -316,14 +313,13 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                         </>
                     )}
                 </>
-            )
-        :(
-            <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
-                        <Grid item>
-                    <CircularProgress disableShrink size={'4rem'} />
+            ) : (
+                <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto ' }}>
+                    <Grid item>
+                        <CircularProgress disableShrink size={'4rem'} />
+                    </Grid>
                 </Grid>
-                        </Grid>
-        )}
+            )}
         </TableContainer>
     );
 };

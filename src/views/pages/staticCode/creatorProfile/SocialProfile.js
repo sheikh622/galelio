@@ -114,10 +114,10 @@ const SocialProfile = () => {
                                 marginLeft: { md: '30px', xl: '30px' },
                                 textAlign: { xs: 'center', sm: 'center', md: 'left', xl: 'left' }
                             }}
-                            className="creator"
+                            className="AdminRole"
                             variant="subtitle2"
                         >
-                            {user.role}
+                            {user?.role}
                         </Typography>
                     </Grid>
                   {/*   <Grid item xs={12} md={6}>
@@ -130,7 +130,7 @@ const SocialProfile = () => {
                                         underline="hover"
                                         color="#2FC1FF !important "
                                     >
-                                        {item.icon}
+                                        {item?.icon}
                                     </Link>
                                 </Grid>
                             ))}
