@@ -114,7 +114,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                         [Yup.ref("password")],
                         "Both password need to be the same"
                       ),
-                    address: Yup.string().max(255).required('Address is required!')
+                    address: Yup.string().max(255).required('Delivery address is required!')
                 })}
                 onSubmit={async (values) => {
                     if (walletAddress == '') {
@@ -263,13 +263,13 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <div>* Password should be 8 characters long containing 1 Uppercase, 1 Numeric and 1 special character</div>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                        {/* <div>* Password should be 8 characters long containing 1 Uppercase, 1 Numeric and 1 special character</div> */}
+                        <FormControl fullWidth  sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Delivery Address </InputLabel>
                             <OutlinedInput
                                 type="address"
                                 value={values.address}
-                                name="delivery_address"
+                                name="address"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 label="Delivery Address"

@@ -139,6 +139,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 setLoader(true);
                 dispatch(
                     addNft({
+                        requesterAddress: user.walletAddress,
                         categoryId: data.CategoryId,
                         mintType: mintType,
                         metaDataArray: fieldDataArray,

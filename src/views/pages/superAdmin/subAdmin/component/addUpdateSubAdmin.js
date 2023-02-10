@@ -112,6 +112,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         password: values.adminPassword,
                         walletAddress: values.walletAddress,
                         brandCategory: brandCategoryId,
+                        hasMintingAccess: true,
                         page: page,
                         limit: limit,
                         search: search,

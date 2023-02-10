@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-import { ethers } from 'ethers';
+import { ethers,utils } from 'ethers';
 import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
 // import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
@@ -30,141 +30,186 @@ const client = create({
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function MintNftDialog({ open, setOpen, page, limit, search, loader, setLoader, nftData, type }) {
+
+    
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
+    const user = useSelector((state) => state.auth.user);
     const handleClose = () => {
         setOpen(false);
         setLoader(false);
     };
+    const checkWallet = async () => {
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
+        let connectWallet = await ethereum._metamask.isUnlocked();
 
-    const directMintThenList = async (result) => {
-        let nftTokens = nftData.NFTTokens;
-        let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
-
-        let nftId = nftData.id;
-        let categoryId = nftData.CategoryId;
-        let brandId = nftData.BrandId;
-        let price = ethers.utils.parseEther(nftData.price.toString());
-        let erc20Address = BLOCKCHAIN.ERC20;
-        let tokenIdArray = [];
-        let transactionHash;
-        try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            const address = await signer.getAddress();
-            const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-            const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
-            const uriArray = await nftTokens.map(() => {
-                return tokenUri;
+        if ((window.ethereum && connectWallet) == false) {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'No crypto wallet found. Please connect one',
+                variant: 'alert',
+                alertSeverity: 'info'
             });
-
-            if (uriArray.length == 1) {
-                let mintedNFT = await (
-                    await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
-                        setLoader(false)
-                        setOpen(false)                            
-                    })
-                ).wait();
-
-                transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
-                const id = parseInt(mintedNFT.events[0].args[2]);
-
-                const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-                await (
-                    await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price).catch((error) => {
- 
-                        setOpen(false)
-                        setLoader(false)
-                    })
-                ).wait();
-
-                tokenIdArray.push({
-                    id: nftTokens[0].id,
-                    tokenId: id
-                });
-                let nftDataArray = [];
-                nftDataArray.push({
-                    nftId: nftId,
-                    tokenUri: tokenUri
-                });
-
-                dispatch(
-                    mintNft({
-                        nftDataArray: nftDataArray,
-                        tokenIdArray: tokenIdArray,
-                        transactionHash: transactionHash,
-                        signerAddress: address,
-                        brandId: brandId,
-                        categoryId: categoryId,
-                        type: type,
-                        search: search,
-                        page: page,
-                        limit: limit,
-                        handleClose: handleClose
-                    })
-                );
-            } else if (uriArray.length > 1) {
-                let mintedNFT = await (
-                    await nft.bulkMint(uriArray, MarketplaceAddress.address).catch((error) => {
-                        toast.error('NFT minting  unsuccessfull');
-                        setOpen(false)
-                        setLoader(false)
-                    })
-                ).wait();
-
-                transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
-
-                let counter = 0;
-                let myNftTokenIdArray = [];
-                for (let i = 0; i < uriArray.length; i++) {
-                    myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
-                    counter = counter + 2;
-                }
-                const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-
-                await (
-                    await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price).catch((error) => {
-          
-                        toast.error('NFT minting  unsuccessfull');
-                        setOpen(false)
-                        setLoader(false)
-                    })
-                ).wait();
-
-                nftTokens.map((data, index) => {
-                    tokenIdArray.push({
-                        id: data.id,
-                        tokenId: myNftTokenIdArray[index]
-                    });
-                });
-
-                let nftDataArray = [];
-                nftDataArray.push({
-                    nftId: nftId,
-                    tokenUri: tokenUri
-                });
-
-                dispatch(
-                    mintNft({
-                        nftDataArray: nftDataArray,
-                        tokenIdArray: tokenIdArray,
-                        transactionHash: transactionHash,
-                        signerAddress: address,
-                        brandId: brandId,
-                        categoryId: categoryId,
-                        type: type,
-                        search: search,
-                        page: page,
-                        limit: limit,
-                        handleClose: handleClose
-                    })
-                );
-            }
-        } catch (error) {
-            setLoader(false);
-            setOpen(false)
+            console.log('No crypto wallet found. Please install it.');
+            // toast.error('No crypto wallet found. Please install it.');
+        } else if (window?.ethereum?.networkVersion !== '5') {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Please change your Chain ID to Goerli',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('Please change your Chain ID to Goerli');
+        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+            dispatch({
+                type: SNACKBAR_OPEN,
+                open: true,
+                message: 'Please connect your registered Wallet Address',
+                variant: 'alert',
+                alertSeverity: 'info'
+            });
+            console.log('Please connect your registered Wallet Address');
+        } else {
+            return true;
         }
+    };
+    const directMintThenList = async (result) => {
+        if(checkWallet){
+            let nftTokens = nftData.NFTTokens;
+            let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
+    
+            let nftId = nftData.id;
+            let categoryId = nftData.CategoryId;
+            let brandId = nftData.BrandId;
+            let price = ethers.utils.parseEther(nftData.price.toString());
+            let erc20Address = BLOCKCHAIN.ERC20;
+            let tokenIdArray = [];
+            let transactionHash;
+            try {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                const address = await signer.getAddress();
+                const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
+                const uriArray = await nftTokens.map(() => {
+                    return tokenUri;
+                });
+    
+                if (uriArray.length == 1) {
+                    let mintedNFT = await (
+                        await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
+                            toast.error(error.message)
+                            setLoader(false)
+                            setOpen(false)                            
+                        })
+                    ).wait();
+    
+                    transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
+                    const id = parseInt(mintedNFT.events[0].args[2]);
+    
+                    const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    await (
+                        await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress).catch((error) => {
+                    
+                            toast.error(error.message);
+                            setOpen(false)
+                            setLoader(false)
+    
+                        })
+                    ).wait();
+    
+                    tokenIdArray.push({
+                        id: nftTokens[0].id,
+                        tokenId: id
+                    });
+                    let nftDataArray = [];
+                    nftDataArray.push({
+                        nftId: nftId,
+                        tokenUri: tokenUri
+                    });
+    
+                    dispatch(
+                        mintNft({
+                            nftDataArray: nftDataArray,
+                            tokenIdArray: tokenIdArray,
+                            transactionHash: transactionHash,
+                            signerAddress: address,
+                            brandId: brandId,
+                            categoryId: categoryId,
+                            type: type,
+                            search: search,
+                            page: page,
+                            limit: limit,
+                            handleClose: handleClose
+                        })
+                    );
+                } else if (uriArray.length > 1) {
+                    let mintedNFT = await (
+                        await nft.bulkMint(uriArray, MarketplaceAddress.address).catch((error) => {
+                            toast.error(error.message);
+                            setOpen(false)
+                            setLoader(false)
+                        })
+                    ).wait();
+    
+                    transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
+    
+                    let counter = 0;
+                    let myNftTokenIdArray = [];
+                    for (let i = 0; i < uriArray.length; i++) {
+                        myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
+                        counter = counter + 2;
+                    }
+                    const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+    
+                    await (
+                        await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price).catch((error) => {
+              
+                            toast.error(error.message);
+                            setOpen(false)
+                            setLoader(false)
+                        })
+                    ).wait();
+    
+                    nftTokens.map((data, index) => {
+                        tokenIdArray.push({
+                            id: data.id,
+                            tokenId: myNftTokenIdArray[index]
+                        });
+                    });
+    
+                    let nftDataArray = [];
+                    nftDataArray.push({
+                        nftId: nftId,
+                        tokenUri: tokenUri
+                    });
+    
+                    dispatch(
+                        mintNft({
+                            nftDataArray: nftDataArray,
+                            tokenIdArray: tokenIdArray,
+                            transactionHash: transactionHash,
+                            signerAddress: address,
+                            brandId: brandId,
+                            categoryId: categoryId,
+                            type: type,
+                            search: search,
+                            page: page,
+                            limit: limit,
+                            handleClose: handleClose
+                        })
+                    );
+                }
+            } catch (error) {
+                
+                setLoader(false);
+                setOpen(false)
+            }
+        }
+       
     };
 
     const handleDirectMint = async () => {
@@ -186,7 +231,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             );
             directMintThenList(result);
         } catch (error) {
-            console.log('im here 3');
+            toast.error(error.message);
+
             setLoader(false);
             setOpen(false)
         }

@@ -229,6 +229,7 @@ function* addNftRequest({ payload }) {
     const formData = new FormData();
     formData.append('asset', payload.asset);
     formData.append('name', payload.name);
+    formData.append('requesterAddress', payload.requesterAddress);
     formData.append('price', payload.price);
     formData.append('currencyType', payload.currencyType);
     formData.append('description', payload.description);
@@ -375,7 +376,9 @@ export function* watchGetAllNft() {
 }
 
 function* requestNftForMintingRequest({ payload }) {
-    let data = {};
+    let data = {
+        
+    };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.patch(`nft/brandAdmin/mintRequest/${payload.id}`, data, headers);
@@ -387,7 +390,8 @@ function* requestNftForMintingRequest({ payload }) {
                 page: payload.page,
                 limit: payload.limit,
                 type: payload.type,
-                brandId: payload.brandId
+                brandId: payload.brandId,
+                
             })
         );
         yield setNotification('success', response.data.message);
