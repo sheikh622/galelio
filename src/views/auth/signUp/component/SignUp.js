@@ -50,7 +50,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
             // toast.error('No crypto wallet found. Please install it.');
         }
 
-        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
         if (response) {
             const address = utils?.getAddress(response[0]);
 

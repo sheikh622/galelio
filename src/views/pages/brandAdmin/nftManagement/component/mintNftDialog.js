@@ -87,7 +87,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             } else if (uriArray.length > 1) {
                 let mintedNFT = await (
                     await nft.bulkMint(uriArray).catch((error) => {
-                        toast.error('NFT minting  unsuccessfull');
+                        toast.error(error.message);
                     })
                 ).wait();
                 transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
@@ -127,6 +127,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             }
         } catch (error) {
             setLoader(false);
+            toast.error(error.message);
         }
     };
 
@@ -149,6 +150,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             directMintThenList(result);
         } catch (error) {
             setLoader(false);
+            toast.error(error.message);
         }
     };
 

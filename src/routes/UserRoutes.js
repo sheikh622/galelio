@@ -57,6 +57,10 @@ const UserRoutes = {
         {
             path: '/companyPage',
             element: <CompanyPage />
+        },
+        {
+            path: '/*',
+            element: <LandingPage />
         }
     ]
 };

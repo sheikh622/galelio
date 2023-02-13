@@ -200,7 +200,6 @@ const PropertiesView = ({ nft }) => {
                     await (await marketplace.purchaseItem(tokenId, contractAddress, price))
                         .wait()
                         .then((data) => {
-                            console.log('im in then');
                             dispatch(
                                 buyNft({
                                     nftId: nft.id,

@@ -84,7 +84,9 @@ export default function Header() {
     };
 
     const user = useSelector((state) => state.auth.user);
-    console.log(user?.role, 'user dashboard link');
+    const token = useSelector((state) => state.auth.token);
+    console.log(token, 'token');
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -255,7 +257,7 @@ export default function Header() {
                         )}
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
-                            <div sx={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
+                            <div sx={{ marginRight: '3%' }}>{token && <MetaMaskSection />}</div>
                             <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
@@ -268,7 +270,7 @@ export default function Header() {
                                 <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                             </IconButton> */}
                         </Box>
-                        {user == null && (
+                        {(user  == null || !token) && (
                             <Button
                                 variant="outlined"
                                 onClick={() => {
@@ -278,7 +280,7 @@ export default function Header() {
                                 Login
                             </Button>
                         )}
-                        {user !== null && (
+                        {token && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
                                     <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
@@ -302,7 +304,7 @@ export default function Header() {
                     </Box>
                 </Toolbar>
             </AppBar>
-            {user !== null && (
+            {token && (
                 <>
                     {renderMobileMenu}
                     {renderMenu}

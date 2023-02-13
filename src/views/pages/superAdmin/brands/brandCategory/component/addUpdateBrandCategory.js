@@ -100,12 +100,14 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
+            
+            let profitAmount = ethers.utils.parseEther(formik.values.profitPercentage.toString());
 
             let res = await (
-                await factoryAddr.deployMintingContract(contractName, symbol).catch((error) => {
+                await factoryAddr.deployMintingContract(contractName, symbol, formik.values.profitPercentage).catch((error) => {
                     setOpen(false);
                     setLoader(false);
-                    console.log('error',error);
+                    toast.error(error.message);
                 })
             )?.wait();
 

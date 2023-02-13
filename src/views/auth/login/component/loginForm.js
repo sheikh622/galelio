@@ -102,8 +102,9 @@ const LoginForm = ({ loginProp, ...others }) => {
                 toast.error(error.message);
             });
     };
-    const responseFacebookFailure = () => {
-        toast.error('Facebook login failed');
+    const responseFacebookFailure = (error) => {
+        console.log('error from FB',error);
+        // toast.error(error);
     };
 
     return (

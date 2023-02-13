@@ -102,7 +102,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
     
                     const token = new ethers.Contract(erc20Address, Erc20, signer)
     
-                let data = await token.transfer(ownerAddress, prices);
+                let data = await(await token.transfer(ownerAddress, prices)).wait();
     
                 await dispatch(
                     requestNftForMinting({
@@ -113,6 +113,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                         search: search,
                         type: type,
                         brandId: user.BrandId,
+                        profitAmount: prices,
                         handleClose: handleClose
                     })
                 );

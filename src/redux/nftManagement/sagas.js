@@ -377,7 +377,7 @@ export function* watchGetAllNft() {
 
 function* requestNftForMintingRequest({ payload }) {
     let data = {
-        
+        profitAmount: payload.profitAmount
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
