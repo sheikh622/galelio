@@ -84,7 +84,7 @@ export default function Header() {
     };
 
     const user = useSelector((state) => state.auth.user);
-    console.log(user?.role, 'user dashboard link');
+    // console.log(user?.role, 'user dashboard link');
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -132,9 +132,12 @@ export default function Header() {
             <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
                 My Profile
             </MenuItem>
+            {user?.role == 'User' && user != null && (
+                      
             <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
                 Delivery Dashboard
             </MenuItem>
+            )}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
@@ -262,12 +265,12 @@ export default function Header() {
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
                             <div sx={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
-                            <IconButton size="large" aria-label="" color="inherit">
+                            {/*     <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                 </Badge>
                             </IconButton>
-                           {/*  <IconButton size="large" aria-label="" color="inherit">
+                          <IconButton size="large" aria-label="" color="inherit">
                                 <AccountBalanceWalletIcon sx={{ color: '#4dabf5' }} />
                             </IconButton>
                             <IconButton size="large" aria-label="" color="inherit">
