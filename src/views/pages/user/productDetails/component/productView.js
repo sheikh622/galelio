@@ -211,7 +211,7 @@ const PropertiesView = ({ nft }) => {
                             );
                         })
                         .catch((error) => {
-                            console.log('im here now');
+                          
                             setLoader(false);
                             toast.error(error.message);
                         });

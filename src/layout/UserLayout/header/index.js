@@ -85,7 +85,7 @@ export default function Header() {
 
     const user = useSelector((state) => state.auth.user);
     const token = useSelector((state) => state.auth.token);
-    console.log(token, 'token');
+    // console.log(token, 'token');
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
