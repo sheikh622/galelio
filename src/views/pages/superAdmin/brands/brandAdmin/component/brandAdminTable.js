@@ -140,7 +140,9 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                                     setBrandAdminData({
                                                                         id: row.id,
                                                                         brandId: row.BrandId,
-                                                                        isActive: row.isActive
+                                                                        isActive: row.isActive,
+                                                                        
+
                                                                     });
                                                                 }}
                                                             >
@@ -161,6 +163,7 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                                         firstName: row.firstName,
                                                                         lastName: row.lastName,
                                                                         adminEmail: row.email,
+                                                                        walletAddress:row.walletAddress,
                                                                         adminPassword: ''
                                                                     });
                                                                 }}

@@ -1,20 +1,27 @@
-import { useState, useRef, useEffect } from 'react';
+import { forwardRef, useState } from 'react';
 
 // material-ui
+import { AppBar,DialogActions, Button, Dialog, CardMedia,Divider,Grid, IconButton, ListItemText, ListItemButton, List, Slide, Toolbar, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from '@mui/material';
-import { Card, Container, CardMedia, TextField, MenuItem, Chip, Divider } from '@mui/material';
-import React from 'react';
-// project imports
 
-import { Link as RouterLink } from 'react-router-dom';
+// assets
+import CloseIcon from '@mui/icons-material/Close';
 
-import { gridSpacing } from 'store/constant';
-// ===============================|| UI DIALOG - SCROLLABLE ||=============================== //
+// slide animation
+const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+
+// ===============================|| UI DIALOG - FULL SCREEN ||=============================== //
 
 export default function DetailsDialog({ open, setOpen, nftData }) {
     const theme = useTheme();
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     const status = [
         {
             name: 'Name:',
@@ -45,93 +52,74 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
             value: 'Null'
         }
     ];
-    const [scroll, setScroll] = useState('paper');
-
-    const handleClickOpen = (scrollType) => () => {
-        setOpen(true);
-        setScroll(scrollType);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const descriptionElementRef = useRef(null);
-    useEffect(() => {
-        if (open) {
-            const { current: descriptionElement } = descriptionElementRef;
-            if (descriptionElement !== null) {
-                descriptionElement?.focus();
-            }
-        }
-    }, [open]);
-
     return (
         <div>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                scroll={scroll} 
-                className='dialog_details'
-                aria-labelledby="scroll-dialog-title"
-                aria-describedby="scroll-dialog-description"
-            >
-                <DialogTitle id="scroll-dialog-title" className="statusHeading">NFT Details</DialogTitle>
-                <DialogContent dividers={scroll === 'paper'}>
-                    <Grid container spacing={3}>
-                        <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
-                            <Grid mt={1} item xs={12}>
-                                <Grid container justifyContent="center" 
-                                 sx={{ textAlign: 'center', }}>
-                                    <Grid p={4} item md={7} lg={5} className="NFTdetails">
-                                        <img src={nftData?.asset} alt="Statement Image" className="imageSize" />
-                                    </Grid>
-
-                                    <Grid  mt={1} item md={7} lg={7} sm={12} >
-                                        
-                                            <Grid container justifyContent="left">
-                                                <Grid item md={12} sm={12}>
-                                                    {status.map((option) => (
-                                                        <Grid container spacing={2} sx={{marginLeft:{lg:'10px'}}} >
-                                                            <Grid item md={7} xs={12}>
-                                                                <Typography
-                                                                    mt={1} 
-                                                                    className="nftHead "
-                                                                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                                                    variant="h3"
-                                                                >
-                                                                    {option.name}
-                                                                </Typography>
-                                                            </Grid>
-
-                                                            <Grid item md={5} xs={12}  className=" encap"
-                                                            sx={{ marginTop: '12px', textAlign: 'left' , textTransform:'' }}>
-                                                                <Typography
-                                                               
-                                                                    mt={1} 
-                                                                    className="nftText encap"
-                                                                    color={theme.palette.mode === 'dark' ? 'white' : '#767676'}
-                                                                    variant="body"
-                                                                >
-                                                                    {option.value}
-                                                                </Typography>
-                                                            </Grid>
-                                                        </Grid>
-                                                    ))}
-                                                </Grid>
-                                            </Grid>
-                                      
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </DialogContent>
+           
+            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+             {/*    <IconButton float="left" color="inherit" onClick={handleClose} aria-label="close" size="large">
+                    <CloseIcon />
+                </IconButton> */}
                 <DialogActions sx={{ pr: 2.5, pt: 2.5 }}>
-                    <Button  className='buttonSize' size='large' sx={{ color: theme.palette.error.dark }} onClick={handleClose} color="secondary">
-                        Close
-                    </Button>
-                </DialogActions>
+                <Button  className='buttonSize' size='large' sx={{ color: theme.palette.error.dark }} onClick={handleClose} color="secondary">
+                <CloseIcon />
+                </Button>
+            </DialogActions>
+            <Grid container   sx={{ pr: 2.5,  pl: 2.5, pt: 2.5 }}>
+            <Grid item xs={12} md={8} lg={8}  sx={{ pr: 2.5 }}>
+                <List>
+                    <ListItemButton>
+                        <ListItemText
+                            primary={<Typography variant="subtitle1" className='font-in-detail'>Name</Typography>}
+                            secondary={<Typography variant="caption" className='font-in-detail' sx={{textTransform:'capitalize'}}>{nftData?.name}</Typography>}
+                        />
+                    </ListItemButton>
+                    <Divider />
+                    <ListItemButton>
+                        <ListItemText
+                            primary={<Typography variant="subtitle1" className='font-in-detail'>Status</Typography>}
+                            secondary={<Typography variant="caption" className='font-in-detail'>{nftData?.status}</Typography>}
+                        />
+                    </ListItemButton>
+                    <Divider />
+                    <ListItemButton>
+                        <ListItemText
+                            primary={<Typography variant="subtitle1" className='font-in-detail'>Description</Typography>}
+                            secondary={<Typography variant="caption" className='font-in-detail' sx={{textTransform:'capitalize'}}>{nftData?.description}</Typography>}
+                        />
+                    </ListItemButton>
+                    <Divider />
+                    <ListItemButton>
+                        <ListItemText
+                            primary={<Typography variant="subtitle1" className='font-in-detail' >Price</Typography>}
+                            secondary={<Typography variant="caption" className='font-in-detail'  sx={{textTransform:'capitalize'}}>{nftData?.price}</Typography>}
+                        />
+                    </ListItemButton>
+                    <Divider />
+                    <ListItemButton>
+                        <ListItemText
+                            primary={<Typography variant="subtitle1" className='font-in-detail' >Mint Type</Typography>}
+                            secondary={<Typography variant="caption" className='font-in-detail'  sx={{textTransform:'capitalize'}}>{ nftData?.mintType}</Typography>}
+                        />
+                    </ListItemButton>
+                    <Divider />
+                    <ListItemButton>
+                        <ListItemText
+                            primary={<Typography variant="subtitle1" className='font-in-detail' >Brand Name</Typography>}
+                            secondary={<Typography variant="caption" className='font-in-detail'  sx={{textTransform:'capitalize'}}>{nftData?.Brand.name}</Typography>}
+                        />
+                    </ListItemButton>
+                </List>
+                </Grid>
+                <Grid item  xs={12} md={4} lg={4}>
+                <CardMedia
+                            
+                component="img"
+                image={nftData?.asset}
+                
+                sx={{ minheight: 'auto', maxHeight:'570px',
+                 overflow: 'hidden', cursor: 'Pointer' }}
+            />
+               </Grid></Grid>
             </Dialog>
         </div>
     );
