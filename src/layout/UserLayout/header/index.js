@@ -267,7 +267,7 @@ export default function Header() {
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
                             <div sx={{ marginRight: '3%' }}>{token && <MetaMaskSection />}</div>
-                            <IconButton size="large" aria-label="" color="inherit">
+                            {/* <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                 </Badge>
@@ -277,7 +277,7 @@ export default function Header() {
                             </IconButton>
                             <IconButton size="large" aria-label="" color="inherit">
                                 <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
-                            </IconButton> 
+                            </IconButton>  */}
                             
                                                </Box>
                         {(user  == null || !token) && (
