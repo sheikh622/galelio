@@ -129,7 +129,7 @@ function* changePasswordRequest({ payload }) {
 
         const response = yield axios.put(`auth/changePassword`, data, headers);
         yield setNotification('success', response.data.message);
-        payload.navigate('/dashboard');
+        payload.navigate('/login');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

@@ -84,7 +84,7 @@ export default function Header() {
     };
 
     const user = useSelector((state) => state.auth.user);
-    console.log(user?.role, 'user dashboard link');
+    // console.log(user?.role, 'user dashboard link');
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -132,9 +132,12 @@ export default function Header() {
             <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
                 My Profile
             </MenuItem>
+            {user?.role == 'User' && user != null && (
+                      
             <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
                 Delivery Dashboard
             </MenuItem>
+            )}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
@@ -205,28 +208,12 @@ export default function Header() {
                             // }
                         }}
                     >
-                        <Box sx={{ display: { xs: 'block', md: 'block' } }}>
-                            <Typography variant="h6" noWrap component="div" 
-                            sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
-                                {theme.palette.mode === 'dark' ? (
-                                    <img sx={{cursor:'pointer'}} src={galileoWhite}    
-                                    onClick={() => {
-                                        navigate('/landingPage');
-                                    }} alt="Galileo White Logo" width="100" />
-                                ) : (
-                                    <img sx={{cursor:'pointer'}} src={galileo}    onClick={() => {
-                                        navigate('/landingPage');
-                                    }} alt="Galileo Dark Logo" width="100" />
-                                )}
-                            </Typography>
-                        </Box>
-
-                      {/*   <Grid container-fluid>
+                         <Grid container-fluid>
                             <Grid item sx={{ display: { lg: 'none', md: 'block' } }}>
                                 <Drawer />
                             </Grid>
 
-                            <Search
+                            {/*   <Search
                                 sx={{ width: '46rem !important', display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
                                 className={styles.search}
                             >
@@ -234,8 +221,29 @@ export default function Header() {
                                     <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                                 </SearchIconWrapper>
                                 <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
-                            </Search>
-                        </Grid> */}
+                            </Search>*/}
+                        </Grid> 
+                        <Box sx={{ display: { xs: 'block', md: 'block' } , cursor:'pointer'}}>
+                            <Typography variant="h6" noWrap component="div" 
+                            sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
+                                {theme.palette.mode === 'dark' ? (
+                                    <img  src={galileoWhite}  
+                                   
+                                    
+                                    onClick={() => {
+                                        navigate('/landingPage');
+                                    }} alt="Galileo White Logo" width="100" />
+                                ) : (
+                                    <img  src={galileo}   
+                                   
+ onClick={() => {
+                                        navigate('/landingPage');
+                                    }} alt="Galileo Dark Logo" width="100" />
+                                )}
+                            </Typography>
+                        </Box>
+
+                  
 
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ flexGrow: 1 }} />
@@ -243,7 +251,8 @@ export default function Header() {
                         {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && user?.role != 'User' && user != null && (
                             <Box>
                                 <Button
-                                    sx={{ marginRight: '10px' }}
+                                    sx={{ marginRight: '10px' ,
+                                     display:{xs:'none', lg:'block'}}}
                                     variant="outlined"
                                     onClick={() => {
                                         navigate('/dashboard');
@@ -256,12 +265,12 @@ export default function Header() {
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
                             <div sx={{ marginRight: '3%' }}>{user && <MetaMaskSection />}</div>
-                            <IconButton size="large" aria-label="" color="inherit">
+                            {/*     <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                 </Badge>
                             </IconButton>
-                           {/*  <IconButton size="large" aria-label="" color="inherit">
+                          <IconButton size="large" aria-label="" color="inherit">
                                 <AccountBalanceWalletIcon sx={{ color: '#4dabf5' }} />
                             </IconButton>
                             <IconButton size="large" aria-label="" color="inherit">
@@ -278,12 +287,15 @@ export default function Header() {
                                 Login
                             </Button>
                         )}
+
                         {user !== null && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                    <img src={userHeader} alt="" height="40" 
+                                    style={{ display: 'inlineBlock' }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                    <img src={personuser} alt="" height="40" 
+                                    style={{ display: 'inlineBlock' }} />
                                 )}
 
                                 <IconButton
@@ -299,6 +311,7 @@ export default function Header() {
                                 </IconButton>
                             </>
                         )}
+                        
                     </Box>
                 </Toolbar>
             </AppBar>

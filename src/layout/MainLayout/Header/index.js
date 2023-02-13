@@ -73,7 +73,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             {/* <SearchSection /> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { sm: 'block', marginRight: '10px' } }}>
+            <Box sx={{ display: { xs:'none',sm: 'block', marginRight: '10px' } }}>
                 <MetaMaskSection />
             </Box>
             {/* live customization & localization */}
@@ -86,7 +86,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <ProfileSection />
 
             {/* mobile header */}
-            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+            <Box sx={{ display: { xs: 'none', sm: 'none' } }}>
                 <MobileSection />
             </Box>
         </>

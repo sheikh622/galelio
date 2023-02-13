@@ -66,8 +66,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                 'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
             )
         }),
-        walletAddress: Yup.string()
-        .required('Wallet address is required!')
+        walletAddress: Yup.string().required('Wallet address is required!')
     });
 
     const formik = useFormik({
@@ -86,7 +85,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                         page: page,
                         limit: limit,
                         search: search,
-                        walletAddress:values.walletAddress,
+                        walletAddress: values.walletAddress,
                         handleClose: handleClose
                     })
                 );
@@ -99,6 +98,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                         lastName: values.lastName,
                         email: values.adminEmail,
                         password: values.adminPassword,
+                        walletAddress: values.walletAddress,
                         page: page,
                         limit: limit,
                         search: search,
@@ -150,8 +150,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                     />
                                 </Grid>
                                 <Grid item xs={6} pt={2} md={12} lg={12}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login" 
-                                    className="textfieldStyle">
+                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
                                         Last Name
                                     </InputLabel>
                                     <TextField
@@ -180,7 +179,6 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                         helperText={formik.touched.adminEmail && formik.errors.adminEmail}
                                         fullWidth
                                         variant="standard"
-                                        
                                     />
                                 </Grid>
 
@@ -237,22 +235,22 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                                 </Grid>
                             </>
                         </Grid>
-                        <Grid item xs={6} md={12} lg={12} sx={{mt:1}}>
-                                    <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
-                                       Wallet Address
-                                    </InputLabel>
-                                    <TextField
-                                        className="field"
-                                        id="walletAddress"
-                                        name="walletAddress"
-                                        value={formik.values.walletAddress}
-                                        onChange={formik.handleChange}
-                                        error={formik.touched.walletAddress && Boolean(formik.errors.walletAddress)}
-                                        helperText={formik.touched.walletAddress && formik.errors.walletAddress}
-                                        fullWidth
-                                        variant="standard"
-                                    />
-                                </Grid>
+                        <Grid item xs={6} md={12} lg={12} sx={{ mt: 1 }}>
+                            <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
+                                Wallet Address
+                            </InputLabel>
+                            <TextField
+                                className="field"
+                                id="walletAddress"
+                                name="walletAddress"
+                                value={formik.values.walletAddress}
+                                onChange={formik.handleChange}
+                                error={formik.touched.walletAddress && Boolean(formik.errors.walletAddress)}
+                                helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Grid>
                     </form>
                 </DialogContent>
 

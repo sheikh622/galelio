@@ -28,7 +28,8 @@ const BrandAdmin = () => {
         firstName: '',
         lastName: '',
         adminEmail: '',
-        adminPassword: ''
+        adminPassword: '',
+        walletAddress:''
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {

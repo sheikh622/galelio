@@ -88,7 +88,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     const handleContractDeployment = async () => {
         if (await checkWallet()) {
             setLoader(true);
-            let brandName = brandCategoryData.brand.name;
+            let brandName = brandCategoryData?.brand.name;
             let categoryName;
             categoryArray.categories.map((data) => {
                 if (data.value == category) {
@@ -96,7 +96,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 }
             });
             const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
-            const symbol = 'G' + brandName.substring(0, 1) + categoryName.substring(0, 1);
+            const symbol = 'G' + brandName?.substring(0, 1) + categoryName?.substring(0, 1);
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
