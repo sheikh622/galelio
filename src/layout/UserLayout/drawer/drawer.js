@@ -17,9 +17,11 @@ import DiscountIcon from '@mui/icons-material/Discount';
 import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Drawer() {
     const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.user);
 
     const [state, setState] = React.useState({
         top: false,
@@ -58,14 +60,19 @@ export default function Drawer() {
                         />
                     </ListItemButton>
                 </ListItem>
+                {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && user?.role != 'User' && user != null && (
+                          
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
                             <PieChartIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Statistics'} />
+                        <ListItemText primary={'Dashboard'}  onClick={() => {
+                                navigate('/dashboard');
+                            }}/>
                     </ListItemButton>
                 </ListItem>
+                )}
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>

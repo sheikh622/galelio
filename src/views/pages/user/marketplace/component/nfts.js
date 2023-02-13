@@ -23,7 +23,7 @@ const NFTS = ({ marketplaceNfts }) => {
                         sx={{  mt:{md:8 , lg:8} , textAlign: { xs: 'center', md: 'center', sm: 'center', color: ' #9498AA' },
                           }}
                     >
-                    There are no Items available.
+                    There are currently no products in this category.
                     </Typography>
                 </Grid>
                     </>

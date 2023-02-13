@@ -135,15 +135,18 @@ const LoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                        <FormControl   fullWidth
+                         error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput
+                            
                                 type="email"
                                 // value={values.email}
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 label="Email"
+
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -153,13 +156,15 @@ const LoginForm = ({ loginProp, ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl
+                        <FormControl  
                             fullWidth
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
+                            <InputLabel   
+                            htmlFor="outlined-adornment-password-login">Password</InputLabel>
                             <OutlinedInput
+                            sx={{color:'#fff'}}
                                 type={showPassword ? 'text' : 'password'}
                                 value={values.password}
                                 name="password"
@@ -208,7 +213,7 @@ const LoginForm = ({ loginProp, ...others }) => {
 
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
-                                {/* {loader ? (
+                                 {loader ? (
                                     <Button
                                         className="signbuttonMarket"
                                         disableElevation
@@ -221,7 +226,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     >
                                         Sign in
                                     </Button>
-                                ) : ( */}
+                                ) : ( 
                                 <Button
                                     className="signbuttonMarket"
                                     disableElevation
@@ -234,7 +239,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 >
                                     Sign in
                                 </Button>
-                                {/* )} */}
+                             )} 
                             </AnimateButton>
                         </Box>
 
@@ -249,8 +254,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                         <Grid mt={1} container spacing={gridSpacing}>
                             <Grid item xs={12}>
                                 <Grid container spacing={gridSpacing}>
-                                    <Grid item lg={6} md={6} sm={6} xs={12} >
-                                        <Box sx={{ float: 'right' }}>
+                                    <Grid item lg={6} md={6} sm={6} xs={6} >
+                                        <Box sx={{ float:{ md:'right', xs:'right'} }}>
                                             <ReactFacebookLogin
                                                 appId="851727442768362"
                                                 // autoLoad={true}
@@ -264,8 +269,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                                         </Box>
                                     </Grid>
 
-                                    <Grid item lg={6} md={6} sm={6} xs={12} >
-                                        <Box sx={{ float: 'left' }}>
+                                    <Grid item lg={6} md={6} sm={6} xs={6} >
+                                        <Box sx={{ float: {md:'left'} }}>
                                             {' '}
                                             <GoogleLogin
                                                 type="icon"
@@ -282,37 +287,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        {/*  <Grid
-                            item
-                            mt={1}
-                            xs={12}
-                            sm={12}
-                            md={12}
-                            lg={6}
-                            className="facebook"
-                               sx={{
-                                color:'white',
-                                width:{lg:'50%' }, margin:'0 auto',
-                                justifyContent: 'center',
-                                marginTop: '10px'
-                            }}
-                            // sx={{
-                            //     width: { xs: '80%', sm: '100%', md: ' 100%', lg: '50%' },
-                            //     margin: { xs: '0 auto', sm: '0 auto', sm: '0 auto' }
-                            // }}
-                            
-                        >
-                            {/* <Button
-                                variant="outlined"
-                                color="secondary"
-                                fullWidth
-                                size="large"
-                                className="signbuttonMarket"
-                                startIcon={<FacebookOutlinedIcon />}
-                            > */}
-                       
-                            {/* </Button> */}
-              
+                     
                     </form>
                 )}
             </Formik>

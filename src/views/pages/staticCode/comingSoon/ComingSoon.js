@@ -58,7 +58,7 @@ const ComingSoon = () => {
                                       color:theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
                                   }}
                               >
-                                  This NFT Page  is
+                                  This  Page  is
                                   <Box component="span" sx={{ ml: 2, color: theme.palette.primary.main }}>
                                    Coming Soon
                                   </Box>

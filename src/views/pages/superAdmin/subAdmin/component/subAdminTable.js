@@ -34,8 +34,7 @@ import { ethers } from 'ethers';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import UpdateIcon from '@mui/icons-material/Update';
 import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import mintingIcon from 'assets/images/mintingIcon.png';
 const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAddUpdateOpen, subAdminData, setSubAdminData }) => {
     const [deleteOpen, setDeleteOpen] = useState(false);
     const theme = useTheme();
@@ -199,24 +198,23 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                 </Tooltip>
                                                                 <Tooltip placement="top" title="Change minting access" sx={{ ml: 1 }}>
                                                                     <IconButton
-                                                                        className="color"
                                                                         aria-label="Edit"
                                                                         size="large"
-                                                                        onClick={
-                                                                            ()=>{
-
-                                                                                setChangeMintingAccessOpen(true);
-                                                                                setSubAdminData({
-                                                                                    id: row.id,
-                                                                                    walletAddress: row.walletAddress,
-                                                                                    isActive: row.isActive,
-                                                                                    hasMintingAccess: row.hasMintingAccess,
-                                                                                    contractAddress: row.BrandCategories[0].contractAddress
-                                                                                });
-                                                                            }
-                                                                        }
+                                                                        onClick={() => {
+                                                                            setChangeMintingAccessOpen(true);
+                                                                            setSubAdminData({
+                                                                                id: row.id,
+                                                                                walletAddress: row.walletAddress,
+                                                                                isActive: row.isActive,
+                                                                                hasMintingAccess: row.hasMintingAccess
+                                                                            });
+                                                                        }}
                                                                     >
-                                                                        <img src={CurrencyExchangeIcon} />
+                                                                        {row.hasMintingAccess == true ? (
+                                                                            <img src={mintingIcon} />
+                                                                        ) : (
+                                                                            <img src={CurrencyExchangeIcon} />
+                                                                        )}
                                                                     </IconButton>
                                                                 </Tooltip>
 

@@ -536,18 +536,20 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <AnimatePresence>
                                     {formik.values.images &&
                                         formik.values.images.map((file, index) => (
-                                            <ListItem key={file.image.name} component={motion.div} className="listItem">
+                                            <ListItem key={file.image.name} component={motion.div} 
+                                            className="listItem">
                                                 <ListItemIcon>
                                                     <Icon icon={fileFill} width={32} height={32} />
                                                 </ListItemIcon>
                                                 <ListItemText
                                                     primary={file.image.name ? file.image.name : ''}
                                                     primaryTypographyProps={{
-                                                        variant: 'h6'
+                                                        variant: 'h3'
                                                     }}
                                                 />
                                                 {mintType == 'directMint' && (
-                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} 
+                                                    index={index} />
                                                 )}
                                                 <IconButton
                                                     color="error"
