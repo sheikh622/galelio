@@ -7,7 +7,7 @@ import galileoWhite from 'assets/images/galileo-white.png';
 // project imports
 import AuthWrapper1 from 'shared/component/AuthWrapper';
 import AuthCardWrapper from 'shared/component/AuthCardWrapper';
-
+import {Helmet} from "react-helmet";
 import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
 import AuthSlider from 'ui-component/cards/AuthSlider';
 import ResetForm from './ResetPassword';
@@ -23,6 +23,11 @@ const ResetPassword = () => {
         <AuthWrapper1 >
         <Grid container justifyContent="space-between" alignItems="center" sx={{ minHeight: '100vh', 
         background: theme.palette.mode === 'dark' ? '#000' : '#fff' , }}>
+        <Helmet>
+        <meta charSet="utf-8" />
+        <title>  Reset Password</title>
+     
+    </Helmet>
             <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', 
             display: { xs: 'none', md: 'block' } }}>
                 <BackgroundPattern1>

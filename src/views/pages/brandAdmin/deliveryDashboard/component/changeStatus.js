@@ -84,7 +84,8 @@ export default function ChangeStatusDialog({ open, setOpen, page, limit, search,
                 <Divider />
                 <DialogActions sx={{ pr: 2.5 }}>
                     <Button
-                        sx={{ color: theme.palette.error.dark, borderColor: theme.palette.error.dark }}
+                        sx={{ color: theme.palette.error.dark,
+                             borderColor: theme.palette.error.dark }}
                         onClick={handleClose}
                         color="secondary"
                     >

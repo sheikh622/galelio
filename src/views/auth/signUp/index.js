@@ -10,7 +10,7 @@ import galileoWhite from 'assets/images/galileo-white.png';
 import AuthWrapper1 from 'shared/component/AuthWrapper';
 import AuthCardWrapper from 'shared/component/AuthCardWrapper';
 import SignUpForm from './component/SignUp';
-
+import {Helmet} from "react-helmet";
 import BackgroundPattern1 from 'ui-component/cards/BackgroundPattern1';
 
 // assets
@@ -30,6 +30,11 @@ const SignUp = () => {
                 alignItems="center"
                 sx={{ minHeight: '100vh', background: theme.palette.mode === 'dark' ? '#000' : '#fff' }}
             >
+            <Helmet>
+            <meta charSet="utf-8" />
+            <title> Sign Up</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
                         <Grid item container alignItems="flex-end" justifyContent="center" spacing={3}>
@@ -43,7 +48,7 @@ const SignUp = () => {
                     <AuthCardWrapper>
                         <Grid container direction="column" justifyContent="center" spacing={2}>
                         <Grid item xs={12} container alignItems="center" justifyContent="center">
-                        <Box sx={{ display: { xs: 'block',sm:'block', md: 'none', lg:'none' } }}>
+                        <Box sx={{ display: { xs: 'block', sm:'block', md: 'none', lg:'none' } }}>
                         <Typography variant="h6" noWrap component="div"
                          sx={{ marginTop: '5px', }}>
                             {theme.palette.mode === 'dark' ? (

@@ -29,6 +29,7 @@ import { logout } from 'redux/auth/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import MetaMaskSection from './MetaMaskSection';
+import {Helmet} from "react-helmet";
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -198,6 +199,11 @@ export default function Header() {
             <AppBar position="static"
              sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
                 <Toolbar>
+                <Helmet>
+                <meta charSet="utf-8" />
+                <title>Galileo Marketplace</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
                     <Box
                         sx={{
                             height: '4em',

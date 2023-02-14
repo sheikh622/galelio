@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
 import { Divider, Grid, Stack, Typography, useMediaQuery, Box } from '@mui/material';
-
+import {Helmet} from "react-helmet";
 import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
 // project imports
@@ -30,6 +30,11 @@ const SocialLoginForm = () => {
                 alignItems="center"
                 sx={{ minHeight: '100vh', background: theme.palette.mode === 'dark' ? '#000' : '#fff' }}
             >
+            <Helmet>
+            <meta charSet="utf-8" />
+            <title>  Social Login</title>
+          
+        </Helmet>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
                         <Grid item container alignItems="flex-end" justifyContent="center" spacing={3}>

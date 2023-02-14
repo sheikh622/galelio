@@ -14,7 +14,7 @@ import MobileSection from './MobileSection';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
 import { useSelector, useDispatch } from 'react-redux';
-
+import {Helmet} from "react-helmet";
 // assets
 import { IconMenu2 } from '@tabler/icons';
 
@@ -41,6 +41,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     }
                 }}
             >
+            <Helmet>
+            <meta charSet="utf-8" />
+            <title> Galileo Dashboard</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     {/* <img style={{width: '100px' }} src={logo} alt="Admin Panel" /> */}
                     {/* <p style={{  fontStyle: 'oblique', fontWeight: 800, color: 'cadetblue' }}>
