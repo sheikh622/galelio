@@ -230,7 +230,7 @@ const Categories = ({ categories }) => {
                                 <Grid
                                     sx={{ my: { xs: '10px', md: '0', sm: '10px' }, 
                                     marginLeft:{xs:'15px'},
-                                     marginRight: {lg:'15px', xl:'0'} }}
+                                     marginRight: {lg:'15px'} }}
                                     item
                                     md={4}
                                     lg={2}

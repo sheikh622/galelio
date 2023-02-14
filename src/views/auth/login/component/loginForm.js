@@ -103,7 +103,7 @@ const LoginForm = ({ loginProp, ...others }) => {
             });
     };
     const responseFacebookFailure = (error) => {
-        console.log('error from FB',error);
+      
         // toast.error(error);
     };
 
