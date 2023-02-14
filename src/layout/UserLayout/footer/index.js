@@ -59,12 +59,12 @@ const Footer = () => {
                         </Grid>
 
                         <Grid container sx={{ mt: 3  }}>
-                            <Grid item md={4} xs={12}>
+                            <Grid item md={4} xs={12} lg={4} xl={3}>
                                 <img src={googlePlay}  alt="Google Play" width="120" />
                             </Grid>
-                            <Grid item md={1} xs={12} >
+                            <Grid item md={1} xs={12} lg={1} xl={1} sx={{display:{xl:'none'}}} >
                             </Grid>
-                            <Grid item md={7} xs={12} >
+                            <Grid item md={7} xs={12}   lg={7} xl={6}>
                                 <img src={appleStore}  alt="Apple Store" width="120" />
                             </Grid>
                         </Grid>

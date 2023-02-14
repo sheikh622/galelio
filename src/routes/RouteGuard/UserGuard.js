@@ -16,9 +16,9 @@ const UserGuard = ({ children }) => {
         if (token == null) {
             navigate('/landingPage', { replace: true });
         }
-        else if (token && user?.role=="User" ) {
-            navigate('/landingPage', { replace: true });
-        }
+        // else if (token && user?.role=="User" ) {
+        //     navigate('/landingPage', { replace: true });
+        // }
     }, [token]);
     
     return children;

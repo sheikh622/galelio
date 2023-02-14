@@ -11,7 +11,7 @@ import { setWallet } from '../../../../redux/auth/actions';
 const MetaMaskSection =  () => {
     
     const user = useSelector((state) => state.auth.user);
-    // console.log('user.walletAddress', user.walletAddress);
+
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
     const handleConnect = async () => {

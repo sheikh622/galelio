@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase } from '@mui/material';
+import { Avatar, Box, ButtonBase , Button} from '@mui/material';
 import MetaMaskSection from './MetaMaskSection';
+import { useNavigate } from 'react-router-dom';
 
 // project imports
 import LogoSection from '../LogoSection';
@@ -12,7 +13,8 @@ import LocalizationSection from './LocalizationSection';
 import MobileSection from './MobileSection';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
-
+import { useSelector, useDispatch } from 'react-redux';
+import {Helmet} from "react-helmet";
 // assets
 import { IconMenu2 } from '@tabler/icons';
 
@@ -20,7 +22,9 @@ import { IconMenu2 } from '@tabler/icons';
 
 const Header = ({ handleLeftDrawerToggle }) => {
     const theme = useTheme();
+    const navigate = useNavigate();
 
+    const user = useSelector((state) => state.auth.user);
     return (
         <>
             {/* logo & toggler button */}
@@ -37,6 +41,11 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     }
                 }}
             >
+            <Helmet>
+            <meta charSet="utf-8" />
+            <title> Galileo Dashboard</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     {/* <img style={{width: '100px' }} src={logo} alt="Admin Panel" /> */}
                     {/* <p style={{  fontStyle: 'oblique', fontWeight: 800, color: 'cadetblue' }}>
@@ -73,6 +82,20 @@ const Header = ({ handleLeftDrawerToggle }) => {
             {/* <SearchSection /> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
+            {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && user?.role != 'User' && user != null && (
+                <Box>
+                    <Button
+                        sx={{ marginRight: '10px' ,
+                         display:{xs:'block', lg:'block'}}}
+                        variant="outlined"
+                        onClick={() => {
+                            navigate('/landingPage');
+                        }}
+                    >
+                        Marketplace
+                    </Button>
+                </Box>
+            )}
             <Box sx={{ display: { xs:'none',sm: 'block', marginRight: '10px' } }}>
                 <MetaMaskSection />
             </Box>

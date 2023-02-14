@@ -52,7 +52,8 @@ const SideBar = () => {
                             pt: 1,
                             pb: 3,
                             ml: 1,
-                            mr: 1, maxWidth:'93% !important',
+                            mr: 1,
+                            maxWidth: { lg: '66% !important' },
                             display: 'block',
                             boxShadow: '1px 2px 2px 2px #d3d3d391',
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
@@ -69,14 +70,14 @@ const SideBar = () => {
                             {pathName == '/landingPage' ? (
                                 <>
                                     <Box sx={{ borderLeft: '6px solid #2196f3' }}>
-                                        <Tooltip title="Landing Page" placement="right" arrow>
+                                        <Tooltip className="fontsize" title="Landing Page" placement="right" arrow>
                                             <DashboardIcon sx={{ color: `${color}` }} />
                                         </Tooltip>
                                     </Box>
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip title="Landing Page" placement="right" arrow>
+                                    <Tooltip className="fontsize" title="Landing Page" placement="right" arrow>
                                         <DashboardIcon />
                                     </Tooltip>
                                 </>
@@ -95,18 +96,15 @@ const SideBar = () => {
                             {pathName.includes('marketplace') ? (
                                 <>
                                     <Box sx={{ borderLeft: '6px solid #2196f3' }}>
-                                        <Tooltip title="Marketplace" placement="right" arrow>
-                                            <StorefrontIcon style={{ color: `${color}` }} />
+                                        <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
+                                            <StorefrontIcon className="fontsize" style={{ color: `${color}` }} />
                                         </Tooltip>
                                     </Box>
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip 
-                                    title="Marketplace" 
-                                    placement="right" 
-                                    arrow>
-                                        <StorefrontIcon />
+                                    <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
+                                        <StorefrontIcon className="fontsize" />
                                     </Tooltip>
                                 </>
                             )}
@@ -118,25 +116,21 @@ const SideBar = () => {
                                 navigate('/ComingSoon');
                             }}
                         >
-                        {pathName.includes('ComingSoon') ? (
-                            <>
-                                <Box >
-                                    <Tooltip title="Coming Soon" placement="right" arrow>
-                                        <BookmarkIcon  />
+                            {pathName.includes('ComingSoon') ? (
+                                <>
+                                    <Box>
+                                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
+                                            <BookmarkIcon className="fontsize" />
+                                        </Tooltip>
+                                    </Box>
+                                </>
+                            ) : (
+                                <>
+                                    <Tooltip className="fontsize" title="ComingSoon" placement="right" arrow>
+                                        <BookmarkIcon />
                                     </Tooltip>
-                                </Box>
-                            </>
-                        ) : (
-                            <>
-                                <Tooltip 
-                                title="ComingSoon" 
-                                placement="right" 
-                                arrow>
-                                <BookmarkIcon />
-                                </Tooltip>
-                            </>
-                        )}
-                          
+                                </>
+                            )}
                         </Grid>
                         <Grid
                             item
@@ -145,25 +139,21 @@ const SideBar = () => {
                                 navigate('/ComingSoon');
                             }}
                         >
-                        {pathName.includes('ComingSoon') ? (
-                            <>
-                                <Box >
-                                    <Tooltip title="Coming Soon" placement="right" arrow>
-                                        <DownloadIcon  />
+                            {pathName.includes('ComingSoon') ? (
+                                <>
+                                    <Box>
+                                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
+                                            <DownloadIcon className="fontsize" />
+                                        </Tooltip>
+                                    </Box>
+                                </>
+                            ) : (
+                                <>
+                                    <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
+                                        <DownloadIcon className="fontsize" />
                                     </Tooltip>
-                                </Box>
-                            </>
-                        ) : (
-                            <>
-                                <Tooltip 
-                                title="Marketplace" 
-                                placement="right" 
-                                arrow>
-                                <DownloadIcon />
-                                </Tooltip>
-                            </>
-                        )}
-                           
+                                </>
+                            )}
                         </Grid>
                         <Grid
                             item
@@ -172,25 +162,21 @@ const SideBar = () => {
                                 navigate('/ComingSoon');
                             }}
                         >
-                        {pathName.includes('ComingSoon') ? (
-                            <>
-                                <Box >
-                                    <Tooltip title="Coming Soon" placement="right" arrow>
-                                        <DiscountIcon  />
+                            {pathName.includes('ComingSoon') ? (
+                                <>
+                                    <Box>
+                                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
+                                            <DiscountIcon className="fontsize" />
+                                        </Tooltip>
+                                    </Box>
+                                </>
+                            ) : (
+                                <>
+                                    <Tooltip title="ComingSoon" placement="right" arrow>
+                                        <DiscountIcon className="fontsize" />
                                     </Tooltip>
-                                </Box>
-                            </>
-                        ) : (
-                            <>
-                                <Tooltip 
-                                title="ComingSoon" 
-                                placement="right" 
-                                arrow>
-                                <DiscountIcon />
-                                </Tooltip>
-                            </>
-                        )}
-                           
+                                </>
+                            )}
                         </Grid>
                         <Grid
                             item
@@ -199,25 +185,21 @@ const SideBar = () => {
                                 navigate('/ComingSoon');
                             }}
                         >
-                        {pathName.includes('ComingSoon') ? (
-                            <>
-                                <Box >
-                                    <Tooltip title="Coming Soon" placement="right" arrow>
-                                        <SettingsIcon  />
+                            {pathName.includes('ComingSoon') ? (
+                                <>
+                                    <Box>
+                                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
+                                            <SettingsIcon className="fontsize" />
+                                        </Tooltip>
+                                    </Box>
+                                </>
+                            ) : (
+                                <>
+                                    <Tooltip className="fontsize" title="ComingSoon" placement="right" arrow>
+                                        <SettingsIcon className="fontsize" />
                                     </Tooltip>
-                                </Box>
-                            </>
-                        ) : (
-                            <>
-                                <Tooltip 
-                                title="ComingSoon" 
-                                placement="right" 
-                                arrow>
-                                <SettingsIcon />
-                                </Tooltip>
-                            </>
-                        )}
-                            
+                                </>
+                            )}
                         </Grid>
                         <Grid
                             item
@@ -226,36 +208,39 @@ const SideBar = () => {
                                 navigate('/ComingSoon');
                             }}
                         >
-                        {pathName.includes('ComingSoon') ? (
-                            <>
-                                <Box >
-                                    <Tooltip title="Coming Soon" placement="right" arrow>
-                                        <LogoutIcon  />
+                            {pathName.includes('ComingSoon') ? (
+                                <>
+                                    <Box>
+                                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
+                                            <LogoutIcon className="fontsize" />
+                                        </Tooltip>
+                                    </Box>
+                                </>
+                            ) : (
+                                <>
+                                    <Tooltip className="fontsize" title="ComingSoon" placement="right" arrow>
+                                        <LogoutIcon className="fontsize" />
                                     </Tooltip>
-                                </Box>
-                            </>
-                        ) : (
-                            <>
-                                <Tooltip 
-                                title="ComingSoon" 
-                                placement="right" 
-                                arrow>
-                                <LogoutIcon />
-                                </Tooltip>
-                            </>
-                        )}
-                           
+                                </>
+                            )}
                         </Grid>
                         <Grid item sx={{ mt: 5, paddingLeft: '0 ! important', textAlign: 'center' }}>
                             {customization.navType == 'dark' ? (
                                 <>
-                                    <Box>
+                                    <Box className="fontsize">
                                         <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
                                     </Box>
                                 </>
                             ) : (
                                 <>
-                                    <DarkModeIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('dark')} />
+                                    {' '}
+                                    <Box className="fontsize">
+                                        <DarkModeIcon
+                                            className="fontsize"
+                                            style={{ color: `${color}`, cursor: 'pointer' }}
+                                            onClick={() => setNavType('dark')}
+                                        />
+                                    </Box>{' '}
                                 </>
                             )}
                         </Grid>

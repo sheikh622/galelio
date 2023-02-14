@@ -1198,9 +1198,9 @@ text-align: center !important;
     /* display: flex; */
     align-items: center;
     color: #2f53ff !important;
-    border: 2px solid #b9ddff;
-    padding: 11px 10px 0 10px;
-    border-radius: 4px;
+    // border: 2px solid #b9ddff;
+    padding: 7px 10px 0 10px;
+    border-radius: 2px;
 }
 .nftButtons {
     padding: 7px 30px;
@@ -1343,11 +1343,58 @@ font-style: normal;
 .fontfigma{
     font-family: 'Public Sans' !important;
     font-style: normal !important;
-    font-weight: 700 !important;
+    font-weight: 500 !important;
     font-size: 22px !important;
     line-height: 26px !important;
 
 }
+@media only screen and (min-width:1568px ) {
+.fontfigma{
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 400;
+    font-size: 39px !important;
+    line-height: 26px !important;
+
+}
+.noDatacat {
+    font-size: 25px !important;
+    font-weight: 400px !important;
+    margin-left: 75px !important;
+   
+    
+}
+.noDataNew {
+    font-size: 25px !important;
+    font-weight: 400px !important;
+    margin-left: 75px !important;
+
+    
+}
+.cardHeading {
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 23px !important;
+}
+.Creationstyling {
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+    font-size: 20px !important;
+}
+.fontsize{
+    font-size: 35px !important 
+}
+.categoreyName {
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 23px !important;
+}
+}
+
 .categoreyName{
     
 font-family: 'Public Sans';

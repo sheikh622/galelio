@@ -9,7 +9,7 @@ import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
 import ForgotForm from './component/ForgetForm';
 import React from 'react';
-
+import {Helmet} from "react-helmet"; 
 const ForgotPassword = () => {
     const theme = useTheme();
 
@@ -21,6 +21,13 @@ const ForgotPassword = () => {
                 alignItems="center"
                 sx={{ minHeight: '100vh',background: theme.palette.mode === 'dark' ? '#000' : '#fff' }}
             >
+            <Helmet>
+            <meta charSet="utf-8" />
+            <title>
+            Forgot Password
+            </title>
+           
+        </Helmet>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', 
                 display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
