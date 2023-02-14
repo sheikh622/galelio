@@ -55,7 +55,9 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
     return (
         <div>
            
-            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+            <Dialog fullScreen open={open} 
+            onClose={handleClose} 
+            TransitionComponent={Transition}>
              {/*    <IconButton float="left" color="inherit" onClick={handleClose} aria-label="close" size="large">
                     <CloseIcon />
                 </IconButton> */}

@@ -103,7 +103,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
         <>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
                 className="createDialog dialog"
                 TransitionComponent={Transition}

@@ -23,7 +23,9 @@ export default function ResellDialog() {
       <Button variant="contained" onClick={handleClickOpen}>
     Resell
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open}
+      // {handleClose}
+      >
         <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
