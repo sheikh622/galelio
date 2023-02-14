@@ -21,6 +21,7 @@ const BrandCard = ({ data, brands }) => {
                      md: brands && brands?.length > 5 ? 4 : 2 }
             }}
             item
+            xl={brands && brands?.length > 5 ? 12 : 2}
             lg={brands && brands?.length > 5 ? 12 : 2}
             md={brands && brands?.length > 5 ? 12 : 4}
             sm={brands && brands?.length > 5 ? 12 : 4}
@@ -38,10 +39,11 @@ const BrandCard = ({ data, brands }) => {
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#000' : 'white',
-                    width: brands && brands?.length > 5 ? '100%' : { lg: '220px' },
+                    width: brands && brands?.length > 5 ? '100%' : { lg: '220px' , xl:'100%'},
                     // boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '3px',
-                    marginBottom: '10px'
+                    marginBottom: '10px',
+                    maxWidth:{xl:'100%'},
                 }}
             >
                 <CardActionArea>

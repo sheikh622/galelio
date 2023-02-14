@@ -20,6 +20,24 @@ const Categories = ({ categories }) => {
         slidesToShow: 5,
         slidesToScroll: 1,
         responsive: [
+            // {
+            //     breakpoint: 1568,
+            //     settings: {
+            //         slidesToShow: 6,
+            //         slidesToScroll: 3,
+            //         infinite: true,
+            //         dots: false
+            //     }
+            // },
+            // {
+            //     breakpoint: 1568,
+            //     settings: {
+            //         slidesToShow: 6,
+            //         slidesToScroll: 3,
+            //         infinite: true,
+            //         dots: false
+            //     }
+            // },
             {
                 breakpoint: 1200,
                 settings: {
@@ -119,11 +137,15 @@ const Categories = ({ categories }) => {
                                                 ml: {
                                                     xs: categories && categories?.length > 5 ? 5 : 0,
                                                     sm: categories && categories?.length > 5 ? 3 : 0,
-                                                    md: categories && categories?.length > 5 ? 2 : 0
+                                                    md: categories && categories?.length > 5 ? 2 : 0,
+                                                    lg: categories && categories?.length > 5 ? 2 : 0,
+                                                    // xl: categories && categories?.length > 5 ? 4 : 0,
                                                 },
                                                 mr: {
                                                     xs: categories && categories?.length > 5 ? 1 : 0,
-                                                    md: categories && categories?.length > 5 ? 4 : 0
+                                                    md: categories && categories?.length > 5 ? 4 : 0,
+                                                    lg: categories && categories?.length > 5 ? 4 : 0,
+                                                    // xl: categories && categories?.length > 5 ? 2 : 0,
                                                 }
                                             }}
                                             item
@@ -131,6 +153,7 @@ const Categories = ({ categories }) => {
                                             sm={categories && categories?.length > 5 ? 12 : 4}
                                             md={categories && categories?.length > 5 ? 12 : 4}
                                             lg={categories && categories?.length > 5 ? 12 : 2}
+                                            xl={categories && categories?.length > 5 ? 12 : 2}
                                         >
                                             <Card
                                          
@@ -138,10 +161,12 @@ const Categories = ({ categories }) => {
                                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                                                     width: categories && categories?.length > 5 ? '100%' : 
-                                                    { lg: '220px' },
+                                                    { lg: '220px' , xl:'100%'},
+                                                    maxWidth:'100%',
                                                     //  boxShadow: '1px 2px 6px #d3d3d3',
                                                     borderRadius: '3px',
-                                                    marginBottom: '10px'
+                                                    marginBottom: '10px',
+                                                    maxWidth:{xl:'100%'},
                                                     
                                                 }}
                                                 onClick={() => {
@@ -168,7 +193,7 @@ const Categories = ({ categories }) => {
                                                             // boxShadow: '1px 2px 9px #d3d3d3'
                                                         }}
                                                     >
-                                                        <CardMedia component="img" height="200" image={item.image} />
+                                                        <CardMedia component="img" height="200"  image={item.image} />
                                                         <Box
                                                             sx={{
                                                                 height: '100%',
@@ -205,10 +230,11 @@ const Categories = ({ categories }) => {
                                 <Grid
                                     sx={{ my: { xs: '10px', md: '0', sm: '10px' }, 
                                     marginLeft:{xs:'15px'},
-                                     marginRight: {lg:'15px'} }}
+                                     marginRight: {lg:'15px', xl:'0'} }}
                                     item
                                     md={4}
                                     lg={2}
+                                    xl={2}
                                     sm={4}
                                     xs={10}
                                 >
@@ -219,7 +245,8 @@ const Categories = ({ categories }) => {
                                            
                                             // boxShadow: '1px 2px 6px #d3d3d3',
                                             borderRadius: '3px',
-                                            width: { lg:'220px'}
+                                            marginRight: {lg:'15px'} ,
+                                            width: { lg:'220px' , xl:'100%'}
                                         }}
                                         onClick={() => {
                                             navigate('/marketplace', {
@@ -256,7 +283,7 @@ const Categories = ({ categories }) => {
                                                         color: 'white'
                                                     }}
                                                 >
-                                                    <Typography variant="h4" color="#fff" sx={{ mt: 11 }}>
+                                                    <Typography  className='categoreyName' variant="h4" color="#fff" sx={{ mt: 11 }}>
                                                         {item.name}
                                                     </Typography>
                                                 </Box>
