@@ -278,7 +278,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         let brandName = nftData.nft.Brand.name;
         let metaData = nftData.nftMetaData;
         let proofOfAuthenticity = nftData.nftFiles;
-        let contractAddress = nftData.nft.Brand.BrandCategories[0].contractAddress;
+        let contractAddress = nftData.nft.Category.BrandCategories[0].contractAddress;
         // setLoader(true);
 
         if (!image || !price || !name || !description) return;
@@ -301,15 +301,17 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
 
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
-            const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+            const nft = new ethers.Contract(contractAddress, NFTAbi, signer);
 
             if (tokenId.length > 1) {
+                console.log('tokenId, tokenUri1',tokenId, tokenUri);
                 let mintedNFT = await (
                     await nft.updateBulkUri(tokenId, tokenUri).catch((error) => {
                         toast.error(`${error.message}`);
                     })
                 ).wait();
             } else {
+                console.log('tokenId, tokenUri2',tokenId, tokenUri);
                 let mintedNFT = await (
                     await nft.updateUri(tokenId, tokenUri).catch((error) => {
                         toast.error(`${error.message}`);

@@ -77,11 +77,7 @@ const PropertiesView = ({ nft }) => {
                         }
                     }}
                 >
-                     
-                            
-
-                                Resell
-                         
+                    Resell
                 </Button>
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>NFT Resell Price</DialogTitle>
@@ -178,13 +174,13 @@ const PropertiesView = ({ nft }) => {
 
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
                     let price = ethers.utils.parseEther(nft.price.toString());
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
 
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
                     const token = new ethers.Contract(erc20Address, Erc20, signer);
                     // await (await token.approve(MarketplaceAddress.address, price)).wait();
 
@@ -224,38 +220,56 @@ const PropertiesView = ({ nft }) => {
                     setLoader(true);
                     let signers = nft.signerAddress;
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    let signature = nft.NFTTokens[0].signature;
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    // let signature = nft.NFTTokens[0].signature;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
+                    // const SIGNING_DOMAIN = 'Galileo-Protocol';
+                    // const SIGNATURE_VERSION = '1';
+
+                    // const domain = {
+                    //     name: SIGNING_DOMAIN,
+                    //     version: SIGNATURE_VERSION,
+                    //     verifyingContract: contractAddress,
+                    //     chainId: 5
+                    // };
+                    // const types = {
+                    //     GalileoVoucher: [
+                    //         { name: 'uri', type: 'string' },
+                    //         { name: 'price', type: 'uint256' },
+                    //         { name: 'token', type: 'address' }
+                    //     ]}
                     // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0";
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
-                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
 
                     let prices = ethers.utils.parseEther(nft.price.toString());
 
                     let voucher = {
                         uri: nft.tokenUri,
                         price: prices,
-                        token: erc20Address
+                        token: erc20Address,
+                        signature: nft.NFTTokens[0].signature
                     };
 
                     let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
                     const token = new ethers.Contract(erc20Address, Erc20, signer);
-                    //const signature = await signer._signTypedData(domain, types, voucher);
-                    // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
+                   // const signature = await signer._signTypedData(domain, types, voucher);
+                   // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
+                    //console.log(verifyAddr);
 
-                    let approvalAmount = await token.allowance(address, contractAddress);
+                    // let approvalAmount = await token.allowance(address, contractAddress);
 
-                    let approvePrice = ethers.utils.parseEther('10000');
-                    if (approvalAmount.toString() < nft.price.toString()) {
-                        await (await token.approve(contractAddress, approvePrice)).wait();
-                    }
-                    // await (await token.approve(contractAddress, prices)).wait();
+                    // let approvePrice = ethers.utils.parseEther('10000');
+                    // if (approvalAmount.toString() < nft.price.toString()) {
+                    //     await (await token.approve(contractAddress, approvePrice)).wait();
+                    // }
+                     await (await token.approve(contractAddress, prices)).wait();
 
                     //
                     try {
-                        let mintedNFT = await (await nfts.buyNft(voucher, signature, MarketplaceAddress.address)).wait();
+                        let mintedNFT = await (await nfts.buyNft(voucher, "0x6f3B51bd5B67F3e5bca2fb32796215A796B79651")).wait();
                         const id = parseInt(mintedNFT.events[0].args[2]);
 
                         dispatch(
@@ -294,15 +308,15 @@ const PropertiesView = ({ nft }) => {
                     setResellLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
                     let rrprice = ethers.utils.parseEther(rprice.toString());
 
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
-                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
 
                     await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
                     await (await marketplace.resellItem(tokenId, contractAddress, rrprice))
@@ -326,21 +340,21 @@ const PropertiesView = ({ nft }) => {
                 } catch (error) {
                     setResellLoader(false);
                     toast.error(error.message);
-                    setOpen(false)
+                    setOpen(false);
                 }
             } else if (nft.mintType == 'lazyMint') {
                 try {
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
                     let rrprice = ethers.utils.parseEther(nft.price.toString());
 
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
-                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
 
                     // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
                     await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, rrprice))
@@ -379,11 +393,11 @@ const PropertiesView = ({ nft }) => {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
 
                     await (await marketplace.redeemNft(tokenId, contractAddress))
                         .wait()
@@ -421,11 +435,11 @@ const PropertiesView = ({ nft }) => {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
                     let rrprice = ethers.utils.parseEther(nft.price.toString());
 
                     await (await marketplace.redeem(erc20Address, tokenId, contractAddress, rrprice))
@@ -482,13 +496,10 @@ const PropertiesView = ({ nft }) => {
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
-                     
                         <CardMedia
-                            
                             component="img"
                             image={nft?.asset ? nft?.asset : watch1}
-                            sx={{ minheight: 'auto', maxHeight:'570px',
-                             overflow: 'hidden', cursor: 'Pointer' }}
+                            sx={{ minheight: 'auto', maxHeight: '570px', overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
 
@@ -536,6 +547,11 @@ const PropertiesView = ({ nft }) => {
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
                                                 {nft?.description}{' '}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Typography className="productdescription" variant="body2">
+                                               Total NFTs: {nft?.NFTTokens.length}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
@@ -604,7 +620,7 @@ const PropertiesView = ({ nft }) => {
                                         //     ))}
                                         // </TextField> */}
                                         </Grid>
-                                       {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
+                                        {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid
                                                 sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9' }}
                                                 className="auction"
@@ -623,7 +639,7 @@ const PropertiesView = ({ nft }) => {
                                                 </Grid>
                                             </Grid>
                                         </Grid> */}
-                                        <Grid  mt={2} item xs={12}>
+                                        <Grid mt={2} item xs={12}>
                                             <Grid container>
                                                 <Grid mt={-2} item md={3} xs={12} sm={12}>
                                                     <Grid item xs={12}>
@@ -754,7 +770,9 @@ const PropertiesView = ({ nft }) => {
                                                                                     {buyerNft?.status !== 'Redeem' && redeem == false && (
                                                                                         <>
                                                                                             {resellLoader ? (
-                                                                                                <CircularProgress sx={{ color: 'blue', ml:3}} />
+                                                                                                <CircularProgress
+                                                                                                    sx={{ color: 'blue', ml: 3 }}
+                                                                                                />
                                                                                             ) : (
                                                                                                 <ResellDialog />
                                                                                             )}
