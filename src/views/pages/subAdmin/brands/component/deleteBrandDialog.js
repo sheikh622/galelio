@@ -17,7 +17,7 @@ export default function DeleteBrandDialog({ open, setOpen, brandId, page, limit,
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >

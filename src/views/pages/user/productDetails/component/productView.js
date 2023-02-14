@@ -79,7 +79,9 @@ const PropertiesView = ({ nft }) => {
                 >
                     Resell
                 </Button>
-                <Dialog open={open} onClose={handleClose}>
+                <Dialog open={open} 
+                // onClose={handleClose}
+                >
                     <DialogTitle>NFT Resell Price</DialogTitle>
                     <DialogContent>
                         <DialogContentText>Please enter the price for the NFT</DialogContentText>

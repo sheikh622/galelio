@@ -117,7 +117,7 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
         <>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="form-dialog-title "
                 className="createDialog dialog"
                 maxWidth="md"

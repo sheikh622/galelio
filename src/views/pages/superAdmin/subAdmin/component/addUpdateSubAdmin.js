@@ -162,7 +162,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
           
             <Dialog
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
                 className="adminDialog dialog"
                 maxWidth="md"
