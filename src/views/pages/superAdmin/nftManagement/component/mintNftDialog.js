@@ -77,7 +77,9 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         }
     };
     const directMintThenList = async (result) => {
+        console.log('imindirectMintThenList');
         if(checkWallet){
+            console.log('imindirectMintThenList2');
             let nftTokens = nftData.NFTTokens;
             let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
     
@@ -92,7 +94,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
                 const address = await signer.getAddress();
-                const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                const nft = new ethers.Contract(contractAddress, NFTAbi, signer);
                 const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
                 const uriArray = await nftTokens.map(() => {
                     return tokenUri;
@@ -100,17 +102,17 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     
                 if (uriArray.length == 1) {
                     let mintedNFT = await (
-                        await nft.mint(tokenUri, MarketplaceAddress.address).catch((error) => {
+                        await nft.mint(tokenUri,erc20Address,price,nftData.requesterAddress).catch((error) => {
                             toast.error(error.message)
                             setLoader(false)
                             setOpen(false)                            
                         })
                     ).wait();
-    
+    console.log('im here at 111');
                     transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                     const id = parseInt(mintedNFT.events[0].args[2]);
-    
-                    const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+    console.log('id', id);
+                    const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
                     await (
                         await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress).catch((error) => {
                     
@@ -148,7 +150,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     );
                 } else if (uriArray.length > 1) {
                     let mintedNFT = await (
-                        await nft.bulkMint(uriArray, MarketplaceAddress.address).catch((error) => {
+                        await nft.bulkMint(uriArray,erc20Address,price,nftData.requesterAddress).catch((error) => {
                             toast.error(error.message);
                             setOpen(false)
                             setLoader(false)
@@ -163,10 +165,10 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                         myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
                         counter = counter + 2;
                     }
-                    const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+                    const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
     
                     await (
-                        await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price).catch((error) => {
+                        await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price, nftData.requesterAddress).catch((error) => {
               
                             toast.error(error.message);
                             setOpen(false)
@@ -254,6 +256,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let brandName = nftData.Brand.name;
         let metaData = nftData.NFTMetaData;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
+    
+        // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
         // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0"
         let nftTokens = nftData.NFTTokens;
 
@@ -294,7 +298,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
-        const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+        const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
         let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
 
         // await await nfts.lazyMint(

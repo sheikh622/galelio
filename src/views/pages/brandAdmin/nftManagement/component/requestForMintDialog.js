@@ -14,12 +14,11 @@ import {
 } from '@mui/material';
 import { requestNftForMinting } from 'redux/nftManagement/actions';
 import Erc20 from '../../../../../contractAbi/Erc20.json';
-import { ethers,utils } from 'ethers';
+import { ethers, utils } from 'ethers';
 import BLOCKCHAIN from '../../../../../constants';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SNACKBAR_OPEN } from 'store/actions';
-
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData, categoryId }) {
@@ -31,9 +30,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
         setLoader(false);
     };
     const user = useSelector((state) => state.auth.user);
+    // console.log('nftData', nftData.Category.BrandCategories[0].contractAddress);
 
-
-    
     const checkWallet = async () => {
         const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
         let connectWallet = await ethereum._metamask.isUnlocked();
@@ -48,8 +46,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
-            setOpen(false)
-            setLoader(false)
+            setOpen(false);
+            setLoader(false);
         } else if (window?.ethereum?.networkVersion !== '5') {
             dispatch({
                 type: SNACKBAR_OPEN,
@@ -59,8 +57,8 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 alertSeverity: 'info'
             });
             console.log('Please change your Chain ID to Goerli');
-            setOpen(false)
-            setLoader(false)
+            setOpen(false);
+            setLoader(false);
         } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
@@ -70,40 +68,25 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 alertSeverity: 'info'
             });
             console.log('Please connect your registered Wallet Address');
-            setOpen(false)
-            setLoader(false)
+            setOpen(false);
+            setLoader(false);
         } else {
             return true;
         }
     };
 
-    
-
     const handleMintRequest = async () => {
-        if(await checkWallet()){
+        if (await checkWallet()) {
             try {
                 setLoader(true);
-                let profitPercentage = parseInt(nftData.Category.BrandCategories[0].profitPercentage);
-                let quant = nftData.NFTTokens.length;
-                let price = quant * nftData.price;
-                let amount = (price / 100) * profitPercentage;
-                let prices = ethers.utils.parseEther(amount.toString());
                 let erc20Address = BLOCKCHAIN.ERC20;
-                let ownerAddress = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
-                
-                // const token = await (
-                //     await new ethers.Contract(erc20Address, Erc20, signer).catch((error) => {
-                //     toast.error(error.message);
-                //     setOpen(false)
-                //     setLoader(false)
-                // }))?.wait()
-    
-                    const token = new ethers.Contract(erc20Address, Erc20, signer)
-    
-                let data = await(await token.transfer(ownerAddress, prices)).wait();
-    
+
+                const token = new ethers.Contract(erc20Address, Erc20, signer);
+
+                let data = await (await token.approve(nftData.Category.BrandCategories[0].contractAddress,"100000000")).wait();
+
                 await dispatch(
                     requestNftForMinting({
                         id: nftData.id,
@@ -113,7 +96,6 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                         search: search,
                         type: type,
                         brandId: user.BrandId,
-                        profitAmount: prices,
                         handleClose: handleClose
                     })
                 );
@@ -121,11 +103,10 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
             } catch (error) {
                 console.log('error', error);
                 toast.error(error);
-                setOpen(false)
-                setLoader(false)
+                setOpen(false);
+                setLoader(false);
             }
         }
-     
     };
     return (
         <>

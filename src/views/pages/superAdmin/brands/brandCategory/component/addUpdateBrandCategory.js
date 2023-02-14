@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import FactoryAbi from '../../../../../../contractAbi/Factory.json';
 import FactoryAddress from '../../../../../../contractAbi/Factory-address.json';
+import MarketplaceAddress from 'contractAbi/Marketplace-address.json'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BLOCKCHAIN from '../../../../../../constants';
@@ -86,6 +87,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     };
 
     const handleContractDeployment = async () => {
+        console.log('im in handleContractDeployment');
         if (await checkWallet()) {
             setLoader(true);
             let brandName = brandCategoryData?.brand.name;
@@ -99,12 +101,13 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             const symbol = 'G' + brandName?.substring(0, 1) + categoryName?.substring(0, 1);
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
-            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
-            
+            console.log('signer',signer);
+            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi, signer);
+            console.log('factoryAddr',factoryAddr);
             let profitAmount = ethers.utils.parseEther(formik.values.profitPercentage.toString());
 
             let res = await (
-                await factoryAddr.deployMintingContract(contractName, symbol, formik.values.profitPercentage).catch((error) => {
+                await factoryAddr.deployMintingContract(contractName, symbol, formik.values.profitPercentage, MarketplaceAddress.address).catch((error) => {
                     setOpen(false);
                     setLoader(false);
                     toast.error(error.message);
