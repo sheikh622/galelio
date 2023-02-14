@@ -87,7 +87,7 @@ const NftManagement = () => {
             <AddNft
                 open={addNftOpen}
                 setOpen={setAddNftOpen}
-                data={location.state.data}
+                data={location?.state?.data}
                 search={search}
                 page={page}
                 limit={limit}
