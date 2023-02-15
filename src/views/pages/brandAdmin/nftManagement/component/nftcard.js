@@ -75,7 +75,9 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 open={openRequestMint}
                 setOpen={setOpenRequestMint}
             />
-            <DetailsDialog open={DetailsNftOpen} setOpen={setDetailsNftOpen} nftData={nftData} />
+            <DetailsDialog open={DetailsNftOpen} 
+            setOpen={setDetailsNftOpen} 
+            nftData={nftData} />
             <MainCard
                 content={false}
                 className='tableShadow'
