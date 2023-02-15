@@ -58,7 +58,7 @@ const Marketplace = () => {
                         <h1 style={{ paddingLeft: '0.5%' }}>
                             <ArrowBackIosIcon
                                 onClick={() => {
-                                    navigate('/landingPage');
+                                    navigate('/Home');
                                 }}
                                 sx={{ color: '#2F53FF' }}
                             />

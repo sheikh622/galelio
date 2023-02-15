@@ -7,8 +7,9 @@ import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
 //New Routing
 const ComingSoon = Loadable(lazy(() => import('views/pages/staticCode/comingSoon/ComingSoon')));
-const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
+// const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 const LandingPage = Loadable(lazy(() => import('views/pages/user/landingPage')));
+const Starting = Loadable(lazy(() => import('views/pages/user/landingPage')));
 const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetails')));
 const DeliveryDashboard = Loadable(lazy(() => import('views/pages/user/deliveryDashboard')));
@@ -31,7 +32,7 @@ const UserRoutes = {
     ),
     children: [
         {
-            path: '/landingPage',
+            path: '/Home',
             element: <LandingPage />
         },
         {

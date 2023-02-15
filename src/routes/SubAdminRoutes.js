@@ -4,9 +4,11 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AdminGuard from './RouteGuard/AdminGuard';
-const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
+// const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 
 const SubAdminDashboard = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
+
+const Starting = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
 const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));

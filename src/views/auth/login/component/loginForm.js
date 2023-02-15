@@ -69,7 +69,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                         state: { socal: response.data.data }
                     });
                 } else {
-                    navigate('/landingPage', {
+                    navigate('/Home', {
                         state: { socal: response.data.data }
                     });
                 }
@@ -93,7 +93,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                         state: { socal: response.data.data }
                     });
                 } else {
-                    navigate('/landingPage', {
+                    navigate('/Home', {
                         state: { socal: response.data.data }
                     });
                 }

@@ -64,10 +64,10 @@ const SideBar = () => {
                             item
                             sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
-                                navigate('/landingPage');
+                                navigate('/Home');
                             }}
                         >
-                            {pathName == '/landingPage' ? (
+                            {pathName == '/Home' ? (
                                 <>
                                     <Box sx={{ borderLeft: '6px solid #2196f3' }}>
                                         <Tooltip className="fontsize" title="Landing Page" placement="right" arrow>

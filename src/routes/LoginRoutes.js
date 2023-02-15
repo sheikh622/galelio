@@ -9,7 +9,8 @@ const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword'))
 const SignUpMarketPlace = Loadable(lazy(() => import('views/auth/signUp')));
 const SocialLogin = Loadable(lazy(() => import('views/auth/socialLogin')));
 const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
-const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
+// const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
+const Starting = Loadable(lazy(() => import('views/pages/user/landingPage')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
