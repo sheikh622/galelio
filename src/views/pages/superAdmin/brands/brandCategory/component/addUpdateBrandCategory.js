@@ -29,6 +29,8 @@ import { SNACKBAR_OPEN } from 'store/actions';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCategoryData, page, limit, search }) {
+
+    console.log('brandCategoryData', brandCategoryData);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const categoryArray = useSelector((state) => state.brandCategoryReducer.categoriesDropdownList);
@@ -149,6 +151,13 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             if (!isUpdate) {
                 handleContractDeployment();
             } else {
+                
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+               
+
+                
+
                 dispatch(
                     updateBrandCategory({
                         brandId: brandCategoryData.brandId,
