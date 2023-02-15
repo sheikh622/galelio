@@ -29,7 +29,7 @@ import { logout } from 'redux/auth/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import MetaMaskSection from './MetaMaskSection';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -85,8 +85,9 @@ export default function Header() {
     };
 
     const user = useSelector((state) => state.auth.user);
+    console.log(user?.role, 'user in sidebar');
     const token = useSelector((state) => state.auth.token);
-    // console.log(token, 'token');
+    // console.log(token, 'token in sidebar');
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -136,10 +137,9 @@ export default function Header() {
                 My Profile
             </MenuItem>
             {user?.role == 'User' && user != null && (
-                      
-            <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
-                Delivery Dashboard
-            </MenuItem>
+                <MenuItem component={RouterLink} to="/deliveryDashboard" onClick={handleMenuClose}>
+                    Delivery Dashboard
+                </MenuItem>
             )}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
@@ -196,14 +196,13 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static"
-             sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
+            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
                 <Toolbar>
-                <Helmet>
-                <meta charSet="utf-8" />
-                <title>Galileo Marketplace</title>
-                <link rel="canonical" href="http://mysite.com/example" />
-            </Helmet>
+                    <Helmet>
+                        <meta charSet="utf-8" />
+                        <title>Galileo Marketplace</title>
+                        <link rel="canonical" href="http://mysite.com/example" />
+                    </Helmet>
                     <Box
                         sx={{
                             height: '4em',
@@ -216,7 +215,7 @@ export default function Header() {
                             // }
                         }}
                     >
-                         <Grid container-fluid>
+                        <Grid container-fluid>
                             <Grid item sx={{ display: { lg: 'none', md: 'block' } }}>
                                 <Drawer />
                             </Grid>
@@ -230,37 +229,39 @@ export default function Header() {
                                 </SearchIconWrapper>
                                 <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
                             </Search>*/}
-                        </Grid> 
-                        <Box sx={{ display: { xs: 'block', md: 'block' } , cursor:'pointer'}}>
-                            <Typography variant="h6" noWrap component="div" 
-                            sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
+                        </Grid>
+                        <Box sx={{ display: { xs: 'block', md: 'block' }, cursor: 'pointer' }}>
+                            <Typography variant="h6" noWrap component="div" sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img  src={galileoWhite}  
-                                   
-                                    
-                                    onClick={() => {
-                                        navigate('/Home');
-                                    }} alt="Galileo White Logo" width="100" />
+                                    <img
+                                        src={galileoWhite}
+                                        onClick={() => {
+                                            navigate('/home');
+                                        }}
+                                        alt="Galileo White Logo"
+                                        width="100"
+                                    />
                                 ) : (
-                                    <img  src={galileo}   
-                                   
- onClick={() => {
-                                        navigate('/Home');
-                                    }} alt="Galileo Dark Logo" width="100" />
+                                    <img
+                                        src={galileo}
+                                        onClick={() => {
+                                            navigate('/home');
+                                        }}
+                                        alt="Galileo Dark Logo"
+                                        width="100"
+                                    />
                                 )}
                             </Typography>
                         </Box>
 
-                  
-
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ flexGrow: 1 }} />
 
-                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && user?.role != 'User' && user != null && (
+                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') 
+                        && user?.role != 'User' && user != null && (
                             <Box>
                                 <Button
-                                    sx={{ marginRight: '10px' ,
-                                     display:{xs:'none', lg:'block'}}}
+                                    sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
                                     variant="outlined"
                                     onClick={() => {
                                         navigate('/dashboard');
@@ -272,7 +273,9 @@ export default function Header() {
                         )}
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
-                            <div sx={{ marginRight: '3%' }}>{token && <MetaMaskSection />}</div>
+                            <div sx={{ marginRight: '3%' }}>{(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User')
+                            
+                            && user != null && <MetaMaskSection />}</div>
                             {/* <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
@@ -284,9 +287,8 @@ export default function Header() {
                             <IconButton size="large" aria-label="" color="inherit">
                                 <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                             </IconButton>  */}
-                            
-                                               </Box>
-                        {(user  == null || !token) && (
+                        </Box>
+                        {user == null && (
                             <Button
                                 variant="outlined"
                                 onClick={() => {
@@ -296,14 +298,13 @@ export default function Header() {
                                 Login
                             </Button>
                         )}
-                        {token && (
+                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' ||  'User')
+                         && user != null && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="40" 
-                                    style={{ display: 'inlineBlock' }} />
+                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="40" 
-                                    style={{ display: 'inlineBlock' }} />
+                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
                                 )}
 
                                 <IconButton
@@ -319,11 +320,11 @@ export default function Header() {
                                 </IconButton>
                             </>
                         )}
-                        
                     </Box>
                 </Toolbar>
             </AppBar>
-            {token && (
+            {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin'|| 'User')
+            && user != null && (
                 <>
                     {renderMobileMenu}
                     {renderMenu}

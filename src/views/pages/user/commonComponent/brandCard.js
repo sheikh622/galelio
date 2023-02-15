@@ -28,7 +28,7 @@ const BrandCard = ({ data, brands }) => {
             xs={12}
             justifyContent="center"
             onClick={() => {
-                navigate('/Home', {
+                navigate('/home', {
                     state: {
                         nft: data
                     }
