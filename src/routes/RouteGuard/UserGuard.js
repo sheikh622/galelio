@@ -14,7 +14,7 @@ const UserGuard = ({ children }) => {
    
     useEffect(() => {
         if (token == null) {
-            navigate('/landingPage', { replace: true });
+            navigate('/Home', { replace: true });
         }
         // else if (token && user?.role=="User" ) {
         //     navigate('/landingPage', { replace: true });

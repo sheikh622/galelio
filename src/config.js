@@ -1,6 +1,6 @@
 const config = {
     basename: '',
-    defaultPath: '/',
+    defaultPath: '/dashboard',
     fontFamily: `'Roboto', sans-serif`,
     borderRadius: 12,
     outlinedFilled: true,

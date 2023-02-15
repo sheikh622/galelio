@@ -239,13 +239,13 @@ export default function Header() {
                                    
                                     
                                     onClick={() => {
-                                        navigate('/landingPage');
+                                        navigate('/Home');
                                     }} alt="Galileo White Logo" width="100" />
                                 ) : (
                                     <img  src={galileo}   
                                    
  onClick={() => {
-                                        navigate('/landingPage');
+                                        navigate('/Home');
                                     }} alt="Galileo Dark Logo" width="100" />
                                 )}
                             </Typography>

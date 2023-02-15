@@ -150,7 +150,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                         <Grid item xs={12}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
                             {
-                                nftData.status != "REQUESTED" && (
+                                nftData.status != "REQUESTED" || 'MINTED' && (
                                     <>
                                         <Button
                                         className='fontstyling'

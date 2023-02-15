@@ -20,9 +20,9 @@ function* loginUser({ payload }) {
 
     
         if (response.data.data.user.role == "Super Admin" || "Brand Admin") {
-            payload.navigate('/landingPage'); 
+            payload.navigate('/Home'); 
         } else {
-            payload.navigate('/landingPage');
+            payload.navigate('/Home');
         }
     } catch (error) {
         yield put(setLoader(false));
