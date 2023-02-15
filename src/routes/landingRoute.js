@@ -20,7 +20,7 @@ const LandingRoutes = {
     ),
     children: [
         {
-            path: "/Home",
+            path: "/home",
             element: <LandingPage />
         },
       

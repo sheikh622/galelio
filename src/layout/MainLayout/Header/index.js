@@ -89,7 +89,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
                          display:{xs:'block', lg:'block'}}}
                         variant="outlined"
                         onClick={() => {
-                            navigate('/Home');
+                            navigate('/home');
                         }}
                     >
                         Marketplace
