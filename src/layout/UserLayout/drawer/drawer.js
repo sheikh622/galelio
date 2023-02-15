@@ -55,7 +55,7 @@ export default function Drawer() {
                         <ListItemText
                             primary={'Overview'}
                             onClick={() => {
-                                navigate('/Home');
+                                navigate('/home');
                             }}
                         />
                     </ListItemButton>

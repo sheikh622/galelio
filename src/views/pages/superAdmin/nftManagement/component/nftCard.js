@@ -118,7 +118,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                         </Grid>
                         <Grid item xs={6}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
-                                {nftData.status == 'MINTED' && (
+                               {/*  {nftData.status == 'MINTED' && (
                                     <>
                                         <Button
                                             className="fontstyling"
@@ -144,7 +144,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                             Edit
                                         </Button>
                                     </>
-                                )}
+                                )} */}
                                 {nftData.status == 'REQUESTED' && (
                                     <Button
                                         variant="contained"
