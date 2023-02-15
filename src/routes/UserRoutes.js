@@ -7,6 +7,7 @@ import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
 //New Routing
 const ComingSoon = Loadable(lazy(() => import('views/pages/staticCode/comingSoon/ComingSoon')));
+const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 const LandingPage = Loadable(lazy(() => import('views/pages/user/landingPage')));
 const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetails')));
@@ -32,6 +33,10 @@ const UserRoutes = {
         {
             path: '/landingPage',
             element: <LandingPage />
+        },
+        {
+            path: '/',
+            element: <Starting />
         },
         {
             path: '/ComingSoon',

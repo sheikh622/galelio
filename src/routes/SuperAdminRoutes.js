@@ -4,6 +4,7 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AdminGuard from './RouteGuard/AdminGuard';
+const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 
 const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
 const SubAdmin = Loadable(lazy(() => import('views/pages/superAdmin/subAdmin')));
@@ -25,6 +26,10 @@ const SuperAdminRoutes = {
     ),
     type: 'group',
     children: [
+        {
+            path: '/',
+            element: <Starting />
+        },
         {
             path: '/dashboard',
             element: <SuperAdminDashboard />
