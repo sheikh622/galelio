@@ -3,7 +3,7 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AdminGuard from './RouteGuard/AdminGuard';
-const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
+// const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 
 const BrandAdminDashboard = Loadable(lazy(() => import('views/pages/brandAdmin/dashboard')));
 const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
@@ -20,10 +20,10 @@ const BrandAdminRoutes = {
         </AdminGuard>
     ),
     children: [
-        {
-            path: '/',
-            element: <Starting />
-        },
+        // {
+        //     path: '/',
+        //     element: <Starting />
+        // },
         {
             path: '/dashboard',
             element: <BrandAdminDashboard />
