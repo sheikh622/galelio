@@ -357,7 +357,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         <>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
                 className="brandDialog Nftdialog"
                 maxWidth="md"

@@ -4,6 +4,7 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AdminGuard from './RouteGuard/AdminGuard';
+const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 
 const SubAdminDashboard = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
 const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
@@ -26,6 +27,10 @@ const SubAdminRoutes = {
     ),
     type: 'group',
     children: [
+        {
+            path: '/',
+            element: <Starting />
+        },
         {
             path: '/dashboard',
             element: <SubAdminDashboard />

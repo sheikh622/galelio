@@ -27,7 +27,7 @@ export default function DeleteSubAdminDialog({ open, setOpen, page, limit, searc
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >

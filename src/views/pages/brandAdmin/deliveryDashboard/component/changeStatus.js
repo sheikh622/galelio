@@ -50,7 +50,7 @@ export default function ChangeStatusDialog({ open, setOpen, page, limit, search,
                 open={open}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="alert-dialog-slide-title1"
                 aria-describedby="alert-dialog-slide-description1"
             >
