@@ -7,6 +7,8 @@ import AdminGuard from './RouteGuard/AdminGuard';
 // const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 
 const SubAdminDashboard = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
+
+const Starting = Loadable(lazy(() => import('views/pages/subAdmin/dashboard')));
 const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
@@ -27,10 +29,10 @@ const SubAdminRoutes = {
     ),
     type: 'group',
     children: [
-        // {
-        //     path: '/',
-        //     element: <Starting />
-        // },
+        {
+            path: '/',
+            element: <Starting />
+        },
         {
             path: '/dashboard',
             element: <SubAdminDashboard />
