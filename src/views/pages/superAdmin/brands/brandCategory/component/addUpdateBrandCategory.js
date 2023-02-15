@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import FactoryAbi from '../../../../../../contractAbi/Factory.json';
 import FactoryAddress from '../../../../../../contractAbi/Factory-address.json';
+import NFTAbi from "../../../../../../contractAbi/NFT.json"
 import MarketplaceAddress from 'contractAbi/Marketplace-address.json'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -134,6 +135,35 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         }
     };
 
+    const handleUpdateContractDeployment = async () => {
+       console.log('formik.values.profitPercentage',formik.values.profitPercentage );
+        if (await checkWallet()) {
+            setLoader(true);
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+           const contractAddress = brandCategoryData.contractAddress;
+           const NftAddr = new ethers.Contract(contractAddress, NFTAbi, signer);
+           let price = ethers.utils.parseEther(formik.values.profitPercentage.toString())
+           await (await NftAddr.setfee(price)).wait()
+
+
+            
+
+            dispatch(
+                updateBrandCategory({
+                    brandId: brandCategoryData.brandId,
+                    categoryId: brandCategoryData.categoryId,
+                    profitPercentage: formik.values.profitPercentage,
+                    page: page,
+                    limit: limit,
+                    search: search,
+                    handleClose: handleClose
+                })
+            );
+
+        }
+        }
+    
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
         profitPercentage: Yup.number()
@@ -152,23 +182,8 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 handleContractDeployment();
             } else {
                 
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
+                handleUpdateContractDeployment()
                
-
-                
-
-                dispatch(
-                    updateBrandCategory({
-                        brandId: brandCategoryData.brandId,
-                        categoryId: brandCategoryData.categoryId,
-                        profitPercentage: values.profitPercentage,
-                        page: page,
-                        limit: limit,
-                        search: search,
-                        handleClose: handleClose
-                    })
-                );
             }
         }
     });

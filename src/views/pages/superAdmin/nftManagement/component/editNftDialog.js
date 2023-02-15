@@ -319,7 +319,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                     })
                 ).wait();
             } else {
-                console.log('tokenId, tokenUri2',tokenId, tokenUri);
+                
                 let mintedNFT = await (
                     await nft.updateUri(tokenId, tokenUri).catch((error) => {
                         toast.error(`${error.message}`);
