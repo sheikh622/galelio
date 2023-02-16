@@ -167,7 +167,8 @@ const BrandCategoryTable = ({
                                                                     setBrandCategoryData({
                                                                         categoryId: row.CategoryId,
                                                                         brandId: row.BrandId,
-                                                                        profitPercentage: row.profitPercentage
+                                                                        profitPercentage: row.profitPercentage,
+                                                                        contractAddress: row.contractAddress
                                                                     });
                                                                 }}
                                                             >

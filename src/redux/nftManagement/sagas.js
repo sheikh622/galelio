@@ -1,3 +1,4 @@
+
 import axios from 'utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
 import { makeSelectAuthToken } from 'store/Selector';
@@ -423,7 +424,7 @@ function* requestChangeTokenId({ payload }) {
         );
         yield setNotification('success', response.data.message);
     } catch (error) {
-        yield sagaErrorHandler('An error occurred');
+        yield sagaErrorHandler(error.response.data.data);
     }
 }
 

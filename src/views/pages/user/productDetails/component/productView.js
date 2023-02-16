@@ -176,7 +176,7 @@ const PropertiesView = ({ nft }) => {
 
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
                     let price = ethers.utils.parseEther(nft.price.toString());
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
@@ -223,7 +223,7 @@ const PropertiesView = ({ nft }) => {
                     let signers = nft.signerAddress;
                     let erc20Address = BLOCKCHAIN.ERC20;
                     // let signature = nft.NFTTokens[0].signature;
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
                     // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
                     // const SIGNING_DOMAIN = 'Galileo-Protocol';
                     // const SIGNATURE_VERSION = '1';
@@ -310,7 +310,7 @@ const PropertiesView = ({ nft }) => {
                     setResellLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
 
                     let rrprice = ethers.utils.parseEther(rprice.toString());
 
@@ -348,7 +348,7 @@ const PropertiesView = ({ nft }) => {
                 try {
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
 
                     let rrprice = ethers.utils.parseEther(nft.price.toString());
 
@@ -395,7 +395,7 @@ const PropertiesView = ({ nft }) => {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
@@ -437,7 +437,7 @@ const PropertiesView = ({ nft }) => {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 

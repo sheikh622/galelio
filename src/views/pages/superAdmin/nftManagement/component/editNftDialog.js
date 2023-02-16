@@ -261,6 +261,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         const tokenId = await nftTokens.map((data) => {
             return parseInt(data.tokenId);
         });
+       
+       
+
 
         let image = null;
         if (nftData.asset) {
@@ -299,6 +302,11 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             );
             const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
+            const bulkTokenUris = await nftTokens.map((data) => {
+                return `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`
+            });
+           
+
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const nft = new ethers.Contract(contractAddress, NFTAbi, signer);
@@ -306,12 +314,12 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             if (tokenId.length > 1) {
                 console.log('tokenId, tokenUri1',tokenId, tokenUri);
                 let mintedNFT = await (
-                    await nft.updateBulkUri(tokenId, tokenUri).catch((error) => {
+                    await nft.updateBulkUri(tokenId, bulkTokenUris).catch((error) => {
                         toast.error(`${error.message}`);
                     })
                 ).wait();
             } else {
-                console.log('tokenId, tokenUri2',tokenId, tokenUri);
+                
                 let mintedNFT = await (
                     await nft.updateUri(tokenId, tokenUri).catch((error) => {
                         toast.error(`${error.message}`);

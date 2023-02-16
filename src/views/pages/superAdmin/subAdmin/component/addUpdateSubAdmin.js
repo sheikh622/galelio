@@ -94,7 +94,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
 
-                const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
                 // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
 
                 let mintedNFT = await (
