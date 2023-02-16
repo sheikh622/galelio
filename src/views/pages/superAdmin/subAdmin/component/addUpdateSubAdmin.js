@@ -88,6 +88,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         initialValues: subAdminData,
         validationSchema,
         onSubmit: async (values) => {
+            console.log(values, 'values')
             if (subAdminData.id == null) {
                 setLoader(true)
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
