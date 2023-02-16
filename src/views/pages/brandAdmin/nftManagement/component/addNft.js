@@ -137,6 +137,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 toast.error('NFT Image is required');
             } else if (isValid) {
                 setLoader(true);
+                toast.success("Please wait for confirmation Transaction !");
                 dispatch(
                     addNft({
                         requesterAddress: user.walletAddress,

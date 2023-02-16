@@ -90,6 +90,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         console.log('im in handleContractDeployment');
         if (await checkWallet()) {
             setLoader(true);
+            toast.success("Please wait for confirmation Transaction !");
             let brandName = brandCategoryData?.brand.name;
             let categoryName;
             categoryArray.categories.map((data) => {

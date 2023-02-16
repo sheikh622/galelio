@@ -100,6 +100,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                     })
                 );
                 setLoader(false);
+                toast.success("Please wait for confirmation Notification !");
             } catch (error) {
                 console.log('error', error);
                 toast.error(error);

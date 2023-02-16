@@ -192,7 +192,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+                        <Stack direction="row" alignItems="center" 
+                        justifyContent="space-between" spacing={1}>
                             <Typography
                             className='Forgot'
                                 variant="subtitle1"
