@@ -47,7 +47,7 @@ const BrandCard = ({ data, brands }) => {
                 }}
             >
                 <CardActionArea>
-                    <CardMedia component="img" height="200"  image={data.image} />
+                    <CardMedia component="img" height="200" sx={{objectFit:'scale-down'}} image={data.image} />
                     <CardContent style={{ padding: '6%' }}>
                         <Grid container>
                             <Grid item xs={8}  className='encap' sx={{ textAlign: 'left' }}>

@@ -34,7 +34,7 @@ const NftCard = ({ data }) => {
                 }}
             >
                 <CardActionArea>
-                    <CardMedia component="img" height="200" sx={{objectFit:'cover'}}  image={data.asset} />
+                    <CardMedia component="img" height="200" sx={{objectFit:'scale-down'}}   image={data.asset} />
                     <CardContent sx={{ padding: '6%' }}>
                         <Grid container>
                             <Grid item xs={8}  className='encap' sx={{ textAlign: 'left' }}>

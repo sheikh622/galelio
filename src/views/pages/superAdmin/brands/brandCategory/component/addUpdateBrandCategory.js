@@ -93,7 +93,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         console.log('im in handleContractDeployment');
         if (await checkWallet()) {
             setLoader(true);
-            toast.success("Please wait for confirmation Transaction !");
+           
             let brandName = brandCategoryData?.brand.name;
             let categoryName;
             categoryArray.categories.map((data) => {
@@ -260,17 +260,33 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                         </Grid>
                     </form>
                 </DialogContent>
-
+                {loader ? (
+                    <DialogActions sx={{ display: 'block'}}>
+                    <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}>
+                        <Grid item>
+                            <CircularProgress disableShrink size={'4rem'} />
+                        </Grid>
+                    </Grid>
+                   
+                        <Button
+                            className="buttons"
+                            variant="Text"
+                            sx={{ width: '100%', margin: '0 auto', color: '#2196f3' }}
+                            size="large"
+                        >
+                        Please wait for Assigning Category...
+                        </Button>
+                 
+                </DialogActions>
+                ) : (
                 <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
-                    {loader ? (
-                        <CircularProgress />
-                    ) : (
+                 
                         <>
                             <AnimateButton>
                                 <Button
                                     variant="contained"
                                     className="buttons"
-                                    sx={{
+                                    sx={{my: 1, ml: 0, 
                                         width: '95%',
                                         margin: '0px 0px 10px 0px',
                                         background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
@@ -298,8 +314,9 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                 </Button>
                             </AnimateButton>
                         </>
-                    )}
+                   
                 </DialogActions>
+                )}
             </Dialog>
         </>
     );

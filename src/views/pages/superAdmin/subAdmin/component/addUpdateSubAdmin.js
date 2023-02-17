@@ -17,10 +17,15 @@ import {
     OutlinedInput,
     DialogTitle,
     Slide,
+    Typography,
     TextField,
     Divider,
-    Grid,Input,
-    MenuItem , InputAdornment,IconButton, CircularProgress
+    Grid,
+    Input,
+    MenuItem,
+    InputAdornment,
+    IconButton,
+    CircularProgress
 } from '@mui/material';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -57,14 +62,10 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
 
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
-        firstName: Yup.string()
-            .required('First Name is required!')
-            .max(42, 'First Name can not exceed 42 characters'),
-            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
-        lastName: Yup.string()
-            .required('Last Name is required!')
-            .max(42, 'Last Name can not exceed 42 characters'),
-            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
+        firstName: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
+        lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
         walletAddress: Yup.string().required('Wallet Address is required!'),
         adminPassword: Yup.mixed().when(['isUpdate'], {
@@ -74,7 +75,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 .matches(
                     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
-                ),
+                )
             // otherwise: Yup.string().matches(
             //     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
             //     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
@@ -88,10 +89,9 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         initialValues: subAdminData,
         validationSchema,
         onSubmit: async (values) => {
-           
             if (subAdminData.id == null) {
-                setLoader(true)
-                toast.success("Please wait for confirmation Transaction !");
+                setLoader(true);
+               
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
 
@@ -101,8 +101,8 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 let mintedNFT = await (
                     await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
                         toast.error(`${error.message}`);
-                        setLoader(false)
-                        setOpen(false)
+                        setLoader(false);
+                        setOpen(false);
                     })
                 ).wait();
 
@@ -120,7 +120,6 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         search: search,
                         handleClose: handleClose
                     })
-                    
                 );
             } else {
                 dispatch(
@@ -141,10 +140,9 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         }
     });
 
-    
     const handleClose = () => {
         setOpen(false);
-        setLoader(false)
+        setLoader(false);
         setSubAdminData({
             id: null,
             firstName: '',
@@ -162,7 +160,6 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
 
     return (
         <>
-          
             <Dialog
                 open={open}
                 // onClose={handleClose}
@@ -173,23 +170,21 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-              
                 <DialogTitle id="form-dialog-title" className="adminname">
                     {subAdminData.id == null ? 'Create Admin' : ' Update Admin'}
                 </DialogTitle>
-                    
-                
+
                 <DialogContent>
                     <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                         <Grid container>
                             <>
-                                <Grid item xs={12} md={12} lg={12} >
+                                <Grid item xs={12} md={12} lg={12}>
                                     <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
                                         First Name
                                     </InputLabel>
 
                                     <TextField
-                                    className='field'
+                                        className="field"
                                         id="firstName"
                                         name="firstName"
                                         value={formik.values.firstName}
@@ -205,7 +200,8 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                     <InputLabel className="textfieldStyle" htmlFor="outlined-adornment-password-login">
                                         Last Name
                                     </InputLabel>
-                                    <TextField className='field'
+                                    <TextField
+                                        className="field"
                                         id="lastName"
                                         name="lastName"
                                         value={formik.values.lastName}
@@ -222,7 +218,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         Email
                                     </InputLabel>
                                     <TextField
-                                    className='field'
+                                        className="field"
                                         variant="standard"
                                         id="adminEmail"
                                         name="adminEmail"
@@ -231,42 +227,42 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         error={formik.touched.adminEmail && Boolean(formik.errors.adminEmail)}
                                         helperText={formik.touched.adminEmail && formik.errors.adminEmail}
                                         fullWidth
-                                        
                                     />
                                 </Grid>
 
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">Password</InputLabel>
-                                <Input
-                                className='field'
-                                  id="standard-adornment-password adminPassword"
-                                  type={showPassword ? 'text' : 'password'}
-                                  name="adminPassword"
-                                  value={formik.values.adminPassword}
-                                  onChange={formik.handleChange}
-                                  error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
-                                  helperText={formik.touched.adminPassword && formik.errors.adminPassword}
-                                  fullWidth
-                                 
-                                  endAdornment={
-                                    <InputAdornment position="end">
-                                      <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                      >
-                                        {showPassword ? <Visibility /> :  <VisibilityOff />}
-                                      </IconButton>
-                                    </InputAdornment>
-                                  }
-                                />
-                      
-                             
+                                    <InputLabel className="textfieldStyle" htmlFor="standard-adornment-password">
+                                        Password
+                                    </InputLabel>
+                                    <Input
+                                        className="field"
+                                        id="standard-adornment-password adminPassword"
+                                        type={showPassword ? 'text' : 'password'}
+                                        name="adminPassword"
+                                        value={formik.values.adminPassword}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.adminPassword && Boolean(formik.errors.adminPassword)}
+                                        helperText={formik.touched.adminPassword && formik.errors.adminPassword}
+                                        fullWidth
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                    />
                                 </Grid>
                                 <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel className="textfieldStyle" htmlFor="">Wallet Address</InputLabel>
+                                    <InputLabel className="textfieldStyle" htmlFor="">
+                                        Wallet Address
+                                    </InputLabel>
                                     <TextField
-                                    className='field'
+                                        className="field"
                                         variant="standard"
                                         id="walletAddress"
                                         name="walletAddress"
@@ -281,9 +277,10 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
 
                                 {subAdminData?.id == null && (
                                     <Grid item xs={6} md={12} lg={12} pt={2}>
-                                        <InputLabel className="textfieldStyle" htmlFor="">Select Category</InputLabel> 
+                                        <InputLabel className="textfieldStyle" htmlFor="">
+                                            Select Category
+                                        </InputLabel>
                                         <TextField
-                                        
                                             variant="standard"
                                             className="responsiveSelectfield textfieldStyle field"
                                             id="outlined-select-budget"
@@ -293,7 +290,6 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                             // value={category}
                                             onChange={handleBrandCategoryChange}
                                         >
-                                           
                                             {brandCategories?.map((data, index) => (
                                                 <MenuItem key={index} value={data}>
                                                     {data.Category.name} ({data.Brand.name})
@@ -308,51 +304,59 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                 </DialogContent>
                 <Divider />
                 {loader ? (
-                        <CircularProgress
-                        
-                        sx={{mt:6, mb:6,ml:2}}
-                        
-                        />
-                    ) : (
-                <DialogActions sx={{ display: 'block' , margin:'10px 10px 0px 20px'}}>
-               <AnimateButton>
-           
+                    <DialogActions sx={{ display: 'block', margin: '10px 5px 0px 5px' }}>
+                        <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}>
+                            <Grid item>
+                                <CircularProgress disableShrink size={'4rem'} />
+                            </Grid>
+                        </Grid>
                        
-                        <Button 
-                        
-                            className="buttons"
-                            variant="contained"
-                            sx={{  width: '95%',
-                                margin: '0px 0px 10px 0px',
-                            background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' }}
-                            type="submit"
-                            size="large"
-                            disableElevation
-                            onClick={() => {
-                                formik.handleSubmit();
-                            }}
-                        >
-                            {subAdminData.id == null ? 'Create ' : 'Update '}
-                        </Button>
+                            <Button
+                                className="buttons"
+                                variant="Text"
+                                sx={{ width: '100%', margin: '0px 0px 10px 0px', color: '#2196f3' }}
+                                size="large"
+                            >
+                                Admin is being Created...
+                            </Button>
+                     
+                    </DialogActions>
+                ) : (
+                    <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
+                        <AnimateButton>
+                            <Button
+                                className="buttons"
+                                variant="contained"
+                                sx={{
+                                    width: '95%',
+                                    margin: '0px 0px 10px 0px',
+                                    background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
+                                }}
+                                type="submit"
+                                size="large"
+                                disableElevation
+                                onClick={() => {
+                                    formik.handleSubmit();
+                                }}
+                            >
+                                {subAdminData.id == null ? 'Create ' : 'Update '}
+                            </Button>
                         </AnimateButton>
                         <AnimateButton>
-                        <Button 
-                            className="buttons"
-                            variant="outlined"
-                            sx={{  width: '95%',
-                            margin: '0px 0px 10px 0px', color: '#4044ED' , }}
-                            onClick={handleClose}
-                            color="secondary"
-                            size="large"
-                        >
-                            Cancel
-                        </Button>
-                       
-                    </AnimateButton>
-                </DialogActions>
-                    )}
+                            <Button
+                                className="buttons"
+                                variant="outlined"
+                                sx={{ width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
+                                onClick={handleClose}
+                                color="secondary"
+                                size="large"
+                            >
+                                Cancel
+                            </Button>
+                        </AnimateButton>
+                    </DialogActions>
+                )}
             </Dialog>
-                 
         </>
     );
 }
