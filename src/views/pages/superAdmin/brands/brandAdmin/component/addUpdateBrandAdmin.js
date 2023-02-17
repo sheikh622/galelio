@@ -254,13 +254,13 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{ display: 'block', margin: '0px 10px 0px 20px' }}>
+                <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             variant="contained"
                             sx={{
                                 width: '95%',
-                                margin: '10px 0px 10px 0px',
+                                margin: '0px 0px 10px 0px',
                                 background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                             }}
                             type="submit"
@@ -273,10 +273,11 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                         >
                             {brandAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
-
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button
                             variant="outlined"
-                            sx={{ width: '95%', margin: '10px 0px 10px 0px', color: '#4044ED' }}
+                            sx={{ width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
                             onClick={handleClose}
                             className="buttons"
                             size="large"

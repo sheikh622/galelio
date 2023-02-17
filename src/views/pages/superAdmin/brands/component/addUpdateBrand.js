@@ -171,14 +171,14 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ display:'block',  margin:'0px 10px 0px 20px' }}>
+                <DialogActions sx={{ display:'block',  margin:'10px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             type="submit"
                             className='buttons' size='large' 
                             variant="contained"
                             sx={{ width: '95%',
-                            margin: '10px 0px 10px 0px', 
+                            margin: '0px 0px 10px 0px', 
                             background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' ,
                            }}
                             onClick={() => {
@@ -189,11 +189,12 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                         >
                             {brandData.id == null ? 'Create' : 'Update'}
                         </Button>
-                    
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button
                             variant="outlined"
                             sx={{ width: '95%',
-                            margin: '10px 0px 10px 0px',   color: '#4044ED'  }}
+                            margin: '0px 0px 10px 0px',   color: '#4044ED'  }}
                             onClick={handleClose}
                             
                             className='buttons' size='large' 

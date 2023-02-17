@@ -75,17 +75,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
                 ),
-                
             // otherwise: Yup.string().matches(
             //     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
             //     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
             // )
-        }),
-        password: Yup.string().max(255).required('Password is required!')
-        .matches(
-            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-            'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
-        ),
+        })
     });
 
     const grantRole = async () => {};
@@ -320,16 +314,16 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         
                         />
                     ) : (
-                <DialogActions sx={{ display: 'block' , margin:'0px 10px 0px 20px'}}>
+                <DialogActions sx={{ display: 'block' , margin:'10px 10px 0px 20px'}}>
                <AnimateButton>
            
-                        <>
+                       
                         <Button 
                         
                             className="buttons"
                             variant="contained"
                             sx={{  width: '95%',
-                                margin: '10px 0px 10px 0px',
+                                margin: '0px 0px 10px 0px',
                             background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' }}
                             type="submit"
                             size="large"
@@ -340,20 +334,20 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         >
                             {subAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
-                      
-                    
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button 
                             className="buttons"
                             variant="outlined"
                             sx={{  width: '95%',
-                            margin: '10px 0px 10px 0px', color: '#4044ED' , }}
+                            margin: '0px 0px 10px 0px', color: '#4044ED' , }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"
                         >
                             Cancel
                         </Button>
-                        </>
+                       
                     </AnimateButton>
                 </DialogActions>
                     )}

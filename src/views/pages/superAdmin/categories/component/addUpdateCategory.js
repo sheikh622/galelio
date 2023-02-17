@@ -162,12 +162,12 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                         </Grid>
                     </form>
                 </DialogContent>
-                <DialogActions sx={{ display: 'block', margin: '0px 10px 0px 20px' }}>
+                <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             sx={{
                                 width: '95%',
-                                margin: '10px 0px 10px 0px',
+                                margin: '0px 0px 10px 0px',
                                 background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                             }}
                             className="buttons"
@@ -179,11 +179,12 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                         >
                             {categoryData.name !== '' ? 'Update ' : 'Create '}
                         </Button>
-
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button
                             className="buttons"
                             variant="outlined"
-                            sx={{ width: '95%', margin: '10px 0px 10px 0px', color: '#4044ED' }}
+                            sx={{ width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
                             onClick={handleClose}
                             size="large"
                         >
