@@ -50,7 +50,7 @@ const NewCard = ({ data, nfts }) => {
                 }}
             >
                 <CardActionArea>
-                    <CardMedia component="img" height="200" sx={{objectFit:'cover'}}  image={data.asset} />
+                    <CardMedia component="img" height="200" sx={{objectFit:'scale-down'}}   image={data.asset} />
                     <CardContent  style={{ padding: '6%' ,  }}>
                         <Grid container >
                             <Grid item className='encap' xs={8} sx={{ textAlign: 'left' }}>
