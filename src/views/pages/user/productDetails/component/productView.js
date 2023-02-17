@@ -501,7 +501,7 @@ const PropertiesView = ({ nft }) => {
                         <CardMedia
                             component="img"
                             image={nft?.asset ? nft?.asset : watch1}
-                            sx={{ minheight: 'auto', maxHeight: '570px', overflow: 'hidden', cursor: 'Pointer' }}
+                            sx={{ minheight: 'auto', maxHeight: '570px', background:'transparent',  overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
 

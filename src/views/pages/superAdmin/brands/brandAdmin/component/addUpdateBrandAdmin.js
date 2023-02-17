@@ -45,12 +45,12 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
         isUpdate: Yup.boolean().default(isUpdate),
         firstName: Yup.string()
             .required('First Name is required!')
-            .max(42, 'First Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
+            .max(42, 'First Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
         lastName: Yup.string()
             .required('Last Name is required!')
-            .max(42, 'Last Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
+            .max(42, 'Last Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
 
         adminPassword: Yup.mixed().when(['isUpdate'], {

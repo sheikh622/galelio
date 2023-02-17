@@ -101,14 +101,18 @@ const SignUpForm = ({ loginProp, ...others }) => {
                 validationSchema={Yup.object().shape({
                     firstName: Yup.string()
                         .required('First Name is required!')
-                        .max(42, 'First Name can not exceed 42 characters')
-                        .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                        .max(42, 'First Name can not exceed 42 characters'),
+                        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     lastName: Yup.string()
                         .required('Last Name is required!')
-                        .max(42, 'Last Name can not exceed 42 characters')
-                        .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                        .max(42, 'Last Name can not exceed 42 characters'),
+                        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-                    password: Yup.string().max(255).required('Password is required!'),
+                    password: Yup.string().max(255).required('Password is required!')
+                    .matches(
+                        /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                        'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                    ),
                     confirmPassword: Yup.string().max(255).required('Confirm Password is required!'),
                     confirmPassword:  Yup.string().oneOf(
                         [Yup.ref("password")],

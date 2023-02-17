@@ -59,12 +59,12 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         isUpdate: Yup.boolean().default(isUpdate),
         firstName: Yup.string()
             .required('First Name is required!')
-            .max(42, 'First Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
+            .max(42, 'First Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
         lastName: Yup.string()
             .required('Last Name is required!')
-            .max(42, 'Last Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
+            .max(42, 'Last Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
         walletAddress: Yup.string().required('Wallet Address is required!'),
         adminPassword: Yup.mixed().when(['isUpdate'], {
@@ -75,11 +75,17 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
                 ),
-            otherwise: Yup.string().matches(
-                /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
-            )
-        })
+                
+            // otherwise: Yup.string().matches(
+            //     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            //     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+            // )
+        }),
+        password: Yup.string().max(255).required('Password is required!')
+        .matches(
+            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+        ),
     });
 
     const grantRole = async () => {};
@@ -88,9 +94,10 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         initialValues: subAdminData,
         validationSchema,
         onSubmit: async (values) => {
-            console.log(values, 'values')
+           
             if (subAdminData.id == null) {
                 setLoader(true)
+                toast.success("Please wait for confirmation Transaction !");
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
 
@@ -119,6 +126,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         search: search,
                         handleClose: handleClose
                     })
+                    
                 );
             } else {
                 dispatch(

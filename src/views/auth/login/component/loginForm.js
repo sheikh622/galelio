@@ -121,6 +121,10 @@ const LoginForm = ({ loginProp, ...others }) => {
                     // .matches(/^[a-zA-Z0-9]/, '* This email cannot contain white space and special character'),
 
                     password: Yup.string().max(255).required('Password is required!')
+                    .matches(
+                        /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                        'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                    ),
                 })}
                 onSubmit={async (values) => {
                     await dispatch(setLoader(true));
@@ -135,7 +139,8 @@ const LoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl   fullWidth
+                        <FormControl  
+                         fullWidth
                          error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
                             <OutlinedInput

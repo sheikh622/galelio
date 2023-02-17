@@ -97,13 +97,13 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                 validationSchema={Yup.object().shape({
                     first_name: Yup.string()
                         .required('First Name is required!')
-                        .max(42, 'First Name can not exceed 42 characters')
-                        .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                        .max(42, 'First Name can not exceed 42 characters'),
+                        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
 
                     last_name: Yup.string()
                         .required('Last Name is required!')
-                        .max(42, 'Last Name can not exceed 42 characters')
-                        .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                        .max(42, 'Last Name can not exceed 42 characters'),
+                        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
 
                     address: Yup.string().max(255).required('Address is required!')
