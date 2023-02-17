@@ -100,7 +100,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
 
                 let mintedNFT = await (
                     await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
-                        toast.error(`${error.message}`);
+                        toast.error(`${error.reason}`);
                         setLoader(false)
                         setOpen(false)
                     })

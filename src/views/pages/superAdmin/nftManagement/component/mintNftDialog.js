@@ -103,7 +103,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 if (uriArray.length == 1) {
                     let mintedNFT = await (
                         await nft.mint(tokenUri,erc20Address,price,nftData.requesterAddress).catch((error) => {
-                            toast.error(error.message)
+                            toast.error(error.reason)
                             setLoader(false)
                             setOpen(false)                            
                         })
@@ -116,7 +116,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     await (
                         await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress).catch((error) => {
                     
-                            toast.error(error.message);
+                            toast.error(error.reason);
                             setOpen(false)
                             setLoader(false)
     
@@ -151,7 +151,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 } else if (uriArray.length > 1) {
                     let mintedNFT = await (
                         await nft.bulkMint(uriArray,erc20Address,price,nftData.requesterAddress).catch((error) => {
-                            toast.error(error.message);
+                            toast.error(error.reason);
                             setOpen(false)
                             setLoader(false)
                         })
@@ -170,7 +170,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     await (
                         await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price, nftData.requesterAddress).catch((error) => {
               
-                            toast.error(error.message);
+                            toast.error(error.reason);
                             setOpen(false)
                             setLoader(false)
                         })
@@ -233,7 +233,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             );
             directMintThenList(result);
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.reason);
 
             setLoader(false);
             setOpen(false)
