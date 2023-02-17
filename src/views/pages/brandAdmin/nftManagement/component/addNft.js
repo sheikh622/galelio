@@ -101,8 +101,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const validationSchema = Yup.object({
         nftName: Yup.string()
             .required('NFT Name is required!')
-            .max(42, 'NFT Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
+            .max(42, 'NFT Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
@@ -137,6 +137,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 toast.error('NFT Image is required');
             } else if (isValid) {
                 setLoader(true);
+                toast.success("Please wait for confirmation Transaction !");
                 dispatch(
                     addNft({
                         requesterAddress: user.walletAddress,

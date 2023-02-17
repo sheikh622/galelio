@@ -59,12 +59,12 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         isUpdate: Yup.boolean().default(isUpdate),
         firstName: Yup.string()
             .required('First Name is required!')
-            .max(42, 'First Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
+            .max(42, 'First Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
         lastName: Yup.string()
             .required('Last Name is required!')
-            .max(42, 'Last Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
+            .max(42, 'Last Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
         walletAddress: Yup.string().required('Wallet Address is required!'),
         adminPassword: Yup.mixed().when(['isUpdate'], {
@@ -75,10 +75,10 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
                 ),
-            otherwise: Yup.string().matches(
-                /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
-            )
+            // otherwise: Yup.string().matches(
+            //     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            //     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+            // )
         })
     });
 
@@ -88,8 +88,10 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         initialValues: subAdminData,
         validationSchema,
         onSubmit: async (values) => {
+           
             if (subAdminData.id == null) {
                 setLoader(true)
+                toast.success("Please wait for confirmation Transaction !");
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
 
@@ -118,6 +120,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         search: search,
                         handleClose: handleClose
                     })
+                    
                 );
             } else {
                 dispatch(
@@ -311,16 +314,16 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         
                         />
                     ) : (
-                <DialogActions sx={{ display: 'block' , margin:'0px 10px 0px 20px'}}>
+                <DialogActions sx={{ display: 'block' , margin:'10px 10px 0px 20px'}}>
                <AnimateButton>
            
-                        <>
+                       
                         <Button 
                         
                             className="buttons"
                             variant="contained"
                             sx={{  width: '95%',
-                                margin: '10px 0px 10px 0px',
+                                margin: '0px 0px 10px 0px',
                             background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' }}
                             type="submit"
                             size="large"
@@ -331,20 +334,20 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         >
                             {subAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
-                      
-                    
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button 
                             className="buttons"
                             variant="outlined"
                             sx={{  width: '95%',
-                            margin: '10px 0px 10px 0px', color: '#4044ED' , }}
+                            margin: '0px 0px 10px 0px', color: '#4044ED' , }}
                             onClick={handleClose}
                             color="secondary"
                             size="large"
                         >
                             Cancel
                         </Button>
-                        </>
+                       
                     </AnimateButton>
                 </DialogActions>
                     )}

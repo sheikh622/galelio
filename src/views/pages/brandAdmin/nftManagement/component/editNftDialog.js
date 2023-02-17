@@ -19,7 +19,6 @@ import {
     ListItemIcon,
     ListItemText,
     Typography,
-    ListItemSecondaryAction,
     IconButton,
     MenuItem
 } from '@mui/material';
@@ -36,7 +35,6 @@ import QuantitySelector from './quantitySelector';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
-import { userStory } from 'store/kanban';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const currencyTypeArray = [
@@ -99,8 +97,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const validationSchema = Yup.object({
         nftName: Yup.string()
             .required('NFT Name is required!')
-            .max(42, 'NFT Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
+            .max(42, 'NFT Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
@@ -258,7 +256,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 </DialogTitle>
                 <Divider />
                 <Grid container>
-                    <DialogActions>
+                    {/* <DialogActions>
                         <AnimateButton>
                             <Button
                                 type="submit"
@@ -287,7 +285,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 Lazy minting
                             </Button>
                         </AnimateButton>
-                    </DialogActions>
+                    </DialogActions> */}
                 </Grid>
 
                 <DialogContent>
@@ -454,7 +452,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                         {fileDataArray?.map((data, index) => (
                                             <>
                                                 <Grid item xs={5}>
-                                                    <TextField
+                                                      <TextField
                                                         id="field_name"
                                                         name="field_name"
                                                         label="File Name"
@@ -467,17 +465,40 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     />
                                                 </Grid>
 
+                                         
+                                                
+
                                                 <Grid item xs={5} mt={3}>
+                                                <span style={{marginBottom:"10%"}}>
+                                                    <a target="_blank" href={data?.fieldValue} style={{color:"white"}}>
+                                                        {data.fieldValue.length > 1
+                                                        ?
+                                                        <>
+                                                        {data?.fieldValue?.slice(61)}
+                                                        
+                                                        </>
+                                                        :
+                                                        <>
+                                                        
+                                                        </>
+                                                        
+                                                        }
+                                                    </a>
                                                     <input
-                                                        type="file"
-                                                        id="avatar"
-                                                        name="avatar"
-                                                        accept="image/*,.pdf"
-                                                        onChange={(event) => {
-                                                            handleFileFieldValueChange(event.currentTarget.files[0], index);
-                                                        }}
-                                                    />
+                                                    style={{display:"inlineBlock"}}
+                                                    type="file"
+                                                    id="avatar"
+                                                    name="avatar"
+                                                    accept="image/*,.pdf"
+                                                    onChange={(event) => {
+                                                        handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                    }}
+                                                />
+                                                </span>
+
+                                                
                                                 </Grid>
+                                                {/* <div style={{marginTop:"3%", marginLeft:"2%"}}><b>Previous file: </b><a target="_blank" href={data.fieldValue}>{data.fieldValue}</a></div> */}
                                                 <Grid item xs={2} mt={2}>
                                                     <IconButton
                                                         color="error"

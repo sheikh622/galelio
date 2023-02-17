@@ -42,6 +42,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
     const [changeStatusOpen, setChangeStatusOpen] = useState(false);
     const [changeRoleOpen, setChangeRoleOpen] = useState(false);
     const [changeMintingAccessOpen, setChangeMintingAccessOpen] = useState(false);
+
     const [detailId, setDetailId] = useState();
     const openDetails = (id) => {
         if (detailId === id) {
@@ -167,14 +168,17 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                     <TableCell align="left" className="tableName">
                                                         {row.email}
                                                     </TableCell>
-
-                                                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                                                        {row.isActive == false ? (
-                                                            <Chip label="Blocked" size="small" chipcolor="orange" />
-                                                        ) : (
-                                                            <Chip label="Unblocked" size="small" chipcolor="success" />
-                                                        )}
-                                                    </TableCell>
+                                                    {row.role == 'Admin' ? (
+                                                        <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                                                            {row.isActive == false ? (
+                                                                <Chip label="Blocked" size="small" chipcolor="orange" />
+                                                            ) : (
+                                                                <Chip label="Unblocked" size="small" chipcolor="success" />
+                                                            )}
+                                                        </TableCell>
+                                                    ) : (
+                                                        <TableCell align="left" sx={{ borderBottom: 'none' }}></TableCell>
+                                                    )}
 
                                                     <TableCell align="center" sx={{ borderBottom: 'none' }}>
                                                         {row.role == 'Admin' ? (

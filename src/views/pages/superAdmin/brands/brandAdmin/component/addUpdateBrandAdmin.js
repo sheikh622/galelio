@@ -45,12 +45,12 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
         isUpdate: Yup.boolean().default(isUpdate),
         firstName: Yup.string()
             .required('First Name is required!')
-            .max(42, 'First Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
+            .max(42, 'First Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
         lastName: Yup.string()
             .required('Last Name is required!')
-            .max(42, 'Last Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
+            .max(42, 'Last Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         adminEmail: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
 
         adminPassword: Yup.mixed().when(['isUpdate'], {
@@ -254,13 +254,13 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{ display: 'block', margin: '0px 10px 0px 20px' }}>
+                <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             variant="contained"
                             sx={{
                                 width: '95%',
-                                margin: '10px 0px 10px 0px',
+                                margin: '0px 0px 10px 0px',
                                 background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                             }}
                             type="submit"
@@ -273,10 +273,11 @@ export default function AddUpdateBrandAdminDialog({ open, setOpen, brandAdminDat
                         >
                             {brandAdminData.id == null ? 'Create ' : 'Update '}
                         </Button>
-
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button
                             variant="outlined"
-                            sx={{ width: '95%', margin: '10px 0px 10px 0px', color: '#4044ED' }}
+                            sx={{ width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
                             onClick={handleClose}
                             className="buttons"
                             size="large"

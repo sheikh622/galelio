@@ -78,7 +78,7 @@ const BrandAdmin = () => {
                     variant="contained"
                     size="large"
                     onClick={() => {
-                        navigate('/brands');
+                        navigate('/brandsByAdmin');
                     }}
                 >
                     Back

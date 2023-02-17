@@ -42,7 +42,11 @@ const ResetPasswordForm = ({ token, ...others }) => {
                     confirmPassword: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    password: Yup.string().max(255).required('Password is required!'),
+                    password: Yup.string().max(255).required('Password is required!')
+                    .matches(
+                        /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                        'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                    ),
                     confirmPassword: Yup.string().when('password', {
                         is: (val) => !!(val && val.length > 0),
                         then: Yup.string().oneOf([Yup.ref('password')], 'Both Password must be match!')

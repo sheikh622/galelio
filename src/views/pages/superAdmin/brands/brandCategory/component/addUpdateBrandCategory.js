@@ -93,6 +93,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
         console.log('im in handleContractDeployment');
         if (await checkWallet()) {
             setLoader(true);
+            toast.success("Please wait for confirmation Transaction !");
             let brandName = brandCategoryData?.brand.name;
             let categoryName;
             categoryArray.categories.map((data) => {
@@ -260,7 +261,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                     </form>
                 </DialogContent>
 
-                <DialogActions sx={{ display: 'block', margin: '0px 10px 0px 20px' }}>
+                <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
                     {loader ? (
                         <CircularProgress />
                     ) : (
@@ -271,7 +272,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                     className="buttons"
                                     sx={{
                                         width: '95%',
-                                        margin: '10px 0px 10px 0px',
+                                        margin: '0px 0px 10px 0px',
                                         background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                                     }}
                                     type="submit"
@@ -283,11 +284,12 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                                 >
                                     {!isUpdate ? 'Create ' : 'Update '}
                                 </Button>
-
+                                </AnimateButton>
+                                <AnimateButton>
                                 <Button
                                     className="buttons"
                                     variant="outlined"
-                                    sx={{ my: 1, ml: 0, width: '95%', margin: '10px 0px 10px 0px', color: '#4044ED' }}
+                                    sx={{ my: 1, ml: 0, width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
                                     onClick={handleClose}
                                     color="secondary"
                                     size="large"

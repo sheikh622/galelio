@@ -27,12 +27,12 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
         isUpdate: Yup.boolean().default(isUpdate),
         name: Yup.string()
             .required('Category Name is required!')
-            .max(200, 'Category Name can not exceed 200 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
+            .max(200, 'Category Name can not exceed 200 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
         description: Yup.string()
             .required('Description is required!')
-            .max(200, 'Description can not exceed 200 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
+            .max(400, 'Description can not exceed 400 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
         image: Yup.mixed().when(['isUpdate'], {
             is: true,
             then: Yup.mixed(),
@@ -162,12 +162,12 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                         </Grid>
                     </form>
                 </DialogContent>
-                <DialogActions sx={{ display: 'block', margin: '0px 10px 0px 20px' }}>
+                <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             sx={{
                                 width: '95%',
-                                margin: '10px 0px 10px 0px',
+                                margin: '0px 0px 10px 0px',
                                 background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                             }}
                             className="buttons"
@@ -179,11 +179,12 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                         >
                             {categoryData.name !== '' ? 'Update ' : 'Create '}
                         </Button>
-
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button
                             className="buttons"
                             variant="outlined"
-                            sx={{ width: '95%', margin: '10px 0px 10px 0px', color: '#4044ED' }}
+                            sx={{ width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
                             onClick={handleClose}
                             size="large"
                         >
