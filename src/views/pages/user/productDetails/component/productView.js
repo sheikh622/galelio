@@ -169,14 +169,15 @@ const PropertiesView = ({ nft }) => {
     const handleBuyNft = async () => {
         if (user == null) {
             navigate('/login');
-        } else if (await checkWallet()) {
+        } else if (await checkWallet()) {       
             if (nft.mintType == 'directMint') {
+                console.log('im in handlebuy');
                 try {
                     setLoader(true);
 
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
                     let price = ethers.utils.parseEther(nft.price.toString());
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
@@ -211,11 +212,11 @@ const PropertiesView = ({ nft }) => {
                         .catch((error) => {
                           
                             setLoader(false);
-                            toast.error(error.message);
+                            toast.error(error.reason);
                         });
                 } catch (error) {
                     setLoader(false);
-                    toast.error(error.message);
+                    toast.error(error.reason);
                 }
             } else if (nft.mintType == 'lazyMint') {
                 try {
@@ -223,7 +224,7 @@ const PropertiesView = ({ nft }) => {
                     let signers = nft.signerAddress;
                     let erc20Address = BLOCKCHAIN.ERC20;
                     // let signature = nft.NFTTokens[0].signature;
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
                     // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
                     // const SIGNING_DOMAIN = 'Galileo-Protocol';
                     // const SIGNATURE_VERSION = '1';
@@ -261,13 +262,13 @@ const PropertiesView = ({ nft }) => {
                    // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
                     //console.log(verifyAddr);
 
-                    // let approvalAmount = await token.allowance(address, contractAddress);
+                     let approvalAmount = await token.allowance(address, contractAddress);
 
-                    // let approvePrice = ethers.utils.parseEther('10000');
-                    // if (approvalAmount.toString() < nft.price.toString()) {
-                    //     await (await token.approve(contractAddress, approvePrice)).wait();
-                    // }
-                     await (await token.approve(contractAddress, prices)).wait();
+                    let approvePrice = ethers.utils.parseEther('10000');
+                    if (approvalAmount.toString() < nft.price.toString()) {
+                        await (await token.approve(contractAddress, approvePrice)).wait();
+                    }
+                    // await (await token.approve(contractAddress, prices)).wait();
 
                     //
                     try {
@@ -291,11 +292,11 @@ const PropertiesView = ({ nft }) => {
                             })
                         );
                     } catch (error) {
-                        toast.error(error.message);
+                        toast.error(error.reason);
                     }
                 } catch (error) {
                     setLoader(false);
-                    toast.error(error.message);
+                    toast.error(error.reason);
                 }
             }
         }
@@ -310,7 +311,7 @@ const PropertiesView = ({ nft }) => {
                     setResellLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
                     let rrprice = ethers.utils.parseEther(rprice.toString());
 
@@ -337,18 +338,18 @@ const PropertiesView = ({ nft }) => {
                             toast.success('NFT is Resold');
                         })
                         .catch((error) => {
-                            toast.error(error.message);
+                            toast.error(error.reason);
                         });
                 } catch (error) {
                     setResellLoader(false);
-                    toast.error(error.message);
+                    toast.error(error.reason);
                     setOpen(false);
                 }
             } else if (nft.mintType == 'lazyMint') {
                 try {
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
 
                     let rrprice = ethers.utils.parseEther(nft.price.toString());
 
@@ -375,12 +376,12 @@ const PropertiesView = ({ nft }) => {
                             toast.success('NFT is Resold');
                         })
                         .catch((error) => {
-                            toast.error(error.message);
+                            toast.error(error.reason);
                         });
                     setOpen(false);
                 } catch (error) {
                     setResellLoader(false);
-                    toast.error(error.message);
+                    toast.error(error.reason);
                 }
             }
         }
@@ -395,7 +396,7 @@ const PropertiesView = ({ nft }) => {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
@@ -426,18 +427,18 @@ const PropertiesView = ({ nft }) => {
                             toast.success('NFT Redeem successfully');
                         })
                         .catch((error) => {
-                            toast.error(error.message);
+                            toast.error(error.reason);
                         });
                 } catch (error) {
                     setRedeemLoader(false);
-                    toast.error(error.message);
+                    toast.error(error.reason);
                 }
             } else if (nft.mintType == 'lazyMint') {
                 try {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
@@ -469,11 +470,11 @@ const PropertiesView = ({ nft }) => {
                             toast.success('NFT Redeem successfully');
                         })
                         .catch((error) => {
-                            toast.error(error.message);
+                            toast.error(error.reason);
                         });
                 } catch (error) {
                     setRedeemLoader(false);
-                    toast.error(error.message);
+                    toast.error(error.reason);
                 }
             }
         }

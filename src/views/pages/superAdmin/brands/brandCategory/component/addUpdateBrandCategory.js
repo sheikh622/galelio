@@ -114,7 +114,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 await factoryAddr.deployMintingContract(contractName, symbol, formik.values.profitPercentage, MarketplaceAddress.address).catch((error) => {
                     setOpen(false);
                     setLoader(false);
-                    toast.error(error.message);
+                    toast.error(error.reason);
                 })
             )?.wait();
 
@@ -145,7 +145,11 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
            const contractAddress = brandCategoryData.contractAddress;
            const NftAddr = new ethers.Contract(contractAddress, NFTAbi, signer);
            let price = ethers.utils.parseEther(formik.values.profitPercentage.toString())
-           await (await NftAddr.setfee(price)).wait()
+           await (await NftAddr.setfee(price).catch((error) => {
+            setOpen(false);
+            setLoader(false);
+            toast.error(error.reason);
+        })).wait()
 
 
             
