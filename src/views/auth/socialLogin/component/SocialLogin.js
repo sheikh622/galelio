@@ -189,7 +189,7 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 name="address"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Address"
+                                label="Delivery Address"
                                 inputProps={{}}
                             />
                             {touched.address && errors.address && (
