@@ -20,7 +20,9 @@ export default function ChangeRoleDialog({ open, setOpen, page, limit, search, s
             walletAddress: '',
             role: '',
             isActive: '',
-            walletAddress: ''
+            hasMintingAccess:'',
+            contractAddress:''
+          
         });
     };
 
@@ -62,6 +64,7 @@ export default function ChangeRoleDialog({ open, setOpen, page, limit, search, s
                         className="buttonSize"
                         size="large"
                         onClick={() => {
+                            console.log('changeRole', subAdminData.id)
                             dispatch(
                                 changeRole({
                                     id: subAdminData.id,

@@ -81,7 +81,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                     }
                 }}
             >
-                <CardMedia sx={{ height: 220 }} image={nftData.asset} />
+                <CardMedia  sx={{ height: 220 }} image={nftData.asset} />
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={8}>
