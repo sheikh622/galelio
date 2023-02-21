@@ -327,9 +327,8 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                             <Button
                                 className="buttons"
                                 variant="contained"
-                                sx={{
-                                    width: '95%',
-                                    margin: '0px 0px 10px 0px',
+                                sx={{ width: '92%',
+                            margin: '0px 0px 10px 8px', 
                                     background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                                 }}
                                 type="submit"
