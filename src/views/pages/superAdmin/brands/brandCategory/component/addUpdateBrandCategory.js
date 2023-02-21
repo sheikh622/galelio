@@ -90,50 +90,56 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
     };
 
     const handleContractDeployment = async () => {
-        console.log('im in handleContractDeployment');
-        if (await checkWallet()) {
-            setLoader(true);
-            toast.success("Please wait for confirmation Transaction !");
-            let brandName = brandCategoryData?.brand.name;
-            let categoryName;
-            categoryArray.categories.map((data) => {
-                if (data.value == category) {
-                    categoryName = data.label;
-                }
-            });
-            const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
-            const symbol = 'G' + brandName?.substring(0, 1) + categoryName?.substring(0, 1);
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
-            console.log('signer',signer);
-            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi, signer);
-            console.log('factoryAddr',factoryAddr);
-            let profitAmount = ethers.utils.parseEther(formik.values.profitPercentage.toString());
-
-            let res = await (
-                await factoryAddr.deployMintingContract(contractName, symbol, formik.values.profitPercentage, MarketplaceAddress.address).catch((error) => {
-                    setOpen(false);
-                    setLoader(false);
-                    toast.error(error.reason);
-                })
-            )?.wait();
-
-            let addr = res?.events[2]?.args[0];
-            if (res) {
-                dispatch(
-                    addBrandCategory({
-                        brandId: brandCategoryData.brandId,
-                        categoryId: category,
-                        profitPercentage: formik.values.profitPercentage,
-                        contractAddress: addr,
-                        page: page,
-                        limit: limit,
-                        search: search,
-                        handleClose: handleClose
+        if(category!==0){
+            if (await checkWallet()) {
+                setLoader(true);
+                toast.success("Please wait for confirmation Transaction !");
+                let brandName = brandCategoryData?.brand.name;
+                let categoryName;
+                categoryArray.categories.map((data) => {
+                    if (data.value == category) {
+                        categoryName = data.label;
+                    }
+                });
+                const contractName = 'Galileo' + ' ' + brandName + ' ' + categoryName;
+                const symbol = 'G' + brandName?.substring(0, 1) + categoryName?.substring(0, 1);
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                console.log('signer',signer);
+                const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi, signer);
+                console.log('factoryAddr',factoryAddr);
+                let profitAmount = ethers.utils.parseEther(formik.values.profitPercentage.toString());
+    
+                let res = await (
+                    await factoryAddr.deployMintingContract(contractName, symbol, formik.values.profitPercentage, MarketplaceAddress.address).catch((error) => {
+                        setOpen(false);
+                        setLoader(false);
+                        toast.error(error.reason);
                     })
-                );
+                )?.wait();
+    
+                let addr = res?.events[2]?.args[0];
+                if (res) {
+                    dispatch(
+                        addBrandCategory({
+                            brandId: brandCategoryData.brandId,
+                            categoryId: category,
+                            profitPercentage: formik.values.profitPercentage,
+                            contractAddress: addr,
+                            page: page,
+                            limit: limit,
+                            search: search,
+                            handleClose: handleClose
+                        })
+                    );
+                }
             }
+
+        }else{
+            toast.error("Please choose a category")
         }
+
+        
     };
 
     const handleUpdateContractDeployment = async () => {
