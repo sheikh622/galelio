@@ -182,7 +182,7 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                             )}
                         </FormControl>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Address </InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Delivery Address </InputLabel>
                             <OutlinedInput
                                 type="address"
                                 value={values.address}

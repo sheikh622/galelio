@@ -85,7 +85,7 @@ function* signupSocialUserRequest({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupsocialSuccess(response.data.data));
-        payload.navigate('/landingPage');
+        payload.navigate('/home');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
