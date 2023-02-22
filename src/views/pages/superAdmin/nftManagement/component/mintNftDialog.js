@@ -221,7 +221,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let brandName = nftData.Brand.name;
         let metaData = nftData.NFTMetaData; 
         let poa = nftData.NFTMetaFiles;
-        let external_url = "https://app.galileoprotocol.io/"
+        let external_url = nftData.NFTMetaFiles[0].fieldValue
+        
         let attributes=[];
         for(let i =0; i<nftData.NFTMetaData.length; i++){
             attributes.push({

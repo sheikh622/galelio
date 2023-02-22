@@ -262,7 +262,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                         <ChangeCircleIcon sx={{ fontSize: '1.5rem' }} />
                                                                     </IconButton>
                                                                 </Tooltip>
-                                                                <Tooltip placement="top" title="Delete">
+                                                                {/* <Tooltip placement="top" title="Delete">
                                                                     <IconButton
                                                                         color="primary"
                                                                         sx={{
@@ -284,7 +284,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                     >
                                                                         <img src={DeleteOutlineOutlinedIcon} />
                                                                     </IconButton>
-                                                                </Tooltip>
+                                                                </Tooltip> */}
                                                             </Stack>
                                                         ) : (
                                                             <Button
