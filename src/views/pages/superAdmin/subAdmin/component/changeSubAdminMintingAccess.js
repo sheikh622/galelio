@@ -34,7 +34,7 @@ console.log('subAdminData from minting access', subAdminData);
     };
 
     const handleMintRole = async () => {
-        
+        console.log(subAdminData.hasMintingAccess, '.hasMintingAccess')
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const nfts = new ethers.Contract(subAdminData.contractAddress, NFTAbi, signer);
@@ -85,9 +85,10 @@ console.log('subAdminData from minting access', subAdminData);
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span" className="statustypo">
-                            {subAdminData.hasMintingAccess == false
-                                ? 'Are you sure you want to give minting access to this Admin?'
-                                : 'Are you sure you want to remove minting access of this Admin?'}
+                            {subAdminData.hasMintingAccess == true
+                                ? 'Are you sure you want to remove minting access of this Admin?' 
+                               
+                                :  'Are you sure you want to give minting access to this Admin?'}
                         </Typography>
                     </DialogContentText>
                 </DialogContent>

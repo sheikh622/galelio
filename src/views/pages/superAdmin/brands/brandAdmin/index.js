@@ -73,17 +73,17 @@ const BrandAdmin = () => {
                         Brand Management
                     </Typography>
                 }
-                secondary={
-                    <Button className='buttonSize' sx={{float:'right'}}
-                    variant="contained"
-                    size="large"
-                    onClick={() => {
-                        navigate('/brandsByAdmin');
-                    }}
-                >
-                    Back
-                </Button>
-                }
+                // secondary={
+                //     <Button className='buttonSize' sx={{float:'right'}}
+                //     variant="contained"
+                //     size="large"
+                //     onClick={() => {
+                //         navigate('/brandsByAdmin');
+                //     }}
+                // >
+                //     Back
+                // </Button>
+                // }
                 content={false}
             ></MainCard>
 
