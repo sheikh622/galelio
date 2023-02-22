@@ -39,7 +39,7 @@ const Dashboard = () => {
             </Grid>
             <Grid item lg={4} md={6} sm={6} xs={12}>
                 <UserCountCard primary="Total Redeem Nfts"
-                 secondary={dashboardAdmin.redeemNfts
+                 secondary={dashboardAdmin?.redeemNfts
                  } color={theme.palette.error.main} />
             </Grid>
 

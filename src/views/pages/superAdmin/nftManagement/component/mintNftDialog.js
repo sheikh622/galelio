@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
-import { ethers,utils } from 'ethers';
+import { ethers, utils } from 'ethers';
 import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
 // import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
@@ -30,8 +30,6 @@ const client = create({
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function MintNftDialog({ open, setOpen, page, limit, search, loader, setLoader, nftData, type }) {
-
-    
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
@@ -76,13 +74,11 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             return true;
         }
     };
+
     const directMintThenList = async (result) => {
-        console.log('imindirectMintThenList');
-        if(checkWallet){
-            console.log('imindirectMintThenList2');
+        if (checkWallet) {
             let nftTokens = nftData.NFTTokens;
             let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
-    
             let nftId = nftData.id;
             let categoryId = nftData.CategoryId;
             let brandId = nftData.BrandId;
@@ -99,30 +95,30 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 const uriArray = await nftTokens.map(() => {
                     return tokenUri;
                 });
-    
+
                 if (uriArray.length == 1) {
                     let mintedNFT = await (
-                        await nft.mint(tokenUri,erc20Address,price,nftData.requesterAddress).catch((error) => {
-                            toast.error(error.reason)
-                            setLoader(false)
-                            setOpen(false)                            
+                        await nft.mint(tokenUri, erc20Address, price, nftData.requesterAddress).catch((error) => {
+                            toast.error(error.reason);
+                            setLoader(false);
+                            setOpen(false);
                         })
                     ).wait();
-    console.log('im here at 111');
+                    console.log('im here at 111');
                     transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                     const id = parseInt(mintedNFT.events[0].args[2]);
-    console.log('id', id);
+                    console.log('id', id);
                     const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
                     await (
-                        await marketplaceAddr.makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress).catch((error) => {
-                    
-                            toast.error(error.reason);
-                            setOpen(false)
-                            setLoader(false)
-    
-                        })
+                        await marketplaceAddr
+                            .makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress)
+                            .catch((error) => {
+                                toast.error(error.reason);
+                                setOpen(false);
+                                setLoader(false);
+                            })
                     ).wait();
-    
+
                     tokenIdArray.push({
                         id: nftTokens[0].id,
                         tokenId: id
@@ -132,7 +128,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                         nftId: nftId,
                         tokenUri: tokenUri
                     });
-    
+
                     dispatch(
                         mintNft({
                             nftDataArray: nftDataArray,
@@ -150,15 +146,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     );
                 } else if (uriArray.length > 1) {
                     let mintedNFT = await (
-                        await nft.bulkMint(uriArray,erc20Address,price,nftData.requesterAddress).catch((error) => {
+                        await nft.bulkMint(uriArray, erc20Address, price, nftData.requesterAddress).catch((error) => {
                             toast.error(error.reason);
-                            setOpen(false)
-                            setLoader(false)
+                            setOpen(false);
+                            setLoader(false);
                         })
                     ).wait();
-    
+
                     transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
-    
+
                     let counter = 0;
                     let myNftTokenIdArray = [];
                     for (let i = 0; i < uriArray.length; i++) {
@@ -166,29 +162,30 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                         counter = counter + 2;
                     }
                     const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
-    
+
                     await (
-                        await marketplaceAddr.makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price, nftData.requesterAddress).catch((error) => {
-              
-                            toast.error(error.reason);
-                            setOpen(false)
-                            setLoader(false)
-                        })
+                        await marketplaceAddr
+                            .makeItemBulk(erc20Address, myNftTokenIdArray, contractAddress, price, nftData.requesterAddress)
+                            .catch((error) => {
+                                toast.error(error.reason);
+                                setOpen(false);
+                                setLoader(false);
+                            })
                     ).wait();
-    
+
                     nftTokens.map((data, index) => {
                         tokenIdArray.push({
                             id: data.id,
                             tokenId: myNftTokenIdArray[index]
                         });
                     });
-    
+
                     let nftDataArray = [];
                     nftDataArray.push({
                         nftId: nftId,
                         tokenUri: tokenUri
                     });
-    
+
                     dispatch(
                         mintNft({
                             nftDataArray: nftDataArray,
@@ -206,17 +203,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     );
                 }
             } catch (error) {
-                
                 setLoader(false);
-                setOpen(false)
+                setOpen(false);
             }
         }
-       
     };
 
     const handleDirectMint = async () => {
         setLoader(true);
-        let image = nftData.asset;
+        let image = nftData.ipfsUrl;
         let price = nftData.price;
         let name = nftData.name;
         let description = nftData.description;
@@ -224,19 +219,29 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let mintedDate = new Date().valueOf();
         let categoryName = nftData.Category.name;
         let brandName = nftData.Brand.name;
-        let metaData = nftData.NFTMetaData;
+        let metaData = nftData.NFTMetaData; 
+        let poa = nftData.NFTMetaFiles;
+        let external_url = "https://app.galileoprotocol.io/"
+        let attributes=[];
+        for(let i =0; i<nftData.NFTMetaData.length; i++){
+            attributes.push({
+                trait_type: nftData.NFTMetaData[i].fieldName, 
+                value: nftData.NFTMetaData[i].fieldValue
+            })
+        }
+
         // setLoader(true);
         if (!image || !price || !name || !description) return;
         try {
             const result = await client.add(
-                JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, metaData })
+                JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, attributes, poa, external_url })
             );
             directMintThenList(result);
         } catch (error) {
             toast.error(error.reason);
 
             setLoader(false);
-            setOpen(false)
+            setOpen(false);
         }
     };
 
@@ -256,7 +261,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let brandName = nftData.Brand.name;
         let metaData = nftData.NFTMetaData;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
-    
+
         // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
         // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0"
         let nftTokens = nftData.NFTTokens;

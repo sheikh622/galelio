@@ -210,7 +210,8 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                                 id: row.id,
                                                                                 walletAddress: row.walletAddress,
                                                                                 isActive: row.isActive,
-                                                                                hasMintingAccess: row.hasMintingAccess
+                                                                                hasMintingAccess: row.hasMintingAccess,
+                                                                                contractAddress: row.BrandCategories[0]?.contractAddress
                                                                             });
                                                                         }}
                                                                     >
@@ -273,7 +274,11 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                         onClick={() => {
                                                                             setDeleteOpen(true);
                                                                             setSubAdminData({
-                                                                                id: row.id
+                                                                                id: row.id,
+                                                                                walletAddress: row.walletAddress,
+                                                                                isActive: row.isActive,
+                                                                                hasMintingAccess: row.hasMintingAccess,
+                                                                                contractAddress: row.BrandCategories[0]?.contractAddress
                                                                             });
                                                                         }}
                                                                     >

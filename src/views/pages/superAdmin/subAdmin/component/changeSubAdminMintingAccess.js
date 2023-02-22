@@ -11,8 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page, limit, search, subAdminData, setSubAdminData }) {
-
-    console.log('subAdminData', subAdminData);
+console.log('subAdminData from minting access', subAdminData);
     const theme = useTheme();
     const dispatch = useDispatch();
     const blockChainRole = '0xd2e4c2619ea6e0faebc405d89445161c041e30fe03373ea0473da142d57d4514';
@@ -29,7 +28,8 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
             role: '',
             isActive: '',
             walletAddress: '',
-            hasMintingAccess: ''
+            hasMintingAccess: '',
+            contractAddress:''
         });
     };
 
@@ -41,9 +41,9 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
         if(subAdminData.hasMintingAccess == true){
             await (
                 await nfts.revokeRole(blockChainRole, subAdminData.walletAddress).catch((error) => {
-                    toast.error(`${error.message}`);
+                    toast.error(`${error.reason}`);
                 })
-            ).wait();
+            )?.wait()
         }
         else{
 
@@ -51,9 +51,9 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
 
             await (
                 await nfts.grantRole(blockChainRole, subAdminData.walletAddress).catch((error) => {
-                    toast.error(`${error.message}`);
+                    toast.error(`${error.reason}`);
                 })
-            ).wait();
+            )?.wait();
 
         }
 
