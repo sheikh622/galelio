@@ -89,38 +89,48 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         initialValues: subAdminData,
         validationSchema,
         onSubmit: async (values) => {
+
+            console.log('contractAddress', contractAddress);
+           
             if (subAdminData.id == null) {
-                setLoader(true);
-               
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
+               if(brandCategoryId == 0){
+                toast.error("Please choose a category")
+               }
+               else{
 
-                const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
-                // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
-
-                let mintedNFT = await (
-                    await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
-                        toast.error(`${error.message}`);
-                        setLoader(false);
-                        setOpen(false);
-                    })
-                ).wait();
-
-                dispatch(
-                    addSubAdmin({
-                        firstName: values.firstName,
-                        lastName: values.lastName,
-                        email: values.adminEmail,
-                        password: values.adminPassword,
-                        walletAddress: values.walletAddress,
-                        brandCategory: brandCategoryId,
-                        hasMintingAccess: true,
-                        page: page,
-                        limit: limit,
-                        search: search,
-                        handleClose: handleClose
-                    })
-                );
+                   setLoader(true)
+                   toast.success("Please wait for confirmation Transaction !");
+                   const provider = new ethers.providers.Web3Provider(window.ethereum);
+                   const signer = provider.getSigner();
+   
+                   const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+                   // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
+   
+                   let mintedNFT = await (
+                       await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
+                           toast.error(`${error.reason}`);
+                           setLoader(false)
+                           setOpen(false)
+                       })
+                   ).wait();
+   
+                   dispatch(
+                       addSubAdmin({
+                           firstName: values.firstName,
+                           lastName: values.lastName,
+                           email: values.adminEmail,
+                           password: values.adminPassword,
+                           walletAddress: values.walletAddress,
+                           brandCategory: brandCategoryId,
+                           hasMintingAccess: true,
+                           page: page,
+                           limit: limit,
+                           search: search,
+                           handleClose: handleClose
+                       })
+                       
+                   );
+               }
             } else {
                 dispatch(
                     updateSubAdmin({

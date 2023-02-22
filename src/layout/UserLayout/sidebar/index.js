@@ -71,14 +71,14 @@ const SideBar = () => {
                             {pathName == '/home' ? (
                                 <>
                                     <Box sx={{ borderLeft: '6px solid #2196f3' }}>
-                                        <Tooltip className="fontsize" title="Landing Page" placement="right" arrow>
+                                        <Tooltip className="fontsize" title="Home" placement="right" arrow>
                                             <DashboardIcon sx={{ color: `${color}` }} />
                                         </Tooltip>
                                     </Box>
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip className="fontsize" title="Landing Page" placement="right" arrow>
+                                    <Tooltip className="fontsize" title="Home" placement="right" arrow>
                                         <DashboardIcon />
                                     </Tooltip>
                                 </>
