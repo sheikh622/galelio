@@ -34,6 +34,7 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, page, limit, search, setSubAdminData }) {
     const dispatch = useDispatch();
+    console.log(subAdminData.walletAddress,'subAdminData>');
     const [isUpdate, setIsUpdate] = useState(false);
     const [contractAddress, setContractAddress] = useState('');
     const [brandCategoryId, setBrandCategoryId] = useState(0);
@@ -99,7 +100,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                else{
 
                    setLoader(true)
-                   toast.success("Please wait for confirmation Transaction !");
+                //    toast.success("Please wait for confirmation Transaction !");
                    const provider = new ethers.providers.Web3Provider(window.ethereum);
                    const signer = provider.getSigner();
    
@@ -139,7 +140,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                         lastName: values.lastName,
                         email: values.adminEmail,
                         password: values.adminPassword,
-                        walletAddress: values.walletAddress,
+                        walletAddress: subAdminData.walletAddress,
                         page: page,
                         limit: limit,
                         search: search,
@@ -267,7 +268,11 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         }
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={12} lg={12} pt={2}>
+                              
+
+                                {subAdminData?.id == null && (
+                                    <>
+                                    <Grid item xs={12} md={12} lg={12} pt={2}>
                                     <InputLabel className="textfieldStyle" htmlFor="">
                                         Wallet Address
                                     </InputLabel>
@@ -284,8 +289,6 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         autoComplete=""
                                     />
                                 </Grid>
-
-                                {subAdminData?.id == null && (
                                     <Grid item xs={6} md={12} lg={12} pt={2}>
                                         <InputLabel className="textfieldStyle" htmlFor="">
                                             Select Category
@@ -307,6 +310,7 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                             ))}
                                         </TextField>
                                     </Grid>
+                                    </>
                                 )}
                             </>
                         </Grid>

@@ -137,7 +137,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 toast.error('NFT Image is required');
             } else if (isValid) {
                 setLoader(true);
-                toast.success("Please wait for confirmation Transaction !");
+                // toast.success("Please wait for confirmation Transaction !");
                 dispatch(
                     addNft({
                         requesterAddress: user.walletAddress,
@@ -571,7 +571,23 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 <Grid container>
                     <DialogActions>
                         {loader ? (
-                            <CircularProgress disableShrink sx={{ ml: 3, mt: 1 }} />
+                            <DialogActions sx={{ display: 'block', margin: '10px 5px 0px 5px' }}>
+                            <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}>
+                                <Grid item>
+                                    <CircularProgress disableShrink size={'4rem'} />
+                                </Grid>
+                            </Grid>
+                           
+                                <Button
+                                    className="buttons"
+                                    variant="Text"
+                                    sx={{ width: '100%', margin: '0px 0px 10px 0px', color: '#2196f3' }}
+                                    size="large"
+                                >
+                                    NFT is being Created...
+                                </Button>
+                         
+                        </DialogActions>
                         ) : (
                             <>
                                 <AnimateButton>

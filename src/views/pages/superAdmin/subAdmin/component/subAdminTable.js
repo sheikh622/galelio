@@ -215,7 +215,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                         }}
                                                                     >
                                                                         {row.hasMintingAccess == true ? (
-                                                                            <img src={CurrencyExchangeIcon} />
+                                                                          <img src={CurrencyExchangeIcon} />
                                                                         ) : (
                                                                             <img src={mintingIcon} />  
                                                                         )}
