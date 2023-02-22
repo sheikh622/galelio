@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, CardContent, CardMedia, Grid, Stack, Typography } from '@mui/material';
+import { Button, CardContent, CardMedia, Grid, Stack, Typography, CardActionArea, Card } from '@mui/material';
 import MainCard from './mainCard';
 import EditNftDialog from './editNftDialog';
 import RequestForMintDialog from './requestForMintDialog';
 import DeleteNFTDialog from './deleteNftDialog';
 import DetailsDialog from './details';
+import { useTheme } from '@mui/material/styles';
+
 import { useEffect } from 'react';
 const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
+    const theme = useTheme();
+
     const [openRequestMint, setOpenRequestMint] = useState(false);
     const [editNftOpen, setEditNftOpen] = useState(false);
     const [deleteNftOpen, setDeleteNftOpen] = useState(false);
@@ -90,7 +94,22 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                     }
                 }}
             >
-                <CardMedia sx={{ height: 220 }} image={nftData.asset} />
+            <Card          sx={{
+                color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                // maxWidth: nfts && nfts?.length > 3? 0 : 365,
+                width:'100%',
+                height:'410px',
+                // boxShadow: '1px 2px 6px #d3d3d3',
+                borderRadius: '3px',
+                marginBottom: '10px',
+                maxWidth:{xl:'100%'},
+            }} >
+            <CardActionArea>
+            <CardMedia component="img" height="220" sx={{objectFit:'scale-down'}} image={nftData.asset} />
+           
+            
+              
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
@@ -219,6 +238,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                         </Grid>
                     </Grid>
                 </CardContent>
+                </CardActionArea></Card>
             </MainCard>
         </>
     );

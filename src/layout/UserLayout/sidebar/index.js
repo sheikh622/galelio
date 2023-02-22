@@ -49,15 +49,16 @@ const SideBar = () => {
                         alignItems="center"
                         spacing={3}
                         sx={{
+                           
                             pt: 1,
                             pb: 3,
                             ml: 1,
                             mr: 1,
-                            maxWidth: { lg: '66% !important' },
+                            maxWidth: { lg: '90% !important' },
                             display: 'block',
-                            boxShadow: '1px 2px 2px 2px #d3d3d391',
+                           
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
-                            borderRadius: '4px'
+                            borderRadius: '1px'
                         }}
                     >
                         <Grid

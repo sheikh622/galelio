@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Button, CardContent, CardMedia, Grid, Stack, Typography, Tooltip } from '@mui/material';
+import { Button, CardContent, CardMedia, Grid, Stack,CardActionArea, Card, Typography, Tooltip } from '@mui/material';
 import MainCard from './mainCard';
 import MintNftDialog from './mintNftDialog';
 import RejectNftDialog from './rejectNftDialog';
 import EditNftDialog from './editNftDialog';
+import { Divider } from 'semantic-ui-react';
+import { useTheme } from '@mui/material/styles';
+
 
 const NftCard = ({ nftData, search, page, limit, type }) => {
     const [loader, setLoader] = useState(false);
@@ -11,6 +14,8 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
     const [rejectMintOpen, setRejectMintOpen] = useState(false);
     const [editNftOpen, setEditNftOpen] = useState(false);
     const [image, setImage] = useState([]);
+    const theme = useTheme();
+
     const [nftInfo, setNftInfo] = useState({
         id: null,
         brandId: null,
@@ -79,21 +84,31 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                         transform: 'scale3d(1.02, 1.02, 1)',
                         transition: 'all .4s ease-in-out'
                     }
-                }}
+                }} 
             >
-                <CardMedia  sx={{ height: 220 }} image={nftData.asset} />
+            <Card          sx={{
+                color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                // maxWidth: nfts && nfts?.length > 3? 0 : 365,
+                width:'100%',
+                height:'410px',
+                // boxShadow: '1px 2px 6px #d3d3d3',
+                borderRadius: '3px',
+                marginBottom: '10px',
+                maxWidth:{xl:'100%'},
+            }} >
+            <CardActionArea>
+            <CardMedia component="img" height="220" sx={{objectFit:'scale-down'}} image={nftData.asset} />
+           
+            
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={8}>
+                        <Grid item xs={8} >
                             <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
                                 {nftData.name}
                             </Typography>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Typography variant="body1" sx={{ textDecoration: 'none', textAlign: 'center' }}>
-                                {nftData.mintType == 'lazyMint' ? 'Lazy Mint' : 'Mint'}
-                            </Typography>
-                        </Grid>
+                     
                         <Grid item xs={12} mt={-1.5}>
                             <Typography
                                 variant="body1"
@@ -106,7 +121,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                             </Typography>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={12}   sm={4} md={6}  lg={6}>
                             <Grid item xs={12}>
                                 <Typography variant="h6">
                                     {nftData.price} {nftData.currencyType}
@@ -116,8 +131,13 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                 <Typography variant="h6">{nftData.NFTTokens.length} Items</Typography>
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
-                            <Stack direction="row" justifyContent="end" alignItems="center">
+                        <Grid item xs={4} md={6}>
+                        <Typography variant="body1" sx={{ textDecoration: 'none', textAlign: 'center' }}>
+                            {nftData.mintType == 'lazyMint' ? 'Lazy Mint' : 'Mint'}
+                        </Typography>
+                    </Grid>
+                        <Grid item xs={12} sm={12} md={12} >
+                            <Stack direction="row" justifyContent="start" alignItems="center">
                                {/*  {nftData.status == 'MINTED' && (
                                     <>
                                         <Button
@@ -174,6 +194,8 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                         </Grid>
                     </Grid>
                 </CardContent>
+                </CardActionArea>
+                </Card>
             </MainCard>
         </>
     );
