@@ -94,7 +94,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                     }
                 }}
             >
-            <Card          sx={{
+            <Card          sx={{ maxWidth: 345,
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                 background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                 // maxWidth: nfts && nfts?.length > 3? 0 : 365,
