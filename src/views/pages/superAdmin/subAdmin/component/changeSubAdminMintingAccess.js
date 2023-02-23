@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page, limit, search, subAdminData, setSubAdminData }) {
 
-    console.log('subAdminData', subAdminData.hasMintingAccess);
     const theme = useTheme();
     const dispatch = useDispatch();
     const blockChainRole = '0xd2e4c2619ea6e0faebc405d89445161c041e30fe03373ea0473da142d57d4514';
@@ -29,21 +28,22 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
             role: '',
             isActive: '',
             walletAddress: '',
-            hasMintingAccess: ''
+            hasMintingAccess: '',
+            contractAddress:''
         });
     };
 
     const handleMintRole = async () => {
-        console.log(subAdminData.hasMintingAccess, '.hasMintingAccess')
+        
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const nfts = new ethers.Contract(subAdminData.contractAddress, NFTAbi, signer);
         if(subAdminData.hasMintingAccess == true){
             await (
                 await nfts.revokeRole(blockChainRole, subAdminData.walletAddress).catch((error) => {
-                    toast.error(`${error.message}`);
+                    toast.error(`${error.reason}`);
                 })
-            ).wait();
+            )?.wait();
         }
         else{
 
@@ -51,12 +51,11 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
 
             await (
                 await nfts.grantRole(blockChainRole, subAdminData.walletAddress).catch((error) => {
-                    toast.error(`${error.message}`);
+                    toast.error(`${error.reason}`);
                 })
-            ).wait();
+            )?.wait();
 
         }
-
 
         dispatch(
             changeSubAdminMintingAccess({
@@ -85,10 +84,9 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description1">
                         <Typography variant="body2" component="span" className="statustypo">
-                            {subAdminData.hasMintingAccess == true
-                                ? 'Are you sure you want to remove minting access of this Admin?' 
-                               
-                                :  'Are you sure you want to give minting access to this Admin?'}
+                            {subAdminData.hasMintingAccess == false
+                                ? 'Are you sure you want to give minting access to this Admin?'
+                                : 'Are you sure you want to remove minting access of this Admin?'}
                         </Typography>
                     </DialogContentText>
                 </DialogContent>
