@@ -9,23 +9,12 @@ const UserLayout = () => {
     return (
         <>
             
-            <Grid
+            <Grid container
                 sx={{
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
                 }}
             >
-                <Grid
-                    container
-                    sx={{
-                        display: {
-                            xs: 'block',
-                            sm: 'block',
-                            md: 'flex',
-                            lg:'flex'
-                        },
-                        paddingBottom: '40px' , 
-                    }}
-                >
+              
                 <Grid item md={12} sm={12} xs={12} sx={{  
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
@@ -38,13 +27,22 @@ const UserLayout = () => {
                         md={1}
                         xs={12}
                         sx={{ position: 'sticky', height: '100%', top: '0', 
-                        display: { xs: 'none', sm: 'none', md: 'none' , lg:'flex' , xl:'flex'} }}
+                        display: { xs: 'none', sm: 'none', md: 'flex' , lg:'flex' , xl:'flex'}    
+                          }}
                     >
                         <SideBar />
                     </Grid>
+                    <Grid  item
+                        md={11}
+                        xs={12}
+                       sm={12}
+                        >
+                           
                     <Outlet />
+                    </Grid>
+                  
                 </Grid>
-            </Grid>
+         
 
             <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
 

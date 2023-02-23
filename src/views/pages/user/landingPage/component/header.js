@@ -24,7 +24,7 @@ const Header = () => {
                     alignItems="center"
                     justifyContent="space-between"
                     spacing={gridSpacing}
-                    sx={{ mt: { xs: 10, sm: 6, md: 18.75 }, mb: { xs: 2.5, md: 10 } }}
+                    sx={{ mt: { xs: 10, sm: 6, md:4}, mb: { xs: 2.5, md: 10 } }}
                 >
                     <Grid item xs={12} md={8}>
                         <Grid
@@ -106,7 +106,8 @@ const Header = () => {
                                 >
                                     {user == null && (
                                         <>
-                                            <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                                            <Grid container spacing={2} sx={{ justifyContent: { xs: 'center',
+                                             md: 'center' , lg:'flex-start' } }}>
                                                 <Grid item>
                                                     <AnimateButton>
                                                         <Button

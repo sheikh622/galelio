@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import {
     Container,
     Card,
@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 // project imports
-import { IconSearch } from '@tabler/icons';
+// import { IconSearch } from '@tabler/icons';
 
 import { gridSpacing } from 'store/constant';
 

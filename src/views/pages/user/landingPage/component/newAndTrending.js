@@ -81,7 +81,7 @@ const NewAndTrendingNfts = ({ nfts }) => {
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Grid container justifyContent="left" spacing={4} sx={{ textAlign: 'center' }}>
+                <Grid container justifyContent="center" spacing={4} sx={{ textAlign: 'center' }}>
                     {nfts && nfts?.length > 5 ? (
                         <>
                             <Slider  className="slider" {...settings}>
