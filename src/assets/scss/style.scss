@@ -1130,6 +1130,14 @@ text-align: center !important;
     font-weight: 400;
     font-size: 18px;
 }
+.mintbuttons {
+    justify-content: center;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+}
 
 .textfieldStyle {
     font-family: 'Inter' !important;
@@ -1534,4 +1542,14 @@ line-height: 26px;
     margin-top: 12px;
     
   
+}
+.footersocalIcons {
+    margin-right: 10px;
+    
+ }
+ @media only screen and (min-width: 1200) and (max-width: 1375) {
+    .footersocalIcons {
+       margin-right: 40px;
+       
+    }
 }

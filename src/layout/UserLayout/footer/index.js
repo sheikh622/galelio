@@ -55,17 +55,18 @@ const Footer = () => {
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                         <Grid style={{ marginTop: '5%' }}>
-                            <span className='footerDownloadTag' style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
+                            <span className='footerDownloadTag' style={{ fontWeight: 'bolder' }}>
+                            Download the app by clicking the link below:</span>
                         </Grid>
 
                         <Grid container sx={{ mt: 3  }}>
-                            <Grid item md={4} xs={12} lg={4} xl={3}>
-                                <img src={googlePlay}  alt="Google Play" width="120" />
+                            <Grid  item md={4} xs={12} lg={4} xl={3} className='footersocalIcons'>
+                                <img src={googlePlay}  alt="Google Play" width="110" />
                             </Grid>
-                            <Grid item md={1} xs={12} lg={1} xl={1} sx={{display:{xl:'none'}}} >
+                            <Grid item md={1} xs={12} lg={1} xl={1} sx={{display:{xl:'none', lg:'none'}}} >
                             </Grid>
                             <Grid item md={7} xs={12}   lg={7} xl={6}>
-                                <img src={appleStore}  alt="Apple Store" width="120" />
+                                <img src={appleStore}  alt="Apple Store" width="110" />
                             </Grid>
                         </Grid>
                     </Grid>

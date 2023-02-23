@@ -29,7 +29,7 @@ const Brands = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const brandsList = useSelector((state) => state.brand.brandsByAdminList);
-
+console.log(brandsList, 'brandsList................>')
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { ethers, utils } from 'ethers';
-import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
+import { Button,Grid, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
 // import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -366,8 +366,24 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                 <DialogActions sx={{ pr: 2.5 }}>
                     <>
-                        {loader ? (
-                            <CircularProgress />
+                        {!loader ? (
+                            <DialogActions sx={{ display: 'block',  }}>
+                            <Grid container justifyContent="center" sx={{ width: '30%', m: '0 auto ' }}>
+                                <Grid item>
+                                    <CircularProgress disableShrink size={'4rem'} />
+                                </Grid>
+                            </Grid>
+                           
+                                <Button
+                                    className="mintbuttons"
+                                    variant="Text"
+                                    sx={{fontSize:'13px',  margin: '0px 0px 10px 0px', color: '#2196f3' }}
+                                    size="small"
+                                >
+                                this NFT is being minted...
+                                </Button>
+                         
+                        </DialogActions>
                         ) : (
                             <>
                                 <Button

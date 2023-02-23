@@ -17,6 +17,9 @@ const BrandAdmin = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
+    console.log(brandAdminList, 'brandAdminList................>');
+    const userData = useSelector((state) => state.auth);
+    console.log(userData.user.role, 'brandsList................>');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -73,17 +76,30 @@ const BrandAdmin = () => {
                         Brand Management
                     </Typography>
                 }
-                // secondary={
-                //     <Button className='buttonSize' sx={{float:'right'}}
-                //     variant="contained"
-                //     size="large"
-                //     onClick={() => {
-                //         navigate('/brandsByAdmin');
-                //     }}
-                // >
-                //     Back
-                // </Button>
-                // }
+                secondary={
+                    userData?.user.role == 'Admin'   ? 
+                    <Button className='buttonSize' sx={{float:'right'}}
+                    variant="contained"
+                    size="large"
+                  
+                    onClick={() => {
+                        navigate('/brandsByAdmin');
+                    }}
+                >
+                    Back
+                </Button>
+                     : 
+                     <Button className='buttonSize' sx={{float:'right'}}
+                     variant="contained"
+                     size="large"
+                   
+                     onClick={() => {
+                         navigate('/brands');
+                     }}
+                 >
+                     Back
+                 </Button>
+                }
                 content={false}
             ></MainCard>
 
