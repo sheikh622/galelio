@@ -19,11 +19,11 @@ function* loginUser({ payload }) {
         yield put(loginSuccess(response.data.data));
 
     
-        // if (response.data.data.user.role == "Super Admin" || "Brand Admin") {
-        //     payload.navigate('/home'); 
-        // } else {
-        //     payload.navigate('/home');
-        // }
+        if (response.data.data.user.role == "Super Admin" || "Brand Admin") {
+            payload.navigate('/home'); 
+        } else {
+            payload.navigate('/home');
+        }
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);

@@ -52,16 +52,20 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
-        } else if (window?.ethereum?.networkVersion !== '5') {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Please change your Chain ID to Goerli',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-            console.log('Please change your Chain ID to Goerli');
-        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+        } 
+        
+        // else if (window?.ethereum?.networkVersion !== '5') {
+        //     dispatch({
+        //         type: SNACKBAR_OPEN,
+        //         open: true,
+        //         message: 'Please change your Chain ID to Goerli',
+        //         variant: 'alert',
+        //         alertSeverity: 'info'
+        //     });
+        //     console.log('Please change your Chain ID to Goerli');
+        // }
+        
+        else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,
@@ -251,7 +255,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let brandId = nftData.BrandId;
         let categoryId = nftData.CategoryId;
         let nftId = nftData.id;
-        let image = nftData.asset;
+        let image = nftData.ipfsUrl;
         let prices = nftData.price;
         let price = ethers.utils.parseEther(prices.toString());
         let name = nftData.name;
@@ -262,13 +266,23 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let brandName = nftData.Brand.name;
         let metaData = nftData.NFTMetaData;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
+        let poa = nftData.NFTMetaFiles;
+        let external_url = nftData.NFTMetaFiles[0].fieldValue
+        
+        let attributes=[];
+        for(let i =0; i<nftData.NFTMetaData.length; i++){
+            attributes.push({
+                trait_type: nftData.NFTMetaData[i].fieldName, 
+                value: nftData.NFTMetaData[i].fieldValue
+            })
+        }
 
         // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
         // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0"
         let nftTokens = nftData.NFTTokens;
 
         const result = await client.add(
-            JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, metaData })
+            JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, attributes, poa, external_url,mintedDate, metaData })
         );
         const uri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
@@ -284,7 +298,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             name: SIGNING_DOMAIN,
             version: SIGNATURE_VERSION,
             verifyingContract: contractAddress,
-            chainId: 5
+            chainId: 80001
         };
 
         const types = {
