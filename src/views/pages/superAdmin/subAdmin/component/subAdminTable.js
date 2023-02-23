@@ -262,13 +262,13 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                         <ChangeCircleIcon sx={{ fontSize: '1.5rem' }} />
                                                                     </IconButton>
                                                                 </Tooltip>
-                                                                {/* <Tooltip placement="top" title="Delete">
+                                                                <Tooltip placement="top" title="Delete">
                                                                     <IconButton
                                                                         color="primary"
                                                                         sx={{
                                                                             color: theme.palette.orange.dark,
                                                                             borderColor: theme.palette.orange.main,
-                                                                            '&:hover ': { background: theme.palette.orange.light }
+                                                                            '&:hover ':  { background: theme.palette.orange.light }
                                                                         }}
                                                                         size="large"
                                                                         onClick={() => {
@@ -284,7 +284,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                     >
                                                                         <img src={DeleteOutlineOutlinedIcon} />
                                                                     </IconButton>
-                                                                </Tooltip> */}
+                                                                </Tooltip>
                                                             </Stack>
                                                         ) : (
                                                             <Button

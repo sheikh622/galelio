@@ -38,34 +38,54 @@ const SignUpForm = ({ loginProp, ...others }) => {
     const [address, setAddress] = useState('');
 
     const handleConnect = async () => {
-        if (!window.ethereum) {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'No crypto wallet found. Please install it.',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' })
+        if(response){
 
-            // toast.error('No crypto wallet found. Please install it.');
+            if (!window.ethereum) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'No crypto wallet found. Please install it.',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            } else if (window?.ethereum?.networkVersion !== '5') {
+              console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Please change your Chain ID to Goerli',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('Please change your Chain ID to Goerli');
+                setWalletAddress()
+            }
+
+
+    
+            else {
+                
+                    const address = utils?.getAddress(response[0]);
+                    setWalletAddress(address);
+                    dispatch({
+                        type: SNACKBAR_OPEN,
+                        open: true,
+                        message: 'Success',
+                        variant: 'alert',
+                        alertSeverity: 'success'
+                    });
+                }
         }
+            else {
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
 
-        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
-        if (response) {
-            const address = utils?.getAddress(response[0]);
-
-            setWalletAddress(address);
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Success',
-                variant: 'alert',
-                alertSeverity: 'success'
-            });
-        } else {
-            // toast.error('No crypto wallet found. Please install it.');
-        }
     };
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };

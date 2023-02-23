@@ -61,7 +61,7 @@ const SocialLoginForm = () => {
                             <Grid item xs={12} container alignItems="center" justifyContent="center">
                                 <Box sx={{ mb: 2 }}>
                                     <Typography className="signInMarket" variant="subtitle1">
-                                        Social Login
+                                        Social Signup
                                     </Typography>
                                 </Box>
                             </Grid>
