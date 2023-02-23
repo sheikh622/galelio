@@ -1349,7 +1349,7 @@ font-style: normal;
 
 }
 .fontsize{
-    font-size: 18px !important 
+    // font-size: 25px !important 
 }
 @media only screen and (min-width:1568px ) {
 .fontfigma{
@@ -1388,7 +1388,7 @@ font-style: normal;
     font-size: 20px !important;
 }
 .fontsize{
-    font-size: 20px !important 
+    font-size: 40px !important 
 }
 .categoreyName {
     font-family: "Public Sans" !important;
@@ -1513,4 +1513,11 @@ font-size: 22px;
 line-height: 26px;
 /* identical to box height */
 
+}
+.sidebar{
+   
+    max-width:200px !important;
+    margin-top: 12px;
+    
+  
 }

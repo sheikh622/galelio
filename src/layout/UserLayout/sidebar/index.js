@@ -37,24 +37,25 @@ const SideBar = () => {
     }, [dispatch, navType]);
     return (
         <>
-            <Container sx={{ mt: 5 }}>
-                <Grid item xs={12}>
-                    <Grid
+          
+             
+                    <Grid className='sidebar'
                         xs={12}
                         sm={10}
-                        md={10}
-                        lg={12}
-                        xl={6}
+                        md={9}
+                        lg={9}
+                        xl={9}
                         container
                         alignItems="center"
                         spacing={3}
                         sx={{
+                             
+                            // pt: 1,
+                            // pb: 3,
+                            ml: 2,
+                            mr:2,
                            
-                            pt: 1,
-                            pb: 3,
-                            ml: 1,
-                            mr: 1,
-                            maxWidth: { lg: '90% !important' },
+                            // maxWidth: { lg: '90% !important' },
                             display: 'block',
                            
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
@@ -72,7 +73,7 @@ const SideBar = () => {
                                 <>
                                     <Box sx={{ borderLeft: '6px solid #2196f3' }}>
                                         <Tooltip className="fontsize" title="Home" placement="right" arrow>
-                                            <DashboardIcon sx={{ color: `${color}` }} />
+                                            <DashboardIcon sx={{ color: `${color}`,  }} />
                                         </Tooltip>
                                     </Box>
                                 </>
@@ -89,7 +90,7 @@ const SideBar = () => {
                         </Grid>  */}
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/marketplace');
                             }}
@@ -112,7 +113,7 @@ const SideBar = () => {
                         </Grid>
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/ComingSoon');
                             }}
@@ -135,7 +136,7 @@ const SideBar = () => {
                         </Grid>
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/ComingSoon');
                             }}
@@ -158,7 +159,7 @@ const SideBar = () => {
                         </Grid>
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/ComingSoon');
                             }}
@@ -181,7 +182,7 @@ const SideBar = () => {
                         </Grid>
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/ComingSoon');
                             }}
@@ -204,7 +205,7 @@ const SideBar = () => {
                         </Grid>
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/ComingSoon');
                             }}
@@ -225,29 +226,34 @@ const SideBar = () => {
                                 </>
                             )}
                         </Grid>
-                        <Grid item sx={{ mt: 5, paddingLeft: '0 ! important', textAlign: 'center' }}>
+                        <Grid item sx={{ mt: 8,mb:2, paddingLeft: '0 ! important', textAlign: 'center' }}>
                             {customization.navType == 'dark' ? (
                                 <>
-                                    <Box className="fontsize">
-                                        <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer' }} onClick={() => setNavType('light')} />
-                                    </Box>
+                                   <Tooltip className="fontsize" 
+                                    title="light" placement="right" arrow>
+                                        <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer', fontSize:{xl:'40px'} }} onClick={() => setNavType('light')} />
+                                    </Tooltip>
                                 </>
                             ) : (
                                 <>
                                     {' '}
-                                    <Box className="fontsize">
+                                    <Tooltip className="fontsize" 
+                                    title="Dark" placement="right" arrow>
+                                 
                                         <DarkModeIcon
-                                            className="fontsize"
-                                            style={{ color: `${color}`, cursor: 'pointer' }}
+                                            
+                                            style={{ color: `${color}`, cursor: 'pointer' ,
+                                            
+                                            }}
                                             onClick={() => setNavType('dark')}
                                         />
-                                    </Box>{' '}
+                                    </Tooltip>{' '}
                                 </>
                             )}
                         </Grid>
                     </Grid>
-                </Grid>
-            </Container>
+           
+           
         </>
     );
 };
