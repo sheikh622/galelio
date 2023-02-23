@@ -97,7 +97,7 @@ const BrandAdmin = () => {
                      Admin Management of : {location.state.brandData.name}
                   </Typography>
                     </Grid>
-                        <Grid item xs={3} lg={2} >
+                        <Grid item xs={12} lg={2} >
                        
                         <OutlinedInput
                         id="input-search-list-style1"
@@ -113,7 +113,7 @@ const BrandAdmin = () => {
                         }}
                     />
                         </Grid>
-                        <Grid item xs={3} lg={2} textAlign="start">
+                        <Grid item xs={12} lg={2} textAlign="start">
                             <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
                                 variant="contained"
                                 size="large"

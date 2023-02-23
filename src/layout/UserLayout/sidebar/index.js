@@ -231,7 +231,8 @@ const SideBar = () => {
                                 <>
                                    <Tooltip className="fontsize" 
                                     title="light" placement="right" arrow>
-                                        <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer', fontSize:{xl:'40px'} }} onClick={() => setNavType('light')} />
+                                        <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer',
+                                         fontSize:{xl:'40px'} }} onClick={() => setNavType('light')} />
                                     </Tooltip>
                                 </>
                             ) : (

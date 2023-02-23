@@ -227,7 +227,7 @@ const Categories = ({ categories }) => {
                                 justifyContent:{md:"center" , lg:'left', xs:'center' , sm:'center'} }}
                         >
                             {categories?.map((item) => (
-                                <Grid
+                                <Grid className='cate-margin'
                                     sx={{ my: { xs: '10px', md: '0', sm: '10px' }, 
                                     marginLeft:{xs:'15px'},
                                      marginRight: {lg:'15px'} }}

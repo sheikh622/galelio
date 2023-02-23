@@ -12,6 +12,7 @@ const NewCard = ({ data, nfts }) => {
             item
             xs={12}
             mt={5}
+            className='new-margin'
             sx={{
                 color: theme.palette.mode === 'dark' ? 'white' : 'black',
                 textDecoration: 'none',
@@ -23,7 +24,7 @@ const NewCard = ({ data, nfts }) => {
                 },
                 mr: { xs: nfts && nfts?.length > 5 ? 1 : 0, md: nfts && nfts?.length > 5 ? 4 : 4 }
             }}
-            md={nfts && nfts?.length > 5 ? 12 : 4}
+            md={nfts && nfts?.length > 5 ? 12 : 2}
             lg={nfts && nfts?.length > 5 ? 12 : 2}
             xl={nfts && nfts?.length > 5 ? 12 : 2}
             sm={nfts && nfts?.length > 5 ? 12 : 4}
