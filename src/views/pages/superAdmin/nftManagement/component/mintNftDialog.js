@@ -366,7 +366,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                 <DialogActions sx={{ pr: 2.5 }}>
                     <>
-                        {!loader ? (
+                        {loader ? (
                             <DialogActions sx={{ display: 'block',  }}>
                             <Grid container justifyContent="center" sx={{ width: '30%', m: '0 auto ' }}>
                                 <Grid item>

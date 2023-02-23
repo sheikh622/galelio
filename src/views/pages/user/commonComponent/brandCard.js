@@ -8,7 +8,7 @@ const BrandCard = ({ data, brands }) => {
     const navigate = useNavigate();
 
     return (
-        <Grid
+        <Grid className='feature'
             sx={{
                 color: theme.palette.mode === 'dark' ? 'white' : 'black',
                 textDecoration: 'none',
@@ -38,7 +38,7 @@ const BrandCard = ({ data, brands }) => {
             <Card
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
-                    background: theme.palette.mode === 'dark' ? '#000' : 'white',
+                    background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     width: brands && brands?.length > 5 ? '100%' : { lg: '220px' , xl:'100%'},
                     // boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '3px',

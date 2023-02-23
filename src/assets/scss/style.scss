@@ -1543,13 +1543,23 @@ line-height: 26px;
     
   
 }
-.footersocalIcons {
-    margin-right: 10px;
-    
- }
- @media only screen and (min-width: 1200) and (max-width: 1375) {
-    .footersocalIcons {
-       margin-right: 40px;
-       
-    }
+ // <umar code
+.slick-slide .MuiGrid-root {
+     margin-left: 0px !important; 
+    /* margin-right: 32px; */
+    margin-right: 18px !important;
 }
+
+@media only screen and (min-width: 1200px) and (max-width: 1330px) {
+    .cate-margin{
+        margin-right: 28px;
+    }
+    .new-margin{
+        margin-right: 46px;
+    }
+    .feature{
+        margin-right: 30px;
+    }
+
+}
+//umar code>

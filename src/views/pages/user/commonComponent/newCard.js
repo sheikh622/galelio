@@ -12,6 +12,7 @@ const NewCard = ({ data, nfts }) => {
             item
             xs={12}
             mt={5}
+            className='new-margin'
             sx={{
                 color: theme.palette.mode === 'dark' ? 'white' : 'black',
                 textDecoration: 'none',
@@ -21,9 +22,9 @@ const NewCard = ({ data, nfts }) => {
                     sm: nfts && nfts?.length > 5 ? 2 : 0,
                     md: nfts && nfts?.length > 5 ? 2 : 0
                 },
-                mr: { xs: nfts && nfts?.length > 5 ? 1 : 0, md: nfts && nfts?.length > 5 ? 4 : 4 }
+                mr: { xs: nfts && nfts?.length > 5 ? 1 : 0, md: nfts && nfts?.length > 5 ? 4 : 2 }
             }}
-            md={nfts && nfts?.length > 5 ? 12 : 4}
+            md={nfts && nfts?.length > 5 ? 12 : 2}
             lg={nfts && nfts?.length > 5 ? 12 : 2}
             xl={nfts && nfts?.length > 5 ? 12 : 2}
             sm={nfts && nfts?.length > 5 ? 12 : 4}
@@ -41,7 +42,7 @@ const NewCard = ({ data, nfts }) => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     // maxWidth: nfts && nfts?.length > 3? 0 : 365,
-                    width: nfts && nfts?.length > 5 ? '100%' : { lg: '220px', xl:'100%' },
+                    width: nfts && nfts?.length > 5 ? '100%' : { lg: '100%', xl:'100%' },
                     
                     // boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '3px',

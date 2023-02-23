@@ -1,11 +1,14 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
+import DarkModeIcon from '@mui/icons-material/DarkMode'
 import ListItemButton from '@mui/material/ListItemButton';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -22,7 +25,9 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function Drawer() {
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
+    const customization = useSelector((state) => state.customization);
 
+    const [navType, setNavType] = useState(customization.navType);
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -118,6 +123,28 @@ export default function Drawer() {
                         <ListItemText primary={'Resources'} />
                     </ListItemButton>
                 </ListItem>
+                {customization.navType == 'dark' ? (
+                      <ListItem disablePadding>
+                      <ListItemButton>
+                          <ListItemIcon>
+                              <WbSunnyIcon />
+                          </ListItemIcon>
+                          <ListItemText primary={'Light'} />
+                      </ListItemButton>
+                  </ListItem>
+                ) :(
+                    <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <DarkModeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Dark'} 
+                          onClick={() => setNavType('dark')}/>
+                    </ListItemButton>
+                </ListItem>
+                )
+}
+              
             </List>
         </Box>
     );
