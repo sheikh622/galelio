@@ -14,6 +14,7 @@ const HeaderAnimationImage = styled('img')({
 
 const Header = () => {
     const user = useSelector((state) => state.auth.user);
+    const token = useSelector((state) => state.auth.token);
     const theme = useTheme();
 
     return (
@@ -104,7 +105,7 @@ const Header = () => {
                                         delay: 0.4
                                     }}
                                 >
-                                    {user == null && (
+                                    {(token == null || undefined) && (
                                         <>
                                             <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
                                                 <Grid item>
