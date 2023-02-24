@@ -95,21 +95,24 @@ const NftManagement = () => {
             />
             <MainCard
                 className="Adminheading"
+                
                 title={
-                    <Typography
+                <Grid container sx={{display:'flex'}}>
+                    <Grid item md={8} xs={12}>
+                        <Typography
                         variant="h1"
                         component="h2"
                         className="headingcard"
-                        sx={{ marginTop: '10px', fontWeight: 600, color:  theme.palette.mode === 'dark' ? '#fff' : '#000' ,
-                         marginLeft: { lg: '-20px', md: '-20px' } }}
+                        sx={{   fontWeight: 600, color:  theme.palette.mode === 'dark' ? '#fff' : '#000' ,
+                         marginLeft: { lg: '-20px', md: '-20px' },  }}
                     >
                         Categories
                     </Typography>
-                }
-                secondary={
+                    </Grid>
+                    <Grid item md={4} xs={12}>
                     <Button
                         className="buttonSize"
-                        sx={{ float: 'right' }}
+                        sx={{float:{xs:'left' , md:'right'}, marginTop:{xs:"10px",md:"0px"} }}
                         variant="contained"
                         size="large"
                         onClick={() => {
@@ -118,7 +121,11 @@ const NftManagement = () => {
                     >
                         Back
                     </Button>
+                        </Grid>
+                        </Grid>
+                   
                 }
+              
                 content={false}
             ></MainCard>
             <MainCard
@@ -128,7 +135,7 @@ const NftManagement = () => {
                         <Grid item xs={12} lg={8}>
                             <Typography className="mainheading" variant="h1" component="h2" 
                             sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
-                                NFT Management
+                                NFT Management  
                             </Typography>
                         </Grid>
                         <Grid item xs={6} lg={2}>
