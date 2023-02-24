@@ -437,6 +437,7 @@ export function* watchRequestNftForMinting() {
 
 function* lazyMintNftRequest({ payload }) {
     let data = {
+        minterAddress: payload.minterAddress,
         nftDataArray: JSON.stringify(payload.nftDataArray),
         tokenIdArray: JSON.stringify(payload.tokenIdArray)
     };
@@ -446,6 +447,7 @@ function* lazyMintNftRequest({ payload }) {
 
         yield put(
             getAllNftSuperAdmin({
+                
                 categoryId: payload.categoryId,
                 brandId: payload.brandId,
                 search: payload.search,
@@ -469,6 +471,8 @@ function* mintNftRequest({ payload }) {
     const formData = new FormData();
     formData.append('nftDataArray', JSON.stringify(payload.nftDataArray));
     formData.append('tokenIdArray', JSON.stringify(payload.tokenIdArray));
+    formData.append('minterAddress', payload.minterAddress);
+
     formData.append('transactionHash', payload.transactionHash);
     formData.append('signerAddress', payload.signerAddress);
 

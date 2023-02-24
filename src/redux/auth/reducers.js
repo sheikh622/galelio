@@ -40,7 +40,7 @@ const AuthReducer = produce((draft, action) => {
 
             break;
         case SIGN_UP_SOCIAL_SUCCESS:
-            draft.socialuser = action.payload.socialuser;
+            draft.user = action.payload.user;
             draft.token = action.payload.token;
 
             break;

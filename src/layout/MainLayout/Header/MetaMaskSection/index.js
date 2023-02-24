@@ -28,18 +28,20 @@ const MetaMaskSection =  () => {
                 });
                 console.log('No crypto wallet found. Please install it.');
                 // toast.error('No crypto wallet found. Please install it.');
-            } else if (window?.ethereum?.networkVersion !== '5') {
-              console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
-                dispatch({
-                    type: SNACKBAR_OPEN,
-                    open: true,
-                    message: 'Please change your Chain ID to Goerli',
-                    variant: 'alert',
-                    alertSeverity: 'info'
-                });
-                console.log('Please change your Chain ID to Goerli');
-                setWalletAddress()
-            }
+            } 
+            
+            // else if (window?.ethereum?.networkVersion !== '5') {
+            //   console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
+            //     dispatch({
+            //         type: SNACKBAR_OPEN,
+            //         open: true,
+            //         message: 'Please change your Chain ID to Goerli',
+            //         variant: 'alert',
+            //         alertSeverity: 'info'
+            //     });
+            //     console.log('Please change your Chain ID to Goerli');
+            //     setWalletAddress()
+            // }
             else if(utils?.getAddress(response[0])!==user.walletAddress) {
                
                 dispatch({

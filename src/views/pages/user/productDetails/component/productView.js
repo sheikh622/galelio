@@ -143,16 +143,21 @@ const PropertiesView = ({ nft }) => {
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
-        } else if (window?.ethereum?.networkVersion !== '5') {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Please change your Chain ID to Goerli',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-            console.log('Please change your Chain ID to Goerli');
-        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+        }
+        
+        // else if (window?.ethereum?.networkVersion !== '5') {
+        //     dispatch({
+        //         type: SNACKBAR_OPEN,
+        //         open: true,
+        //         message: 'Please change your Chain ID to Goerli',
+        //         variant: 'alert',
+        //         alertSeverity: 'info'
+        //     });
+        //     console.log('Please change your Chain ID to Goerli');
+        // }
+        
+        
+        else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,
@@ -219,6 +224,7 @@ const PropertiesView = ({ nft }) => {
                     toast.error(error.reason);
                 }
             } else if (nft.mintType == 'lazyMint') {
+                console.log("HY LAZY HERE ");
                 try {
                     setLoader(true);
                     let signers = nft.signerAddress;
@@ -245,8 +251,12 @@ const PropertiesView = ({ nft }) => {
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
-                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
 
+                    console.log('im in 255');
+
+
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+console.log('nfts',nfts);
                     let prices = ethers.utils.parseEther(nft.price.toString());
 
                     let voucher = {
@@ -262,17 +272,22 @@ const PropertiesView = ({ nft }) => {
                    // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
                     //console.log(verifyAddr);
 
-                     let approvalAmount = await token.allowance(address, contractAddress);
+                    let approvalAmount = await token.allowance(address, contractAddress);
 
                     let approvePrice = ethers.utils.parseEther('10000');
                     if (approvalAmount.toString() < nft.price.toString()) {
                         await (await token.approve(contractAddress, approvePrice)).wait();
                     }
-                    // await (await token.approve(contractAddress, prices)).wait();
+                     //await (await token.approve(contractAddress, prices)).wait();
+                   console.log(voucher,"voucher");
+                   console.log(nft.minterAddress)
+                   console.log(erc20Address)
+                   console.log(prices)
+                   console.log(nft.requesterAddress )
 
                     //
                     try {
-                        let mintedNFT = await (await nfts.buyNft(voucher, "0x6f3B51bd5B67F3e5bca2fb32796215A796B79651")).wait();
+                        let mintedNFT = await (await nfts.buyNft(voucher, nft.minterAddress,nft.requesterAddress )).wait();
                         const id = parseInt(mintedNFT.events[0].args[2]);
 
                         dispatch(
@@ -297,6 +312,7 @@ const PropertiesView = ({ nft }) => {
                 } catch (error) {
                     setLoader(false);
                     toast.error(error.reason);
+                    console.log('error', error);
                 }
             }
         }
