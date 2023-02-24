@@ -48,18 +48,22 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
             // toast.error('No crypto wallet found. Please install it.');
             setOpen(false);
             setLoader(false);
-        } else if (window?.ethereum?.networkVersion !== '5') {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Please change your Chain ID to Goerli',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-            console.log('Please change your Chain ID to Goerli');
-            setOpen(false);
-            setLoader(false);
-        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+        }
+        
+        // else if (window?.ethereum?.networkVersion !== '5') {
+        //     dispatch({
+        //         type: SNACKBAR_OPEN,
+        //         open: true,
+        //         message: 'Please change your Chain ID to Goerli',
+        //         variant: 'alert',
+        //         alertSeverity: 'info'
+        //     });
+        //     console.log('Please change your Chain ID to Goerli');
+        //     setOpen(false);
+        //     setLoader(false);
+        // }
+        
+        else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,

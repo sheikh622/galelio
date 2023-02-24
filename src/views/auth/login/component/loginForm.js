@@ -62,13 +62,17 @@ const LoginForm = ({ loginProp, ...others }) => {
                 data: decoded_data
             })
             .then(function (response) {
+                console.log('response.data.data',response.data.data );
                 dispatch(loginSuccess(response.data.data));
 
                 if (!response.data.data.profileCompleted) {
                     navigate('/socialLogin', {
                         state: { socal: response.data.data }
                     });
+
+                    console.log('if in ran');
                 } else {
+                    console.log('else in ran');
                     navigate('/home', {
                         state: { socal: response.data.data }
                     });

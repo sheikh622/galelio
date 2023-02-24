@@ -533,11 +533,14 @@ font-weight: 700;
     // background-color: #212121;
     min-height: auto;
     max-height: auto;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
     height: 455px;
     width: 99%;
     background-image: url(../images/background1.png);
     background-position: center;
     background-size: cover;
+    overflow: hidden;
     margin-top: 15px;
 }
 .TextField-without-border-radius fieldset {
@@ -555,10 +558,10 @@ font-weight: 700;
   }
 .create {
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
-    padding: 10px 32px;
+    padding: 13px 32px;
     font-family: 'Public Sans';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     line-height: 19px;
     text-transform: capitalize;
@@ -1369,7 +1372,7 @@ font-style: normal;
 .fontfigma{
     font-family: 'Public Sans' !important;
     font-style: normal !important;
-    font-weight: 500 !important;
+    font-weight: 700 !important;
     font-size: 22px !important;
     line-height: 26px !important;
 
@@ -1430,6 +1433,7 @@ font-family: 'Public Sans';
 font-style: normal;
 font-weight: 500;
 font-size: 16px;
+ 
 }
 .centerText{
     
@@ -1554,15 +1558,36 @@ line-height: 26px;
     margin-right: 18px !important;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1330px) {
+@media only screen and (min-width: 1200px) and (max-width: 1370px) {
     .cate-margin{
-        margin-right: 60px;
+        margin-right: 35px;
+        margin-left: -9px;
     }
+
+    .cate-width{
+     width:220px ;
+    }
+
     .new-margin{
-        margin-right: 46px;
+        margin-right: 20px;
+        margin-left: 9px;
+    }
+    .new-width{
+       
+       width: 220px;
     }
     .feature{
-        margin-right: 30px;
+        margin-right: 24px;
+        margin-left: 5px;
+    }
+    .feature-width{
+        width:220px ;
+    }
+    .footersocalIcons{
+      margin-right: 10px;  
+    }
+    .contactLargescrn{
+margin-top: 35px;
     }
 
 }

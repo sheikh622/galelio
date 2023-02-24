@@ -39,6 +39,7 @@ const BrandCard = ({ data, brands }) => {
             }}
         >
             <Card
+            className='feature-width'
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',

@@ -54,7 +54,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
 
                     <LogoSection />
                 </Box>
-               <ButtonBase sx={{ display:{md:'block', lg:'none' , xs:'block' , sm:'block'} , 
+               <ButtonBase sx={{ display:{md:'block', lg:'none' , xs:'block' , sm:'block', } , 
                marginTop:{md:'0', lg:'0' , xs:'-15px' , sm:'-15px'},
                 borderRadius: '', overflow: 'hidden' }}>
                     <Avatar
