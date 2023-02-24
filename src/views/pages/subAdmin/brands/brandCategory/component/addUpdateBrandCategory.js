@@ -103,7 +103,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             const symbol = 'G' + brandName?.substring(0, 1) + categoryName?.substring(0, 1);
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
-            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
+            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi, signer);
 
             let res = await (
                 await factoryAddr.deployMintingContract(contractName, symbol).catch((error) => {

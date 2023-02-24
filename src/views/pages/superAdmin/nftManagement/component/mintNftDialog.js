@@ -30,6 +30,9 @@ const client = create({
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function MintNftDialog({ open, setOpen, page, limit, search, loader, setLoader, nftData, type }) {
+
+
+    console.log('im here');
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
@@ -254,6 +257,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
     const handleLazyMint = async () => {
         setLoader(true);
+        console.log("hy")
         let brandId = nftData.BrandId;
         let categoryId = nftData.CategoryId;
         let nftId = nftData.id;

@@ -109,7 +109,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
                 console.log('signer',signer);
-                const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi, signer);
+                const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
                 console.log('factoryAddr',factoryAddr);
                 let profitAmount = ethers.utils.parseEther(formik.values.profitPercentage.toString());
     
