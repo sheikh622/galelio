@@ -217,8 +217,8 @@ export default function Header() {
                     </Helmet>
                     <Box
                         sx={{
-                            height: '4em',
-                            paddingTop: '1em',
+                            height: '3em',
+                            // paddingTop: '1em',
                             width: '100%',
                             marginLeft: '2%',
                             display: 'flex'
@@ -314,9 +314,9 @@ export default function Header() {
                          ) && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock',  marginTop: '-5px', }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock', marginTop: '-3px', }} />
                                 )}
 
                                 <IconButton

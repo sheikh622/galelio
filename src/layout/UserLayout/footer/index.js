@@ -135,7 +135,7 @@ const Footer = () => {
                                     className={styles.contact}
                                     style={{
                                         display: 'flex',
-                                        flexWrap: 'wrap',
+                                        // flexWrap: 'wrap',
                                         marginTop: '3%'
                                     }}
                                 >

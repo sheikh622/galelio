@@ -25,7 +25,7 @@ const Header = () => {
                     alignItems="center"
                     justifyContent="space-between"
                     spacing={gridSpacing}
-                    sx={{ mt: { xs: 10, sm: 6, md:4}, mb: { xs: 2.5, md: 10 } }}
+                    sx={{ mt: { xs: 10, sm: 6, md: 4 }, mb: { xs: 2.5, md: 10 } }}
                 >
                     <Grid item xs={12} md={8}>
                         <Grid
@@ -49,11 +49,10 @@ const Header = () => {
                                             fontFamily: 'Public Sans !important',
                                             fontStyle: 'normal !important',
                                             fontWeight: '600',
-                                           
-                                       
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px' , lg:'78px' },
-                                            lineHeight: { xs: '1', sm: '1', md: '84px' , lg:'84px' },
-                                           
+
+                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
+                                            lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
+
                                             color: '#000'
                                         }}
                                     >
@@ -82,10 +81,10 @@ const Header = () => {
                                         sx={{
                                             color: '#000',
                                             fontFamily: 'Public Sans  !important',
-                                            fontStyle: 'normal',                                        
-                                         
+                                            fontStyle: 'normal',
+
                                             textTransform: 'capitalize  !important',
-                                            fontSize: { xs: '1rem', md: '27px' , lg:'27px' },
+                                            fontSize: { xs: '1rem', md: '27px', lg: '27px' },
                                             fontWeight: 400,
                                             lineHeight: 1.4
                                         }}
@@ -107,14 +106,17 @@ const Header = () => {
                                 >
                                     {(token == null || undefined) && (
                                         <>
-                                            <Grid container spacing={2} sx={{ justifyContent: { xs: 'center',
-                                             md: 'center' , lg:'flex-start' } }}>
+                                            <Grid
+                                                container
+                                                spacing={2}
+                                                sx={{ justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
+                                            >
                                                 <Grid item>
                                                     <AnimateButton>
                                                         <Button
                                                             className="create"
                                                             component={RouterLink}
-                                                            to="/login"                                                            
+                                                            to="/login"
                                                             size="large"
                                                             variant="contained"
                                                             color="secondary"
