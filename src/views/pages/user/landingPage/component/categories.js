@@ -239,6 +239,7 @@ const Categories = ({ categories }) => {
                                  
                                 >
                                     <Card
+                                    className='cate-width'
                                         sx={{
                                             color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                             background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
@@ -294,7 +295,8 @@ const Categories = ({ categories }) => {
                             ))}
                         </Grid>
                     ) : (
-                        <Grid mt={0} container  spacing={2}>
+                        <Grid mt={0} container  spacing={2} 
+                         sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}>
                             <h3 className="noDatacat fontfamily" 
                             sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
                             > No category found. 

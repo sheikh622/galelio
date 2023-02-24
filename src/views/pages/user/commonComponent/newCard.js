@@ -38,7 +38,7 @@ const NewCard = ({ data, nfts }) => {
                 });
             }}
         >
-            <Card
+            <Card className='new-width'
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',

@@ -1550,15 +1550,35 @@ line-height: 26px;
     margin-right: 18px !important;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1330px) {
+@media only screen and (min-width: 1200px) and (max-width: 1358px) {
     .cate-margin{
-        margin-right: 60px;
+        margin-right: 35px;
+        margin-left: -9px;
     }
+
+    .cate-width{
+     width:220px ;
+    }
+
     .new-margin{
-        margin-right: 46px;
+        margin-right: 20px;
+        margin-left: 9px;
+    }
+    .new-width{
+       width: 220px;
     }
     .feature{
-        margin-right: 30px;
+        margin-right: 24px;
+        margin-left: 5px;
+    }
+    .feature-width{
+        width:220px ;
+    }
+    .footersocalIcons{
+      margin-right: 10px;  
+    }
+    .contactLargescrn{
+margin-top: 35px;
     }
 
 }

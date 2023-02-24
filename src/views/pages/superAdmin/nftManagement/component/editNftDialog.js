@@ -125,7 +125,15 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             .required('NFT Price is required')
             .typeError('Invalid Price'),
         images: Yup.mixed()
-    });
+        .when(['isUpdate'], {
+            is: true,
+            then: Yup.mixed(),
+            otherwise: Yup.mixed().required('Image is required')
+        })
+
+        .test('image size',
+         'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
+});
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: nftInfo,

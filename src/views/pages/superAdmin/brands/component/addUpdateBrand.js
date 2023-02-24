@@ -36,11 +36,15 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
             .required('Brand is required!')
             .max(400, 'Brand can not exceed 400 characters'),
             // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
-        image: Yup.mixed().when(['isUpdate'], {
+        image: Yup.mixed()     .when(['isUpdate'], {
             is: true,
             then: Yup.mixed(),
             otherwise: Yup.mixed().required('Image is required')
         })
+
+        .test('image size',
+         'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
+
     });
     const errorHandler = (values) => {
         if (values.image) {
