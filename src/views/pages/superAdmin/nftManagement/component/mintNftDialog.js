@@ -135,6 +135,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                     dispatch(
                         mintNft({
+                            minterAddress: user.walletAddress,
                             nftDataArray: nftDataArray,
                             tokenIdArray: tokenIdArray,
                             transactionHash: transactionHash,
@@ -192,6 +193,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                     dispatch(
                         mintNft({
+                            minterAddress: user.walletAddress,
                             nftDataArray: nftDataArray,
                             tokenIdArray: tokenIdArray,
                             transactionHash: transactionHash,
@@ -347,6 +349,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
         dispatch(
             lazyMintNft({
+                minterAddress: user.walletAddress,
                 nftDataArray: nftDataArray,
                 tokenIdArray: tokenIdArray,
                 brandId: brandId,

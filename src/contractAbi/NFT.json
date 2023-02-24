@@ -496,18 +496,8 @@
 			},
 			{
 				"internalType": "address",
-				"name": "owner",
+				"name": "_owner",
 				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_price",
-				"type": "uint256"
 			},
 			{
 				"internalType": "address",
