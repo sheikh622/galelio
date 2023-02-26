@@ -41,6 +41,8 @@ const PropertiesView = ({ nft }) => {
     const [loader, setLoader] = useState(false);
     const [redeemLoader, setRedeemLoader] = useState(false);
     const [resellLoader, setResellLoader] = useState(false);
+    const [lazyTokenId, setLazyTokenId] = useState("");
+
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
@@ -79,8 +81,9 @@ const PropertiesView = ({ nft }) => {
                 >
                     Resell
                 </Button>
-                <Dialog open={open} 
-                // onClose={handleClose}
+                <Dialog
+                    open={open}
+                    // onClose={handleClose}
                 >
                     <DialogTitle>NFT Resell Price</DialogTitle>
                     <DialogContent>
@@ -143,16 +146,19 @@ const PropertiesView = ({ nft }) => {
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
-        } else if (window?.ethereum?.networkVersion !== '5') {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Please change your Chain ID to Goerli',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-            console.log('Please change your Chain ID to Goerli');
-        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+        }
+
+        // else if (window?.ethereum?.networkVersion !== '5') {
+        //     dispatch({
+        //         type: SNACKBAR_OPEN,
+        //         open: true,
+        //         message: 'Please change your Chain ID to Goerli',
+        //         variant: 'alert',
+        //         alertSeverity: 'info'
+        //     });
+        //     console.log('Please change your Chain ID to Goerli');
+        // }
+        else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,
@@ -169,7 +175,7 @@ const PropertiesView = ({ nft }) => {
     const handleBuyNft = async () => {
         if (user == null) {
             navigate('/login');
-        } else if (await checkWallet()) {       
+        } else if (await checkWallet()) {
             if (nft.mintType == 'directMint') {
                 console.log('im in handlebuy');
                 try {
@@ -177,23 +183,25 @@ const PropertiesView = ({ nft }) => {
 
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.contractAddress;
                     let price = ethers.utils.parseEther(nft.price.toString());
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
 
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    console.log('marketplace', marketplace);
+
                     const token = new ethers.Contract(erc20Address, Erc20, signer);
-                    // await (await token.approve(MarketplaceAddress.address, price)).wait();
+                    await (await token.approve(MarketplaceAddress.address, price)).wait();
 
                     // -------------
-                    let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
+                    // let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
 
-                    let approvePrice = ethers.utils.parseEther('10000');
-                    if (approvalAmount.toString() < nft.price.toString()) {
-                        await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
-                    }
+                    // let approvePrice = ethers.utils.parseEther('10000');
+                    // if (approvalAmount.toString() < nft.price.toString()) {
+                    //     await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
+                    // }
                     // ---------------
                     console.log('tokenId, contractAddress, price from product view', tokenId, contractAddress, price);
                     await (await marketplace.purchaseItem(tokenId, contractAddress, price))
@@ -210,7 +218,6 @@ const PropertiesView = ({ nft }) => {
                             );
                         })
                         .catch((error) => {
-                          
                             setLoader(false);
                             toast.error(error.reason);
                         });
@@ -219,12 +226,13 @@ const PropertiesView = ({ nft }) => {
                     toast.error(error.reason);
                 }
             } else if (nft.mintType == 'lazyMint') {
+                console.log('HY LAZY HERE ');
                 try {
                     setLoader(true);
                     let signers = nft.signerAddress;
                     let erc20Address = BLOCKCHAIN.ERC20;
                     // let signature = nft.NFTTokens[0].signature;
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.contractAddress;
                     // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
                     // const SIGNING_DOMAIN = 'Galileo-Protocol';
                     // const SIGNATURE_VERSION = '1';
@@ -245,43 +253,55 @@ const PropertiesView = ({ nft }) => {
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
-                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
 
-                    let prices = ethers.utils.parseEther(nft.price.toString());
+                    console.log('im in 255');
+
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                    console.log('nfts', nfts);
+                    let nftPrice = nft.price.toString();
+
+                    let prices = ethers.utils.parseEther(nftPrice);
 
                     let voucher = {
                         uri: nft.tokenUri,
-                        price: prices,
+                        price: prices.toString(),
                         token: erc20Address,
                         signature: nft.NFTTokens[0].signature
                     };
-
+                    console.log(voucher, 'voucher');
                     let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
                     const token = new ethers.Contract(erc20Address, Erc20, signer);
-                   // const signature = await signer._signTypedData(domain, types, voucher);
-                   // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
+                    // const signature = await signer._signTypedData(domain, types, voucher);
+                    // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
                     //console.log(verifyAddr);
 
-                     let approvalAmount = await token.allowance(address, contractAddress);
+                    // let approvalAmount = await token.allowance(address, contractAddress);
 
-                    let approvePrice = ethers.utils.parseEther('10000');
-                    if (approvalAmount.toString() < nft.price.toString()) {
-                        await (await token.approve(contractAddress, approvePrice)).wait();
-                    }
-                    // await (await token.approve(contractAddress, prices)).wait();
+                    // let approvePrice = ethers.utils.parseEther('10000');
+                    // if (approvalAmount.toString() < nft.price.toString()) {
+                    //     await (await token.approve(contractAddress, approvePrice)).wait();
+                    // }
+                    await (await token.approve(contractAddress, '100000000000000000000000000000000000000')).wait();
+                    console.log(voucher, 'voucher');
+                    console.log(nft.minterAddress);
+                    console.log(erc20Address);
+
+                    console.log(nft.requesterAddress);
 
                     //
                     try {
-                        let mintedNFT = await (await nfts.buyNft(voucher, "0x6f3B51bd5B67F3e5bca2fb32796215A796B79651")).wait();
+                        let mintedNFT = await (await nfts.buyNft(voucher, nft.minterAddress, nft.requesterAddress)).wait();
                         const id = parseInt(mintedNFT.events[0].args[2]);
-
+                        console.log('mintedNFT',mintedNFT);
+                        console.log('id', id);
+                        setLazyTokenId(id.toString())
                         dispatch(
                             changeTokenId({
                                 id: nft.NFTTokens[0].id,
                                 tokenId: id.toString()
                             })
                         );
-
+                            console.log('im before lazy dispatch');
                         dispatch(
                             buyNft({
                                 nftId: nft.id,
@@ -292,11 +312,13 @@ const PropertiesView = ({ nft }) => {
                             })
                         );
                     } catch (error) {
+                        console.log('error',error);
                         toast.error(error.reason);
                     }
                 } catch (error) {
                     setLoader(false);
                     toast.error(error.reason);
+                    console.log('error', error);
                 }
             }
         }
@@ -311,14 +333,14 @@ const PropertiesView = ({ nft }) => {
                     setResellLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.contractAddress;
 
                     let rrprice = ethers.utils.parseEther(rprice.toString());
 
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
 
-                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
 
                     await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
@@ -347,20 +369,36 @@ const PropertiesView = ({ nft }) => {
                 }
             } else if (nft.mintType == 'lazyMint') {
                 try {
+                    setResellLoader(true);
+                    console.log('hy');
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    // let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    let tokenId = parseInt(lazyTokenId)
 
-                    let rrprice = ethers.utils.parseEther(nft.price.toString());
+                    console.log('tokenId from resell', tokenId);
+                    let contractAddress = nft.contractAddress;
+                    let nftPrice = nft.price.toString();
+                    let rrprice = ethers.utils.parseEther(nftPrice);
+                    rrprice = rrprice.toString();
+                    let buyer = buyerNft?.buyer?.buyerAddress;
 
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
-
-                    const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+                    console.log('signer', signer);
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
-
-                    // await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
-                    await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, rrprice))
+                    console.log('MARKETPLACE', marketplace);
+                    console.log(
+                        'erc20Address, tokenId, contractAddress, rrprice,buyer',
+                        erc20Address,
+                        tokenId,
+                        contractAddress,
+                        rrprice,
+                        buyer
+                    );
+                    //await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
+                    // console.log("tokenid",tokenId)
+                    await (await marketplace.makeItem(erc20Address, tokenId, contractAddress, rrprice, buyer))
                         .wait()
                         .then((data) => {
                             dispatch(
@@ -377,11 +415,13 @@ const PropertiesView = ({ nft }) => {
                         })
                         .catch((error) => {
                             toast.error(error.reason);
+                            console.log(error);
                         });
                     setOpen(false);
                 } catch (error) {
                     setResellLoader(false);
                     toast.error(error.reason);
+                    console.log(error);
                 }
             }
         }
@@ -393,14 +433,21 @@ const PropertiesView = ({ nft }) => {
         } else if (await checkWallet()) {
             if (nft.mintType == 'directMint') {
                 try {
+                    console.log('hy');
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    
+                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    console.log('im beneath ca');
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
+                    console.log('signer', signer);
 
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    console.log('marketplace', marketplace);
+
+                    console.log('directmint redeem tokenId',tokenId);
 
                     await (await marketplace.redeemNft(tokenId, contractAddress))
                         .wait()
@@ -428,25 +475,36 @@ const PropertiesView = ({ nft }) => {
                         })
                         .catch((error) => {
                             toast.error(error.reason);
+                            console.log(error);
                         });
                 } catch (error) {
                     setRedeemLoader(false);
                     toast.error(error.reason);
+                    console.log(error);
                 }
             } else if (nft.mintType == 'lazyMint') {
+                console.log('im in lm');
                 try {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.Category.BrandCategories[0].contractAddress;
+                    // let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    
+                    let tokenId = parseInt(lazyTokenId)
+console.log('tokenId', tokenId);
+                    let contractAddress = nft.contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
-
+                    // console.log("tokenid",nft.NFTTokens[0].tokenId)
+                    // console.log("tokenid",typeof nft.NFTTokens[0].tokenId)
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
-                    let rrprice = ethers.utils.parseEther(nft.price.toString());
-
-                    await (await marketplace.redeem(erc20Address, tokenId, contractAddress, rrprice))
+                    let nftPrice = nft.price.toString();
+                    let rrprice = ethers.utils.parseEther(nftPrice);
+                    console.log('rrprice.toString()', rrprice.toString());
+                    let fprice=rrprice.toString()
+                    console.log('erc20Address, tokenId, contractAddress, fprice',erc20Address, tokenId, contractAddress, fprice);
+                    await (await marketplace.redeem(erc20Address, tokenId, contractAddress, fprice))
                         .wait()
+
                         .then((data) => {
                             dispatch(
                                 redeemNft({
@@ -471,17 +529,22 @@ const PropertiesView = ({ nft }) => {
                         })
                         .catch((error) => {
                             toast.error(error.reason);
+                            console.log('error', error);
                         });
                 } catch (error) {
                     setRedeemLoader(false);
                     toast.error(error.reason);
+                    console.log('error', error);
                 }
             }
         }
     };
 
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
+
+    console.log('buyerNft', buyerNft?.buyer?.buyerAddress);
     useEffect(() => {
+        console.log('useEffect Ran');
         if (user) {
             dispatch(
                 getNftBuyer({
@@ -502,7 +565,7 @@ const PropertiesView = ({ nft }) => {
                         <CardMedia
                             component="img"
                             image={nft?.asset ? nft?.asset : watch1}
-                            sx={{ minheight: 'auto', maxHeight: '570px', background:'transparent',  overflow: 'hidden', cursor: 'Pointer' }}
+                            sx={{ minheight: 'auto', maxHeight: '570px', background: 'transparent', overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
 
@@ -554,7 +617,7 @@ const PropertiesView = ({ nft }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                               Total NFTs: {nft?.NFTTokens.length}
+                                                Total NFTs: {nft?.NFTTokens.length}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>

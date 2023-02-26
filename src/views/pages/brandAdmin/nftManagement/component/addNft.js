@@ -49,6 +49,8 @@ const typeArray = [
 ];
 
 export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
+
+    console.log('data', data);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
@@ -140,7 +142,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 // toast.success("Please wait for confirmation Transaction !");
                 dispatch(
                     addNft({
-                        requesterAddress: user.walletAddress,
+                    
                         categoryId: data.CategoryId,
                         mintType: mintType,
                         metaDataArray: fieldDataArray,
@@ -157,6 +159,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         limit: limit,
                         search: search,
                         categoryId: data.CategoryId,
+                        requesterAddress: user.walletAddress,
+                        contractAddress:data.contractAddress,
                         handleClose: handleClose,
                         brandId: user.BrandId
                     })

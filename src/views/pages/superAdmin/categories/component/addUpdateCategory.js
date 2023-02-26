@@ -25,19 +25,19 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
 
     const validationSchema = Yup.object({
         isUpdate: Yup.boolean().default(isUpdate),
-        name: Yup.string()
-            .required('Category Name is required!')
-            .max(200, 'Category Name can not exceed 200 characters'),
-            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
-        description: Yup.string()
-            .required('Description is required!')
-            .max(400, 'Description can not exceed 400 characters'),
-            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
-        image: Yup.mixed().when(['isUpdate'], {
-            is: true,
-            then: Yup.mixed(),
-            otherwise: Yup.mixed().required('Image is required')
-        })
+        name: Yup.string().required('Category Name is required!').max(200, 'Category Name can not exceed 200 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Category name'),
+        description: Yup.string().required('Description is required!').max(400, 'Description can not exceed 400 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
+        image: Yup.mixed()
+            .when(['isUpdate'], {
+                is: true,
+                then: Yup.mixed(),
+                otherwise: Yup.mixed().required('Image is required')
+            })
+
+            .test('image size',
+             'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
     });
 
     const errorHandler = (values) => {
@@ -165,8 +165,9 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
-                        sx={{ width: '92%',
-                        margin: '0px 0px 10px 8px', 
+                            sx={{
+                                width: '92%',
+                                margin: '0px 0px 10px 8px',
                                 background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                             }}
                             className="buttons"
@@ -178,8 +179,8 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                         >
                             {categoryData.name !== '' ? 'Update ' : 'Create '}
                         </Button>
-                        </AnimateButton>
-                        <AnimateButton>
+                    </AnimateButton>
+                    <AnimateButton>
                         <Button
                             className="buttons"
                             variant="outlined"

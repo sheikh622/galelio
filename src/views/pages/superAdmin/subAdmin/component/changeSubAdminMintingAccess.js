@@ -37,7 +37,7 @@ export default function ChangeSubAdminMintingAccessDialog({ open, setOpen, page,
         
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const nfts = new ethers.Contract(subAdminData.contractAddress, NFTAbi, signer);
+        const nfts = new ethers.Contract(subAdminData.contractAddress, NFTAbi.abi, signer);
         if(subAdminData.hasMintingAccess == true){
             await (
                 await nfts.revokeRole(blockChainRole, subAdminData.walletAddress).catch((error) => {

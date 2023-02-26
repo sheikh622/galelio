@@ -38,34 +38,56 @@ const SignUpForm = ({ loginProp, ...others }) => {
     const [address, setAddress] = useState('');
 
     const handleConnect = async () => {
-        if (!window.ethereum) {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'No crypto wallet found. Please install it.',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' })
+        if(response){
 
-            // toast.error('No crypto wallet found. Please install it.');
+            if (!window.ethereum) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'No crypto wallet found. Please install it.',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            } 
+            
+            // else if (window?.ethereum?.networkVersion !== '5') {
+            //   console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
+            //     dispatch({
+            //         type: SNACKBAR_OPEN,
+            //         open: true,
+            //         message: 'Please change your Chain ID to Goerli',
+            //         variant: 'alert',
+            //         alertSeverity: 'info'
+            //     });
+            //     console.log('Please change your Chain ID to Goerli');
+            //     setWalletAddress()
+            // }
+
+
+    
+            else {
+                
+                    const address = utils?.getAddress(response[0]);
+                    setWalletAddress(address);
+                    dispatch({
+                        type: SNACKBAR_OPEN,
+                        open: true,
+                        message: 'Success',
+                        variant: 'alert',
+                        alertSeverity: 'success'
+                    });
+                }
         }
+            else {
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
 
-        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
-        if (response) {
-            const address = utils?.getAddress(response[0]);
-
-            setWalletAddress(address);
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Success',
-                variant: 'alert',
-                alertSeverity: 'success'
-            });
-        } else {
-            // toast.error('No crypto wallet found. Please install it.');
-        }
     };
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -146,7 +168,8 @@ const SignUpForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                        <FormControl fullWidth 
+                       sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">First Name </InputLabel>
                             <OutlinedInput
                                 type="name"
@@ -163,7 +186,8 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+                        <FormControl fullWidth  
+                        sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Last Name </InputLabel>
                             <OutlinedInput
                                 type="lastName"
@@ -180,24 +204,25 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
-                            <OutlinedInput
-                                type="email"
-                                value={values.email}
-                                name="email"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                label="Email"
-                                inputProps={{}}
-                            />
-                            {touched.email && errors.email && (
-                                <FormHelperText error id="standard-weight-helper-text-email-login">
-                                    {errors.email}
-                                </FormHelperText>
-                            )}
-                        </FormControl>
-
+                      
+                        <FormControl fullWidth error={Boolean(touched.email && errors.email)}
+                        sx={{ ...theme.typography.customInput }}>
+                           <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
+                           <OutlinedInput
+                               type="email"
+                               value={values.email}
+                               name="email"
+                               onBlur={handleBlur}
+                               onChange={handleChange}
+                               label="Email"
+                               inputProps={{}}
+                           />
+                           {touched.email && errors.email && (
+                               <FormHelperText error id="standard-weight-helper-text-email-login">
+                                   {errors.email}
+                               </FormHelperText>
+                           )}
+                       </FormControl>
                         <FormControl
                             fullWidth
                             error={Boolean(touched.password && errors.password)}

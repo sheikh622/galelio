@@ -30,6 +30,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import MetaMaskSection from './MetaMaskSection';
 import { Helmet } from 'react-helmet';
+import { useEffect } from 'react';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -84,9 +85,20 @@ export default function Header() {
         }
     };
 
-    const user = useSelector((state) => state.auth.user);
-    console.log(user?.role, 'user in sidebar');
+
     const token = useSelector((state) => state.auth.token);
+  const   user = useSelector((state) => state.auth.user);
+    console.log('token',token);
+    console.log('user',user);
+
+    // const token = useSelector((state) => state.auth.token);
+    // if(!token){
+    //     user =undefined
+    // }else{
+    //     user = useSelector((state) => state.auth.user);
+       
+    // }
+    // console.log(user?.role, 'user in sidebar');
     // console.log(token, 'token in sidebar');
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -205,8 +217,8 @@ export default function Header() {
                     </Helmet>
                     <Box
                         sx={{
-                            height: '4em',
-                            paddingTop: '1em',
+                            height: '3em',
+                            // paddingTop: '1em',
                             width: '100%',
                             marginLeft: '2%',
                             display: 'flex'
@@ -258,7 +270,7 @@ export default function Header() {
                         <Box sx={{ flexGrow: 1 }} />
 
                         {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') 
-                        && user?.role != 'User' && user != null && (
+                        && (user?.role != 'User' && (token !== null || undefined)) && (
                             <Box>
                                 <Button
                                     sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
@@ -275,7 +287,7 @@ export default function Header() {
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
                             <div sx={{ marginRight: '3%' }}>{(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User')
                             
-                            && user != null && <MetaMaskSection />}</div>
+                            && (token != null || undefined) && <MetaMaskSection />}</div>
                             {/* <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
@@ -288,7 +300,7 @@ export default function Header() {
                                 <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                             </IconButton>  */}
                         </Box>
-                        {user == null && (
+                        {(token  == null || undefined) && (
                             <Button
                                 variant="outlined"
                                 onClick={() => {
@@ -298,13 +310,13 @@ export default function Header() {
                                 Login
                             </Button>
                         )}
-                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' ||  'User')
-                         && user != null && (
+                        {((token && (user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' ||  'User'))
+                         ) && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock',  marginTop: '-5px', }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock' }} />
+                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock', marginTop: '-3px', }} />
                                 )}
 
                                 <IconButton
@@ -324,7 +336,7 @@ export default function Header() {
                 </Toolbar>
             </AppBar>
             {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin'|| 'User')
-            && user != null && (
+            && (token != null || undefined)&& (
                 <>
                     {renderMobileMenu}
                     {renderMenu}

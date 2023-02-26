@@ -44,34 +44,50 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
     const location = useLocation();
 
     const handleConnect = async () => {
-        if (!window.ethereum) {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'No crypto wallet found. Please install it.',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-
-            // toast.error('No crypto wallet found. Please install it.');
-        }
-
-        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
         if (response) {
-            const address = utils?.getAddress(response[0]);
-
-            setWalletAddress(address);
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Success',
-                variant: 'alert',
-                alertSeverity: 'success'
-            });
+            if (!window.ethereum) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'No crypto wallet found. Please install it.',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
+            
+            // else if (window?.ethereum?.networkVersion !== '5') {
+            //     console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
+            //     dispatch({
+            //         type: SNACKBAR_OPEN,
+            //         open: true,
+            //         message: 'Please change your Chain ID to Goerli',
+            //         variant: 'alert',
+            //         alertSeverity: 'info'
+            //     });
+            //     console.log('Please change your Chain ID to Goerli');
+            //     setWalletAddress();
+            // }
+            
+            else {
+                const address = utils?.getAddress(response[0]);
+                setWalletAddress(address);
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Success',
+                    variant: 'alert',
+                    alertSeverity: 'success'
+                });
+            }
         } else {
+            console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
         }
     };
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -95,15 +111,11 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                     address: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    first_name: Yup.string()
-                        .required('First Name is required!')
-                        .max(42, 'First Name can not exceed 42 characters'),
-                        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                    first_name: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
+                    // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
 
-                    last_name: Yup.string()
-                        .required('Last Name is required!')
-                        .max(42, 'Last Name can not exceed 42 characters'),
-                        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                    last_name: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
+                    // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
 
                     address: Yup.string().max(255).required('Address is required!')

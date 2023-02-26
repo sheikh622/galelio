@@ -8,22 +8,25 @@ const BrandCard = ({ data, brands }) => {
     const navigate = useNavigate();
 
     return (
-        <Grid
+        <Grid className='feature'
             sx={{
                 color: theme.palette.mode === 'dark' ? 'white' : 'black',
                 textDecoration: 'none',
                 ml: {
                     xs: brands && brands?.length > 5 ? 4 : 0,
                     sm: brands && brands?.length > 5 ? 2 : 0,
-                    md: brands && brands?.length > 5 ? 2 : 2
+                    md: brands && brands?.length > 5 ? 2 : 0,
+                    lg: brands && brands?.length > 5 ? 2 : 2
                 },
                 mr: { xs: brands && brands?.length > 5 ? 1 : 0,
-                     md: brands && brands?.length > 5 ? 4 : 2 }
+                     md: brands && brands?.length > 5 ? 4 : 2,
+                     lg: brands && brands?.length > 5 ? 4 : 2
+                     }
             }}
             item
             xl={brands && brands?.length > 5 ? 12 : 2}
             lg={brands && brands?.length > 5 ? 12 : 2}
-            md={brands && brands?.length > 5 ? 12 : 4}
+            md={brands && brands?.length > 5 ? 12 : 2}
             sm={brands && brands?.length > 5 ? 12 : 4}
             xs={12}
             justifyContent="center"
@@ -36,10 +39,11 @@ const BrandCard = ({ data, brands }) => {
             }}
         >
             <Card
+            className='feature-width'
                 sx={{
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
-                    background: theme.palette.mode === 'dark' ? '#000' : 'white',
-                    width: brands && brands?.length > 5 ? '100%' : { lg: '220px' , xl:'100%'},
+                    background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
+                    width: brands && brands?.length > 5 ? '100%' : { lg: '240px' , xl:'100%'},
                     // boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '3px',
                     marginBottom: '10px',

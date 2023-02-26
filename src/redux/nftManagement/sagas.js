@@ -231,6 +231,7 @@ function* addNftRequest({ payload }) {
     formData.append('asset', payload.asset);
     formData.append('name', payload.name);
     formData.append('requesterAddress', payload.requesterAddress);
+    formData.append('contractAddress', payload.contractAddress);
     formData.append('price', payload.price);
     formData.append('currencyType', payload.currencyType);
     formData.append('description', payload.description);
@@ -411,19 +412,20 @@ function* requestChangeTokenId({ payload }) {
 
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.put(`update/nftToken/${payload.id}`, data, headers);
-        payload.handleClose();
-        yield put(
-            getAllNft({
-                categoryId: payload.categoryId,
-                search: payload.search,
-                page: payload.page,
-                limit: payload.limit,
-                type: payload.type,
-                brandId: payload.brandId
-            })
-        );
+        
+        // yield put(
+        //     getAllNft({
+        //         categoryId: payload.categoryId,
+        //         search: payload.search,
+        //         page: payload.page,
+        //         limit: payload.limit,
+        //         type: payload.type,
+        //         brandId: payload.brandId
+        //     })
+        // );
         yield setNotification('success', response.data.message);
     } catch (error) {
+        console.log('error', error);
         yield sagaErrorHandler(error.response.data.data);
     }
 }
@@ -437,6 +439,7 @@ export function* watchRequestNftForMinting() {
 
 function* lazyMintNftRequest({ payload }) {
     let data = {
+        minterAddress: payload.minterAddress,
         nftDataArray: JSON.stringify(payload.nftDataArray),
         tokenIdArray: JSON.stringify(payload.tokenIdArray)
     };
@@ -446,6 +449,7 @@ function* lazyMintNftRequest({ payload }) {
 
         yield put(
             getAllNftSuperAdmin({
+                
                 categoryId: payload.categoryId,
                 brandId: payload.brandId,
                 search: payload.search,
@@ -469,6 +473,8 @@ function* mintNftRequest({ payload }) {
     const formData = new FormData();
     formData.append('nftDataArray', JSON.stringify(payload.nftDataArray));
     formData.append('tokenIdArray', JSON.stringify(payload.tokenIdArray));
+    formData.append('minterAddress', payload.minterAddress);
+
     formData.append('transactionHash', payload.transactionHash);
     formData.append('signerAddress', payload.signerAddress);
 

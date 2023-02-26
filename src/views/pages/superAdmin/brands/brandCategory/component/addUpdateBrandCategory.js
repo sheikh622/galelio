@@ -66,16 +66,19 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
-        } else if (window?.ethereum?.networkVersion !== '5') {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Please change your Chain ID to Goerli',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-            console.log('Please change your Chain ID to Goerli');
-        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+        } 
+        // else if (window?.ethereum?.networkVersion !== '5') {
+        //     dispatch({
+        //         type: SNACKBAR_OPEN,
+        //         open: true,
+        //         message: 'Please change your Chain ID to Goerli',
+        //         variant: 'alert',
+        //         alertSeverity: 'info'
+        //     });
+        //     console.log('Please change your Chain ID to Goerli');
+        // }
+        
+        else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,
@@ -106,7 +109,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
                 console.log('signer',signer);
-                const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi, signer);
+                const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
                 console.log('factoryAddr',factoryAddr);
                 let profitAmount = ethers.utils.parseEther(formik.values.profitPercentage.toString());
     
@@ -119,6 +122,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 )?.wait();
     
                 let addr = res?.events[2]?.args[0];
+
                 if (res) {
                     dispatch(
                         addBrandCategory({
@@ -149,13 +153,13 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
            const contractAddress = brandCategoryData.contractAddress;
-           const NftAddr = new ethers.Contract(contractAddress, NFTAbi, signer);
+           const NftAddr = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
            let price = ethers.utils.parseEther(formik.values.profitPercentage.toString())
            await (await NftAddr.setfee(price).catch((error) => {
             setOpen(false);
             setLoader(false);
             toast.error(error.reason);
-        })).wait()
+        }))?.wait()
 
 
             

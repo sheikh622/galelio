@@ -48,29 +48,30 @@ const Footer = () => {
                 <Grid container alignItems="center" sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' } }} 
                 spacing={gridSpacing}>
                 <Grid item xs={12} md={1} lg={1} xl={1} sm={12}></Grid>
-                    <Grid item xs={12} md={3} lg={3}  xl={3} sm={6}>
+                    <Grid item xs={12} md={3} lg={3}  xl={3} sm={12}>
                         {theme.palette.mode === 'dark' ? (
                             <img src={galileoWhite} alt="Galileo White Logo" width="100" />
                         ) : (
                             <img src={galileo} alt="Galileo Dark Logo" width="100" />
                         )}
                         <Grid style={{ marginTop: '5%' }}>
-                            <span className='footerDownloadTag' style={{ fontWeight: 'bolder' }}>Download the app by clicking the link below:</span>
+                            <span className='footerDownloadTag' style={{ fontWeight: 'bolder' }}>
+                            Download the app by clicking the link below:</span>
                         </Grid>
 
                         <Grid container sx={{ mt: 3  }}>
-                            <Grid item md={4} xs={12} lg={4} xl={3}>
-                                <img src={googlePlay}  alt="Google Play" width="120" />
+                            <Grid  item md={12} xs={12} sm={12} lg={4} xl={3} className='footersocalIcons'>
+                                <img src={googlePlay}  alt="Google Play" width="110" />
                             </Grid>
-                            <Grid item md={1} xs={12} lg={1} xl={1} sx={{display:{xl:'none'}}} >
+                            <Grid item md={1} xs={12} lg={1} xl={1} sx={{display:{xl:'none', lg:'none', md:'none'}}} >
                             </Grid>
-                            <Grid item md={7} xs={12}   lg={7} xl={6}>
-                                <img src={appleStore}  alt="Apple Store" width="120" />
+                            <Grid item md={12} xs={12} sm={12}  lg={7} xl={6}>
+                                <img src={appleStore}  alt="Apple Store" width="110" />
                             </Grid>
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={2} sm={6}>
+                    <Grid item xs={12} md={2} sm={12}>
                         <Grid sx={{ marginTop: { md: '-5px' } }}>
                             <h2 className='footerElement'>Company</h2>
                         </Grid>
@@ -87,7 +88,7 @@ const Footer = () => {
                             <span className={styles.link}>Blog</span>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2} sm={6} sx={{ marginTop: { md: '-37px' } }}>
+                    <Grid item xs={12} md={2} sm={12} sx={{ marginTop: { md: '-37px' } }}>
                         <h2  className='footerElement'>Service</h2>
                         <Grid>
                             <Grid>
@@ -102,8 +103,8 @@ const Footer = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={2} sm={6} sx={{ marginTop: { md: '-37px' } }}>
-                        <h2  className='footerElement'>Contact</h2>
+                    <Grid item xs={12} md={2} sm={12} sx={{ marginTop: { md: '-37px' } }}>
+                        <h2  className='footerElement contactLargescrn'>Contact</h2>
 
                         <Grid>
                             <Grid>
@@ -134,7 +135,7 @@ const Footer = () => {
                                     className={styles.contact}
                                     style={{
                                         display: 'flex',
-                                        flexWrap: 'wrap',
+                                        // flexWrap: 'wrap',
                                         marginTop: '3%'
                                     }}
                                 >
@@ -144,7 +145,7 @@ const Footer = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2}  sm={6} sx={{ paddingBottom: { md: '6.5%' } }}>
+                    <Grid item xs={12} md={2}  sm={12} sx={{ paddingBottom: { md: '6.5%' } }}>
                         <h2  className='footerElement'>Social Media</h2>
 
                         <Grid style={{}}>

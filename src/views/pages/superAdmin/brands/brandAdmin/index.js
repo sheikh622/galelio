@@ -17,6 +17,9 @@ const BrandAdmin = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
+    console.log(brandAdminList, 'brandAdminList................>');
+    const userData = useSelector((state) => state.auth);
+    console.log(userData.user.role, 'brandsList................>');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -73,17 +76,30 @@ const BrandAdmin = () => {
                         Brand Management
                     </Typography>
                 }
-                // secondary={
-                //     <Button className='buttonSize' sx={{float:'right'}}
-                //     variant="contained"
-                //     size="large"
-                //     onClick={() => {
-                //         navigate('/brandsByAdmin');
-                //     }}
-                // >
-                //     Back
-                // </Button>
-                // }
+                secondary={
+                    userData?.user.role == 'Admin'   ? 
+                    <Button className='buttonSize' sx={{float:'right'}}
+                    variant="contained"
+                    size="large"
+                  
+                    onClick={() => {
+                        navigate('/brandsByAdmin');
+                    }}
+                >
+                    Back
+                </Button>
+                     : 
+                     <Button className='buttonSize' sx={{float:'right'}}
+                     variant="contained"
+                     size="large"
+                   
+                     onClick={() => {
+                         navigate('/brands');
+                     }}
+                 >
+                     Back
+                 </Button>
+                }
                 content={false}
             ></MainCard>
 
@@ -97,7 +113,7 @@ const BrandAdmin = () => {
                      Admin Management of : {location.state.brandData.name}
                   </Typography>
                     </Grid>
-                        <Grid item xs={3} lg={2} >
+                        <Grid item xs={12} lg={2} >
                        
                         <OutlinedInput
                         id="input-search-list-style1"
@@ -113,7 +129,7 @@ const BrandAdmin = () => {
                         }}
                     />
                         </Grid>
-                        <Grid item xs={3} lg={2} textAlign="start">
+                        <Grid item xs={12} lg={2} textAlign="start">
                             <Button className='buttonSize' sx={{marginLeft:{lg:'-16px', md:'-16px'}}}
                                 variant="contained"
                                 size="large"

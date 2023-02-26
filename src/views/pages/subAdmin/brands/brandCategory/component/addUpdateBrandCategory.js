@@ -62,16 +62,20 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
-        } else if (window?.ethereum?.networkVersion !== '5') {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Please change your Chain ID to Goerli',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-            console.log('Please change your Chain ID to Goerli');
-        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+        } 
+        
+        // else if (window?.ethereum?.networkVersion !== '5') {
+        //     dispatch({
+        //         type: SNACKBAR_OPEN,
+        //         open: true,
+        //         message: 'Please change your Chain ID to Goerli',
+        //         variant: 'alert',
+        //         alertSeverity: 'info'
+        //     });
+        //     console.log('Please change your Chain ID to Goerli');
+        // } 
+        
+        else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,
@@ -99,7 +103,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             const symbol = 'G' + brandName?.substring(0, 1) + categoryName?.substring(0, 1);
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
-            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
+            const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi, signer);
 
             let res = await (
                 await factoryAddr.deployMintingContract(contractName, symbol).catch((error) => {

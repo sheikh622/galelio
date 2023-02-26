@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { ethers, utils } from 'ethers';
-import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
+import { Button,Grid, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Slide, Typography } from '@mui/material';
 // import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,6 +30,9 @@ const client = create({
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function MintNftDialog({ open, setOpen, page, limit, search, loader, setLoader, nftData, type }) {
+
+
+    console.log('im here');
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
@@ -52,16 +55,20 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             });
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
-        } else if (window?.ethereum?.networkVersion !== '5') {
-            dispatch({
-                type: SNACKBAR_OPEN,
-                open: true,
-                message: 'Please change your Chain ID to Goerli',
-                variant: 'alert',
-                alertSeverity: 'info'
-            });
-            console.log('Please change your Chain ID to Goerli');
-        } else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+        } 
+        
+        // else if (window?.ethereum?.networkVersion !== '5') {
+        //     dispatch({
+        //         type: SNACKBAR_OPEN,
+        //         open: true,
+        //         message: 'Please change your Chain ID to Goerli',
+        //         variant: 'alert',
+        //         alertSeverity: 'info'
+        //     });
+        //     console.log('Please change your Chain ID to Goerli');
+        // }
+        
+        else if (utils?.getAddress(response[0]) !== user.walletAddress) {
             dispatch({
                 type: SNACKBAR_OPEN,
                 open: true,
@@ -90,7 +97,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
                 const address = await signer.getAddress();
-                const nft = new ethers.Contract(contractAddress, NFTAbi, signer);
+                const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
                 const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
                 const uriArray = await nftTokens.map(() => {
                     return tokenUri;
@@ -131,6 +138,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                     dispatch(
                         mintNft({
+                            minterAddress: user.walletAddress,
                             nftDataArray: nftDataArray,
                             tokenIdArray: tokenIdArray,
                             transactionHash: transactionHash,
@@ -188,6 +196,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                     dispatch(
                         mintNft({
+                            minterAddress: user.walletAddress,
                             nftDataArray: nftDataArray,
                             tokenIdArray: tokenIdArray,
                             transactionHash: transactionHash,
@@ -210,6 +219,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     };
 
     const handleDirectMint = async () => {
+        console.log('im in direct');
         setLoader(true);
         let image = nftData.ipfsUrl;
         let price = nftData.price;
@@ -247,13 +257,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     };
 
     const handleLazyMint = async () => {
+        console.log("hy")
         setLoader(true);
         let brandId = nftData.BrandId;
         let categoryId = nftData.CategoryId;
         let nftId = nftData.id;
-        let image = nftData.asset;
-        let prices = nftData.price;
-        let price = ethers.utils.parseEther(prices.toString());
+        let image = nftData.ipfsUrl;
+        let prices = nftData.price.toString();
+        let price = ethers.utils.parseEther(prices);
+        price = price.toString()
         let name = nftData.name;
         let description = nftData.description;
         let projectName = 'Galelio';
@@ -262,13 +274,24 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let brandName = nftData.Brand.name;
         let metaData = nftData.NFTMetaData;
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
+        let poa = nftData.NFTMetaFiles;
+        let external_url = nftData.NFTMetaFiles[0].fieldValue
+        console.log('price from mintnftdialog', price);
+        console.log('price from mintnftdialog', typeof price);
+        let attributes=[];
+        for(let i =0; i<nftData.NFTMetaData.length; i++){
+            attributes.push({
+                trait_type: nftData.NFTMetaData[i].fieldName, 
+                value: nftData.NFTMetaData[i].fieldValue
+            })
+        }
 
         // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
         // let contractAddress = "0x6e9550E5fee2bE7BdB208214e9cE2B47131a5Ca0"
         let nftTokens = nftData.NFTTokens;
 
         const result = await client.add(
-            JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, mintedDate, metaData })
+            JSON.stringify({ projectName, brandName, categoryName, image, name, description, price, attributes, poa, external_url,mintedDate, metaData })
         );
         const uri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
@@ -284,7 +307,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
             name: SIGNING_DOMAIN,
             version: SIGNATURE_VERSION,
             verifyingContract: contractAddress,
-            chainId: 5
+            chainId: 80001
         };
 
         const types = {
@@ -304,7 +327,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
-        const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+        const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
         let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
 
         // await await nfts.lazyMint(
@@ -333,6 +356,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
         dispatch(
             lazyMintNft({
+                minterAddress: user.walletAddress,
                 nftDataArray: nftDataArray,
                 tokenIdArray: tokenIdArray,
                 brandId: brandId,
@@ -367,7 +391,23 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 <DialogActions sx={{ pr: 2.5 }}>
                     <>
                         {loader ? (
-                            <CircularProgress />
+                            <DialogActions sx={{ display: 'block',  }}>
+                            <Grid container justifyContent="center" sx={{ width: '30%', m: '0 auto ' }}>
+                                <Grid item>
+                                    <CircularProgress disableShrink size={'4rem'} />
+                                </Grid>
+                            </Grid>
+                           
+                                <Button
+                                    className="mintbuttons"
+                                    variant="Text"
+                                    sx={{fontSize:'13px',  margin: '0px 0px 10px 0px', color: '#2196f3' }}
+                                    size="small"
+                                >
+                                this NFT is being minted...
+                                </Button>
+                         
+                        </DialogActions>
                         ) : (
                             <>
                                 <Button

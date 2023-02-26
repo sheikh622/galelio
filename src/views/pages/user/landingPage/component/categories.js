@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 // import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
 import Slider from 'react-slick';
+import { spacing } from '@mui/system';
 
 const Categories = ({ categories }) => {
    
@@ -135,33 +136,32 @@ const Categories = ({ categories }) => {
                                             sx={{
                                                 my: { xs: '10px', md: '0', sm: '10px' },
                                                 ml: {
-                                                    xs: categories && categories?.length > 5 ? 5 : 0,
-                                                    sm: categories && categories?.length > 5 ? 3 : 0,
-                                                    md: categories && categories?.length > 5 ? 2 : 0,
-                                                    lg: categories && categories?.length > 5 ? 2 : 0,
+                                                    xs:5,
+                                                    sm: 3,
+                                                    md:2,
+                                                    lg: 2
                                                     // xl: categories && categories?.length > 5 ? 4 : 0,
                                                 },
                                                 mr: {
-                                                    xs: categories && categories?.length > 5 ? 1 : 0,
-                                                    md: categories && categories?.length > 5 ? 4 : 0,
-                                                    lg: categories && categories?.length > 5 ? 4 : 0,
+                                                    xs: 1,
+                                                    md: 4,
+                                                    lg: 4
                                                     // xl: categories && categories?.length > 5 ? 2 : 0,
                                                 }
                                             }}
                                             item
                                             xs={12}
-                                            sm={categories && categories?.length > 5 ? 12 : 4}
-                                            md={categories && categories?.length > 5 ? 12 : 4}
-                                            lg={categories && categories?.length > 5 ? 12 : 2}
-                                            xl={categories && categories?.length > 5 ? 12 : 2}
+                                            sm={12}
+                                            md={12}
+                                            lg={12}
+                                            xl={12}
                                         >
                                             <Card
                                          
                                                 sx={{
                                                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
-                                                    width: categories && categories?.length > 5 ? '100%' : 
-                                                    { lg: '220px' , xl:'100%'},
+                                                    width:'100%',
                                                     maxWidth:'100%',
                                                     //  boxShadow: '1px 2px 6px #d3d3d3',
                                                     borderRadius: '3px',
@@ -224,29 +224,30 @@ const Categories = ({ categories }) => {
                            
                             spacing={4}
                             sx={{ textAlign: 'center', marginLeft: { md: '2px' }, width: { md: '100%' },
-                                justifyContent:{md:"center" , lg:'left', xs:'center' , sm:'center'} }}
+                                justifyContent:{md:"left" , lg:'left', xs:'center' , sm:'center'} }}
                         >
                             {categories?.map((item) => (
-                                <Grid
-                                    sx={{ my: { xs: '10px', md: '0', sm: '10px' }, 
-                                    marginLeft:{xs:'15px'},
-                                     marginRight: {lg:'15px'} }}
+                                <Grid className='cate-margin' spacing={2}
+                                    sx={{ my: { xs: '10px', md: '0', sm: '10px' }, mr:{lg:3.5}
+                                     }}
                                     item
-                                    md={4}
+                                    md={2}
                                     lg={2}
                                     xl={2}
-                                    sm={4}
+                                    sm={3}
                                     xs={10}
+                                 
                                 >
                                     <Card
+                                    className='cate-width'
                                         sx={{
                                             color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                                             background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                                            
                                             // boxShadow: '1px 2px 6px #d3d3d3',
                                             borderRadius: '3px',
-                                            marginRight: {lg:'15px'} ,
-                                            width: { lg:'220px' , xl:'100%'}
+                                            marginLeft: {md:'8px' , lg:'8px'}, 
+                                            width: { sm:'220px',md:'100%', lg:'240px' , xl:'100%'}
                                         }}
                                         onClick={() => {
                                             navigate('/marketplace', {
@@ -294,7 +295,8 @@ const Categories = ({ categories }) => {
                             ))}
                         </Grid>
                     ) : (
-                        <Grid mt={0} container  spacing={2}>
+                        <Grid mt={0} container  spacing={2} 
+                         sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}>
                             <h3 className="noDatacat fontfamily" 
                             sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
                             > No category found. 
