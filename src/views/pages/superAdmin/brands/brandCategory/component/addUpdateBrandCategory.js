@@ -122,6 +122,7 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                 )?.wait();
     
                 let addr = res?.events[2]?.args[0];
+
                 if (res) {
                     dispatch(
                         addBrandCategory({
@@ -152,13 +153,13 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
            const contractAddress = brandCategoryData.contractAddress;
-           const NftAddr = new ethers.Contract(contractAddress, NFTAbi, signer);
+           const NftAddr = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
            let price = ethers.utils.parseEther(formik.values.profitPercentage.toString())
            await (await NftAddr.setfee(price).catch((error) => {
             setOpen(false);
             setLoader(false);
             toast.error(error.reason);
-        })).wait()
+        }))?.wait()
 
 
             

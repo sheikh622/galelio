@@ -89,7 +89,7 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
 
                 const token = new ethers.Contract(erc20Address, Erc20, signer);
 
-                let data = await (await token.approve(nftData.Category.BrandCategories[0].contractAddress,"100000000")).wait();
+                let data = await (await token.approve(nftData.Category.BrandCategories[0].contractAddress,"100000000000000000000000000000000000000")).wait();
 
                 await dispatch(
                     requestNftForMinting({

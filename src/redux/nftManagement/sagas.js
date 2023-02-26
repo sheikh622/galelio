@@ -231,6 +231,7 @@ function* addNftRequest({ payload }) {
     formData.append('asset', payload.asset);
     formData.append('name', payload.name);
     formData.append('requesterAddress', payload.requesterAddress);
+    formData.append('contractAddress', payload.contractAddress);
     formData.append('price', payload.price);
     formData.append('currencyType', payload.currencyType);
     formData.append('description', payload.description);
@@ -411,19 +412,20 @@ function* requestChangeTokenId({ payload }) {
 
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.put(`update/nftToken/${payload.id}`, data, headers);
-        payload.handleClose();
-        yield put(
-            getAllNft({
-                categoryId: payload.categoryId,
-                search: payload.search,
-                page: payload.page,
-                limit: payload.limit,
-                type: payload.type,
-                brandId: payload.brandId
-            })
-        );
+        
+        // yield put(
+        //     getAllNft({
+        //         categoryId: payload.categoryId,
+        //         search: payload.search,
+        //         page: payload.page,
+        //         limit: payload.limit,
+        //         type: payload.type,
+        //         brandId: payload.brandId
+        //     })
+        // );
         yield setNotification('success', response.data.message);
     } catch (error) {
+        console.log('error', error);
         yield sagaErrorHandler(error.response.data.data);
     }
 }

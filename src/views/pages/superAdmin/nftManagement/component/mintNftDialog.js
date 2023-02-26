@@ -97,7 +97,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
                 const address = await signer.getAddress();
-                const nft = new ethers.Contract(contractAddress, NFTAbi, signer);
+                const nft = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
                 const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
                 const uriArray = await nftTokens.map(() => {
                     return tokenUri;
@@ -219,6 +219,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     };
 
     const handleDirectMint = async () => {
+        console.log('im in direct');
         setLoader(true);
         let image = nftData.ipfsUrl;
         let price = nftData.price;
@@ -256,14 +257,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     };
 
     const handleLazyMint = async () => {
-        setLoader(true);
         console.log("hy")
+        setLoader(true);
         let brandId = nftData.BrandId;
         let categoryId = nftData.CategoryId;
         let nftId = nftData.id;
         let image = nftData.ipfsUrl;
-        let prices = nftData.price;
-        let price = ethers.utils.parseEther(prices.toString());
+        let prices = nftData.price.toString();
+        let price = ethers.utils.parseEther(prices);
+        price = price.toString()
         let name = nftData.name;
         let description = nftData.description;
         let projectName = 'Galelio';
@@ -274,7 +276,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
         let poa = nftData.NFTMetaFiles;
         let external_url = nftData.NFTMetaFiles[0].fieldValue
-        
+        console.log('price from mintnftdialog', price);
+        console.log('price from mintnftdialog', typeof price);
         let attributes=[];
         for(let i =0; i<nftData.NFTMetaData.length; i++){
             attributes.push({
@@ -324,7 +327,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
         const signerAddr = '0x6f3B51bd5B67F3e5bca2fb32796215A796B79651';
 
-        const nfts = new ethers.Contract(contractAddress, NFTAbi, signer);
+        const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
         let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
 
         // await await nfts.lazyMint(

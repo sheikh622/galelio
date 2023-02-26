@@ -88,7 +88,7 @@ export default function DeleteSubAdminDialog({ open, setOpen, page, limit, searc
                                     setLoader(true);
                                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                                     const signer = provider.getSigner();
-                                    const nfts = new ethers.Contract(subAdminData.contractAddress, NFTAbi, signer);
+                                    const nfts = new ethers.Contract(subAdminData.contractAddress, NFTAbi.abi, signer);
                                     await (
                                         await nfts.revokeRole(blockChainRole, subAdminData.walletAddress).catch((error) => {
                                             toast.error(`${error.reason}`);
