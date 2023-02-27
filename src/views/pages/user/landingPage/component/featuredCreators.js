@@ -96,7 +96,9 @@ const FeaturedCreators = ({ brands }) => {
                     </Grid>
                 </>
             ) : brands && brands?.length > 0 ? (
-                <Grid container justifyContent="left" spacing={2} sx={{ textAlign: 'center' ,  }}>
+                <Grid container
+                sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }} spacing={2}
+                 >
                     {brands?.map((item) => (
                         <BrandCard data={item} brands={brands} />
                     ))}

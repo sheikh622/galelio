@@ -67,7 +67,7 @@ const ForgotPassword = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Grid item container direction="column" alignItems="center" xs={12}>
-                                    <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                                    <Typography className="emailfont" variant="subtitle1" sx={{ textDecoration: 'none' }}>
                                         Please enter registered email ID.
                                     </Typography>
                                 </Grid>

@@ -15,9 +15,9 @@ const UserLayout = () => {
                 }}
             >
               
-                <Grid m={2} item md={12} sm={12} xs={12} sx={{  
+                <Grid mt={2} ml={2} mr={2} mb={1} item md={12} sm={12} xs={12} sx={{  
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                    color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040', borderRadius:'4px'
 
                 }}>
                 <Header />

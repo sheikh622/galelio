@@ -57,7 +57,7 @@ const ResetPassword = () => {
             </Box>
                 </Grid>
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
-                    <Box sx={{ mb: 2 }}>
+                    <Box sx={{ mb: 4 }}>
                         <Typography className='signInMarket' variant="subtitle1">
                             
                       Reset Password</Typography>

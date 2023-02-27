@@ -47,7 +47,7 @@ const SideBar = () => {
                         xl={9}
                         container
                         alignItems="center"
-                        spacing={3}
+                        spacing={2}
                         sx={{
                              
                             // pt: 1,
@@ -59,19 +59,22 @@ const SideBar = () => {
                             display: 'block',
                            
                             background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
-                            borderRadius: '1px'
+                            borderRadius: '4px'
                         }}
                     >
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 2, paddingLeft: '0 ! important', 
+                            textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/home');
                             }}
                         >
                             {pathName == '/home' ? (
                                 <>
-                                    <Box sx={{ borderLeft: '6px solid #2196f3' }}>
+                                    <Box 
+                                    sx={{ borderLeft: '4px solid #2196f3' }}
+                                    >
                                         <Tooltip className="fontsize" title="Home" placement="right" arrow>
                                             <DashboardIcon sx={{ color: `${color}`,  }} />
                                         </Tooltip>
@@ -79,15 +82,35 @@ const SideBar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip className="fontsize" title="Landing Page" placement="right" arrow>
+                                    <Tooltip className="fontsize" title="Home" placement="right" arrow>
                                         <DashboardIcon />
                                     </Tooltip>
                                 </>
                             )}
                         </Grid>
-                        {/*   <Grid item sx={{ mt: 2 ,  marginLeft:'-5px', }}>
-                            <PieChartIcon  />
-                        </Grid>  */}
+                        <Grid
+                        item
+                        sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                        onClick={() => {
+                            navigate('/ComingSoon');
+                        }}
+                    >
+                        {pathName.includes('ComingSoon') ? (
+                            <>
+                                <Box>
+                                    <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
+                                        <PieChartIcon className="fontsize" />
+                                    </Tooltip>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Tooltip className="fontsize" title="ComingSoon" placement="right" arrow>
+                                    <PieChartIcon />
+                                </Tooltip>
+                            </>
+                        )}
+                    </Grid>
                         <Grid
                             item
                             sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
@@ -97,7 +120,9 @@ const SideBar = () => {
                         >
                             {pathName.includes('marketplace') ? (
                                 <>
-                                    <Box sx={{ borderLeft: '6px solid #2196f3' }}>
+                                    <Box
+                                     sx={{ borderLeft: '6px solid #2196f3' }}
+                                     >
                                         <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
                                             <StorefrontIcon className="fontsize" style={{ color: `${color}` }} />
                                         </Tooltip>
@@ -151,7 +176,7 @@ const SideBar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
+                                    <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                                         <DownloadIcon className="fontsize" />
                                     </Tooltip>
                                 </>
