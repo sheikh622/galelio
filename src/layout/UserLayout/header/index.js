@@ -208,7 +208,7 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
+            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` , borderRadius:'4px'}}>
                 <Toolbar>
                     <Helmet>
                         <meta charSet="utf-8" />

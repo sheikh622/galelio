@@ -1380,8 +1380,8 @@ body {
     .fontfigma {
         font-family: 'Public Sans' !important;
         font-style: normal !important;
-        font-weight: 400;
-        font-size: 39px !important;
+        font-weight: 400 !important;
+        font-size: 28px !important;
         line-height: 26px !important;
     }
     .noDatacat {
@@ -1554,6 +1554,37 @@ body {
     }
     .feature-width {
         width: 215px;
+    }
+    .footersocalIcons {
+        margin-right: 10px;
+    }
+    .contactLargescrn {
+        margin-top: 35px;
+    }
+}
+@media only screen and (min-width: 1900px) and (max-width: 2560px) {
+    .cate-margin {
+        margin-right: 35px;
+        margin-left: -9px;
+    }
+
+    .cate-width {
+        width: 100%;
+    }
+
+    .new-margin {
+        margin-right: 20px;
+        margin-left: 9px;
+    }
+    .new-width {
+        width: 100%;
+    }
+    .feature {
+        margin-right: 32px;
+        margin-left: 0px;
+    }
+    .feature-width {
+        width: 100%;
     }
     .footersocalIcons {
         margin-right: 10px;
