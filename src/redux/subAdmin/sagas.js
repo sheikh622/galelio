@@ -11,7 +11,8 @@ import {
     DELETE_SUBADMIN,
     CHANGE_SUBADMIN_STATUS,
     CHANGE_ROLE,
-    CHANGE_SUBADMIN_MINTING_ACCESS
+    CHANGE_SUBADMIN_MINTING_ACCESS,
+    ASSIGN_BRANDCATEGORY
 } from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
@@ -59,7 +60,6 @@ function* addSubAdminRequest({ payload }) {
 export function* watchAddSubAdmin() {
     yield takeLatest(ADD_SUBADMIN, addSubAdminRequest);
 }
-
 function* updateSubAdminRequest({ payload }) {
     let data = {
         firstName: payload.firstName,
@@ -87,6 +87,30 @@ function* updateSubAdminRequest({ payload }) {
 
 export function* watchUpdateSubAdmin() {
     yield takeLatest(UPDATE_SUBADMIN, updateSubAdminRequest);
+}
+function* assignBrandCategoryRequest({ payload }) {
+    let data = {
+        brandCategory: payload.brandCategory,
+    };
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.patch(`admin/assignBrandCategory/${payload.id}`, data, headers);
+        yield put(
+            getAllSubAdminList({
+                page: payload.page,
+                limit: payload.limit,
+                search: payload.search
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchAssignBrandCategory() {
+    yield takeLatest(ASSIGN_BRANDCATEGORY, assignBrandCategoryRequest);
 }
 
 function* deleteSubAdminRequest({ payload }) {
@@ -186,6 +210,7 @@ export default function* subAdminSaga() {
         fork(watchDeleteSubAdmin),
         fork(watchChangeSubAdminStatus),
         fork(watchChangeSubAdminRole),
-        fork(watchChangeSubAdminMintingAccess)
+        fork(watchChangeSubAdminMintingAccess),
+        fork(watchAssignBrandCategory)
     ]);
 }
