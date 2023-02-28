@@ -73,9 +73,10 @@ const SideBar = () => {
                             {pathName == '/home' ? (
                                 <>
                                     <Box 
-                                    sx={{ display:"flex",gap:{xl:"50px",md:"21px"} }}
+                                    sx={{ display:"flex",gap:{xl:"31px",md:"21px", lg:"26px"} }}
                                     >
-                                        <Box sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px' }}></Box>
+                                        <Box sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},
+                                        padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px' }}></Box>
                                         <Tooltip className="fontsize" title="Home" placement="right" arrow>
                                             <DashboardIcon sx={{ color: `${color}`, alignSelf:"center"  }} />
                                         </Tooltip>
@@ -122,7 +123,7 @@ const SideBar = () => {
                             {pathName.includes('marketplace') ? (
                                 <>
                                     <Box
-                                     sx={{ display:"flex" ,gap:{md:"21px",xl:"50px"}}}
+                                     sx={{ display:"flex" ,gap:{md:"21px",lg:"26px" , xl:"31px"}}}
                                      >
                                         <Box sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px', }}></Box>
                                         <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
