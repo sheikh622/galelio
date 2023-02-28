@@ -15,6 +15,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useDispatch, useSelector } from 'react-redux';
 import { MENU_TYPE } from 'store/actions';
 import Tooltip from '@mui/material/Tooltip';
+import { red } from '@mui/material/colors';
 const SideBar = () => {
     const navigate = useNavigate();
     const [color] = useState('#2196f3');
@@ -44,12 +45,11 @@ const SideBar = () => {
                         sm={10}
                         md={9}
                         lg={9}
-                        xl={9}
+                        xl={7.5}
                         container
                         alignItems="center"
                         spacing={2}
                         sx={{
-                             
                             // pt: 1,
                             // pb: 3,
                             ml: 2,
@@ -64,7 +64,7 @@ const SideBar = () => {
                     >
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', 
+                            sx={{ mt: 2, paddingLeft: '0 ! important',
                             textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/home');
