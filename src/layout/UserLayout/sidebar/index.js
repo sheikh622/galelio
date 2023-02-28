@@ -73,10 +73,11 @@ const SideBar = () => {
                             {pathName == '/home' ? (
                                 <>
                                     <Box 
-                                    sx={{ borderLeft: '4px solid #2196f3' }}
+                                    sx={{ display:"flex",gap:{xl:"50px",md:"21px"} }}
                                     >
+                                        <Box sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px' }}></Box>
                                         <Tooltip className="fontsize" title="Home" placement="right" arrow>
-                                            <DashboardIcon sx={{ color: `${color}`,  }} />
+                                            <DashboardIcon sx={{ color: `${color}`, alignSelf:"center"  }} />
                                         </Tooltip>
                                     </Box>
                                 </>
@@ -121,10 +122,11 @@ const SideBar = () => {
                             {pathName.includes('marketplace') ? (
                                 <>
                                     <Box
-                                     sx={{ borderLeft: '6px solid #2196f3' }}
+                                     sx={{ display:"flex" ,gap:{md:"21px",xl:"50px"}}}
                                      >
+                                        <Box sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px', }}></Box>
                                         <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
-                                            <StorefrontIcon className="fontsize" style={{ color: `${color}` }} />
+                                            <StorefrontIcon className="fontsize" style={{ color: `${color}`,alignSelf:"center"  }} />
                                         </Tooltip>
                                     </Box>
                                 </>
