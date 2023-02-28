@@ -211,7 +211,8 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                                 walletAddress: row.walletAddress,
                                                                                 isActive: row.isActive,
                                                                                 hasMintingAccess: row.hasMintingAccess,
-                                                                                contractAddress: row.BrandCategories[0]?.contractAddress
+                                                                                contractAddress: row.BrandCategories[0]?.contractAddress,
+                                                                                email : row.email
                                                                             });
                                                                         }}
                                                                     >
@@ -294,6 +295,7 @@ const SubAdminTable = ({ subAdminList, search, page, limit, addUpdateOpen, setAd
                                                                     setSubAdminData({
                                                                         id: row.id,
                                                                         role: row.role
+                                                                        
                                                                     });
                                                                 }}
                                                                 endIcon={<ChangeCircleIcon />}

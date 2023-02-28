@@ -34,7 +34,7 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, page, limit, search, setSubAdminData }) {
     const dispatch = useDispatch();
-    console.log(subAdminData.walletAddress,'subAdminData>');
+    console.log(subAdminData.walletAddress, 'subAdminData>');
     const [isUpdate, setIsUpdate] = useState(false);
     const [contractAddress, setContractAddress] = useState('');
     const [brandCategoryId, setBrandCategoryId] = useState(0);
@@ -90,48 +90,44 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
         initialValues: subAdminData,
         validationSchema,
         onSubmit: async (values) => {
-
             console.log('contractAddress', contractAddress);
-           
-            if (subAdminData.id == null) {
-               if(brandCategoryId == 0){
-                toast.error("Please choose a category")
-               }
-               else{
 
-                   setLoader(true)
-                //    toast.success("Please wait for confirmation Transaction !");
-                   const provider = new ethers.providers.Web3Provider(window.ethereum);
-                   const signer = provider.getSigner();
-   
-                   const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                   // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
-   
-                   let mintedNFT = await (
-                       await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
-                           toast.error(`${error.reason}`);
-                           setLoader(false)
-                           setOpen(false)
-                       })
-                   ).wait();
-   console.log('hello');
-                   dispatch(
-                       addSubAdmin({
-                           firstName: values.firstName,
-                           lastName: values.lastName,
-                           email: values.adminEmail,
-                           password: values.adminPassword,
-                           walletAddress: values.walletAddress,
-                           brandCategory: brandCategoryId,
-                           hasMintingAccess: true,
-                           page: page,
-                           limit: limit,
-                           search: search,
-                           handleClose: handleClose
-                       })
-                       
-                   );
-               }
+            if (subAdminData.id == null) {
+                if (brandCategoryId == 0) {
+                    toast.error('Please choose a category');
+                } else {
+                    setLoader(true);
+                    //    toast.success("Please wait for confirmation Transaction !");
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+
+                    const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
+                    // const admin="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
+
+                    let mintedNFT = await (
+                        await nfts.grantRole(blockChainRole, values.walletAddress).catch((error) => {
+                            toast.error(`${error.reason}`);
+                            setLoader(false);
+                            setOpen(false);
+                        })
+                    ).wait();
+                    console.log('hello');
+                    dispatch(
+                        addSubAdmin({
+                            firstName: values.firstName,
+                            lastName: values.lastName,
+                            email: values.adminEmail,
+                            password: values.adminPassword,
+                            walletAddress: values.walletAddress,
+                            brandCategory: brandCategoryId,
+                            hasMintingAccess: true,
+                            page: page,
+                            limit: limit,
+                            search: search,
+                            handleClose: handleClose
+                        })
+                    );
+                }
             } else {
                 dispatch(
                     updateSubAdmin({
@@ -268,48 +264,47 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                         }
                                     />
                                 </Grid>
-                              
 
                                 {subAdminData?.id == null && (
                                     <>
-                                    <Grid item xs={12} md={12} lg={12} pt={2}>
-                                    <InputLabel className="textfieldStyle" htmlFor="">
-                                        Wallet Address
-                                    </InputLabel>
-                                    <TextField
-                                        className="field"
-                                        variant="standard"
-                                        id="walletAddress"
-                                        name="walletAddress"
-                                        value={formik.values.walletAddress}
-                                        onChange={formik.handleChange}
-                                        error={formik.touched.walletAddress && Boolean(formik.errors.walletAddress)}
-                                        helperText={formik.touched.walletAddress && formik.errors.walletAddress}
-                                        fullWidth
-                                        autoComplete=""
-                                    />
-                                </Grid>
-                                    <Grid item xs={6} md={12} lg={12} pt={2}>
-                                        <InputLabel className="textfieldStyle" htmlFor="">
-                                            Select Category
-                                        </InputLabel>
-                                        <TextField
-                                            variant="standard"
-                                            className="responsiveSelectfield textfieldStyle field"
-                                            id="outlined-select-budget"
-                                            select
-                                            fullWidth
-                                            // label="Select Category"
-                                            // value={category}
-                                            onChange={handleBrandCategoryChange}
-                                        >
-                                            {brandCategories?.map((data, index) => (
-                                                <MenuItem key={index} value={data}>
-                                                    {data.Category.name} ({data.Brand.name})
-                                                </MenuItem>
-                                            ))}
-                                        </TextField>
-                                    </Grid>
+                                        <Grid item xs={12} md={12} lg={12} pt={2}>
+                                            <InputLabel className="textfieldStyle" htmlFor="">
+                                                Wallet Address
+                                            </InputLabel>
+                                            <TextField
+                                                className="field"
+                                                variant="standard"
+                                                id="walletAddress"
+                                                name="walletAddress"
+                                                value={formik.values.walletAddress}
+                                                onChange={formik.handleChange}
+                                                error={formik.touched.walletAddress && Boolean(formik.errors.walletAddress)}
+                                                helperText={formik.touched.walletAddress && formik.errors.walletAddress}
+                                                fullWidth
+                                                autoComplete=""
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6} md={12} lg={12} pt={2}>
+                                            <InputLabel className="textfieldStyle" htmlFor="">
+                                                Select Category
+                                            </InputLabel>
+                                            <TextField
+                                                variant="standard"
+                                                className="responsiveSelectfield textfieldStyle field"
+                                                id="outlined-select-budget"
+                                                select
+                                                fullWidth
+                                                // label="Select Category"
+                                                // value={category}
+                                                onChange={handleBrandCategoryChange}
+                                            >
+                                                {brandCategories?.map((data, index) => (
+                                                    <MenuItem key={index} value={data}>
+                                                        {data.Category.name} ({data.Brand.name})
+                                                    </MenuItem>
+                                                ))}
+                                            </TextField>
+                                        </Grid>
                                     </>
                                 )}
                             </>
@@ -324,16 +319,15 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                                 <CircularProgress disableShrink size={'4rem'} />
                             </Grid>
                         </Grid>
-                       
-                            <Button
-                                className="buttons"
-                                variant="Text"
-                                sx={{ width: '100%', margin: '0px 0px 10px 0px', color: '#2196f3' }}
-                                size="large"
-                            >
-                                Admin is being Created...
-                            </Button>
-                     
+
+                        <Button
+                            className="buttons"
+                            variant="Text"
+                            sx={{ width: '100%', margin: '0px 0px 10px 0px', color: '#2196f3' }}
+                            size="large"
+                        >
+                            Admin is being Created...
+                        </Button>
                     </DialogActions>
                 ) : (
                     <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
@@ -341,8 +335,9 @@ export default function AddUpdateSubAdminDialog({ open, setOpen, subAdminData, p
                             <Button
                                 className="buttons"
                                 variant="contained"
-                                sx={{ width: '92%',
-                            margin: '0px 0px 10px 8px', 
+                                sx={{
+                                    width: '92%',
+                                    margin: '0px 0px 10px 8px',
                                     background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
                                 }}
                                 type="submit"
