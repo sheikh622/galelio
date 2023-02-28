@@ -208,7 +208,7 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` }}>
+            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` , borderRadius:'4px'}}>
                 <Toolbar>
                     <Helmet>
                         <meta charSet="utf-8" />
@@ -220,7 +220,7 @@ export default function Header() {
                             height: '3em',
                             // paddingTop: '1em',
                             width: '100%',
-                            marginLeft: '2%',
+                            marginLeft: '1%',
                             display: 'flex'
                             // [theme.breakpoints.down('md')]: {
                             //     width: 'auto'
@@ -243,7 +243,8 @@ export default function Header() {
                             </Search>*/}
                         </Grid>
                         <Box sx={{ display: { xs: 'block', md: 'block' }, cursor: 'pointer' }}>
-                            <Typography variant="h6" noWrap component="div" sx={{ marginTop: '5px', display: { xs: '', sm: 'block' } }}>
+                            <Typography variant="h6" noWrap component="div"
+                             sx={{ marginTop: '3px', display: { xs: '', sm: 'block' } }}>
                                 {theme.palette.mode === 'dark' ? (
                                     <img
                                         src={galileoWhite}
@@ -271,7 +272,7 @@ export default function Header() {
 
                         {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') 
                         && (user?.role != 'User' && (token !== null || undefined)) && (
-                            <Box>
+                            <Box sx={{marginTop:'3px'}}>
                                 <Button
                                     sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
                                     variant="outlined"
@@ -284,8 +285,9 @@ export default function Header() {
                             </Box>
                         )}
 
-                        <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 }}>
-                            <div sx={{ marginRight: '3%' }}>{(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User')
+                        <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 , marginTop:'3px'}}>
+                            <div sx={{ marginRight: '3%' }}>
+                            {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User')
                             
                             && (token != null || undefined) && <MetaMaskSection />}</div>
                             {/* <IconButton size="large" aria-label="" color="inherit">
@@ -314,9 +316,11 @@ export default function Header() {
                          ) && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock',  marginTop: '-5px', }} />
+                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock', 
+                                     marginTop: '-3px', }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock', marginTop: '-3px', }} />
+                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock',
+                                     marginTop: '-3px', }} />
                                 )}
 
                                 <IconButton

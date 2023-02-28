@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../../../redux/auth/actions';
 import { setLoader } from '../../../../redux/auth/actions';
+import TextField from '@material-ui/core/TextField';
 
 // third party
 import * as Yup from 'yup';
@@ -45,15 +46,30 @@ const ForgetForm = ({ ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
-                            <OutlinedInput
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Email{' '}
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.email && errors.email)}
+                        >
+                            <TextField
+                                sx={{ background: 'pink !important' }}
+                                placeholder="email"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="email"
                                 value={values.email}
                                 name="email"
+                                autoComplete="current-email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email"
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (

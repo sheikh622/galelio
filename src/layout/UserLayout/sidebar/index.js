@@ -15,6 +15,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useDispatch, useSelector } from 'react-redux';
 import { MENU_TYPE } from 'store/actions';
 import Tooltip from '@mui/material/Tooltip';
+import { red } from '@mui/material/colors';
 const SideBar = () => {
     const navigate = useNavigate();
     const [color] = useState('#2196f3');
@@ -44,12 +45,11 @@ const SideBar = () => {
                         sm={10}
                         md={9}
                         lg={9}
-                        xl={9}
+                        xl={7.5}
                         container
                         alignItems="center"
-                        spacing={3}
+                        spacing={2}
                         sx={{
-                             
                             // pt: 1,
                             // pb: 3,
                             ml: 2,
@@ -57,37 +57,65 @@ const SideBar = () => {
                            
                             // maxWidth: { lg: '90% !important' },
                             display: 'block',
-                           
-                            background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
-                            borderRadius: '1px'
+                            backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : '#fff'}` ,
+                            // background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
+                            borderRadius: '4px'
                         }}
                     >
                         <Grid
                             item
-                            sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                            sx={{ mt: 2, paddingLeft: '0 ! important',
+                            textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => {
                                 navigate('/home');
                             }}
                         >
                             {pathName == '/home' ? (
                                 <>
-                                    <Box sx={{ borderLeft: '6px solid #2196f3' }}>
+                                    <Box  className='sideLine'
+                                    sx={{ display:"flex", gap:{xl:"31px", md:"21px", lg:"26px"} }}
+                                    >
+                                        <Box sx={{ height:{xl:"62px" , md:"40px"},
+                                         width:{xl:"12px" , md:"9px"},
+                                        padding:"3px",
+                                         background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',
+                                         borderRadius:'0px 5px 5px 0px' }}></Box>
                                         <Tooltip className="fontsize" title="Home" placement="right" arrow>
-                                            <DashboardIcon sx={{ color: `${color}`,  }} />
+                                            <DashboardIcon sx={{ color: `${color}`, alignSelf:"center"  }} />
                                         </Tooltip>
                                     </Box>
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip className="fontsize" title="Landing Page" placement="right" arrow>
+                                    <Tooltip className="fontsize" title="Home" placement="right" arrow>
                                         <DashboardIcon />
                                     </Tooltip>
                                 </>
                             )}
                         </Grid>
-                        {/*   <Grid item sx={{ mt: 2 ,  marginLeft:'-5px', }}>
-                            <PieChartIcon  />
-                        </Grid>  */}
+                        <Grid
+                        item
+                        sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
+                        onClick={() => {
+                            navigate('/ComingSoon');
+                        }}
+                    >
+                        {pathName.includes('ComingSoon') ? (
+                            <>
+                                <Box>
+                                    <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
+                                        <PieChartIcon className="fontsize" />
+                                    </Tooltip>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Tooltip className="fontsize" title="ComingSoon" placement="right" arrow>
+                                    <PieChartIcon />
+                                </Tooltip>
+                            </>
+                        )}
+                    </Grid>
                         <Grid
                             item
                             sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
@@ -97,9 +125,12 @@ const SideBar = () => {
                         >
                             {pathName.includes('marketplace') ? (
                                 <>
-                                    <Box sx={{ borderLeft: '6px solid #2196f3' }}>
+                                    <Box  className='sideLine'
+                                     sx={{ display:"flex" ,gap:{md:"21px",lg:"26px" , xl:"31px"}}}
+                                     >
+                                        <Box sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px', }}></Box>
                                         <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
-                                            <StorefrontIcon className="fontsize" style={{ color: `${color}` }} />
+                                            <StorefrontIcon className="fontsize" style={{ color: `${color}`,alignSelf:"center"  }} />
                                         </Tooltip>
                                     </Box>
                                 </>
@@ -151,7 +182,7 @@ const SideBar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
+                                    <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                                         <DownloadIcon className="fontsize" />
                                     </Tooltip>
                                 </>

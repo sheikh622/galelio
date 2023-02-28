@@ -290,14 +290,13 @@ body {
     font-size: 35px;
     color: #212121 !important;
     // font-weight: 900;
-  
-font-family: 'Public Sans';
-font-style: normal;
-font-weight: 700;
-// font-size: 30px;
+
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
+    // font-size: 30px;
     line-height: 1.2;
     margin-bottom: 0.35em;
-  
 }
 
 .signbutton {
@@ -362,12 +361,11 @@ font-weight: 700;
 }
 
 .chip:hover {
-    border-color: #2F5AFF !important;
-    background: #2F5AFF !important;
+    border-color: #2f5aff !important;
+    background: #2f5aff !important;
     color: #e3f2fd !important;
 }
-.avatarStyle{
-    
+.avatarStyle {
 }
 // .css-1pqm26d-MuiAvatar-img {
 //     width: 100% !important;
@@ -380,7 +378,7 @@ font-weight: 700;
 // }
 .css-1qed7u8-MuiButtonBase-root-MuiListItemButton-root:hover {
     color: #fff !important;
-    background-color:rgba(47, 83, 255, 0.1411764706) !important;
+    background-color: rgba(47, 83, 255, 0.1411764706) !important;
 }
 .icons:hover {
     // background-color: #ede7f6 !important;
@@ -533,29 +531,29 @@ font-weight: 700;
     // background-color: #212121;
     min-height: auto;
     max-height: auto;
-    background-attachment:fixed;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     height: 455px;
-    width: 99%;
+    width:99%;
     background-image: url(../images/background1.png);
     background-position: center;
     background-size: cover;
     overflow: hidden;
-    margin-top: 15px;
+    margin-top: 14px;
+    border-radius: 4px;
+    // margin-left: 20px;
 }
 .TextField-without-border-radius fieldset {
     border-radius: 4px;
     // background-color: transparent ;
-   
-  }
+}
 .TextField-without-border-radius input {
     border-radius: 4px;
     // background-color: #266798 ;
-   
-  }
+}
 .TextField-without-border-radius OutlinedInput {
     border-radius: 4px;
-  }
+}
 .create {
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
     padding: 13px 32px;
@@ -570,15 +568,14 @@ font-weight: 700;
 
 .pbackground {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 16px;
-text-align: center;
-text-transform: capitalize;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: capitalize;
 
-color: #2194FF;
-
+    color: #2194ff;
 }
 
 .Lux {
@@ -622,11 +619,11 @@ color: #2194FF;
     display: flex;
     /* align-items: center; */
     letter-spacing: 0.02em;
-    
+
     text-transform: capitalize;
 
     text-align: left;
-  
+
     padding: 0 15px;
     color: #9498aa;
 }
@@ -639,7 +636,26 @@ color: #2194FF;
 .textfield {
     text-decoration: none !important;
 }
-
+.iconvisible {
+    position: absolute;
+    top: 19px;
+    right: 13px;
+}
+.textForm {
+    position: relative;
+}
+.auth-formcontrol {
+    margin-top: -10px !important;
+}
+.auth-formcontrol input {
+    color: gray !important;
+}
+.authFont {
+    font-family: 'Source Sans Pro' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+}
 .buy {
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
     border-radius: 4px;
@@ -659,13 +675,11 @@ color: #2194FF;
 
     margin-right: 15px;
 }
-.Forgot{
-
-    
-font-family: 'Public Sans';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
+.Forgot {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
 }
 .price {
     font-family: 'Public Sans';
@@ -689,23 +703,23 @@ font-size: 16px;
 
 .auction {
     padding: 15px 36px;
-  
-        border-radius: 4px;
-        font-family: 'Public Sans';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-}
-#proofstyle{
-    font-family: 'Public Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 15px;
-line-height: 18px;
-/* identical to box height */
 
-text-align: center;
-text-transform: capitalize;
+    border-radius: 4px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+#proofstyle {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: capitalize;
 }
 .overflow {
     width: 200px;
@@ -759,19 +773,24 @@ text-transform: capitalize;
     font-weight: 700;
     font-size: 30px;
     line-height: 100%;
-    
-font-family: 'Public Sans';
-font-style: normal;
+
+    font-family: 'Public Sans';
+    font-style: normal;
 
     /* identical to box height, or 30px */
 
     text-align: center;
 }
-
+.emailfont {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+}
 .signbuttonMarket {
-    
-font-family: 'Public Sans';
-font-style: normal;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
 
     background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
     border-radius: 4px;
@@ -794,20 +813,21 @@ font-style: normal;
 @media only screen and (min-width: 320px) and (max-width: 900px) {
     .mainBackground {
         // background-color: #212121;
-     
+
         height: auto !important;
         width: 99%;
         background-image: url(../images/background1.png);
         background-position: center;
         background-size: cover;
         margin-top: 15px;
+        margin-left: 0 !important;
     }
 }
 .adminDialog {
     .MuiDialog-paper {
         width: 100%;
         max-height: 685px;
-       
+
         border-radius: 2px !important;
     }
 
@@ -822,7 +842,7 @@ font-style: normal;
     .MuiDialog-paper {
         width: 100%;
         max-height: 575px;
-       
+
         border-radius: 2px !important;
     }
 
@@ -833,11 +853,11 @@ font-style: normal;
         }
     }
 }
-.field{
- background-color: transparent;
+.field {
+    background-color: transparent;
     margin-top: -6px !important;
 }
-.inputPadding{
+.inputPadding {
     padding: 0px !important;
 }
 .categoryDialog {
@@ -866,7 +886,7 @@ font-style: normal;
 
 .quantityField {
     width: 100px;
-text-align: center !important;
+    text-align: center !important;
     & .css-4pzdr3-MuiInputBase-input-MuiOutlinedInput-input {
         height: 0.8375em;
     }
@@ -904,23 +924,17 @@ text-align: center !important;
     font-size: 18px;
     font-weight: 400px;
     margin-left: 50px;
-
-    
 }
 
 .noDataNew {
     font-size: 18px;
     font-weight: 400px;
     margin-left: 82px;
-
-    
 }
 .noDatacat {
     font-size: 18px;
     font-weight: 400px;
     margin-left: 68px;
-   
-    
 }
 .NFTdetails {
     overflow: hidden;
@@ -963,7 +977,7 @@ text-align: center !important;
 }
 .creator {
     margin-top: 7px;
-    color: #CDCDCD;
+    color: #cdcdcd;
     font-family: 'Public Sans';
     font-style: normal;
     font-weight: 400;
@@ -1026,7 +1040,6 @@ text-align: center !important;
     font-size: 27px !important;
 }
 .headingcard {
-    
     font-weight: 600;
     font-family: 'Poppins';
     font-style: normal;
@@ -1044,9 +1057,6 @@ text-align: center !important;
 .Adminheading {
     background-color: transparent;
     border: none !important ;
-   
-  
-  
 }
 .stylingtitle {
     font-family: 'Poppins' !important;
@@ -1085,41 +1095,34 @@ text-align: center !important;
     width: 27% !important;
     margin: 0 auto;
     // border: 2px solid red;
-   
- 
 }
-@media only screen and (min-width:  0px) and (max-width:  600px) {
+@media only screen and (min-width: 0px) and (max-width: 600px) {
     .dialog {
-       
         width: 100% !important;
         max-height: 530px;
     }
 }
-@media only screen and (min-width:  600px) and (max-width:  1200px) {
+@media only screen and (min-width: 600px) and (max-width: 1200px) {
     .dialog {
-       
         width: 50% !important;
         max-height: 530px;
     }
 }
-@media only screen and (min-width:  600px) and (max-width:  900px) {
+@media only screen and (min-width: 600px) and (max-width: 900px) {
     .dialog {
-       
         width: 50% !important;
         max-height: 530px;
     }
 }
-@media only screen and (min-width:  900px) and (max-width:  1199px) {
+@media only screen and (min-width: 900px) and (max-width: 1199px) {
     .dialog {
-       
         width: 40% !important;
         max-height: 530px;
     }
 }
 
-@media only screen and (min-width:  1200px) and (max-width: 1350px) {
+@media only screen and (min-width: 1200px) and (max-width: 1350px) {
     .dialog {
-       
         width: 35% !important;
         max-height: 530px;
     }
@@ -1274,7 +1277,6 @@ text-align: center !important;
 }
 .css-17c4ftt {
     background: #e4f3f2 !important;
-
 }
 .encap {
     white-space: nowrap;
@@ -1282,9 +1284,9 @@ text-align: center !important;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.font-in-detail{
+.font-in-detail {
     font-family: 'Poppins';
-font-style: normal;
+    font-style: normal;
 }
 .encapPropertry {
     text-align: center;
@@ -1296,13 +1298,11 @@ font-style: normal;
 }
 .dialog_details {
     height: 520px;
-    width:99%;
+    width: 99%;
     margin: 0 auto;
-   
 }
-.fixedDialoge{
-  
-   width: 220px; 
+.fixedDialoge {
+    width: 220px;
 }
 .prdpadding {
     padding: 10px 8px 0 25px !important;
@@ -1323,8 +1323,8 @@ font-style: normal;
     border-radius: 4px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-transition: background-color .218s,border-color .218s;
-    transition: background-color .218s,border-color .218s;
+    -webkit-transition: background-color 0.218s, border-color 0.218s;
+    transition: background-color 0.218s, border-color 0.218s;
     -webkit-user-select: none;
     -webkit-appearance: none;
     background-color: #fff;
@@ -1332,7 +1332,7 @@ font-style: normal;
     border: 1px solid #dadce0;
     color: #3c4043;
     cursor: pointer;
-    font-family: "Google Sans",arial,sans-serif;
+    font-family: 'Google Sans', arial, sans-serif;
     font-size: 14px;
     height: 40px;
     letter-spacing: 0.25px;
@@ -1346,109 +1346,95 @@ font-style: normal;
     width: 50% !important;
     /* padding: 20px; */
     margin: 0 auto !important;
-   
 }
 .css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
-    color: #2F53FF !important;
+    color: #2f53ff !important;
 }
 .css-dj8axb-MuiTypography-root {
     margin: 0;
     font-size: 0.875rem;
     color: #d7dcec;
     font-weight: 500;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.334;
-    color: #2F53FF !important;
-   
+    color: #2f53ff !important;
 }
 .css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
-    color: #2F53FF !important;
+    color: #2f53ff !important;
     background-color: transparent !important;
 }
 .css-hjvw11-MuiButtonBase-root-MuiListItemButton-root:hover {
     background-color: #2f53ff24 !important;
-    color: #2F53FF !important;
+    color: #2f53ff !important;
 }
-.fontfigma{
+.fontfigma {
     font-family: 'Public Sans' !important;
     font-style: normal !important;
     font-weight: 700 !important;
     font-size: 22px !important;
     line-height: 26px !important;
-
 }
-.fontsize{
-    // font-size: 25px !important 
+.fontsize {
+    font-size: 23px !important
 }
-@media only screen and (min-width:1568px ) {
-.fontfigma{
-    font-family: "Public Sans" !important;
-    font-style: normal !important;
-    font-weight: 400;
-    font-size: 39px !important;
-    line-height: 26px !important;
-
-}
-.noDatacat {
-    font-size: 25px !important;
-    font-weight: 400px !important;
-    margin-left: 75px !important;
+@media only screen and (min-width: 1568px) {
+    .fontfigma {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        font-size: 28px !important;
+        line-height: 26px !important;
+    }
+    .noDatacat {
+        font-size: 25px !important;
+        font-weight: 400px !important;
+        margin-left: 75px !important;
+    }
+    .noDataNew {
+        font-size: 25px !important;
+        font-weight: 400px !important;
+        margin-left: 75px !important;
+    }
+    .cardHeading {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 23px !important;
+    }
+    .Creationstyling {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        text-transform: capitalize !important;
+        font-size: 20px !important;
+    }
    
-    
+    .categoreyName {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 23px !important;
+    }
 }
-.noDataNew {
-    font-size: 25px !important;
-    font-weight: 400px !important;
-    margin-left: 75px !important;
 
-    
-}
-.cardHeading {
-    font-family: "Public Sans" !important;
-    font-style: normal !important;
-    font-weight: 500 !important;
-    font-size: 23px !important;
-}
-.Creationstyling {
-    font-family: "Public Sans" !important;
-    font-style: normal !important;
-    font-weight: 500 !important;
-    text-transform: capitalize !important;
-    font-size: 20px !important;
-}
-.fontsize{
-    font-size: 40px !important 
-}
 .categoreyName {
-    font-family: "Public Sans" !important;
-    font-style: normal !important;
-    font-weight: 500 !important;
-    font-size: 23px !important;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
 }
-}
+.centerText {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
 
-.categoreyName{
-    
-font-family: 'Public Sans';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
- 
+    text-align: center;
+    text-transform: capitalize;
 }
-.centerText{
-    
-font-family: 'Public Sans';
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 19px;
-/* identical to box height */
-
-text-align: center;
-text-transform: capitalize;
-
-}
-.productfigmastyl{
+.productfigmastyl {
     font-family: 'Public Sans' !important;
     font-style: normal !important;
     font-weight: 700 !important;
@@ -1456,9 +1442,8 @@ text-transform: capitalize;
     line-height: 28px !important;
     /* text-align: center; */
     text-transform: capitalize !important;
-  
 }
-.plight{
+.plight {
     font-family: 'Public Sans' !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -1466,7 +1451,7 @@ text-transform: capitalize;
     line-height: 14px !important;
     text-align: center !important;
     text-transform: capitalize !important;
-    color: #CDCDCD !important;
+    color: #cdcdcd !important;
 }
 .MuiInputBase-input {
     font: inherit;
@@ -1484,111 +1469,196 @@ text-transform: capitalize;
     letter-spacing: inherit;
     animation-duration: 10ms;
     -webkit-tap-highlight-color: transparent;
- 
 }
-.Creationstyling{
+.Creationstyling {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 500;
-// font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    // font-size: 10px;
 
-text-transform: capitalize;
-
-
+    text-transform: capitalize;
 }
-.cardHeading{
+.cardHeading {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 500;
-// font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    // font-size: 10px;
 }
-.brandName{
+.brandName {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 200;
-// font-size: 8px;
-
+    font-style: normal;
+    font-weight: 200;
+    // font-size: 8px;
 }
-.fontfamily{
+.fontfamily {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 400;
-
+    font-style: normal;
+    font-weight: 400;
 }
-.activityTable{
+.activityTable {
     font-family: 'Public Sans';
     font-style: normal;
 }
 
-
-
-.newCreator{
+.newCreator {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 200;
-
+    font-style: normal;
+    font-weight: 200;
 }
-.footerDownloadTag{
-    
-font-family: 'Public Sans' !important;
-font-style: normal !important;
-font-weight: 400 !important;
-font-size: 14px !important;
+.footerDownloadTag {
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
 }
-.MarketplaceHead{
+.MarketplaceHead {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 700;
-font-size: 22px;
-line-height: 26px;
-/* identical to box height */
-
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    /* identical to box height */
 }
-.sidebar{
-   
-    max-width:200px !important;
+.sidebar {
+    max-width: 200px !important;
     margin-top: 12px;
-    
-  
 }
- // <umar code
+// <umar code
 .slick-slide .MuiGrid-root {
-     margin-left: 0px !important; 
+    margin-left: 0px !important;
     /* margin-right: 32px; */
     margin-right: 18px !important;
 }
+.background{
+    // background-color: black; /* For browsers that do not support gradients */
+    // background-image: linear-gradient(to top right, black,rgba(255,0,0,0), rgba(43 140 255 / 27%) );
+    // background: radial-gradient(to top right , 50% 50% at 50% 50%,
+    // #2B8CFF 0%, rgba(43 140 255 / 27%)); 
+}
 
 @media only screen and (min-width: 1200px) and (max-width: 1370px) {
-    .cate-margin{
+    .cate-margin {
         margin-right: 35px;
         margin-left: -9px;
     }
 
-    .cate-width{
-     width:220px ;
+    .cate-width {
+        width: 220px;
     }
 
-    .new-margin{
+    .new-margin {
         margin-right: 20px;
         margin-left: 9px;
     }
-    .new-width{
-       
-       width: 220px;
+    .new-width {
+        width: 215px;
     }
-    .feature{
-        margin-right: 24px;
-        margin-left: 5px;
+    .feature {
+        margin-right: 32px;
+        margin-left: 0px;
     }
-    .feature-width{
-        width:220px ;
+    .feature-width {
+        width: 215px;
     }
-    .footersocalIcons{
-      margin-right: 10px;  
+    .footersocalIcons {
+        margin-right: 10px;
     }
-    .contactLargescrn{
-margin-top: 35px;
+    .contactLargescrn {
+        margin-top: 35px;
+    }
+    .sideLine{
+        gap:21px;
+    }
+}
+@media only screen and (min-width: 1900px) and (max-width: 2560px) {
+    .fontsize {
+        font-size: 25px !important;
+    }
+  .outlet-Margin{
+    margin-left:-18px;
+  }
+  .mainBackground {
+    // background-color: #212121;
+    min-height: auto;
+    max-height: auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 455px;
+    width:100%;
+    background-image: url(../images/background1.png);
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    margin-top: 13px;
+    border-radius: 4px;
+    // margin-left: 20px;
+}
+    .cate-margin {
+        margin-right: 28px;
+        margin-left: 0px;
     }
 
+    .cate-width {
+        width: 100%;
+    }
+
+    .new-margin {
+        margin-right: 20px;
+        margin-left: 9px;
+    }
+    .new-width {
+        width: 100%;
+    }
+    .feature {
+        margin-right: 32px;
+        margin-left: 0px;
+    }
+    .feature-width {
+        width: 100%;
+    }
+    .footersocalIcons {
+        margin-right: 10px;
+    }
+    .contactLargescrn {
+        margin-top: 35px;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    .cate-margin {
+        margin-right: -8px;
+        margin-left: -10px;
+    }
+
+    .cate-width {
+        width: 100%;
+    }
+    .catigaryslider {
+        background-color: transparent;
+        height: 198px;
+        width: 85%;
+        margin: 0 auto;
+        justify-content: center;
+        text-align: center;
+        color: #212121;
+    }
+    .slider {
+        background-color: transparent;
+        height: 330px;
+        width: 85%;
+        margin: 0 auto;
+        justify-content: center;
+        text-align: center;
+        color: #212121;
+    }
+    .sliderBrand {
+        background-color: transparent;
+        height: 250px;
+        width: 85%;
+        margin: 0 auto;
+        justify-content: center;
+        text-align: center;
+        color: #212121;
+    }
+  
 }
 //umar code>

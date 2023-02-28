@@ -22,6 +22,7 @@ import {
     Divider
 } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -57,7 +58,7 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                 console.log('No crypto wallet found. Please install it.');
                 // toast.error('No crypto wallet found. Please install it.');
             }
-            
+
             // else if (window?.ethereum?.networkVersion !== '5') {
             //     console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
             //     dispatch({
@@ -70,7 +71,6 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
             //     console.log('Please change your Chain ID to Goerli');
             //     setWalletAddress();
             // }
-            
             else {
                 const address = utils?.getAddress(response[0]);
                 setWalletAddress(address);
@@ -145,14 +145,28 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <OutlinedInput
+                        <InputLabel  sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            First Name{' '}
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.first_name && errors.first_name)}
+                        >
+                            <TextField
+                                placeholder="First Name"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="name"
                                 value={values.first_name}
-                                name="first_name"
+                                name="firstName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="First Name"
                                 inputProps={{}}
                             />
                             {touched.first_name && errors.first_name && (
@@ -161,14 +175,29 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <OutlinedInput
-                                type="name"
+
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Last Name{' '}
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.last_name && errors.last_name)}
+                        >
+                            <TextField
+                                placeholder="Last Name"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                type="lastName"
                                 value={values.last_name}
-                                name="last_name"
+                                name="lastName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Last name"
                                 inputProps={{}}
                             />
                             {touched.last_name && errors.last_name && (
@@ -177,14 +206,29 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <OutlinedInput
+
+                        <InputLabel  sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Email
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.email && errors.email)}
+                        >
+                            <TextField
+                                placeholder="Email"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="email"
                                 value={values.email}
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email"
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -193,15 +237,29 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Delivery Address </InputLabel>
-                            <OutlinedInput
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Delivery Address
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.address && errors.address)}
+                        >
+                            <TextField
+                                placeholder="Delivery Address"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="address"
                                 value={values.address}
                                 name="address"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Delivery Address"
+                                // helperText="Some important text"
                                 inputProps={{}}
                             />
                             {touched.address && errors.address && (
