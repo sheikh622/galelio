@@ -64,14 +64,14 @@ const SocialProfile = () => {
     ];
 
     return (
-        <Grid
-            container
+        <Grid  
+            container  
             spacing={gridSpacing}
             sx={{
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >
-            <Grid item xs={12} sx={{}}>
+            <Grid item xs={12} lg={11.86} >
                 <CardMedia component="img" image={Cover} sx={{ borderRadius: '1px', overflow: 'hidden', mb: 3 }} />
 
                 <Grid container spacing={gridSpacing}>
