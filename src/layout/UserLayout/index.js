@@ -11,7 +11,15 @@ const UserLayout = () => {
             
             <Grid container
                 sx={{
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
+                    background: theme.palette.mode === 'dark' ? "radial-gradient(to top right, 50% 50% at 50% 50%, #2B8CFF 0%, rgba(43, 140, 255, 0.27))"
+                     : '#f3f3f3',
+
+                      // backgroundImage: "linear-gradient(to top right, black,rgba(255,0,0,0), rgba(43 140 255 / 27%) )",
+                    // background: "radial-gradient(to top right, 50% 50% at 50% 50%, #2B8CFF 0%, rgba(43, 140, 255, 0.27))",
+
+                    backgroundImage: theme.palette.mode === 'dark' ?
+                    "linear-gradient(to top right, black,rgba(255,0,0,0), rgba(43 140 255 / 27%) )" : 
+                    "",
                 }}
             >
               

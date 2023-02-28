@@ -57,8 +57,8 @@ const SideBar = () => {
                            
                             // maxWidth: { lg: '90% !important' },
                             display: 'block',
-                           
-                            background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
+                            backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : '#fff'}` ,
+                            // background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff',
                             borderRadius: '4px'
                         }}
                     >
