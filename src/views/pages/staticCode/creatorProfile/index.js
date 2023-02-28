@@ -14,7 +14,7 @@ const Profile = () => {
     return (
         <>
             <Grid
-            md={12} lg={11}
+            md={12} lg={12}
                 sx={{
                     background: 'tranparent',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
