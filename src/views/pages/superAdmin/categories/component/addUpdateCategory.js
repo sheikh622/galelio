@@ -28,7 +28,6 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState(false);
     const [loader, setLoader] = useState(false);
-    
 
     useEffect(() => {
         if (categoryData.id == null) {
@@ -51,26 +50,20 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 otherwise: Yup.mixed().required('Image is required')
             })
 
-            .test('image size', 'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
+            .test('image size', 'Choose image less than 5 mb', (value) => !value || (value && value.size <= 5_000_000))
     });
 
     const errorHandler = (values) => {
         if (values.image) {
             if (
-                values.image.name.split('.').pop() !== 'jpg' &&
-                values.image.name.split('.').pop() !== 'png' &&
-                values.image.name.split('.').pop() !== 'jpeg '
+                values.image.name.split('.').pop() == 'jpg' ||
+                values.image.name.split('.').pop() == 'png' ||
+                values.image.name.split('.').pop() == 'jpeg '
             ) {
+                return true;
+            } else {
                 toast.error('Upload the files with these extensions: jpg, png, jpeg');
                 return false;
-            } else if(values.image.size/1000000>5){
-
-                toast.error('Please upload image with less than 5 mb size');
-                return false;
-            }
-            
-            else {
-               return true
             }
         }
         return true;
@@ -81,11 +74,12 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
         initialValues: categoryData,
         validationSchema,
         onSubmit: async (values) => {
-            setLoader(true);
-            console.log('values', values.image.size / 1000000);
+           
+            
             const isValid = errorHandler(values);
             if (isValid) {
-                if (categoryData.id == null) {
+                setLoader(true);
+                if ( categoryData.id == null) {
                     await dispatch(
                         addCategory({
                             name: values.name,
@@ -97,8 +91,9 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                             handleClose: handleClose
                         })
                     );
+                    
                 } else {
-                    dispatch(
+                    await dispatch(
                         updateCategory({
                             categoryId: categoryData.id,
                             name: values.name,
@@ -122,8 +117,6 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
         formik.resetForm();
     };
 
-    
-    
     return (
         <>
             <Dialog
@@ -156,6 +149,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                                 helperText={formik.touched.name && formik.errors.name}
                                 fullWidth
                                 autoComplete="given-name"
+                                disabled = {loader ? true : false}
                             />
 
                             <InputLabel sx={{ marginTop: '15px' }} htmlFor="outlined-adornment-password-login" className="textfieldStyle">
@@ -172,6 +166,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                                 helperText={formik.touched.description && formik.errors.description}
                                 fullWidth
                                 autoComplete="given-name"
+                                disabled = {loader ? true : false}
                             />
                         </Grid>
 
@@ -184,15 +179,6 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                                 placeHolder="Add Category Image"
                                 variant="standard"
                             />
-
-                          
-                        </Grid>
-                        <Grid>
-                        {formik.values?.image?.size/1000000 > 4
-                            &&
-                            <span style={{textAlign:"center", color:"red"}}>Please choose image less than 4 mb</span>
-                            
-                            }
                         </Grid>
                         
                     </form>
@@ -218,7 +204,6 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                                     type="submit"
                                     size="large"
                                     onClick={formik.handleSubmit}
-                                    
                                 >
                                     {categoryData.name !== '' ? 'Update ' : 'Create '}
                                 </Button>
