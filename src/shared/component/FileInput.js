@@ -9,6 +9,7 @@ import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 // Props needed for component formik ,correctOption, setCorrectOption , optionValue , formikFieldName , PlaceHOLDER
 const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
+    
     const dispatch = useDispatch();
     const fileRef1 = useRef();
 
@@ -66,7 +67,11 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
                                         fileRef1.current.value = null;
                                     }}
                                 >
+                                    
+
                                     <CloseOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                    
+                                    
                                 </IconButton>
                             </Tooltip>
                         ) : (

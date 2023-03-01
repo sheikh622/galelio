@@ -17,7 +17,10 @@ const Profile = () => {
             md={12} lg={12}
                 sx={{
                     background: 'tranparent',
-                    color: theme.palette.mode === 'dark' ? 'white' : '#404040'
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040',  mt: { lg: 1.5, xl: 1.5 },
+                    ml:{lg: 0.5},
+                   
+                    // mb: { lg: 0, xl: 1.5 }
                 }}
             >
                 <Grid container-fluid sx={{ display: { xs: 'block', sm: 'block', md: 'flex' , lg:'flex' } }}>

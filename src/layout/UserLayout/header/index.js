@@ -286,10 +286,12 @@ export default function Header() {
                         )}
 
                         <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 , marginTop:'3px'}}>
-                            <div sx={{ marginRight: '3%' }}>
+                            <div sx={{ marginRight: '1%' }}>
                             {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User')
                             
-                            && (token != null || undefined) && <MetaMaskSection />}</div>
+                            && (token != null || undefined) && 
+                            <MetaMaskSection />}
+                            </div>
                             {/* <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
@@ -316,11 +318,11 @@ export default function Header() {
                          ) && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="40" style={{ display: 'inlineBlock', 
-                                     marginTop: '-3px', }} />
+                                    <img src={userHeader} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'3px'
+                                     }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="40" style={{ display: 'inlineBlock',
-                                     marginTop: '-3px', }} />
+                                    <img src={personuser} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'3px'
+                                     }} />
                                 )}
 
                                 <IconButton

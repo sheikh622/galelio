@@ -49,8 +49,6 @@ const typeArray = [
 ];
 
 export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
-
-    console.log('data', data);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
@@ -64,57 +62,85 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     };
 
     const handleError = (fieldDataArray, fileDataArray, values) => {
+        console.log('im in handle error');
         let isValid = true;
-        if (parseInt(values.images[0].quantity) < 1) {
-            toast.error('NFT Quantity must be greater than zero');
+        console.log('fieldDataArray', fieldDataArray);
+        console.log('fileDataArray', fileDataArray);
+        console.log('values', values);
+
+        if (fieldDataArray.length == 0) {
             isValid = false;
+            toast.error('Metadata is required');
+        } 
+
+        // else  (fieldDataArray.length > 0) {
+            
+            fieldDataArray.map((array) => {
+                if (array.fieldName == '') {
+                    isValid = false;
+                    toast.error(`Metadata name cannot be empty`);
+                }
+                else if (array.fieldValue == '') {
+                    isValid = false;
+                    toast.error(`Metadata value cannot be empty`);
+                }
+            });
+        // }
+         if (fileDataArray.length == 0) {
+            isValid = false;
+            toast.error('Proof of Authenticity is required');
         }
-        if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
-        } else {
+
+    //    else (fileDataArray.length > 0) {
+        console.log('im here 2');
+            fileDataArray.map((array) => {
+                if (array.fieldName == '') {
+                    isValid = false;
+                    toast.error(`File name field is mandatory`);
+                }
+                else if (array.fieldValue == null) {
+                    isValid = false;
+                    toast.error(`Attach proof of authenticity`);
+                }
+                else if (array.fieldValue?.size/1000000>5) {
+                    isValid = false;
+                    toast.error(`Please attach a less than 5 mb proof of authenticity`);
+                }
+            });
+        // }
+
+         if (values.images.length == 0) {
+            toast.error('Please upload a NFT Image');
+            isValid = false;
+        } else if (values.images[0].image.size / 1000000 > 5) {
+            toast.error('Please upload a image less than 5 mb');
+            isValid = false;
+        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
             toast.error('Upload the files with these extensions: jpg, png, gif');
             isValid = false;
+        }else if (parseInt(values.images[0].quantity) <=0) {
+            toast.error('NFT Quantity should be atleast one');
+            isValid = false;
         }
 
-        fieldDataArray.forEach((array) => {
-            if (array.fieldName == '') {
-                isValid = false;
-                toast.error(`Metadata name fields are mandatory`);
-            }
-            if (array.fieldValue == '') {
-                isValid = false;
-                toast.error(`Metadata value fields are mandatory`);
-            }
-        });
-
-        fileDataArray.forEach((array) => {
-            if (array.fieldName == '') {
-                isValid = false;
-                toast.error(`File name fields are mandatory`);
-            }
-            if (array.fieldValue == null) {
-                isValid = false;
-                toast.error(`File value fields are mandatory`);
-            }
-        });
 
         return isValid;
     };
 
     const validationSchema = Yup.object({
-        nftName: Yup.string()
-            .required('NFT Name is required!')
-            .max(42, 'NFT Name can not exceed 42 characters'),
-            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
+        nftName: Yup.string().required('NFT Name is required!').max(42, 'NFT Name can not exceed 42 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
         nftPrice: Yup.number()
-            .min(0.000001, 'Price should not less than zero')
+            .min(0.000000001, 'Price should be greater than zero')
             .required('NFT Price is required')
-            .typeError('Invalid Price'),
-        images: Yup.mixed()
+            .typeError('Invalid Price')
+        // image: Yup.mixed()
     });
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -125,6 +151,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         },
         validationSchema,
         onSubmit: (values) => {
+            console.log('values', values);
+
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
             });
@@ -133,16 +161,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             });
 
             let isValid = handleError(fieldDataArray, fileDataArray, values);
-            if (fileDataArray.length == 0) {
-                toast.error('Proof of authenticity is required');
-            } else if (values.images.length == 0) {
-                toast.error('NFT Image is required');
-            } else if (isValid) {
+            console.log('isValid', isValid);
+     
+
+            if (isValid==true) {
                 setLoader(true);
-                // toast.success("Please wait for confirmation Transaction !");
                 dispatch(
                     addNft({
-                    
                         categoryId: data.CategoryId,
                         mintType: mintType,
                         metaDataArray: fieldDataArray,
@@ -160,7 +185,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         search: search,
                         categoryId: data.CategoryId,
                         requesterAddress: user.walletAddress,
-                        contractAddress:data.contractAddress,
+                        contractAddress: data.contractAddress,
                         handleClose: handleClose,
                         brandId: user.BrandId
                     })
@@ -373,14 +398,14 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                         ]);
                                     }}
                                 >
-                                    Add more fields
+                                    Add Metadata
                                 </Button>
                             </Grid>
                         </Grid>
 
                         {fieldDataArray.length != 0 && (
                             <>
-                                <Grid container spacing={4}>
+                                <Grid container spacing={4} sx={{mt:1}}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
                                             <Grid item xs={5}>
@@ -541,8 +566,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <AnimatePresence>
                                     {formik.values.images &&
                                         formik.values.images.map((file, index) => (
-                                            <ListItem key={file.image.name} component={motion.div} 
-                                            className="listItem">
+                                            <ListItem key={file.image.name} component={motion.div} className="listItem">
                                                 <ListItemIcon>
                                                     <Icon icon={fileFill} width={32} height={32} />
                                                 </ListItemIcon>
@@ -553,8 +577,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     }}
                                                 />
                                                 {mintType == 'directMint' && (
-                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} 
-                                                    index={index} />
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
                                                 )}
                                                 <IconButton
                                                     color="error"
@@ -576,12 +599,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                     <DialogActions>
                         {loader ? (
                             <DialogActions sx={{ display: 'block', margin: '10px 5px 0px 5px' }}>
-                            <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}>
-                                <Grid item>
-                                    <CircularProgress disableShrink size={'4rem'} />
+                                <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}>
+                                    <Grid item>
+                                        <CircularProgress disableShrink size={'4rem'} />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                           
+
                                 <Button
                                     className="buttons"
                                     variant="Text"
@@ -590,8 +613,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 >
                                     NFT is being Created...
                                 </Button>
-                         
-                        </DialogActions>
+                            </DialogActions>
                         ) : (
                             <>
                                 <AnimateButton>

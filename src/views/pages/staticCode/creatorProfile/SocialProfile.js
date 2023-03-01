@@ -71,7 +71,7 @@ const SocialProfile = () => {
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040'
             }}
         >
-            <Grid item xs={12} lg={11.86} >
+            <Grid item xs={12} lg={11.86} xl={12} >
                 <CardMedia component="img" image={Cover} sx={{ borderRadius: '1px', overflow: 'hidden', mb: 3 }} />
 
                 <Grid container spacing={gridSpacing}>

@@ -1529,12 +1529,7 @@ body {
     /* margin-right: 32px; */
     margin-right: 18px !important;
 }
-.background{
-    // background-color: black; /* For browsers that do not support gradients */
-    // background-image: linear-gradient(to top right, black,rgba(255,0,0,0), rgba(43 140 255 / 27%) );
-    // background: radial-gradient(to top right , 50% 50% at 50% 50%,
-    // #2B8CFF 0%, rgba(43 140 255 / 27%)); 
-}
+
 
 @media only screen and (min-width: 1200px) and (max-width: 1370px) {
     .cate-margin {
@@ -1561,7 +1556,7 @@ body {
         width: 215px;
     }
     .footersocalIcons {
-        margin-right: 10px;
+        margin-right: 25px;
     }
     .contactLargescrn {
         margin-top: 35px;
@@ -1623,6 +1618,42 @@ body {
         margin-top: 35px;
     }
 }
+@media only screen and (min-width: 1371px) and (max-width: 1535px) {
+    .cate-margin {
+        margin-right: 32px;
+        margin-left: 0px;
+    }
+    //   .bottom{
+    //     padding-bottom: 7.52% !important;
+    //   }
+    .cate-width {
+        width: 230px;
+    }
+    .new-margin {
+        margin-right: 22px !important;
+       
+        margin-left: 19px !important;
+    }
+    .new-width {
+        width: 234px;
+    }
+    .feature {
+        margin-right: 32px;
+        margin-left: 11px;
+    }
+    .feature-width {
+        width: 234px;
+    }
+    .footersocalIcons {
+        margin-right: 22px;
+    }
+
+}
+// @media only screen and (min-width: 900px) and (max-width: 1200px){
+//     .sideLine{
+//         gap:7px;
+//     }
+// }
 @media only screen and (min-width: 600px) and (max-width: 900px) {
     .cate-margin {
         margin-right: -8px;
@@ -1661,4 +1692,46 @@ body {
     }
   
 }
+
+@media only screen and (min-width: 1536px)  and (max-width: 1699px)  {
+  .Gap{
+   gap:18px !important;
+  }
+  .new-margin {
+    margin-right: 0px;
+    margin-left: 2px;
+}
+
+
+
+ 
+
+
+
+}
+@media only screen and (min-width: 1700px)   {
+    .Gap{
+     gap:20px !important;
+    }
+  
+  
+   
+  
+  
+  
+  }
+  @media only screen and (max-width: 768px) {
+ 
+
+
+    .slick-slide .MuiGrid-root {
+        margin-left: 40px !important;
+        /* margin-right: 32px; */
+        margin-right: 2px !important;
+    }
+
+
+
+}
+
 //umar code>
