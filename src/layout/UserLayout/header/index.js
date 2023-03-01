@@ -318,10 +318,10 @@ export default function Header() {
                          ) && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'2px'
+                                    <img src={userHeader} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'3px'
                                      }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'2px'
+                                    <img src={personuser} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'3px'
                                      }} />
                                 )}
 

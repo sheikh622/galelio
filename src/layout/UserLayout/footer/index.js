@@ -8,8 +8,8 @@ import { gridSpacing } from 'store/constant';
 // assets
 import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
-import googlePlay from 'assets/images/google-play.png';
-import appleStore from 'assets/images/apple-store.png';
+import googlePlay from 'assets/images/google.png';
+import appleStore from 'assets/images/App.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
