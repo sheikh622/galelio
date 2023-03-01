@@ -56,9 +56,9 @@ const Header = () => {
                                             color: '#000'
                                         }}
                                     >
-                                        The Biggest NFT
+                                       The Future of 
                                         <Box component="span" sx={{ ml: 2, color: theme.palette.primary.main }}>
-                                            Marketplace
+                                        Ownership!
                                         </Box>
                                     </Typography>
                                 </motion.div>
@@ -89,7 +89,7 @@ const Header = () => {
                                             lineHeight: 1.4
                                         }}
                                     >
-                                        Find lots of cool works to buy, sell or collect here{' '}
+                                      Unlock the Value of Physical Assets with Tokenisation
                                     </Typography>
                                 </motion.div>
                             </Grid>
