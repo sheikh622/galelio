@@ -246,7 +246,7 @@ const Categories = ({ categories }) => {
                                            
                                             // boxShadow: '1px 2px 6px #d3d3d3',
                                             borderRadius: '3px',
-                                            marginLeft: {xs:'0px', md:'8px' , lg:'18px'}, 
+                                            marginLeft: {xs:'0px', md:'8px' , lg:'25px'}, 
                                             width: { sm:'220px',md:'100%', lg:'245px' , xl:'100%'}
                                         }}
                                         onClick={() => {
