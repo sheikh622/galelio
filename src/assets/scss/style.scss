@@ -1529,12 +1529,7 @@ body {
     /* margin-right: 32px; */
     margin-right: 18px !important;
 }
-.background{
-    // background-color: black; /* For browsers that do not support gradients */
-    // background-image: linear-gradient(to top right, black,rgba(255,0,0,0), rgba(43 140 255 / 27%) );
-    // background: radial-gradient(to top right , 50% 50% at 50% 50%,
-    // #2B8CFF 0%, rgba(43 140 255 / 27%)); 
-}
+
 
 @media only screen and (min-width: 1200px) and (max-width: 1370px) {
     .cate-margin {
@@ -1623,6 +1618,11 @@ body {
         margin-top: 35px;
     }
 }
+// @media only screen and (min-width: 900px) and (max-width: 1200px){
+//     .sideLine{
+//         gap:7px;
+//     }
+// }
 @media only screen and (min-width: 600px) and (max-width: 900px) {
     .cate-margin {
         margin-right: -8px;

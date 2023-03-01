@@ -145,10 +145,10 @@ const Footer = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2}  sm={12} sx={{ paddingBottom: { md: '6.5%' } }}>
+                    <Grid item xs={12} md={2}  sm={12} sx={{ paddingBottom: { md: '5.8%' } }}>
                         <h2  className='footerElement'>Social Media</h2>
 
-                        <Grid style={{}}>
+                        <Grid style={{marginTop:'-4px'}}>
                             <span>
                                 <FacebookIcon />
                             </span>
