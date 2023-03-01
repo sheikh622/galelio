@@ -1,6 +1,18 @@
 import { forwardRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Dialog, DialogContent, InputLabel, TextField, Grid, DialogTitle, Divider, DialogActions, Slide } from '@mui/material';
+import {
+    Button,
+    Dialog,
+    DialogContent,
+    InputLabel,
+    TextField,
+    Grid,
+    DialogTitle,
+    Divider,
+    DialogActions,
+    Slide,
+    CircularProgress
+} from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -8,12 +20,15 @@ import { addCategory, updateCategory } from 'redux/categories/actions';
 import FileInput from '../../../../../shared/component/FileInput';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { set } from 'lodash';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function AddUpdateCategory({ open, setOpen, categoryData, page, limit, search }) {
     const dispatch = useDispatch();
     const [isUpdate, setIsUpdate] = useState(false);
+    const [loader, setLoader] = useState(false);
+    
 
     useEffect(() => {
         if (categoryData.id == null) {
@@ -36,21 +51,20 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                 otherwise: Yup.mixed().required('Image is required')
             })
 
-            .test('image size',
-             'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
+            .test('image size', 'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
     });
 
     const errorHandler = (values) => {
         if (values.image) {
             if (
-                values.image.name.split('.').pop() == 'jpg' ||
-                values.image.name.split('.').pop() == 'png' ||
-                values.image.name.split('.').pop() == 'jpeg '
+                values.image.name.split('.').pop() !== 'jpg' &&
+                values.image.name.split('.').pop() !== 'png' &&
+                values.image.name.split('.').pop() !== 'jpeg '
             ) {
-                return true;
-            } else {
                 toast.error('Upload the files with these extensions: jpg, png, jpeg');
                 return false;
+            } else {
+               return true
             }
         }
         return true;
@@ -61,6 +75,8 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
         initialValues: categoryData,
         validationSchema,
         onSubmit: async (values) => {
+            setLoader(true);
+            console.log('values', values.image.size / 1000000);
             const isValid = errorHandler(values);
             if (isValid) {
                 if (categoryData.id == null) {
@@ -95,10 +111,13 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
 
     const handleClose = () => {
         setOpen(false);
+        setLoader(false);
 
         formik.resetForm();
     };
 
+    
+    
     return (
         <>
             <Dialog
@@ -159,39 +178,60 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                                 placeHolder="Add Category Image"
                                 variant="standard"
                             />
+
+                          
                         </Grid>
+                        <Grid>
+                        {formik.values?.image?.size/1000000 > 4
+                            &&
+                            <span style={{textAlign:"center", color:"red"}}>Please choose image less than 4 mb</span>
+                            
+                            }
+                        </Grid>
+                        
                     </form>
                 </DialogContent>
-                <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
-                    <AnimateButton>
-                        <Button
-                            sx={{
-                                width: '92%',
-                                margin: '0px 0px 10px 8px',
-                                background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
-                            }}
-                            className="buttons"
-                            variant="contained"
-                            type="submit"
-                            size="large"
-                            onClick={formik.handleSubmit}
-                            disableElevation
-                        >
-                            {categoryData.name !== '' ? 'Update ' : 'Create '}
-                        </Button>
-                    </AnimateButton>
-                    <AnimateButton>
-                        <Button
-                            className="buttons"
-                            variant="outlined"
-                            sx={{ width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
-                            onClick={handleClose}
-                            size="large"
-                        >
-                            Cancel
-                        </Button>
-                    </AnimateButton>
-                </DialogActions>
+                {loader ? (
+                    <>
+                        <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
+                            <CircularProgress disableShrink size={'4rem'} />
+                        </DialogActions>
+                    </>
+                ) : (
+                    <>
+                        <DialogActions sx={{ display: 'block', margin: '10px 10px 0px 20px' }}>
+                            <AnimateButton>
+                                <Button
+                                    sx={{
+                                        width: '92%',
+                                        margin: '0px 0px 10px 8px',
+                                        background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)'
+                                    }}
+                                    className="buttons"
+                                    variant="contained"
+                                    type="submit"
+                                    size="large"
+                                    onClick={formik.handleSubmit}
+                                    disabled
+                                    
+                                >
+                                    {categoryData.name !== '' ? 'Update ' : 'Create '}
+                                </Button>
+                            </AnimateButton>
+                            <AnimateButton>
+                                <Button
+                                    className="buttons"
+                                    variant="outlined"
+                                    sx={{ width: '95%', margin: '0px 0px 10px 0px', color: '#4044ED' }}
+                                    onClick={handleClose}
+                                    size="large"
+                                >
+                                    Cancel
+                                </Button>
+                            </AnimateButton>
+                        </DialogActions>
+                    </>
+                )}
             </Dialog>
         </>
     );

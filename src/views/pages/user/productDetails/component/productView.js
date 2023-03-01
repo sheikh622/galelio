@@ -444,7 +444,7 @@ let tokenId;
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
                     
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.contractAddress;
                     console.log('im beneath ca');
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();

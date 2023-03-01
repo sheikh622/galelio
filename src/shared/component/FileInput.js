@@ -30,6 +30,7 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
                         className="chooseFileInput"
                         accept={accept}
                         onChange={(event) => {
+                            
                             formik.setFieldValue(fieldName, event.currentTarget.files[0]);
                         }}
                         error={formik.touched[`${fieldName}`] && Boolean(formik.errors[`${fieldName}`])}
@@ -52,6 +53,7 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
                             </Typography>
                         )}
 
+                            
                         {formik.values[`${fieldName}`] ? (
                             <Tooltip placement="top" title={accept == 'image/*' ? 'Clear Image' : 'Clear Audio'}>
                                 <IconButton
