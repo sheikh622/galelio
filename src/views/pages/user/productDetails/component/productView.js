@@ -373,8 +373,15 @@ const PropertiesView = ({ nft }) => {
                     console.log('hy');
                     let erc20Address = BLOCKCHAIN.ERC20;
                     // let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let tokenId = parseInt(lazyTokenId)
+let tokenId;
+                     if(lazyTokenId ==""){
+                        tokenId = parseInt(nft.NFTTokens[0].tokenId);
 
+                    }
+                    else{
+
+                        tokenId = parseInt(lazyTokenId)
+                    }
                     console.log('tokenId from resell', tokenId);
                     let contractAddress = nft.contractAddress;
                     let nftPrice = nft.price.toString();
@@ -432,13 +439,12 @@ const PropertiesView = ({ nft }) => {
             navigate('/login');
         } else if (await checkWallet()) {
             if (nft.mintType == 'directMint') {
-                try {
-                    console.log('hy');
+                try {                    
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId = parseInt(nft.NFTTokens[0].tokenId);
                     
-                    let contractAddress = nft.Brand.BrandCategories[0].contractAddress;
+                    let contractAddress = nft.contractAddress;
                     console.log('im beneath ca');
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
@@ -487,10 +493,19 @@ const PropertiesView = ({ nft }) => {
                 try {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    // let tokenId = parseInt(nft.NFTTokens[0].tokenId);
+                    let tokenId;
+                    if(lazyTokenId ==""){
+                        tokenId = parseInt(nft.NFTTokens[0].tokenId);
+
+                    }
+                    else{
+
+                        tokenId = parseInt(lazyTokenId)
+                    }
                     
-                    let tokenId = parseInt(lazyTokenId)
-console.log('tokenId', tokenId);
+
+                    console.log('tokenId', tokenId);
+                    console.log('lazyTokenId', lazyTokenId);
                     let contractAddress = nft.contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();

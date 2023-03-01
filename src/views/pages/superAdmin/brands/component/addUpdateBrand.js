@@ -42,8 +42,7 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
             otherwise: Yup.mixed().required('Image is required')
         })
 
-        .test('image size',
-         'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
+        .test('image size', 'Choose image less than 5 mb', (value) => !value || (value && value.size <= 5_000_000))
 
     });
     const errorHandler = (values) => {
