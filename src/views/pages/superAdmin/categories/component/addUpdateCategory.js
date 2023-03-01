@@ -63,7 +63,13 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
             ) {
                 toast.error('Upload the files with these extensions: jpg, png, jpeg');
                 return false;
-            } else {
+            } else if(values.image.size/1000000>5){
+
+                toast.error('Please upload image with less than 5 mb size');
+                return false;
+            }
+            
+            else {
                return true
             }
         }
@@ -212,7 +218,6 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
                                     type="submit"
                                     size="large"
                                     onClick={formik.handleSubmit}
-                                    disabled
                                     
                                 >
                                     {categoryData.name !== '' ? 'Update ' : 'Create '}
