@@ -150,9 +150,10 @@ const LoginForm = ({ loginProp, ...others }) => {
                         <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
                             Email{' '}
                         </InputLabel>
-                        <FormControl  sx={{ ...theme.typography.customInput }} className="auth-formcontrol" fullWidth error={Boolean(touched.email && errors.email)}>
+                        <FormControl  sx={{ ...theme.typography.customInput }} className="auth-formcontrol" 
+                        fullWidth error={Boolean(touched.email && errors.email)}>
                             <TextField
-                            sx={{background:'pink !important'}}
+                           
                                 placeholder="email"
                                 className="textForm"
                                 // onChange={(event)=>handelAccount("password",event)}

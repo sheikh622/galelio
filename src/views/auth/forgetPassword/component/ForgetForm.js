@@ -57,7 +57,7 @@ const ForgetForm = ({ ...others }) => {
                             error={Boolean(touched.email && errors.email)}
                         >
                             <TextField
-                                sx={{ background: 'pink !important' }}
+                             
                                 placeholder="email"
                                 className="textForm"
                                 // onChange={(event)=>handelAccount("password",event)}
