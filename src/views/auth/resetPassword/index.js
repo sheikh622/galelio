@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Stack, Typography, useMediaQuery,Box  } from '@mui/material';
+import '@fontsource/public-sans';
 
 import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';

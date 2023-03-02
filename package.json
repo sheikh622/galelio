@@ -60,6 +60,7 @@
         "moment": "^2.29.4",
         "numeral": "^2.0.6",
         "prop-types": "^15.7.2",
+        "public-sans": "^0.1.7-1",
         "react": "^17.0.2",
         "react-apexcharts": "^1.3.7",
         "react-beautiful-dnd": "^13.1.0",
