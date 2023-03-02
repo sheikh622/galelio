@@ -79,7 +79,7 @@ export default function AddUpdateCategory({ open, setOpen, categoryData, page, l
             const isValid = errorHandler(values);
             if (isValid) {
                 setLoader(true);
-                if ( categoryData.id == null) {
+                if (categoryData.id == null) {
                     await dispatch(
                         addCategory({
                             name: values.name,
