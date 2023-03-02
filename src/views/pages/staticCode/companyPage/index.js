@@ -35,8 +35,8 @@ const CompanyPage = () => {
                     <Grid container>
                         <Grid item xs={12} md={3} sx={{ paddingRight: '1rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                <div style={{ paddingTop: '10px' }}>
-                                    <img src={rolex} style={{ borderRadius: '100px', height:'56px' , width:'56px',  border: '3px solid #2196f3' }} />
+                                <div style={{ paddingTop: '0px' }}>
+                                    <img src={rolex} style={{ borderRadius: '100px', height:'92px' , width:'92px',  border: '3px solid #2196f3' }} />
                                 </div>
 
                                 <div className='font-company-page'>
@@ -69,7 +69,8 @@ const CompanyPage = () => {
                         </Grid>
 
                         <Grid item xs={12} md={3} sx={{ marginLeft: '15%', mt: 2 }}>
-                            <Grid container style={{ display: 'flex', justifyContent: 'space-evenly', marginRight: '7%', float: 'right' }}>
+                            <Grid container style={{ display: 'flex', justifyContent: 'space-evenly',
+                             marginRight: '7%', float: 'right' }}>
                                 <Grid item>
                                     <img src={etherscan} height="18rem" alt="" />
                                 </Grid>
