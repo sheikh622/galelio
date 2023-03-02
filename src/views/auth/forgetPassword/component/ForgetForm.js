@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { forgotPassword } from '../../../../redux/auth/actions';
 import { setLoader } from '../../../../redux/auth/actions';
 import TextField from '@material-ui/core/TextField';
+import '@fontsource/public-sans';
 
 // third party
 import * as Yup from 'yup';

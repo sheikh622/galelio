@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@material-ui/core/TextField';
 import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 import {
     Box,
     Button,

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import '@fontsource/public-sans';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';

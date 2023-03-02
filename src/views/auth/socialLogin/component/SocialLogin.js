@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -104,17 +106,17 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    first_name: location.state?.socal?.user?.firstName,
-                    last_name: location.state?.socal?.user?.lastName,
+                    firstName: location.state?.socal?.user?.firstName,
+                    lastName: location.state?.socal?.user?.lastName,
                     email: location.state?.socal?.user?.email,
                     walletAddress: '',
                     address: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    first_name: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
+                    firstName: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
                     // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
 
-                    last_name: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
+                    lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
                     // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
 
@@ -133,8 +135,8 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                     await dispatch(setLoader(true));
                     dispatch(
                         signupsocial({
-                            firstName: values.first_name,
-                            lastName: values.last_name,
+                            firstName: values.firstName,
+                            lastName: values.lastName,
                             email: values.email,
                             walletAddress: walletAddress,
                             address: values.address,
@@ -145,14 +147,18 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <InputLabel  sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
                             First Name{' '}
                         </InputLabel>
                         <FormControl
                             sx={{ ...theme.typography.customInput }}
                             className="auth-formcontrol"
                             fullWidth
-                            error={Boolean(touched.first_name && errors.first_name)}
+                            error={Boolean(touched.firstName && errors.firstName)}
                         >
                             <TextField
                                 placeholder="First Name"
@@ -163,27 +169,31 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 required
                                 fullWidth
                                 type="name"
-                                value={values.first_name}
+                                value={values.firstName}
                                 name="firstName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 inputProps={{}}
                             />
-                            {touched.first_name && errors.first_name && (
+                            {touched.firstName && errors.firstName && (
                                 <FormHelperText error id="standard-weight-helper-text-name-login">
-                                    {errors.first_name}
+                                    {errors.firstName}
                                 </FormHelperText>
                             )}
                         </FormControl>
 
-                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
                             Last Name{' '}
                         </InputLabel>
                         <FormControl
                             sx={{ ...theme.typography.customInput }}
                             className="auth-formcontrol"
                             fullWidth
-                            error={Boolean(touched.last_name && errors.last_name)}
+                            error={Boolean(touched.lastName && errors.lastName)}
                         >
                             <TextField
                                 placeholder="Last Name"
@@ -194,20 +204,24 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 required
                                 fullWidth
                                 type="lastName"
-                                value={values.last_name}
+                                value={values.lastName}
                                 name="lastName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 inputProps={{}}
                             />
-                            {touched.last_name && errors.last_name && (
+                            {touched.lastName && errors.lastName && (
                                 <FormHelperText error id="standard-weight-helper-text-name-login">
-                                    {errors.last_name}
+                                    {errors.lastName}
                                 </FormHelperText>
                             )}
                         </FormControl>
 
-                        <InputLabel  sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
                             Email
                         </InputLabel>
                         <FormControl
@@ -237,7 +251,11 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
                             Delivery Address
                         </InputLabel>
                         <FormControl
