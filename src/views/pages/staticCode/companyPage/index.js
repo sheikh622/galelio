@@ -35,8 +35,8 @@ const CompanyPage = () => {
                     <Grid container>
                         <Grid item xs={12} md={3} sx={{ paddingRight: '1rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                <div style={{ paddingTop: '0px' }}>
-                                    <img src={rolex} style={{ borderRadius: '100px', height:'92px' , width:'92px',  border: '3px solid #2196f3' }} />
+                                <div style={{ paddingTop: '-25px' }}>
+                                    <img src={rolex} style={{ borderRadius: '100px',marginTop:'-5px', height:'92px' , width:'92px',  border: '3px solid #2196f3' }} />
                                 </div>
 
                                 <div className='font-company-page'>
