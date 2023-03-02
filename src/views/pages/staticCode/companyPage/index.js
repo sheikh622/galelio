@@ -16,10 +16,11 @@ const CompanyPage = () => {
     const theme = useTheme();
     return (
         <Grid
-        ml={1}
+       
         mt={1.5}
-            md={11.8}
+            md={12}
             sx={{
+                ml:{lg:-2},
                 background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                 p: 1 , borderRadius:'4px'
