@@ -107,7 +107,7 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                 enableReinitialize
                 initialValues={{
                     firstName: location.state?.socal?.user?.firstName,
-                    lastName: location.state?.socal?.user?.lastName,
+                    lastName: location.state?.socal?.user?.lastName ? location.state?.socal?.user?.lastName : ' ',
                     email: location.state?.socal?.user?.email,
                     walletAddress: '',
                     address: ''
