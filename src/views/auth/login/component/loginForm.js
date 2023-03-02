@@ -180,7 +180,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                             {' '}
                             Password
                         </InputLabel>
-                        <FormControl  className="auth-formcontrol" fullWidth error={Boolean(touched.password && errors.password)}>
+                        <FormControl  className="auth-formcontrol" fullWidth error={Boolean(touched.password 
+                            && errors.password)}>
                             <TextField
                            
                                 placeholder=" Password"

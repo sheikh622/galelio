@@ -34,7 +34,7 @@ const SignUp = () => {
             <Helmet>
             <meta charSet="utf-8" />
             <title> Sign Up</title>
-            <link rel="canonical" href="http://mysite.com/example" />
+            <link rel="canonical" />
         </Helmet>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>
