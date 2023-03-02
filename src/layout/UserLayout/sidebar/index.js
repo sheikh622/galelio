@@ -73,9 +73,9 @@ const SideBar = () => {
                             {pathName == '/home' ? (
                                 <>
                                     <Box  className='sideLine Gap'
-                                    sx={{ display:"flex", gap:{xl:"31px", md:"21px", lg:"26px"} }}
+                                    sx={{ display:"flex", gap:{xl:"31px", md:"21px", lg:"24px"} }}
                                     >
-                                        <Box sx={{ height:{xl:"62px" , md:"40px"},
+                                        <Box  className='barHeight' sx={{ height:{xl:"62px" , md:"40px"},
                                          width:{xl:"12px" , md:"9px"},
                                         padding:"3px",
                                          background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',
@@ -87,9 +87,21 @@ const SideBar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip className="fontsize" title="Home" placement="right" arrow>
+                                 <Box  className='sideLine Gap'
+                                    sx={{ display:"flex", gap:{xl:"31px", md:"21px", lg:"24px"} }}
+                                    >
+                                        <Box  className='barHeight' sx={{ height:{xl:"62px" , md:"40px"},
+                                         width:{xl:"12px" , md:"9px"},
+                                        padding:"3px",
+                                         background: 'transparent',
+                                         borderRadius:'0px 5px 5px 0px' }}></Box>
+                                        <Tooltip className="fontsize" title="Home" placement="right" arrow>
+                                            <DashboardIcon sx={{ alignSelf:"center"  }} />
+                                        </Tooltip>
+                                    </Box>
+                                    {/* <Tooltip className="fontsize" title="Home" placement="right" arrow>
                                         <DashboardIcon />
-                                    </Tooltip>
+                                    </Tooltip> */}
                                 </>
                             )}
                         </Grid>
@@ -126,9 +138,9 @@ const SideBar = () => {
                             {pathName.includes('marketplace') ? (
                                 <>
                                     <Box  className='sideLine Gap'
-                                     sx={{ display:"flex" ,gap:{md:"21px",lg:"26px" , xl:"31px"}}}
+                                     sx={{ display:"flex" ,gap:{md:"21px",lg:"24px" , xl:"31px"}}}
                                      >
-                                        <Box sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px', }}></Box>
+                                        <Box className='barHeight' sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)',borderRadius:'0px 5px 5px 0px', }}></Box>
                                         <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
                                             <StorefrontIcon className="fontsize" style={{ color: `${color}`,alignSelf:"center"  }} />
                                         </Tooltip>
@@ -136,9 +148,17 @@ const SideBar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
+                                <Box  className='sideLine Gap'
+                                     sx={{ display:"flex" ,gap:{md:"21px",lg:"24px" , xl:"31px"}}}
+                                     >
+                                        <Box className='barHeight' sx={{ height:{xl:"62px",md:"40px"},width:{xl:"12px",md:"9px"},padding:"3px", background: 'transparent',borderRadius:'0px 5px 5px 0px', }}></Box>
+                                        <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
+                                            <StorefrontIcon className="fontsize" style={{alignSelf:"center"  }} />
+                                        </Tooltip>
+                                    </Box>
+                                    {/* <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
                                         <StorefrontIcon className="fontsize" />
-                                    </Tooltip>
+                                    </Tooltip> */}
                                 </>
                             )}
                         </Grid>
@@ -262,7 +282,7 @@ const SideBar = () => {
                                 <>
                                    <Tooltip className="fontsize" 
                                     title="light" placement="right" arrow>
-                                        <WbSunnyIcon style={{ color: `${color}`, cursor: 'pointer',
+                                        <DarkModeIcon  style={{ color: `${color}`, cursor: 'pointer',
                                          fontSize:{xl:'40px'} }} onClick={() => setNavType('light')} />
                                     </Tooltip>
                                 </>
@@ -272,7 +292,7 @@ const SideBar = () => {
                                     <Tooltip className="fontsize" 
                                     title="Dark" placement="right" arrow>
                                  
-                                        <DarkModeIcon
+                                        <WbSunnyIcon
                                             
                                             style={{ color: `${color}`, cursor: 'pointer' ,
                                             

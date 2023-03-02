@@ -115,14 +115,16 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         } else if (values.images[0].image.size / 1000000 > 5) {
             toast.error('Please upload a image less than 5 mb');
             isValid = false;
-        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
+        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && 
+        values.images[0].image.name.split('.').pop() !== 'png')
+         {
             toast.error('Upload the files with these extensions: jpg, png, gif');
             isValid = false;
         }else if (parseInt(values.images[0].quantity) <=0) {
             toast.error('NFT Quantity should be atleast one');
             isValid = false;
         }
-
+console.log(values.images, 'values.images.length')
 
         return isValid;
     };

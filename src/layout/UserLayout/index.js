@@ -45,7 +45,7 @@ const UserLayout = () => {
                     item
                     md={1}
                     xs={12}
-                    sx={{
+                    sx={{ marginBottom:'28px',
                         position: 'sticky',
                         height: '100%',
                         top: '0',

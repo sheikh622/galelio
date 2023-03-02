@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import '@fontsource/public-sans';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -33,7 +34,7 @@ const SignUp = () => {
             <Helmet>
             <meta charSet="utf-8" />
             <title> Sign Up</title>
-            <link rel="canonical" href="http://mysite.com/example" />
+            <link rel="canonical" />
         </Helmet>
                 <Grid item md={6} lg={5} sx={{ position: 'relative', alignSelf: 'stretch', display: { xs: 'none', md: 'block' } }}>
                     <BackgroundPattern1>

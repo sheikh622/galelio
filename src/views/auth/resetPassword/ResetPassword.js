@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '@fontsource/public-sans';
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
