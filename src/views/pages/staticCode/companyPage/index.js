@@ -16,11 +16,13 @@ const CompanyPage = () => {
     const theme = useTheme();
     return (
         <Grid
-        md={11}
+        ml={1}
+        mt={1.5}
+            md={11.8}
             sx={{
                 background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040',
-                p: 1
+                p: 1 , borderRadius:'4px'
             }}
         >
             <Grid
@@ -104,9 +106,10 @@ const CompanyPage = () => {
 
                         <Grid container-fluid sx={{ paddingRight: '7%', paddingLeft: '2%' }}>
                             <p style={{ lineHeight: '210%' }}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lobortis facilisis tortor, ut molestie. In rhoncus
-                                aliquam dui, vitae sollicitudin justo, cursus maecenas. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Lobortis facilisis tortor, ut molestie. In rhoncus aliquam dui, vitae sollicitudin justo,
+                                Jaquet Droz is a luxury Swiss watch brand known for its exquisite craftsmanship and intricate automata.
+                                Founded in 1738 by Pierre Jaquet-Droz, the brand combines traditional watchmaking techniques with innovative
+                                designs to create timepieces that are both beautiful and functional. Jaquet Droz watches are highly sought
+                                after by collectors and connoisseurs of fine watches.{' '}
                             </p>
                         </Grid>
                     </Grid>
