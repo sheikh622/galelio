@@ -15,7 +15,6 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useDispatch, useSelector } from 'react-redux';
 import { MENU_TYPE } from 'store/actions';
 import Tooltip from '@mui/material/Tooltip';
-import { red } from '@mui/material/colors';
 const SideBar = () => {
     const navigate = useNavigate();
     const [color] = useState('#2196f3');
