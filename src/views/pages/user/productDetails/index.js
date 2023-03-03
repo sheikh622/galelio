@@ -19,7 +19,7 @@ const ProductDetails = () => {
                 container-fluid
                 md={12}
                 lg={12}
-                sx={{
+                sx={{ ml:{lg:-1},
                     display: { xs: 'block', sm: 'block', md: 'flex', lg: 'flex' },
                     background: 'tranparent',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
