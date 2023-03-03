@@ -91,7 +91,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                 background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                 // maxWidth: nfts && nfts?.length > 3? 0 : 365,
                 width:'100%',
-                height:'410px',
+                maxHeight:'410px',
                 // boxShadow: '1px 2px 6px #d3d3d3',
                 borderRadius: '3px',
                 marginBottom: '10px',
@@ -103,22 +103,27 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
             
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
+                    
                         <Grid item xs={8} >
-                            <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                        <Tooltip placement="left" title={nftData.name}>
+                            <Typography variant="subtitle1"   className='fontstyling encap-nft' sx={{ textDecoration: 'none' }}>
                                 {nftData.name}
                             </Typography>
+                            </Tooltip>
                         </Grid>
                      
                         <Grid item xs={12} mt={-1.5}>
-                            <Typography
+                        <Tooltip placement="left" title= {nftData?.description}>
+                            <Typography  className='fontstyling encap-nft'
                                 variant="body1"
                                 sx={{
                                     overflow: 'hidden',
-                                    height: 34
+                                    height: 16
                                 }}
                             >
                                 {nftData.description}
                             </Typography>
+                            </Tooltip>
                         </Grid>
 
                         <Grid item xs={12}   sm={4} md={6}  lg={6}>

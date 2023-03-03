@@ -1284,6 +1284,12 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.encap-nft {
+    white-space: nowrap;
+    width: 100% !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .font-in-detail {
     font-family: 'Poppins';
     font-style: normal;

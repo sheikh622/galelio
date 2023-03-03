@@ -126,7 +126,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const validationSchema = Yup.object({
         nftName: Yup.string()
             .required('NFT Name is required!')
-            .max(42, 'NFT Name can not exceed 42 characters'),
+            .max(60, 'NFT Name can not exceed 60 characters'),
             // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')

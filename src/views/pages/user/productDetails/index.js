@@ -18,7 +18,7 @@ const ProductDetails = () => {
             <Grid
                 container-fluid
                 md={12}
-                lg={11}
+                lg={12}
                 sx={{
                     display: { xs: 'block', sm: 'block', md: 'flex', lg: 'flex' },
                     background: 'tranparent',

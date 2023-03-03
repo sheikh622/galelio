@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, CardContent, CardMedia, Grid, Stack, Typography, CardActionArea, Card } from '@mui/material';
+import { Button, CardContent, CardMedia, Grid, Stack, Typography, CardActionArea, Card , Tooltip} from '@mui/material';
 import MainCard from './mainCard';
 import EditNftDialog from './editNftDialog';
 import RequestForMintDialog from './requestForMintDialog';
@@ -99,7 +99,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                 // maxWidth: nfts && nfts?.length > 3? 0 : 365,
                 width:'100%',
-                height:'410px',
+                maxHeight:'410px',
                 // boxShadow: '1px 2px 6px #d3d3d3',
                 borderRadius: '3px',
                 marginBottom: '10px',
@@ -113,24 +113,28 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                 <CardContent sx={{ p: 2 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={9}>
-                            <Typography variant="subtitle1" className='fontstyling'
+                        <Tooltip placement="left" title= {nftData.name}>
+                            <Typography variant="subtitle1" className='fontstyling encap-nft'
                              sx={{ textDecoration: 'none', textTransform: 'capitalize' }}>
                                 {nftData.name}
                             </Typography>
+                            </Tooltip>
                         </Grid>
 
                         <Grid item xs={12} mt={-1.5}>
-                            <Typography
-                            className='fontstyling'
+                        <Tooltip placement="left" title= {nftData?.description}>
+                        <Typography
+                            className='fontstyling encap-nft'
                                 variant="body1"
                                 sx={{
                                     overflow: 'hidden',
-                                    height: 34,
+                                    height: 16,
                                     textTransform: 'capitalize'
                                 }}
                             >
                                 {nftData.description}
                             </Typography>
+                            </Tooltip>   
                         </Grid>
 
                         <Grid item xs={6}>
