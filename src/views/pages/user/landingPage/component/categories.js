@@ -228,7 +228,7 @@ const Categories = ({ categories }) => {
                         >
                             {categories?.map((item) => (
                                 <Grid className='cate-margin' spacing={2}
-                                    sx={{ my: { xs: '0', md: '0', sm: '10px' },  mr:{lg:3.5}
+                                    sx={{ my: { xs: '0', md: '0', sm: '16px' },  mr:{md:2 , lg:3.5}
                                     ,  }}
                                     item
                                     md={2}
