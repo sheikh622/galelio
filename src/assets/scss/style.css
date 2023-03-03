@@ -1570,10 +1570,13 @@
   .contactLargescrn {
     margin-top: 35px;
   }
+  .sideLine {
+    gap: 21px;
+  }
 }
 @media only screen and (min-width: 1371px) and (max-width: 1535px) {
   .cate-margin {
-    margin-right: 32px;
+    margin-right: 39px;
     margin-left: 0px;
   }
   .cate-width {
@@ -1659,9 +1662,22 @@
     height: 50px !important;
   }
 }
-@media only screen and (min-width: 1700px) {
+@media only screen and (min-width: 1700px) and (max-width: 2000px) {
   .Gap {
-    gap: 20px !important;
+    gap: 24px !important;
+  }
+}
+@media only screen and (min-width: 899px) and (max-width: 1100px) {
+  .Gap {
+    gap: 7px !important;
+  }
+  .fontsize {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-width: 2001px) {
+  .Gap {
+    gap: 34px !important;
   }
 }
 @media only screen and (max-width: 768px) {
