@@ -29,7 +29,8 @@ const CompanyPage = () => {
         >
             <Grid
                 container-fluid
-                sx={{ margin: '0', padding: '0', display: { xs: 'block', sm: 'block', md: 'flex' }, marginBottom: '40px' }}
+                sx={{ margin: '0', padding: '0',
+                 display: { xs: 'block', sm: 'block', md: 'flex' }, marginBottom: '40px' }}
             >
                 <Grid item md={12} xs={12} sx={{ mt: 2 }}>
                     <Grid container>
