@@ -1,6 +1,7 @@
 import { Grid, Button } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import rolex from 'assets/images/rolex.png';
+import rolex from 'assets/images/rolex.jpg';
+import "@fontsource/public-sans";
 import discord from 'assets/images/companypageIcons/discord.png';
 import etherscan from 'assets/images/companypageIcons/etherscan.png';
 import globe from 'assets/images/companypageIcons/globe.png';
@@ -34,12 +35,12 @@ const CompanyPage = () => {
                     <Grid container>
                         <Grid item xs={12} md={3} sx={{ paddingRight: '1rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                <div style={{ paddingTop: '0' }}>
-                                    <img src={rolex} style={{ borderRadius: '100px', border: '3px solid #2196f3' }} />
+                                <div style={{ paddingTop: '-25px' }}>
+                                    <img src={rolex} style={{ borderRadius: '100px',marginTop:'-5px', height:'92px' , width:'92px',  border: '3px solid #2196f3' }} />
                                 </div>
 
-                                <div>
-                                    <h1>Rolex</h1>
+                                <div className='font-company-page'>
+                                    <h1>Jazquet Droz</h1>
                                     <h3>Geneva, Switzerland</h3>
                                 </div>
                             </div>
@@ -68,7 +69,8 @@ const CompanyPage = () => {
                         </Grid>
 
                         <Grid item xs={12} md={3} sx={{ marginLeft: '15%', mt: 2 }}>
-                            <Grid container style={{ display: 'flex', justifyContent: 'space-evenly', marginRight: '7%', float: 'right' }}>
+                            <Grid container style={{ display: 'flex', justifyContent: 'space-evenly',
+                             marginRight: '7%', float: 'right' }}>
                                 <Grid item>
                                     <img src={etherscan} height="18rem" alt="" />
                                 </Grid>
@@ -106,7 +108,7 @@ const CompanyPage = () => {
                         </Grid>
 
                         <Grid container-fluid sx={{ paddingRight: '7%', paddingLeft: '2%' }}>
-                            <p style={{ lineHeight: '210%' }}>
+                            <p className='des-font'>
                                 Jaquet Droz is a luxury Swiss watch brand known for its exquisite craftsmanship and intricate automata.
                                 Founded in 1738 by Pierre Jaquet-Droz, the brand combines traditional watchmaking techniques with innovative
                                 designs to create timepieces that are both beautiful and functional. Jaquet Droz watches are highly sought
