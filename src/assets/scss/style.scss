@@ -534,7 +534,7 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     height: 455px;
-    width:99%;
+    width: 99%;
     background-image: url(../images/background1.png);
     background-position: center;
     background-size: cover;
@@ -1381,7 +1381,7 @@ body {
     line-height: 26px !important;
 }
 .fontsize {
-    font-size: 23px !important
+    font-size: 23px !important;
 }
 @media only screen and (min-width: 1568px) {
     .fontfigma {
@@ -1414,7 +1414,7 @@ body {
         text-transform: capitalize !important;
         font-size: 20px !important;
     }
-   
+
     .categoreyName {
         font-family: 'Public Sans' !important;
         font-style: normal !important;
@@ -1536,7 +1536,6 @@ body {
     margin-right: 18px !important;
 }
 
-
 @media only screen and (min-width: 1200px) and (max-width: 1370px) {
     .cate-margin {
         margin-right: 35px;
@@ -1567,33 +1566,33 @@ body {
     .contactLargescrn {
         margin-top: 35px;
     }
-    .sideLine{
-        gap:21px;
+    .sideLine {
+        gap: 21px;
     }
 }
 @media only screen and (min-width: 1900px) and (max-width: 2560px) {
     .fontsize {
         font-size: 25px !important;
     }
-  .outlet-Margin{
-    margin-left:-18px;
-  }
-  .mainBackground {
-    // background-color: #212121;
-    min-height: auto;
-    max-height: auto;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    height: 455px;
-    width:100%;
-    background-image: url(../images/background1.png);
-    background-position: center;
-    background-size: cover;
-    overflow: hidden;
-    margin-top: 13px;
-    border-radius: 4px;
-    // margin-left: 20px;
-}
+    .outlet-Margin {
+        margin-left: -18px;
+    }
+    .mainBackground {
+        // background-color: #212121;
+        min-height: auto;
+        max-height: auto;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        height: 455px;
+        width: 100%;
+        background-image: url(../images/background1.png);
+        background-position: center;
+        background-size: cover;
+        overflow: hidden;
+        margin-top: 13px;
+        border-radius: 4px;
+        // margin-left: 20px;
+    }
     .cate-margin {
         margin-right: 28px;
         margin-left: 0px;
@@ -1623,6 +1622,9 @@ body {
     .contactLargescrn {
         margin-top: 35px;
     }
+    .sideLine {
+        gap: 21px;
+    }
 }
 @media only screen and (min-width: 1371px) and (max-width: 1535px) {
     .cate-margin {
@@ -1637,7 +1639,7 @@ body {
     }
     .new-margin {
         margin-right: 22px !important;
-       
+
         margin-left: 19px !important;
     }
     .new-width {
@@ -1653,20 +1655,19 @@ body {
     .footersocalIcons {
         margin-right: 22px;
     }
-
 }
-.font-company-page{
+.font-company-page {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 600;
-// font-size: 36.8571px;
+    font-style: normal;
+    font-weight: 600;
+    // font-size: 36.8571px;
 }
-.des-font{
+.des-font {
     font-family: 'Public Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 34px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 34px;
 }
 // @media only screen and (min-width: 900px) and (max-width: 1200px){
 //     .sideLine{
@@ -1709,50 +1710,46 @@ line-height: 34px;
         text-align: center;
         color: #212121;
     }
-  
 }
 
-@media only screen and (min-width: 1536px)  and (max-width: 1699px)  {
-  .Gap{
-   gap:18px !important;
-  }
-  .new-margin {
-    margin-right: 0px;
-    margin-left: 2px;
-}
-
-.barHeight{
-    height: 50px !important;
-}
-
- 
-
-
-
-}
-@media only screen and (min-width: 1700px)   {
-    .Gap{
-     gap:20px !important;
+@media only screen and (min-width: 1536px) and (max-width: 1699px) {
+    .Gap {
+        gap: 18px !important;
     }
-  
-  
-   
-  
-  
-  
-  }
-  @media only screen and (max-width: 768px) {
- 
+    .new-margin {
+        margin-right: 0px;
+        margin-left: 2px;
+    }
 
-
+    .barHeight {
+        height: 50px !important;
+    }
+}
+@media only screen and (min-width: 1700px)  and (max-width: 2000px) {
+    .Gap {
+        gap: 24px !important;
+    }
+}
+@media only screen and (min-width: 899px)  and (max-width: 1100px) {
+    .Gap {
+        gap: 7px !important;
+    }
+    .fontsize {
+        font-size: 20px !important;
+    }
+    
+}
+@media only screen and (min-width: 2001px) {
+    .Gap {
+        gap: 43px !important;
+    }
+}
+@media only screen and (max-width: 768px) {
     .slick-slide .MuiGrid-root {
         margin-left: 40px !important;
         /* margin-right: 32px; */
         margin-right: 2px !important;
     }
-
-
-
 }
 
 //umar code>
