@@ -47,6 +47,7 @@ const Footer = () => {
             >
                 <Grid container sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' },
                  }} spacing={gridSpacing}>
+                 <Grid item xs={12} md={1} lg={1} xl={1} sm={12} ></Grid>
                     {/* <Grid item xs={12} md={1} lg={1} xl={1} sm={12}></Grid> */}
                     <Grid item xs={12} md={3} lg={3} xl={3} sm={12} sx={{marginTop:{md:'15px'}}} >
                         {theme.palette.mode === 'dark' ? (
