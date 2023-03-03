@@ -67,7 +67,7 @@ const UserLayout = () => {
                 sm={10}
                 xs={12}
                 sx={{
-                    pl: { md: 3, lg: 3 },
+                    pl: { },
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}

@@ -65,7 +65,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/home')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '24px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px',lg: '29px', xl: '31px'} }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -87,7 +87,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/chart')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '24px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -112,7 +112,7 @@ const SideBar = () => {
                         navigate('/marketplace');
                     }}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { md: '21px', lg: '24px', xl: '31px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -135,7 +135,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/bookmarks')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '24px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -157,7 +157,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/downloads')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '24px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px',lg: '29px', xl: '31px'} }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -179,7 +179,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/tags')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '24px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -201,7 +201,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/settings')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '24px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px',lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -223,7 +223,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/ComingSoon')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '24px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px'} }}>
                         <Box
                             className="barHeight"
                             sx={{
