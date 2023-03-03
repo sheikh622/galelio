@@ -1,4 +1,4 @@
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import rolex from 'assets/images/rolex.jpg';
 import "@fontsource/public-sans";
@@ -12,6 +12,7 @@ import star from 'assets/images/companypageIcons/star.png';
 import twitter from 'assets/images/companypageIcons/twitter.png';
 import warn from 'assets/images/companypageIcons/warn.png';
 import styles from './companypage.module.css';
+
 import NFTS from 'views/pages/user/marketplace/component/nfts';
 const CompanyPage = () => {
     const theme = useTheme();
@@ -72,49 +73,71 @@ const CompanyPage = () => {
                         <Grid item xs={12} md={3} sx={{ marginLeft: '15%', mt: 2 }}>
                             <Grid container style={{ display: 'flex', justifyContent: 'space-evenly',
                              marginRight: '7%', float: 'right' }}>
-                                <Grid item>
+                             <Tooltip placement="top" title='Coming Soon'>
+                             <Grid item>
                                     <img src={etherscan} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={insta} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={globe} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={discord} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={twitter} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={phone} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={star} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
                                 <div style={{ borderLeft: '1px solid #7E7D7D' }}></div>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={warn} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
+                                <Tooltip placement="top" title='Coming Soon'>
                                 <Grid item>
                                     <img src={share} height="18rem" alt="" />
                                 </Grid>
+                                </Tooltip>
                             </Grid>
                             <Grid item xs={8} md={12} style={{ justifyContent: '' }}>
-                                <Button variant="contained" sx={{ mt: 2, width: '50%', float: 'right', mr: 2 }}>
+                            <Tooltip placement="top" title='Coming Soon'> 
+                            <Button variant="contained" sx={{ mt: 2, width: '50%', float: 'right', mr: 2 }}>
                                     Follow
                                 </Button>
+                                </Tooltip>
                             </Grid>
                         </Grid>
 
                         <Grid container-fluid sx={{ paddingRight: '7%', paddingLeft: '2%' }}>
-                            <p className='des-font'>
+                        <Tooltip placement="top" title='Coming Soon'>    
+                        <p className='des-font'>
                                 Jaquet Droz is a luxury Swiss watch brand known for its exquisite craftsmanship and intricate automata.
                                 Founded in 1738 by Pierre Jaquet-Droz, the brand combines traditional watchmaking techniques with innovative
                                 designs to create timepieces that are both beautiful and functional. Jaquet Droz watches are highly sought
                                 after by collectors and connoisseurs of fine watches.{' '}
                             </p>
+                            </Tooltip>
                         </Grid>
                     </Grid>
                     <Grid container sx={{ paddingLeft: '2%', width: '100%' }}>

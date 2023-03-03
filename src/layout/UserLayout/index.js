@@ -54,7 +54,8 @@ const UserLayout = () => {
                 >
                     <SideBar />
                 </Grid>
-                <Grid item md={11} xs={12} sm={12} className="outlet-Margin">
+                <Grid item md={11} xs={12} sm={12} 
+                className="outlet-Margin">
                     <Outlet />
                 </Grid>
             </Grid>
