@@ -1228,6 +1228,13 @@
   text-overflow: ellipsis;
 }
 
+.encap-nft {
+  white-space: nowrap;
+  width: 100% !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .font-in-detail {
   font-family: "Poppins";
   font-style: normal;
@@ -1506,7 +1513,7 @@
     width: 215px;
   }
   .footersocalIcons {
-    margin-right: 10px;
+    margin-right: 25px;
   }
   .contactLargescrn {
     margin-top: 35px;
@@ -1563,7 +1570,50 @@
   .contactLargescrn {
     margin-top: 35px;
   }
+  .sideLine {
+    gap: 21px;
+  }
 }
+@media only screen and (min-width: 1371px) and (max-width: 1535px) {
+  .cate-margin {
+    margin-right: 39px;
+    margin-left: 0px;
+  }
+  .cate-width {
+    width: 230px;
+  }
+  .new-margin {
+    margin-right: 22px !important;
+    margin-left: 19px !important;
+  }
+  .new-width {
+    width: 234px;
+  }
+  .feature {
+    margin-right: 26px;
+    margin-left: 11px;
+  }
+  .feature-width {
+    width: 234px;
+  }
+  .footersocalIcons {
+    margin-right: 22px;
+  }
+}
+.font-company-page {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.des-font {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 34px;
+}
+
 @media only screen and (min-width: 600px) and (max-width: 900px) {
   .cate-margin {
     margin-right: -8px;
@@ -1598,5 +1648,42 @@
     justify-content: center;
     text-align: center;
     color: #212121;
+  }
+}
+@media only screen and (min-width: 1536px) and (max-width: 1699px) {
+  .Gap {
+    gap: 18px !important;
+  }
+  .new-margin {
+    margin-right: 0px;
+    margin-left: 2px;
+  }
+  .barHeight {
+    height: 50px !important;
+  }
+}
+@media only screen and (min-width: 1700px) and (max-width: 2000px) {
+  .Gap {
+    gap: 24px !important;
+  }
+}
+@media only screen and (min-width: 899px) and (max-width: 1100px) {
+  .Gap {
+    gap: 7px !important;
+  }
+  .fontsize {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-width: 2001px) {
+  .Gap {
+    gap: 34px !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .slick-slide .MuiGrid-root {
+    margin-left: 40px !important;
+    /* margin-right: 32px; */
+    margin-right: 2px !important;
   }
 }/*# sourceMappingURL=style.css.map */
