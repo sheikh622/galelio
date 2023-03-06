@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import TextField from '@material-ui/core/TextField';
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 import {
     Box,
     Button,
@@ -17,7 +20,7 @@ import {
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import "@fontsource/public-sans";
+import '@fontsource/public-sans';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -62,7 +65,7 @@ const LoginForm = ({ loginProp, ...others }) => {
                 data: decoded_data
             })
             .then(function (response) {
-                console.log('response.data.data',response.data.data );
+                console.log('response.data.data', response.data.data);
                 dispatch(loginSuccess(response.data.data));
 
                 if (!response.data.data.profileCompleted) {
@@ -107,7 +110,6 @@ const LoginForm = ({ loginProp, ...others }) => {
             });
     };
     const responseFacebookFailure = (error) => {
-      
         // toast.error(error);
     };
 
@@ -124,11 +126,13 @@ const LoginForm = ({ loginProp, ...others }) => {
                     // .matches(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/, 'Invalid Email'),
                     // .matches(/^[a-zA-Z0-9]/, '* This email cannot contain white space and special character'),
 
-                    password: Yup.string().max(255).required('Password is required!')
-                    .matches(
-                        /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                        'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
-                    ),
+                    password: Yup.string()
+                        .max(255)
+                        .required('Password is required!')
+                        .matches(
+                            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                            'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                        )
                 })}
                 onSubmit={async (values) => {
                     await dispatch(setLoader(true));
@@ -143,19 +147,26 @@ const LoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl  
-                         fullWidth
-                         error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
-                            <OutlinedInput
-                            
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Email{' '}
+                        </InputLabel>
+                        <FormControl  sx={{ ...theme.typography.customInput }} className="auth-formcontrol" 
+                        fullWidth error={Boolean(touched.email && errors.email)}>
+                            <TextField
+                           
+                                placeholder="email"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="email"
-                                // value={values.email}
+                                value={values.email}
                                 name="email"
+                                autoComplete="current-email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email"
-
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -165,34 +176,27 @@ const LoginForm = ({ loginProp, ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl  
-                            fullWidth
-                            error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
-                        >
-                            <InputLabel   
-                            htmlFor="outlined-adornment-password-login">Password</InputLabel>
-                            <OutlinedInput
-                            sx={{color:'#fff'}}
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.password}
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-password-login">
+                            {' '}
+                            Password
+                        </InputLabel>
+                        <FormControl  className="auth-formcontrol" fullWidth error={Boolean(touched.password 
+                            && errors.password)}>
+                            <TextField
+                           
+                                placeholder=" Password"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                id="password"
+                                autoComplete="current-password"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
                                 inputProps={{}}
                             />
                             {touched.password && errors.password && (
@@ -200,17 +204,29 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     {errors.password}
                                 </FormHelperText>
                             )}
+                            <IconButton
+                                className="iconvisible"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                aria-label="toggle password visibility"
+                                edge="end"
+                                size="large"
+                            >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
                         </FormControl>
-                        <Stack direction="row" alignItems="center" 
-                        justifyContent="space-between" spacing={1}>
+
+                        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                             <Typography
-                            className='Forgot'
+                                className="Forgot"
                                 variant="subtitle1"
                                 component={Link}
                                 to={'/forgetPassword'}
-                                sx={{ textDecoration: 'none',
-                               
-                                 color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
+                                sx={{
+                                    textDecoration: 'none',
+
+                                    color: theme.palette.mode === 'dark' ? '#fff' : '#000'
+                                }}
                             >
                                 Forgot Password?
                             </Typography>
@@ -223,7 +239,7 @@ const LoginForm = ({ loginProp, ...others }) => {
 
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
-                                 {loader ? (
+                                {loader ? (
                                     <Button
                                         className="signbuttonMarket"
                                         disableElevation
@@ -236,27 +252,26 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     >
                                         Sign in
                                     </Button>
-                                ) : ( 
-                                <Button
-                                    className="signbuttonMarket"
-                                    disableElevation
-                                    disabled={isSubmitting}
-                                    fullWidth
-                                    size="large"
-                                    type="submit"
-                                    variant="contained"
-                                    color="secondary"
-                                >
-                                    Sign in
-                                </Button>
-                             )} 
+                                ) : (
+                                    <Button
+                                        className="signbuttonMarket"
+                                        disableElevation
+                                        disabled={isSubmitting}
+                                        fullWidth
+                                        size="large"
+                                        type="submit"
+                                        variant="contained"
+                                        color="secondary"
+                                    >
+                                        Sign in
+                                    </Button>
+                                )}
                             </AnimateButton>
                         </Box>
 
                         <Grid item xs={12}>
                             <Grid mt={2} mb={-2} item container direction="column" alignItems="center" xs={12}>
-                                <Typography className='fontfamily' variant="subtitle1" sx={{ textDecoration: 'none',
-                                fontSize: '16px' }}>
+                                <Typography className="fontfamily" variant="subtitle1" sx={{ textDecoration: 'none', fontSize: '16px' }}>
                                     or continue with
                                 </Typography>
                             </Grid>
@@ -264,8 +279,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                         <Grid mt={1} container spacing={gridSpacing}>
                             <Grid item xs={12}>
                                 <Grid container spacing={gridSpacing}>
-                                    <Grid item lg={6} md={6} sm={6} xs={6} >
-                                        <Box sx={{ float:{ md:'right', xs:'right'} }}>
+                                    <Grid item lg={6} md={6} sm={6} xs={6}>
+                                        <Box sx={{ float: { md: 'right', xs: 'right' } }}>
                                             <ReactFacebookLogin
                                                 appId="851727442768362"
                                                 // autoLoad={true}
@@ -279,8 +294,8 @@ const LoginForm = ({ loginProp, ...others }) => {
                                         </Box>
                                     </Grid>
 
-                                    <Grid item lg={6} md={6} sm={6} xs={6} >
-                                        <Box sx={{ float: {md:'left'} }}>
+                                    <Grid item lg={6} md={6} sm={6} xs={6}>
+                                        <Box sx={{ float: { md: 'left' } }}>
                                             {' '}
                                             <GoogleLogin
                                                 type="icon"
@@ -297,7 +312,6 @@ const LoginForm = ({ loginProp, ...others }) => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                     
                     </form>
                 )}
             </Formik>

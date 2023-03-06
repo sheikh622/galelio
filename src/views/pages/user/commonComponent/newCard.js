@@ -21,14 +21,17 @@ const NewCard = ({ data, nfts }) => {
                     xs: nfts && nfts?.length > 5 ? 4 : 0,
                     sm: nfts && nfts?.length > 5 ? 2 : 0,
                     md: nfts && nfts?.length > 5 ? 2 : 0,
-                    lg: nfts && nfts?.length > 5 ? 2 : 2
+                    lg: nfts && nfts?.length > 5 ? 2 : 1
                 },
-                mr: { xs: nfts && nfts?.length > 5 ? 1 : 0, md: nfts && nfts?.length > 5 ? 4 : 2 }
+                mr: { xs: nfts && nfts?.length > 5 ? 1 : 0,
+                     md: nfts && nfts?.length > 5 ? 4 : 2,
+                     lg: nfts && nfts?.length > 5 ? 4 : 3.5
+                     }
             }}
             md={nfts && nfts?.length > 5 ? 12 : 2}
             lg={nfts && nfts?.length > 5 ? 12 : 2}
             xl={nfts && nfts?.length > 5 ? 12 : 2}
-            sm={nfts && nfts?.length > 5 ? 12 : 4}
+            sm={nfts && nfts?.length > 5 ? 12 : 3}
            
             onClick={() => {
                 navigate('/productDetails', {
@@ -43,7 +46,7 @@ const NewCard = ({ data, nfts }) => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                     background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                     // maxWidth: nfts && nfts?.length > 3? 0 : 365,
-                    width: nfts && nfts?.length > 5 ? '100%' : { lg: '240px', xl:'100%' },
+                    width: nfts && nfts?.length > 5 ? '100%' : { lg: '249px', xl:'100%' },
                     
                     // boxShadow: '1px 2px 6px #d3d3d3',
                     borderRadius: '3px',

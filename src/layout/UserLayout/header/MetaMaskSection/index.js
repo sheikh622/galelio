@@ -92,14 +92,18 @@ const MetaMaskSection =  () => {
 
     return (
         <>
-            <Button
-                variant="contained"
-                onClick={() => {
-                    handleConnect();
-                }}
-            >
-                {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
-            </Button>
+        
+        <Button
+            sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
+            variant="outlined"
+            onClick={() => {
+                handleConnect();
+            }}
+        >
+        {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
+        </Button>
+ 
+         
         </>
     );
 };

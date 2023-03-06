@@ -8,49 +8,71 @@ const UserLayout = () => {
     const theme = useTheme();
     return (
         <>
-            
-            <Grid container
+            <Grid
+                container
                 sx={{
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3'
+                    background:
+                        theme.palette.mode === 'dark'
+                            ? 'radial-gradient(to top right, 50% 50% at 50% 50%, #2B8CFF 0%, rgba(43, 140, 255, 0.27))'
+                            : '#f3f3f3',
+
+                    // backgroundImage: "linear-gradient(to top right, black,rgba(255,0,0,0), rgba(43 140 255 / 27%) )",
+                    // background: "radial-gradient(to top right, 50% 50% at 50% 50%, #2B8CFF 0%, rgba(43, 140, 255, 0.27))",
+
+                    backgroundImage:
+                        theme.palette.mode === 'dark' ? 'linear-gradient(to top right, black,rgba(255,0,0,0), rgba(43 140 255 / 27%) )' : ''
                 }}
             >
-              
-                <Grid m={2} item md={12} sm={12} xs={12} sx={{  
-                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                    color: theme.palette.mode === 'dark' ? 'white' : '#404040',
-
-                }}>
-                <Header />
+                <Grid
+                    item
+                    md={12}
+                    sm={12}
+                    xs={12}
+                    sx={{
+                        background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                        color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                        borderRadius: '4px',
+                        mt: {xs:2, sm:2, lg: 2, xl: 3 },
+                        ml: 2,
+                        mr: 2,
+                        mb: { lg: 0.5, xl: 1.5 }
+                    }}
+                >
+                    <Header />
                 </Grid>
 
-                    <Grid
-                        item
-                        md={1}
-                        xs={12}
-                        sx={{ position: 'sticky', height: '100%', top: '0', 
-                        display: { xs: 'none', sm: 'none', md: 'flex' , lg:'flex' , xl:'flex'}    
-                          }}
-                    >
-                        <SideBar />
-                    </Grid>
-                    <Grid  item
-                        md={11}
-                        xs={12}
-                       sm={12}
-                        >
-                           
+                <Grid
+                    item
+                    md={1}
+                    xs={12}
+                    sx={{ marginBottom:'28px',
+                        position: 'sticky',
+                        height: '100%',
+                        top: '0',
+                        display: { xs: 'none', sm: 'none', md: 'flex', lg: 'flex', xl: 'flex' }
+                    }}
+                >
+                    <SideBar />
+                </Grid>
+                <Grid item md={11} xs={12} sm={12} 
+                className="outlet-Margin">
                     <Outlet />
-                    </Grid>
-                  
                 </Grid>
-         
+            </Grid>
 
             <Divider sx={{ borderBottomWidth: 1, border: '1px solid #ccc' }} />
 
-            <Grid item md={10} sm={10} xs={12} sx={{ pl:{ md:3 , lg:3} ,  
-                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                color: theme.palette.mode === 'dark' ? 'white' : '#404040'
-            }}>
+            <Grid
+                item
+                md={10}
+                sm={10}
+                xs={12}
+                sx={{
+                    pl: { },
+                    background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040'
+                }}
+            >
                 <Footer />
             </Grid>
         </>

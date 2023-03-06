@@ -222,14 +222,14 @@ const Categories = ({ categories }) => {
                             mt={-3}
                             container
                            
-                            spacing={4}
-                            sx={{ textAlign: 'center', marginLeft: { md: '2px' }, width: { md: '100%' },
+                            spacing={2}
+                            sx={{ textAlign: 'center', marginLeft: {xs:'0px', md: '2px' }, width: { md: '100%' },
                                 justifyContent:{md:"left" , lg:'left', xs:'center' , sm:'center'} }}
                         >
                             {categories?.map((item) => (
                                 <Grid className='cate-margin' spacing={2}
-                                    sx={{ my: { xs: '10px', md: '0', sm: '10px' }, mr:{lg:3.5}
-                                     }}
+                                    sx={{ my: { xs: '0', md: '0', sm: '16px' },  mr:{md:2 , lg:3.5}
+                                    ,  }}
                                     item
                                     md={2}
                                     lg={2}
@@ -246,8 +246,8 @@ const Categories = ({ categories }) => {
                                            
                                             // boxShadow: '1px 2px 6px #d3d3d3',
                                             borderRadius: '3px',
-                                            marginLeft: {md:'8px' , lg:'8px'}, 
-                                            width: { sm:'220px',md:'100%', lg:'240px' , xl:'100%'}
+                                            marginLeft: {xs:'0px', md:'8px' , lg:'25px'}, 
+                                            width: { sm:'220px',md:'100%', lg:'245px' , xl:'100%'}
                                         }}
                                         onClick={() => {
                                             navigate('/marketplace', {

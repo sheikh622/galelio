@@ -56,48 +56,77 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         setCurrencyType(event.target.value);
     };
 
-    const handleError = (fieldDataArray, fileDataArray, values, isFile) => {
+    const handleError = (fieldDataArray, fileDataArray, values) => {
+        console.log('im in handle error');
         let isValid = true;
-        if (isFile) {
-            if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
-            } else {
-                toast.error('Upload the files with these extensions: jpg, png, gif');
-                isValid = false;
-            }
+        console.log('fieldDataArray', fieldDataArray);
+        console.log('fileDataArray', fileDataArray);
+        console.log('values', values);
+
+        if (fieldDataArray.length == 0) {
+            isValid = false;
+            toast.error('Metadata is required');
+        } 
+
+        // else  (fieldDataArray.length > 0) {
+            
+            fieldDataArray.map((array) => {
+                if (array.fieldName == '') {
+                    isValid = false;
+                    toast.error(`Metadata name cannot be empty`);
+                }
+                else if (array.fieldValue == '') {
+                    isValid = false;
+                    toast.error(`Metadata value cannot be empty`);
+                }
+            });
+        // }
+         if (fileDataArray.length == 0) {
+            isValid = false;
+            toast.error('Proof of Authenticity is required');
         }
 
-        if (parseInt(values.images[0].quantity) < 1) {
-            toast.error('NFT Quantity must be greater than zero');
+    //    else (fileDataArray.length > 0) {
+        console.log('im here 2');
+            fileDataArray.map((array) => {
+                if (array.fieldName == '') {
+                    isValid = false;
+                    toast.error(`File name field is mandatory`);
+                }
+                else if (array.fieldValue == null) {
+                    isValid = false;
+                    toast.error(`Attach proof of authenticity`);
+                }
+                else if (array.fieldValue?.size/1000000>5) {
+                    isValid = false;
+                    toast.error(`Please attach a less than 5 mb proof of authenticity`);
+                }
+            });
+        // }
+
+         if (values.images.length == 0) {
+            toast.error('Please upload a NFT Image');
+            isValid = false;
+        } else if (values.images[0].image.size / 1000000 > 5) {
+            toast.error('Please upload a image less than 5 mb');
+            isValid = false;
+        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
+            toast.error('Upload the files with these extensions: jpg, png, gif');
+            isValid = false;
+        }else if (parseInt(values.images[0].quantity) <=0) {
+            toast.error('NFT Quantity should be atleast one');
             isValid = false;
         }
 
-        fieldDataArray.forEach((array) => {
-            if (array.fieldName == '') {
-                isValid = false;
-                toast.error(`Metadata name fields are mandatory`);
-            }
-            if (array.fieldValue == '') {
-                isValid = false;
-                toast.error(`Metadata value fields are mandatory`);
-            }
-        });
-        fileDataArray.forEach((array) => {
-            if (array.fieldName == '') {
-                isValid = false;
-                toast.error(`File name fields are mandatory`);
-            }
-            if (array.fieldValue == null) {
-                isValid = false;
-                toast.error(`File value fields are mandatory`);
-            }
-        });
+
         return isValid;
     };
+
 
     const validationSchema = Yup.object({
         nftName: Yup.string()
             .required('NFT Name is required!')
-            .max(42, 'NFT Name can not exceed 42 characters'),
+            .max(60, 'NFT Name can not exceed 60 characters'),
             // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
@@ -108,14 +137,14 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             .required('NFT Price is required')
             .typeError('Invalid Price'),
         images: Yup.mixed()
-        .when(['isUpdate'], {
-            is: true,
-            then: Yup.mixed(),
-            otherwise: Yup.mixed().required('Image is required')
-        })
+        // .when(['isUpdate'], {
+        //     is: true,
+        //     then: Yup.mixed(),
+        //     otherwise: Yup.mixed().required('Image is required')
+        // })
 
-        .test('image size',
-         'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
+        // .test('image size',
+        //  'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
 
     });
     const formik = useFormik({
@@ -610,6 +639,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 variant="contained"
                                 sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
                                 onClick={() => {
+                                    
                                     formik.handleSubmit();
                                 }}
                                 className="buttons"

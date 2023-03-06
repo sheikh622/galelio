@@ -6,7 +6,8 @@ import {
     DELETE_SUBADMIN,
     CHANGE_SUBADMIN_STATUS,
     CHANGE_SUBADMIN_MINTING_ACCESS,
-    CHANGE_ROLE
+    CHANGE_ROLE,
+    ASSIGN_BRANDCATEGORY
 } from './constants';
 
 // Admin
@@ -38,6 +39,13 @@ export const updateSubAdmin = (data) => {
         payload: data
     };
 };
+export const assignBrandCategory = (data) => {
+    return {
+        type: ASSIGN_BRANDCATEGORY,
+        payload: data
+    };
+};
+
 
 export const deleteSubAdmin = (data) => {
     return {

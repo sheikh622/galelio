@@ -44,6 +44,26 @@ const UserRoutes = {
             element: <ComingSoon />
         },
         {
+            path: '/chart',
+            element: <ComingSoon />
+        },
+        {
+            path: '/bookmarks',
+            element: <ComingSoon />
+        },
+        {
+            path: '/downloads',
+            element: <ComingSoon />
+        },
+        {
+            path: '/tags',
+            element: <ComingSoon />
+        },
+        {
+            path: '/settings',
+            element: <ComingSoon />
+        },
+        {
             path: '/marketplace',
             element: <Marketplace />
         },

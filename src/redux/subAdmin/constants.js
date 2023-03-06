@@ -6,3 +6,4 @@ export const DELETE_SUBADMIN = 'delete_subadmin';
 export const CHANGE_SUBADMIN_STATUS = 'change_subadmin_status';
 export const CHANGE_ROLE = 'change_role';
 export const CHANGE_SUBADMIN_MINTING_ACCESS = 'change_subadmin_minting_access';
+export const ASSIGN_BRANDCATEGORY = 'assign_brandcategory';

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Stack, Typography, useMediaQuery,Box  } from '@mui/material';
+import '@fontsource/public-sans';
 
 import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
@@ -57,7 +58,7 @@ const ResetPassword = () => {
             </Box>
                 </Grid>
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
-                    <Box sx={{ mb: 2 }}>
+                    <Box sx={{ mb: 4 }}>
                         <Typography className='signInMarket' variant="subtitle1">
                             
                       Reset Password</Typography>

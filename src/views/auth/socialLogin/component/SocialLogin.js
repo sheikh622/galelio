@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -22,6 +24,7 @@ import {
     Divider
 } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -57,7 +60,7 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                 console.log('No crypto wallet found. Please install it.');
                 // toast.error('No crypto wallet found. Please install it.');
             }
-            
+
             // else if (window?.ethereum?.networkVersion !== '5') {
             //     console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
             //     dispatch({
@@ -70,7 +73,6 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
             //     console.log('Please change your Chain ID to Goerli');
             //     setWalletAddress();
             // }
-            
             else {
                 const address = utils?.getAddress(response[0]);
                 setWalletAddress(address);
@@ -104,17 +106,17 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    first_name: location.state?.socal?.user?.firstName,
-                    last_name: location.state?.socal?.user?.lastName,
+                    firstName: location.state?.socal?.user?.firstName,
+                    lastName: location.state?.socal?.user?.lastName ? location.state?.socal?.user?.lastName : ' ',
                     email: location.state?.socal?.user?.email,
                     walletAddress: '',
                     address: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    first_name: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
+                    firstName: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
                     // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
 
-                    last_name: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
+                    lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
                     // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
 
@@ -133,8 +135,8 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                     await dispatch(setLoader(true));
                     dispatch(
                         signupsocial({
-                            firstName: values.first_name,
-                            lastName: values.last_name,
+                            firstName: values.firstName,
+                            lastName: values.lastName,
                             email: values.email,
                             walletAddress: walletAddress,
                             address: values.address,
@@ -145,46 +147,102 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <OutlinedInput
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
+                            First Name{' '}
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.firstName && errors.firstName)}
+                        >
+                            <TextField
+                                placeholder="First Name"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="name"
-                                value={values.first_name}
-                                name="first_name"
+                                value={values.firstName}
+                                name="firstName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="First Name"
                                 inputProps={{}}
                             />
-                            {touched.first_name && errors.first_name && (
+                            {touched.firstName && errors.firstName && (
                                 <FormHelperText error id="standard-weight-helper-text-name-login">
-                                    {errors.first_name}
+                                    {errors.firstName}
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <OutlinedInput
-                                type="name"
-                                value={values.last_name}
-                                name="last_name"
+
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
+                            Last Name{' '}
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.lastName && errors.lastName)}
+                        >
+                            <TextField
+                                placeholder="Last Name"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                type="lastName"
+                                value={values.lastName}
+                                name="lastName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Last name"
                                 inputProps={{}}
                             />
-                            {touched.last_name && errors.last_name && (
+                            {touched.lastName && errors.lastName && (
                                 <FormHelperText error id="standard-weight-helper-text-name-login">
-                                    {errors.last_name}
+                                    {errors.lastName}
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <OutlinedInput
+
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
+                            Email
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.email && errors.email)}
+                        >
+                            <TextField
+                                placeholder="Email"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="email"
                                 value={values.email}
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email"
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -193,15 +251,33 @@ const SocialLoginForm = ({ loginProp, ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Delivery Address </InputLabel>
-                            <OutlinedInput
+                        <InputLabel
+                            sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
+                            className="authFont"
+                            htmlFor="outlined-adornment-email-login"
+                        >
+                            Delivery Address
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.address && errors.address)}
+                        >
+                            <TextField
+                                placeholder="Delivery Address"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="address"
                                 value={values.address}
                                 name="address"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Delivery Address"
+                                // helperText="Some important text"
                                 inputProps={{}}
                             />
                             {touched.address && errors.address && (
