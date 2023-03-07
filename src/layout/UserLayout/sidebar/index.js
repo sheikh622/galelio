@@ -46,7 +46,7 @@ const SideBar = () => {
                 xl={7.5}
                 container
                 alignItems="center"
-                spacing={2}
+                // spacing={2}
                 sx={{
                     // pt: 1,
                     // pb: 3,

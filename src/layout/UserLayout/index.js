@@ -28,14 +28,13 @@ const UserLayout = () => {
                     md={12}
                     sm={12}
                     xs={12}
-                    sx={{
+                    sx={{ mt:2,
+                        ml:2,
+                        mr:2,
                         background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
                         color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                         borderRadius: '4px',
-                        mt: {xs:2, sm:2, lg: 2, xl: 3 },
-                        ml: 2,
-                        mr: 2,
-                        mb: { lg: 0.5, xl: 1.5 }
+                      
                     }}
                 >
                     <Header />
@@ -45,7 +44,7 @@ const UserLayout = () => {
                     item
                     md={1}
                     xs={12}
-                    sx={{ marginBottom:'28px',
+                    sx={{  mt:2,  marginBottom:'28px',
                         position: 'sticky',
                         height: '100%',
                         top: '0',
@@ -54,7 +53,7 @@ const UserLayout = () => {
                 >
                     <SideBar />
                 </Grid>
-                <Grid item md={11} xs={12} sm={12} 
+                <Grid mt={0.5} item md={11} xs={12} sm={12} 
                 className="outlet-Margin">
                     <Outlet />
                 </Grid>
