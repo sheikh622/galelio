@@ -90,6 +90,7 @@ const PropertiesView = ({ nft }) => {
                         <DialogContentText>Please enter the price for the NFT</DialogContentText>
                         <TextField
                             autoFocus
+                            type='number'
                             margin="dense"
                             label="Price "
                             fullWidth
@@ -98,6 +99,7 @@ const PropertiesView = ({ nft }) => {
                             onChange={(e) => {
                                 rprice = e.target.value;
                             }}
+                            InputProps={{ inputProps: { min: 0 } }}
                         />
                     </DialogContent>
                     <DialogActions>

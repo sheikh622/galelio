@@ -98,7 +98,7 @@ function* addBrandCategoryRequest({ payload }) {
             })
         );
         payload.handleClose();
-        yield setNotification('success', response.data.message);
+        // yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
@@ -127,7 +127,7 @@ function* updateBrandCategoryRequest({ payload }) {
             })
         );
         payload.handleClose();
-        yield setNotification('success', response.data.message);
+        // yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
