@@ -558,8 +558,9 @@ let tokenId;
     };
 
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
+    console.log('buyer nft',buyerNft.status );
 
-    console.log('buyerNft', buyerNft?.buyer?.buyerAddress);
+    // console.log('buyerNft', buyerNft?.buyer?.buyerAddress);
     useEffect(() => {
         console.log('useEffect Ran');
         if (user) {
