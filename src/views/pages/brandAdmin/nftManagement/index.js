@@ -134,7 +134,7 @@ const NftManagement = () => {
                     <Grid container spacing={4}>
                         <Grid item xs={12} lg={8}>
                             <Typography className="mainheading" variant="h1" component="h2" 
-                            sx={{ marginLeft: { lg: '48px', md: '48px' } }}>
+                            sx={{ marginLeft: { lg: '48px', md: '48px' },marginTop:{md:"6px"} }}>
                                 NFT Management  
                             </Typography>
                         </Grid>
@@ -179,7 +179,7 @@ const NftManagement = () => {
                         <>
                             {' '}
                             <Grid container spacing={gridSpacing} mt={2}
-                             sx={{ marginLeft: { lg: '5px', md: '5px' } , marginRight: { lg: '25px', md: '25px' } }}>
+                             sx={{ padding:"0px 16px" }}>
                                 {nftList.nfts.rows &&
                                     nftList.nfts.rows.map((nft, index) => {
                                         return (
