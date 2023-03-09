@@ -235,6 +235,8 @@ function* addNftRequest({ payload }) {
     formData.append('price', payload.price);
     formData.append('currencyType', payload.currencyType);
     formData.append('description', payload.description);
+    formData.append('directBuyerAddress', payload.directBuyerAddress);
+    formData.append('isDirectTransfer', payload.isDirectTransfer);
     formData.append('categoryId', payload.categoryId);
     formData.append('quantity', payload.quantity);
     formData.append('metaData', JSON.stringify(payload.metaDataArray));
