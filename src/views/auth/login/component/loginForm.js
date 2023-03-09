@@ -129,10 +129,10 @@ const LoginForm = ({ loginProp, ...others }) => {
                     password: Yup.string()
                         .max(255)
                         .required('Password is required!')
-                        .matches(
-                            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                            'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
-                        )
+                        // .matches(
+                        //     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                        //     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                        // )
                 })}
                 onSubmit={async (values) => {
                     await dispatch(setLoader(true));
