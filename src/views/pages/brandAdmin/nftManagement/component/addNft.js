@@ -52,11 +52,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
+   
     const [uploadedImages, setUploadedImages] = useState([]);
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [type, setType] = useState('USDT');
     const [loader, setLoader] = useState(false);
     const [fileDataArray, setFileDataArray] = useState([]);
+    const [isDirectTransfer, setIsDirectTransfer] = useState(false);
     const handleType = (event) => {
         setType(event.target.value);
     };
@@ -71,60 +73,55 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
-        } 
+        }
 
         // else  (fieldDataArray.length > 0) {
-            
-            fieldDataArray.map((array) => {
-                if (array.fieldName == '') {
-                    isValid = false;
-                    toast.error(`Metadata name cannot be empty`);
-                }
-                else if (array.fieldValue == '') {
-                    isValid = false;
-                    toast.error(`Metadata value cannot be empty`);
-                }
-            });
+
+        fieldDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`Metadata name cannot be empty`);
+            } else if (array.fieldValue == '') {
+                isValid = false;
+                toast.error(`Metadata value cannot be empty`);
+            }
+        });
         // }
-         if (fileDataArray.length == 0) {
+        if (fileDataArray.length == 0) {
             isValid = false;
             toast.error('Proof of Authenticity is required');
         }
 
-    //    else (fileDataArray.length > 0) {
+        //    else (fileDataArray.length > 0) {
         console.log('im here 2');
-            fileDataArray.map((array) => {
-                if (array.fieldName == '') {
-                    isValid = false;
-                    toast.error(`File name field is mandatory`);
-                }
-                else if (array.fieldValue == null) {
-                    isValid = false;
-                    toast.error(`Attach proof of authenticity`);
-                }
-                else if (array.fieldValue?.size/1000000>5) {
-                    isValid = false;
-                    toast.error(`Please attach a less than 5 mb proof of authenticity`);
-                }
-            });
+        fileDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`File name field is mandatory`);
+            } else if (array.fieldValue == null) {
+                isValid = false;
+                toast.error(`Attach proof of authenticity`);
+            } else if (array.fieldValue?.size / 1000000 > 5) {
+                isValid = false;
+                toast.error(`Please attach a less than 5 mb proof of authenticity`);
+            }
+        });
         // }
 
-         if (values.images.length == 0) {
+        if (values.images.length == 0) {
             toast.error('Please upload a NFT Image');
             isValid = false;
         } else if (values.images[0].image.size / 1000000 > 5) {
             toast.error('Please upload a image less than 5 mb');
             isValid = false;
-        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && 
-        values.images[0].image.name.split('.').pop() !== 'png')
-         {
+        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
             toast.error('Upload the files with these extensions: jpg, png, gif');
             isValid = false;
-        }else if (parseInt(values.images[0].quantity) <=0) {
+        } else if (parseInt(values.images[0].quantity) <= 0) {
             toast.error('NFT Quantity should be atleast one');
             isValid = false;
         }
-console.log(values.images, 'values.images.length')
+        console.log(values.images, 'values.images.length');
 
         return isValid;
     };
@@ -135,6 +132,11 @@ console.log(values.images, 'values.images.length')
         nftDescription: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
+        directBuyerAddress: Yup.string()
+            // .required('NFT Description is required!')
+            // .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
+            .min(26, 'Minimum length 26 character ')
+            .max(42, 'Must be exactly 42 characters'),
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
         nftPrice: Yup.number()
             .min(0.000000001, 'Price should be greater than zero')
@@ -148,12 +150,14 @@ console.log(values.images, 'values.images.length')
         initialValues: {
             nftName: '',
             nftDescription: '',
+            directBuyerAddress:'',
             nftPrice: 0,
             images: []
         },
         validationSchema,
         onSubmit: (values) => {
             console.log('values', values);
+         
 
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
@@ -164,9 +168,17 @@ console.log(values.images, 'values.images.length')
 
             let isValid = handleError(fieldDataArray, fileDataArray, values);
             console.log('isValid', isValid);
-     
 
-            if (isValid==true) {
+            if (isValid == true) {
+                var WAValidator = require('wallet-address-validator');
+ 
+                var valid = WAValidator.validate(values.directBuyerAddress, 'ETH');
+                if(valid || values.directBuyerAddress == '')
+              { 
+                //  toast.success(``);
+              
+                    console.log('This is a valid wallet address');
+           
                 setLoader(true);
                 dispatch(
                     addNft({
@@ -178,6 +190,7 @@ console.log(values.images, 'values.images.length')
                         name: values.nftName,
                         price: values.nftPrice,
                         description: values.nftDescription,
+                        directBuyerAddress:values.directBuyerAddress? values.directBuyerAddress : '' ,
                         currencyType: type,
                         quantity: values.images[0].quantity,
                         asset: values.images[0].image,
@@ -189,9 +202,14 @@ console.log(values.images, 'values.images.length')
                         requesterAddress: user.walletAddress,
                         contractAddress: data.contractAddress,
                         handleClose: handleClose,
-                        brandId: user.BrandId
+                        brandId: user.BrandId,
+                        isDirectTransfer : values.directBuyerAddress == ''?  false : true
                     })
                 );
+              }
+                else
+                toast.error(`Wallet Address invalid !`);
+                    // console.log('Address INVALID');
             }
         }
     });
@@ -266,6 +284,7 @@ console.log(values.images, 'values.images.length')
         array.splice(index, 1);
         setFileDataArray(array);
     };
+    
 
     return (
         <>
@@ -385,6 +404,28 @@ console.log(values.images, 'values.images.length')
                                     variant="standard"
                                 />
                             </Grid>
+                            {mintType == 'directMint' && (
+                            <Grid xs={12} mt={1}>
+                                <TextField
+                                    multiline
+                                    rows={2}
+                                    type="number"
+                                    className="textfieldStyle"
+                                    id="directBuyerAddress"
+                                    name="directBuyerAddress"
+                                    label="Wallet Address"
+                                    placeholder='wallet Address'
+                                    fullWidth
+                                    value={formik.values.directBuyerAddress}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.directBuyerAddress && Boolean(formik.errors.directBuyerAddress)}
+                                    helperText={formik.touched.directBuyerAddress && formik.errors.directBuyerAddress}
+                                    autoComplete=""
+                                    variant="standard"
+                                    InputProps={{ inputProps: { min: 0 } }}
+                                />
+                            </Grid>
+                            )}
                             <Grid xs={12} mt={2}>
                                 <Button
                                     className="fieldbutton"
@@ -402,12 +443,13 @@ console.log(values.images, 'values.images.length')
                                 >
                                     Add Metadata
                                 </Button>
-                            </Grid>
+                            </Grid> 
+                            
                         </Grid>
 
                         {fieldDataArray.length != 0 && (
                             <>
-                                <Grid container spacing={4} sx={{mt:1}}>
+                                <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
                                             <Grid item xs={5}>
