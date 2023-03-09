@@ -290,10 +290,10 @@ const PropertiesView = ({ nft }) => {
 
                     console.log(nft.requesterAddress);
 
-                    //
+                    
                     try {
                         let mintedNFT = await (await nfts.buyNft(voucher, nft.minterAddress, nft.requesterAddress)).wait();
-                        const id = parseInt(mintedNFT.events[0].args[2]);
+                        const id = parseInt(mintedNFT.events[0]?.address);
                         console.log('mintedNFT',mintedNFT);
                         console.log('id', id);
                         setLazyTokenId(id.toString())

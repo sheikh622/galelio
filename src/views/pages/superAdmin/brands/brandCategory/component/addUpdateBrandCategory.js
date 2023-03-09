@@ -121,7 +121,9 @@ export default function AddUpdateBrandCategoryDialog({ open, setOpen, brandCateg
                     })
                 )?.wait();
     
-                let addr = res?.events[2]?.args[0];
+                let addr = res?.events[0]?.address;
+console.log('addr',addr);
+                console.log('res',res);
 
                 if (res) {
                     dispatch(

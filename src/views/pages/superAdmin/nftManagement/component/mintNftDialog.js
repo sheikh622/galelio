@@ -85,13 +85,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
     const directMintThenList = async (result) => {
         if (checkWallet) {
             let nftTokens = nftData.NFTTokens;
+            let isDirectTransfer = nftData.isDirectTransfer;
             let contractAddress = nftData.Category.BrandCategories[0].contractAddress;
             let nftId = nftData.id;
             let categoryId = nftData.CategoryId;
             let brandId = nftData.BrandId;
             let price = ethers.utils.parseEther(nftData.price.toString());
             let erc20Address = BLOCKCHAIN.ERC20;
-            let tokenIdArray = [];
+            let 
+            ay = [];
             let transactionHash;
             try {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -127,6 +129,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                     ).wait();
 
                     tokenIdArray.push({
+                        isDirectTransfer:isDirectTransfer,
+                        nftId:nftId,
                         id: nftTokens[0].id,
                         tokenId: id
                     });
@@ -183,6 +187,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
                     nftTokens.map((data, index) => {
                         tokenIdArray.push({
+                            isDirectTransfer:isDirectTransfer,
+                            nftId:nftId,
                             id: data.id,
                             tokenId: myNftTokenIdArray[index]
                         });
