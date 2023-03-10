@@ -582,7 +582,7 @@ let tokenId;
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
                         <CardMedia
                             component="img"
-                            image={nft?.asset ? nft?.asset : watch1}
+                            image={nft?.asset}
                             sx={{ minheight: 'auto', maxHeight: '570px', background: 'transparent', overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
@@ -743,7 +743,7 @@ let tokenId;
                                                             className="ETH "
                                                             variant="h3"
                                                         >
-                                                            {nft.price} {nft.currencyType}
+                                                            {nft?.price} {nft?.currencyType}
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>

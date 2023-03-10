@@ -30,17 +30,17 @@ const ProductDetails = () => {
                         <Grid item md={12} xs={12}>
                             <Grid container>
                                 <Grid item md={12} xs={12}>
-                                    <PropertiesView nft={location.state.nft} />
+                                    <PropertiesView nft={location?.state?.nft} />
                                 </Grid>
                                 <Grid item md={12} xs={12}>
-                                    <Properties nft={location.state.nft} />
+                                    <Properties nft={location?.state?.nft} />
                                 </Grid>
                                 <Grid item md={12} xs={12}>
-                                    <Activity nft={location.state.nft} />
+                                    <Activity nft={location?.state?.nft} />
                                 </Grid>
 
                                 <Grid item md={12} xs={12}>
-                                    <SimilarProducts nft={location.state.nft} />
+                                    <SimilarProducts nft={location?.state?.nft} />
                                 </Grid>
                             </Grid>
                         </Grid>

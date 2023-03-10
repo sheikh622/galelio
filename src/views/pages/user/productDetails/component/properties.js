@@ -17,6 +17,8 @@ const Properties = ({ nft }) => {
     const [propertiesOpen, setPropertiesOpen] = useState(false);
     const [metadata, setMetadata] = useState('');
     const [value, setValue] = useState('');
+    const [editable, setEditable] = useState('');
+    const [id, setId] = useState('');
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
     console.log('buyer nft',buyerNft?.status );
     const property = [
@@ -54,7 +56,7 @@ const Properties = ({ nft }) => {
 
     return (
         <>
-            <Edit open={propertiesOpen} setOpen={setPropertiesOpen} metadata={metadata} value={value}/>
+            <Edit open={propertiesOpen} id={id} setOpen={setPropertiesOpen} metadata={metadata} value={value} nft={nft} editable={editable}/>
             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
                 <Grid item xs={12} lg={12} md={12}>
                     <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -98,7 +100,7 @@ const Properties = ({ nft }) => {
                                                         className="centerText encapPropertry"
                                                         variant="h3"
                                                     >
-                                                        {item.fieldValue}{' '}
+                                                        {item?.fieldValue}{' '}
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={12}>
@@ -107,7 +109,7 @@ const Properties = ({ nft }) => {
                                                         className="plight"
                                                         variant="body2"
                                                     >
-                                                        94% Have this trait
+                                                   94% Have this trait
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
@@ -118,11 +120,14 @@ const Properties = ({ nft }) => {
                                     title="Edit Properties"
                                   
                                 >
+                                
                                     <ModeEditIcon sx={{  color: '#bde2f0 ', }}   
                                      onClick={() => {
                                         setPropertiesOpen(true);
                                         setMetadata(item.fieldName);
                                         setValue(item.fieldValue);
+                                        setEditable(item.isEditable);
+                                        setId(item.id);
                                     }}/>
                                 </Tooltip>
                                 )} 

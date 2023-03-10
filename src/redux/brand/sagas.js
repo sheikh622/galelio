@@ -3,9 +3,11 @@ import { all, call, fork, put, retry, takeLatest, select } from 'redux-saga/effe
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
 import { makeSelectAuthToken } from 'store/Selector';
 import { getAllBrands, getAllBrandsSuccess, getAllBrandsByAdmin, getAllBrandsByAdminSuccess } from './actions';
-import { GET_ALL_BRANDS, ADD_BRAND, UPDATE_BRAND, DELETE_BRAND, GET_ALL_BRANDS_BY_ADMIN } from './constants';
+import { GET_ALL_BRANDS, ADD_BRAND, UPDATE_BRAND,UPDATE_PROPERTY, DELETE_BRAND, GET_ALL_BRANDS_BY_ADMIN } from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
-
+import { getNftBuyerSuccess } from 'redux/nftManagement/actions';
+// import { getAllMarketplaceNftsByCategorySuccess } from 'redux/marketplace/actions';
+import { getAllMarketplaceCategoriesSuccess } from 'redux/marketplace/actions';
 function* getAllBrandsByAdminRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -89,6 +91,32 @@ function* updateBrandRequest({ payload }) {
 export function* watchUpdateBrand() {
     yield takeLatest(UPDATE_BRAND, updateBrandRequest);
 }
+function* updatePropertyRequest({ payload }) {
+   
+    const formData = new FormData();
+    formData.append('fieldName', payload.fieldName);
+    formData.append('fieldValue', payload.fieldValue);
+    
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.put(`/update/nftMetaData/${payload.id}`, formData, headers);
+        yield put(
+            getNftBuyerSuccess({
+                walletAddress: payload.walletAddress,
+                NFTTokenId: payload.NFTTokenId,
+                NftId: payload.NFTTokenId
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchPropertyBrand() {
+    yield takeLatest(UPDATE_PROPERTY, updatePropertyRequest);
+}
 
 function* deleteBrandRequest({ payload }) {
     try {
@@ -114,5 +142,8 @@ export function* watchDeleteBrand() {
 }
 
 export default function* brandSaga() {
-    yield all([fork(watchGetAllBrands), fork(watchAddBrand), fork(watchDeleteBrand), fork(watchUpdateBrand),fork(watchGetAllBrandsByAdmin)]);
+    yield all([fork(watchGetAllBrands), 
+        fork(watchAddBrand), 
+        fork(watchPropertyBrand), 
+        fork(watchDeleteBrand), fork(watchUpdateBrand),fork(watchGetAllBrandsByAdmin)]);
 }
