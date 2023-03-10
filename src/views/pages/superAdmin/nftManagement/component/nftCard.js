@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material/styles';
 
 
 const NftCard = ({ nftData, search, page, limit, type }) => {
+    console.log(nftData?.transferAddress, 'nftData=======>')
     const [loader, setLoader] = useState(false);
     const [openMint, setOpenMint] = useState(false);
     const [rejectMintOpen, setRejectMintOpen] = useState(false);
@@ -86,7 +87,8 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                     }
                 }} 
             >
-            <Card          sx={{
+            <Card       
+               sx={{
                 color: theme.palette.mode === 'dark' ? 'white' : '#404040',
                 background: theme.palette.mode === 'dark' ? '#181C1F' : 'white',
                 // maxWidth: nfts && nfts?.length > 3? 0 : 365,
@@ -184,6 +186,7 @@ const NftCard = ({ nftData, search, page, limit, type }) => {
                                 )}
 
                                 {nftData.status == 'REQUESTED' && (
+                                   
                                     <Button
                                         variant="contained"
                                         color="primary"

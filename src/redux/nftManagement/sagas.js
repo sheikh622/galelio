@@ -484,6 +484,7 @@ function* mintNftRequest({ payload }) {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`nft/admin/mint`, formData, headers);
         payload.handleClose();
+        console.log('success');
         yield put(
             getAllNftSuperAdmin({
                 categoryId: payload.categoryId,
