@@ -154,6 +154,7 @@ function* getAllNftUserRequest({ payload }) {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.get(`/users/nfts/` + payload.walletAddress, headers);
         yield put(getAllNftSuccessUser(response.data.data));
+        console.log('good');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
