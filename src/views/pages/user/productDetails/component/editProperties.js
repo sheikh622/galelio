@@ -1,5 +1,5 @@
 import { forwardRef, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 // material-ui
@@ -23,7 +23,7 @@ import {
     Typography
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
+import { updateProperty } from 'redux/brand/actions';
 // assets
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -32,8 +32,11 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 // ===============================|| UI DIALOG - FULL SCREEN ||=============================== //
 
-export default function Edit({ open, setOpen , metadata, value}) {
+export default function Edit({ open, setOpen , metadata, value , nft , id , editable}) {
     const theme = useTheme();
+    console.log('nft editable==========??', id );
+    const user = useSelector((state) => state.auth.user);
+    
     const dispatch = useDispatch();
 console.log(metadata , 'metadata' , value, 'value')
     const validationSchema = Yup.object({
@@ -52,22 +55,18 @@ console.log(metadata , 'metadata' , value, 'value')
         onSubmit: (values) => {
             console.log(values);
 
-            // dispatch(
-            //     updateBrandAdmin({
-            //         id: brandAdminData.id,
-            //         brandId: brandAdminData.brandId,
-            //         firstName: values.firstName,
-            //         lastName: values.lastName,
-            //         email: values.adminEmail,
-            //         password: values.adminPassword,
-            //         walletAddress: values.walletAddress,
-            //         page: page,
-            //         limit: limit,
-            //         search: search,
-            //         handleClose: handleClose
-            //     }
-            //     )
-            // );
+            dispatch(
+                updateProperty({
+                    id:id,
+                    walletAddress: user?.walletAddress,
+                    NFTTokenId: nft.NFTTokens[0].id,
+                    NftId: nft.id,
+                    fieldName:values.firstName,
+                    fieldValue:values.lastName,
+                    handleClose: handleClose
+                }
+                )
+            );
         }
     });
     const handleClose = () => {
@@ -138,7 +137,7 @@ console.log(metadata , 'metadata' , value, 'value')
                        
                                 <Grid item xs={6} md={12} lg={12}>
                                     <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
-                                      Color
+                                      Metadata Name
                                     </InputLabel>
                                     <TextField
                                         className="field"
@@ -154,7 +153,7 @@ console.log(metadata , 'metadata' , value, 'value')
                                 </Grid>
                                 <Grid item xs={6} pt={2} pb={2} md={12} lg={12}>
                                     <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
-                                       Background
+                                    Metadata Value
                                     </InputLabel>
                                     <TextField pt={2}
                                         className="field"
@@ -180,8 +179,12 @@ console.log(metadata , 'metadata' , value, 'value')
                 variant='outlined'
                     className="buttonSize"
                     size="large"
+                    type="submit"
                     sx={{ color: theme.palette.success.dark }}
-                    onClick={handleClose}
+                    onClick={() => {
+                                    
+                        formik.handleSubmit();
+                    }}
                     color="secondary"
                 >
                   Update

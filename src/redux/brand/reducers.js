@@ -2,7 +2,7 @@ import produce from 'immer';
 import {
    
     GET_ALL_BRANDS_SUCCESS,
-    GET_ALL_BRANDS_BY_ADMIN_SUCCESS
+    GET_ALL_BRANDS_BY_ADMIN_SUCCESS,
 
 } from './constants';
 

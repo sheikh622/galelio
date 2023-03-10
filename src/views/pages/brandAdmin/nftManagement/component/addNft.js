@@ -25,6 +25,7 @@ import {
 } from '@mui/material';
 
 import { useDropzone } from 'react-dropzone';
+import { Switch } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { addNft } from 'redux/nftManagement/actions';
@@ -52,8 +53,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
-   
+
     const [uploadedImages, setUploadedImages] = useState([]);
+
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [type, setType] = useState('USDT');
     const [loader, setLoader] = useState(false);
@@ -62,6 +64,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const handleType = (event) => {
         setType(event.target.value);
     };
+    const [checked, setChecked] = useState(false);
+ 
 
     const handleError = (fieldDataArray, fileDataArray, values) => {
         console.log('im in handle error');
@@ -150,14 +154,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         initialValues: {
             nftName: '',
             nftDescription: '',
-            directBuyerAddress:'',
+            directBuyerAddress: '',
             nftPrice: 0,
             images: []
         },
         validationSchema,
         onSubmit: (values) => {
             console.log('values', values);
-         
 
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
@@ -171,45 +174,42 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
 
             if (isValid == true) {
                 var WAValidator = require('wallet-address-validator');
- 
+
                 var valid = WAValidator.validate(values.directBuyerAddress, 'ETH');
-                if(valid || values.directBuyerAddress == '')
-              { 
-                //  toast.success(``);
-              
+                if (valid || values.directBuyerAddress == '') {
+                    //  toast.success(``);
+
                     console.log('This is a valid wallet address');
-           
-                setLoader(true);
-                dispatch(
-                    addNft({
-                        categoryId: data.CategoryId,
-                        mintType: mintType,
-                        metaDataArray: fieldDataArray,
-                        fileNameArray: fileNameArray,
-                        fileArray: fileArray,
-                        name: values.nftName,
-                        price: values.nftPrice,
-                        description: values.nftDescription,
-                        directBuyerAddress:values.directBuyerAddress? values.directBuyerAddress : '' ,
-                        currencyType: type,
-                        quantity: values.images[0].quantity,
-                        asset: values.images[0].image,
-                        type: nftType,
-                        page: page,
-                        limit: limit,
-                        search: search,
-                        categoryId: data.CategoryId,
-                        requesterAddress: user.walletAddress,
-                        contractAddress: data.contractAddress,
-                        handleClose: handleClose,
-                        brandId: user.BrandId,
-                        isDirectTransfer : values.directBuyerAddress == ''?  false : true
-                    })
-                );
-              }
-                else
-                toast.error(`Wallet Address invalid !`);
-                    // console.log('Address INVALID');
+
+                    setLoader(true);
+                    dispatch(
+                        addNft({
+                            categoryId: data.CategoryId,
+                            mintType: mintType,
+                            metaDataArray: fieldDataArray,
+                            fileNameArray: fileNameArray,
+                            fileArray: fileArray,
+                            name: values.nftName,
+                            price: values.nftPrice,
+                            description: values.nftDescription,
+                            directBuyerAddress: values.directBuyerAddress ? values.directBuyerAddress : '',
+                            currencyType: type,
+                            quantity: values.images[0].quantity,
+                            asset: values.images[0].image,
+                            type: nftType,
+                            page: page,
+                            limit: limit,
+                            search: search,
+                            categoryId: data.CategoryId,
+                            requesterAddress: user.walletAddress,
+                            contractAddress: data.contractAddress,
+                            handleClose: handleClose,
+                            brandId: user.BrandId,
+                            isDirectTransfer: values.directBuyerAddress == '' ? false : true
+                        })
+                    );
+                } else toast.error(`Wallet Address invalid !`);
+                // console.log('Address INVALID');
             }
         }
     });
@@ -261,6 +261,18 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         array[index].fieldValue = value;
         setFieldDataArray(array);
     };
+ 
+    const handleChange = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = [...fieldDataArray];
+        array[index].isEditable = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+    // console.log("arrayyyyyyyyyyyyyy",fieldDataArray);
 
     const handleRemoveField = (index) => {
         let array = [...fieldDataArray];
@@ -284,7 +296,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         array.splice(index, 1);
         setFileDataArray(array);
     };
-    
 
     return (
         <>
@@ -405,26 +416,26 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 />
                             </Grid>
                             {mintType == 'directMint' && (
-                            <Grid xs={12} mt={1}>
-                                <TextField
-                                    multiline
-                                    rows={2}
-                                    type="number"
-                                    className="textfieldStyle"
-                                    id="directBuyerAddress"
-                                    name="directBuyerAddress"
-                                    label="Wallet Address"
-                                    placeholder='wallet Address'
-                                    fullWidth
-                                    value={formik.values.directBuyerAddress}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.directBuyerAddress && Boolean(formik.errors.directBuyerAddress)}
-                                    helperText={formik.touched.directBuyerAddress && formik.errors.directBuyerAddress}
-                                    autoComplete=""
-                                    variant="standard"
-                                    InputProps={{ inputProps: { min: 0 } }}
-                                />
-                            </Grid>
+                                <Grid xs={12} mt={1}>
+                                    <TextField
+                                        multiline
+                                        rows={2}
+                                        type="number"
+                                        className="textfieldStyle"
+                                        id="directBuyerAddress"
+                                        name="directBuyerAddress"
+                                        label="Wallet Address"
+                                        placeholder="wallet Address"
+                                        fullWidth
+                                        value={formik.values.directBuyerAddress}
+                                        onChange={formik.handleChange}
+                                        error={formik.touched.directBuyerAddress && Boolean(formik.errors.directBuyerAddress)}
+                                        helperText={formik.touched.directBuyerAddress && formik.errors.directBuyerAddress}
+                                        autoComplete=""
+                                        variant="standard"
+                                        InputProps={{ inputProps: { min: 0 } }}
+                                    />
+                                </Grid>
                             )}
                             <Grid xs={12} mt={2}>
                                 <Button
@@ -436,15 +447,15 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             ...fieldDataArray,
                                             {
                                                 fieldName: '',
-                                                fieldValue: ''
+                                                fieldValue: '',
+                                                isEditable: false
                                             }
                                         ]);
                                     }}
                                 >
                                     Add Metadata
                                 </Button>
-                            </Grid> 
-                            
+                            </Grid>
                         </Grid>
 
                         {fieldDataArray.length != 0 && (
@@ -492,6 +503,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 >
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
+                                                <Switch
+                                                value={data.isEditable}
+                                                    checked={data.isEditable}
+                                                    onChange={(e)=> handleChange(e,index)}
+                                                    // inputProps={{ 'aria-label': 'controlled' }}
+                                                />
                                             </Grid>
                                         </>
                                     ))}

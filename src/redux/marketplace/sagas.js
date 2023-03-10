@@ -27,6 +27,7 @@ function* getAllMarketplaceCategoriesRequest() {
     try {
         const response = yield axios.get(`/category/marketplace`);
         yield put(getAllMarketplaceCategoriesSuccess(response.data.data));
+        console.log(response,'response');
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

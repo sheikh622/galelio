@@ -2,7 +2,7 @@ import {
     // Brand
     GET_ALL_BRANDS,
     GET_ALL_BRANDS_SUCCESS,
-
+    UPDATE_PROPERTY,
     ADD_BRAND,
     UPDATE_BRAND,
     DELETE_BRAND,
@@ -53,6 +53,12 @@ export const addBrand = (data) => {
 export const updateBrand = (data) => {
     return {
         type: UPDATE_BRAND,
+        payload: data
+    };
+};
+export const updateProperty = (data) => {
+    return {
+        type: UPDATE_PROPERTY,
         payload: data
     };
 };

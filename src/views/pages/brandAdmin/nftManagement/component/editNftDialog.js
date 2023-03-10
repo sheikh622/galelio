@@ -22,7 +22,7 @@ import {
     IconButton,
     MenuItem
 } from '@mui/material';
-
+import { Switch } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
@@ -55,6 +55,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const handleCurrencyType = (event) => {
         setCurrencyType(event.target.value);
     };
+    const [checked, setChecked] = useState(true);
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+      };
 
     const handleError = (fieldDataArray, fileDataArray, values) => {
         console.log('im in handle error');
@@ -459,6 +463,11 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 >
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
+                                                <Switch
+                                                    checked={checked}
+                                                    onChange={handleChange}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
                                             </Grid>
                                         </>
                                     ))}
