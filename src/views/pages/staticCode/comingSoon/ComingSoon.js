@@ -1,4 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
+import { Switch } from '@mui/material';
 import { useTheme, styled } from '@mui/material/styles';
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -6,6 +7,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 import widget1 from 'assets/images/watch.png';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const HeaderAnimationImage = styled('img')({
     maxWidth: '100%',
@@ -13,6 +15,10 @@ const HeaderAnimationImage = styled('img')({
 });
 
 const ComingSoon = () => {
+    const [checked, setChecked] = useState(true);
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+      };
     const user = useSelector((state) => state.auth.user);
     const theme = useTheme();
 
@@ -65,7 +71,7 @@ const ComingSoon = () => {
                               </Typography>
                           </motion.div>
                       </Grid>
-                    
+                   
                    
                   </Grid>
               </Grid>

@@ -25,6 +25,7 @@ import {
 } from '@mui/material';
 
 import { useDropzone } from 'react-dropzone';
+import { Switch } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { addNft } from 'redux/nftManagement/actions';
@@ -53,12 +54,17 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
     const [uploadedImages, setUploadedImages] = useState([]);
+
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [type, setType] = useState('USDT');
     const [loader, setLoader] = useState(false);
     const [fileDataArray, setFileDataArray] = useState([]);
     const handleType = (event) => {
         setType(event.target.value);
+    };
+    const [checked, setChecked] = useState(true);
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
     };
 
     const handleError = (fieldDataArray, fileDataArray, values) => {
@@ -71,60 +77,55 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
-        } 
+        }
 
         // else  (fieldDataArray.length > 0) {
-            
-            fieldDataArray.map((array) => {
-                if (array.fieldName == '') {
-                    isValid = false;
-                    toast.error(`Metadata name cannot be empty`);
-                }
-                else if (array.fieldValue == '') {
-                    isValid = false;
-                    toast.error(`Metadata value cannot be empty`);
-                }
-            });
+
+        fieldDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`Metadata name cannot be empty`);
+            } else if (array.fieldValue == '') {
+                isValid = false;
+                toast.error(`Metadata value cannot be empty`);
+            }
+        });
         // }
-         if (fileDataArray.length == 0) {
+        if (fileDataArray.length == 0) {
             isValid = false;
             toast.error('Proof of Authenticity is required');
         }
 
-    //    else (fileDataArray.length > 0) {
+        //    else (fileDataArray.length > 0) {
         console.log('im here 2');
-            fileDataArray.map((array) => {
-                if (array.fieldName == '') {
-                    isValid = false;
-                    toast.error(`File name field is mandatory`);
-                }
-                else if (array.fieldValue == null) {
-                    isValid = false;
-                    toast.error(`Attach proof of authenticity`);
-                }
-                else if (array.fieldValue?.size/1000000>5) {
-                    isValid = false;
-                    toast.error(`Please attach a less than 5 mb proof of authenticity`);
-                }
-            });
+        fileDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`File name field is mandatory`);
+            } else if (array.fieldValue == null) {
+                isValid = false;
+                toast.error(`Attach proof of authenticity`);
+            } else if (array.fieldValue?.size / 1000000 > 5) {
+                isValid = false;
+                toast.error(`Please attach a less than 5 mb proof of authenticity`);
+            }
+        });
         // }
 
-         if (values.images.length == 0) {
+        if (values.images.length == 0) {
             toast.error('Please upload a NFT Image');
             isValid = false;
         } else if (values.images[0].image.size / 1000000 > 5) {
             toast.error('Please upload a image less than 5 mb');
             isValid = false;
-        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && 
-        values.images[0].image.name.split('.').pop() !== 'png')
-         {
+        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
             toast.error('Upload the files with these extensions: jpg, png, gif');
             isValid = false;
-        }else if (parseInt(values.images[0].quantity) <=0) {
+        } else if (parseInt(values.images[0].quantity) <= 0) {
             toast.error('NFT Quantity should be atleast one');
             isValid = false;
         }
-console.log(values.images, 'values.images.length')
+        console.log(values.images, 'values.images.length');
 
         return isValid;
     };
@@ -164,9 +165,8 @@ console.log(values.images, 'values.images.length')
 
             let isValid = handleError(fieldDataArray, fileDataArray, values);
             console.log('isValid', isValid);
-     
 
-            if (isValid==true) {
+            if (isValid == true) {
                 setLoader(true);
                 dispatch(
                     addNft({
@@ -407,7 +407,7 @@ console.log(values.images, 'values.images.length')
 
                         {fieldDataArray.length != 0 && (
                             <>
-                                <Grid container spacing={4} sx={{mt:1}}>
+                                <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
                                             <Grid item xs={5}>
@@ -450,7 +450,14 @@ console.log(values.images, 'values.images.length')
                                                 >
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
+                                                <Switch
+                                                    checked={checked}
+                                                    onChange={handleChange}
+                                                    // inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            
                                             </Grid>
+                                            
                                         </>
                                     ))}
                                 </Grid>
@@ -516,6 +523,7 @@ console.log(values.images, 'values.images.length')
                                                     >
                                                         <Icon icon={closeFill} width={28} height={28} />
                                                     </IconButton>
+                                                    <Typography>abc</Typography>
                                                 </Grid>
                                             </>
                                         ))}
