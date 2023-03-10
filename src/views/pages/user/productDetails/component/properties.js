@@ -76,7 +76,7 @@ const Properties = ({ nft }) => {
                         </Grid>
                     </Grid>
                 </Grid>
-                {nft.NFTMetaData?.length > 0 ? (
+                {nft?.NFTMetaData?.length > 0 ? (
                     <>
                         <Grid item xs={12}>
                             <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
