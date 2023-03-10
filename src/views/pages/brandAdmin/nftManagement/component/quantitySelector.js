@@ -8,7 +8,8 @@ const QuantitySelector = ({ formik, fileArray, index }) => {
     return (
         <>
             <div style={{ display: 'flex', marginRight: '10px', }}>
-                <Typography variant='h3' style={{ marginTop: '5px', marginRight: '5px' }}>Quantity  </Typography>
+                <Typography variant='h3' style={{ marginTop: '5px',
+                 marginRight: '5px' }}>Quantity  </Typography>
 
                 <TextField
               
