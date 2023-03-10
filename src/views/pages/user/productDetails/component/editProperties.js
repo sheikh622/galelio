@@ -26,6 +26,7 @@ import { useTheme } from '@mui/material/styles';
 import { updateProperty } from 'redux/brand/actions';
 // assets
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 
 // slide animation
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
@@ -36,7 +37,8 @@ export default function Edit({ open, setOpen , metadata, value , nft , id , edit
     const theme = useTheme();
     console.log('nft editable==========??', id );
     const user = useSelector((state) => state.auth.user);
-    
+    const navigate = useNavigate();
+
     const dispatch = useDispatch();
 console.log(metadata , 'metadata' , value, 'value')
     const validationSchema = Yup.object({
@@ -53,7 +55,7 @@ console.log(metadata , 'metadata' , value, 'value')
         // brandAdminData,
         validationSchema,
         onSubmit: (values) => {
-            console.log(values);
+            console.log(values, 'allll data');
 
             dispatch(
                 updateProperty({
@@ -63,6 +65,7 @@ console.log(metadata , 'metadata' , value, 'value')
                     NftId: nft.id,
                     fieldName:values.firstName,
                     fieldValue:values.lastName,
+                    navigate: navigate,
                     handleClose: handleClose
                 }
                 )
