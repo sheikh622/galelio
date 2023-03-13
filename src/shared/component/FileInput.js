@@ -17,7 +17,7 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
         <>
             <Grid item className="displayFlex">
                 <Fragment>
-                    <Tooltip placement="top" title={accept == 'image/*' ? 'Add Image' : 'Add Audio'}>
+                    <Tooltip placement="top" title={accept == 'image/*' ? 'Add Image' : 'Add File'}>
                         <IconButton color="primary" aria-label="delete" size="large" onClick={() => fileRef1.current.click()}>
                             <AddCircleOutlinedIcon sx={{ fontSize: '3.0rem' }} />
                         </IconButton>
