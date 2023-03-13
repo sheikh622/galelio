@@ -260,7 +260,7 @@ export default function Header() {
                                 <Search
                                     sx={{
                                         width: '10rem !important',
-                                        display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' }
+                                        display: { xs: 'none', sm: 'none', md: 'none', lg: 'none', xl: 'none' }
                                     }}
                                 >
                                     <SearchIconWrapper>
