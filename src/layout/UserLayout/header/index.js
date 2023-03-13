@@ -69,7 +69,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         width: '100%',
         width: '100ch',
         [theme.breakpoints.up('md')]: {
-           
+            width: '68ch',
+            maxWidth: 'auto'
+        },
+       
+        [theme.breakpoints.up('lg')]: {
+            width: '70ch',
+            maxWidth: 'auto'
+        },
+       
+        [theme.breakpoints.up('xl')]: {
+            width: '75ch',
             maxWidth: 'auto'
         }
     }

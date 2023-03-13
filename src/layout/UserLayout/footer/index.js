@@ -65,7 +65,7 @@ const Footer = () => {
                             <Grid item md={12} xs={12} sm={12} lg={4} xl={3} className="footersocalIcons">
                                 <img src={googlePlay} alt="Google Play" width="110" />
                             </Grid>
-                            <Grid item md={1} xs={12} lg={1} xl={1} sx={{ display: { xl: 'none', lg: 'none', md: 'none' } }}></Grid>
+                            <Grid item md={1} xs={12} lg={1} xl={1} sx={{ display: { xl: 'flex', lg: 'none', md: 'none' } }}></Grid>
                             <Grid item md={12} xs={12} sm={12} lg={7} xl={6}>
                                 <img src={appleStore} alt="Apple Store" width="110" />
                             </Grid>
