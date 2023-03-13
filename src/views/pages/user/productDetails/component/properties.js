@@ -115,13 +115,20 @@ const Properties = ({ nft }) => {
                                                             // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                             className="plight"
                                                             variant="body2"
-                                                            sx={{ cursor: 'pointer' }}
+                                                            sx={{ cursor: 'pointer',color:"blue !important"}}
                                                             onClick={() => {
                                                                 // useNavigate(option.fieldValue)
                                                                 window.open(item?.proof, '_blank');
                                                             }}
                                                         >
+                                                            <span style={{color:theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray'
+                                                            ,
+                                                             textDecoration:"underline"}}>
                                                             {item?.proof ? ' proof of  metadata' : 'no proof'}
+                                                            
+
+
+                                                            </span>
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
