@@ -194,7 +194,9 @@ export default function Header() {
                 <p>Messages</p>
             </MenuItem>
             <MenuItem>
-                <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+                <IconButton size="large" 
+                aria-label="show 17 
+                new notifications" color="inherit">
                     <Badge badgeContent={17} color="error">
                         <NotificationsIcon />
                     </Badge>
@@ -313,7 +315,7 @@ export default function Header() {
                                 )}
                             </div>
                             <IconButton size="large" aria-label="" color="inherit">
-                                <Badge badgeContent={17} color="error">
+                                <Badge>
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                 </Badge>
                             </IconButton>
