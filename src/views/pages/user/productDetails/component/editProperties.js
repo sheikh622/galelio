@@ -76,7 +76,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                     fieldName: values.firstName,
                     fieldValue: values.lastName,
                     file: values.file,
-                    navigate: navigate,
+                    // navigate: navigate,
                     handleClose: handleClose
                 })
             );
