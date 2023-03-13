@@ -96,6 +96,7 @@ function* updatePropertyRequest({ payload }) {
     const formData = new FormData();
     formData.append('fieldName', payload.fieldName);
     formData.append('fieldValue', payload.fieldValue);
+    formData.append('file', payload.file);
     
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -108,7 +109,7 @@ function* updatePropertyRequest({ payload }) {
         //     })
         // );
         payload.handleClose();
-        // payload.navigate('/creatorProfile');
+        payload.navigate('/creatorProfile');
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);

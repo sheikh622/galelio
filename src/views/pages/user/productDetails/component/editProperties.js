@@ -4,6 +4,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
 import { ethers, utils } from 'ethers';
+import FileInput from 'shared/component/FileInput';
+
 // material-ui
 import {
     AppBar,
@@ -38,31 +40,34 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 // ===============================|| UI DIALOG - FULL SCREEN ||=============================== //
 
-export default function Edit({ open, setOpen, metadata, value, nft, id, editable }) {
+export default function Edit({ open, setOpen, metadata, value, nft, id, editable, proofRequired }) {
     const theme = useTheme();
-    console.log('nft editable==========??', id);
+    const [file, setFile] = useState('');
+    // console.log('proofRequired==========??', proofRequired);
     const user = useSelector((state) => state.auth.user);
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
-    console.log(metadata, 'metadata', value, 'value');
+    // console.log(metadata, 'metadata', value, 'value');
     const validationSchema = Yup.object({
         // isUpdate: Yup.boolean().default(isUpdate),
         firstName: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
-        lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters')
+        lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
+        file: Yup.mixed().required('File is required!')
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
     });
 
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: { firstName: metadata, lastName: value },
+        initialValues: { firstName: metadata, lastName: value, file: '' },
         // brandAdminData,
         validationSchema,
         onSubmit: async (values) => {
             console.log(values, 'allll data');
 
-           await dispatch(
+            await dispatch(
                 updateProperty({
                     id: id,
                     walletAddress: user?.walletAddress,
@@ -70,49 +75,45 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                     NftId: nft.id,
                     fieldName: values.firstName,
                     fieldValue: values.lastName,
-                    // navigate: navigate,
+                    file: values.file,
+                    navigate: navigate,
                     handleClose: handleClose
                 })
-            )
-setTimeout(()=>{
-    const singleNft =async()=>{
+            );
+            setTimeout(() => {
+                const singleNft = async () => {
+                    await axios
+                        .get(API_URL + 'nft/' + nft.id, {})
+                        .then(async (data) => {
+                            console.log('data from editproperties', data.data.data);
+                            let nftData = data.data.data.nft;
 
-        await axios
-             .get(API_URL + 'nft/' + nft.id, {})
-             .then(async(data) => {
-                 console.log('data from editproperties', data.data.data);
-                 let nftData = data.data.data.nft
+                            console.log('nftData from axios', nftData);
 
-                 console.log('nftData from axios',nftData);
+                            const provider = new ethers.providers.Web3Provider(window.ethereum);
+                            const signer = provider.getSigner();
+                            const address = await signer.getAddress();
+                            const nft = new ethers.Contract(nftData.contractAddress, NFTAbi.abi, signer);
+                            let mintedNFT = await (
+                                await nft.updateUri(nftData.NFTTokens[0].tokenId, nftData.tokenUri).catch((error) => {
+                                    //  toast.error(error.reason);
+                                    //  setLoader(false);
+                                    //  setOpen(false);
+                                    console.log(error);
+                                })
+                            ).wait();
+                            navigate('/creatorProfile');
+                        })
+                        .catch((error) => {
+                            console.log('error', error);
+                        });
+                };
 
-                 const provider = new ethers.providers.Web3Provider(window.ethereum);
-                 const signer = provider.getSigner();
-                 const address = await signer.getAddress();
-                 const nft = new ethers.Contract(nftData.contractAddress, NFTAbi.abi, signer);
-                 let mintedNFT = await (
-                     await nft.updateUri(nftData.NFTTokens[0].tokenId,  nftData.tokenUri).catch((error) => {
-                        //  toast.error(error.reason);
-                        //  setLoader(false);
-                        //  setOpen(false);
-                        console.log(error)
-                     })
-                 ).wait();
-                 navigate("/creatorProfile")
-
-             })
-             .catch((error) => {
-                 console.log('error', error);
-             });
-    }
-
-    singleNft()
-
-},2000)
-
-            
-
+                singleNft();
+            }, 2000);
         }
     });
+
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
@@ -122,46 +123,13 @@ setTimeout(()=>{
         setOpen(true);
     };
 
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-    // const status = [
-    //     {
-    //         name: 'Name:',
-    //         value: nftData?.name
-    //     },
-    //     {
-    //         name: 'Status:',
-    //         value: nftData?.status
-    //     },
-    //     {
-    //         name: 'Description:',
-    //         value: nftData?.description
-    //     },
-    //     {
-    //         name: 'Price:',
-    //         value: nftData?.price
-    //     },
-    //     {
-    //         name: 'Mint Type:',
-    //         value: nftData?.mintType
-    //     },
-    //     {
-    //         name: 'Brand:',
-    //         value: nftData?.Brand.name
-    //     },
-    //     {
-    //         name: 'Token URL:',
-    //         value: 'Null'
-    //     }
-    // ];
     return (
         <div>
             <Dialog
                 open={open}
                 onClose={handleClose}
                 TransitionComponent={Transition}
-                sx={{ width: '80%', margin: '0 auto', maxHeight: '440px' }}
+                sx={{ width: '80%', margin: '0 auto', maxHeight: '500px' }}
             >
                 {/*    <IconButton float="left" color="inherit" onClick={handleClose} aria-label="close" size="large">
                     <CloseIcon />
@@ -182,7 +150,7 @@ setTimeout(()=>{
                     <Grid item xs={12} md={12} lg={12} sx={{ p: 2.5 }}>
                         <form noValidate onSubmit={formik.handleSubmit} id="validation-forms">
                             <Grid container>
-                                <Grid item xs={6} md={12} lg={12}>
+                                <Grid item xs={12} md={12} lg={12}>
                                     <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
                                         Metadata Name
                                     </InputLabel>
@@ -198,7 +166,7 @@ setTimeout(()=>{
                                         variant="standard"
                                     />
                                 </Grid>
-                                <Grid item xs={6} pt={2} pb={2} md={12} lg={12}>
+                                <Grid item xs={12} pt={2} pb={2} md={12} lg={12}>
                                     <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
                                         Metadata Value
                                     </InputLabel>
@@ -215,11 +183,29 @@ setTimeout(()=>{
                                         variant="standard"
                                     />
                                 </Grid>
+                                {proofRequired == true && (
+                                    <Grid item xs={12} pt={1} pb={2} md={12} lg={12}>
+                                        <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
+                                            Add Proof
+                                        </InputLabel>
+                                        <Grid  ml={-2} item xs={12} md={12} lg={12}>
+                                        <FileInput
+                                        
+                                            className="textfieldStyle"
+                                            formik={formik}
+                                            accept=".pdf"
+                                            fieldName="file"
+                                            placeHolder="Add File"
+                                            variant="standard"
+                                        />
+                                    </Grid>
+                                    </Grid>
+                                )}
                             </Grid>
                         </form>
                     </Grid>
                 </Grid>
-                <DialogActions sx={{ pr: 2.5 }}>
+                <DialogActions sx={{mt:-4 , pr: 2.5 }}>
                     <Button
                         variant="outlined"
                         className="buttonSize"

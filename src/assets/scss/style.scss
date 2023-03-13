@@ -778,6 +778,7 @@ text-align: center;
 
 
 }
+
 .signInMarket {
     font-weight: 700;
     font-size: 30px;
@@ -1271,6 +1272,14 @@ text-align: center;
     font-weight: 400;
     font-size: 16px;
     background: linear-gradient(97.63deg, #2f57ff 0%, #2fa3ff 108.45%);
+    border-radius: 4px;
+}
+.walletbutton {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    background: transparent;
     border-radius: 4px;
 }
 .fontstyling {

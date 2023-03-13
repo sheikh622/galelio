@@ -704,6 +704,15 @@
   font-size: 17px;
 }
 
+.account-style {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #9498AA;
+  text-align: center;
+}
+
 .signInMarket {
   font-weight: 700;
   font-size: 30px;
@@ -1204,6 +1213,15 @@
   border-radius: 4px;
 }
 
+.walletbutton {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  background: transparent;
+  border-radius: 4px;
+}
+
 .fontstyling {
   font-family: "Poppins";
   font-style: normal;
@@ -1481,7 +1499,6 @@
 
 .sidebar {
   max-width: 200px !important;
-  margin-top: 12px;
 }
 
 .slick-slide .MuiGrid-root {
