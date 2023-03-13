@@ -72,12 +72,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             width: '68ch',
             maxWidth: 'auto'
         },
-       
+
         [theme.breakpoints.up('lg')]: {
             width: '70ch',
             maxWidth: 'auto'
         },
-       
+
         [theme.breakpoints.up('xl')]: {
             width: '75ch',
             maxWidth: 'auto'
@@ -266,7 +266,7 @@ export default function Header() {
                                     />
                                 )}
                             </Grid>
-                            <Grid item md={5} >
+                            <Grid item md={5}>
                                 <Search
                                     sx={{
                                         width: '10rem !important',
@@ -277,7 +277,8 @@ export default function Header() {
                                         <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                                     </SearchIconWrapper>
                                     <StyledInputBase
-                                        sx={{ border: '3px solid black', borderRadius: '4px !important' }}
+                                        sx={{ border:`${theme.palette.mode === 'dark' ? ' 3px solid black' : ' 3px solid white'}`
+                                        , borderRadius: '4px !important' }}
                                         placeholder="Search"
                                         inputProps={{ 'aria-label': 'search' }}
                                     />
