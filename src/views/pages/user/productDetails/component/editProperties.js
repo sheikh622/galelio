@@ -35,7 +35,7 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 export default function Edit({ open, setOpen , metadata, value , nft , id , editable}) {
     const theme = useTheme();
-    console.log('nft editable==========??', id );
+    console.log('nft editable==========??', editable );
     const user = useSelector((state) => state.auth.user);
     const navigate = useNavigate();
 

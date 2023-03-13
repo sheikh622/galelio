@@ -227,45 +227,50 @@ export default function Header() {
                             // }
                         }}
                     >
-                        <Grid container-fluid>
+                        <Grid container-fluid  sx={{display:'flex', marginTop:'3px'}}>
                             <Grid item sx={{ display: { lg: 'none', md: 'none' } }}>
                                 <Drawer />
                             </Grid>
-
-                            {/*   <Search
-                                sx={{ width: '46rem !important', display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' } }}
-                                className={styles.search}
-                            >
-                                <SearchIconWrapper>
-                                    <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
-                                </SearchIconWrapper>
-                                <StyledInputBase placeholder="Search" style={{ width: '100%' }} inputProps={{ 'aria-label': 'search' }} />
-                            </Search>*/}
+                            <Grid item md={4} >
+                            {theme.palette.mode === 'dark' ? (
+                                <img
+                                    src={galileoWhite}
+                                    onClick={() => {
+                                        navigate('/home');
+                                    }}
+                                    alt="Galileo White Logo"
+                                    width="100"
+                                />
+                            ) : (
+                                <img
+                                    src={galileo}
+                                    onClick={() => {
+                                        navigate('/home');
+                                    }}
+                                    alt="Galileo Dark Logo"
+                                    width="100"
+                                />
+                            )}
+                            </Grid>
+                            <Grid item md={6}  >
+                            <Search 
+                           
+                            sx={{ width: '10rem !important',  
+                            display: { xs: 'none', sm: 'none', md: 'none', lg: 'none', xl: 'flex' } }}
+                           
+                        >
+                            <SearchIconWrapper>
+                                <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' ,  }} />
+                            </SearchIconWrapper>
+                            <StyledInputBase  sx={{ border:'3px solid black',     
+                            borderRadius: '4px !important'}}
+                             placeholder="Search" inputProps={{ 'aria-label': 'search' }} />
+                        </Search>
+                            </Grid>
+                            <Grid item md={2} >
                         </Grid>
-                        <Box sx={{ display: { xs: 'block', md: 'block' }, cursor: 'pointer' }}>
-                            <Typography variant="h6" noWrap component="div"
-                             sx={{ marginTop: '3px', display: { xs: '', sm: 'block' } }}>
-                                {theme.palette.mode === 'dark' ? (
-                                    <img
-                                        src={galileoWhite}
-                                        onClick={() => {
-                                            navigate('/home');
-                                        }}
-                                        alt="Galileo White Logo"
-                                        width="100"
-                                    />
-                                ) : (
-                                    <img
-                                        src={galileo}
-                                        onClick={() => {
-                                            navigate('/home');
-                                        }}
-                                        alt="Galileo Dark Logo"
-                                        width="100"
-                                    />
-                                )}
-                            </Typography>
-                        </Box>
+                        </Grid>
+                      
 
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ flexGrow: 1 }} />
@@ -292,7 +297,7 @@ export default function Header() {
                             && (token != null || undefined) && 
                             <MetaMaskSection />}
                             </div>
-                            {/* <IconButton size="large" aria-label="" color="inherit">
+                             <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                 </Badge>
@@ -302,10 +307,11 @@ export default function Header() {
                             </IconButton>
                             <IconButton size="large" aria-label="" color="inherit">
                                 <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
-                            </IconButton>  */}
+                            </IconButton> 
                         </Box>
                         {(token  == null || undefined) && (
                             <Button
+                            size="large"
                                 variant="outlined"
                                 onClick={() => {
                                     navigate('/login');
