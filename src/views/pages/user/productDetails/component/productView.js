@@ -567,8 +567,8 @@ let tokenId;
             dispatch(
                 getNftBuyer({
                     walletAddress: user?.walletAddress,
-                    NFTTokenId: nft.NFTTokens[0].id,
-                    NftId: nft.id
+                    NFTTokenId: nft?.NFTTokens[0]?.id,
+                    NftId: nft?.id
                 })
             );
         }

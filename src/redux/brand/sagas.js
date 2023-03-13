@@ -108,7 +108,7 @@ function* updatePropertyRequest({ payload }) {
         //     })
         // );
         payload.handleClose();
-        payload.navigate('/creatorProfile');
+        // payload.navigate('/creatorProfile');
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);

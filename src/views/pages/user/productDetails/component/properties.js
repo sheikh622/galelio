@@ -20,7 +20,7 @@ const Properties = ({ nft }) => {
     const [editable, setEditable] = useState('');
     const [id, setId] = useState('');
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
-    console.log('buyer nft',buyerNft?.status );
+    console.log('nft?.NFTMetaData?', nft?.NFTMetaData );
     const property = [
         {
             heading: 'Background',
@@ -76,7 +76,7 @@ const Properties = ({ nft }) => {
                         </Grid>
                     </Grid>
                 </Grid>
-                {nft.NFTMetaData?.length > 0 ? (
+                {nft?.NFTMetaData?.length > 0 ? (
                     <>
                         <Grid item xs={12}>
                             <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
@@ -115,7 +115,8 @@ const Properties = ({ nft }) => {
                                             </Grid>
                                         </SubCard>
                                     </Grid>
-                                   {(buyerNft?.status == 'Redeem' && <Tooltip
+                                   {(buyerNft?.status == 'Redeem' &&  item?.isEditable == true &&
+                                   <Tooltip
                                     placement="right"
                                     title="Edit Properties"
                                   
