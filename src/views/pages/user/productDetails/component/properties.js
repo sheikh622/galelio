@@ -18,9 +18,10 @@ const Properties = ({ nft }) => {
     const [metadata, setMetadata] = useState('');
     const [value, setValue] = useState('');
     const [editable, setEditable] = useState('');
+    const [proofRequired, setProofRequired] = useState('');
     const [id, setId] = useState('');
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
-    console.log('nft?.NFTMetaData?', nft?.NFTMetaData );
+    // console.log('nft?.NFTMetaData?', nft?.NFTMetaData );
     const property = [
         {
             heading: 'Background',
@@ -56,7 +57,16 @@ const Properties = ({ nft }) => {
 
     return (
         <>
-            <Edit open={propertiesOpen} id={id} setOpen={setPropertiesOpen} metadata={metadata} value={value} nft={nft} editable={editable}/>
+            <Edit
+                open={propertiesOpen}
+                id={id}
+                setOpen={setPropertiesOpen}
+                metadata={metadata}
+                value={value}
+                nft={nft}
+                editable={editable}
+                proofRequired={proofRequired}
+            />
             <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
                 <Grid item xs={12} lg={12} md={12}>
                     <Grid container spacing={2} sx={{ mb: 2 }}>
@@ -67,11 +77,9 @@ const Properties = ({ nft }) => {
                                 variant="h2"
                                 mt={4}
                                 component="div"
-                                sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' },
-                                 textTransform: 'capitalize' }}
+                                sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
                             >
                                 Properties
-                              
                             </Typography>
                         </Grid>
                     </Grid>
@@ -81,57 +89,59 @@ const Properties = ({ nft }) => {
                         <Grid item xs={12}>
                             <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                                 {nft?.NFTMetaData.map((item) => (
-                                   <>
-                                  
-                                    <Grid item md={4} lg={2} xs={12} sm={6}>
-                                        <SubCard
-                                            className="property propertyShadow"
-                                            sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
-                                        > 
-                                            <Grid container justifyContent="center" spacing={2}>
-                                                <Grid item xs={12}>
-                                                    <Typography className="pbackground" variant="h3">
-                                                        {item.fieldName}
-                                                    </Typography>
+                                    <>
+                                        <Grid item md={4} lg={2} xs={12} sm={6}>
+                                            <SubCard
+                                                className="property propertyShadow"
+                                                sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
+                                            >
+                                                <Grid container justifyContent="center" spacing={2}>
+                                                    <Grid item xs={12}>
+                                                        <Typography className="pbackground" variant="h3">
+                                                            {item.fieldName}
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <Typography
+                                                            color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                            className="centerText encapPropertry"
+                                                            variant="h3"
+                                                        >
+                                                            {item?.fieldValue}{' '}
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item xs={12}>
+                                                        <Typography
+                                                            // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                            className="plight"
+                                                            variant="body2"
+                                                            sx={{ cursor: 'pointer' }}
+                                                            onClick={() => {
+                                                                // useNavigate(option.fieldValue)
+                                                                window.open(item?.proof, '_blank');
+                                                            }}
+                                                        >
+                                                            {item?.proof ? ' proof of  metadata' : 'no proof'}
+                                                        </Typography>
+                                                    </Grid>
                                                 </Grid>
-                                                <Grid item xs={12}>
-                                                    <Typography
-                                                        color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                                        className="centerText encapPropertry"
-                                                        variant="h3"
-                                                    >
-                                                        {item?.fieldValue}{' '}
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    <Typography
-                                                        // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                                        className="plight"
-                                                        variant="body2"
-                                                    >
-                                                   94% Have this trait
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </SubCard>
-                                    </Grid>
-                                   {(buyerNft?.status == 'Redeem' &&  item?.isEditable == true &&
-                                   <Tooltip
-                                    placement="right"
-                                    title="Edit Properties"
-                                  
-                                >
-                                
-                                    <ModeEditIcon sx={{  color: '#bde2f0 ', }}   
-                                     onClick={() => {
-                                        setPropertiesOpen(true);
-                                        setMetadata(item.fieldName);
-                                        setValue(item.fieldValue);
-                                        setEditable(item.isEditable);
-                                        setId(item.id);
-                                    }}/>
-                                </Tooltip>
-                                )} 
+                                            </SubCard>
+                                        </Grid>
+                                        {buyerNft?.status == 'Redeem' && item?.isEditable == true && (
+                                            <Tooltip placement="right" title="Edit Properties">
+                                                <ModeEditIcon
+                                                    sx={{ color: '#bde2f0 ' }}
+                                                    onClick={() => {
+                                                        setPropertiesOpen(true);
+                                                        setMetadata(item.fieldName);
+                                                        setValue(item.fieldValue);
+                                                        setEditable(item.isEditable);
+                                                        setProofRequired(item.proofRequired);
+                                                        setId(item.id);
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                        )}
                                     </>
                                 ))}
                             </Grid>

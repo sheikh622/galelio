@@ -1,5 +1,7 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Tooltip from '@mui/material/Tooltip';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -61,11 +63,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const [loader, setLoader] = useState(false);
     const [fileDataArray, setFileDataArray] = useState([]);
     const [isDirectTransfer, setIsDirectTransfer] = useState(false);
+    const [wallettoggle, setWallettoggle] = useState(false);
     const handleType = (event) => {
         setType(event.target.value);
     };
     const [checked, setChecked] = useState(false);
- 
 
     const handleError = (fieldDataArray, fileDataArray, values) => {
         console.log('im in handle error');
@@ -160,7 +162,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         },
         validationSchema,
         onSubmit: (values) => {
-            console.log('values', values);
+            // console.log('values', values);
 
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
@@ -170,7 +172,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             });
 
             let isValid = handleError(fieldDataArray, fileDataArray, values);
-            console.log('isValid', isValid);
+            // console.log('isValid', isValid);
 
             if (isValid == true) {
                 var WAValidator = require('wallet-address-validator');
@@ -261,7 +263,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         array[index].fieldValue = value;
         setFieldDataArray(array);
     };
- 
+
     const handleChange = (event, index) => {
         // setChecked(event.target.checked);
         let array = [...fieldDataArray];
@@ -272,8 +274,27 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         // setFieldDataArray(array);
         // console.log(event.target.checked,'value==============?')
     };
+    const handleproof = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = [...fieldDataArray];
+        array[index].proofRequired = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
     // console.log("arrayyyyyyyyyyyyyy",fieldDataArray);
 
+    const walletadded = (event, index) => {
+        setWallettoggle(true);
+        setChecked(event.target.checked);
+
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
     const handleRemoveField = (index) => {
         let array = [...fieldDataArray];
         array.splice(index, 1);
@@ -400,8 +421,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             </Grid>
                             <Grid xs={12} mt={1}>
                                 <TextField
-                                    multiline
-                                    rows={2}
                                     className="textfieldStyle"
                                     id="nftDescription"
                                     name="nftDescription"
@@ -415,12 +434,20 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-                            {mintType == 'directMint' && (
+                            <Grid xs={12} mt={2} ml={-1}>
+                                <Button className="walletbutton" variant="text" sx={{ float: 'left' }}>
+                                    Click to add wallet address.
+                                </Button>
+                                <Switch
+                                    checked={checked}
+                                    onChange={(e) => walletadded(e)}
+
+                                    // inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            </Grid>
+                            {mintType == 'directMint' && wallettoggle == true && checked == true && (
                                 <Grid xs={12} mt={1}>
                                     <TextField
-                                        multiline
-                                        rows={2}
-                                        type="number"
                                         className="textfieldStyle"
                                         id="directBuyerAddress"
                                         name="directBuyerAddress"
@@ -433,7 +460,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                         helperText={formik.touched.directBuyerAddress && formik.errors.directBuyerAddress}
                                         autoComplete=""
                                         variant="standard"
-                                        InputProps={{ inputProps: { min: 0 } }}
                                     />
                                 </Grid>
                             )}
@@ -448,7 +474,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             {
                                                 fieldName: '',
                                                 fieldValue: '',
-                                                isEditable: false
+                                                isEditable: false,
+                                                proofRequired: false
                                             }
                                         ]);
                                     }}
@@ -463,7 +490,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={4}>
                                                 <TextField
                                                     id="field_name"
                                                     className="textfieldStyle"
@@ -478,7 +505,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={5}>
                                                 <TextField
                                                     className="textfieldStyle"
                                                     id="field_value"
@@ -492,7 +519,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     fullWidth
                                                 />
                                             </Grid>
-                                            <Grid item xs={2} mt={2}>
+                                            <Grid item xs={2} mt={2} md={3}>
                                                 <IconButton
                                                     color="error"
                                                     edge="end"
@@ -503,12 +530,32 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 >
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
+                                                <Tooltip
+                                                className="fontsize"
+                                                title="Require editable metadata"
+                                                placement="top"
+                                                arrow
+                                            >
                                                 <Switch
-                                                value={data.isEditable}
+                                                    value={data.isEditable}
                                                     checked={data.isEditable}
-                                                    onChange={(e)=> handleChange(e,index)}
+                                                    onChange={(e) => handleChange(e, index)}
                                                     // inputProps={{ 'aria-label': 'controlled' }}
                                                 />
+                                                </Tooltip>
+                                                <Tooltip
+                                                    className="fontsize"
+                                                    title="Require a proof"
+                                                    placement="top"
+                                                    arrow
+                                                >
+                                                    <Switch
+                                                        value={data.proofRequired}
+                                                        checked={data.proofRequired}
+                                                        onChange={(e) => handleproof(e, index)}
+                                                        // inputProps={{ 'aria-label': 'controlled' }}
+                                                    />
+                                                </Tooltip>
                                             </Grid>
                                         </>
                                     ))}

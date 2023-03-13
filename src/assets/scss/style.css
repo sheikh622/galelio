@@ -1213,6 +1213,15 @@
   border-radius: 4px;
 }
 
+.walletbutton {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  background: transparent;
+  border-radius: 4px;
+}
+
 .fontstyling {
   font-family: "Poppins";
   font-style: normal;

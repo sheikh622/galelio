@@ -67,8 +67,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
+        width: '100ch',
         [theme.breakpoints.up('md')]: {
-            width: '100ch'
+           
+            maxWidth: 'auto'
         }
     }
 }));
@@ -85,18 +87,17 @@ export default function Header() {
         }
     };
 
-
     const token = useSelector((state) => state.auth.token);
-  const   user = useSelector((state) => state.auth.user);
-    console.log('token',token);
-    console.log('user',user);
+    const user = useSelector((state) => state.auth.user);
+    console.log('token', token);
+    console.log('user', user);
 
     // const token = useSelector((state) => state.auth.token);
     // if(!token){
     //     user =undefined
     // }else{
     //     user = useSelector((state) => state.auth.user);
-       
+
     // }
     // console.log(user?.role, 'user in sidebar');
     // console.log(token, 'token in sidebar');
@@ -208,7 +209,10 @@ export default function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}` , borderRadius:'4px'}}>
+            <AppBar
+                position="static"
+                sx={{ backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}`, borderRadius: '4px' }}
+            >
                 <Toolbar>
                     <Helmet>
                         <meta charSet="utf-8" />
@@ -227,91 +231,91 @@ export default function Header() {
                             // }
                         }}
                     >
-                        <Grid container-fluid  sx={{display:'flex', marginTop:'3px'}}>
+                        <Grid container-fluid sx={{ display: 'flex', marginTop: '3px' }}>
                             <Grid item sx={{ display: { lg: 'none', md: 'none' } }}>
                                 <Drawer />
                             </Grid>
-                            <Grid item md={4} >
-                            {theme.palette.mode === 'dark' ? (
-                                <img
-                                    src={galileoWhite}
-                                    onClick={() => {
-                                        navigate('/home');
-                                    }}
-                                    alt="Galileo White Logo"
-                                    width="100"
-                                />
-                            ) : (
-                                <img
-                                    src={galileo}
-                                    onClick={() => {
-                                        navigate('/home');
-                                    }}
-                                    alt="Galileo Dark Logo"
-                                    width="100"
-                                />
-                            )}
+                            <Grid item md={4}>
+                                {theme.palette.mode === 'dark' ? (
+                                    <img
+                                        src={galileoWhite}
+                                        onClick={() => {
+                                            navigate('/home');
+                                        }}
+                                        alt="Galileo White Logo"
+                                        width="100"
+                                    />
+                                ) : (
+                                    <img
+                                        src={galileo}
+                                        onClick={() => {
+                                            navigate('/home');
+                                        }}
+                                        alt="Galileo Dark Logo"
+                                        width="100"
+                                    />
+                                )}
                             </Grid>
-                            <Grid item md={6}  >
-                            <Search 
-                           
-                            sx={{ width: '10rem !important',  
-                            display: { xs: 'none', sm: 'none', md: 'none', lg: 'none', xl: 'flex' } }}
-                           
-                        >
-                            <SearchIconWrapper>
-                                <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' ,  }} />
-                            </SearchIconWrapper>
-                            <StyledInputBase  sx={{ border:'3px solid black',     
-                            borderRadius: '4px !important'}}
-                             placeholder="Search" inputProps={{ 'aria-label': 'search' }} />
-                        </Search>
-                            </Grid>
-                            <Grid item md={2} >
-                        </Grid>
-                        </Grid>
-                      
-
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Box sx={{ flexGrow: 1 }} />
-
-                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') 
-                        && (user?.role != 'User' && (token !== null || undefined)) && (
-                            <Box sx={{marginTop:'3px'}}>
-                                <Button
-                                    sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
-                                    variant="outlined"
-                                    onClick={() => {
-                                        navigate('/dashboard');
+                            <Grid item md={5} >
+                                <Search
+                                    sx={{
+                                        width: '10rem !important',
+                                        display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex', xl: 'flex' }
                                     }}
                                 >
-                                    Dashboard
-                                </Button>
-                            </Box>
-                        )}
+                                    <SearchIconWrapper>
+                                        <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
+                                    </SearchIconWrapper>
+                                    <StyledInputBase
+                                        sx={{ border: '3px solid black', borderRadius: '4px !important' }}
+                                        placeholder="Search"
+                                        inputProps={{ 'aria-label': 'search' }}
+                                    />
+                                </Search>
+                            </Grid>
+                            <Grid item md={3}></Grid>
+                        </Grid>
 
-                        <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3 , marginTop:'3px'}}>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ flexGrow: 1 }} />
+
+                        {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') &&
+                            user?.role != 'User' &&
+                            (token !== null || undefined) && (
+                                <Box sx={{ marginTop: '3px' }}>
+                                    <Button
+                                        sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
+                                        variant="outlined"
+                                        onClick={() => {
+                                            navigate('/dashboard');
+                                        }}
+                                    >
+                                        Dashboard
+                                    </Button>
+                                </Box>
+                            )}
+
+                        <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3, marginTop: '3px' }}>
                             <div sx={{ marginRight: '1%' }}>
-                            {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User')
-                            
-                            && (token != null || undefined) && 
-                            <MetaMaskSection />}
+                                {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') && (token != null || undefined) && (
+                                    <MetaMaskSection />
+                                )}
                             </div>
-                             <IconButton size="large" aria-label="" color="inherit">
+                            <IconButton size="large" aria-label="" color="inherit">
                                 <Badge badgeContent={17} color="error">
                                     <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                 </Badge>
                             </IconButton>
-                          <IconButton size="large" aria-label="" color="inherit">
+                            <IconButton size="large" aria-label="" color="inherit">
                                 <AccountBalanceWalletIcon sx={{ color: '#4dabf5' }} />
                             </IconButton>
                             <IconButton size="large" aria-label="" color="inherit">
                                 <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
-                            </IconButton> 
+                            </IconButton>
                         </Box>
-                        {(token  == null || undefined) && (
+                        {(token == null || undefined) && (
                             <Button
-                            size="large"
+                                size="large"
                                 variant="outlined"
                                 onClick={() => {
                                     navigate('/login');
@@ -320,15 +324,12 @@ export default function Header() {
                                 Login
                             </Button>
                         )}
-                        {((token && (user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' ||  'User'))
-                         ) && (
+                        {token && (user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') && (
                             <>
                                 {theme.palette.mode === 'dark' ? (
-                                    <img src={userHeader} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'3px'
-                                     }} />
+                                    <img src={userHeader} alt="" height="35" style={{ display: 'inlineBlock', marginTop: '3px' }} />
                                 ) : (
-                                    <img src={personuser} alt="" height="35" style={{ display: 'inlineBlock', marginTop:'3px'
-                                     }} />
+                                    <img src={personuser} alt="" height="35" style={{ display: 'inlineBlock', marginTop: '3px' }} />
                                 )}
 
                                 <IconButton
@@ -347,8 +348,7 @@ export default function Header() {
                     </Box>
                 </Toolbar>
             </AppBar>
-            {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin'|| 'User')
-            && (token != null || undefined)&& (
+            {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') && (token != null || undefined) && (
                 <>
                     {renderMobileMenu}
                     {renderMenu}
