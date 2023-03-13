@@ -121,7 +121,9 @@ const Properties = ({ nft }) => {
                                                                 window.open(item?.proof, '_blank');
                                                             }}
                                                         >
-                                                            <span style={{color:"", textDecoration:"underline"}}>
+                                                            <span style={{color:theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray'
+                                                            ,
+                                                             textDecoration:"underline"}}>
                                                             {item?.proof ? ' proof of  metadata' : 'no proof'}
                                                             
 
