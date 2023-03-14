@@ -63,9 +63,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const handleError = (fieldDataArray, fileDataArray, values) => {
         console.log('im in handle error');
         let isValid = true;
-        console.log('fieldDataArray', fieldDataArray);
-        console.log('fileDataArray', fileDataArray);
-        console.log('values', values);
+        // console.log('fieldDataArray', fieldDataArray);
+        // console.log('fileDataArray', fileDataArray);
+        // console.log('values', values);
 
         if (fieldDataArray.length == 0) {
             isValid = false;

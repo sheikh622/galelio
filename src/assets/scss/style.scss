@@ -1334,6 +1334,16 @@ right: 8px;
     text-overflow: ellipsis;
     text-transform: capitalize;
 }
+.encap-fieldName{
+    text-align: center;
+    white-space: nowrap;
+    width: 50% !important;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}
 .dialog_details {
     height: 520px;
     width: 99%;

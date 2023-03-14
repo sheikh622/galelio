@@ -98,11 +98,13 @@ const Properties = ({ nft }) => {
                                                 sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
                                             >
                                          
-                                                <Grid container justifyContent="center" spacing={2} className='postion-fields'>
+                                                <Grid container justifyContent="center" spacing={2} className='postion-fields '>
                                                     <Grid item xs={12}>
-                                                        <Typography className="pbackground" variant="h3">
+                                                    <Tooltip placement="right" title={item.fieldName} >
+                                                    <Typography className="pbackground encap-fieldName" variant="h3">
                                                             {item.fieldName}
                                                         </Typography>
+                                                        </Tooltip>
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <Typography
