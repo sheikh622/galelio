@@ -168,7 +168,7 @@ function* getNftBuyerRequest({ payload }) {
             headers
         );
         yield put(getNftBuyerSuccess(response.data.data));
-        console.log('goooooooooood')
+        // console.log('goooooooooood')
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
