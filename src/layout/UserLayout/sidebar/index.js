@@ -100,7 +100,7 @@ const SideBar = () => {
                                 borderRadius: '0px 5px 5px 0px'
                             }}
                         ></Box>
-                        <Tooltip className="fontsize" title="Comming Soon" placement="right" arrow>
+                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                             <PieChartIcon sx={{  color: `${pathName == '/chart' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
@@ -148,7 +148,7 @@ const SideBar = () => {
                                 borderRadius: '0px 5px 5px 0px'
                             }}
                         ></Box>
-                        <Tooltip className="fontsize" title="Comming Soon" placement="right" arrow>
+                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                             <BookmarkIcon  sx={{  color: `${pathName == '/bookmarks' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
@@ -170,7 +170,7 @@ const SideBar = () => {
                                 borderRadius: '0px 5px 5px 0px'
                             }}
                         ></Box>
-                        <Tooltip className="fontsize" title="Comming Soon" placement="right" arrow>
+                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                             <DownloadIcon  sx={{  color: `${pathName == '/downloads' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
@@ -192,7 +192,7 @@ const SideBar = () => {
                                 borderRadius: '0px 5px 5px 0px'
                             }}
                         ></Box>
-                        <Tooltip className="fontsize" title="Comming Soon" placement="right" arrow>
+                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                             <DiscountIcon  sx={{  color: `${pathName == '/tags' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
@@ -214,7 +214,7 @@ const SideBar = () => {
                                 borderRadius: '0px 5px 5px 0px'
                             }}
                         ></Box>
-                        <Tooltip className="fontsize" title="Comming Soon" placement="right" arrow>
+                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                             <SettingsIcon  sx={{  color: `${pathName == '/settings' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
@@ -235,7 +235,7 @@ const SideBar = () => {
                                 borderRadius: '0px 5px 5px 0px'
                             }}
                         ></Box>
-                        <Tooltip className="fontsize" title="Comming Soon" placement="right" arrow>
+                        <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
                             <LogoutIcon  sx={{  color: `${pathName == '/ComingSoon' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>

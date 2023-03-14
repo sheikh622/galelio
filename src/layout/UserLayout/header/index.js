@@ -279,7 +279,8 @@ export default function Header() {
                                         <SearchIcon sx={{ color: '#d3d3d3', zIndex: '1' }} />
                                     </SearchIconWrapper>
                                     <StyledInputBase
-                                        sx={{ border:`${theme.palette.mode === 'dark' ? ' 3px solid black' : ' 3px solid white'}`
+                                        sx={{color:`${theme.palette.mode === 'dark' ? '#fff' : '#000'}`
+                                        , border:`${theme.palette.mode === 'dark' ? ' 3px solid black' : ' 3px solid white'}`
                                         , borderRadius: '4px !important' }}
                                         placeholder="Search"
                                         inputProps={{ 'aria-label': 'search' }}

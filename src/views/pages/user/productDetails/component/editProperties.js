@@ -78,7 +78,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                     await axios
                         .get(API_URL + 'nft/' + nft.id, {})
                         .then(async (data) => {
-                            console.log('data from editproperties', data.data.data);
+                            // console.log('data from editproperties', data.data.data);
                             let nftData = data.data.data.nft;
 
                             console.log('nftData from axios', nftData);
