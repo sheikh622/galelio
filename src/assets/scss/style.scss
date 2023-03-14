@@ -1266,6 +1266,20 @@ text-align: center;
 
     border-radius: 4px;
 }
+.postion-property{
+position: relative;
+height: 130px;
+}
+.postion-fields{
+position: absolute;
+top: 20px;
+left: 1px;
+}
+.postion-icon{
+position: absolute;
+top: 8px;
+right: 8px;
+}
 .fieldbutton {
     font-family: 'Poppins';
     font-style: normal;

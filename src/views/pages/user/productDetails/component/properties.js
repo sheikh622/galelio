@@ -2,8 +2,10 @@
 import { useTheme } from '@mui/material/styles';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import editicon from 'assets/images/edit.png';
 import { Container, Grid, Typography, Tooltip } from '@mui/material';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+// import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import ModeEditIcon from '@mui/icons-material/BorderColorSharp';
 // project imports
 import Edit from './editProperties';
 import SubCard from 'ui-component/cards/SubCard';
@@ -90,12 +92,13 @@ const Properties = ({ nft }) => {
                             <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                                 {nft?.NFTMetaData.map((item) => (
                                     <>
-                                        <Grid item md={4} lg={2} xs={12} sm={6}>
+                                        <Grid item  md={2} lg={2} xs={6} sm={2}>
                                             <SubCard
-                                                className="property propertyShadow"
+                                                className="property propertyShadow postion-property"
                                                 sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
                                             >
-                                                <Grid container justifyContent="center" spacing={2}>
+                                         
+                                                <Grid container justifyContent="center" spacing={2} className='postion-fields'>
                                                     <Grid item xs={12}>
                                                         <Typography className="pbackground" variant="h3">
                                                             {item.fieldName}
@@ -115,29 +118,34 @@ const Properties = ({ nft }) => {
                                                             // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                             className="plight"
                                                             variant="body2"
-                                                            sx={{ cursor: 'pointer',color:"blue !important"}}
-                                                            onClick={() => {
-                                                                // useNavigate(option.fieldValue)
-                                                                window.open(item?.proof, '_blank');
-                                                            }}
+                                                         
                                                         >
-                                                            <span style={{color:theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray'
-                                                            ,
-                                                             textDecoration:"underline"}}>
-                                                            {item?.proof ? ' proof of  metadata' : 'no proof'}
-                                                            
-
-
-                                                            </span>
+                                                            {item?.proof ? (
+                                                                <span
+                                                                onClick={() => {
+                                                                    // useNavigate(option.fieldValue)
+                                                                    window.open(item?.proof, '_blank');
+                                                                }}
+                                                                    style={{cursor: 'pointer',
+                                                                        color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray',
+                                                                        textDecoration: 'underline'
+                                                                    }}
+                                                                >
+                                                                    Proof of metadata
+                                                                </span>
+                                                            ) : (
+                                                                <span style={{ color: 'transparent' }}>no proof</span>
+                                                            )}
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
-                                            </SubCard>
-                                        </Grid>
+                                         
+                                       
                                         {buyerNft?.status == 'Redeem' && item?.isEditable == true && (
-                                            <Tooltip placement="right" title="Edit Properties">
+                                            <Tooltip placement="right" title="Edit Properties" className='postion-icon'>
+                                          
                                                 <ModeEditIcon
-                                                    sx={{ color: '#bde2f0 ' }}
+                                                    sx={{ color:  theme.palette.mode === 'dark' ? '#bde2f0' : '#000', float:'right'}}
                                                     onClick={() => {
                                                         setPropertiesOpen(true);
                                                         setMetadata(item.fieldName);
@@ -149,6 +157,8 @@ const Properties = ({ nft }) => {
                                                 />
                                             </Tooltip>
                                         )}
+                                        </SubCard>
+                                        </Grid>
                                     </>
                                 ))}
                             </Grid>
