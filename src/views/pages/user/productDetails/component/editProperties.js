@@ -60,7 +60,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
         lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
-        file: Yup.mixed().required('File is required!')
+        // file: Yup.mixed().required('File is required!')
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
     });
 
