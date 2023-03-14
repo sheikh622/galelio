@@ -80,6 +80,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             isValid = false;
             toast.error('Metadata is required');
         }
+        if (checked == true) {
+            toast.error('Wallet address is required');
+        }
 
         // else  (fieldDataArray.length > 0) {
 
@@ -436,7 +439,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             </Grid>
                             <Grid xs={12} mt={2} ml={-1}>
                                 <Button className="walletbutton" variant="text" sx={{ float: 'left' }}>
-                                  Mint to wallet.
+                                    Mint to wallet.
                                 </Button>
                                 <Switch
                                     checked={checked}
@@ -530,36 +533,24 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 >
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
-                                                <Tooltip
-                                                className="fontsize"
-                                                title="Allow edit"
-                                                placement="top"
-                                                arrow
-                                            >
-                                                <Switch
-                                                    value={data.isEditable}
-                                                    checked={data.isEditable}
-                                                    onChange={(e) => handleChange(e, index)}
-                                                    // inputProps={{ 'aria-label': 'controlled' }}
-                                                />
-                                             
-                                                </Tooltip>
-                                                {data.isEditable== true &&(
-                                                    <Tooltip
-                                                    className="fontsize"
-                                                    title="Require a proof"
-                                                    placement="top"
-                                                    arrow
-                                                >
+                                                <Tooltip className="fontsize" title="Allow edit" placement="top" arrow>
                                                     <Switch
-                                                        value={data.proofRequired}
-                                                        checked={data.proofRequired}
-                                                        onChange={(e) => handleproof(e, index)}
+                                                        value={data.isEditable}
+                                                        checked={data.isEditable}
+                                                        onChange={(e) => handleChange(e, index)}
                                                         // inputProps={{ 'aria-label': 'controlled' }}
                                                     />
                                                 </Tooltip>
+                                                {data.isEditable == true && (
+                                                    <Tooltip className="fontsize" title="Require a proof" placement="top" arrow>
+                                                        <Switch
+                                                            value={data.proofRequired}
+                                                            checked={data.proofRequired}
+                                                            onChange={(e) => handleproof(e, index)}
+                                                            // inputProps={{ 'aria-label': 'controlled' }}
+                                                        />
+                                                    </Tooltip>
                                                 )}
-                                              
                                             </Grid>
                                         </>
                                     ))}
