@@ -436,7 +436,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                             </Grid>
                             <Grid xs={12} mt={2} ml={-1}>
                                 <Button className="walletbutton" variant="text" sx={{ float: 'left' }}>
-                                    Click to add wallet address.
+                                  Mint to wallet.
                                 </Button>
                                 <Switch
                                     checked={checked}
@@ -532,7 +532,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 </IconButton>
                                                 <Tooltip
                                                 className="fontsize"
-                                                title="Require editable metadata"
+                                                title="Allow edit"
                                                 placement="top"
                                                 arrow
                                             >
