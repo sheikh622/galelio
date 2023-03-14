@@ -177,7 +177,7 @@ const Items = () => {
                                             <CardContent sx={{ padding: '6%' }}>
                                                 <Grid container>
                                                     <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                                                        <span className="cardHeading" style={{ fontSize: '130%' }}>
+                                                        <span className="cardHeading encap" style={{ fontSize: '130%' }}>
                                                             {data.name}{' '}
                                                         </span>
                                                         <div className="overflow" style={{ marginTop: '5%', color: '#656565' }}>

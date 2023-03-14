@@ -542,8 +542,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     onChange={(e) => handleChange(e, index)}
                                                     // inputProps={{ 'aria-label': 'controlled' }}
                                                 />
+                                             
                                                 </Tooltip>
-                                                <Tooltip
+                                                {data.isEditable== true &&(
+                                                    <Tooltip
                                                     className="fontsize"
                                                     title="Require a proof"
                                                     placement="top"
@@ -556,6 +558,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         // inputProps={{ 'aria-label': 'controlled' }}
                                                     />
                                                 </Tooltip>
+                                                )}
+                                              
                                             </Grid>
                                         </>
                                     ))}
