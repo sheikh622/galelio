@@ -44,7 +44,8 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 export default function Edit({ open, setOpen, metadata, value, nft, id, editable, proofRequired }) {
 
-    const [loader, setLoader] = useState(false)
+    console.log('metadata, value, nft, id, editable, proofRequired',metadata, value, nft, id, editable, proofRequired);
+    const [loader, setLoader] = useState(false);
     const theme = useTheme();
     const [file, setFile] = useState('');
     // console.log('proofRequired==========??', proofRequired);
@@ -70,8 +71,8 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
         validationSchema,
         onSubmit: async (values) => {
             console.log(values, 'allll data');
-setLoader(true)
-      
+            setLoader(true);
+
             setTimeout(() => {
                 const singleNft = async () => {
                     await axios
@@ -88,43 +89,42 @@ setLoader(true)
                             const nft = new ethers.Contract(nftData.contractAddress, NFTAbi.abi, signer);
                             await (
                                 await nft.updateUri(nftData.NFTTokens[0].tokenId, nftData.tokenUri).catch((error) => {
-                                     toast.error(error.reason);
+                                    toast.error(error.reason);
                                     //  setLoader(false);
                                     //  setOpen(false);
                                     console.log(error);
                                 })
-                            ).wait().then((data)=>{
-                                // console.log('im in .then');
+                            )
+                                .wait()
+                                .then((data) => {
+                                    // console.log('im in .then');
 
+                                    dispatch(
+                                        updateProperty({
+                                            id: id,
+                                            walletAddress: user?.walletAddress,
+                                            NFTTokenId: nftData.NFTTokens[0].id,
+                                            NftId: nftData.id,
+                                            fieldName: values.firstName,
+                                            fieldValue: values.lastName,
+                                            file: values.file,
+                                            navigate: navigate,
+                                            handleClose: handleClose
+                                        })
+                                    );
 
-                                 dispatch(
-                                    updateProperty({
-                                        id: id,
-                                        walletAddress: user?.walletAddress,
-                                        NFTTokenId: nftData.NFTTokens[0].id,
-                                        NftId: nftData.id,
-                                        fieldName: values.firstName,
-                                        fieldValue: values.lastName,
-                                        file: values.file,
-                                        navigate: navigate,
-                                        handleClose: handleClose
-                                    })
-                                );
-
-                                // navigate('/creatorProfile');
-                            }).catch((error)=>{
-                                console.log(error)
-                                toast.error(error.reason)
-                                setLoader(false)
-      
-                            })
-
-                            
+                                    // navigate('/creatorProfile');
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                    toast.error(error.reason);
+                                    setLoader(false);
+                                });
                         })
                         .catch((error) => {
                             console.log('error', error);
-                            toast.error(error.reason)
-                            setLoader(false)
+                            toast.error(error.reason);
+                            setLoader(false);
                         });
                 };
 
@@ -136,7 +136,7 @@ setLoader(true)
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
-        setLoader(false)
+        setLoader(false);
     };
 
     const handleClickOpen = () => {
@@ -208,51 +208,45 @@ setLoader(true)
                                         <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
                                             Add Proof
                                         </InputLabel>
-                                        <Grid  ml={-2} item xs={12} md={12} lg={12}>
-                                        <FileInput
-                                        
-                                            className="textfieldStyle"
-                                            formik={formik}
-                                            accept=".pdf"
-                                            fieldName="file"
-                                            placeHolder="Add File"
-                                            variant="standard"
-                                        />
-                                    </Grid>
+                                        <Grid ml={-2} item xs={12} md={12} lg={12}>
+                                            <FileInput
+                                                className="textfieldStyle"
+                                                formik={formik}
+                                                accept=".pdf"
+                                                fieldName="file"
+                                                placeHolder="Add File"
+                                                variant="standard"
+                                            />
+                                        </Grid>
                                     </Grid>
                                 )}
                             </Grid>
                         </form>
                     </Grid>
                 </Grid>
-                {loader ?
-                  <DialogActions sx={{mt:-4 , pr: 2.5 }}>
-
-                      <CircularProgress
-                      sx={{ color: 'blue', ml: 3 }}
-                  />
-
-                  </DialogActions>
-            :
-            <>
-                <DialogActions sx={{mt:-4 , pr: 2.5 }}>
-                    <Button
-                        variant="outlined"
-                        className="buttonSize"
-                        size="large"
-                        type="submit"
-                        sx={{ color: theme.palette.success.dark }}
-                        onClick={() => {
-                            formik.handleSubmit();
-                        }}
-                        color="secondary"
-                    >
-                        Update
-                    </Button>
-                </DialogActions>
-            
-            </>
-            }
+                {loader ? (
+                    <DialogActions sx={{ mt: -4, pr: 2.5 }}>
+                        <CircularProgress sx={{ color: 'blue', ml: 3 }} />
+                    </DialogActions>
+                ) : (
+                    <>
+                        <DialogActions sx={{ mt: -4, pr: 2.5 }}>
+                            <Button
+                                variant="outlined"
+                                className="buttonSize"
+                                size="large"
+                                type="submit"
+                                sx={{ color: theme.palette.success.dark }}
+                                onClick={() => {
+                                    formik.handleSubmit();
+                                }}
+                                color="secondary"
+                            >
+                                Update
+                            </Button>
+                        </DialogActions>
+                    </>
+                )}
             </Dialog>
         </div>
     );
