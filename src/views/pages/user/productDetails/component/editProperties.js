@@ -70,7 +70,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
         validationSchema,
         onSubmit: async (values) => {
             console.log(values, 'allll data');
-
+setLoader(true)
       
             setTimeout(() => {
                 const singleNft = async () => {
@@ -96,6 +96,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                             ).wait().then((data)=>{
                                 // console.log('im in .then');
 
+
                                  dispatch(
                                     updateProperty({
                                         id: id,
@@ -114,6 +115,8 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                             }).catch((error)=>{
                                 console.log(error)
                                 toast.error(error.reason)
+                                setLoader(false)
+      
                             })
 
                             
@@ -121,6 +124,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                         .catch((error) => {
                             console.log('error', error);
                             toast.error(error.reason)
+                            setLoader(false)
                         });
                 };
 
@@ -132,6 +136,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
+        setLoader(false)
     };
 
     const handleClickOpen = () => {
