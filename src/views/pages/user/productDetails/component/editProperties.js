@@ -5,7 +5,8 @@ import * as Yup from 'yup';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
 import { ethers, utils } from 'ethers';
 import FileInput from 'shared/component/FileInput';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // material-ui
 import {
     AppBar,
@@ -34,6 +35,7 @@ import { useNavigate } from 'react-router-dom';
 import { create } from 'ipfs-http-client';
 import { API_URL } from 'utils/axios';
 import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // slide animation
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
@@ -41,6 +43,8 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 // ===============================|| UI DIALOG - FULL SCREEN ||=============================== //
 
 export default function Edit({ open, setOpen, metadata, value, nft, id, editable, proofRequired }) {
+
+    const [loader, setLoader] = useState(false)
     const theme = useTheme();
     const [file, setFile] = useState('');
     // console.log('proofRequired==========??', proofRequired);
@@ -67,19 +71,7 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
         onSubmit: async (values) => {
             console.log(values, 'allll data');
 
-            await dispatch(
-                updateProperty({
-                    id: id,
-                    walletAddress: user?.walletAddress,
-                    NFTTokenId: nft.NFTTokens[0].id,
-                    NftId: nft.id,
-                    fieldName: values.firstName,
-                    fieldValue: values.lastName,
-                    file: values.file,
-                    // navigate: navigate,
-                    handleClose: handleClose
-                })
-            );
+      
             setTimeout(() => {
                 const singleNft = async () => {
                     await axios
@@ -94,18 +86,41 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                             const signer = provider.getSigner();
                             const address = await signer.getAddress();
                             const nft = new ethers.Contract(nftData.contractAddress, NFTAbi.abi, signer);
-                            let mintedNFT = await (
+                            await (
                                 await nft.updateUri(nftData.NFTTokens[0].tokenId, nftData.tokenUri).catch((error) => {
-                                    //  toast.error(error.reason);
+                                     toast.error(error.reason);
                                     //  setLoader(false);
                                     //  setOpen(false);
                                     console.log(error);
                                 })
-                            ).wait();
-                            navigate('/creatorProfile');
+                            ).wait().then((data)=>{
+                                // console.log('im in .then');
+
+                                 dispatch(
+                                    updateProperty({
+                                        id: id,
+                                        walletAddress: user?.walletAddress,
+                                        NFTTokenId: nftData.NFTTokens[0].id,
+                                        NftId: nftData.id,
+                                        fieldName: values.firstName,
+                                        fieldValue: values.lastName,
+                                        file: values.file,
+                                        navigate: navigate,
+                                        handleClose: handleClose
+                                    })
+                                );
+
+                                // navigate('/creatorProfile');
+                            }).catch((error)=>{
+                                console.log(error)
+                                toast.error(error.reason)
+                            })
+
+                            
                         })
                         .catch((error) => {
                             console.log('error', error);
+                            toast.error(error.reason)
                         });
                 };
 
@@ -205,6 +220,16 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                         </form>
                     </Grid>
                 </Grid>
+                {loader ?
+                  <DialogActions sx={{mt:-4 , pr: 2.5 }}>
+
+                      <CircularProgress
+                      sx={{ color: 'blue', ml: 3 }}
+                  />
+
+                  </DialogActions>
+            :
+            <>
                 <DialogActions sx={{mt:-4 , pr: 2.5 }}>
                     <Button
                         variant="outlined"
@@ -220,6 +245,9 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
                         Update
                     </Button>
                 </DialogActions>
+            
+            </>
+            }
             </Dialog>
         </div>
     );
