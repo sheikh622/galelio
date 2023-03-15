@@ -155,7 +155,7 @@ const Items = () => {
                                     md={2}
                                     sm={6}
                                     onClick={() => {
-                                        navigate('/productDetails', {
+                                        navigate('/productDetails/' + data.id, {
                                             state: {
                                                 nft: data
                                             }

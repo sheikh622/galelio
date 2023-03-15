@@ -6,6 +6,7 @@ import { getAllBrands, getAllBrandsSuccess, getAllBrandsByAdmin, getAllBrandsByA
 import { GET_ALL_BRANDS, ADD_BRAND, UPDATE_BRAND,UPDATE_PROPERTY, DELETE_BRAND, GET_ALL_BRANDS_BY_ADMIN } from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
 import { getNftBuyer } from 'redux/nftManagement/actions';
+import { getnftData } from 'redux/landingPage/actions';
 // import { getAllMarketplaceNftsByCategorySuccess } from 'redux/marketplace/actions';
 import { getAllMarketplaceCategoriesSuccess } from 'redux/marketplace/actions';
 function* getAllBrandsByAdminRequest({ payload }) {
@@ -101,15 +102,13 @@ function* updatePropertyRequest({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.put(`/update/nftMetaData/${payload.id}`, formData, headers);
-        // yield put(
-        //     getNftBuyer({
-        //         walletAddress: payload.walletAddress,
-        //         NFTTokenId: payload.NFTTokenId,
-        //         NftId: payload.NFTTokenId
-        //     })
-        // );
+        yield put(
+            getnftData({
+                id:payload.nftid
+            })
+        );
         payload.handleClose();
-        payload.navigate('/creatorProfile');
+        // payload.navigate('/creatorProfile');
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
