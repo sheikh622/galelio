@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import CardMedia from '@mui/material/CardMedia';
 import { getAllSimilarProducts } from 'redux/marketplace/actions';
-const SimilarProducts = ({ nft }) => {
+const SimilarProducts = ({ nftList }) => {
     const theme = useTheme();
     const itemData = [
         {
@@ -82,6 +82,9 @@ const SimilarProducts = ({ nft }) => {
             creator: 'Creator'
         }
     ];
+    const nftid = nftList?.nft?.id;
+    const CategoryId = nftList?.nft?.CategoryId;
+    // console.log('nftid==========??', nftid);
 
     const dispatch = useDispatch();
     const similarProductNfts = useSelector((state) => state.marketplaceReducer.similarProductNfts);
@@ -95,8 +98,8 @@ const SimilarProducts = ({ nft }) => {
                 search: search,
                 page: page,
                 limit: limit,
-                categoryId: nft.CategoryId,
-                nftId: nft.id
+                categoryId: CategoryId? CategoryId : 0,
+                nftId:nftid? nftid : 0
             })
         );
         setClick(false);

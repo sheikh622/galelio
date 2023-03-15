@@ -14,7 +14,8 @@ import { gridSpacing } from 'store/constant';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const Properties = ({ nft }) => {
+const Properties = ({  nftList }) => {
+    // console.log(nftList?.nft?.id, 'properties==>');
     const theme = useTheme();
     const [propertiesOpen, setPropertiesOpen] = useState(false);
     const [metadata, setMetadata] = useState('');
@@ -60,12 +61,13 @@ const Properties = ({ nft }) => {
     return (
         <>
             <Edit
+                nftList={nftList}
                 open={propertiesOpen}
                 id={id}
                 setOpen={setPropertiesOpen}
                 metadata={metadata}
                 value={value}
-                nft={nft}
+              
                 editable={editable}
                 proofRequired={proofRequired}
             />
@@ -86,24 +88,23 @@ const Properties = ({ nft }) => {
                         </Grid>
                     </Grid>
                 </Grid>
-                {nft?.NFTMetaData?.length > 0 ? (
+                {nftList?.nft?.NFTMetaData?.length > 0 ? (
                     <>
                         <Grid item xs={12}>
                             <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                                {nft?.NFTMetaData.map((item) => (
+                                {nftList?.nft?.NFTMetaData?.map((item) => (
                                     <>
-                                        <Grid item  md={2} lg={2} xs={6} sm={2}>
+                                        <Grid item md={2} lg={2} xs={6} sm={2}>
                                             <SubCard
                                                 className="property propertyShadow postion-property"
                                                 sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
                                             >
-                                         
-                                                <Grid container justifyContent="center" spacing={2} className='postion-fields '>
+                                                <Grid container justifyContent="center" spacing={2} className="postion-fields ">
                                                     <Grid item xs={12}>
-                                                    <Tooltip placement="right" title={item.fieldName} >
-                                                    <Typography className="pbackground encap-fieldName" variant="h3">
-                                                            {item.fieldName}
-                                                        </Typography>
+                                                        <Tooltip placement="right" title={item.fieldName}>
+                                                            <Typography className="pbackground encap-fieldName" variant="h3">
+                                                                {item.fieldName}
+                                                            </Typography>
                                                         </Tooltip>
                                                     </Grid>
                                                     <Grid item xs={12}>
@@ -120,15 +121,15 @@ const Properties = ({ nft }) => {
                                                             // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                             className="plight"
                                                             variant="body2"
-                                                         
                                                         >
                                                             {item?.proof ? (
                                                                 <span
-                                                                onClick={() => {
-                                                                    // useNavigate(option.fieldValue)
-                                                                    window.open(item?.proof, '_blank');
-                                                                }}
-                                                                    style={{cursor: 'pointer',
+                                                                    onClick={() => {
+                                                                        // useNavigate(option.fieldValue)
+                                                                        window.open(item?.proof, '_blank');
+                                                                    }}
+                                                                    style={{
+                                                                        cursor: 'pointer',
                                                                         color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray',
                                                                         textDecoration: 'underline'
                                                                     }}
@@ -141,25 +142,26 @@ const Properties = ({ nft }) => {
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
-                                         
-                                       
-                                        {buyerNft?.status == 'Redeem' && item?.isEditable == true && (
-                                            <Tooltip placement="right" title="Edit Properties" className='postion-icon'>
-                                          
-                                                <ModeEditIcon
-                                                    sx={{ color:  theme.palette.mode === 'dark' ? '#bde2f0' : '#000', float:'right'}}
-                                                    onClick={() => {
-                                                        setPropertiesOpen(true);
-                                                        setMetadata(item.fieldName);
-                                                        setValue(item.fieldValue);
-                                                        setEditable(item.isEditable);
-                                                        setProofRequired(item.proofRequired);
-                                                        setId(item.id);
-                                                    }}
-                                                />
-                                            </Tooltip>
-                                        )}
-                                        </SubCard>
+
+                                                {buyerNft?.status == 'Redeem' && item?.isEditable == true && (
+                                                    <Tooltip placement="right" title="Edit Properties" className="postion-icon">
+                                                        <ModeEditIcon
+                                                            sx={{
+                                                                color: theme.palette.mode === 'dark' ? '#bde2f0' : '#000',
+                                                                float: 'right'
+                                                            }}
+                                                            onClick={() => {
+                                                                setPropertiesOpen(true);
+                                                                setMetadata(item.fieldName);
+                                                                setValue(item.fieldValue);
+                                                                setEditable(item.isEditable);
+                                                                setProofRequired(item.proofRequired);
+                                                                setId(item.id);
+                                                            }}
+                                                        />
+                                                    </Tooltip>
+                                                )}
+                                            </SubCard>
                                         </Grid>
                                     </>
                                 ))}

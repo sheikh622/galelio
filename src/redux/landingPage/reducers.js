@@ -1,14 +1,18 @@
 import produce from 'immer';
-import { GET_ALL_LANDING_PAGE_DATA_SUCCESS } from './constants';
+import { GET_ALL_LANDING_PAGE_DATA_SUCCESS , GET_NFT_DATA_SUCCESS} from './constants';
 
 const INITIAL_STATE = {
-    landingPageData: []
+    landingPageData: [],
+    nft:[]
 };
 
 const landingPageReducer = produce((draft, action) => {
     switch (action.type) {
         case GET_ALL_LANDING_PAGE_DATA_SUCCESS:
             draft.landingPageData = action.payload;
+            break;
+        case GET_NFT_DATA_SUCCESS:
+            draft.nft = action.payload;
             break;
 
         default:
