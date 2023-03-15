@@ -68,7 +68,7 @@ const UserRoutes = {
             element: <Marketplace />
         },
         {
-            path: '/productDetails',
+            path: '/productDetails/:id',
             element: <ProductDetails />
         },
 

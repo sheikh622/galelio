@@ -42,13 +42,13 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 // ===============================|| UI DIALOG - FULL SCREEN ||=============================== //
 
-export default function Edit({ open, setOpen, metadata, value, nft, id, editable, proofRequired }) {
-
-    console.log('metadata, value, nft, id, editable, proofRequired',metadata, value, nft, id, editable, proofRequired);
+export default function Edit({ open, setOpen, metadata, value,  id, editable, proofRequired, nftList }) {
+    // console.log('metadata, value, nft, id, editable, proofRequired',metadata, value, nft, id, editable, proofRequired);
     const [loader, setLoader] = useState(false);
     const theme = useTheme();
+    const nftid = nftList?.nft?.id;
     const [file, setFile] = useState('');
-    // console.log('proofRequired==========??', proofRequired);
+    // console.log('nftid==========??', nftid);
     const user = useSelector((state) => state.auth.user);
     const navigate = useNavigate();
 
@@ -56,9 +56,9 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
     // console.log(metadata, 'metadata', value, 'value');
     const validationSchema = Yup.object({
         // isUpdate: Yup.boolean().default(isUpdate),
-        firstName: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
+        firstName: Yup.string().required('First Name is required!').max(16, 'First Name can not exceed 16 characters'),
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
-        lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
+        lastName: Yup.string().required('Last Name is required!').max(16, 'Last Name can not exceed 16 characters')
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         // file: Yup.mixed().required('File is required!')
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
@@ -70,59 +70,46 @@ export default function Edit({ open, setOpen, metadata, value, nft, id, editable
         // brandAdminData,
         validationSchema,
         onSubmit: async (values) => {
-            console.log(values, 'allll data');
+            // console.log(values, 'allll data');
             setLoader(true);
 
             setTimeout(() => {
                 const singleNft = async () => {
-                    await axios
-                        .get(API_URL + 'nft/' + nft.id, {})
-                        .then(async (data) => {
-                            // console.log('data from editproperties', data.data.data);
-                            let nftData = data.data.data.nft;
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
+                    const address = await signer.getAddress();
+                    const nft = new ethers.Contract(nftList?.nft?.contractAddress, NFTAbi.abi, signer);
+                    await (
+                        await nft.updateUri(nftList.nft?.NFTTokens[0].tokenId, nftList.nft?.tokenUri).catch((error) => {
+                            toast.error(error.reason);
+                            //  setLoader(false);
+                            //  setOpen(false);
+                            console.log(error);
+                        })
+                    )
+                        .wait()
+                        .then((data) => {
+                            // console.log('im in .then');
 
-                            console.log('nftData from axios', nftData);
-
-                            const provider = new ethers.providers.Web3Provider(window.ethereum);
-                            const signer = provider.getSigner();
-                            const address = await signer.getAddress();
-                            const nft = new ethers.Contract(nftData.contractAddress, NFTAbi.abi, signer);
-                            await (
-                                await nft.updateUri(nftData.NFTTokens[0].tokenId, nftData.tokenUri).catch((error) => {
-                                    toast.error(error.reason);
-                                    //  setLoader(false);
-                                    //  setOpen(false);
-                                    console.log(error);
+                            dispatch(
+                                updateProperty({
+                                    id: id,
+                                    walletAddress: user?.walletAddress,
+                                    NFTTokenId: nftList.nft?.NFTTokens[0].id,
+                                    NftId: nftid,
+                                    nftid: nftid,
+                                    fieldName: values.firstName,
+                                    fieldValue: values.lastName,
+                                    file: values.file,
+                                    // navigate: navigate,
+                                    handleClose: handleClose
                                 })
-                            )
-                                .wait()
-                                .then((data) => {
-                                    // console.log('im in .then');
+                            );
 
-                                    dispatch(
-                                        updateProperty({
-                                            id: id,
-                                            walletAddress: user?.walletAddress,
-                                            NFTTokenId: nftData.NFTTokens[0].id,
-                                            NftId: nftData.id,
-                                            fieldName: values.firstName,
-                                            fieldValue: values.lastName,
-                                            file: values.file,
-                                            navigate: navigate,
-                                            handleClose: handleClose
-                                        })
-                                    );
-
-                                    // navigate('/creatorProfile');
-                                })
-                                .catch((error) => {
-                                    console.log(error);
-                                    toast.error(error.reason);
-                                    setLoader(false);
-                                });
+                            // navigate('/creatorProfile');
                         })
                         .catch((error) => {
-                            console.log('error', error);
+                            console.log(error);
                             toast.error(error.reason);
                             setLoader(false);
                         });

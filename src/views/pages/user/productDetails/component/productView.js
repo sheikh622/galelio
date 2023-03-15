@@ -32,8 +32,10 @@ import { setLoader } from 'redux/auth/actions';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const PropertiesView = ({ nft }) => {
-    console.log('nft from product view', nft);
+const PropertiesView = ({  nftList }) => {
+    // console.log('nft from product view', nft);
+
+    console.log('nftList from product view', nftList?.nft?.NFTTokens[0]?.id);
     const dispatch = useDispatch();
     const [resell, setResell] = useState(false);
     const [bought, setBought] = useState(false);
@@ -41,7 +43,7 @@ const PropertiesView = ({ nft }) => {
     const [loader, setLoader] = useState(false);
     const [redeemLoader, setRedeemLoader] = useState(false);
     const [resellLoader, setResellLoader] = useState(false);
-    const [lazyTokenId, setLazyTokenId] = useState("");
+    const [lazyTokenId, setLazyTokenId] = useState('');
 
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
@@ -72,9 +74,9 @@ const PropertiesView = ({ nft }) => {
                     variant="contained"
                     size="large"
                     onClick={() => {
-                        if (nft.mintType == 'directMint') {
+                        if (nftList?.nft?.mintType == 'directMint') {
                             setOpen(true);
-                        } else if (nft.mintType == 'lazyMint') {
+                        } else if (nftList?.nft?.mintType == 'lazyMint') {
                             handleResellNft();
                         }
                     }}
@@ -90,7 +92,7 @@ const PropertiesView = ({ nft }) => {
                         <DialogContentText>Please enter the price for the NFT</DialogContentText>
                         <TextField
                             autoFocus
-                            type='number'
+                            type="number"
                             margin="dense"
                             label="Price "
                             fullWidth
@@ -178,15 +180,15 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else if (await checkWallet()) {
-            if (nft.mintType == 'directMint') {
+            if (nftList?.nft?.mintType == 'directMint') {
                 console.log('im in handlebuy');
                 try {
                     setLoader(true);
 
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.contractAddress;
-                    let price = ethers.utils.parseEther(nft.price.toString());
+                    let tokenId = parseInt(nftList?.nft?.NFTTokens[0].tokenId);
+                    let contractAddress = nftList?.nft?.contractAddress;
+                    let price = ethers.utils.parseEther(nftList?.nft?.price.toString());
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
@@ -211,8 +213,8 @@ const PropertiesView = ({ nft }) => {
                         .then((data) => {
                             dispatch(
                                 buyNft({
-                                    nftId: nft.id,
-                                    nftToken: nft.NFTTokens[0].id,
+                                    nftId: nftList?.nft?.id,
+                                    nftToken: nftList?.nft?.NFTTokens[0].id,
                                     buyerAddress: data.from,
                                     contractAddress: contractAddress,
                                     buyNftResolve: buyNftResolve
@@ -227,14 +229,14 @@ const PropertiesView = ({ nft }) => {
                     setLoader(false);
                     toast.error(error.reason);
                 }
-            } else if (nft.mintType == 'lazyMint') {
+            } else if (nftList?.nft?.mintType == 'lazyMint') {
                 console.log('HY LAZY HERE ');
                 try {
                     setLoader(true);
-                    let signers = nft.signerAddress;
+                    let signers = nftList?.nft?.signerAddress;
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    // let signature = nft.NFTTokens[0].signature;
-                    let contractAddress = nft.contractAddress;
+                    // let signature = nftList?.nft?.NFTTokens[0].signature;
+                    let contractAddress = nftList?.nft?.contractAddress;
                     // let contractAddress = "0x2750aE21C32f8De4C3CaE1230efAd2Fb497263b8"
                     // const SIGNING_DOMAIN = 'Galileo-Protocol';
                     // const SIGNATURE_VERSION = '1';
@@ -260,15 +262,15 @@ const PropertiesView = ({ nft }) => {
 
                     const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
                     console.log('nfts', nfts);
-                    let nftPrice = nft.price.toString();
+                    let nftPrice = nftList?.nft?.price.toString();
 
                     let prices = ethers.utils.parseEther(nftPrice);
 
                     let voucher = {
-                        uri: nft.tokenUri,
+                        uri: nftList?.nft?.tokenUri,
                         price: prices.toString(),
                         token: erc20Address,
-                        signature: nft.NFTTokens[0].signature
+                        signature: nftList?.nft?.NFTTokens[0].signature
                     };
                     console.log(voucher, 'voucher');
                     let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
@@ -285,36 +287,37 @@ const PropertiesView = ({ nft }) => {
                     // }
                     await (await token.approve(contractAddress, '100000000000000000000000000000000000000')).wait();
                     console.log(voucher, 'voucher');
-                    console.log(nft.minterAddress);
+                    console.log(nftList?.nft?.minterAddress);
                     console.log(erc20Address);
 
-                    console.log(nft.requesterAddress);
+                    console.log(nftList?.nft?.requesterAddress);
 
-                    
                     try {
-                        let mintedNFT = await (await nfts.buyNft(voucher, nft.minterAddress, nft.requesterAddress)).wait();
+                        let mintedNFT = await (
+                            await nfts.buyNft(voucher, nftList?.nft?.minterAddress, nftList?.nft?.requesterAddress)
+                        ).wait();
                         const id = parseInt(mintedNFT.events[0]?.address);
-                        console.log('mintedNFT',mintedNFT);
+                        console.log('mintedNFT', mintedNFT);
                         console.log('id', id);
-                        setLazyTokenId(id.toString())
+                        setLazyTokenId(id.toString());
                         dispatch(
                             changeTokenId({
-                                id: nft.NFTTokens[0].id,
+                                id: nftList?.nft?.NFTTokens[0].id,
                                 tokenId: id.toString()
                             })
                         );
-                            console.log('im before lazy dispatch');
+                        console.log('im before lazy dispatch');
                         dispatch(
                             buyNft({
-                                nftId: nft.id,
-                                nftToken: nft.NFTTokens[0].id,
+                                nftId: nftList?.nft?.id,
+                                nftToken: nftList?.nft?.NFTTokens[0].id,
                                 buyerAddress: mintedNFT.from,
                                 contractAddress: contractAddress,
                                 buyNftResolve: buyNftResolve
                             })
                         );
                     } catch (error) {
-                        console.log('error',error);
+                        console.log('error', error);
                         toast.error(error.reason);
                     }
                 } catch (error) {
@@ -330,12 +333,12 @@ const PropertiesView = ({ nft }) => {
         if (user == null) {
             navigate('/login');
         } else if (await checkWallet()) {
-            if (nft.mintType == 'directMint') {
+            if (nftList?.nft?.mintType == 'directMint') {
                 try {
                     setResellLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    let contractAddress = nft.contractAddress;
+                    let tokenId = parseInt(nftList?.nft?.NFTTokens[0].tokenId);
+                    let contractAddress = nftList?.nft?.contractAddress;
 
                     let rrprice = ethers.utils.parseEther(rprice.toString());
 
@@ -352,8 +355,8 @@ const PropertiesView = ({ nft }) => {
                             dispatch(
                                 resellNft({
                                     rprice: rprice,
-                                    nftId: nft.id,
-                                    nftToken: nft.NFTTokens[0].id,
+                                    nftId: nftList?.nft?.id,
+                                    nftToken: nftList?.nft?.NFTTokens[0].id,
                                     buyerAddress: data.from,
                                     contractAddress: contractAddress,
                                     resellNftResolve: resellNftResolve
@@ -369,24 +372,21 @@ const PropertiesView = ({ nft }) => {
                     toast.error(error.reason);
                     setOpen(false);
                 }
-            } else if (nft.mintType == 'lazyMint') {
+            } else if (nftList?.nft?.mintType == 'lazyMint') {
                 try {
                     setResellLoader(true);
                     console.log('hy');
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    // let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-let tokenId;
-                     if(lazyTokenId ==""){
-                        tokenId = parseInt(nft.NFTTokens[0].tokenId);
-
-                    }
-                    else{
-
-                        tokenId = parseInt(lazyTokenId)
+                    // let tokenId = parseInt(nftList?.nft?.NFTTokens[0].tokenId);
+                    let tokenId;
+                    if (lazyTokenId == '') {
+                        tokenId = parseInt(nftList?.nft?.NFTTokens[0].tokenId);
+                    } else {
+                        tokenId = parseInt(lazyTokenId);
                     }
                     console.log('tokenId from resell', tokenId);
-                    let contractAddress = nft.contractAddress;
-                    let nftPrice = nft.price.toString();
+                    let contractAddress = nftList?.nft?.contractAddress;
+                    let nftPrice = nftList?.nft?.price.toString();
                     let rrprice = ethers.utils.parseEther(nftPrice);
                     rrprice = rrprice.toString();
                     let buyer = buyerNft?.buyer?.buyerAddress;
@@ -412,8 +412,8 @@ let tokenId;
                         .then((data) => {
                             dispatch(
                                 resellNft({
-                                    nftId: nft.id,
-                                    nftToken: nft.NFTTokens[0].id,
+                                    nftId: nftList?.nft?.id,
+                                    nftToken: nftList?.nft?.NFTTokens[0].id,
                                     buyerAddress: data.from,
                                     contractAddress: contractAddress,
                                     resellNftResolve: resellNftResolve
@@ -440,13 +440,13 @@ let tokenId;
         if (user == null) {
             navigate('/login');
         } else if (await checkWallet()) {
-            if (nft.mintType == 'directMint') {
-                try {                    
+            if (nftList?.nft?.mintType == 'directMint') {
+                try {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
-                    let tokenId = parseInt(nft.NFTTokens[0].tokenId);
-                    
-                    let contractAddress = nft.contractAddress;
+                    let tokenId = parseInt(nftList?.nft?.NFTTokens[0].tokenId);
+
+                    let contractAddress = nftList?.nft?.contractAddress;
                     console.log('im beneath ca');
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
@@ -455,15 +455,15 @@ let tokenId;
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
                     console.log('marketplace', marketplace);
 
-                    console.log('directmint redeem tokenId',tokenId);
+                    console.log('directmint redeem tokenId', tokenId);
 
                     await (await marketplace.redeemNft(tokenId, contractAddress))
                         .wait()
                         .then((data) => {
                             dispatch(
                                 redeemNft({
-                                    nftId: nft.id,
-                                    nftToken: nft.NFTTokens[0].id,
+                                    nftId: nftList?.nft?.id,
+                                    nftToken: nftList?.nft?.NFTTokens[0].id,
                                     buyerAddress: data.from,
                                     contractAddress: contractAddress
                                 })
@@ -471,9 +471,9 @@ let tokenId;
                             dispatch(
                                 addDeliveryNft({
                                     status: 'Pending',
-                                    TokenId: nft.NFTTokens[0].id,
+                                    TokenId: nftList?.nft?.NFTTokens[0].id,
                                     WalletAddress: data.from,
-                                    NftId: nft.id,
+                                    NftId: nftList?.nft?.id,
                                     UserId: user.id,
                                     redeemNftResolve: redeemNftResolve
                                 })
@@ -490,43 +490,39 @@ let tokenId;
                     toast.error(error.reason);
                     console.log(error);
                 }
-            } else if (nft.mintType == 'lazyMint') {
+            } else if (nftList?.nft?.mintType == 'lazyMint') {
                 console.log('im in lm');
                 try {
                     setRedeemLoader(true);
                     let erc20Address = BLOCKCHAIN.ERC20;
                     let tokenId;
-                    if(lazyTokenId ==""){
-                        tokenId = parseInt(nft.NFTTokens[0].tokenId);
-
+                    if (lazyTokenId == '') {
+                        tokenId = parseInt(nftList?.nft?.NFTTokens[0].tokenId);
+                    } else {
+                        tokenId = parseInt(lazyTokenId);
                     }
-                    else{
-
-                        tokenId = parseInt(lazyTokenId)
-                    }
-                    
 
                     console.log('tokenId', tokenId);
                     console.log('lazyTokenId', lazyTokenId);
-                    let contractAddress = nft.contractAddress;
+                    let contractAddress = nftList?.nft?.contractAddress;
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     // console.log("tokenid",nft.NFTTokens[0].tokenId)
                     // console.log("tokenid",typeof nft.NFTTokens[0].tokenId)
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
-                    let nftPrice = nft.price.toString();
+                    let nftPrice = nftList?.nft?.price.toString();
                     let rrprice = ethers.utils.parseEther(nftPrice);
                     console.log('rrprice.toString()', rrprice.toString());
-                    let fprice=rrprice.toString()
-                    console.log('erc20Address, tokenId, contractAddress, fprice',erc20Address, tokenId, contractAddress, fprice);
+                    let fprice = rrprice.toString();
+                    console.log('erc20Address, tokenId, contractAddress, fprice', erc20Address, tokenId, contractAddress, fprice);
                     await (await marketplace.redeem(erc20Address, tokenId, contractAddress, fprice))
                         .wait()
 
                         .then((data) => {
                             dispatch(
                                 redeemNft({
-                                    nftId: nft.id,
-                                    nftToken: nft.NFTTokens[0].id,
+                                    nftId: nftList?.nft?.id,
+                                    nftToken: nftList?.nft?.NFTTokens[0].id,
                                     buyerAddress: data.from,
                                     contractAddress: contractAddress
                                 })
@@ -534,9 +530,9 @@ let tokenId;
                             dispatch(
                                 addDeliveryNft({
                                     status: 'Pending',
-                                    TokenId: nft.NFTTokens[0].id,
+                                    TokenId: nftList?.nft?.NFTTokens[0].id,
                                     WalletAddress: data.from,
-                                    NftId: nft.id,
+                                    NftId: nftList?.nft?.id,
                                     UserId: user.id,
                                     redeemNftResolve: redeemNftResolve
                                 })
@@ -558,7 +554,7 @@ let tokenId;
     };
 
     const buyerNft = useSelector((state) => state.nftReducer.nftBuyer);
-    console.log('buyer nft',buyerNft.status );
+    console.log('buyer nft', buyerNft.status);
 
     // console.log('buyerNft', buyerNft?.buyer?.buyerAddress);
     useEffect(() => {
@@ -567,12 +563,12 @@ let tokenId;
             dispatch(
                 getNftBuyer({
                     walletAddress: user?.walletAddress,
-                    NFTTokenId: nft?.NFTTokens[0]?.id,
-                    NftId: nft?.id
+                    NFTTokenId: nftList?.nft?.NFTTokens[0]?.id ? nftList?.nft?.NFTTokens[0]?.id : 0,
+                    NftId: nftList?.nft?.id ? nftList?.nft?.id : 0
                 })
             );
         }
-    }, [useSelector, dispatch, resell, bought, redeem]);
+    }, [useSelector, dispatch, resell, bought, redeem, nftList]);
 
     useEffect(() => {}, []);
     return (
@@ -582,7 +578,7 @@ let tokenId;
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
                         <CardMedia
                             component="img"
-                            image={nft?.asset}
+                            image={nftList?.nft?.asset}
                             sx={{ minheight: 'auto', maxHeight: '570px', background: 'transparent', overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
@@ -597,7 +593,7 @@ let tokenId;
                                                 <Grid item>
                                                     <Avatar
                                                         alt="User 1"
-                                                        src={nft?.Brand?.image}
+                                                        src={nftList?.nft?.Brand?.image}
                                                         sx={{ width: 56, height: 56, objectFit: 'fill' }}
                                                     />
                                                 </Grid>
@@ -610,7 +606,7 @@ let tokenId;
                                                     to="/companyPage"
                                                 >
                                                     <Typography align="left" fontWeight={600} variant="h2" className="brand">
-                                                        {nft?.Brand?.name}
+                                                        {nftList?.nft?.Brand?.name}
                                                     </Typography>
                                                     <Typography align="left" variant="h3" className="creator">
                                                         Brand
@@ -625,17 +621,17 @@ let tokenId;
                                                 color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                 variant="h3"
                                             >
-                                                {nft?.name ? nft?.name : 'Luxury Stainless Watch'}{' '}
+                                                {nftList?.nft?.name ? nftList?.nft?.name : 'Luxury Stainless Watch'}{' '}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                                {nft?.description}{' '}
+                                                {nftList?.nft?.description}{' '}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                                Total NFTs: {nft?.NFTTokens.length}
+                                                Total NFTs: {nftList?.nft?.NFTTokens.length}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
@@ -668,7 +664,7 @@ let tokenId;
                                                         {/* <MenuItem disabled value="">
                                       <em>aiman</em>
                                     </MenuItem> */}
-                                                        {nft?.NFTMetaFiles.map((option) => (
+                                                        {nftList?.nft?.NFTMetaFiles.map((option) => (
                                                             <MenuItem
                                                                 // component={redirect}
                                                                 // to={option.fieldValue}
@@ -743,14 +739,14 @@ let tokenId;
                                                             className="ETH "
                                                             variant="h3"
                                                         >
-                                                            {nft?.price} {nft?.currencyType}
+                                                            {nftList?.nft?.price} {nftList?.nft?.currencyType}
                                                         </Typography>
                                                     </Grid>
                                                 </Grid>
                                                 {/*      {buyerNft?.founded && (
                                             <>
                                                 <Grid item xs={12} md={12} mt={1}>
-                                                    {(nft?.transactionHash !== '' || nft?.transactionHash) && (
+                                                    {(nftList?.nft?.transactionHash !== '' || nftList?.nft?.transactionHash) && (
                                                         <>
                                                             <Accordion sx={{ margin: '10px', border: '2px solid', borderRadius: '4px' }}>
                                                                 <AccordionSummary
@@ -761,8 +757,8 @@ let tokenId;
                                                                     <Typography>Transaction hash</Typography>
                                                                 </AccordionSummary>
                                                                 <AccordionDetails>
-                                                                    <a target="_blank" href={nft?.transactionHash}>
-                                                                        {nft?.transactionHash}
+                                                                    <a target="_blank" href={nftList?.nft?.transactionHash}>
+                                                                        {nftList?.nft?.transactionHash}
                                                                     </a>
                                                                 </AccordionDetails>
                                                             </Accordion>
@@ -779,7 +775,8 @@ let tokenId;
                                                             <Typography>Contract address</Typography>
                                                         </AccordionSummary>
                                                         <AccordionDetails>
-                                                            <Typography>{nft?.Category?.BrandCategories[0].contractAddress}</Typography>
+                                                            <Typography>
+                                                            {nftList?.nft?.Category?.BrandCategories[0].contractAddress}</Typography>
                                                         </AccordionDetails>
                                                     </Accordion>
                                                 </Grid>
@@ -787,7 +784,8 @@ let tokenId;
                                         )} */}
 
                                                 <>
-                                                    {(bought == true || nft?.isSold == true) && JSON.stringify(buyerNft) === '{}' ? (
+                                                    {(bought == true || nftList?.nft?.isSold == true) &&
+                                                    JSON.stringify(buyerNft) === '{}' ? (
                                                         <>
                                                             <Grid item md={8} xs={12} sm={12} textAlign="center">
                                                                 <Alert severity="error">

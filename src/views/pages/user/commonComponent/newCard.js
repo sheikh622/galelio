@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const NewCard = ({ data, nfts }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-
+ console.log(data.id,'data.id======>');
     return (
         <Grid
             item
@@ -34,7 +34,7 @@ const NewCard = ({ data, nfts }) => {
             sm={nfts && nfts?.length > 5 ? 12 : 3}
            
             onClick={() => {
-                navigate('/productDetails', {
+                navigate('/productDetails/' + data.id, {
                     state: {
                         nft: data
                     }
