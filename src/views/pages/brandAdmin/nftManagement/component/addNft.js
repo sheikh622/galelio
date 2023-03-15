@@ -81,7 +81,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             toast.error('Metadata is required');
         }
         if (checked == true) {
-            toast.error('Wallet address is required');
+            // toast.error('Wallet address is required');
         }
 
         // else  (fieldDataArray.length > 0) {
