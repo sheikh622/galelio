@@ -134,7 +134,7 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
         <div>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 TransitionComponent={Transition}
                 sx={{ width: '80%', margin: '0 auto', maxHeight: '500px' }}
             >
