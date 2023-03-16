@@ -21,7 +21,7 @@ const ProductDetails = () => {
     }, []);
     const nftList = useSelector((state) => state.landingPageReducer?.nft);
 
-    console.log(nftList, 'nftList=>');
+    // console.log(nftList, 'nftList=>');
     return (
         <>
             <Grid
