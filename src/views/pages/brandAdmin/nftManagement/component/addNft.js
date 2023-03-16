@@ -81,7 +81,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             toast.error('Metadata is required');
         }
         if (checked == true) {
-            toast.error('Wallet address is required');
+            // isValid = false;
+            // toast.error('Wallet address is required');
         }
 
         // else  (fieldDataArray.length > 0) {
@@ -141,8 +142,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         nftDescription: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
-        directBuyerAddress: Yup.string()
-            // .required('NFT Description is required!')
+        directBuyerAddress: checked == true && (Yup.string()
+            .required('Wallet address  is required!'))
             // .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
             .min(26, 'Minimum length 26 character ')
             .max(42, 'Must be exactly 42 characters'),
@@ -287,7 +288,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         // setFieldDataArray(array);
         // console.log(event.target.checked,'value==============?')
     };
-    // console.log("arrayyyyyyyyyyyyyy",fieldDataArray);
+   
 
     const walletadded = (event, index) => {
         setWallettoggle(true);
@@ -533,7 +534,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 >
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
-                                                <Tooltip className="fontsize" title="Allow edit" placement="top" arrow>
+                                                <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
                                                     <Switch
                                                         value={data.isEditable}
                                                         checked={data.isEditable}
@@ -542,7 +543,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     />
                                                 </Tooltip>
                                                 {data.isEditable == true && (
-                                                    <Tooltip className="fontsize" title="Require a proof" placement="top" arrow>
+                                                    <Tooltip className="fontsize" title="Accept proof on update of metadata" placement="top" arrow>
                                                         <Switch
                                                             value={data.proofRequired}
                                                             checked={data.proofRequired}
