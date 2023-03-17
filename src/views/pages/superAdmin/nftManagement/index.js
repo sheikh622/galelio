@@ -39,7 +39,7 @@ const NftManagement = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const nftList = useSelector((state) => state.nftReducer.nftListSuperAdmin);
-    console.log(nftList,'nftList=======>')
+    // console.log(nftList,'nftList=======>')
     const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);

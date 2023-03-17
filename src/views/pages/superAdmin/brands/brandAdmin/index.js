@@ -17,9 +17,9 @@ const BrandAdmin = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const brandAdminList = useSelector((state) => state.brandadminReducer.brandadminsList);
-    console.log(brandAdminList, 'brandAdminList................>');
+    // console.log(brandAdminList, 'brandAdminList................>');
     const userData = useSelector((state) => state.auth);
-    console.log(userData.user.role, 'brandsList................>');
+    // console.log(userData.user.role, 'brandsList................>');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);

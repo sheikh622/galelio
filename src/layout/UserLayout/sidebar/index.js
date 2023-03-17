@@ -65,8 +65,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/home')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px',lg: '29px', 
-                    xl: '31px'} }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -79,7 +78,7 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Home" placement="right" arrow>
-                            <DashboardIcon sx={{  color: `${pathName == '/home' ? color : ''}`, alignSelf: 'center' }} />
+                            <DashboardIcon sx={{ color: `${pathName == '/home' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
                 </Grid>
@@ -101,7 +100,7 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
-                            <PieChartIcon sx={{  color: `${pathName == '/chart' ? color : ''}`, alignSelf: 'center' }} />
+                            <PieChartIcon sx={{ color: `${pathName == '/chart' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
                 </Grid>
@@ -127,7 +126,10 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Marketplace" placement="right" arrow>
-                            <StorefrontIcon className="fontsize" sx={{  color: `${pathName == '/marketplace' ? color : ''}`, alignSelf: 'center' }} />
+                            <StorefrontIcon
+                                className="fontsize"
+                                sx={{ color: `${pathName == '/marketplace' ? color : ''}`, alignSelf: 'center' }}
+                            />
                         </Tooltip>
                     </Box>
                 </Grid>
@@ -149,7 +151,7 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
-                            <BookmarkIcon  sx={{  color: `${pathName == '/bookmarks' ? color : ''}`, alignSelf: 'center' }} />
+                            <BookmarkIcon sx={{ color: `${pathName == '/bookmarks' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
                 </Grid>
@@ -158,7 +160,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/downloads')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px',lg: '29px', xl: '31px'} }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -171,7 +173,7 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
-                            <DownloadIcon  sx={{  color: `${pathName == '/downloads' ? color : ''}`, alignSelf: 'center' }} />
+                            <DownloadIcon sx={{ color: `${pathName == '/downloads' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
                 </Grid>
@@ -193,7 +195,7 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
-                            <DiscountIcon  sx={{  color: `${pathName == '/tags' ? color : ''}`, alignSelf: 'center' }} />
+                            <DiscountIcon sx={{ color: `${pathName == '/tags' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
                 </Grid>
@@ -202,7 +204,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/settings')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px',lg: '29px', xl: '31px' } }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -215,7 +217,7 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
-                            <SettingsIcon  sx={{  color: `${pathName == '/settings' ? color : ''}`, alignSelf: 'center' }} />
+                            <SettingsIcon sx={{ color: `${pathName == '/settings' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
                 </Grid>
@@ -224,7 +226,7 @@ const SideBar = () => {
                     sx={{ mt: 2, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
                     onClick={() => navigate('/ComingSoon')}
                 >
-                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px'} }}>
+                    <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
                             className="barHeight"
                             sx={{
@@ -236,7 +238,7 @@ const SideBar = () => {
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
-                            <LogoutIcon  sx={{  color: `${pathName == '/ComingSoon' ? color : ''}`, alignSelf: 'center' }} />
+                            <LogoutIcon sx={{ color: `${pathName == '/ComingSoon' ? color : ''}`, alignSelf: 'center' }} />
                         </Tooltip>
                     </Box>
                 </Grid>

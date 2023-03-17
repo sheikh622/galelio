@@ -8,16 +8,14 @@ import { Button } from '@mui/material';
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 import { setWallet } from '../../../../redux/auth/actions';
-const MetaMaskSection =  () => {
-    
+const MetaMaskSection = () => {
     const user = useSelector((state) => state.auth.user);
     console.log('user.walletAddress', user.walletAddress);
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
     const handleConnect = async () => {
-        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' })
-        if(response){
-
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
+        if (response) {
             if (!window.ethereum) {
                 dispatch({
                     type: SNACKBAR_OPEN,
@@ -28,9 +26,8 @@ const MetaMaskSection =  () => {
                 });
                 console.log('No crypto wallet found. Please install it.');
                 // toast.error('No crypto wallet found. Please install it.');
-            } 
-            
-            
+            }
+
             // else if (window?.ethereum?.networkVersion !== '5' || true) {
             //   console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
             //     dispatch({
@@ -43,8 +40,7 @@ const MetaMaskSection =  () => {
             //     console.log('Please change your Chain ID to Goerli');
             //     setWalletAddress()
             // }
-            else if(utils?.getAddress(response[0])!==user.walletAddress) {
-               
+            else if (utils?.getAddress(response[0]) !== user.walletAddress) {
                 dispatch({
                     type: SNACKBAR_OPEN,
                     open: true,
@@ -53,28 +49,22 @@ const MetaMaskSection =  () => {
                     alertSeverity: 'info'
                 });
                 console.log('Please connect your registered Wallet Address');
-                setWalletAddress()
+                setWalletAddress();
+            } else {
+                const address = utils?.getAddress(response[0]);
+                setWalletAddress(address);
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Success',
+                    variant: 'alert',
+                    alertSeverity: 'success'
+                });
             }
-
-    
-            else {
-                
-                    const address = utils?.getAddress(response[0]);
-                    setWalletAddress(address);
-                    dispatch({
-                        type: SNACKBAR_OPEN,
-                        open: true,
-                        message: 'Success',
-                        variant: 'alert',
-                        alertSeverity: 'success'
-                    });
-                }
+        } else {
+            console.log('No crypto wallet found. Please install it.');
+            // toast.error('No crypto wallet found. Please install it.');
         }
-            else {
-                console.log('No crypto wallet found. Please install it.');
-                // toast.error('No crypto wallet found. Please install it.');
-            }
-
     };
 
     useEffect(() => {
@@ -92,21 +82,17 @@ const MetaMaskSection =  () => {
 
     return (
         <>
-        
-        <Button
-            sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
-            variant="outlined"
-            onClick={() => {
-                handleConnect();
-            }}
-        >
-        {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect'}
-        </Button>
- 
-         
+            <Button
+                sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
+                variant="text"
+                onClick={() => {
+                    handleConnect();
+                }}
+            >
+                {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect to MetaMask'}
+            </Button>
         </>
     );
 };
 
 export default MetaMaskSection;
-    

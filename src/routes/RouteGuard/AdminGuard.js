@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 const AdminGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
 
-    console.log('token from adminguard', token);
+    // console.log('token from adminguard', token);
     const user = useSelector((state) => state.auth.user);
 
     const navigate = useNavigate();
