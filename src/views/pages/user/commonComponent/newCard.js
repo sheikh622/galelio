@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const NewCard = ({ data, nfts }) => {
     const theme = useTheme();
     const navigate = useNavigate();
- console.log(data.id,'data.id======>');
+//  console.log(data.id,'data.id======>');
     return (
         <Grid
             item
