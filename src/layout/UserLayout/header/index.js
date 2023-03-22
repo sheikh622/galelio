@@ -22,6 +22,7 @@ import personuser from 'assets/images/person_user.png';
 import galileo from 'assets/images/galileo.png';
 import galileoWhite from 'assets/images/galileo-white.png';
 import styles from './header.module.css';
+import MetaData from '../metaDataValue/metadata';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -374,8 +375,10 @@ export default function Header() {
                                         <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                     </Badge>
                                 </IconButton>
-                                <IconButton size="large" aria-label="" color="inherit">
-                                    <AccountBalanceWalletIcon onClick={myWalletMenuOpen} sx={{ color: '#4dabf5' }} />
+                                <IconButton size="large" aria-label="" color="inherit" sx={{marginTop:'5px'}}>
+                                    <MetaData  sx={{ color: '#4dabf5' }} />
+                                {/*     <AccountBalanceWalletIcon onClick={myWalletMenuOpen} sx={{ color: '#4dabf5' }} />
+                             */}
                                 </IconButton>
                                 <IconButton size="large" aria-label="" color="inherit">
                                     <ShoppingCartIcon sx={{ color: '#4dabf5' }} />

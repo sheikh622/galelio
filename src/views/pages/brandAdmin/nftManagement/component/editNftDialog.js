@@ -552,34 +552,28 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     />
                                                 </Grid>
 
-                                                <Grid item xs={3} mt={3}>
-                                                    <span style={{ marginBottom: '10%' }}>
-                                                        {/*          <a target="_blank" href={data?.fieldValue} style={{color:"white"}}>
-                                                        {data.fieldValue.length > 1
-                                                        ?
-                                                        <>
-                                                        {data?.fieldValue?.slice(61)}
-                                                        
-                                                        </>
-                                                        :
-                                                        <>
-                                                        
-                                                        </>
-                                                        
-                                                        }
-                                                    </a> */}
+                                                {data?.fieldValue?.length > 1 ? (
+                                                    <Grid item xs={3} mt={3.5} className="encap" sx={{}}>
+                                                        <a target="_blank" href={data?.fieldValue} style={{ color: '#4198e3' }}>
+                                                            {data?.fieldValue}
+                                                        </a>
+                                                    </Grid>
+                                                ) : (
+                                                    <Grid item xs={3} mt={3}>
                                                         <input
                                                             style={{ display: 'inlineBlock' }}
                                                             type="file"
                                                             id="avatar"
                                                             name="avatar"
                                                             accept="image/*,.pdf"
+                                                            // value={data?.fieldName}
                                                             onChange={(event) => {
                                                                 handleFileFieldValueChange(event.currentTarget.files[0], index);
                                                             }}
                                                         />
-                                                    </span>
-                                                </Grid>
+                                                    </Grid>
+                                                )}
+
                                                 {/* <div style={{marginTop:"3%", marginLeft:"2%"}}><b>Previous file: </b><a target="_blank" href={data.fieldValue}>{data.fieldValue}</a></div> */}
                                                 <Grid item xs={2} mt={2}>
                                                     <IconButton

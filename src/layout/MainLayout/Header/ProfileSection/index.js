@@ -47,7 +47,7 @@ const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
     const userData = useSelector((state) => state.auth);
-
+    console.log(userData, 'userData');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [sdm, setSdm] = useState(true);
@@ -95,11 +95,22 @@ const ProfileSection = () => {
 
         prevOpen.current = open;
     }, [open]);
+    var myDate = new Date();
+    var hrs = myDate.getHours();
+    var greet;
+
+    if (hrs < 12) {
+        greet = 'Good Morning';
+    } else if (hrs >= 12 && hrs <= 17) {
+        greet = 'Good Afternoon';
+    } else if (hrs >= 17 && hrs <= 24) {
+        greet = 'Good Evening';
+    }
 
     return (
         <>
             <Chip
-            className='chip'
+                className="chip"
                 sx={{
                     height: '48px',
                     alignItems: 'center',
@@ -119,17 +130,13 @@ const ProfileSection = () => {
                         lineHeight: 0
                     }
                 }}
-                icon={
-                    <img  src={User1} width='53px'  />
-                 
-                }
-                label={<IconSettings stroke={1.5} size="1.5rem" sx={{color:""}} />}
+                icon={<img src={User1} width="53px" />}
+                label={<IconSettings stroke={1.5} size="1.5rem" sx={{ color: '' }} />}
                 variant="outlined"
                 ref={anchorRef}
                 aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
-              
             />
             <Popper
                 placement="bottom-end"
@@ -154,34 +161,31 @@ const ProfileSection = () => {
                         <Paper>
                             <ClickAwayListener onClickAway={handleClose}>
                                 <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                                    {/* <Box sx={{ p: 2 }}>
+                                    <Box sx={{ p: 2 }}>
                                         <Stack>
                                             <Stack direction="row" spacing={0.5} alignItems="center">
-                                                <Typography variant="h4">Good Morning,</Typography>
-                                                <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                    {user?.name}
+                                                <Typography variant="h4" sx={{ color: '#FFC107' }}>
+                                                    {greet},
+                                                </Typography>
+                                                <Typography component="span" variant="h4" sx={{ fontWeight: 500 }}>
+                                                    {userData?.user.firstName}
+                                                </Typography>
+                                                <Typography component="span" variant="h4" sx={{ fontWeight: 500 }}>
+                                                    {userData?.user.lastName}
                                                 </Typography>
                                             </Stack>
-                                            <Typography variant="subtitle2">Project Admin</Typography>
+
+                                            <Typography variant="subtitle2">
+                                                {userData?.user.role == 'Super Admin'
+                                                    ? 'Super Admin'
+                                                    : userData?.user.role == 'Admin'
+                                                    ? 'Admin'
+                                                    : userData?.user.role == 'Brand Admin'
+                                                    ? 'Brand Admin'
+                                                    : 'Null'}
+                                            </Typography>
                                         </Stack>
-                                        <OutlinedInput
-                                            sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}
-                                            id="input-search-profile"
-                                            value={value}
-                                            onChange={(e) => setValue(e.target.value)}
-                                            placeholder="Search profile options"
-                                            startAdornment={
-                                                <InputAdornment position="start">
-                                                    <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
-                                                </InputAdornment>
-                                            }
-                                            aria-describedby="search-helper-text"
-                                            inputProps={{
-                                                'aria-label': 'weight'
-                                            }}
-                                        />
-                                        <Divider />
-                                    </Box> */}
+                                    </Box>
                                     <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                                         <Box sx={{ p: 2 }}>
                                             {/* <UpgradePlanCard />
@@ -248,31 +252,31 @@ const ProfileSection = () => {
                                                     }
                                                 }}
                                             >
-                                            {userData.user && userData.user.role == 'Admin' &&
-                                            <ListItemButton
-                                            sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                            selected={selectedIndex === 0}
-                                            onClick={(event) => handleListItemClick(event, 0, '/ChangePassword')}
-                                        >
-                                            <ListItemIcon>
-                                                <IconSettings stroke={1.5} size="1.3rem" />
-                                            </ListItemIcon>
-                                            <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
-                                        </ListItemButton>
-                                     }
-                                            {userData.user && userData.user.role == 'Brand Admin' &&
-                                            <ListItemButton
-                                            sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                            selected={selectedIndex === 0}
-                                            onClick={(event) => handleListItemClick(event, 0, '/ChangePassword')}
-                                        >
-                                            <ListItemIcon>
-                                                <IconSettings stroke={1.5} size="1.3rem" />
-                                            </ListItemIcon>
-                                            <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
-                                        </ListItemButton>
-                                     }
-                                          
+                                                {userData.user && userData.user.role == 'Admin' && (
+                                                    <ListItemButton
+                                                        sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                        selected={selectedIndex === 0}
+                                                        onClick={(event) => handleListItemClick(event, 0, '/ChangePassword')}
+                                                    >
+                                                        <ListItemIcon>
+                                                            <IconSettings stroke={1.5} size="1.3rem" />
+                                                        </ListItemIcon>
+                                                        <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
+                                                    </ListItemButton>
+                                                )}
+                                                {userData.user && userData.user.role == 'Brand Admin' && (
+                                                    <ListItemButton
+                                                        sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                        selected={selectedIndex === 0}
+                                                        onClick={(event) => handleListItemClick(event, 0, '/ChangePassword')}
+                                                    >
+                                                        <ListItemIcon>
+                                                            <IconSettings stroke={1.5} size="1.3rem" />
+                                                        </ListItemIcon>
+                                                        <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
+                                                    </ListItemButton>
+                                                )}
+
                                                 {/* <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                     selected={selectedIndex === 0}
@@ -320,7 +324,7 @@ const ProfileSection = () => {
                                                     onClick={handleLogout}
                                                 >
                                                     <ListItemIcon>
-                                                        <IconLogout className='logouticon' stroke={1.5} size="1.3rem" />
+                                                        <IconLogout className="logouticon" stroke={1.5} size="1.3rem" />
                                                     </ListItemIcon>
                                                     <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
                                                 </ListItemButton>
