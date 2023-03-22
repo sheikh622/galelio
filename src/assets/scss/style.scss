@@ -1141,6 +1141,7 @@ text-align: center;
 .Nftdialog {
     width: 100% !important;
     margin: 0 auto;
+    max-height: 100vh;
 }
 .buttons {
     justify-content: center;
@@ -1365,7 +1366,41 @@ right: 8px;
     width: 35px !important;
     height: 35px !important;
 }
+.wallet-select{
+    font-family: 'Public Sans';
+font-style: normal;
+font-weight: 400 !important;
+font-size: 20px !important;
+text-align: center;
+   
+}
+.connect-wallet{
+    font-family: 'Public Sans' !important;
+font-style: normal !important;
+font-weight: 700 !important;
+font-size: 20px !important;
+text-align: center;
 
+}
+
+.connecting{
+    font-size: 0.875rem  !important;
+    font-weight: 400  !important;
+    line-height: 1.334em;
+    
+    font-family: 'Public Sans' !important;
+font-style: normal !important;
+
+text-align: center;
+
+}
+.connect-button{
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    text-align: center; 
+}
 .nsm7Bb-HzV7m-LgbsSe {
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -1575,7 +1610,7 @@ right: 8px;
 .slick-slide .MuiGrid-root {
     margin-left: 0px !important;
     /* margin-right: 32px; */
-    margin-right: 18px !important;
+    // margin-right: 18px !important;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1370px) {
@@ -1594,6 +1629,7 @@ right: 8px;
     }
     .new-width {
         width: 215px;
+        border:2px solid red
     }
     .feature {
         margin-right: 32px;
