@@ -86,10 +86,20 @@ export default function RequestForMintDialog({ open, setOpen, page, limit, searc
                 let erc20Address = BLOCKCHAIN.ERC20;
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
+                    
+                const token = new ethers.Contract(erc20Address, Erc20.abi, signer);
 
-                const token = new ethers.Contract(erc20Address, Erc20, signer);
-
-                let data = await (await token.approve(nftData.Category.BrandCategories[0].contractAddress,"100000000000000000000000000000000000000")).wait();
+                // let data = await (await token.approve(nftData.Category.BrandCategories[0].contractAddress,"100000000000000000000000000000000000000")).wait();
+                // let balance= await token.balanceOf(user.walletAddress);
+                // if(balance> )
+                 let price= ethers.utils.parseEther("10000000000000000000000");
+                let approvalAmount = await token.allowance(user.walletAddress,nftData.Category.BrandCategories[0].contractAddress);
+                console.log("hy")
+            //    console.log(balance.toString())
+               let approvePrice = ethers.utils.parseEther('10000000000000000000');
+               if (approvalAmount.toString() < price.toString()) {
+                   await (await token.approve(nftData.Category.BrandCategories[0].contractAddress, approvePrice)).wait();
+               }0
 
                 await dispatch(
                     requestNftForMinting({
