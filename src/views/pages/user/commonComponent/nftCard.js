@@ -15,7 +15,7 @@ const NftCard = ({ data }) => {
             sm={6}
             xs={12}
             onClick={() => {
-                navigate('/productDetails', {
+                navigate('/productDetails/' + data.id, {
                     state: {
                         nft: data
                     }

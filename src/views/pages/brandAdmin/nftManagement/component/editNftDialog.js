@@ -13,6 +13,7 @@ import {
     TextField,
     Divider,
     Box,
+    Tooltip,
     Link,
     List,
     ListItem,
@@ -46,6 +47,7 @@ const currencyTypeArray = [
 
 export default function EditNftDialog({ nftInfo, categoryId, type, search, page, limit, loader, setLoader, open, setOpen }) {
     const dispatch = useDispatch();
+    console.log(nftInfo, 'nftInfo');
     const [mintType, setMintType] = useState('directMint');
     const [currencyType, setCurrencyType] = useState('USDT');
     const [fieldDataArray, setFieldDataArray] = useState([]);
@@ -56,9 +58,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         setCurrencyType(event.target.value);
     };
     const [checked, setChecked] = useState(true);
-    const handleChange = (event) => {
-        setChecked(event.target.checked);
-      };
+    // const handleChange = (event) => {
+    //     setChecked(event.target.checked);
+    // };
 
     const handleError = (fieldDataArray, fileDataArray, values) => {
         console.log('im in handle error');
@@ -70,45 +72,42 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
-        } 
+        }
 
         // else  (fieldDataArray.length > 0) {
-            
-            fieldDataArray.map((array) => {
-                if (array.fieldName == '') {
-                    isValid = false;
-                    toast.error(`Metadata name cannot be empty`);
-                }
-                else if (array.fieldValue == '') {
-                    isValid = false;
-                    toast.error(`Metadata value cannot be empty`);
-                }
-            });
+
+        fieldDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`Metadata name cannot be empty`);
+            } else if (array.fieldValue == '') {
+                isValid = false;
+                toast.error(`Metadata value cannot be empty`);
+            }
+        });
         // }
-         if (fileDataArray.length == 0) {
+        if (fileDataArray.length == 0) {
             isValid = false;
             toast.error('Proof of Authenticity is required');
         }
 
-    //    else (fileDataArray.length > 0) {
+        //    else (fileDataArray.length > 0) {
         console.log('im here 2');
-            fileDataArray.map((array) => {
-                if (array.fieldName == '') {
-                    isValid = false;
-                    toast.error(`File name field is mandatory`);
-                }
-                else if (array.fieldValue == null) {
-                    isValid = false;
-                    toast.error(`Attach proof of authenticity`);
-                }
-                else if (array.fieldValue?.size/1000000>5) {
-                    isValid = false;
-                    toast.error(`Please attach a less than 5 mb proof of authenticity`);
-                }
-            });
+        fileDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`File name field is mandatory`);
+            } else if (array.fieldValue == null) {
+                isValid = false;
+                toast.error(`Attach proof of authenticity`);
+            } else if (array.fieldValue?.size / 1000000 > 5) {
+                isValid = false;
+                toast.error(`Please attach a less than 5 mb proof of authenticity`);
+            }
+        });
         // }
 
-         if (values.images.length == 0) {
+        if (values.images.length == 0) {
             toast.error('Please upload a NFT Image');
             isValid = false;
         } else if (values.images[0].image.size / 1000000 > 5) {
@@ -117,21 +116,17 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
             toast.error('Upload the files with these extensions: jpg, png, gif');
             isValid = false;
-        }else if (parseInt(values.images[0].quantity) <=0) {
+        } else if (parseInt(values.images[0].quantity) <= 0) {
             toast.error('NFT Quantity should be atleast one');
             isValid = false;
         }
 
-
         return isValid;
     };
 
-
     const validationSchema = Yup.object({
-        nftName: Yup.string()
-            .required('NFT Name is required!')
-            .max(60, 'NFT Name can not exceed 60 characters'),
-            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
+        nftName: Yup.string().required('NFT Name is required!').max(60, 'NFT Name can not exceed 60 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
@@ -149,7 +144,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
 
         // .test('image size',
         //  'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
-
     });
     const formik = useFormik({
         enableReinitialize: true,
@@ -236,20 +230,44 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         accept: '.jpeg,.png,.jpg,.gif',
         onDrop: handleDrop
     });
-
     const handleFieldNameChange = (value, index) => {
         let array = structuredClone(fieldDataArray);
+        // let array = [...fieldDataArray];
         array[index].fieldName = value;
         setFieldDataArray(array);
     };
     const handleFieldValueChange = (value, index) => {
         let array = structuredClone(fieldDataArray);
+        // let array = [...fieldDataArray];
         array[index].fieldValue = value;
         setFieldDataArray(array);
     };
 
+    const handleChange = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = structuredClone(fieldDataArray);
+        // let array = [...fieldDataArray];
+        array[index].isEditable = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+    const handleproof = (event, index) => {
+        let array = structuredClone(fieldDataArray);
+        // setChecked(event.target.checked);
+        // let array = [...fieldDataArray];
+        array[index].proofRequired = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+
     const handleRemoveField = (index) => {
-        let array = structuredClone(fileDataArray);
+        let array = structuredClone([...fieldDataArray]);
         array.splice(index, 1);
         setFieldDataArray(array);
     };
@@ -284,10 +302,11 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     return (
         <>
             <Dialog
+                fullScreen
                 open={open}
                 // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog Nftdialog"
+                // className="brandDialog Nftdialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
@@ -333,7 +352,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={1}>
-                            <Grid xs={4} md={5} lg={5}>
+                            <Grid xs={4} md={4} lg={4}>
                                 <TextField
                                     className="textfieldStyle"
                                     id="nftName"
@@ -348,8 +367,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} md={2} lg={2}></Grid>
-                            <Grid xs={4} md={5} lg={5}>
+
+                            <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
                                     id="nftPrice"
@@ -364,7 +383,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} md={12} lg={12} mt={2}>
+                            <Grid xs={12} md={4} lg={4} mt={1.5}>
                                 <TextField
                                     className="textfieldStyle"
                                     id="outlined-select-budget"
@@ -408,7 +427,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                             ...fieldDataArray,
                                             {
                                                 fieldName: '',
-                                                fieldValue: ''
+                                                fieldValue: '',
+                                                isEditable: false,
+                                                proofRequired: false
                                             }
                                         ]);
                                     }}
@@ -423,10 +444,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 <Grid container spacing={4} mt={1}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
-                                                    className="textfieldStyle"
                                                     id="field_name"
+                                                    className="textfieldStyle"
                                                     name="field_name"
                                                     label="Metadata Name"
                                                     value={data.fieldName}
@@ -438,7 +459,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
                                                     className="textfieldStyle"
                                                     id="field_value"
@@ -452,7 +473,30 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     fullWidth
                                                 />
                                             </Grid>
-                                            <Grid item xs={2} mt={2}>
+                                            <Grid item xs={2} mt={2} md={3}>
+                                                <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
+                                                    <Switch
+                                                        value={data?.isEditable}
+                                                        checked={data?.isEditable}
+                                                        onChange={(e) => handleChange(e, index)}
+                                                        // inputProps={{ 'aria-label': 'controlled' }}
+                                                    />
+                                                </Tooltip>
+                                                {data?.isEditable == true && (
+                                                    <Tooltip
+                                                        className="fontsize"
+                                                        title="Accept proof on update of metadata"
+                                                        placement="top"
+                                                        arrow
+                                                    >
+                                                        <Switch
+                                                            value={data.proofRequired}
+                                                            checked={data.proofRequired}
+                                                            onChange={(e) => handleproof(e, index)}
+                                                            // inputProps={{ 'aria-label': 'controlled' }}
+                                                        />
+                                                    </Tooltip>
+                                                )}
                                                 <IconButton
                                                     color="error"
                                                     edge="end"
@@ -463,12 +507,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 >
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
-                                                <Switch
-                                                    checked={checked}
-                                                    onChange={handleChange}
-                                                    inputProps={{ 'aria-label': 'controlled' }}
-                                                />
                                             </Grid>
+                                            <Grid item xs={2} mt={2} md={3}></Grid>
                                         </>
                                     ))}
                                 </Grid>
@@ -498,8 +538,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     <Grid container spacing={2} mt={1}>
                                         {fileDataArray?.map((data, index) => (
                                             <>
-                                                <Grid item xs={5}>
-                                                      <TextField
+                                                <Grid item xs={3}>
+                                                    <TextField
                                                         id="field_name"
                                                         name="field_name"
                                                         label="File Name"
@@ -512,12 +552,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     />
                                                 </Grid>
 
-                                         
-                                                
-
-                                                <Grid item xs={5} mt={3}>
-                                                <span style={{marginBottom:"10%"}}>
-                                                    <a target="_blank" href={data?.fieldValue} style={{color:"white"}}>
+                                                <Grid item xs={3} mt={3}>
+                                                    <span style={{ marginBottom: '10%' }}>
+                                                        {/*          <a target="_blank" href={data?.fieldValue} style={{color:"white"}}>
                                                         {data.fieldValue.length > 1
                                                         ?
                                                         <>
@@ -530,20 +567,18 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                         </>
                                                         
                                                         }
-                                                    </a>
-                                                    <input
-                                                    style={{display:"inlineBlock"}}
-                                                    type="file"
-                                                    id="avatar"
-                                                    name="avatar"
-                                                    accept="image/*,.pdf"
-                                                    onChange={(event) => {
-                                                        handleFileFieldValueChange(event.currentTarget.files[0], index);
-                                                    }}
-                                                />
-                                                </span>
-
-                                                
+                                                    </a> */}
+                                                        <input
+                                                            style={{ display: 'inlineBlock' }}
+                                                            type="file"
+                                                            id="avatar"
+                                                            name="avatar"
+                                                            accept="image/*,.pdf"
+                                                            onChange={(event) => {
+                                                                handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                            }}
+                                                        />
+                                                    </span>
                                                 </Grid>
                                                 {/* <div style={{marginTop:"3%", marginLeft:"2%"}}><b>Previous file: </b><a target="_blank" href={data.fieldValue}>{data.fieldValue}</a></div> */}
                                                 <Grid item xs={2} mt={2}>
@@ -558,6 +593,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                         <Icon icon={closeFill} width={28} height={28} />
                                                     </IconButton>
                                                 </Grid>
+                                                <Grid item xs={2} mt={2} md={3}></Grid>
                                             </>
                                         ))}
                                     </Grid>
@@ -648,7 +684,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 variant="contained"
                                 sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
                                 onClick={() => {
-                                    
                                     formik.handleSubmit();
                                 }}
                                 className="buttons"

@@ -201,7 +201,7 @@ function* editNftRequest({ payload }) {
     for (let i = 0; i < payload.fileArray.length; i++) {
         formData.append('fileArray', payload.fileArray[i]);
     }
-
+console.log(formData, 'formData')
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.put(`/nft/brandAdmin/${payload.id}`, formData, headers);

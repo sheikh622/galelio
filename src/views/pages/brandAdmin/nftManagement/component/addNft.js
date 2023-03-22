@@ -325,11 +325,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
 
     return (
         <>
-            <Dialog
+            <Dialog fullScreen
                 open={open}
                 // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog Nftdialog "
+                // className="brandDialog "
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
@@ -375,7 +375,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container mt={1}>
-                            <Grid xs={4} md={5} lg={5}>
+                            <Grid xs={4} md={4} lg={4}>
                                 <TextField
                                     className="textfieldStyle"
                                     id="nftName"
@@ -390,8 +390,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} md={2} lg={2}></Grid>
-                            <Grid xs={4} md={5} lg={5}>
+                           
+                            <Grid xs={4}  md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
                                     id="nftPrice"
@@ -407,7 +407,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 />
                             </Grid>
 
-                            <Grid xs={12} md={12} lg={12} mt={2}>
+                            <Grid  xs={4} md={4} lg={4}  mt={1.5}>
                                 <TextField
                                     className="textfieldStyle"
                                     variant="filled"
@@ -499,7 +499,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5} md={4}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
                                                     id="field_name"
                                                     className="textfieldStyle"
@@ -514,7 +514,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={5} md={5}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
                                                     className="textfieldStyle"
                                                     id="field_value"
@@ -529,25 +529,16 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 />
                                             </Grid>
                                             <Grid item xs={2} mt={2} md={3}>
-                                                <IconButton
-                                                    color="error"
-                                                    edge="end"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        handleRemoveField(index);
-                                                    }}
-                                                >
-                                                    <Icon icon={closeFill} width={28} height={28} />
-                                                </IconButton>
+                                              
                                                 <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
                                                     <Switch
-                                                        value={data.isEditable}
-                                                        checked={data.isEditable}
+                                                        value={data?.isEditable}
+                                                        checked={data?.isEditable}
                                                         onChange={(e) => handleChange(e, index)}
                                                         // inputProps={{ 'aria-label': 'controlled' }}
                                                     />
                                                 </Tooltip>
-                                                {data.isEditable == true && (
+                                                {data?.isEditable == true && (
                                                     <Tooltip
                                                         className="fontsize"
                                                         title="Accept proof on update of metadata"
@@ -562,7 +553,18 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         />
                                                     </Tooltip>
                                                 )}
+                                                <IconButton
+                                                color="error"
+                                                edge="end"
+                                                size="small"
+                                                onClick={() => {
+                                                    handleRemoveField(index);
+                                                }}
+                                            >
+                                                <Icon icon={closeFill} width={28} height={28} />
+                                            </IconButton>
                                             </Grid>
+                                            <Grid item xs={2} mt={2} md={3}></Grid>
                                         </>
                                     ))}
                                 </Grid>
@@ -592,7 +594,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     <Grid container spacing={2} mt={2}>
                                         {fileDataArray.map((data, index) => (
                                             <>
-                                                <Grid item xs={5}>
+                                                <Grid item xs={3}>
                                                     <TextField
                                                         id="field_name"
                                                         name="field_name"
@@ -606,7 +608,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     />
                                                 </Grid>
 
-                                                <Grid item mt={3} xs={5}>
+                                                <Grid item mt={3} xs={3}>
                                                     <input
                                                         type="file"
                                                         id="avatar"
@@ -629,6 +631,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         <Icon icon={closeFill} width={28} height={28} />
                                                     </IconButton>
                                                 </Grid>
+                                                <Grid item mt={3} xs={3}></Grid>
                                             </>
                                         ))}
                                     </Grid>
