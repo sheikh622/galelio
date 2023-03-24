@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SNACKBAR_OPEN } from 'store/actions';
+import { useTheme } from '@mui/material/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { ethers, utils } from 'ethers';
@@ -9,11 +10,14 @@ import { Button } from '@mui/material';
 // import 'react-toastify/dist/ReactToastify.css';
 import { setWallet } from '../../../../redux/auth/actions';
 const MetaMaskSection = () => {
+    const theme = useTheme();
+
     const user = useSelector((state) => state.auth.user);
-    console.log('user.walletAddress', user.walletAddress);
+    console.log('user.walletAddress', user?.walletAddress);
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
     const handleConnect = async () => {
+
         const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
         if (response) {
             if (!window.ethereum) {
@@ -82,8 +86,11 @@ const MetaMaskSection = () => {
 
     return (
         <>
-            <Button
-                sx={{ marginRight: '10px', display: { xs: 'none', lg: 'block' } }}
+            <Button 
+                sx={{
+                    //  marginRight: '-10px',
+                 display: { xs: 'none', lg: 'block' } , float:{md:'right'} ,
+                 color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#9e9e9e' }}
                 variant="text"
                 onClick={() => {
                     handleConnect();
