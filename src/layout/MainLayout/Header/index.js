@@ -44,7 +44,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <Helmet>
             <meta charSet="utf-8" />
             <title> Galileo Dashboard</title>
-            <link rel="canonical" href="http://mysite.com/example" />
+           
         </Helmet>
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     {/* <img style={{width: '100px' }} src={logo} alt="Admin Panel" /> */}
@@ -96,9 +96,9 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     </Button>
                 </Box>
             )}
-            <Box sx={{ display: { xs:'none',sm: 'block', marginRight: '10px' } }}>
+         {/*    <Box sx={{ display: { xs:'none',sm: 'block', marginRight: '10px' } }}>
                 <MetaMaskSection />
-            </Box>
+            </Box> */}
             {/* live customization & localization */}
             {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 <LocalizationSection />
