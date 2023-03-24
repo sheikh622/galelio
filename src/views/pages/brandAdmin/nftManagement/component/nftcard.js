@@ -247,9 +247,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                         variant="contained"
                                         color="primary"
                                         sx={{ marginRight: '5px' }}
-                                        onClick={() => {
-                                            setOpenRequestMint(true);
-                                        }}
+                                     
                                     >
                                        Edit Request
                                     </Button>

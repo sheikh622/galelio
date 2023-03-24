@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { SNACKBAR_OPEN } from 'store/actions';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
-export default function RequestForMintDialog({ open, setOpen, page, limit, search, type, nftData, categoryId }) {
+export default function EditRequestDialog({ open, setOpen, page, limit, search, type, nftData, categoryId }) {
     const theme = useTheme();
     const [loader, setLoader] = useState(false);
     const dispatch = useDispatch();

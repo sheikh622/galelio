@@ -63,7 +63,8 @@ export default function MetaData() {
                     </Grid>
                     <Grid mt={1} xs={12}>
                         <MainCard
-                            className="walletShadow"
+                            className="walletShadow" 
+                            // sx={{borderColor: theme.palette.mode === 'dark' ? '#2d2e2f' : '#90caf975'}}
                             title={
                                 <Grid container spacing={1}>
                                     <Grid item xs={11}>
