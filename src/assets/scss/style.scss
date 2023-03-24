@@ -1034,6 +1034,12 @@ text-align: center;
 
     border-radius: 5px !important;
 }
+.walletShadow {
+    // box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.164) !important;
+
+    border-radius: 8px !important;
+}
+
 .propertyShadow {
     box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
     border-radius: 5px !important;
@@ -1058,6 +1064,16 @@ text-align: center;
 .buttonSize {
     padding: 7px 28px !important;
 
+    font-family: 'Poppins';
+    font-style: normal;
+    // padding:7px 29px !important;
+
+    // margin-left:10px !important;
+}
+.wallet-button  {
+    // padding: 7px 248px !important;
+    margin-left: -28px;
+    width: 380px;
     font-family: 'Poppins';
     font-style: normal;
     // padding:7px 29px !important;
@@ -1381,6 +1397,27 @@ font-weight: 700 !important;
 font-size: 20px !important;
 text-align: center;
 
+}
+.My-wallet{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 17px !important;
+    text-align: left;  
+}
+.balance{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 17px !important;
+    text-align: center;  
+}
+.usd{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 17px !important;
+    text-align: center;  
 }
 
 .connecting{
