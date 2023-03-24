@@ -189,8 +189,7 @@ export default function Header() {
         </Menu>
     );
     const walletmenu = (
-        <Menu 
-        
+        <Menu
             anchorEl={myWallet}
             anchorOrigin={{
                 vertical: 'top',
@@ -209,11 +208,8 @@ export default function Header() {
                 My Wallet
             </MenuItem>
             <MenuItem component={RouterLink} className="userName">
-            {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') &&
-            (token != null || undefined) && <MetaMaskSection />}
+                {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') && (token != null || undefined) && <MetaMaskSection />}
             </MenuItem>
-
-        
         </Menu>
     );
 
@@ -366,7 +362,7 @@ export default function Header() {
                                 )}
 
                             <Box sx={{ display: { xs: 'none', sm: 'flex', md: 'flex' }, mr: 3, marginTop: '3px' }}>
-                              {/*   <div sx={{ marginRight: '1%' }}>
+                                {/*   <div sx={{ marginRight: '1%' }}>
                                     {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') &&
                                         (token != null || undefined) && <MetaMaskSection />}
                                 </div> */}
@@ -375,11 +371,23 @@ export default function Header() {
                                         <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                     </Badge>
                                 </IconButton>
-                                <IconButton size="large" aria-label="" color="inherit" sx={{marginTop:'5px'}}>
-                                    <MetaData  sx={{ color: '#4dabf5' }} />
-                                {/*     <AccountBalanceWalletIcon onClick={myWalletMenuOpen} sx={{ color: '#4dabf5' }} />
-                             */}
-                                </IconButton>
+
+                                {user?.walletAddress ? (
+                                    <IconButton size="large" aria-label="" color="inherit" sx={{ marginTop: '5px' }}>
+                                        <MetaData sx={{ color: '#4dabf5' }} />
+                                    </IconButton>
+                                ) : (
+                                    <IconButton size="large" aria-label="" color="inherit" sx={{}}>
+                                        <AccountBalanceWalletIcon
+                                            onClick={() => {
+                                                setMetamask(true);
+                                            }}
+                                            sx={{ color: '#4dabf5' }}
+                                        />
+                                    </IconButton>
+                                )}
+                               
+
                                 <IconButton size="large" aria-label="" color="inherit">
                                     <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                                 </IconButton>

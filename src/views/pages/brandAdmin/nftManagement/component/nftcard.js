@@ -176,7 +176,8 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                         <Grid item xs={12}>
                             <Stack direction="row" justifyContent="end" alignItems="center">
                             {
-                                (nftData.status !== 'MINTED' &&  nftData.status !== 'REQUESTED') && (
+                                (nftData.status !== 'MINTED'
+                                 &&  nftData.status !== 'REQUESTED') && (
                                     <>
                                         <Button
                                         className='fontstyling'
@@ -238,6 +239,19 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                         }}
                                     >
                                         Request
+                                    </Button>
+                                )}
+                                {(nftData.status == 'MINTED') && (
+                                    <Button
+                                    className='fontstyling'
+                                        variant="contained"
+                                        color="primary"
+                                        sx={{ marginRight: '5px' }}
+                                        onClick={() => {
+                                            setOpenRequestMint(true);
+                                        }}
+                                    >
+                                       Edit Request
                                     </Button>
                                 )}
                             </Stack>
