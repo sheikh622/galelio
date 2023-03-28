@@ -14,7 +14,9 @@ import {
     DASHBOARD,
     DASHBOARD_SUCCESS,
     BRAND_DASHBOARD,
-    BRAND_DASHBOARD_SUCCESS
+    BRAND_DASHBOARD_SUCCESS,
+    VERIFY,
+    VERIFY_SUCCESS
 } from './constants';
 
 export const login = (data) => {
@@ -40,6 +42,19 @@ export const dashboard = (data) => {
 export const dashboardSuccess = (data) => {
     return {
         type: DASHBOARD_SUCCESS,
+        payload: data
+    };
+};
+export const emailVerification  = (data) => {
+    return {
+        type: VERIFY,
+        payload: data
+    };
+};
+
+export const emailVerificationSuccess = (data) => {
+    return {
+        type: VERIFY_SUCCESS,
         payload: data
     };
 };

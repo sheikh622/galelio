@@ -116,21 +116,18 @@ export default function Header() {
     // console.log(token, 'token in sidebar');
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const [myWallet, setMyWallet] = useState(null);
+    
     const [metamask, setMetamask] = useState(false);
 
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
-    const isWalletOpen = Boolean(myWallet);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const myWalletMenuOpen = (event) => {
-        setMyWallet(event.currentTarget);
-    };
+   
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -140,10 +137,7 @@ export default function Header() {
         setAnchorEl(null);
         handleMobileMenuClose();
     };
-    const myWalletClose = () => {
-        setMyWallet(null);
-        // handleMobileMenuClose();
-    };
+ 
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -188,31 +182,7 @@ export default function Header() {
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
-    const walletmenu = (
-        <Menu
-            anchorEl={myWallet}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-            }}
-            open={isWalletOpen}
-            onClose={myWalletClose}
-        >
-            <MenuItem component={RouterLink} to="/creatorProfile" onClick={handleMenuClose}>
-                My Wallet
-            </MenuItem>
-            <MenuItem component={RouterLink} className="userName">
-                {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') && (token != null || undefined) && <MetaMaskSection />}
-            </MenuItem>
-        </Menu>
-    );
-
+   
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
         <Menu
@@ -431,7 +401,7 @@ export default function Header() {
                     <>
                         {renderMobileMenu}
                         {renderMenu}
-                        {walletmenu}
+                     
                     </>
                 )}
             </Box>
