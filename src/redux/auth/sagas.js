@@ -1,6 +1,16 @@
 import axios from '../../utils/axios';
 import { all, fork, put, takeLatest, select } from 'redux-saga/effects';
-import { LOGIN, FORGOT_PASSWORD, RESET_PASSWORD, SIGN_UP, SIGN_UP_SOCIAL, CHANGE_PASSWORD, DASHBOARD, BRAND_DASHBOARD } from './constants';
+import {
+    LOGIN,
+    FORGOT_PASSWORD,
+    RESET_PASSWORD,
+    SIGN_UP,
+    SIGN_UP_SOCIAL,
+    CHANGE_PASSWORD,
+    DASHBOARD,
+    BRAND_DASHBOARD,
+    VERIFY
+} from './constants';
 import { loginSuccess, signupSuccess, signupsocialSuccess, setLoader, dashboardSuccess, branddashboardSuccess } from './actions';
 import { makeSelectAuthToken } from 'store/Selector';
 
@@ -18,9 +28,8 @@ function* loginUser({ payload }) {
         yield setNotification('success', response.data.message);
         yield put(loginSuccess(response.data.data));
 
-    
-        if (response.data.data.user.role == "Super Admin" || "Brand Admin") {
-            payload.navigate('/home'); 
+        if (response.data.data.user.role == 'Super Admin' || 'Brand Admin') {
+            payload.navigate('/home');
         } else {
             payload.navigate('/home');
         }
@@ -65,7 +74,7 @@ function* signupUserRequest({ payload }) {
         yield put(setLoader(false));
         yield setNotification('success', response.data.message);
         yield put(signupSuccess(response.data.data));
-        payload.navigate('/login');
+        payload.navigate('/emailVerify');
     } catch (error) {
         yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
@@ -113,9 +122,24 @@ function* resetPasswordRequest({ payload }) {
     };
     try {
         const response = yield axios.put(`auth/resetPassword`, data);
+
         yield setNotification('success', response.data.message);
         payload.navigate('/login');
     } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+function* verifyRequest({ payload }) {
+    let data = {
+        token: payload.token
+    };
+    try {
+        const response = yield axios.put(`users/verify/email`, data);
+        yield put(setLoader(false));
+        yield setNotification('Your Account has verified successfully', response.data.message);
+        payload.navigate('/login');
+    } catch (error) {
+        yield put(setLoader(false));
         yield sagaErrorHandler(error.response.data.data);
     }
 }
@@ -155,8 +179,11 @@ export function* watchSocialSignup() {
 export function* watchForgot() {
     yield takeLatest(FORGOT_PASSWORD, forgetPasswordRequest);
 }
-export function* watchReset() {
+export function* watchVerify() {
     yield takeLatest(RESET_PASSWORD, resetPasswordRequest);
+}
+export function* watchReset() {
+    yield takeLatest(VERIFY, verifyRequest);
 }
 export function* watchchangePassword() {
     yield takeLatest(CHANGE_PASSWORD, changePasswordRequest);
@@ -167,6 +194,7 @@ export default function* authSaga() {
         fork(watchLogin),
         fork(watchForgot),
         fork(watchReset),
+        fork(watchVerify),
         fork(watchSignup),
         fork(watchSocialSignup),
         fork(watchchangePassword),
