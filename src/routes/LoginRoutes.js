@@ -4,6 +4,8 @@ import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
 // login routing
 const AuthLogin = Loadable(lazy(() => import('views/auth/login')));
+const VerifyEmail = Loadable(lazy(() => import('views/auth/verifyEmail')));
+const VerifyEmailBefore = Loadable(lazy(() => import('views/auth/emailVerifyBefore')));
 const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
 const SignUpMarketPlace = Loadable(lazy(() => import('views/auth/signUp')));
@@ -25,6 +27,18 @@ const LoginRoutes = {
         {
             path: '/login',
             element: <AuthLogin />
+        },
+        {
+            path: '/emailVerify',
+            element: <VerifyEmailBefore />
+        },
+        {
+            path: '/Verify',
+            element: <VerifyEmail />
+        },
+        {
+            path: '/Verify',
+            element: <VerifyEmailBefore />
         },
         {
             path: '/',
