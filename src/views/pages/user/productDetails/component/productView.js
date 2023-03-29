@@ -194,10 +194,26 @@ const PropertiesView = ({  nftList }) => {
                     const address = signer.getAddress();
 
                     const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
-                    console.log('marketplace', marketplace);
+                    console.log('price', price);
+                    console.log('marketplace', MarketplaceAddress.address);
 
-                    const token = new ethers.Contract(erc20Address, Erc20, signer);
-                    await (await token.approve(MarketplaceAddress.address, price)).wait();
+                    const token = new ethers.Contract(erc20Address, Erc20.abi, signer);
+                   // await (await token.approve(MarketplaceAddress.address, price)).wait();
+
+
+                   let balance= await token.balanceOf(address);
+                   if(balance < price.toString())
+                   {
+                    toast.error("Insufficient Balance")
+                   }
+                   let approvalAmount = await token.allowance(address,MarketplaceAddress.address);
+                   console.log("hy")
+    
+                  let approvePrice = ethers.utils.parseEther('1000000');
+                  if (approvalAmount.toString() < price.toString()) {
+                      await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
+                  }
+                
 
                     // -------------
                     // let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
@@ -222,10 +238,12 @@ const PropertiesView = ({  nftList }) => {
                             );
                         })
                         .catch((error) => {
+                            console.log('error',error);
                             setLoader(false);
                             toast.error(error.reason);
                         });
                 } catch (error) {
+                    console.log('error',error);
                     setLoader(false);
                     toast.error(error.reason);
                 }
@@ -285,12 +303,25 @@ const PropertiesView = ({  nftList }) => {
                     // if (approvalAmount.toString() < nft.price.toString()) {
                     //     await (await token.approve(contractAddress, approvePrice)).wait();
                     // }
-                    await (await token.approve(contractAddress, '100000000000000000000000000000000000000')).wait();
+                   // await (await token.approve(contractAddress, '100000000000000000000000000000000000000')).wait();
                     console.log(voucher, 'voucher');
                     console.log(nftList?.nft?.minterAddress);
                     console.log(erc20Address);
 
                     console.log(nftList?.nft?.requesterAddress);
+
+                let balance= await token.balanceOf(address);
+                   if(balance < voucher.price)
+                   {
+                    toast.error("Insufficient Balance")
+                   }
+                   let approvalAmount = await token.allowance(address,contractAddress);
+                   
+    
+                  let approvePrice = ethers.utils.parseEther('1000000');
+                  if (approvalAmount.toString() <  voucher.price) {
+                      await (await token.approve(contractAddress, approvePrice)).wait();
+                  }
 
                     try {
                         let mintedNFT = await (
@@ -365,12 +396,14 @@ const PropertiesView = ({  nftList }) => {
                             toast.success('NFT is Resold');
                         })
                         .catch((error) => {
+                            console.log('error',error);
                             toast.error(error.reason);
                         });
                 } catch (error) {
                     setResellLoader(false);
                     toast.error(error.reason);
                     setOpen(false);
+                    console.log('error',error);
                 }
             } else if (nftList?.nft?.mintType == 'lazyMint') {
                 try {

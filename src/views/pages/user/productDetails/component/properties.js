@@ -122,11 +122,11 @@ const Properties = ({  nftList }) => {
                                                             className="plight"
                                                             variant="body2"
                                                         >
-                                                            {item?.proof ? (
+                                                            {item?.Proofs[0].proof ? (
                                                                 <span
                                                                     onClick={() => {
                                                                         // useNavigate(option.fieldValue)
-                                                                        window.open(item?.proof, '_blank');
+                                                                        window.open(item?.Proofs[0].proof, '_blank');
                                                                     }}
                                                                     style={{
                                                                         cursor: 'pointer',
