@@ -354,7 +354,7 @@ const VerifyEmail = ({ token, ...others }) => {
                                                         error={Boolean(touched.password && errors.password)}
                                                     >
                                                         <TextField
-                                                            placeholder=" Password"
+                                                            placeholder="Password"
                                                             className="textForm"
                                                             // onChange={(event)=>handelAccount("password",event)}
                                                             variant="outlined"
