@@ -116,7 +116,7 @@ export default function Header() {
     // console.log(token, 'token in sidebar');
 
     const [anchorEl, setAnchorEl] = useState(null);
-    
+
     const [metamask, setMetamask] = useState(false);
 
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -127,7 +127,6 @@ export default function Header() {
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
-   
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -137,7 +136,6 @@ export default function Header() {
         setAnchorEl(null);
         handleMobileMenuClose();
     };
- 
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -182,7 +180,7 @@ export default function Header() {
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
-   
+
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
         <Menu
@@ -342,11 +340,13 @@ export default function Header() {
                                     </Badge>
                                 </IconButton>
 
-                                {user?.walletAddress ? (
+                                {user?.walletAddress && (
                                     <IconButton size="large" aria-label="" color="inherit" sx={{ marginTop: '5px' }}>
                                         <MetaData sx={{ color: '#4dabf5' }} />
                                     </IconButton>
-                                ) : (
+                                )}
+
+                                {/*     ) : (
                                     <IconButton size="large" aria-label="" color="inherit" sx={{}}>
                                         <AccountBalanceWalletIcon
                                             onClick={() => {
@@ -355,8 +355,7 @@ export default function Header() {
                                             sx={{ color: '#4dabf5' }}
                                         />
                                     </IconButton>
-                                )}
-                               
+                                )} */}
 
                                 <IconButton size="large" aria-label="" color="inherit">
                                     <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
@@ -401,7 +400,6 @@ export default function Header() {
                     <>
                         {renderMobileMenu}
                         {renderMenu}
-                     
                     </>
                 )}
             </Box>

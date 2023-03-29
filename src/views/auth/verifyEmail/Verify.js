@@ -25,7 +25,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 const VerifyEmail = ({ token, ...others }) => {
     const theme = useTheme();
     // const loader = useSelector((state) => state.auth.loader);
-    console.log(token, 'token');
+    // console.log(token, 'token');
     const navigate = useNavigate();
     const dispatch = useDispatch();
    

@@ -67,7 +67,7 @@ const Verify = () => {
             </Grid> 
                     <Grid container spacing={2} justifyContent="center" >
                         <Grid item xs={12}>
-                            <VerifyEmail  token={params.token}   />
+                            <VerifyEmail  token={params.token}/>
                         </Grid>
                       
                     </Grid>
