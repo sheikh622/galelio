@@ -135,14 +135,18 @@ function* verifyRequest({ payload }) {
     };
     try {
         const response = yield axios.put(`users/verify/email`, data);
-        yield put(setLoader(false));
-        yield setNotification('Your Account has verified successfully', response.data.message);
-        payload.navigate('/login');
+        console.log(response, 'response');
+        yield setNotification('success', response?.data?.message);
+        if(data){
+         payload.navigate('/login');
+        }
+       
     } catch (error) {
-        yield put(setLoader(false));
+        console.log(error, 'error');
         yield sagaErrorHandler(error.response.data.data);
     }
 }
+
 function* changePasswordRequest({ payload }) {
     let data = {
         newPassword: payload.newPassword,
@@ -179,10 +183,11 @@ export function* watchSocialSignup() {
 export function* watchForgot() {
     yield takeLatest(FORGOT_PASSWORD, forgetPasswordRequest);
 }
-export function* watchVerify() {
+
+export function* watchReset() {
     yield takeLatest(RESET_PASSWORD, resetPasswordRequest);
 }
-export function* watchReset() {
+export function* watchVerify() {
     yield takeLatest(VERIFY, verifyRequest);
 }
 export function* watchchangePassword() {
@@ -192,9 +197,11 @@ export function* watchchangePassword() {
 export default function* authSaga() {
     yield all([
         fork(watchLogin),
+        fork(watchVerify),
+
         fork(watchForgot),
         fork(watchReset),
-        fork(watchVerify),
+
         fork(watchSignup),
         fork(watchSocialSignup),
         fork(watchchangePassword),

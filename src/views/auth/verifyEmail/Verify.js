@@ -8,7 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { emailVerification } from 'redux/auth/actions';
 import { setLoader } from 'redux/auth/actions';
 import TextField from '@material-ui/core/TextField';
-import '@fontsource/public-sans';
+
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 import CircularProgress from '@mui/material/CircularProgress';
 
 // third party
@@ -20,27 +22,27 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 
 // ========================|| FIREBASE - FORGOT PASSWORD ||======================== //
 
-const VerifyEmail = ({ token , ...others }) => {
+const VerifyEmail = ({ token, ...others }) => {
     const theme = useTheme();
     // const loader = useSelector((state) => state.auth.loader);
-console.log(token, 'token');
+    console.log(token, 'token');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+   
+
     useEffect(() => {
-     
-        dispatch(setLoader(true));
+       
         dispatch(
             emailVerification({
                 token: token,
                 navigate: navigate
             })
         );
-    
-}, [token]);
+    }, [token]);
+   
     return (
         <>
-            <Formik
-            >
+            <Formik>
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <Grid xs={12} sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#6d6e72' }}>
@@ -49,43 +51,12 @@ console.log(token, 'token');
                             </Typography>
                             <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}>
                                 <Grid item>
-                                    
-                                    <CircularStatic/>
+                                    <CircularStatic />
                                 </Grid>
                             </Grid>
                         </Grid>
 
-                        {/*   <Box sx={{ mt: 2 }}>
-                            <AnimateButton>
-                                {loader ? (
-                                    <Button
-                                        className="signbuttonMarket"
-                                        disableElevation
-                                        disabled={isSubmitting}
-                                        fullWidth
-                                        size="large"
-                                        type="submit"
-                                        variant="contained"
-                                        color="secondary"
-                                    >
-                                    Verify
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        className="signbuttonMarket"
-                                        disableElevation
-                                        disabled={isSubmitting}
-                                        fullWidth
-                                        size="large"
-                                        type="submit"
-                                        variant="contained"
-                                        color="secondary"
-                                    >
-                                    Verify
-                                    </Button>
-                                )}
-                            </AnimateButton>
-                        </Box> */}
+                     
                     </form>
                 )}
             </Formik>
