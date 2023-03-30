@@ -16,7 +16,7 @@ const LandingPage = () => {
     return (
         <Grid item md={12} xs={12} lg={12} xl={12}>
             <Grid container-fluid>
-                <Grid  item md={12} xs={12} >
+                <Grid  item md={12} xs={12}>
                     <Header />
                 </Grid>
                 <Grid item md={12} xs={12}>

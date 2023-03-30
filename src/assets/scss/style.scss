@@ -179,19 +179,6 @@
     width: 62px;
     height: 61px;
 }
-.slick-dots button {
-    display: block;
-    width: 5px !important;
-    height: 5px !important;
-    padding: 0;
-    border: none;
-    border-radius: 100%;
-    background-color: #4DABF5 !important;
-    text-indent: -9999px;
-  }
-  .slick-dots li.slick-active button {
-    background-color: #F9FFFF !important;
-  }
 
 // .chooseFileInput {
 //     border: 1px solid rgba(0, 0, 0, 0.23);
@@ -1913,42 +1900,3 @@ text-align: center;
     font-weight: 400;
     font-size: 18px;
 }
-.slick-slider {
-    position: relative;
-    display: block;
-    box-sizing: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    touch-action: pan-y;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .slick-list {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .slick-track {
-    position: relative;
-    top: 0;
-    left: 0;
-    display: block;
-  }
-  
-  .slick-slide {
-    float: left;
-    height: 100%;
-    min-height: 1px;
-    display: none;
-  }
-  
-  .slick-slide img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
