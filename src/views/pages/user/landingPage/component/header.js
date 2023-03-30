@@ -38,16 +38,17 @@ const Header = () => {
     const theme = useTheme();
 
     return (
-        <Carousel responsive={responsive}   swipeable={true}
-        draggable={false}
+        <Carousel responsive={responsive}   
+        // swipeable={true}
+        // draggable={false}
         arrows={false}
         showDots={true}
-        ssr={true} // means to render carousel on server-side.
+        // ssr={true} // means to render carousel on server-side.
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={1000}
+        autoPlaySpeed={2000}
         keyBoardControl={true}
-        customTransition="all .5"
+        // customTransition="all .5"
         transitionDuration={500}
         containerClass="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile"]}
