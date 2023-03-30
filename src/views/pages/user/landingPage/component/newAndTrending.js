@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@mui/material';
 import { gridSpacing } from 'store/constant';
 import NewCard from '../../commonComponent/newCard';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+// import Carousel from 'react-multi-carousel';
+// import 'react-multi-carousel/lib/styles.css';
 import { useTheme } from '@mui/material/styles';
 
 import React from 'react';
