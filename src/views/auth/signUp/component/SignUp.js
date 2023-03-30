@@ -41,49 +41,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
     const [walletAddress, setWalletAddress] = useState('');
     const [address, setAddress] = useState('');
 
-    const handleConnect = async () => {
-        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
-        if (response) {
-            if (!window.ethereum) {
-                dispatch({
-                    type: SNACKBAR_OPEN,
-                    open: true,
-                    message: 'No crypto wallet found. Please install it.',
-                    variant: 'alert',
-                    alertSeverity: 'info'
-                });
-                console.log('No crypto wallet found. Please install it.');
-                // toast.error('No crypto wallet found. Please install it.');
-            }
-
-            // else if (window?.ethereum?.networkVersion !== '5') {
-            //   console.log('window?.ethereum?.networkVersion !== 5', window?.ethereum?.networkVersion);
-            //     dispatch({
-            //         type: SNACKBAR_OPEN,
-            //         open: true,
-            //         message: 'Please change your Chain ID to Goerli',
-            //         variant: 'alert',
-            //         alertSeverity: 'info'
-            //     });
-            //     console.log('Please change your Chain ID to Goerli');
-            //     setWalletAddress()
-            // }
-            else {
-                const address = utils?.getAddress(response[0]);
-                setWalletAddress(address);
-                dispatch({
-                    type: SNACKBAR_OPEN,
-                    open: true,
-                    message: 'Success',
-                    variant: 'alert',
-                    alertSeverity: 'success'
-                });
-            }
-        } else {
-            console.log('No crypto wallet found. Please install it.');
-            // toast.error('No crypto wallet found. Please install it.');
-        }
-    };
+  
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -97,10 +55,22 @@ const SignUpForm = ({ loginProp, ...others }) => {
     const handleClickShowconfirmPassword = () => {
         setShowconfirmPassword(!showconfirmPassword);
     };
+    const handleConnect = async () => {
+        if (!window.ethereum) {
+            toast.error('No crypto wallet found. Please install it.');
+        }
+
+        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (response) {
+            const address = utils?.getAddress(response[0]);
+            setWalletAddress(address);
+        } else {
+            toast.error('No crypto wallet found. Please install it.');
+        }
+    };
 
     useEffect(() => {
         dispatch(setWallet(walletAddress));
-        handleConnect();
     }, [walletAddress]);
 
     if (window.ethereum) {
@@ -391,7 +361,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 handleConnect();
                             }}
                         >
-                            {walletAddress ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42) : 'Connect with wallet'}
+                            {'Connect with wallet'}
                         </Button>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>

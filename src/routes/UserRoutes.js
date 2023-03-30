@@ -17,6 +17,7 @@ const DeliveryDashboard = Loadable(lazy(() => import('views/pages/user/deliveryD
 
 const Profile = Loadable(lazy(() => import('views/pages/staticCode/creatorProfile')));
 const CompanyPage = Loadable(lazy(() => import('views/pages/staticCode/companyPage')));
+const BMWPage = Loadable(lazy(() => import('views/pages/staticCode/BMWPage')));
 
 
 // ==============================|| market  ROUTING ||============================== //
@@ -83,6 +84,10 @@ const UserRoutes = {
         {
             path: '/companyPage',
             element: <CompanyPage />
+        },
+        {
+            path: '/BMW',
+            element: <BMWPage />
         },
         {
             path: '/*',

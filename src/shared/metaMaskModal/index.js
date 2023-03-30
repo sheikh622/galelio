@@ -33,7 +33,8 @@ import { updateProperty } from 'redux/brand/actions';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import metaMask from 'assets/images/metamask.svg';
-
+import { ethers, utils } from 'ethers';
+import { setWallet } from 'redux/auth/actions';
 // slide animation
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
@@ -54,12 +55,29 @@ export default function MetaMask({ open, setOpen }) {
         textAlign: 'right'
     }));
     const [file, setFile] = useState('');
+
     // console.log('nftid==========??', nftid);
     const user = useSelector((state) => state.auth.user);
     const navigate = useNavigate();
+   const dispatch = useDispatch();
+    const [walletAddress, setWalletAddress] = useState();
+    const handleConnect = async () => {
+        if (!window.ethereum) {
+            toast.error('No crypto wallet found. Please install it.');
+        }
 
-    const dispatch = useDispatch();
+        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (response) {
+            const address = utils?.getAddress(response[0]);
+            setWalletAddress(address);
+        } else {
+            toast.error('No crypto wallet found. Please install it.');
+        }
+    };
 
+    useEffect(() => {
+        dispatch(setWallet(walletAddress));
+    }, [walletAddress]);
     const handleClose = () => {
         setOpen(false);
     };
@@ -117,6 +135,9 @@ export default function MetaMask({ open, setOpen }) {
                         <Grid mt={1} xs={8}>
                             
                             <Button  sx={{ color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
+                            onClick={() => {
+                                handleConnect();
+                            }}
                             className='connect-button' variant="text" startIcon={<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 212 189">
                             <g fill="none" fill-rule="evenodd">
                                 <polygon
