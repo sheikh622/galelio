@@ -1,4 +1,3 @@
-import axioss from 'axios';
 import axios from 'utils/axios';
 import { all, call, fork, put, retry, takeLatest, select } from 'redux-saga/effects';
 import { sagaErrorHandler } from 'shared/helperMethods/sagaErrorHandler';
@@ -49,7 +48,7 @@ export function* watchAddCategory() {
 }
 
 function* updateCategoryRequest({ payload }) {
-    console.log('payload', payload);
+  
     const formData = new FormData();
     formData.append('name', payload.name);
     formData.append('description', payload.description);

@@ -26,9 +26,8 @@
 
 .scrollbar-container {
     .ps__rail-y {
-
-        &:hover>.ps__thumb-y,
-        &:focus>.ps__thumb-y,
+        &:hover > .ps__thumb-y,
+        &:focus > .ps__thumb-y,
         &.ps--clicking .ps__thumb-y {
             background-color: $grey500;
             width: 5px;
@@ -60,8 +59,8 @@
 }
 
 .scrollbar-container.ps,
-.scrollbar-container>.ps {
-    &.ps--active-y>.ps__rail-y {
+.scrollbar-container > .ps {
+    &.ps--active-y > .ps__rail-y {
         width: 5px;
         background-color: transparent !important;
         z-index: 999;
@@ -73,8 +72,8 @@
         }
     }
 
-    &.ps--scrolling-y>.ps__rail-y,
-    &.ps--scrolling-x>.ps__rail-x {
+    &.ps--scrolling-y > .ps__rail-y,
+    &.ps--scrolling-x > .ps__rail-x {
         opacity: 0.4;
         background-color: transparent;
     }
@@ -103,7 +102,6 @@
 }
 
 @keyframes bounce {
-
     0%,
     20%,
     53%,
@@ -134,7 +132,6 @@
 }
 
 @keyframes slideY {
-
     0%,
     50%,
     100% {
@@ -151,7 +148,6 @@
 }
 
 @keyframes slideX {
-
     0%,
     50%,
     100% {
@@ -214,7 +210,7 @@
 
 html,
 body {
-    background: #f5f5f5 !important
+    // background: #181C1F !important;
 }
 
 .chooseFileInput {
@@ -293,11 +289,14 @@ body {
     margin: -20px;
     font-size: 35px;
     color: #212121 !important;
-    font-weight: 900;
-    font-family: 'Roboto', sans-serif;
+    // font-weight: 900;
+
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
+    // font-size: 30px;
     line-height: 1.2;
     margin-bottom: 0.35em;
-    color: #816a51 !important;
 }
 
 .signbutton {
@@ -362,11 +361,25 @@ body {
 }
 
 .chip:hover {
-    border-color: #604223 !important;
-    background: #604223 !important;
+    border-color: #2f5aff !important;
+    background: #2f5aff !important;
     color: #e3f2fd !important;
 }
-
+.avatarStyle {
+}
+// .css-1pqm26d-MuiAvatar-img {
+//     width: 100% !important;
+//     height: 56px !important;
+//     text-align: center;
+//     object-fit: cover !important;
+//     color: transparent;
+//     background: transparent !important;
+//     text-indent: 10000px;
+// }
+.css-1qed7u8-MuiButtonBase-root-MuiListItemButton-root:hover {
+    color: #fff !important;
+    background-color: rgba(47, 83, 255, 0.1411764706) !important;
+}
 .icons:hover {
     // background-color: #ede7f6 !important;
     // color: #9c6a36 !important;
@@ -516,103 +529,172 @@ body {
 // ===========================================================================================================>
 .mainBackground {
     // background-color: #212121;
-    min-height: 100vh;
+    min-height: auto;
+    max-height: auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 455px;
     width: 99%;
     background-image: url(../images/background1.png);
     background-position: center;
     background-size: cover;
-    margin-top: 15px;
+    overflow: hidden;
+    margin-top: 14px;
+    border-radius: 4px;
+    // margin-left: 20px;
 }
-
+.TextField-without-border-radius fieldset {
+    border-radius: 4px;
+    // background-color: transparent ;
+}
+.TextField-without-border-radius input {
+    border-radius: 4px;
+    // background-color: #266798 ;
+}
+.TextField-without-border-radius OutlinedInput {
+    border-radius: 4px;
+}
 .create {
-    background: linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%);
-    padding: 8px 32px;
+    background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
+    padding: 13px 32px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: #ffffff;
 }
 
 .pbackground {
-    color: #2194FF;
-    font-weight: 600;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: capitalize;
+
+    color: #2194ff;
 }
 
 .Lux {
-
+    text-transform: capitalize;
 
     font-family: 'Public Sans';
     font-style: normal;
     font-weight: 700;
     font-size: 30px;
-    line-height: 35px;
+
     text-align: left;
 
     padding: 0 15px;
-
 }
-.nftHead{
-    font-family: 'Public Sans';
+
+.nftHead {
+    font-family: 'Poppins' !important;
     font-style: normal;
     font-weight: 500;
-    font-size:  21px;
-   
-    text-align: left;
+    font-size: 21px;
 
-    
+    text-align: left;
 }
-.nftText{
-    font-family: 'Public Sans';
+
+.nftText {
+    font-family: 'Poppins' !important;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-   
+    color: #2f53ff !important;
     text-align: left;
-
-  
 }
 
 .productdescription {
     // font-family: 'Public Sans';
+    font-family: 'Public Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 34px;
-    text-align: left;
+    display: flex;
+    /* align-items: center; */
     letter-spacing: 0.02em;
-    padding: 0 15px;
-    color: #9498AA;
 
+    text-transform: capitalize;
+
+    text-align: left;
+
+    padding: 0 15px;
+    color: #9498aa;
 }
 
 .select {
-
-
     border-radius: 4px !important;
     padding: 0 17px;
     text-align: left;
 }
-
+.textfield {
+    text-decoration: none !important;
+}
+.iconvisible {
+    position: absolute;
+    top: 19px;
+    right: 13px;
+}
+.textForm {
+    position: relative;
+}
+.auth-formcontrol {
+    margin-top: -10px !important;
+}
+.auth-formcontrol input {
+    color: gray !important;
+}
+.authFont {
+    font-family: 'Source Sans Pro' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+}
 .buy {
-    background: linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%);
+    background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
+    border-radius: 4px;
+    width: 90%;
+    margin-right: 15px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+
+    margin-right: 15px;
+}
+.sel {
+    background: transparent;
     border-radius: 4px;
     width: 90%;
 
     margin-right: 15px;
 }
-
+.Forgot {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
 .price {
     font-family: 'Public Sans';
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 19px;
     text-transform: capitalize;
-
 }
 
 .ETH {
+    color: darkorange;
     font-family: 'Public Sans';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
-
-
 }
 
 .timer {
@@ -620,11 +702,25 @@ body {
 }
 
 .auction {
-    padding: 12px 32px;
-    background: #D9D9D9;
-    border-radius: 4px;
-}
+    padding: 15px 36px;
 
+    border-radius: 4px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+#proofstyle {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: capitalize;
+}
 .overflow {
     width: 200px;
     white-space: nowrap;
@@ -632,45 +728,94 @@ body {
     /* border: 1px solid; */
     text-overflow: ellipsis;
 }
-.text{
-    font-weight: 700;
-font-size: 22px;
+.line {
+    background: #ccc;
+    width: 5px;
+    height: 420px;
+    color: transparent;
 
+    margin-top: 13px;
+    margin-left: 36px;
+    border-radius: 20px;
 }
-.creator{
+.text {
+    font-size: 22px;
+    text-transform: capitalize;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
+}
+
+.creator {
     font-weight: 400;
-    font-size: 17px;  
+    font-size: 17px;
 }
-.list{
-display: flex;
+
+.list {
+    display: flex;
 }
-.item{
-margin-right: 30px;
-list-style: none;
-}
-.itemstyle{
+
+.item {
     margin-right: 30px;
-
+    list-style: none;
 }
-.para{
+
+.itemstyle {
+    margin-right: 30px;
+}
+
+.para {
     font-weight: 300;
-font-size: 17px;
-
+    font-size: 17px;
 }
-.signInMarket{
-    font-weight: 700;
-font-size: 30px;
-line-height: 100%;
-/* identical to box height, or 30px */
-
+.account-style{
+    font-family: 'Public Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+color: #9498AA;
 text-align: center;
 
 
 }
-.signbuttonMarket{
-    background: linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%);
-border-radius: 4px;
-color: #fff;}
+
+.signInMarket {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 100%;
+// color: #262626;
+    font-family: 'Public Sans';
+    font-style: normal;
+
+    /* identical to box height, or 30px */
+
+    text-align: center;
+}
+.emailfont {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+}
+.signbuttonMarket {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+
+    background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
+    border-radius: 4px;
+    color: #fff;
+}
+.ReEnterEmail {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #2f53ff;
+    border-color: #2f53ff;
+    border-radius: 4px;
+    
+}
 
 .brandDialog {
     .MuiDialog-paper {
@@ -685,6 +830,59 @@ color: #fff;}
         }
     }
 }
+@media only screen and (min-width: 320px) and (max-width: 900px) {
+    .mainBackground {
+        // background-color: #212121;
+
+        height: auto !important;
+        width: 99%;
+        background-image: url(../images/background1.png);
+        background-position: center;
+        background-size: cover;
+        margin-top: 15px;
+        margin-left: 0 !important;
+    }
+}
+.adminDialog {
+    .MuiDialog-paper {
+        width: 100%;
+        max-height: 685px;
+
+        border-radius: 2px !important;
+    }
+
+    @media only screen and (min-width: 320px) and (max-width: 480px) {
+        .MuiDialog-paper {
+            width: 100%;
+            max-height: 530px;
+        }
+    }
+}
+.createDialog {
+    .MuiDialog-paper {
+        width: 100%;
+        max-height: 575px;
+
+        border-radius: 2px !important;
+    }
+
+    @media only screen and (min-width: 320px) and (max-width: 480px) {
+        .MuiDialog-paper {
+            width: 100%;
+            max-height: 530px;
+        }
+    }
+}
+.field {
+    background-color: transparent;
+    margin-top: -6px !important;
+}
+.inputPadding {
+    padding: 0px !important;
+}
+.categoryDialog {
+    width: 77%;
+}
 
 .responsiveSelectfield {
     @media only screen and (min-width: 320px) and (max-width: 480px) {
@@ -697,38 +895,1047 @@ color: #fff;}
 .list {
     margin: 12px;
 }
+
 .listItem {
     border: solid 1px rgba(145, 158, 171, 0.24);
     margin: 8px 0px;
     padding: 4px 16px;
-    border-radius: 8px;
-    background-color: #fff;
+    border-radius: 4px;
+    background: linear-gradient(97.63deg, #2f57ff 0%, #2fa3ff 108.45%);
 }
+
 .quantityField {
     width: 100px;
+    text-align: center !important;
     & .css-4pzdr3-MuiInputBase-input-MuiOutlinedInput-input {
         height: 0.8375em;
     }
 }
-.slider{
-    
+
+.slider {
     background-color: transparent;
-    height: 390px;
-    width: 90%;
-    margin:0 auto;
+    height: 330px;
+    width: 95%;
+    margin: 0 auto;
     justify-content: center;
     text-align: center;
     color: #212121;
-    overflow: hidden;
 }
-.sliderBrand{
-    
+.catigaryslider {
     background-color: transparent;
-    height: 340px;
-    width: 90%;
-    margin:0 auto;
+    height: 198px;
+    width: 95%;
+    margin: 0 auto;
     justify-content: center;
     text-align: center;
     color: #212121;
 }
 
+.sliderBrand {
+    background-color: transparent;
+    height: 250px;
+    width: 95%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    color: #212121;
+}
+.noData {
+    font-size: 18px;
+    font-weight: 400px;
+    margin-left: 50px;
+}
+
+.noDataNew {
+    font-size: 18px;
+    font-weight: 400px;
+    margin-left: 82px;
+}
+.noDatacat {
+    font-size: 18px;
+    font-weight: 400px;
+    margin-left: 68px;
+}
+.NFTdetails {
+    overflow: hidden;
+    padding: 10px;
+    height: 325px;
+}
+.Productdetails {
+    overflow: hidden;
+}
+.deliveryimageSize {
+    width: 100%;
+
+    height: 350px;
+    object-fit: cover;
+}
+.ProductimageSize {
+    width: 100%;
+
+    height: 410px;
+    object-fit: cover;
+}
+.imageSize {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.userName {
+    font-size: 20px;
+    color: #2196f3;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.brand {
+    font-size: 21px;
+    color: #2196f3;
+    text-transform: capitalize;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+}
+.creator {
+    margin-top: 7px;
+    color: #cdcdcd;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+}
+.AdminRole {
+    margin-top: 7px;
+    color: rgb(169, 157, 157);
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+// #################################################################
+.tableName {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: none;
+
+    color: #98a2b2;
+    margin: 9px 0px 0 7px !important;
+}
+.tablecell {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 500;
+
+    color: #98a2b2;
+    margin: 0px 0px 0 0px !important;
+}
+.Tableheading {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 19px !important;
+}
+.color {
+    color: #2f53ff;
+}
+.tableShadow {
+    box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
+
+    border-radius: 5px !important;
+}
+.walletShadow {
+    // box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.164) !important;
+
+    border-radius: 8px !important;
+}
+
+.propertyShadow {
+    box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
+    border-radius: 5px !important;
+    border-color: #2f53ff !important;
+}
+.tableShadow {
+    box-shadow: 0px 4px 15px rgb(0 0 0 / 25%) !important;
+    border-radius: 5px !important;
+}
+.mainheading {
+    font-weight: 600 !important;
+    font-family: 'Poppins' !important;
+    font-style: normal !important;
+    font-size: 27px !important;
+}
+.headingcard {
+    font-weight: 600;
+    font-family: 'Poppins';
+    font-style: normal;
+    background-color: transparent;
+}
+.buttonSize {
+    padding: 7px 28px !important;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    // padding:7px 29px !important;
+
+    // margin-left:10px !important;
+}
+.wallet-button  {
+    // padding: 7px 248px !important;
+    margin-left: -28px;
+    width: 380px;
+    font-family: 'Poppins';
+    font-style: normal;
+    // padding:7px 29px !important;
+
+    // margin-left:10px !important;
+}
+.Adminheading {
+    background-color: transparent;
+    border: none !important ;
+}
+.stylingtitle {
+    font-family: 'Poppins' !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    // font-size: 16px;
+    letter-spacing: 0.5px;
+}
+.sidebartitle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    // font-size: 16px;
+    letter-spacing: 0.5px;
+}
+.css-bpi7ug-MuiButtonBase-root-MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+    color: #2f53ff !important;
+}
+
+.css-908h34-MuiTypography-root {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #212121;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.334;
+    color: #2f53ff !important;
+}
+.adminname {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+}
+.dialog {
+    width: 27% !important;
+    margin: 0 auto;
+    // border: 2px solid red;
+}
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+    .dialog {
+        width: 100% !important;
+        max-height: 530px;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 1200px) {
+    .dialog {
+        width: 50% !important;
+        max-height: 530px;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    .dialog {
+        width: 50% !important;
+        max-height: 530px;
+    }
+}
+@media only screen and (min-width: 900px) and (max-width: 1199px) {
+    .dialog {
+        width: 40% !important;
+        max-height: 530px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1350px) {
+    .dialog {
+        width: 35% !important;
+        max-height: 530px;
+    }
+}
+
+.Nftdialog {
+    width: 100% !important;
+    margin: 0 auto;
+    max-height: 100vh;
+}
+.buttons {
+    justify-content: center;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+.mintbuttons {
+    justify-content: center;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.textfieldStyle {
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 19px !important;
+    /* line-height: 29px; */
+    color: #757575 !important;
+}
+.statustypo {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+}
+.statusHeading {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+}
+.css-c0hsol-MuiTypography-root {
+    margin: 0;
+    font-size: 0.875rem;
+
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    /* line-height: 1.334; */
+    margin-top: 24px;
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 19px !important;
+    /* line-height: 29px; */
+    color: #757575 !important;
+}
+.css-ix00ao-MuiInputBase-input-MuiInput-input {
+    font: inherit;
+    letter-spacing: inherit;
+    color: currentColor;
+    padding: 4px 0 5px;
+    border: 0;
+    box-sizing: content-box;
+    background: none;
+    height: 1.4375em;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    min-width: 0;
+    width: 100%;
+    -webkit-animation-name: mui-auto-fill-cancel;
+    animation-name: mui-auto-fill-cancel;
+    -webkit-animation-duration: 10ms;
+    animation-duration: 10ms;
+
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    /* line-height: 29px; */
+    color: #757575 !important;
+}
+
+.menustyle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.4545px;
+    /* line-height: 22px; */
+    /* display: flex; */
+    align-items: center;
+    color: #7778c2 !important;
+}
+.selectstyle {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.4545px;
+    /* line-height: 22px; */
+    /* display: flex; */
+    align-items: center;
+    color: #2f53ff !important;
+    // border: 2px solid #b9ddff;
+    padding: 7px 10px 0 10px;
+    border-radius: 2px;
+}
+.nftButtons {
+    padding: 7px 30px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+
+    /* font-size: 19.0507px; */
+
+    border-radius: 4px;
+}
+.lazyButtons {
+    padding: 7px 34px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+
+    /* font-size: 19.0507px; */
+
+    border-radius: 4px;
+}
+.postion-property{
+position: relative;
+height: 130px;
+}
+.postion-fields{
+position: absolute;
+top: 20px;
+left: 1px;
+}
+.postion-icon{
+position: absolute;
+top: 8px;
+right: 8px;
+}
+.fieldbutton {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    background: linear-gradient(97.63deg, #2f57ff 0%, #2fa3ff 108.45%);
+    border-radius: 4px;
+}
+.walletbutton {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    background: transparent;
+    border-radius: 4px;
+}
+.fontstyling {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+}
+.assignheading {
+    font-weight: 600;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 25px;
+}
+.css-17c4ftt {
+    background: #e4f3f2 !important;
+}
+.encap {
+    white-space: nowrap;
+    width: 50px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.encap-nft {
+    white-space: nowrap;
+    width: 100% !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.font-in-detail {
+    font-family: 'Poppins';
+    font-style: normal;
+}
+.encapPropertry {
+    text-align: center;
+    white-space: nowrap;
+    width: auto !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}
+.encap-fieldName{
+    text-align: center;
+    white-space: nowrap;
+    width: 50% !important;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+}
+.dialog_details {
+    height: 520px;
+    width: 99%;
+    margin: 0 auto;
+}
+.fixedDialoge {
+    width: 220px;
+}
+.prdpadding {
+    padding: 10px 8px 0 25px !important;
+}
+// .css-bpi7ug-MuiButtonBase-root-MuiListItemButton-root.Mui-selected:hover {
+//     background-color: transparent !important;
+
+//     border-right: 10px solid #2f53ff !important;
+// }
+.circul {
+    color: #fff !important;
+    width: 35px !important;
+    height: 35px !important;
+}
+.wallet-select{
+    font-family: 'Public Sans';
+font-style: normal;
+font-weight: 400 !important;
+font-size: 20px !important;
+text-align: center;
+   
+}
+.connect-wallet{
+    font-family: 'Public Sans' !important;
+font-style: normal !important;
+font-weight: 700 !important;
+font-size: 20px !important;
+text-align: center;
+
+}
+.My-wallet{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 17px !important;
+    text-align: left;  
+}
+.MenuItem-style{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 17px !important;
+    text-align: left; 
+    margin: 8px 13px; 
+}
+.balance{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 17px !important;
+    text-align: center;  
+}
+.usd{
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 17px !important;
+    text-align: center;  
+}
+
+.connecting{
+    font-size: 0.875rem  !important;
+    font-weight: 400  !important;
+    line-height: 1.334em;
+    
+    font-family: 'Public Sans' !important;
+font-style: normal !important;
+
+text-align: center;
+
+}
+.connect-button{
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    text-align: center; 
+}
+.nsm7Bb-HzV7m-LgbsSe {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background-color 0.218s, border-color 0.218s;
+    transition: background-color 0.218s, border-color 0.218s;
+    -webkit-user-select: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #dadce0;
+    color: #3c4043;
+    cursor: pointer;
+    font-family: 'Google Sans', arial, sans-serif;
+    font-size: 14px;
+    height: 40px;
+    letter-spacing: 0.25px;
+    outline: none;
+    overflow: hidden;
+    padding: 0 23px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 50% !important;
+    /* padding: 20px; */
+    margin: 0 auto !important;
+}
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+    color: #2f53ff !important;
+}
+.css-dj8axb-MuiTypography-root {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #d7dcec;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.334;
+    color: #2f53ff !important;
+}
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+    color: #2f53ff !important;
+    background-color: transparent !important;
+}
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root:hover {
+    background-color: #2f53ff24 !important;
+    color: #2f53ff !important;
+}
+.fontfigma {
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    line-height: 26px !important;
+}
+.fontsize {
+    font-size: 23px !important;
+}
+@media only screen and (min-width: 1568px) {
+    .fontfigma {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        font-size: 28px !important;
+        line-height: 26px !important;
+    }
+    .noDatacat {
+        font-size: 25px !important;
+        font-weight: 400px !important;
+        margin-left: 75px !important;
+    }
+    .noDataNew {
+        font-size: 25px !important;
+        font-weight: 400px !important;
+        margin-left: 75px !important;
+    }
+    .cardHeading {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 23px !important;
+    }
+    .Creationstyling {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        text-transform: capitalize !important;
+        font-size: 20px !important;
+    }
+
+    .categoreyName {
+        font-family: 'Public Sans' !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 23px !important;
+    }
+}
+
+.categoreyName {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
+.centerText {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: capitalize;
+}
+.productfigmastyl {
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 24px !important;
+    line-height: 28px !important;
+    /* text-align: center; */
+    text-transform: capitalize !important;
+}
+.plight {
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    text-align: center !important;
+    text-transform: capitalize !important;
+    color: #cdcdcd !important;
+}
+.MuiInputBase-input {
+    font: inherit;
+    color: currentColor;
+    width: 100%;
+    border: 0;
+    height: 1.1876em;
+    margin: 0;
+    display: block;
+    padding: 6px 0 7px;
+    min-width: 0;
+    background: none;
+    box-sizing: content-box;
+    animation-name: mui-auto-fill-cancel;
+    letter-spacing: inherit;
+    animation-duration: 10ms;
+    -webkit-tap-highlight-color: transparent;
+}
+.Creationstyling {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    // font-size: 10px;
+
+    text-transform: capitalize;
+}
+.cardHeading {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 500;
+    // font-size: 10px;
+}
+.brandName {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 200;
+    // font-size: 8px;
+}
+.fontfamily {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+}
+.activityTable {
+    font-family: 'Public Sans';
+    font-style: normal;
+}
+
+.newCreator {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 200;
+}
+.footerDownloadTag {
+    font-family: 'Public Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+}
+.MarketplaceHead {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    /* identical to box height */
+}
+.sidebar {
+    max-width: 200px !important;
+    // margin-top: 12px;
+}
+// <umar code
+.slick-slide .MuiGrid-root {
+    margin-left: 0px !important;
+    /* margin-right: 32px; */
+    // margin-right: 18px !important;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1370px) {
+    .cate-margin {
+        margin-right: 35px;
+        margin-left: -6px;
+    }
+
+    .cate-width {
+        width: 210px;
+    }
+
+    .new-margin {
+        margin-right: 20px;
+        margin-left: 9px;
+    }
+    .new-width {
+        width: 215px;
+        border:2px solid red
+    }
+    .feature {
+        margin-right: 32px;
+        margin-left: 0px;
+    }
+    .feature-width {
+        width: 215px;
+    }
+    .footersocalIcons {
+        margin-right: 25px;
+    }
+    .contactLargescrn {
+        margin-top: 35px;
+    }
+    .sideLine {
+        gap: 21px;
+    }
+}
+@media only screen and (min-width: 1900px) and (max-width: 2560px) {
+    .fontsize {
+        font-size: 25px !important;
+    }
+    .outlet-Margin {
+        margin-left: -18px;
+    }
+    .mainBackground {
+        // background-color: #212121;
+        min-height: auto;
+        max-height: auto;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        height: 455px;
+        width: 100%;
+        background-image: url(../images/background1.png);
+        background-position: center;
+        background-size: cover;
+        overflow: hidden;
+        margin-top: 13px;
+        border-radius: 4px;
+        // margin-left: 20px;
+    }
+    .cate-margin {
+        margin-right: 28px;
+        margin-left: 0px;
+    }
+
+    .cate-width {
+        width: 100%;
+    }
+
+    .new-margin {
+        margin-right: 20px;
+        margin-left: 9px;
+    }
+    .new-width {
+        width: 100%;
+    }
+    .feature {
+        margin-right: 32px;
+        margin-left: 0px;
+    }
+    .feature-width {
+        width: 100%;
+    }
+    .footersocalIcons {
+        margin-right: 10px;
+    }
+    .contactLargescrn {
+        margin-top: 35px;
+    }
+    .sideLine {
+        gap: 21px;
+    }
+}
+@media only screen and (min-width: 1371px) and (max-width: 1535px) {
+    .cate-margin {
+        margin-right: 39px;
+        margin-left: 0px;
+    }
+    //   .bottom{
+    //     padding-bottom: 7.52% !important;
+    //   }
+    .cate-width {
+        width: 230px;
+    }
+    .new-margin {
+        margin-right: 22px !important;
+
+        margin-left: 19px !important;
+    }
+    .new-width {
+        width: 234px;
+    }
+    .feature {
+        margin-right: 26px;
+        margin-left: 11px;
+    }
+    .feature-width {
+        width: 234px;
+    }
+    .footersocalIcons {
+        margin-right: 22px;
+    }
+}
+.font-company-page {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    // font-size: 36.8571px;
+}
+.des-font {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 34px;
+}
+// @media only screen and (min-width: 900px) and (max-width: 1200px){
+//     .sideLine{
+//         gap:7px;
+//     }
+// }
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    .cate-margin {
+        margin-right: -8px;
+        margin-left: -10px;
+    }
+
+    .cate-width {
+        width: 100%;
+    }
+    .catigaryslider {
+        background-color: transparent;
+        height: 198px;
+        width: 85%;
+        margin: 0 auto;
+        justify-content: center;
+        text-align: center;
+        color: #212121;
+    }
+    .slider {
+        background-color: transparent;
+        height: 330px;
+        width: 85%;
+        margin: 0 auto;
+        justify-content: center;
+        text-align: center;
+        color: #212121;
+    }
+    .sliderBrand {
+        background-color: transparent;
+        height: 250px;
+        width: 85%;
+        margin: 0 auto;
+        justify-content: center;
+        text-align: center;
+        color: #212121;
+    }
+}
+
+@media only screen and (min-width: 1536px) and (max-width: 1699px) {
+    .Gap {
+        gap: 18px !important;
+    }
+    .new-margin {
+        margin-right: 0px;
+        margin-left: 2px;
+    }
+
+    .barHeight {
+        height: 50px !important;
+    }
+}
+@media only screen and (min-width: 1700px)  and (max-width: 2000px) {
+    .Gap {
+        gap: 24px !important;
+    }
+}
+@media only screen and (min-width: 899px)  and (max-width: 1100px) {
+    .Gap {
+        gap: 7px !important;
+    }
+    .fontsize {
+        font-size: 20px !important;
+    }
+    
+}
+@media only screen and (min-width: 2001px) {
+    .Gap {
+        gap: 34px !important;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .slick-slide .MuiGrid-root {
+        margin-left: 40px !important;
+        /* margin-right: 32px; */
+        margin-right: 2px !important;
+    }
+}
+
+//umar code>
+//>>>>>>>>>>>>
+//bmw page>
+.bmw{
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26.8571px;
+}
+.bmw-title{
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+  
+  .slick-slide {
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    display: none;
+  }
+  
+  .slick-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }

@@ -4,8 +4,10 @@ import React, { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import AdminGuard from './RouteGuard/AdminGuard';
+// const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 
 const SuperAdminDashboard = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
+const Starting = Loadable(lazy(() => import('views/pages/superAdmin/dashboard')));
 const SubAdmin = Loadable(lazy(() => import('views/pages/superAdmin/subAdmin')));
 const Brand = Loadable(lazy(() => import('views/pages/superAdmin/brands')));
 const BrandAdmin = Loadable(lazy(() => import('views/pages/superAdmin/brands/brandAdmin')));
@@ -13,7 +15,6 @@ const BrandCategory = Loadable(lazy(() => import('views/pages/superAdmin/brands/
 const Categories = Loadable(lazy(() => import('views/pages/superAdmin/categories')));
 const NftManagement = Loadable(lazy(() => import('views/pages/superAdmin/nftManagement')));
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const SuperAdminRoutes = {
@@ -26,6 +27,10 @@ const SuperAdminRoutes = {
     ),
     type: 'group',
     children: [
+        {
+            path: '/',
+            element: <Starting />
+        },
         {
             path: '/dashboard',
             element: <SuperAdminDashboard />

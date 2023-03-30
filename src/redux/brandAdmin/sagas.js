@@ -29,7 +29,8 @@ function* addBrandAdminRequest({ payload }) {
         firstName: payload.firstName,
         lastName: payload.lastName,
         email: payload.email,
-        password: payload.password
+        password: payload.password,
+        walletAddress: payload.walletAddress
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -54,7 +55,7 @@ export function* watchAddBrandAdmin() {
 }
 
 function* updateBrandAdminRequest({ payload }) {
-    console.log('payload', payload);
+   
     let data = {
         adminId: payload.id,
         firstName: payload.firstName,

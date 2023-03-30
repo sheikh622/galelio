@@ -9,8 +9,10 @@ import { Buffer } from 'buffer';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NFTAbi from '../../../../../contractAbi/NFT.json';
+import  BLOCKCHAIN from '../../../../../constants';
 const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
 const projectSecret = 'a09de1e8b20292cd87460290de554003';
+
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
 const client = create({
@@ -25,6 +27,7 @@ const client = create({
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function MintNftDialog({ open, setOpen, page, limit, search, categoryId, loader, setLoader, nftData, type }) {
+
     const theme = useTheme();
     const dispatch = useDispatch();
     const walletAddress = useSelector((state) => state.auth.walletAddress);
@@ -84,7 +87,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             } else if (uriArray.length > 1) {
                 let mintedNFT = await (
                     await nft.bulkMint(uriArray).catch((error) => {
-                        toast.error('NFT minting  unsuccessfull');
+                        toast.error(error.message);
                     })
                 ).wait();
                 transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
@@ -124,6 +127,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             }
         } catch (error) {
             setLoader(false);
+            toast.error(error.message);
         }
     };
 
@@ -146,6 +150,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
             directMintThenList(result);
         } catch (error) {
             setLoader(false);
+            toast.error(error.message);
         }
     };
 
@@ -169,7 +174,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, cate
         );
         const uri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
 
-        let token = '0x9C7F2b187d24147F1f993E932A16e59111675867';
+        let token = BLOCKCHAIN.ERC20
         const SIGNING_DOMAIN = 'Voucher';
         const SIGNATURE_VERSION = '4';
         const chainId = 5;

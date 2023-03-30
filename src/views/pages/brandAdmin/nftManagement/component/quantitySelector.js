@@ -7,10 +7,13 @@ const QuantitySelector = ({ formik, fileArray, index }) => {
 
     return (
         <>
-            <div style={{ display: 'flex', marginRight: '10px' }}>
-                <Typography style={{ marginTop: '12px', marginRight: '5px' }}>Quantity : </Typography>
+            <div style={{ display: 'flex', marginRight: '10px', }}>
+                <Typography variant='h3' style={{ marginTop: '5px',
+                 marginRight: '5px' }}>Quantity  </Typography>
 
                 <TextField
+              
+               variant='filled'
                     type="number"
                     className="quantityField"
                     id="outlined-select-currency-native"

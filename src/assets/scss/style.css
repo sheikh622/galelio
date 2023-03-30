@@ -109,29 +109,12 @@
   background-color: transparent;
 }
 
-@-webkit-keyframes wings {
-  50% {
-    transform: translateY(-40px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
 @keyframes wings {
   50% {
     transform: translateY(-40px);
   }
   100% {
     transform: translateY(0px);
-  }
-}
-@-webkit-keyframes blink {
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 @keyframes blink {
@@ -142,44 +125,17 @@
     opacity: 1;
   }
 }
-@-webkit-keyframes bounce {
-  0%, 20%, 53%, to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    transform: translateZ(0);
-  }
-  40%, 43% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    transform: translate3d(0, -5px, 0);
-  }
-  70% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    transform: translate3d(0, -7px, 0);
-  }
-  80% {
-    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    transform: translateZ(0);
-  }
-  90% {
-    transform: translate3d(0, -2px, 0);
-  }
-}
 @keyframes bounce {
   0%, 20%, 53%, to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
     transform: translateZ(0);
   }
   40%, 43% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
     transform: translate3d(0, -5px, 0);
   }
   70% {
-    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
-            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
     transform: translate3d(0, -7px, 0);
   }
   80% {
@@ -188,17 +144,6 @@
   }
   90% {
     transform: translate3d(0, -2px, 0);
-  }
-}
-@-webkit-keyframes slideY {
-  0%, 50%, 100% {
-    transform: translateY(0px);
-  }
-  25% {
-    transform: translateY(-10px);
-  }
-  75% {
-    transform: translateY(10px);
   }
 }
 @keyframes slideY {
@@ -210,17 +155,6 @@
   }
   75% {
     transform: translateY(10px);
-  }
-}
-@-webkit-keyframes slideX {
-  0%, 50%, 100% {
-    transform: translateX(0px);
-  }
-  25% {
-    transform: translateX(-10px);
-  }
-  75% {
-    transform: translateX(10px);
   }
 }
 @keyframes slideX {
@@ -246,11 +180,6 @@
 .avatarSiz {
   width: 62px;
   height: 61px;
-}
-
-html,
-body {
-  background: #f5f5f5 !important;
 }
 
 .chooseFileInput {
@@ -321,11 +250,11 @@ body {
   margin: -20px;
   font-size: 35px;
   color: #212121 !important;
-  font-weight: 900;
-  font-family: "Roboto", sans-serif;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 700;
   line-height: 1.2;
   margin-bottom: 0.35em;
-  color: #816a51 !important;
 }
 
 .signbutton {
@@ -389,9 +318,14 @@ body {
 }
 
 .chip:hover {
-  border-color: #604223 !important;
-  background: #604223 !important;
+  border-color: #2f5aff !important;
+  background: #2f5aff !important;
   color: #e3f2fd !important;
+}
+
+.css-1qed7u8-MuiButtonBase-root-MuiListItemButton-root:hover {
+  color: #fff !important;
+  background-color: rgba(47, 83, 255, 0.1411764706) !important;
 }
 
 .packageDescription {
@@ -529,36 +463,67 @@ body {
 }
 
 .mainBackground {
-  min-height: 100vh;
+  min-height: auto;
+  max-height: auto;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 455px;
   width: 99%;
   background-image: url(../images/background1.png);
   background-position: center;
   background-size: cover;
-  margin-top: 15px;
+  overflow: hidden;
+  margin-top: 14px;
+  border-radius: 4px;
+}
+
+.TextField-without-border-radius fieldset {
+  border-radius: 4px;
+}
+
+.TextField-without-border-radius input {
+  border-radius: 4px;
+}
+
+.TextField-without-border-radius OutlinedInput {
+  border-radius: 4px;
 }
 
 .create {
-  background: linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%);
-  padding: 8px 32px;
+  background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
+  padding: 13px 32px;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: capitalize;
+  color: #ffffff;
 }
 
 .pbackground {
-  color: #2194FF;
-  font-weight: 600;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: capitalize;
+  color: #2194ff;
 }
 
 .Lux {
+  text-transform: capitalize;
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
-  line-height: 35px;
   text-align: left;
   padding: 0 15px;
 }
 
 .nftHead {
-  font-family: "Public Sans";
+  font-family: "Poppins" !important;
   font-style: normal;
   font-weight: 500;
   font-size: 21px;
@@ -566,22 +531,27 @@ body {
 }
 
 .nftText {
-  font-family: "Public Sans";
+  font-family: "Poppins" !important;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
+  color: #2f53ff !important;
   text-align: left;
 }
 
 .productdescription {
+  font-family: "Public Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 34px;
-  text-align: left;
+  display: flex;
+  /* align-items: center; */
   letter-spacing: 0.02em;
+  text-transform: capitalize;
+  text-align: left;
   padding: 0 15px;
-  color: #9498AA;
+  color: #9498aa;
 }
 
 .select {
@@ -590,25 +560,74 @@ body {
   text-align: left;
 }
 
+.textfield {
+  text-decoration: none !important;
+}
+
+.iconvisible {
+  position: absolute;
+  top: 19px;
+  right: 13px;
+}
+
+.textForm {
+  position: relative;
+}
+
+.auth-formcontrol {
+  margin-top: -10px !important;
+}
+
+.auth-formcontrol input {
+  color: gray !important;
+}
+
+.authFont {
+  font-family: "Source Sans Pro" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+}
+
 .buy {
-  background: linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%);
+  background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
   border-radius: 4px;
   width: 90%;
   margin-right: 15px;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 15px;
+}
+
+.sel {
+  background: transparent;
+  border-radius: 4px;
+  width: 90%;
+  margin-right: 15px;
+}
+
+.Forgot {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .price {
   font-family: "Public Sans";
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 19px;
   text-transform: capitalize;
 }
 
 .ETH {
+  color: darkorange;
   font-family: "Public Sans";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
 }
 
@@ -617,9 +636,23 @@ body {
 }
 
 .auction {
-  padding: 12px 32px;
-  background: #D9D9D9;
+  padding: 15px 36px;
   border-radius: 4px;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+#proofstyle {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  text-align: center;
+  text-transform: capitalize;
 }
 
 .overflow {
@@ -630,9 +663,22 @@ body {
   text-overflow: ellipsis;
 }
 
+.line {
+  background: #ccc;
+  width: 5px;
+  height: 420px;
+  color: transparent;
+  margin-top: 13px;
+  margin-left: 36px;
+  border-radius: 20px;
+}
+
 .text {
-  font-weight: 700;
   font-size: 22px;
+  text-transform: capitalize;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 700;
 }
 
 .creator {
@@ -658,16 +704,37 @@ body {
   font-size: 17px;
 }
 
+.account-style {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #9498AA;
+  text-align: center;
+}
+
 .signInMarket {
   font-weight: 700;
   font-size: 30px;
   line-height: 100%;
+  font-family: "Public Sans";
+  font-style: normal;
   /* identical to box height, or 30px */
   text-align: center;
 }
 
+.emailfont {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+}
+
 .signbuttonMarket {
-  background: linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%);
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  background: linear-gradient(138.3deg, #2f53ff -0.85%, #2fc1ff 131.63%);
   border-radius: 4px;
   color: #fff;
 }
@@ -681,6 +748,54 @@ body {
     width: 100%;
     max-height: 530px;
   }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 900px) {
+  .mainBackground {
+    height: auto !important;
+    width: 99%;
+    background-image: url(../images/background1.png);
+    background-position: center;
+    background-size: cover;
+    margin-top: 15px;
+    margin-left: 0 !important;
+  }
+}
+.adminDialog .MuiDialog-paper {
+  width: 100%;
+  max-height: 685px;
+  border-radius: 2px !important;
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .adminDialog .MuiDialog-paper {
+    width: 100%;
+    max-height: 530px;
+  }
+}
+
+.createDialog .MuiDialog-paper {
+  width: 100%;
+  max-height: 575px;
+  border-radius: 2px !important;
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .createDialog .MuiDialog-paper {
+    width: 100%;
+    max-height: 530px;
+  }
+}
+
+.field {
+  background-color: transparent;
+  margin-top: -6px !important;
+}
+
+.inputPadding {
+  padding: 0px !important;
+}
+
+.categoryDialog {
+  width: 77%;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
@@ -697,12 +812,13 @@ body {
   border: solid 1px rgba(145, 158, 171, 0.24);
   margin: 8px 0px;
   padding: 4px 16px;
-  border-radius: 8px;
-  background-color: #fff;
+  border-radius: 4px;
+  background: linear-gradient(97.63deg, #2f57ff 0%, #2fa3ff 108.45%);
 }
 
 .quantityField {
   width: 100px;
+  text-align: center !important;
 }
 .quantityField .css-4pzdr3-MuiInputBase-input-MuiOutlinedInput-input {
   height: 0.8375em;
@@ -710,21 +826,909 @@ body {
 
 .slider {
   background-color: transparent;
-  height: 390px;
-  width: 90%;
+  height: 330px;
+  width: 95%;
   margin: 0 auto;
   justify-content: center;
   text-align: center;
   color: #212121;
-  overflow: hidden;
+}
+
+.catigaryslider {
+  background-color: transparent;
+  height: 198px;
+  width: 95%;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+  color: #212121;
 }
 
 .sliderBrand {
   background-color: transparent;
-  height: 340px;
-  width: 90%;
+  height: 250px;
+  width: 95%;
   margin: 0 auto;
   justify-content: center;
   text-align: center;
   color: #212121;
+}
+
+.noData {
+  font-size: 18px;
+  font-weight: 400px;
+  margin-left: 50px;
+}
+
+.noDataNew {
+  font-size: 18px;
+  font-weight: 400px;
+  margin-left: 82px;
+}
+
+.noDatacat {
+  font-size: 18px;
+  font-weight: 400px;
+  margin-left: 68px;
+}
+
+.NFTdetails {
+  overflow: hidden;
+  padding: 10px;
+  height: 325px;
+}
+
+.Productdetails {
+  overflow: hidden;
+}
+
+.deliveryimageSize {
+  width: 100%;
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.ProductimageSize {
+  width: 100%;
+  height: 410px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.imageSize {
+  width: 100%;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.userName {
+  font-size: 20px;
+  color: #2196f3;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.brand {
+  font-size: 21px;
+  color: #2196f3;
+  text-transform: capitalize;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.creator {
+  margin-top: 7px;
+  color: #cdcdcd;
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.AdminRole {
+  margin-top: 7px;
+  color: rgb(169, 157, 157);
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.tableName {
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: none;
+  color: #98a2b2;
+  margin: 9px 0px 0 7px !important;
+}
+
+.tablecell {
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 500;
+  color: #98a2b2;
+  margin: 0px 0px 0 0px !important;
+}
+
+.Tableheading {
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 19px !important;
+}
+
+.color {
+  color: #2f53ff;
+}
+
+.tableShadow {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 5px !important;
+}
+
+.propertyShadow {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 5px !important;
+  border-color: #2f53ff !important;
+}
+
+.tableShadow {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 5px !important;
+}
+
+.mainheading {
+  font-weight: 600 !important;
+  font-family: "Poppins" !important;
+  font-style: normal !important;
+  font-size: 27px !important;
+}
+
+.headingcard {
+  font-weight: 600;
+  font-family: "Poppins";
+  font-style: normal;
+  background-color: transparent;
+}
+
+.buttonSize {
+  padding: 7px 28px !important;
+  font-family: "Poppins";
+  font-style: normal;
+}
+
+.Adminheading {
+  background-color: transparent;
+  border: none !important;
+}
+
+.stylingtitle {
+  font-family: "Poppins" !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+}
+
+.sidebartitle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.css-bpi7ug-MuiButtonBase-root-MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+  color: #2f53ff !important;
+}
+
+.css-908h34-MuiTypography-root {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #212121;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.334;
+  color: #2f53ff !important;
+}
+
+.adminname {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+}
+
+.dialog {
+  width: 27% !important;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+  .dialog {
+    width: 100% !important;
+    max-height: 530px;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 1200px) {
+  .dialog {
+    width: 50% !important;
+    max-height: 530px;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .dialog {
+    width: 50% !important;
+    max-height: 530px;
+  }
+}
+@media only screen and (min-width: 900px) and (max-width: 1199px) {
+  .dialog {
+    width: 40% !important;
+    max-height: 530px;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1350px) {
+  .dialog {
+    width: 35% !important;
+    max-height: 530px;
+  }
+}
+.Nftdialog {
+  width: 100% !important;
+  margin: 0 auto;
+}
+
+.buttons {
+  justify-content: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.mintbuttons {
+  justify-content: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.textfieldStyle {
+  font-family: "Inter" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 19px !important;
+  /* line-height: 29px; */
+  color: #757575 !important;
+}
+
+.statustypo {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+}
+
+.statusHeading {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.css-c0hsol-MuiTypography-root {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  /* line-height: 1.334; */
+  margin-top: 24px;
+  font-family: "Inter" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 19px !important;
+  /* line-height: 29px; */
+  color: #757575 !important;
+}
+
+.css-ix00ao-MuiInputBase-input-MuiInput-input {
+  font: inherit;
+  letter-spacing: inherit;
+  color: currentColor;
+  padding: 4px 0 5px;
+  border: 0;
+  box-sizing: content-box;
+  background: none;
+  height: 1.4375em;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  min-width: 0;
+  width: 100%;
+  animation-name: mui-auto-fill-cancel;
+  animation-duration: 10ms;
+  font-family: "Inter" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  /* line-height: 29px; */
+  color: #757575 !important;
+}
+
+.menustyle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14.4545px;
+  /* line-height: 22px; */
+  /* display: flex; */
+  align-items: center;
+  color: #7778c2 !important;
+}
+
+.selectstyle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14.4545px;
+  /* line-height: 22px; */
+  /* display: flex; */
+  align-items: center;
+  color: #2f53ff !important;
+  padding: 7px 10px 0 10px;
+  border-radius: 2px;
+}
+
+.nftButtons {
+  padding: 7px 30px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  /* font-size: 19.0507px; */
+  border-radius: 4px;
+}
+
+.lazyButtons {
+  padding: 7px 34px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  /* font-size: 19.0507px; */
+  border-radius: 4px;
+}
+
+.postion-property {
+  position: relative;
+  height: 130px;
+}
+
+.postion-fields {
+  position: absolute;
+  top: 20px;
+  left: 1px;
+}
+
+.postion-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.fieldbutton {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  background: linear-gradient(97.63deg, #2f57ff 0%, #2fa3ff 108.45%);
+  border-radius: 4px;
+}
+
+.walletbutton {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.fontstyling {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.assignheading {
+  font-weight: 600;
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 25px;
+}
+
+.css-17c4ftt {
+  background: #e4f3f2 !important;
+}
+
+.encap {
+  white-space: nowrap;
+  width: 50px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.encap-nft {
+  white-space: nowrap;
+  width: 100% !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.font-in-detail {
+  font-family: "Poppins";
+  font-style: normal;
+}
+
+.encapPropertry {
+  text-align: center;
+  white-space: nowrap;
+  width: auto !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
+.encap-fieldName {
+  text-align: center;
+  white-space: nowrap;
+  width: 50% !important;
+  margin: 0 auto;
+  overflow: hidden;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
+.dialog_details {
+  height: 520px;
+  width: 99%;
+  margin: 0 auto;
+}
+
+.fixedDialoge {
+  width: 220px;
+}
+
+.prdpadding {
+  padding: 10px 8px 0 25px !important;
+}
+
+.circul {
+  color: #fff !important;
+  width: 35px !important;
+  height: 35px !important;
+}
+
+.nsm7Bb-HzV7m-LgbsSe {
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: background-color 0.218s, border-color 0.218s;
+  -webkit-user-select: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #dadce0;
+  color: #3c4043;
+  cursor: pointer;
+  font-family: "Google Sans", arial, sans-serif;
+  font-size: 14px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 23px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 50% !important;
+  /* padding: 20px; */
+  margin: 0 auto !important;
+}
+
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+  color: #2f53ff !important;
+}
+
+.css-dj8axb-MuiTypography-root {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #d7dcec;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.334;
+  color: #2f53ff !important;
+}
+
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+  color: #2f53ff !important;
+  background-color: transparent !important;
+}
+
+.css-hjvw11-MuiButtonBase-root-MuiListItemButton-root:hover {
+  background-color: rgba(47, 83, 255, 0.1411764706) !important;
+  color: #2f53ff !important;
+}
+
+.fontfigma {
+  font-family: "Public Sans" !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 22px !important;
+  line-height: 26px !important;
+}
+
+.fontsize {
+  font-size: 23px !important;
+}
+
+@media only screen and (min-width: 1568px) {
+  .fontfigma {
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 28px !important;
+    line-height: 26px !important;
+  }
+  .noDatacat {
+    font-size: 25px !important;
+    font-weight: 400px !important;
+    margin-left: 75px !important;
+  }
+  .noDataNew {
+    font-size: 25px !important;
+    font-weight: 400px !important;
+    margin-left: 75px !important;
+  }
+  .cardHeading {
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 23px !important;
+  }
+  .Creationstyling {
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+    font-size: 20px !important;
+  }
+  .categoreyName {
+    font-family: "Public Sans" !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 23px !important;
+  }
+}
+.categoreyName {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.centerText {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.productfigmastyl {
+  font-family: "Public Sans" !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 28px !important;
+  /* text-align: center; */
+  text-transform: capitalize !important;
+}
+
+.plight {
+  font-family: "Public Sans" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  text-align: center !important;
+  text-transform: capitalize !important;
+  color: #cdcdcd !important;
+}
+
+.MuiInputBase-input {
+  font: inherit;
+  color: currentColor;
+  width: 100%;
+  border: 0;
+  height: 1.1876em;
+  margin: 0;
+  display: block;
+  padding: 6px 0 7px;
+  min-width: 0;
+  background: none;
+  box-sizing: content-box;
+  animation-name: mui-auto-fill-cancel;
+  letter-spacing: inherit;
+  animation-duration: 10ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.Creationstyling {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.cardHeading {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.brandName {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 200;
+}
+
+.fontfamily {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+}
+
+.activityTable {
+  font-family: "Public Sans";
+  font-style: normal;
+}
+
+.newCreator {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 200;
+}
+
+.footerDownloadTag {
+  font-family: "Public Sans" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+}
+
+.MarketplaceHead {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  /* identical to box height */
+}
+
+.sidebar {
+  max-width: 200px !important;
+}
+
+.slick-slide .MuiGrid-root {
+  margin-left: 0px !important;
+  /* margin-right: 32px; */
+  margin-right: 18px !important;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1370px) {
+  .cate-margin {
+    margin-right: 35px;
+    margin-left: -6px;
+  }
+  .cate-width {
+    width: 210px;
+  }
+  .new-margin {
+    margin-right: 20px;
+    margin-left: 9px;
+  }
+  .new-width {
+    width: 215px;
+  }
+  .feature {
+    margin-right: 32px;
+    margin-left: 0px;
+  }
+  .feature-width {
+    width: 215px;
+  }
+  .footersocalIcons {
+    margin-right: 25px;
+  }
+  .contactLargescrn {
+    margin-top: 35px;
+  }
+  .sideLine {
+    gap: 21px;
+  }
+}
+@media only screen and (min-width: 1900px) and (max-width: 2560px) {
+  .fontsize {
+    font-size: 25px !important;
+  }
+  .outlet-Margin {
+    margin-left: -18px;
+  }
+  .mainBackground {
+    min-height: auto;
+    max-height: auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 455px;
+    width: 100%;
+    background-image: url(../images/background1.png);
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    margin-top: 13px;
+    border-radius: 4px;
+  }
+  .cate-margin {
+    margin-right: 28px;
+    margin-left: 0px;
+  }
+  .cate-width {
+    width: 100%;
+  }
+  .new-margin {
+    margin-right: 20px;
+    margin-left: 9px;
+  }
+  .new-width {
+    width: 100%;
+  }
+  .feature {
+    margin-right: 32px;
+    margin-left: 0px;
+  }
+  .feature-width {
+    width: 100%;
+  }
+  .footersocalIcons {
+    margin-right: 10px;
+  }
+  .contactLargescrn {
+    margin-top: 35px;
+  }
+  .sideLine {
+    gap: 21px;
+  }
+}
+@media only screen and (min-width: 1371px) and (max-width: 1535px) {
+  .cate-margin {
+    margin-right: 39px;
+    margin-left: 0px;
+  }
+  .cate-width {
+    width: 230px;
+  }
+  .new-margin {
+    margin-right: 22px !important;
+    margin-left: 19px !important;
+  }
+  .new-width {
+    width: 234px;
+  }
+  .feature {
+    margin-right: 26px;
+    margin-left: 11px;
+  }
+  .feature-width {
+    width: 234px;
+  }
+  .footersocalIcons {
+    margin-right: 22px;
+  }
+}
+.font-company-page {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.des-font {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 34px;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .cate-margin {
+    margin-right: -8px;
+    margin-left: -10px;
+  }
+  .cate-width {
+    width: 100%;
+  }
+  .catigaryslider {
+    background-color: transparent;
+    height: 198px;
+    width: 85%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    color: #212121;
+  }
+  .slider {
+    background-color: transparent;
+    height: 330px;
+    width: 85%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    color: #212121;
+  }
+  .sliderBrand {
+    background-color: transparent;
+    height: 250px;
+    width: 85%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    color: #212121;
+  }
+}
+@media only screen and (min-width: 1536px) and (max-width: 1699px) {
+  .Gap {
+    gap: 18px !important;
+  }
+  .new-margin {
+    margin-right: 0px;
+    margin-left: 2px;
+  }
+  .barHeight {
+    height: 50px !important;
+  }
+}
+@media only screen and (min-width: 1700px) and (max-width: 2000px) {
+  .Gap {
+    gap: 24px !important;
+  }
+}
+@media only screen and (min-width: 899px) and (max-width: 1100px) {
+  .Gap {
+    gap: 7px !important;
+  }
+  .fontsize {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-width: 2001px) {
+  .Gap {
+    gap: 34px !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .slick-slide .MuiGrid-root {
+    margin-left: 40px !important;
+    /* margin-right: 32px; */
+    margin-right: 2px !important;
+  }
 }/*# sourceMappingURL=style.css.map */

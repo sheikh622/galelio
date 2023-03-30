@@ -1,6 +1,7 @@
 // third-party
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { FormattedMessage } from 'react-intl';
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
 // assets
 import {
     IconDashboard,
@@ -15,7 +16,6 @@ import {
     IconBuildingStore,
     IconCurrencyEthereum
 } from '@tabler/icons';
-
 // constant
 const icons = {
     IconDashboard,
@@ -28,9 +28,10 @@ const icons = {
     IconCash,
     IconLayout2,
     IconBuildingStore,
-    IconCurrencyEthereum
+    IconCurrencyEthereum,
+    DashboardIcon,
+    AccountCircleIcon
 };
-import GridViewIcon from '@mui/icons-material/GridView';
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -44,7 +45,8 @@ const superAdminMenu = {
             title: <FormattedMessage id="admin.dashboard" />,
             type: 'item',
             url: '/dashboard',
-            icon: icons.IconLayout2,
+            icon: icons.DashboardIcon,
+
             breadcrumbs: false
         },
 
@@ -53,7 +55,7 @@ const superAdminMenu = {
             title: <FormattedMessage id="admin.adminManagement" />,
             type: 'item',
             url: '/subAdminManagement',
-            icon: icons.IconUserCheck,
+            icon: icons.AccountCircleIcon,
             breadcrumbs: false
         },
         {
@@ -72,8 +74,7 @@ const superAdminMenu = {
             icon: icons.IconBuildingStore,
             url: '/brands',
             breadcrumbs: false
-        },
-       
+        }
     ]
 };
 

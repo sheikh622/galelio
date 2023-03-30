@@ -4,9 +4,15 @@ import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
 // login routing
 const AuthLogin = Loadable(lazy(() => import('views/auth/login')));
+const VerifyEmail = Loadable(lazy(() => import('views/auth/verifyEmail')));
+const VerifyEmailBefore = Loadable(lazy(() => import('views/auth/emailVerifyBefore')));
 const AuthForgot = Loadable(lazy(() => import('views/auth/forgetPassword')));
 const AuthRsetPassword = Loadable(lazy(() => import('views/auth/resetPassword')));
 const SignUpMarketPlace = Loadable(lazy(() => import('views/auth/signUp')));
+const SocialLogin = Loadable(lazy(() => import('views/auth/socialLogin')));
+const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
+// const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
+const Starting = Loadable(lazy(() => import('views/pages/user/landingPage')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -23,6 +29,22 @@ const LoginRoutes = {
             element: <AuthLogin />
         },
         {
+            path: '/emailVerify',
+            element: <VerifyEmailBefore />
+        },
+        {
+            path: '/Verify',
+            element: <VerifyEmail />
+        },
+        {
+            path: '/Verify',
+            element: <VerifyEmailBefore />
+        },
+        {
+            path: '/',
+            element: <Starting />
+        },
+        {
             path: '/forgetPassword',
             element: <AuthForgot />
         },
@@ -34,6 +56,14 @@ const LoginRoutes = {
         {
             path: '/signUp',
             element: <SignUpMarketPlace />
+        },
+        {
+            path: '/ChangePassword',
+            element: <ChangePassword />
+        },
+        {
+            path: '/socialLogin',
+            element: <SocialLogin />
         }
     ]
 };

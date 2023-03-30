@@ -15,8 +15,11 @@ import {
     Tooltip,
     CircularProgress
 } from '@mui/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+// import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from 'assets/images/edit.png';
+
+// import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import DeleteOutlineOutlinedIcon from 'assets/images/delete.png';
 import DeleteCategoryDialog from './deleteCategoryDialog';
 import Avatar from 'ui-component/extended/Avatar';
 import moment from 'moment';
@@ -37,58 +40,70 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
             />
             <DeleteCategoryDialog />
             <TableContainer>
+            {( categoryList.categories?.length == 0) || undefined ? (
+                <>
+                    <Grid item>
+                         
+                    <Grid item>
+                    <Typography className="statustypo" style={{   padding: '20px 20px 20px 70px', fontWeight: '500' }}> No Data Available</Typography>
+                </Grid>
+                    </Grid>
+                </>
+            ) : (
+                <>
+
+                {categoryList.categories !== undefined || categoryList.categories?.length > 0 ? (
                 <Table>
                     <TableHead>
-                        <TableRow>
-                            <TableCell align="center">Name</TableCell>
-                            <TableCell align="center">Description</TableCell>
-                            <TableCell align="center">Created At</TableCell>
-                            <TableCell align="center">Updated At</TableCell>
-                            <TableCell align="center">Actions</TableCell>
-                        </TableRow>
+                    <TableRow>
+                    <TableCell align="center" sx={{borderBottom:'none'}}></TableCell>
+                    <TableCell align="left " className='Tableheading' sx={{borderBottom:'none'}}>Category name </TableCell>
+                  {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell>
+                    <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell> */}
+                   
+                    <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Created At</TableCell>
+                    <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Updated At</TableCell>
+                    <TableCell  className='Tableheading' sx={{borderBottom:'none'}}>Actions</TableCell>
+                </TableRow>
                     </TableHead>
 
-                    {(categoryList.categories == undefined && categoryList.categories?.length == 0) || undefined ? (
-                        <>
-                            <Grid item>
-                                <Typography style={{ padding: '20px', fontWeight: '800', justifyContent: 'center' }}>
-                                    {' '}
-                                    No Data Available
-                                </Typography>
-                            </Grid>
-                        </>
-                    ) : (
-                        <>
-                            {categoryList.categories?.length > 0 ? (
+               
+                       
                                 <>
                                     <TableBody>
                                         {categoryList.categories != undefined &&
                                             categoryList.categories.map((row, index) => (
                                                 <>
                                                     <TableRow>
-                                                        <TableCell align="center" justifyContent="center" alignItems="center">
-                                                            <Grid container spacing={2} justifyContent="center" alignItems="center">
-                                                                <Grid item>
-                                                                    <Avatar alt="Category Image" src={row.image} />
-                                                                </Grid>
-                                                                <Grid item>
-                                                                    <Typography variant="subtitle1" component="div">
-                                                                        {row.name}
-                                                                    </Typography>
-                                                                </Grid>
-                                                            </Grid>
-                                                        </TableCell>
-
-                                                        <TableCell align="center" sx={{ padding: '0px' }}>
-                                                            {row.description}
-                                                        </TableCell>
-                                                        <TableCell align="center">{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
-                                                        <TableCell align="center">{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
-                                                        <TableCell align="center" sx={{ padding: '0px' }}>
-                                                            <Stack direction="row" justifyContent="center" alignItems="center">
+                                                    <TableCell align="right" sx={{ borderBottom: 'none'}}>
+                                                    </TableCell>
+                                                    <TableCell
+                                                       
+                                                        sx={{display:'flex', borderBottom: 'none', textTransform: 'capitalize', 
+                                                        borderBottom: 'none' }}
+                                                    >
+                                                    <Grid item lg={6}>
+                                                    <Avatar alt="Brand Image" src={row.image} sx={{  }} />
+                                                    </Grid>
+                                                    <Grid item lg={6}  className='tableName'>
+                                                    {row.name}
+                                                     </Grid>
+            
+                                                    </TableCell>
+                                              {/*       <TableCell  className='tablecell' sx={{ textTransform: 'capitalize' ,  borderBottom: 'none'}}>
+                                                        {row.location}
+                                                    </TableCell>
+                                                    <TableCell  className='tablecell' sx={{ textTransform: 'capitalize' ,  borderBottom: 'none'}}>
+                                                        {row.description}
+                                                    </TableCell> */}
+                                                  
+                                                    <TableCell  className='tablecell'  sx={{ borderBottom: 'none'}}>{moment(row.createdAt).format('DD-MMM-YYYY')}</TableCell>
+                                                    <TableCell  className='tablecell'  sx={{ borderBottom: 'none'}}>{moment(row.updatedAt).format('DD-MMM-YYYY')}</TableCell>
+                                                      <TableCell   sx={{borderBottom: 'none' }}>
+                                                            <Stack direction="row" justifyContent="left">
                                                                 <Tooltip placement="top" title="Edit">
                                                                     <IconButton
-                                                                        color="primary"
+                                                                    className='color'
                                                                         aria-label="Edit"
                                                                         size="large"
                                                                         onClick={() => {
@@ -101,7 +116,7 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                                                                             });
                                                                         }}
                                                                     >
-                                                                        <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                                    <img src={EditOutlinedIcon} /> 
                                                                     </IconButton>
                                                                 </Tooltip>
                                                                 <Tooltip placement="top" title="Delete">
@@ -118,7 +133,7 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                                                                             setCategoryId(row.id);
                                                                         }}
                                                                     >
-                                                                        <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                                                        <img src={DeleteOutlineOutlinedIcon}/>
                                                                     </IconButton>
                                                                 </Tooltip>
                                                             </Stack>
@@ -128,18 +143,20 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
                                             ))}
                                     </TableBody>
                                 </>
-                            ) : (
-                                <>
-                                    <Grid container justifyContent="center" sx={{ width: '300%', m: 5 }}>
-                                        <Grid item>
-                                            <CircularProgress size={'4rem'} />
-                                        </Grid>
-                                    </Grid>
-                                </>
-                            )}
-                        </>
-                    )}
+                       
+                   
                 </Table>
+                ) : (
+                    <>
+                        <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto '}}>
+                        <Grid item>
+                    <CircularProgress disableShrink size={'4rem'} />
+                </Grid>
+                        </Grid>
+                    </>
+                )}
+            </>
+                )}
                 <Divider />
             </TableContainer>
         </>

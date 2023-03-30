@@ -1,5 +1,7 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Tooltip from '@mui/material/Tooltip';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -19,12 +21,13 @@ import {
     ListItemIcon,
     ListItemText,
     Typography,
-    ListItemSecondaryAction,
     IconButton,
-    MenuItem
+    MenuItem,
+    CircularProgress
 } from '@mui/material';
 
 import { useDropzone } from 'react-dropzone';
+import { Switch } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { addNft } from 'redux/nftManagement/actions';
@@ -37,14 +40,11 @@ import closeFill from '@iconify-icons/eva/close-fill';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
+import { DataArraySharp } from '@mui/icons-material';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const typeArray = [
-    {
-        value: 'ETH',
-        label: 'ETH'
-    },
     {
         value: 'USDT',
         label: 'USDT'
@@ -53,85 +53,171 @@ const typeArray = [
 
 export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
+
     const [uploadedImages, setUploadedImages] = useState([]);
+
     const [fieldDataArray, setFieldDataArray] = useState([]);
-    const [type, setType] = useState('ETH');
+    const [type, setType] = useState('USDT');
+    const [loader, setLoader] = useState(false);
+    const [fileDataArray, setFileDataArray] = useState([]);
+    const [isDirectTransfer, setIsDirectTransfer] = useState(false);
+    const [wallettoggle, setWallettoggle] = useState(false);
     const handleType = (event) => {
         setType(event.target.value);
     };
+    const [checked, setChecked] = useState(false);
 
-    const handleError = (fieldDataArray, values) => {
+    const handleError = (fieldDataArray, fileDataArray, values) => {
+        // console.log('im in handle error');
         let isValid = true;
-        if (parseInt(values.images[0].quantity) < 1) {
-            toast.error('NFT Quantity must be greater than zero');
+        // console.log('fieldDataArray', fieldDataArray);
+        // console.log('fileDataArray', fileDataArray);
+        // console.log('values', values);
+
+        if (fieldDataArray.length == 0) {
             isValid = false;
+            toast.error('Metadata is required');
         }
-        if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
-        } else {
-            toast.error('Upload the files with these extensions: jpg, png, gif');
-            isValid = false;
+        if (checked == true) {
+            // isValid = false;
+            // toast.error('Wallet address is required');
         }
 
-        fieldDataArray.forEach((array) => {
+        // else  (fieldDataArray.length > 0) {
+
+        fieldDataArray.map((array) => {
             if (array.fieldName == '') {
                 isValid = false;
-                toast.error(`Metadata name fields are mandatory`);
-            }
-            if (array.fieldValue == '') {
+                toast.error(`Metadata name cannot be empty`);
+            } else if (array.fieldValue == '') {
                 isValid = false;
-                toast.error(`Metadata value fields are mandatory`);
+                toast.error(`Metadata value cannot be empty`);
             }
         });
+        // }
+        if (fileDataArray.length == 0) {
+            isValid = false;
+            toast.error('Proof of Authenticity is required');
+        }
+
+        //    else (fileDataArray.length > 0) {
+        console.log('im here 2');
+        fileDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`File name field is mandatory`);
+            } else if (array.fieldValue == null) {
+                isValid = false;
+                toast.error(`Attach proof of authenticity`);
+            } else if (array.fieldValue?.size / 1000000 > 5) {
+                isValid = false;
+                toast.error(`Please attach a less than 5 mb proof of authenticity`);
+            }
+        });
+        // }
+
+        if (values.images.length == 0) {
+            toast.error('Please upload a NFT Image');
+            isValid = false;
+        } else if (values.images[0].image.size / 1000000 > 5) {
+            toast.error('Please upload a image less than 5 mb');
+            isValid = false;
+        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
+            toast.error('Upload the files with these extensions: jpg, png, gif');
+            isValid = false;
+        } else if (parseInt(values.images[0].quantity) <= 0) {
+            toast.error('NFT Quantity should be atleast one');
+            isValid = false;
+        }
+        console.log(values.images, 'values.images.length');
+
         return isValid;
     };
 
     const validationSchema = Yup.object({
-        nftName: Yup.string()
-            .required('NFT Name is required!')
-            .max(42, 'NFT Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
+        nftName: Yup.string().required('NFT Name is required!').max(60, 'NFT Name can not exceed 60 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
-            .max(500, 'Invalid NFT description can not exceed 500 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
+            .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
+        directBuyerAddress:
+            checked == true &&
+            Yup.string()
+                .required('Wallet address  is required!')
+                // .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
+                .min(26, 'Minimum length 26 character ')
+                .max(42, 'Must be exactly 42 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
         nftPrice: Yup.number()
-            .min(0.000001, 'Price should not less than zero')
+            .min(0.000000001, 'Price should be greater than zero')
             .required('NFT Price is required')
-            .typeError('Invalid Price'),
-        images: Yup.mixed()
+            .typeError('Invalid Price')
+        // image: Yup.mixed()
     });
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
             nftName: '',
             nftDescription: '',
+            directBuyerAddress: '',
             nftPrice: 0,
             images: []
         },
         validationSchema,
         onSubmit: (values) => {
-            let isValid = handleError(fieldDataArray, values);
-            if (isValid) {
-                dispatch(
-                    addNft({
-                        categoryId: data.CategoryId,
-                        mintType: mintType,
-                        metaDataArray: fieldDataArray,
-                        name: values.nftName,
-                        price: values.nftPrice,
-                        description: values.nftDescription,
-                        currencyType: type,
-                        quantity: values.images[0].quantity,
-                        asset: values.images[0].image,
-                        type: nftType,
-                        page: page,
-                        limit: limit,
-                        search: search,
-                        categoryId: data.CategoryId,
-                        handleClose: handleClose
-                    })
-                );
+            // console.log('values', values);
+
+            let fileArray = fileDataArray.map((data) => {
+                return data.fieldValue;
+            });
+            let fileNameArray = fileDataArray.map((data) => {
+                return data.fieldName;
+            });
+
+            let isValid = handleError(fieldDataArray, fileDataArray, values);
+            // console.log('isValid', isValid);
+
+            if (isValid == true) {
+                var WAValidator = require('wallet-address-validator');
+
+                var valid = WAValidator.validate(values.directBuyerAddress, 'ETH');
+                if (valid || values.directBuyerAddress == '') {
+                    //  toast.success(``);
+
+                    console.log('This is a valid wallet address');
+
+                    setLoader(true);
+                    dispatch(
+                        addNft({
+                            categoryId: data.CategoryId,
+                            mintType: mintType,
+                            metaDataArray: fieldDataArray,
+                            fileNameArray: fileNameArray,
+                            fileArray: fileArray,
+                            name: values.nftName,
+                            price: values.nftPrice,
+                            description: values.nftDescription,
+                            directBuyerAddress: values.directBuyerAddress ? values.directBuyerAddress : '',
+                            currencyType: type,
+                            quantity: values.images[0].quantity,
+                            asset: values.images[0].image,
+                            type: nftType,
+                            page: page,
+                            limit: limit,
+                            search: search,
+                            categoryId: data.CategoryId,
+                            requesterAddress: user.walletAddress,
+                            contractAddress: data.contractAddress,
+                            handleClose: handleClose,
+                            brandId: user.BrandId,
+                            isDirectTransfer: values.directBuyerAddress == '' ? false : true
+                        })
+                    );
+                } else toast.error(`Wallet Address invalid !`);
+                // console.log('Address INVALID');
             }
         }
     });
@@ -142,9 +228,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setOpen(false);
         formik.resetForm();
         setMintType('directMint');
-        setType('ETH');
+        setType('USDT');
         setUploadedImages([]);
         setFieldDataArray([]);
+        setLoader(false);
+        setFileDataArray([]);
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {
@@ -182,54 +270,114 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFieldDataArray(array);
     };
 
+    const handleChange = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = [...fieldDataArray];
+        array[index].isEditable = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+    const handleproof = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = [...fieldDataArray];
+        array[index].proofRequired = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+
+    const walletadded = (event, index) => {
+        setWallettoggle(true);
+        setChecked(event.target.checked);
+
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
     const handleRemoveField = (index) => {
         let array = [...fieldDataArray];
         array.splice(index, 1);
         setFieldDataArray(array);
     };
 
+    const handleFileFieldNameChange = (value, index) => {
+        let array = [...fileDataArray];
+        array[index].fieldName = value;
+        setFileDataArray(array);
+    };
+    const handleFileFieldValueChange = (value, index) => {
+        let array = [...fileDataArray];
+        array[index].fieldValue = value;
+        setFileDataArray(array);
+    };
+
+    const handleFileRemoveField = (index) => {
+        let array = [...fileDataArray];
+        array.splice(index, 1);
+        setFileDataArray(array);
+    };
+
     return (
         <>
-            <Dialog
+            <Dialog fullScreen
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                // className="brandDialog "
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <Grid container spacing={2}>
-                    <Grid item md={8} xs={12} textAlign="left">
-                        <DialogTitle id="alert-dialog-slide-title1">Add NFT</DialogTitle>
-                    </Grid>
-                    <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
-                        <Button
-                            sx={{ marginRight: '10px' }}
-                            variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                            onClick={() => {
-                                setMintType('directMint');
-                            }}
-                        >
-                            Direct Mint
-                        </Button>
-                        <Button
-                            variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                            onClick={() => {
-                                setMintType('lazyMint');
-                            }}
-                        >
-                            Lazy Minting
-                        </Button>
-                    </Grid>
-                </Grid>
+                <DialogTitle id="alert-dialog-slide-title1" className="adminname">
+                    Add NFT
+                </DialogTitle>
                 <Divider />
+                <Grid container>
+                    <DialogActions>
+                        <AnimateButton>
+                            <Button
+                                type="submit"
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                                className="buttons"
+                                size="large"
+                                onClick={() => {
+                                    setMintType('directMint');
+                                }}
+                            >
+                                Direct minting
+                            </Button>
+                        </AnimateButton>
+                        <AnimateButton>
+                            <Button
+                                className="buttons"
+                                size="large"
+                                type="submit"
+                                variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                onClick={() => {
+                                    setMintType('lazyMint');
+                                }}
+                            >
+                                Lazy minting
+                            </Button>
+                        </AnimateButton>
+                    </DialogActions>
+                </Grid>
+
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
-                        <Grid container mt={2}>
-                            <Grid xs={4} mt={2} pr={3}>
+                        <Grid container mt={1}>
+                            <Grid xs={4} md={4} lg={4}>
                                 <TextField
+                                    className="textfieldStyle"
                                     id="nftName"
                                     name="nftName"
                                     label="NFT Name"
@@ -242,9 +390,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-
-                            <Grid xs={4} mt={2} pr={3}>
+                           
+                            <Grid xs={4}  md={4} lg={4} pl={2} pr={2}>
                                 <TextField
+                                    className="textfieldStyle"
                                     id="nftPrice"
                                     name="nftPrice"
                                     label="NFT Price"
@@ -258,12 +407,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 />
                             </Grid>
 
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid  xs={4} md={4} lg={4}  mt={1.5}>
                                 <TextField
+                                    className="textfieldStyle"
+                                    variant="filled"
                                     id="outlined-select-budget"
                                     select
                                     fullWidth
-                                    label="Select Token"
                                     value={type}
                                     onChange={handleType}
                                 >
@@ -274,10 +424,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            <Grid xs={12} mt={1}>
                                 <TextField
-                                    multiline
-                                    rows={2}
+                                    className="textfieldStyle"
                                     id="nftDescription"
                                     name="nftDescription"
                                     label="NFT Description"
@@ -290,33 +439,70 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            {mintType == 'directMint' && (
+                                <>
+                                    <Grid xs={12} mt={2} ml={-1}>
+                                        <Button className="walletbutton" variant="text" sx={{ float: 'left' }}>
+                                            Mint to wallet.
+                                        </Button>
+                                        <Switch
+                                            checked={checked}
+                                            onChange={(e) => walletadded(e)}
+
+                                            // inputProps={{ 'aria-label': 'controlled' }}
+                                        />
+                                    </Grid>
+                                    {wallettoggle == true && checked == true && (
+                                        <Grid xs={12} mt={1}>
+                                            <TextField
+                                                className="textfieldStyle"
+                                                id="directBuyerAddress"
+                                                name="directBuyerAddress"
+                                                label="Wallet Address"
+                                                placeholder="wallet Address"
+                                                fullWidth
+                                                value={formik.values.directBuyerAddress}
+                                                onChange={formik.handleChange}
+                                                error={formik.touched.directBuyerAddress && Boolean(formik.errors.directBuyerAddress)}
+                                                helperText={formik.touched.directBuyerAddress && formik.errors.directBuyerAddress}
+                                                autoComplete=""
+                                                variant="standard"
+                                            />
+                                        </Grid>
+                                    )}
+                                </>
+                            )}
+                            <Grid xs={12} mt={2}>
                                 <Button
+                                    className="fieldbutton"
                                     variant="contained"
-                                    sx={{ float: 'right' }}
+                                    sx={{ float: 'left', padding: { md: ' 6px 38px', lg: '6px 38px' } }}
                                     onClick={() => {
                                         setFieldDataArray([
                                             ...fieldDataArray,
                                             {
                                                 fieldName: '',
-                                                fieldValue: ''
+                                                fieldValue: '',
+                                                isEditable: false,
+                                                proofRequired: false
                                             }
                                         ]);
                                     }}
                                 >
-                                    Add Fields
+                                    Add Metadata
                                 </Button>
                             </Grid>
                         </Grid>
 
                         {fieldDataArray.length != 0 && (
                             <>
-                                <Grid container spacing={4}>
+                                <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
                                                     id="field_name"
+                                                    className="textfieldStyle"
                                                     name="field_name"
                                                     label="Metadata Name"
                                                     value={data.fieldName}
@@ -328,8 +514,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
+                                                    className="textfieldStyle"
                                                     id="field_value"
                                                     name="field_value"
                                                     label="Metadata Value"
@@ -341,30 +528,123 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     fullWidth
                                                 />
                                             </Grid>
-                                            <Grid item xs={2} mt={2}>
+                                            <Grid item xs={2} mt={2} md={3}>
+                                              
+                                                <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
+                                                    <Switch
+                                                        value={data?.isEditable}
+                                                        checked={data?.isEditable}
+                                                        onChange={(e) => handleChange(e, index)}
+                                                        // inputProps={{ 'aria-label': 'controlled' }}
+                                                    />
+                                                </Tooltip>
+                                                {data?.isEditable == true && (
+                                                    <Tooltip
+                                                        className="fontsize"
+                                                        title="Accept proof on update of metadata"
+                                                        placement="top"
+                                                        arrow
+                                                    >
+                                                        <Switch
+                                                            value={data.proofRequired}
+                                                            checked={data.proofRequired}
+                                                            onChange={(e) => handleproof(e, index)}
+                                                            // inputProps={{ 'aria-label': 'controlled' }}
+                                                        />
+                                                    </Tooltip>
+                                                )}
                                                 <IconButton
-                                                    color="error"
-                                                    edge="end"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        handleRemoveField(index);
-                                                    }}
-                                                >
-                                                    <Icon icon={closeFill} width={28} height={28} />
-                                                </IconButton>
+                                                color="error"
+                                                edge="end"
+                                                size="small"
+                                                onClick={() => {
+                                                    handleRemoveField(index);
+                                                }}
+                                            >
+                                                <Icon icon={closeFill} width={28} height={28} />
+                                            </IconButton>
                                             </Grid>
+                                            <Grid item xs={2} mt={2} md={3}></Grid>
                                         </>
                                     ))}
                                 </Grid>
                             </>
                         )}
+                        <Grid container>
+                            <Grid xs={12} mt={2}>
+                                <Button
+                                    className="fieldbutton"
+                                    variant="contained"
+                                    sx={{ float: 'left' }}
+                                    onClick={() => {
+                                        setFileDataArray([
+                                            ...fileDataArray,
+                                            {
+                                                fieldName: '',
+                                                fieldValue: null
+                                            }
+                                        ]);
+                                    }}
+                                >
+                                    Add Authenticity Files
+                                </Button>
+                            </Grid>
+                            {fileDataArray.length != 0 && (
+                                <>
+                                    <Grid container spacing={2} mt={2}>
+                                        {fileDataArray.map((data, index) => (
+                                            <>
+                                                <Grid item xs={3}>
+                                                    <TextField
+                                                        id="field_name"
+                                                        name="field_name"
+                                                        label="File Name"
+                                                        value={data.fieldName}
+                                                        onChange={(e) => {
+                                                            handleFileFieldNameChange(e.target.value, index);
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
+
+                                                <Grid item mt={3} xs={3}>
+                                                    <input
+                                                        type="file"
+                                                        id="avatar"
+                                                        name="avatar"
+                                                        accept="image/*,.pdf"
+                                                        onChange={(event) => {
+                                                            handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                        }}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={2} mt={2}>
+                                                    <IconButton
+                                                        color="error"
+                                                        edge="end"
+                                                        size="small"
+                                                        onClick={() => {
+                                                            handleFileRemoveField(index);
+                                                        }}
+                                                    >
+                                                        <Icon icon={closeFill} width={28} height={28} />
+                                                    </IconButton>
+                                                </Grid>
+                                                <Grid item mt={3} xs={3}></Grid>
+                                            </>
+                                        ))}
+                                    </Grid>
+                                </>
+                            )}
+                        </Grid>
 
                         {uploadedImages.length !== 1 && (
                             <Grid
                                 sx={{ background: '#c5cbe9', borderRadius: '5px', paddingBottom: '2rem', paddingTop: '2rem' }}
                                 item
                                 lg={12}
-                                mt={3}
+                                mt={10}
                             >
                                 <div className={clsx('dropZoneContainer', 'xyz')}>
                                     <div
@@ -397,6 +677,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 </div>
                             </Grid>
                         )}
+
                         <Grid item lg={12} mt={3}>
                             <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
                                 <AnimatePresence>
@@ -408,12 +689,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 </ListItemIcon>
                                                 <ListItemText
                                                     primary={file.image.name ? file.image.name : ''}
-                                                    secondary={fData(file.image.size) ? fData(file.image.size) : ''}
                                                     primaryTypographyProps={{
-                                                        variant: 'subtitle2'
+                                                        variant: 'h3'
                                                     }}
                                                 />
-                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                {mintType == 'directMint' && (
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                )}
                                                 <IconButton
                                                     color="error"
                                                     edge="end"
@@ -430,33 +712,60 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ pr: 2.5 }}>
-                    <AnimateButton>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{ my: 3, ml: 1 }}
-                            onClick={() => {
-                                formik.handleSubmit();
-                            }}
-                            size="large"
-                            disableElevation
-                        >
-                            Add
-                        </Button>
-                    </AnimateButton>
-                    <AnimateButton>
-                        <Button
-                            variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
-                            onClick={handleClose}
-                            color="secondary"
-                            size="large"
-                        >
-                            Cancel
-                        </Button>
-                    </AnimateButton>
-                </DialogActions>
+                <Grid container>
+                    <DialogActions>
+                        {loader ? (
+                            <DialogActions sx={{ display: 'block', margin: '10px 5px 0px 5px' }}>
+                                <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}>
+                                    <Grid item>
+                                        <CircularProgress disableShrink size={'4rem'} />
+                                    </Grid>
+                                </Grid>
+
+                                <Button
+                                    className="buttons"
+                                    variant="Text"
+                                    sx={{ width: '100%', margin: '0px 0px 10px 0px', color: '#2196f3' }}
+                                    size="large"
+                                >
+                                    NFT is being Created...
+                                </Button>
+                            </DialogActions>
+                        ) : (
+                            <>
+                                <AnimateButton>
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                        onClick={() => {
+                                            formik.handleSubmit();
+                                        }}
+                                        className="buttons"
+                                        size="large"
+                                        disableElevation
+                                    >
+                                        Add
+                                    </Button>
+                                </AnimateButton>
+                                <AnimateButton>
+                                    <Button
+                                        className="buttons"
+                                        size="large"
+                                        type="submit"
+                                        variant="contained"
+                                        sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                        onClick={handleClose}
+                                        color="error"
+                                        disableElevation
+                                    >
+                                        Cancel
+                                    </Button>
+                                </AnimateButton>
+                            </>
+                        )}
+                    </DialogActions>
+                </Grid>
             </Dialog>
         </>
     );

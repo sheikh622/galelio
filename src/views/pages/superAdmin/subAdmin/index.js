@@ -8,9 +8,9 @@ import { IconSearch } from '@tabler/icons';
 import { getAllSubAdminList } from '../../../../redux/subAdmin/actions';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
-import HeadingCard from 'shared/Card/HeadingCard';
 import AddUpdateSubAdminDialog from './component/addUpdateSubAdmin';
-
+import HeadingCard from 'shared/Card/HeadingCard';
+import { getAllBrandCategoriesAdmin } from 'redux/brandCategory/actions';
 const SubAdmin = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -23,8 +23,14 @@ const SubAdmin = () => {
         id: null,
         firstName: '',
         lastName: '',
-        subAdminEmail: '',
-        subAdminPassword: ''
+        adminEmail: '',
+        adminPassword: '',
+        walletAddress: '',
+        role: '',
+        isActive: '',
+        walletAddress: '',
+        hasMintingAccess:'',
+        contractAddress:''
     });
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
@@ -41,7 +47,8 @@ const SubAdmin = () => {
                 search: search,
                 page: page,
                 limit: limit
-            })
+            }),
+            dispatch(getAllBrandCategoriesAdmin())
         );
     }, [search, page, limit]);
 
@@ -55,16 +62,21 @@ const SubAdmin = () => {
                 limit={limit}
                 search={search}
             />
-
-            <Typography variant="h1" sx={{m:2}}>
-            Sub Admin Management
-                </Typography>
+            <HeadingCard title="Admin Management" />
 
             <MainCard
+                className="tableShadow"
                 title={
-                    <Grid container spacing={gridSpacing}>
-                        <Grid item xs={6}>
+                    <Grid container spacing={4}>
+                        <Grid item xs={12} lg={8}>
+                            <Typography className="mainheading" variant="h1" component="h2" 
+                            sx={{ marginLeft: { lg: '38px', md: '38px' } }}>
+                                Admins
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={6} lg={2}>
                             <OutlinedInput
+                            variant='standard'
                                 id="input-search-list-style1"
                                 placeholder="Search"
                                 startAdornment={
@@ -78,8 +90,10 @@ const SubAdmin = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={6} textAlign="end">
+                        <Grid item xs={6} lg={2} textAlign="start">
                             <Button
+                                className="buttonSize "
+                                sx={{ marginLeft: { lg: '-16px', md: '-16px' } }}
                                 variant="contained"
                                 size="large"
                                 onClick={() => {
@@ -89,11 +103,15 @@ const SubAdmin = () => {
                                         firstName: '',
                                         lastName: '',
                                         adminEmail: '',
-                                        adminPassword: ''
+                                        adminPassword: '',
+                                        walletAddress: '',
+                                        role: '',
+                                        isActive: '',
+                                        walletAddress: ''
                                     });
                                 }}
                             >
-                                Add Subadmin
+                                Create 
                             </Button>
                         </Grid>
                     </Grid>
@@ -113,7 +131,7 @@ const SubAdmin = () => {
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>
-                        <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                        <Grid container justifyContent="center" spacing={gridSpacing}>
                             <Grid item>
                                 <Pagination
                                     color="primary"
@@ -125,67 +143,6 @@ const SubAdmin = () => {
                                         setPage(newPage);
                                     }}
                                 />
-                            </Grid>
-                            <Grid item>
-                                <Button
-                                    size="large"
-                                    sx={{ color: theme.palette.grey[900] }}
-                                    color="secondary"
-                                    endIcon={<ExpandMoreRoundedIcon />}
-                                    onClick={handleClick}
-                                >
-                                    {limit} Rows
-                                </Button>
-                                <Menu
-                                    id="menu-user-list-style1"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleCloseMenu}
-                                    variant="selectedMenu"
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right'
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right'
-                                    }}
-                                >
-                                    <MenuItem
-                                        value={10}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        10 Rows
-                                    </MenuItem>
-                                    <MenuItem
-                                        value={25}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        25 Rows
-                                    </MenuItem>
-                                    <MenuItem
-                                        value={50}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        50 Rows{' '}
-                                    </MenuItem>
-                                </Menu>
                             </Grid>
                         </Grid>
                     </Grid>

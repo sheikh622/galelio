@@ -9,15 +9,14 @@ import { getAllLandingPageData } from 'redux/landingPage/actions';
 const LandingPage = () => {
     const dispatch = useDispatch();
     const landingPageData = useSelector((state) => state.landingPageReducer.landingPageData);
-    console.log('landingPageData', landingPageData);
     useEffect(() => {
         dispatch(getAllLandingPageData());
     }, []);
 
     return (
-        <Grid item md={11} xs={12}>
+        <Grid item md={12} xs={12} lg={12} xl={12}>
             <Grid container-fluid>
-                <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
+                <Grid  item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
                     <Header />
                 </Grid>
                 <Grid item md={12} xs={12}>

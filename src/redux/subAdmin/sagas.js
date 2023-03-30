@@ -10,7 +10,9 @@ import {
     UPDATE_SUBADMIN,
     DELETE_SUBADMIN,
     CHANGE_SUBADMIN_STATUS,
-    CHANGE_SUBADMIN_MINTING_ACCESS
+    CHANGE_ROLE,
+    CHANGE_SUBADMIN_MINTING_ACCESS,
+    ASSIGN_BRANDCATEGORY
 } from './constants';
 import { setNotification } from 'shared/helperMethods/setNotification';
 
@@ -33,7 +35,10 @@ function* addSubAdminRequest({ payload }) {
         firstName: payload.firstName,
         lastName: payload.lastName,
         email: payload.email,
-        password: payload.password
+        password: payload.password,
+        walletAddress: payload.walletAddress,
+        brandCategory: payload.brandCategory,
+        hasMintingAccess: true
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -55,13 +60,13 @@ function* addSubAdminRequest({ payload }) {
 export function* watchAddSubAdmin() {
     yield takeLatest(ADD_SUBADMIN, addSubAdminRequest);
 }
-
 function* updateSubAdminRequest({ payload }) {
     let data = {
         firstName: payload.firstName,
         lastName: payload.lastName,
         email: payload.email,
-        password: payload.password
+        password: payload.password,
+        walletAddress: payload.walletAddress
     };
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
@@ -82,6 +87,30 @@ function* updateSubAdminRequest({ payload }) {
 
 export function* watchUpdateSubAdmin() {
     yield takeLatest(UPDATE_SUBADMIN, updateSubAdminRequest);
+}
+function* assignBrandCategoryRequest({ payload }) {
+    let data = {
+        brandCategory: payload.brandCategory,
+    };
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.patch(`admin/assignBrandCategory/${payload.id}`, data, headers);
+        yield put(
+            getAllSubAdminList({
+                page: payload.page,
+                limit: payload.limit,
+                search: payload.search
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchAssignBrandCategory() {
+    yield takeLatest(ASSIGN_BRANDCATEGORY, assignBrandCategoryRequest);
 }
 
 function* deleteSubAdminRequest({ payload }) {
@@ -107,7 +136,7 @@ export function* watchDeleteSubAdmin() {
 }
 
 function* changeSubAdminStatusRequest({ payload }) {
-    console.log("payload",payload)
+    
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.patch(`admin/${payload.id}`,{}, headers);
@@ -127,6 +156,28 @@ function* changeSubAdminStatusRequest({ payload }) {
 
 export function* watchChangeSubAdminStatus() {
     yield takeLatest(CHANGE_SUBADMIN_STATUS, changeSubAdminStatusRequest);
+}
+function* changeSubadminRoleRequest({ payload }) {
+    
+    try {
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.patch(`/admin/changeRole/${payload.id}`,{}, headers);
+        yield put(
+            getAllSubAdminList({
+                page: payload.page,
+                limit: payload.limit,
+                search: payload.search
+            })
+        );
+        payload.handleClose();
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchChangeSubAdminRole() {
+    yield takeLatest(CHANGE_ROLE, changeSubadminRoleRequest);
 }
 
 function* changeSubAdminMintingAccessRequest({ payload }) {
@@ -158,6 +209,8 @@ export default function* subAdminSaga() {
         fork(watchUpdateSubAdmin),
         fork(watchDeleteSubAdmin),
         fork(watchChangeSubAdminStatus),
-        fork(watchChangeSubAdminMintingAccess)
+        fork(watchChangeSubAdminRole),
+        fork(watchChangeSubAdminMintingAccess),
+        fork(watchAssignBrandCategory)
     ]);
 }

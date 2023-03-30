@@ -5,15 +5,20 @@ import UserGuard from './RouteGuard/UserGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
-import CompanyPage from 'views/pages/landing/companyPage';
-
 //New Routing
+const ComingSoon = Loadable(lazy(() => import('views/pages/staticCode/comingSoon/ComingSoon')));
+// const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 const LandingPage = Loadable(lazy(() => import('views/pages/user/landingPage')));
+const Starting = Loadable(lazy(() => import('views/pages/user/landingPage')));
 const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetails')));
+const DeliveryDashboard = Loadable(lazy(() => import('views/pages/user/deliveryDashboard')));
 //Old Routing
 
-const Profile = Loadable(lazy(() => import('views/pages/landing/creatorProfile')));
+const Profile = Loadable(lazy(() => import('views/pages/staticCode/creatorProfile')));
+const CompanyPage = Loadable(lazy(() => import('views/pages/staticCode/companyPage')));
+const BMWPage = Loadable(lazy(() => import('views/pages/staticCode/BMWPage')));
+
 
 // ==============================|| market  ROUTING ||============================== //
 
@@ -28,15 +33,43 @@ const UserRoutes = {
     ),
     children: [
         {
-            path: '/',
+            path: '/home',
             element: <LandingPage />
+        },
+        {
+            path: '/',
+            element: <Starting />
+        },
+        {
+            path: '/ComingSoon',
+            element: <ComingSoon />
+        },
+        {
+            path: '/chart',
+            element: <ComingSoon />
+        },
+        {
+            path: '/bookmarks',
+            element: <ComingSoon />
+        },
+        {
+            path: '/downloads',
+            element: <ComingSoon />
+        },
+        {
+            path: '/tags',
+            element: <ComingSoon />
+        },
+        {
+            path: '/settings',
+            element: <ComingSoon />
         },
         {
             path: '/marketplace',
             element: <Marketplace />
         },
         {
-            path: '/productDetails',
+            path: '/productDetails/:id',
             element: <ProductDetails />
         },
 
@@ -45,8 +78,20 @@ const UserRoutes = {
             element: <Profile />
         },
         {
+            path: '/deliveryDashboard',
+            element: <DeliveryDashboard />
+        },
+        {
             path: '/companyPage',
             element: <CompanyPage />
+        },
+        {
+            path: '/BMW',
+            element: <BMWPage />
+        },
+        {
+            path: '/*',
+            element: <LandingPage />
         }
     ]
 };

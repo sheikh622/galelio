@@ -9,13 +9,18 @@ import { useSelector } from 'react-redux';
 const UserGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
     const navigate = useNavigate();
-    console.log('token in UserGuard', token);
+
+    const user = useSelector((state) => state.auth.user);
+   
     useEffect(() => {
         if (token == null) {
-            navigate('/', { replace: true });
+            navigate('/home', { replace: true });
         }
+        // else if (token && user?.role=="User" ) {
+        //     navigate('/landingPage', { replace: true });
+        // }
     }, [token]);
-
+    
     return children;
 };
 

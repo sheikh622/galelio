@@ -31,21 +31,21 @@ const subAdminMenu = {
             breadcrumbs: false
         },
 
-        {
-            id: 'categories',
-            title: <FormattedMessage id="categories" />,
-            type: 'item',
-            icon: icons.IconCheckbox,
-            url: '/categories',
-            breadcrumbs: false
-        },
+        // {
+        //     id: 'categories',
+        //     title: <FormattedMessage id="categories" />,
+        //     type: 'item',
+        //     icon: icons.IconCheckbox,
+        //     url: '/categories',
+        //     breadcrumbs: false
+        // },
 
         {
             id: 'brand',
             title: <FormattedMessage id="admin.BrandManagement" />,
             type: 'item',
             icon: icons.IconCheckbox,
-            url: '/brands',
+            url: '/brandsByAdmin',
             breadcrumbs: false
         }
     ]

@@ -1,31 +1,58 @@
 import { useState, useEffect } from 'react';
+import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-
+import '@fontsource/public-sans';
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import {
-    Button,
-    Typography,
-    Grid,
-    Select,
-    InputLabel,
-    FormControl,
-    MenuItem,
-    Menu,
-    Pagination,
-    OutlinedInput,
-    InputAdornment,
-    Divider
-} from '@mui/material';
+import { Typography, Grid, Select, InputLabel, FormControl, MenuItem, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
-
+import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
-import HeadingCard from 'shared/Card/HeadingCard';
 const Activity = () => {
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250
+            }
+        }
+    };
+
+    const names = [
+        'Oliver Hansen',
+        'Van Henry',
+        'April Tucker',
+        'Ralph Hubbard',
+        'Omar Alexander',
+        'Carlos Abbott',
+        'Miriam Wagner',
+        'Bradley Wilkerson',
+        'Virginia Andrews',
+        'Kelly Snyder'
+    ];
+
+    function getStyles(name, personName) {
+        return {
+            fontWeight: personName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
+        };
+    }
     const theme = useTheme();
+    const [personName, setPersonName] = React.useState([]);
+
+    const handleChange = (event) => {
+        const {
+            target: { value }
+        } = event;
+        setPersonName(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value
+        );
+    };
     const itemData = [
         {
             title: 'List',
@@ -37,23 +64,23 @@ const Activity = () => {
         {
             title: 'List',
             price: '0.006 ETH',
-            from: 'Vlad556 ',
-            to: 'Vlad556 ',
-            days: '9 Days ago '
+            from: 'Alex 67 ',
+            to: 'Alex 67 ',
+            days: '6 Days ago '
+        },
+        {
+            title: 'List',
+            price: '0.006 ETH',
+            from: 'cynthia321 ',
+            to: 'cynthia321 ',
+            days: '60 Days ago '
         },
         {
             title: 'List',
             price: '0.006 ETH',
             from: 'Vlad556 ',
             to: 'Vlad556 ',
-            days: '9 Days ago '
-        },
-        {
-            title: 'List',
-            price: '0.006 ETH',
-            from: 'Vlad556 ',
-            to: 'Vlad556 ',
-            days: '9 Days ago '
+            days: '79 Days ago '
         }
     ];
     const [search, setSearch] = useState('');
@@ -65,11 +92,12 @@ const Activity = () => {
                     <Grid container spacing={2} sx={{ mb: 2 }}>
                         <Grid item xs={12}>
                             <Typography
+                                color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
+                                className="productfigmastyl"
                                 variant="h2"
                                 mt={4}
                                 component="div"
-                                sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, 
-                                textTransform: 'capitalize' }}
+                                sx={{ textAlign: { xs: 'center', md: 'left', sm: 'center' }, textTransform: 'capitalize' }}
                             >
                                 Activity
                                 <AutorenewIcon />
@@ -81,13 +109,56 @@ const Activity = () => {
                 <Grid item xs={12}>
                     <Grid item md={12} sm={12}>
                         <MainCard
+                            className="tableShadow"
                             sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
                             title={
                                 <Grid container spacing={gridSpacing}>
                                     <Grid item xs={12}>
-                                        <FormControl fullWidth>
-                                            <InputLabel id="age-select">Filter</InputLabel>
+                                        <div>
+                                            <FormControl
+                                                sx={{
+                                                    background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
+                                                    color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
+                                                    padding: '10px 10px 10px 10px',
+                                                    border: '2px solid #CDCDCD',
+                                                    borderRadius: '4px'
+                                                }}
+                                                fullWidth
+                                            >
+                                                <Select
+                                                    variant="standard"
+                                                    fullWidth
+                                                    displayEmpty
+                                                    value={personName}
+                                                    onChange={handleChange}
+                                                    // input={<OutlinedInput />}
+                                                    renderValue={(selected) => {
+                                                        if (selected.length === 0) {
+                                                            return <em className="fontfamily">filter</em>;
+                                                        }
+
+                                                        return selected.join(', ');
+                                                    }}
+                                                    MenuProps={MenuProps}
+                                                    inputProps={{ 'aria-label': 'Without label' }}
+                                                >
+                                                    {/* <MenuItem disabled value="">
+                                          <em>aiman</em>
+                                        </MenuItem> */}
+                                                    {names.map((name) => (
+                                                        <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+                                                            {name}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </div>
+                                        {/*    <FormControl  sx={{ background:theme.palette.mode === 'dark' ? '#181C1F'
+                                        : '#d9d9d9',color:theme.palette.mode === 'dark' ? '#ffff'
+                                        : 'black', border: '2px solid #CDCDCD' , borderRadius:'4px'}} fullWidth>
+                                            <InputLabel className='activityTable'  sx={{color:'#CDCDCD'}} id="age-select">Filter</InputLabel>
                                             <Select
+                                            variant='standard'
                                                 fullWidth
                                                 labelId="age-select"
                                                 id="age"
@@ -97,13 +168,13 @@ const Activity = () => {
                                                 label="Age"
                                             >
                                                 <MenuItem value="">
-                                                    <em>Filter</em>
+                                                    <em className='activityTable' >Filter</em>
                                                 </MenuItem>
                                                 <MenuItem value={10}>Ten</MenuItem>
                                                 <MenuItem value={20}>Twenty</MenuItem>
                                                 <MenuItem value={30}>Thirty</MenuItem>
                                             </Select>
-                                        </FormControl>
+                                        </FormControl> */}
                                     </Grid>
                                 </Grid>
                             }
@@ -114,25 +185,49 @@ const Activity = () => {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell align="center">Event </TableCell>
-                                            <TableCell align="center">Price </TableCell>
-                                            <TableCell align="center">From</TableCell>
-                                            <TableCell align="center">To </TableCell>
-                                            <TableCell align="center">Date</TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                Event{' '}
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                Price{' '}
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                From
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                To{' '}
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                Date
+                                            </TableCell>
                                         </TableRow>
                                     </TableHead>
                                     {itemData.map((item) => (
                                         <TableBody>
                                             <TableRow>
-                                                <TableCell align="center">{item.title}</TableCell>
-                                                <TableCell align="center">{item.price}</TableCell>
-                                                <TableCell sx={{ color: '#2194FF' }} align="center">
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                    {item.title}
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                    {item.price}
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
                                                     {item.from}
                                                 </TableCell>
-                                                <TableCell sx={{ color: '#2194FF' }} align="center">
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
                                                     {item.to}
                                                 </TableCell>
-                                                <TableCell align="center">{item.days}</TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                    {item.days}
+                                                </TableCell>
                                             </TableRow>
                                         </TableBody>
                                     ))}

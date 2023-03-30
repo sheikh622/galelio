@@ -77,10 +77,13 @@ const NavItem = ({ item, level }) => {
             selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
             onClick={() => itemHandler(item.id)}
         >
-            <ListItemIcon className='icons' sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36  , color:"#98A2B2"}}>{itemIcon}</ListItemIcon>
+            <ListItemIcon className='icons' sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36  , 
+            color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2', }}>{itemIcon}</ListItemIcon>
             <ListItemText
                 primary={
-                    <Typography className='icons' sx={{color:"#98A2B2"}} variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} >
+                    <Typography className='icons stylingtitle'
+                     sx={{   color: theme.palette.mode === 'light' ? ' #000 ' : '#98A2B2',  }}
+                      variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} >
                         {item.title}
                     </Typography>
                 }

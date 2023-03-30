@@ -61,14 +61,18 @@ export default function AddUpdateDialog({
     const validationSchema = Yup.object({
         firstName: Yup.string()
             .required('First Name is required!')
-            .max(42, 'First Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
+            .max(400, 'First Name can not exceed 400 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
         lastName: Yup.string()
             .required('Last Name is required!')
-            .max(42, 'Last Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
+            .max(42, 'Last Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
         password: Yup.string().max(255).required('Password is required!')
+        .matches(
+            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+        ),
     });
     const formik = useFormik({
         enableReinitialize: true,
@@ -118,7 +122,9 @@ export default function AddUpdateDialog({
 
     return (
         <>
-            <Dialog open={open} onClose={handleClose} handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
+            <Dialog open={open}
+            //  onClose={handleClose} 
+             handleBrandChange={handleBrandChange} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
                     {brandManagement.firstName !== '' ? 'Update Brand Admin ' : ' Add Brand Admin '}
                 </DialogTitle>

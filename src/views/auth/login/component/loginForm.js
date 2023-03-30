@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import TextField from '@material-ui/core/TextField';
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 import {
     Box,
     Button,
@@ -17,6 +20,7 @@ import {
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import '@fontsource/public-sans';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -26,19 +30,16 @@ import { setLoader } from '../../../../redux/auth/actions';
 import { GoogleLogin } from '@react-oauth/google';
 let jwt = require('jsonwebtoken');
 import axios from 'axios';
+import { gridSpacing } from 'store/constant';
+
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactFacebookLogin from 'react-facebook-login';
 import './loginForm.css';
-import { API_URL} from 'utils/axios';
-
-
-
+import { API_URL } from 'utils/axios';
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 
 const LoginForm = ({ loginProp, ...others }) => {
-
-    
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const theme = useTheme();
@@ -60,11 +61,25 @@ const LoginForm = ({ loginProp, ...others }) => {
     const googleAuthHandle = (data) => {
         const decoded_data = jwt.decode(data.credential);
         axios
-            .post(API_URL+'auth/google/callback/success', {
+            .post(API_URL + 'auth/google/callback/success', {
                 data: decoded_data
             })
             .then(function (response) {
+                // console.log('response.data.data', response.data.data);
                 dispatch(loginSuccess(response.data.data));
+
+                if (!response.data.data.profileCompleted) {
+                    navigate('/socialLogin', {
+                        state: { socal: response.data.data }
+                    });
+
+                    console.log('if in ran');
+                } else {
+                    // console.log('else in ran');
+                    navigate('/home', {
+                        state: { socal: response.data.data }
+                    });
+                }
             })
             .catch(function (error) {
                 toast.error(error.message);
@@ -72,23 +87,32 @@ const LoginForm = ({ loginProp, ...others }) => {
     };
 
     const responseFacebook = (data) => {
-        console.log('facebook data', data);
         let { email, first_name, last_name } = data;
         axios
-            .post(API_URL+'auth/facebook/callback/success', {
+            .post(API_URL + 'auth/facebook/callback/success', {
                 data: { email, first_name, last_name }
             })
             .then(function (response) {
                 dispatch(loginSuccess(response.data.data));
-                // console.log(response)
+
+                if (!response.data.data.profileCompleted) {
+                    navigate('/socialLogin', {
+                        state: { socal: response.data.data }
+                    });
+                } else {
+                    navigate('/home', {
+                        state: { socal: response.data.data }
+                    });
+                }
             })
             .catch(function (error) {
                 toast.error(error.message);
             });
     };
-    const responseFacebookFailure = () => {
-        toast.error('Facebook login failed');
+    const responseFacebookFailure = (error) => {
+        // toast.error(error);
     };
+
     return (
         <>
             <Formik
@@ -99,7 +123,16 @@ const LoginForm = ({ loginProp, ...others }) => {
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-                    password: Yup.string().max(255).required('Password is required!')
+                    // .matches(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/, 'Invalid Email'),
+                    // .matches(/^[a-zA-Z0-9]/, '* This email cannot contain white space and special character'),
+
+                    password: Yup.string()
+                        .max(255)
+                        .required('Password is required!')
+                        // .matches(
+                        //     /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                        //     'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                        // )
                 })}
                 onSubmit={async (values) => {
                     await dispatch(setLoader(true));
@@ -114,15 +147,26 @@ const LoginForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
-                            <OutlinedInput
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Email{' '}
+                        </InputLabel>
+                        <FormControl  sx={{ ...theme.typography.customInput }} className="auth-formcontrol" 
+                        fullWidth error={Boolean(touched.email && errors.email)}>
+                            <TextField
+                           
+                                placeholder="email"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="email"
                                 value={values.email}
                                 name="email"
+                                autoComplete="current-email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email"
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -132,32 +176,27 @@ const LoginForm = ({ loginProp, ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl
-                            fullWidth
-                            error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
-                        >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
-                            <OutlinedInput
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.password}
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-password-login">
+                            {' '}
+                            Password
+                        </InputLabel>
+                        <FormControl  className="auth-formcontrol" fullWidth error={Boolean(touched.password 
+                            && errors.password)}>
+                            <TextField
+                           
+                                placeholder=" Password"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                id="password"
+                                autoComplete="current-password"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
                                 inputProps={{}}
                             />
                             {touched.password && errors.password && (
@@ -165,13 +204,29 @@ const LoginForm = ({ loginProp, ...others }) => {
                                     {errors.password}
                                 </FormHelperText>
                             )}
+                            <IconButton
+                                className="iconvisible"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                aria-label="toggle password visibility"
+                                edge="end"
+                                size="large"
+                            >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
                         </FormControl>
+
                         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                             <Typography
+                                className="Forgot"
                                 variant="subtitle1"
                                 component={Link}
                                 to={'/forgetPassword'}
-                                sx={{ textDecoration: 'none', color: '#000 ' }}
+                                sx={{
+                                    textDecoration: 'none',
+
+                                    color: theme.palette.mode === 'dark' ? '#fff' : '#000'
+                                }}
                             >
                                 Forgot Password?
                             </Typography>
@@ -215,38 +270,47 @@ const LoginForm = ({ loginProp, ...others }) => {
                         </Box>
 
                         <Grid item xs={12}>
-                            <Grid mt={2} item container direction="column" alignItems="center" xs={12}>
-                                <Typography variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                            <Grid mt={2} mb={-2} item container direction="column" alignItems="center" xs={12}>
+                                <Typography className="fontfamily" variant="subtitle1" sx={{ textDecoration: 'none', fontSize: '16px' }}>
                                     or continue with
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
-                            <GoogleLogin
-                                select_account={false}
-                                auto_select={false}
-                                onSuccess={(data) => {
-                                    googleAuthHandle(data);
-                                }}
-                                onError={() => {
-                                    toast.error('Google Auth Failed');
-                                }}
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            sx={{ background: '', display: 'flex', justifyContent: 'center', marginTop: '15px', paddingRight: '21%' }}
-                        >
-                            <ReactFacebookLogin
-                                appId="851727442768362"
-                                // autoLoad={true}
-                                fields="first_name, last_name,email"
-                                callback={responseFacebook}
-                                onFailure={responseFacebookFailure}
-                                icon="fa-facebook"
-                                cssClass="my-facebook-button-class"
-                                textButton=" Login with Facebook"
-                            />
+                        <Grid mt={1} container spacing={gridSpacing}>
+                            <Grid item xs={12}>
+                                <Grid container spacing={gridSpacing}>
+                                    <Grid item lg={6} md={6} sm={6} xs={6}>
+                                        <Box sx={{ float: { md: 'right', xs: 'right' } }}>
+                                            <ReactFacebookLogin
+                                                appId="851727442768362"
+                                                // autoLoad={true}
+                                                fields="first_name, last_name,email"
+                                                callback={responseFacebook}
+                                                onFailure={responseFacebookFailure}
+                                                cssClass="my-facebook-button-class"
+                                                icon="fa-facebook"
+                                                textButton=""
+                                            />
+                                        </Box>
+                                    </Grid>
+
+                                    <Grid item lg={6} md={6} sm={6} xs={6}>
+                                        <Box sx={{ float: { md: 'left' } }}>
+                                            {' '}
+                                            <GoogleLogin
+                                                type="icon"
+                                                onSuccess={(data) => {
+                                                    // console.log('datafrom google login', data);
+                                                    googleAuthHandle(data);
+                                                }}
+                                                onError={() => {
+                                                    toast.error('Google Auth Failed');
+                                                }}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </form>
                 )}

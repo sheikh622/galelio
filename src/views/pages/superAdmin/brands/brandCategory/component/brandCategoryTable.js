@@ -15,16 +15,23 @@ import {
     Button,
     TableRow,
     Tooltip,
-    Stack
+    Stack,
+    CircularProgress
 } from '@mui/material';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddUpdateBrandCategoryDialog from './addUpdateBrandCategory';
 import DeleteBrandCategoryDialog from './deleteBrandCategoryDialog';
 import Avatar from 'ui-component/extended/Avatar';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+// import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import EditOutlinedIcon from 'assets/images/edit.png';
+
+// import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
+import DeleteOutlineOutlinedIcon from 'assets/images/delete.png';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import moment from 'moment';
+
 const BrandCategoryTable = ({
     brandCategoriesList,
     search,
@@ -67,111 +74,146 @@ const BrandCategoryTable = ({
                 search={search}
                 brandCategoryData={brandCategoryData}
             />
+            {brandCategoriesList.brandCategories == undefined ? (
+                <Grid container justifyContent="center" sx={{ width: '80%', m: '15px auto ' }}>
+                    <Grid item>
+                        <CircularProgress disableShrink size={'4rem'} />
+                    </Grid>
+                </Grid>
+            ) : (
+                <>
+                    {brandCategoriesList.brandCategories != undefined && brandCategoriesList.count > 0 ? (
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center" sx={{ borderBottom: 'none' }}></TableCell>
+                                    <TableCell align="left " className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Category name{' '}
+                                    </TableCell>
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Profit Percentage
+                                    </TableCell>
+                                    {/* <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Description</TableCell> */}
 
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="center">Category</TableCell>
-                        <TableCell align="center">Description</TableCell>
-                        <TableCell align="center">Profit percentage</TableCell>
-                        <TableCell align="center">Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                {brandCategoriesList.brandCategories != undefined && brandCategoriesList.count > 0 ? (
-                    <TableBody sx={{ padding: '10px' }}>
-                        {brandCategoriesList.brandCategories != undefined &&
-                            brandCategoriesList.brandCategories.map((row, index) => (
-                                <>
-                                    <TableRow>
-                                        <TableCell align="center" justifyContent="center" alignItems="center">
-                                            <Grid container spacing={2} justifyContent="center" alignItems="center">
-                                                <Grid item>
-                                                    <Avatar alt="Category Image" src={row.Category.image} />
-                                                </Grid>
-                                                <Grid item>
-                                                    <Typography variant="subtitle1" component="div">
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Created At
+                                    </TableCell>
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Updated At
+                                    </TableCell>
+                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                        Actions
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody sx={{ padding: '10px' }}>
+                                {brandCategoriesList.brandCategories != undefined &&
+                                    brandCategoriesList.brandCategories.map((row, index) => (
+                                        <>
+                                            <TableRow>
+                                                <TableCell align="right" sx={{ borderBottom: 'none' }}></TableCell>
+                                                <TableCell
+                                                    sx={{
+                                                        display: 'flex',
+                                                        borderBottom: 'none',
+                                                        textTransform: 'capitalize',
+                                                        borderBottom: 'none'
+                                                    }}
+                                                >
+                                                    <Grid item lg={6}>
+                                                        <Avatar alt="Brand Image" src={row.Category.image} sx={{}} />
+                                                    </Grid>
+                                                    <Grid item lg={6} className="tableName">
                                                         {row.Category.name}
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                        </TableCell>
+                                                    </Grid>
+                                                </TableCell>
 
-                                        <TableCell align="center">{row.Category.description}</TableCell>
-                                        <TableCell align="center">{row.profitPercentage}</TableCell>
+                                                <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                                    {row.profitPercentage}%
+                                                </TableCell>
+                                                <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                                    {moment(row.createdAt).format('DD-MMM-YYYY')}
+                                                </TableCell>
+                                                <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                                    {moment(row.updatedAt).format('DD-MMM-YYYY')}
+                                                </TableCell>
 
-                                        <TableCell align="center" sx={{ padding: '0px' }}>
-                                            <Stack direction="row" justifyContent="center" alignItems="center">
-                                                <Tooltip placement="top" title=" View NFT'S">
-                                                    <IconButton
-                                                        color="primary"
-                                                        aria-label="detail"
-                                                        size="medium"
-                                                        onClick={() => {
-                                                            navigate('/nftManagement', {
-                                                                state: {
-                                                                    brandData: row
-                                                                }
-                                                            });
-                                                        }}
-                                                    >
-                                                        <RemoveRedEyeIcon sx={{ fontSize: '1.5rem' }} />
-                                                    </IconButton>
-                                                </Tooltip>
+                                                <TableCell align="left" sx={{ padding: '0px', borderBottom: 'none' }}>
+                                                    <Stack direction="row">
+                                                        <Tooltip placement="top" title=" View NFT'S">
+                                                            <IconButton
+                                                                color="primary"
+                                                                aria-label="detail"
+                                                                size="medium"
+                                                                onClick={() => {
+                                                                    navigate('/nftManagement', {
+                                                                        state: {
+                                                                            brandData: row
+                                                                        }
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <RemoveRedEyeIcon sx={{ fontSize: '1.5rem' }} />
+                                                            </IconButton>
+                                                        </Tooltip>
 
-                                                <Tooltip placement="top" title="Edit">
-                                                    <IconButton
-                                                        color="primary"
-                                                        aria-label="Edit"
-                                                        size="large"
-                                                        onClick={() => {
-                                                            setAddUpdateOpen(true);
-                                                            setBrandCategoryData({
-                                                                categoryId: row.CategoryId,
-                                                                brandId: row.BrandId,
-                                                                profitPercentage: row.profitPercentage
-                                                            });
-                                                        }}
-                                                    >
-                                                        <EditOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                                    </IconButton>
-                                                </Tooltip>
-                                                <Tooltip placement="top" title="Delete">
-                                                    <IconButton
-                                                        color="primary"
-                                                        sx={{
-                                                            color: theme.palette.orange.dark,
-                                                            borderColor: theme.palette.orange.main,
-                                                            '&:hover ': { background: theme.palette.orange.light }
-                                                        }}
-                                                        size="large"
-                                                        onClick={() => {
-                                                            setDeleteOpen(true);
-                                                            setBrandCategoryData({
-                                                                categoryId: row.CategoryId,
-                                                                brandId: row.BrandId
-                                                            });
-                                                        }}
-                                                    >
-                                                        <DeleteOutlineOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            </Stack>
-                                        </TableCell>
-                                    </TableRow>
-                                </>
-                            ))}
-                    </TableBody>
-                ) : (
-                    <>
-                        <Grid item md={12}>
-                            <Divider />
-                        </Grid>
-                        <Grid item>
-                            <Typography style={{ padding: '20px', fontWeight: '800' }}> No Data Available</Typography>
-                        </Grid>
-                    </>
-                )}
-            </Table>
+                                                        <Tooltip placement="top" title="Edit">
+                                                            <IconButton
+                                                                sx={{ color: '#008b04' }}
+                                                                aria-label="Edit"
+                                                                size="large"
+                                                                onClick={() => {
+                                                                    setAddUpdateOpen(true);
+                                                                    setBrandCategoryData({
+                                                                        categoryId: row.CategoryId,
+                                                                        brandId: row.BrandId,
+                                                                        profitPercentage: row.profitPercentage,
+                                                                        contractAddress: row.contractAddress
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <img src={EditOutlinedIcon} />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                        <Tooltip placement="top" title="Delete">
+                                                            <IconButton
+                                                                color="primary"
+                                                                sx={{
+                                                                    color: theme.palette.orange.dark,
+                                                                    borderColor: theme.palette.orange.main,
+                                                                    '&:hover ': { background: theme.palette.orange.light }
+                                                                }}
+                                                                size="large"
+                                                                onClick={() => {
+                                                                    setDeleteOpen(true);
+                                                                    setBrandCategoryData({
+                                                                        categoryId: row.CategoryId,
+                                                                        brandId: row.BrandId
+                                                                    });
+                                                                }}
+                                                            >
+                                                                <img src={DeleteOutlineOutlinedIcon} />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </Stack>
+                                                </TableCell>
+                                            </TableRow>
+                                        </>
+                                    ))}
+                            </TableBody>
+                        </Table>
+                    ) : (
+                        <>
+                            <Grid item>
+                                <Typography className="statustypo" style={{ padding: '20px 20px 20px 70px', fontWeight: '500' }}>
+                                    {' '}
+                                    No Data Available
+                                </Typography>
+                            </Grid>
+                        </>
+                    )}
+                </>
+            )}
         </TableContainer>
     );
 };

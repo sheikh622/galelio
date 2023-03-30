@@ -26,21 +26,24 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
         isUpdate: Yup.boolean().default(isUpdate),
         name: Yup.string()
             .required('Brand Name is required!')
-            .max(42, 'Brand Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Brand name'),
+            .max(42, 'Brand Name can not exceed 42 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Brand name'),
         location: Yup.string()
             .required('Location is required!')
-            .max(42, 'Location can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Location'),
+            .max(42, 'Location can not exceed 42 characters'),  
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Location'),
         description: Yup.string()
             .required('Brand is required!')
-            .max(42, 'Brand can not exceed 200 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
-        image: Yup.mixed().when(['isUpdate'], {
+            .max(400, 'Brand can not exceed 400 characters'),
+            // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Description'),
+        image: Yup.mixed()     .when(['isUpdate'], {
             is: true,
             then: Yup.mixed(),
             otherwise: Yup.mixed().required('Image is required')
         })
+
+        .test('image size', 'Choose image less than 5 mb', (value) => !value || (value && value.size <= 5_000_000))
+
     });
     const errorHandler = (values) => {
         if (values.image) {
@@ -104,24 +107,30 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
         <>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                className="createDialog dialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-                <DialogTitle id="alert-dialog-slide-title1">{brandData.id == null ? 'Add Brand' : 'Update Brand'}</DialogTitle>
-                <Divider />
+                <DialogTitle id="alert-dialog-slide-title1" className="adminname">
+                    {brandData.id == null ? 'Create Brand' : 'Update Brand'}
+                </DialogTitle>
+                
                 <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
                         <Grid container>
-                            <Grid item xs={6} pt={4} pr={4}>
-                                <InputLabel htmlFor="outlined-adornment-password-login">Name</InputLabel>
+                        <Grid item xs={12} md={12} lg={12} >
+                                <InputLabel htmlFor="outlined-adornment-password-login" className="textfieldStyle">
+                                    Name
+                                </InputLabel>
                                 <TextField
+                                className='field'
                                     id="name"
                                     name="name"
+                                    variant="standard"
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
                                     error={formik.touched.name && Boolean(formik.errors.name)}
@@ -130,61 +139,68 @@ export default function AddUpdateBrandDialog({ brandData, page, limit, search, o
                                     autoComplete="given-name"
                                 />
                             </Grid>
-                            <Grid item xs={6} pt={4}>
-                                <InputLabel htmlFor="outlined-adornment-password-login">Location</InputLabel>
+                            <Grid item xs={12} md={12} lg={12} pt={2}>
+                                <InputLabel htmlFor="outlined-adornment-password-login"   className='textfieldStyle'>Location</InputLabel>
                                 <TextField
+                                className='field'
                                     id="location"
-                                    name="location"
+                                    name="location"  variant="standard"
                                     value={formik.values.location}
                                     onChange={formik.handleChange}
                                     error={formik.touched.location && Boolean(formik.errors.location)}
                                     helperText={formik.touched.location && formik.errors.location}
                                     fullWidth
-                                    autoComplete="given-name"
+                                  
                                 />
                             </Grid>
-                            <Grid item xs={12} pt={2}>
-                                <InputLabel htmlFor="outlined-adornment-password-login">Description</InputLabel>
+                            <Grid item xs={12} md={12} lg={12} pt={2}>
+                                <InputLabel htmlFor="outlined-adornment-password-login"   className='textfieldStyle'>Description</InputLabel>
                                 <TextField
+                                className='field'
                                     id="description"
-                                    name="description"
+                                    name="description"  variant="standard"
                                     value={formik.values.description}
                                     onChange={formik.handleChange}
                                     error={formik.touched.description && Boolean(formik.errors.description)}
                                     helperText={formik.touched.description && formik.errors.description}
                                     fullWidth
-                                    autoComplete="given-name"
+                                  
                                 />
                             </Grid>
-                            <Grid item xs={12} pt={2}>
-                                <FileInput formik={formik} accept="image/*" fieldName="image" placeHolder="Add Brand Image" />
+                            <Grid item xs={12} md={12} lg={12} pt={2} sx={{ml:{md:'-15px', lg:'-15px'}}}>
+                                <FileInput   className='textfieldStyle' variant="standard" formik={formik} accept="image/*" fieldName="image" placeHolder="Add Brand Image" />
                             </Grid>
                         </Grid>
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ pr: 2.5 }}>
+                <DialogActions sx={{ display:'block',  margin:'10px 10px 0px 20px' }}>
                     <AnimateButton>
                         <Button
                             type="submit"
+                            className='buttons' size='large' 
                             variant="contained"
-                            sx={{ my: 3, ml: 1 }}
+                            sx={{ width: '92%',
+                            margin: '0px 0px 10px 8px', 
+                            background: 'linear-gradient(97.63deg, #2F57FF 0%, #2FA3FF 108.45%)' ,
+                           }}
                             onClick={() => {
                                 formik.handleSubmit();
                             }}
-                            size="large"
+                            
                             disableElevation
                         >
-                            {brandData.id == null ? 'Add' : 'Update'}
+                            {brandData.id == null ? 'Create' : 'Update'}
                         </Button>
-                    </AnimateButton>
-                    <AnimateButton>
+                        </AnimateButton>
+                        <AnimateButton>
                         <Button
-                            variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
+                            variant="outlined"
+                            sx={{ width: '95%',
+                            margin: '0px 0px 10px 0px',   color: '#4044ED'  }}
                             onClick={handleClose}
-                            color="secondary"
-                            size="large"
+                            
+                            className='buttons' size='large' 
                         >
                             Cancel
                         </Button>

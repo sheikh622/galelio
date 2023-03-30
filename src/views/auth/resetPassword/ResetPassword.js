@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import { useSelector } from 'react-redux';
-
+import TextField from '@material-ui/core/TextField';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -22,15 +24,20 @@ const ResetPasswordForm = ({ token, ...others }) => {
     const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
+    const [showconfirmPassword, setShowconfirmPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const handleClickShowConfirmPassword = () => {
-        setShowConfirmPassword(!showConfirmPassword);
+    const handleClickShowconfirmPassword = () => {
+        setShowconfirmPassword(!showconfirmPassword);
     };
+   
+  
 
     const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+    const handleMouseDownconfirmPassword = (event) => {
         event.preventDefault();
     };
 
@@ -42,13 +49,20 @@ const ResetPasswordForm = ({ token, ...others }) => {
                     confirmPassword: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    password: Yup.string().max(255).required('Password is required!'),
+                    password: Yup.string()
+                        .max(255)
+                        .required('Password is required!')
+                        .matches(
+                            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                            'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                        ),
                     confirmPassword: Yup.string().when('password', {
                         is: (val) => !!(val && val.length > 0),
                         then: Yup.string().oneOf([Yup.ref('password')], 'Both Password must be match!')
                     })
                 })}
                 onSubmit={async (values) => {
+                    console.log('reset', values)
                     await dispatch(
                         resetPassword({
                             newPassword: values.password,
@@ -60,68 +74,80 @@ const ResetPasswordForm = ({ token, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl
+                    <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className='authFont' htmlFor="outlined-adornment-password-login"> Password</InputLabel>
+                    <FormControl
+                  className='auth-formcontrol'
+                    fullWidth
+                    error={Boolean(touched.password && errors.password)}
+                   
+                >
+                        <TextField
+                        placeholder=' Password'
+                            className="textForm"
+                            // onChange={(event)=>handelAccount("password",event)}
+                            variant="outlined"
+                            margin="normal"
+                            required
                             fullWidth
-                            error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
-                        >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
-                            <OutlinedInput
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                name="password"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-                                inputProps={{}}
-                            />
-                            {touched.password && errors.password && (
-                                <FormHelperText error id="standard-weight-helper-text-password-login">
-                                    {errors.password}
-                                </FormHelperText>
-                            )}
+                            name="password"
+                          
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            autoComplete="current-password"
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            
+                            inputProps={{}}
+                        />
+                        {touched.password && errors.password && (
+                            <FormHelperText error id="standard-weight-helper-text-password-login">
+                                {errors.password}
+                            </FormHelperText>
+                        )}
+                        <IconButton className='iconvisible'
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        aria-label="toggle password visibility" edge="end" size="large">
+                           
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
                         </FormControl>
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className='authFont' htmlFor="outlined-adornment-password-login">Confirm Password</InputLabel>
                         <FormControl
+                        className='auth-formcontrol'
                             fullWidth
                             error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
+                          
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Confirm Password</InputLabel>
-                            <OutlinedInput
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.confirmPassword}
+                        
+                        <TextField
+                        placeholder='Confirm Password'
+                        className="textForm"
+                        // onChange={(event)=>handelAccount("password",event)}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        value={values.confirmPassword}
                                 name="confirmPassword"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="confirmPassword"
-                                inputProps={{}}
-                            />
+                      
+                        type={showconfirmPassword ? 'text' : 'password'}
+                      
+                        id="password"
+                        autoComplete="current-password"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        
+                        inputProps={{}}
+                    />
+                
+                    <IconButton className='iconvisible'
+                    onClick={handleClickShowconfirmPassword}
+                    onMouseDown={handleMouseDownconfirmPassword}
+                    aria-label="toggle password visibility" edge="end" size="large">
+                       
+                    {showconfirmPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
                             {touched.confirmPassword && errors.confirmPassword && (
                                 <FormHelperText error id="standard-weight-helper-text-password-login">
                                     {errors.confirmPassword}
@@ -135,7 +161,8 @@ const ResetPasswordForm = ({ token, ...others }) => {
                             </Box>
                         )}
 
-                        <Box sx={{ mt: 2 }}>
+                        <div>* Password should be 8 characters long containing 1 Uppercase, 1 Numeric and 1 special character</div>
+                        <Box sx={{ mt: 5 }}>
                             <AnimateButton>
                                 <Button
                                     className="signbuttonMarket"

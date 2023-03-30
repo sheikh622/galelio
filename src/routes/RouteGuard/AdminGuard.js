@@ -9,15 +9,19 @@ import { useSelector } from 'react-redux';
  */
 const AdminGuard = ({ children }) => {
     const token = useSelector((state) => state.auth.token);
+
+    // console.log('token from adminguard', token);
+    const user = useSelector((state) => state.auth.user);
+
     const navigate = useNavigate();
-    console.log('token in AdminGuard', token);
+   
     useEffect(() => {
         if (token == null) {
-            navigate('/', { replace: true });
-        } else if (token) {
-            console.log('When there will be token in admin guard');
-            navigate('/dashboard', { replace: true });
+            navigate('/login', { replace: true });
         }
+        //  else if (token) {
+        //     navigate('/dashboard', { replace: true });
+        // }
     }, [token]);
     return children;
 };

@@ -1,11 +1,25 @@
 import produce from 'immer';
-import { LOGIN_SUCCESS, SET_WALLET_ADDRESS, LOGOUT, SET_LOADER, SIGN_UP_SUCCESS } from './constants';
+import {
+    LOGIN_SUCCESS,
+    VERIFY_SUCCESS,
+    SET_WALLET_ADDRESS,
+    LOGOUT,
+    SET_LOADER,
+    SIGN_UP_SUCCESS,
+    SIGN_UP_SOCIAL_SUCCESS,
+    DASHBOARD_SUCCESS,
+    BRAND_DASHBOARD_SUCCESS
+} from './constants';
 
 const INITIAL_STATE = {
     user: null,
+    dahboardUser: null,
+    branddahboardUser: null,
+    socialuser: null,
     token: null,
     loader: false,
-    walletAddress: null
+    walletAddress: null,
+    Verify: null
 };
 
 const AuthReducer = produce((draft, action) => {
@@ -14,7 +28,24 @@ const AuthReducer = produce((draft, action) => {
             draft.user = action.payload.user;
             draft.token = action.payload.token;
             break;
+        case VERIFY_SUCCESS:
+            draft.Verify = action.payload;
+            
+            break;
+        case DASHBOARD_SUCCESS:
+            draft.dahboardUser = action.payload;
+
+            break;
+        case BRAND_DASHBOARD_SUCCESS:
+            draft.branddahboardUser = action.payload;
+
+            break;
         case SIGN_UP_SUCCESS:
+            draft.user = action.payload.user;
+            draft.token = action.payload.token;
+
+            break;
+        case SIGN_UP_SOCIAL_SUCCESS:
             draft.user = action.payload.user;
             draft.token = action.payload.token;
 

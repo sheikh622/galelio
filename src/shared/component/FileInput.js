@@ -9,6 +9,7 @@ import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 // Props needed for component formik ,correctOption, setCorrectOption , optionValue , formikFieldName , PlaceHOLDER
 const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
+    
     const dispatch = useDispatch();
     const fileRef1 = useRef();
 
@@ -16,7 +17,7 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
         <>
             <Grid item className="displayFlex">
                 <Fragment>
-                    <Tooltip placement="top" title={accept == 'image/*' ? 'Add Image' : 'Add Audio'}>
+                    <Tooltip placement="top" title={accept == 'image/*' ? 'Add Image' : 'Add File'}>
                         <IconButton color="primary" aria-label="delete" size="large" onClick={() => fileRef1.current.click()}>
                             <AddCircleOutlinedIcon sx={{ fontSize: '3.0rem' }} />
                         </IconButton>
@@ -30,6 +31,7 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
                         className="chooseFileInput"
                         accept={accept}
                         onChange={(event) => {
+                            
                             formik.setFieldValue(fieldName, event.currentTarget.files[0]);
                         }}
                         error={formik.touched[`${fieldName}`] && Boolean(formik.errors[`${fieldName}`])}
@@ -52,6 +54,7 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
                             </Typography>
                         )}
 
+                            
                         {formik.values[`${fieldName}`] ? (
                             <Tooltip placement="top" title={accept == 'image/*' ? 'Clear Image' : 'Clear Audio'}>
                                 <IconButton
@@ -64,7 +67,11 @@ const FileInput = ({ formik, fieldName, placeHolder, accept }) => {
                                         fileRef1.current.value = null;
                                     }}
                                 >
+                                    
+
                                     <CloseOutlinedIcon sx={{ fontSize: '1.5rem' }} />
+                                    
+                                    
                                 </IconButton>
                             </Tooltip>
                         ) : (

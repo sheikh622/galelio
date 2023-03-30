@@ -40,29 +40,35 @@ const Categories = () => {
     }, [search, page, limit]);
     return (
         <>
-        
-        
-        <Typography variant="h1" sx={{m:2}}>
-        Category Management
-            </Typography>
+            <HeadingCard title=" Category Management" />
+
             <MainCard
+            className='tableShadow'
                 title={
-                    <Grid container spacing={gridSpacing}>
-                        <Grid item xs={6}>
-                            <OutlinedInput
-                                id="input-search-list-style1"
-                                placeholder="Search"
-                                startAdornment={
-                                    <InputAdornment position="start">
-                                        <IconSearch stroke={1.5} size="1rem" />
-                                    </InputAdornment>
-                                }
-                                size="small"
-                                onChange={(e) => {
-                                    setSearch(e.target.value);
-                                }}
-                            />
+                    <Grid container spacing={4} >
+                    <Grid item xs={12} lg={8} >
+                    <Typography className='mainheading' variant="h1" component="h2"
+                     sx={{marginLeft:{lg:'48px', md:'48px'}}}>
+                     Categories
+                  </Typography>
+                    </Grid>
+                        <Grid item xs={12} lg={4} >
+                       
+                        <OutlinedInput
+                        id="input-search-list-style1"
+                        placeholder="Search"
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <IconSearch stroke={1.5} size="1rem" />
+                            </InputAdornment>
+                        }
+                        size="small"
+                        onChange={(e) => {
+                            setSearch(e.target.value);
+                        }}
+                    />
                         </Grid>
+                        
                     </Grid>
                 }
                 content={false}
@@ -71,7 +77,7 @@ const Categories = () => {
 
                 <>
                     <Grid item xs={12} sx={{ p: 3 }}>
-                        <Grid container justifyContent="space-between" spacing={gridSpacing}>
+                        <Grid container justifyContent="center" spacing={gridSpacing}>
                             <Grid item>
                                 <Pagination
                                     color="primary"
@@ -84,67 +90,7 @@ const Categories = () => {
                                     }}
                                 />
                             </Grid>
-                            <Grid item>
-                                <Button
-                                    size="large"
-                                    sx={{ color: theme.palette.grey[900] }}
-                                    color="secondary"
-                                    endIcon={<ExpandMoreRoundedIcon />}
-                                    onClick={handleClick}
-                                >
-                                    {limit} Rows
-                                </Button>
-                                <Menu
-                                    id="menu-user-list-style1"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleCloseMenu}
-                                    variant="selectedMenu"
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right'
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right'
-                                    }}
-                                >
-                                    <MenuItem
-                                        value={10}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        10 Rows
-                                    </MenuItem>
-                                    <MenuItem
-                                        value={25}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        25 Rows
-                                    </MenuItem>
-                                    <MenuItem
-                                        value={50}
-                                        onClick={(e) => {
-                                            setLimit(e.target.value);
-                                            setPage(1);
-                                            handleCloseMenu();
-                                        }}
-                                    >
-                                        {' '}
-                                        50 Rows{' '}
-                                    </MenuItem>
-                                </Menu>
-                            </Grid>
+                          
                         </Grid>
                     </Grid>
                 </>

@@ -1,5 +1,5 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -13,17 +13,17 @@ import {
     TextField,
     Divider,
     Box,
+    Tooltip,
     Link,
     List,
     ListItem,
     ListItemIcon,
     ListItemText,
     Typography,
-    ListItemSecondaryAction,
     IconButton,
     MenuItem
 } from '@mui/material';
-
+import { Switch } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
@@ -40,10 +40,6 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 const currencyTypeArray = [
     {
-        value: 'ETH',
-        label: 'ETH'
-    },
-    {
         value: 'USDT',
         label: 'USDT'
     }
@@ -51,57 +47,103 @@ const currencyTypeArray = [
 
 export default function EditNftDialog({ nftInfo, categoryId, type, search, page, limit, loader, setLoader, open, setOpen }) {
     const dispatch = useDispatch();
+    console.log(nftInfo, 'nftInfo');
     const [mintType, setMintType] = useState('directMint');
-    const [currencyType, setCurrencyType] = useState('ETH');
+    const [currencyType, setCurrencyType] = useState('USDT');
     const [fieldDataArray, setFieldDataArray] = useState([]);
+    const [fileDataArray, setFileDataArray] = useState([]);
     const [uploadedImages, setUploadedImages] = useState([]);
-
+    const user = useSelector((state) => state.auth.user);
     const handleCurrencyType = (event) => {
         setCurrencyType(event.target.value);
     };
+    const [checked, setChecked] = useState(true);
+    // const handleChange = (event) => {
+    //     setChecked(event.target.checked);
+    // };
 
-    const handleError = (fieldDataArray, values, isFile) => {
+    const handleError = (fieldDataArray, fileDataArray, values) => {
+        console.log('im in handle error');
         let isValid = true;
-        if (isFile) {
-            if (values.images[0].image.name.split('.').pop() == 'jpg' || values.images[0].image.name.split('.').pop() == 'png') {
-            } else {
-                toast.error('Upload the files with these extensions: jpg, png, gif');
-                isValid = false;
-            }
+        // console.log('fieldDataArray', fieldDataArray);
+        // console.log('fileDataArray', fileDataArray);
+        // console.log('values', values);
+
+        if (fieldDataArray.length == 0) {
+            isValid = false;
+            toast.error('Metadata is required');
         }
 
-        if (parseInt(values.images[0].quantity) < 1) {
-            toast.error('NFT Quantity must be greater than zero');
+        // else  (fieldDataArray.length > 0) {
+
+        fieldDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`Metadata name cannot be empty`);
+            } else if (array.fieldValue == '') {
+                isValid = false;
+                toast.error(`Metadata value cannot be empty`);
+            }
+        });
+        // }
+        if (fileDataArray.length == 0) {
+            isValid = false;
+            toast.error('Proof of Authenticity is required');
+        }
+
+        //    else (fileDataArray.length > 0) {
+        console.log('im here 2');
+        fileDataArray.map((array) => {
+            if (array.fieldName == '') {
+                isValid = false;
+                toast.error(`File name field is mandatory`);
+            } else if (array.fieldValue == null) {
+                isValid = false;
+                toast.error(`Attach proof of authenticity`);
+            } else if (array.fieldValue?.size / 1000000 > 5) {
+                isValid = false;
+                toast.error(`Please attach a less than 5 mb proof of authenticity`);
+            }
+        });
+        // }
+
+        if (values.images.length == 0) {
+            toast.error('Please upload a NFT Image');
+            isValid = false;
+        } else if (values.images[0].image.size / 1000000 > 5) {
+            toast.error('Please upload a image less than 5 mb');
+            isValid = false;
+        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
+            toast.error('Upload the files with these extensions: jpg, png, gif');
+            isValid = false;
+        } else if (parseInt(values.images[0].quantity) <= 0) {
+            toast.error('NFT Quantity should be atleast one');
             isValid = false;
         }
 
-        fieldDataArray.forEach((array) => {
-            if (array.fieldName == '') {
-                isValid = false;
-                toast.error(`Metadata name fields are mandatory`);
-            }
-            if (array.fieldValue == '') {
-                isValid = false;
-                toast.error(`Metadata value fields are mandatory`);
-            }
-        });
         return isValid;
     };
 
     const validationSchema = Yup.object({
-        nftName: Yup.string()
-            .required('NFT Name is required!')
-            .max(42, 'NFT Name can not exceed 42 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
+        nftName: Yup.string().required('NFT Name is required!').max(60, 'NFT Name can not exceed 60 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
         nftDescription: Yup.string()
             .required('NFT Description is required!')
-            .max(500, 'Invalid NFT description can not exceed 500 characters')
-            .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
+            .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
+        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
         nftPrice: Yup.number()
             .min(0.000001, 'Price should not less than zero')
             .required('NFT Price is required')
             .typeError('Invalid Price'),
         images: Yup.mixed()
+        // .when(['isUpdate'], {
+        //     is: true,
+        //     then: Yup.mixed(),
+        //     otherwise: Yup.mixed().required('Image is required')
+        // })
+
+        // .test('image size',
+        //  'this image is too large', (value) => !value || (value && value.size <= 1_000_000))
     });
     const formik = useFormik({
         enableReinitialize: true,
@@ -110,7 +152,24 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         onSubmit: (values) => {
             let file = values.images[0].image;
             let isFile = file instanceof File;
-            let isValid = handleError(fieldDataArray, values, isFile);
+
+            let perviousUploadedItems = fileDataArray.filter((data) => {
+                if (typeof data.fieldValue === 'string') return data;
+            });
+
+            let newUploadedItems = fileDataArray.filter((data) => {
+                if (typeof data.fieldValue !== 'string') return data;
+            });
+
+            let fileArray = newUploadedItems.map((data) => {
+                return data.fieldValue;
+            });
+            let fileNameArray = newUploadedItems.map((data) => {
+                return data.fieldName;
+            });
+
+            let isValid = handleError(fieldDataArray, fileDataArray, values, isFile);
+
             if (isValid) {
                 dispatch(
                     editNft({
@@ -120,15 +179,21 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         description: values.nftDescription,
                         quantity: values.images[0].quantity,
                         asset: isFile ? values.images[0].image : null,
+                        isFile: isFile,
                         currencyType: currencyType,
                         mintType: mintType,
                         metaDataArray: fieldDataArray,
+                        fileNameArray: fileNameArray,
+                        fileArray: fileArray,
+                        perviousUploadedItems: perviousUploadedItems,
                         type: type,
                         page: page,
                         limit: limit,
                         search: search,
                         categoryId: categoryId,
+                        brandId: nftInfo.brandId,
                         handleClose: handleClose
+                        // brandId: user.BrandId
                     })
                 );
             }
@@ -165,95 +230,131 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         accept: '.jpeg,.png,.jpg,.gif',
         onDrop: handleDrop
     });
-
     const handleFieldNameChange = (value, index) => {
         let array = structuredClone(fieldDataArray);
+        // let array = [...fieldDataArray];
         array[index].fieldName = value;
         setFieldDataArray(array);
     };
     const handleFieldValueChange = (value, index) => {
         let array = structuredClone(fieldDataArray);
+        // let array = [...fieldDataArray];
         array[index].fieldValue = value;
         setFieldDataArray(array);
     };
 
+    const handleChange = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = structuredClone(fieldDataArray);
+        // let array = [...fieldDataArray];
+        array[index].isEditable = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+    const handleproof = (event, index) => {
+        let array = structuredClone(fieldDataArray);
+        // setChecked(event.target.checked);
+        // let array = [...fieldDataArray];
+        array[index].proofRequired = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+
     const handleRemoveField = (index) => {
-        let array = [...fieldDataArray];
+        let array = structuredClone([...fieldDataArray]);
         array.splice(index, 1);
         setFieldDataArray(array);
     };
 
+    const handleFileFieldNameChange = (value, index) => {
+        let array = structuredClone(fileDataArray);
+        array[index].fieldName = value;
+        setFileDataArray(array);
+    };
+    const handleFileFieldValueChange = (value, index) => {
+        let array = structuredClone(fileDataArray);
+        array[index].fieldValue = value;
+        setFileDataArray(array);
+    };
+
+    const handleFileRemoveField = (index) => {
+        let array = structuredClone(fileDataArray);
+        array.splice(index, 1);
+        setFileDataArray(array);
+    };
+
     useEffect(() => {
         setFieldDataArray(nftInfo.fieldDataArray);
+        setFileDataArray(nftInfo.fileDataArray);
         setMintType(nftInfo.mintType);
         setCurrencyType(nftInfo.currencyType);
         setUploadedImages(nftInfo.images);
     }, [nftInfo]);
 
+    useEffect(() => {}, [fileDataArray]);
+
     return (
         <>
             <Dialog
+                fullScreen
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
-                className="brandDialog"
+                // className="brandDialog Nftdialog"
                 maxWidth="md"
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description1"
             >
-            <Grid container spacing={2}>
-            <Grid item md={8} xs={12} textAlign="left">
-                <DialogTitle id="alert-dialog-slide-title1">Edit NFT</DialogTitle>
-            </Grid>
-            <Grid item md={4} xs={12} sx={{ marginTop: '15px' }}>
-                <Button
-                    sx={{ marginRight: '10px' }}
-                    variant={mintType == 'directMint' ? 'contained' : 'outlined'}
-                    onClick={() => {
-                        setMintType('directMint');
-                    }}
-                >
-                    Direct Mint
-                </Button>
-                <Button
-                    variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
-                    onClick={() => {
-                        setMintType('lazyMint');
-                    }}
-                >
-                    Lazy Minting
-                </Button>
-            </Grid>
-        </Grid>
-        <Divider />
-
-                <DialogContent>
-                    <Grid container spacing={2} textAlign="end">
-                        <Grid item xs={12}>
+                <DialogTitle id="alert-dialog-slide-title1 " className="adminname">
+                    Edit NFT
+                </DialogTitle>
+                <Divider />
+                <Grid container>
+                    {/* <DialogActions>
+                        <AnimateButton>
                             <Button
-                                sx={{ marginRight: '10px' }}
+                                type="submit"
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
                                 variant={mintType == 'directMint' ? 'contained' : 'outlined'}
+                                className="buttons"
+                                size="large"
                                 onClick={() => {
                                     setMintType('directMint');
                                 }}
                             >
-                                Direct Mint
+                                Direct minting
                             </Button>
+                        </AnimateButton>
+                        <AnimateButton>
                             <Button
+                                className="buttons"
+                                size="large"
+                                type="submit"
                                 variant={mintType == 'lazyMint' ? 'contained' : 'outlined'}
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
                                 onClick={() => {
                                     setMintType('lazyMint');
                                 }}
                             >
-                                Lazy Minting
+                                Lazy minting
                             </Button>
-                        </Grid>
-                    </Grid>
+                        </AnimateButton>
+                    </DialogActions> */}
+                </Grid>
+
+                <DialogContent>
                     <form autoComplete="off" onSubmit={formik.handleSubmit}>
-                        <Grid container mt={2}>
-                            <Grid xs={4} mt={2} pr={3}>
+                        <Grid container mt={1}>
+                            <Grid xs={4} md={4} lg={4}>
                                 <TextField
+                                    className="textfieldStyle"
                                     id="nftName"
                                     name="nftName"
                                     label="NFT Name"
@@ -267,8 +368,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 />
                             </Grid>
 
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
+                                    className="textfieldStyle"
                                     id="nftPrice"
                                     name="nftPrice"
                                     label="NFT Price"
@@ -281,13 +383,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-
-                            <Grid xs={4} mt={2} pr={3}>
+                            <Grid xs={12} md={4} lg={4} mt={1.5}>
                                 <TextField
+                                    className="textfieldStyle"
                                     id="outlined-select-budget"
                                     select
                                     fullWidth
-                                    label="Select Token"
+                                    variant="filled"
                                     value={currencyType}
                                     onChange={handleCurrencyType}
                                 >
@@ -298,8 +400,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     ))}
                                 </TextField>
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            <Grid xs={12} md={12} lg={12} mt={2}>
                                 <TextField
+                                    className="textfieldStyle"
                                     multiline
                                     rows={2}
                                     id="nftDescription"
@@ -314,33 +417,37 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} mt={2} pr={3}>
+                            <Grid xs={12} mt={2}>
                                 <Button
+                                    className="fieldbutton"
                                     variant="contained"
-                                    sx={{ float: 'right' }}
+                                    sx={{ float: 'left', padding: { md: ' 6px 38px', lg: '6px 38px' } }}
                                     onClick={() => {
                                         setFieldDataArray([
                                             ...fieldDataArray,
                                             {
                                                 fieldName: '',
-                                                fieldValue: ''
+                                                fieldValue: '',
+                                                isEditable: false,
+                                                proofRequired: false
                                             }
                                         ]);
                                     }}
                                 >
-                                    Add Fields
+                                    Add more fields
                                 </Button>
                             </Grid>
                         </Grid>
 
                         {fieldDataArray.length != 0 && (
                             <>
-                                <Grid container spacing={4}>
+                                <Grid container spacing={4} mt={1}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
                                                     id="field_name"
+                                                    className="textfieldStyle"
                                                     name="field_name"
                                                     label="Metadata Name"
                                                     value={data.fieldName}
@@ -352,8 +459,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={5}>
+                                            <Grid item xs={5} md={3}>
                                                 <TextField
+                                                    className="textfieldStyle"
                                                     id="field_value"
                                                     name="field_value"
                                                     label="Metadata Value"
@@ -365,7 +473,30 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     fullWidth
                                                 />
                                             </Grid>
-                                            <Grid item xs={2} mt={2}>
+                                            <Grid item xs={2} mt={2} md={3}>
+                                                <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
+                                                    <Switch
+                                                        value={data?.isEditable}
+                                                        checked={data?.isEditable}
+                                                        onChange={(e) => handleChange(e, index)}
+                                                        // inputProps={{ 'aria-label': 'controlled' }}
+                                                    />
+                                                </Tooltip>
+                                                {data?.isEditable == true && (
+                                                    <Tooltip
+                                                        className="fontsize"
+                                                        title="Accept proof on update of metadata"
+                                                        placement="top"
+                                                        arrow
+                                                    >
+                                                        <Switch
+                                                            value={data.proofRequired}
+                                                            checked={data.proofRequired}
+                                                            onChange={(e) => handleproof(e, index)}
+                                                            // inputProps={{ 'aria-label': 'controlled' }}
+                                                        />
+                                                    </Tooltip>
+                                                )}
                                                 <IconButton
                                                     color="error"
                                                     edge="end"
@@ -377,18 +508,99 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
                                             </Grid>
+                                            <Grid item xs={2} mt={2} md={3}></Grid>
                                         </>
                                     ))}
                                 </Grid>
                             </>
                         )}
+                        <Grid container>
+                            <Grid xs={12} mt={2} pr={3}>
+                                <Button
+                                    className="fieldbutton"
+                                    variant="contained"
+                                    sx={{ float: 'left' }}
+                                    onClick={() => {
+                                        setFileDataArray([
+                                            ...fileDataArray,
+                                            {
+                                                fieldName: '',
+                                                fieldValue: null
+                                            }
+                                        ]);
+                                    }}
+                                >
+                                    Add Authenticity Files
+                                </Button>
+                            </Grid>
+                            {fileDataArray?.length != 0 && (
+                                <>
+                                    <Grid container spacing={2} mt={1}>
+                                        {fileDataArray?.map((data, index) => (
+                                            <>
+                                                <Grid item xs={3}>
+                                                    <TextField
+                                                        id="field_name"
+                                                        name="field_name"
+                                                        label="File Name"
+                                                        value={data.fieldName}
+                                                        onChange={(e) => {
+                                                            handleFileFieldNameChange(e.target.value, index);
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
+
+                                                {data?.fieldValue?.length > 1 ? (
+                                                    <Grid item xs={3} mt={3.5} className="encap" sx={{}}>
+                                                        <a target="_blank" href={data?.fieldValue} style={{ color: '#4198e3' }}>
+                                                            {data?.fieldValue}
+                                                        </a>
+                                                    </Grid>
+                                                ) : (
+                                                    <Grid item xs={3} mt={3}>
+                                                        <input
+                                                            style={{ display: 'inlineBlock' }}
+                                                            type="file"
+                                                            id="avatar"
+                                                            name="avatar"
+                                                            accept="image/*,.pdf"
+                                                            // value={data?.fieldName}
+                                                            onChange={(event) => {
+                                                                handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                )}
+
+                                                {/* <div style={{marginTop:"3%", marginLeft:"2%"}}><b>Previous file: </b><a target="_blank" href={data.fieldValue}>{data.fieldValue}</a></div> */}
+                                                <Grid item xs={2} mt={2}>
+                                                    <IconButton
+                                                        color="error"
+                                                        edge="end"
+                                                        size="small"
+                                                        onClick={() => {
+                                                            handleFileRemoveField(index);
+                                                        }}
+                                                    >
+                                                        <Icon icon={closeFill} width={28} height={28} />
+                                                    </IconButton>
+                                                </Grid>
+                                                <Grid item xs={2} mt={2} md={3}></Grid>
+                                            </>
+                                        ))}
+                                    </Grid>
+                                </>
+                            )}
+                        </Grid>
 
                         {uploadedImages.length !== 1 && (
                             <Grid
                                 sx={{ background: '#c5cbe9', borderRadius: '5px', paddingBottom: '2rem', paddingTop: '2rem' }}
                                 item
                                 lg={12}
-                                mt={3}
+                                mt={10}
                             >
                                 <div className={clsx('dropZoneContainer', 'xyz')}>
                                     <div
@@ -430,14 +642,18 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                             <ListItemIcon>
                                                 <Icon icon={fileFill} width={32} height={32} />
                                             </ListItemIcon>
+
                                             <ListItemText
+                                                className="encap"
                                                 primary={file.image.name ? file.image.name : ''}
                                                 // secondary={fData(file.image.size) ? fData(file.image.size) : ''}
                                                 // primaryTypographyProps={{
-                                                //     variant: 'subtitle2'
+                                                //     variant: 'body2'
                                                 // }}
                                             />
-                                            <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                            {mintType == 'directMint' && (
+                                                <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                            )}
 
                                             <IconButton
                                                 color="error"
@@ -454,33 +670,39 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                     </form>
                 </DialogContent>
                 <Divider />
-                <DialogActions sx={{ pr: 2.5 }}>
-                    <AnimateButton>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{ my: 3, ml: 1 }}
-                            onClick={() => {
-                                formik.handleSubmit();
-                            }}
-                            size="large"
-                            disableElevation
-                        >
-                            Edit NFT
-                        </Button>
-                    </AnimateButton>
-                    <AnimateButton>
-                        <Button
-                            variant="contained"
-                            sx={{ my: 3, ml: 1, color: '#fff' }}
-                            onClick={handleClose}
-                            color="secondary"
-                            size="large"
-                        >
-                            Cancel
-                        </Button>
-                    </AnimateButton>
-                </DialogActions>
+                <Grid container>
+                    <DialogActions>
+                        <AnimateButton>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                onClick={() => {
+                                    formik.handleSubmit();
+                                }}
+                                className="buttons"
+                                size="large"
+                                disableElevation
+                            >
+                                Edit
+                            </Button>
+                        </AnimateButton>
+                        <AnimateButton>
+                            <Button
+                                className="buttons"
+                                size="large"
+                                type="submit"
+                                variant="contained"
+                                sx={{ my: 1, ml: 1, padding: { md: '6px 50px', lg: '6px 50px' } }}
+                                onClick={handleClose}
+                                color="error"
+                                disableElevation
+                            >
+                                Cancel
+                            </Button>
+                        </AnimateButton>
+                    </DialogActions>
+                </Grid>
             </Dialog>
         </>
     );

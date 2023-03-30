@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import "@fontsource/source-sans-pro";
+import "@fontsource/public-sans";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { ethers, utils } from 'ethers';
 import {
     Box,
     Button,
@@ -15,10 +18,7 @@ import {
     InputAdornment,
     InputLabel,
     OutlinedInput,
-    Stack,
-    Typography,
-    useMediaQuery,
-    Divider
+    Stack
 } from '@mui/material';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -27,46 +27,108 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { signup, setLoader } from '../../../../redux/auth/actions';
 import { useNavigate } from 'react-router-dom';
+import { setWallet } from 'redux/auth/actions';
+import { SNACKBAR_OPEN } from 'store/actions';
+import TextField from '@material-ui/core/TextField';
+
 const SignUpForm = ({ loginProp, ...others }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [checked, setChecked] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
+    const [showconfirmPassword, setShowconfirmPassword] = useState(false);
+    const [walletAddress, setWalletAddress] = useState('');
+    const [address, setAddress] = useState('');
+
+  
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+    const handleMouseDownconfirmPassword = (event) => {
+        event.preventDefault();
+    };
+    const handleClickShowconfirmPassword = () => {
+        setShowconfirmPassword(!showconfirmPassword);
+    };
+    const handleConnect = async () => {
+        if (!window.ethereum) {
+            toast.error('No crypto wallet found. Please install it.');
+        }
 
+        const response = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (response) {
+            const address = utils?.getAddress(response[0]);
+            setWalletAddress(address);
+        } else {
+            toast.error('No crypto wallet found. Please install it.');
+        }
+    };
+
+    useEffect(() => {
+        dispatch(setWallet(walletAddress));
+    }, [walletAddress]);
+
+    if (window.ethereum) {
+        window.ethereum.on('accountsChanged', function (accounts) {
+            // Time to reload your interface with accounts[0]!
+            // setReload(true)
+            handleConnect();
+        });
+    }
     return (
         <>
             <Formik
                 enableReinitialize
                 initialValues={{
-                    name: '',
+                    firstName: '',
+                    lastName: '',
                     email: '',
                     password: '',
-                    confirmPassword: ''
+                    confirmPassword: '',
+                    walletAddress: '',
+                    address: ''
                 }}
                 validationSchema={Yup.object().shape({
-                    name: Yup.string()
-                        .required('Name is required!')
-                        .max(42, 'Name can not exceed 42 characters')
-                        .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                    firstName: Yup.string().required('First Name is required!').max(42, 'First Name can not exceed 42 characters'),
+                    // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
+                    lastName: Yup.string().required('Last Name is required!').max(42, 'Last Name can not exceed 42 characters'),
+                    // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Name'),
                     email: Yup.string().email('Enter valid email').max(255).required('Email is required!'),
-                    password: Yup.string().max(255).required('Password is required!'),
-                    confirmPassword: Yup.string().max(255).required('Confirm Password is required!')
+                    password: Yup.string()
+                        .max(255)
+                        .required('Password is required!')
+                        .matches(
+                            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                            'Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character'
+                        ),
+                    confirmPassword: Yup.string().max(255).required('Confirm Password is required!'),
+                    confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Both password need to be the same'),
+                    address: Yup.string().max(255).required('Delivery address is required!')
                 })}
                 onSubmit={async (values) => {
-                    await console.log('login', values);
+                    if (walletAddress == '') {
+                        dispatch({
+                            type: SNACKBAR_OPEN,
+                            open: true,
+                            message: 'Please connect to your wallet',
+                            variant: 'alert',
+                            alertSeverity: 'info'
+                        });
+                    }
                     await dispatch(setLoader(true));
                     dispatch(
                         signup({
-                            name: values.name,
+                            firstName: values.firstName,
+                            lastName: values.lastName,
                             email: values.email,
                             password: values.password,
+                            walletAddress: walletAddress,
+                            address: values.address,
                             navigate: navigate
                         })
                     );
@@ -74,32 +136,90 @@ const SignUpForm = ({ loginProp, ...others }) => {
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Name </InputLabel>
-                            <OutlinedInput
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            First Name{' '}
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.firstName && errors.firstName)}
+                        >
+                            <TextField
+                                placeholder="First Name"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="name"
-                                value={values.name}
-                                name="name"
+                                value={values.firstName}
+                                name="firstName"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Name"
                                 inputProps={{}}
                             />
-                            {touched.name && errors.name && (
+                            {touched.firstName && errors.firstName && (
                                 <FormHelperText error id="standard-weight-helper-text-name-login">
-                                    {errors.name}
+                                    {errors.firstName}
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email </InputLabel>
-                            <OutlinedInput
+
+                        <InputLabel  sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Last Name{' '}
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.lastName && errors.lastName)}
+                        >
+                            <TextField
+                                placeholder="Last Name"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                type="lastName"
+                                value={values.lastName}
+                                name="lastName"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                inputProps={{}}
+                            />
+                            {touched.lastName && errors.lastName && (
+                                <FormHelperText error id="standard-weight-helper-text-name-login">
+                                    {errors.lastName}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Email
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.email && errors.email)}
+                        >
+                            <TextField
+                                placeholder="Email"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 type="email"
                                 value={values.email}
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email"
                                 inputProps={{}}
                             />
                             {touched.email && errors.email && (
@@ -109,32 +229,25 @@ const SignUpForm = ({ loginProp, ...others }) => {
                             )}
                         </FormControl>
 
-                        <FormControl
-                            fullWidth
-                            error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
-                        >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
-                            <OutlinedInput
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.password}
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-password-login">
+                            {' '}
+                            Password
+                        </InputLabel>
+                        <FormControl className="auth-formcontrol" fullWidth error={Boolean(touched.password && errors.password)}>
+                            <TextField
+                                placeholder=" Password"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                id="password"
+                                autoComplete="current-password"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
                                 inputProps={{}}
                             />
                             {touched.password && errors.password && (
@@ -142,41 +255,93 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                     {errors.password}
                                 </FormHelperText>
                             )}
+                            <IconButton
+                                className="iconvisible"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                aria-label="toggle password visibility"
+                                edge="end"
+                                size="large"
+                            >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
                         </FormControl>
+
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-password-login">
+                            Confirm Password
+                        </InputLabel>
                         <FormControl
+                            className="auth-formcontrol"
                             fullWidth
-                            error={Boolean(touched.password && errors.password)}
-                            sx={{ ...theme.typography.customInput }}
+                            error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Confirm Password</InputLabel>
-                            <OutlinedInput
-                                type={showPassword ? 'text' : 'password'}
+                            <TextField
+                                placeholder="Confirm Password"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
                                 value={values.confirmPassword}
                                 name="confirmPassword"
+                                type={showconfirmPassword ? 'text' : 'password'}
+                                id="password"
+                                autoComplete="current-password"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="confirmPassword"
                                 inputProps={{}}
                             />
+
+                            <IconButton
+                                className="iconvisible"
+                                onClick={handleClickShowconfirmPassword}
+                                onMouseDown={handleMouseDownconfirmPassword}
+                                aria-label="toggle password visibility"
+                                edge="end"
+                                size="large"
+                            >
+                                {showconfirmPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
                             {touched.confirmPassword && errors.confirmPassword && (
                                 <FormHelperText error id="standard-weight-helper-text-password-login">
                                     {errors.confirmPassword}
                                 </FormHelperText>
                             )}
                         </FormControl>
+                        {/* <div>* Password should be 8 characters long containing 1 Uppercase, 1 Numeric and 1 special character</div> */}
+                        <InputLabel sx={{  color: theme.palette.mode === 'dark' ? 'white' : '#404040'}} className="authFont" htmlFor="outlined-adornment-email-login">
+                            Delivery Address
+                        </InputLabel>
+                        <FormControl
+                            sx={{ ...theme.typography.customInput }}
+                            className="auth-formcontrol"
+                            fullWidth
+                            error={Boolean(touched.address && errors.address)}
+                        >
+                            <TextField
+                                placeholder="Delivery Address"
+                                className="textForm"
+                                // onChange={(event)=>handelAccount("password",event)}
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                type="address"
+                                value={values.address}
+                                name="address"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                // helperText="Some important text"
+                                inputProps={{}}
+                            />
+                            {touched.address && errors.address && (
+                                <FormHelperText error id="standard-weight-helper-text-name-login">
+                                    {errors.address}
+                                </FormHelperText>
+                            )}
+                        </FormControl>
+
                         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
                             <FormControlLabel
                                 control={
@@ -190,6 +355,14 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                 label="By checking you agree to our Terms and Conditions"
                             />
                         </Stack>
+                        <Button
+                            variant="contained"
+                            onClick={() => {
+                                handleConnect();
+                            }}
+                        >
+                            {'Connect with wallet'}
+                        </Button>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
                                 <FormHelperText error>{errors.submit}</FormHelperText>
@@ -208,7 +381,7 @@ const SignUpForm = ({ loginProp, ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                    Sign in
+                                    Sign up
                                 </Button>
                             </AnimateButton>
                         </Box>

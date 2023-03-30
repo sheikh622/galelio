@@ -8,7 +8,7 @@ import subAdminSaga from 'redux/subAdmin/sagas';
 import nftSaga from 'redux/nftManagement/sagas';
 import landingPageSaga from 'redux/landingPage/sagas';
 import marketplaceSaga from 'redux/marketplace/sagas';
-
+import deliverySaga from 'redux/deliveryDashboard/sagas';
 export default function* rootSaga() {
     yield all([
         authSaga(),
@@ -19,6 +19,7 @@ export default function* rootSaga() {
         subAdminSaga(),
         nftSaga(),
         landingPageSaga(),
-        marketplaceSaga()
+        marketplaceSaga(),
+        deliverySaga(),
     ]);
 }

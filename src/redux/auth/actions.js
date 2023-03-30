@@ -1,6 +1,23 @@
-import { LOGIN, LOGIN_SUCCESS,SIGN_UP,SIGN_UP_SUCCESS, LOGOUT, FORGOT_PASSWORD, RESET_PASSWORD, SET_WALLET_ADDRESS, SET_LOADER } from './constants';
-
-
+import {
+    LOGIN,
+    LOGIN_SUCCESS,
+    SIGN_UP,
+    SIGN_UP_SUCCESS,
+    SIGN_UP_SOCIAL,
+    SIGN_UP_SOCIAL_SUCCESS,
+    LOGOUT,
+    FORGOT_PASSWORD,
+    RESET_PASSWORD,
+    SET_WALLET_ADDRESS,
+    SET_LOADER,
+    CHANGE_PASSWORD,
+    DASHBOARD,
+    DASHBOARD_SUCCESS,
+    BRAND_DASHBOARD,
+    BRAND_DASHBOARD_SUCCESS,
+    VERIFY,
+    VERIFY_SUCCESS
+} from './constants';
 
 export const login = (data) => {
     return {
@@ -12,6 +29,45 @@ export const login = (data) => {
 export const loginSuccess = (data) => {
     return {
         type: LOGIN_SUCCESS,
+        payload: data
+    };
+};
+export const dashboard = (data) => {
+    return {
+        type: DASHBOARD,
+        payload: data
+    };
+};
+
+export const dashboardSuccess = (data) => {
+    return {
+        type: DASHBOARD_SUCCESS,
+        payload: data
+    };
+};
+export const emailVerification  = (data) => {
+    return {
+        type: VERIFY,
+        payload: data
+    };
+};
+
+export const emailVerificationSuccess = (data) => {
+    return {
+        type: VERIFY_SUCCESS,
+        payload: data
+    };
+};
+export const branddashboard = (data) => {
+    return {
+        type: BRAND_DASHBOARD,
+        payload: data
+    };
+};
+
+export const branddashboardSuccess = (data) => {
+    return {
+        type: BRAND_DASHBOARD_SUCCESS,
         payload: data
     };
 };
@@ -29,7 +85,19 @@ export const signupSuccess = (data) => {
         payload: data
     };
 };
+export const signupsocial = (data) => {
+    return {
+        type: SIGN_UP_SOCIAL,
+        payload: data
+    };
+};
 
+export const signupsocialSuccess = (data) => {
+    return {
+        type: SIGN_UP_SOCIAL_SUCCESS,
+        payload: data
+    };
+};
 
 export const setLoader = (data) => {
     return {
@@ -53,6 +121,12 @@ export const forgotPassword = (data) => {
 export const resetPassword = (data) => {
     return {
         type: RESET_PASSWORD,
+        payload: data
+    };
+};
+export const changePassword = (data) => {
+    return {
+        type: CHANGE_PASSWORD,
         payload: data
     };
 };

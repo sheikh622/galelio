@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 import widget1 from 'assets/images/watch.png';
+import { useSelector } from 'react-redux';
 
 const HeaderAnimationImage = styled('img')({
     maxWidth: '100%',
@@ -12,6 +13,8 @@ const HeaderAnimationImage = styled('img')({
 });
 
 const Header = () => {
+    const user = useSelector((state) => state.auth.user);
+    const token = useSelector((state) => state.auth.token);
     const theme = useTheme();
 
     return (
@@ -22,7 +25,7 @@ const Header = () => {
                     alignItems="center"
                     justifyContent="space-between"
                     spacing={gridSpacing}
-                    sx={{ mt: { xs: 10, sm: 6, md: 18.75 }, mb: { xs: 2.5, md: 10 } }}
+                    sx={{ mt: { xs: 10, sm: 6, md: 4 }, mb: { xs: 2.5, md: 10 } }}
                 >
                     <Grid item xs={12} md={8}>
                         <Grid
@@ -43,15 +46,19 @@ const Header = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '4rem' },
-                                            fontWeight: 900,
-                                            lineHeight: 1.4,
+                                            fontFamily: 'Public Sans !important',
+                                            fontStyle: 'normal !important',
+                                            fontWeight: '600',
+
+                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
+                                            lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
+
                                             color: '#000'
                                         }}
                                     >
-                                        The Biggest NFT
+                                       The Future of 
                                         <Box component="span" sx={{ ml: 2, color: theme.palette.primary.main }}>
-                                            Marketplace
+                                        Ownership!
                                         </Box>
                                     </Typography>
                                 </motion.div>
@@ -72,13 +79,17 @@ const Header = () => {
                                         component="div"
                                         color="inherit"
                                         sx={{
-                                            textTransform: 'capitalize',
-                                            fontSize: { xs: '1rem', md: '1.125rem' },
+                                            color: '#000',
+                                            fontFamily: 'Public Sans  !important',
+                                            fontStyle: 'normal',
+
+                                            textTransform: 'capitalize  !important',
+                                            fontSize: { xs: '1rem', md: '27px', lg: '27px' },
                                             fontWeight: 400,
                                             lineHeight: 1.4
                                         }}
                                     >
-                                        Find lots of cool works to buy, sell or collect here{' '}
+                                      Unlock the Value of Physical Assets with Tokenisation
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -93,23 +104,30 @@ const Header = () => {
                                         delay: 0.4
                                     }}
                                 >
-                                    <Grid container spacing={2} sx={{ justifyContent: { xs: 'center', md: 'flex-start' } }}>
-                                        <Grid item>
-                                            <AnimateButton>
-                                                <Button
-                                                    className="create"
-                                                    component={RouterLink}
-                                                    to="/login"
-                                                    target="_blank"
-                                                    size="large"
-                                                    variant="contained"
-                                                    color="secondary"
-                                                >
-                                                    Create Yours
-                                                </Button>
-                                            </AnimateButton>
-                                        </Grid>
-                                    </Grid>
+                                    {(token == null || undefined) && (
+                                        <>
+                                            <Grid
+                                                container
+                                                spacing={2}
+                                                sx={{ justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
+                                            >
+                                                <Grid item>
+                                                    <AnimateButton>
+                                                        <Button
+                                                            className="create"
+                                                            component={RouterLink}
+                                                            to="/login"
+                                                            size="large"
+                                                            variant="contained"
+                                                            color="secondary"
+                                                        >
+                                                            Create Your's
+                                                        </Button>
+                                                    </AnimateButton>
+                                                </Grid>
+                                            </Grid>
+                                        </>
+                                    )}
                                 </motion.div>
                             </Grid>
                         </Grid>
