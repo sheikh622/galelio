@@ -31,7 +31,7 @@ const BrandCard = ({ data, brands }) => {
             xs={12}
             justifyContent="center"
             onClick={() => {
-                navigate('/home', {
+                navigate('/BMW', {
                     state: {
                         nft: data
                     }
