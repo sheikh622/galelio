@@ -636,7 +636,7 @@ const PropertiesView = ({  nftList }) => {
                                                     zeroMinWidth
                                                     component={RouterLink}
                                                     sx={{ textDecoration: 'none' }}
-                                                    to="/companyPage"
+                                                    to="/BMW"
                                                 >
                                                     <Typography align="left" fontWeight={600} variant="h2" className="brand">
                                                         {nftList?.nft?.Brand?.name}

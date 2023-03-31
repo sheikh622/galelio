@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SNACKBAR_OPEN } from 'store/actions';
 import { useTheme } from '@mui/material/styles';
-import { Typography } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 import CryptoConvert from 'crypto-convert';
 import { useSelector, useDispatch } from 'react-redux';
 import { ethers, utils } from 'ethers';
@@ -22,15 +22,17 @@ const Balance = () => {
     const [walletAddress, setWalletAddress] = useState();
     // const [bvalue, setBvalue] = useState(0);
     const [balanceValue, setbalanceValue] = useState();
+    const [maticValue, setMaticValue] = useState();
 
     const handleConnect = async () => {
         const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
         console.log('response', response);
         const provider = ethers.getDefaultProvider('https://polygon-mumbai.g.alchemy.com/v2/Wk2k1fN6Gv2KG4f7474ABGxpmhQrZKFM');
-        const balance = await provider.getBalance(response[0]);
+        const balance = await provider?.getBalance(response[0]);
         console.log(balance);
-        const value = ethers.utils.formatEther(balance);
+        const value = ethers.utils?.formatEther(balance);
         console.log(value, 'value');
+        setMaticValue(value);
         // let val;
         // const arrow = async ()=>{
 
@@ -76,18 +78,44 @@ const Balance = () => {
 
     return (
         <>
-            <Typography
-                className="usd"
-                variant="h1"
-                component="h2"
-                sx={{ color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
-                onClick={() => {
-                    handleConnect();
-                    // handleConnect().arrow();
-                }}
-            >
-                {balanceValue ? balanceValue : 0} USDT
-            </Typography>
+            <Grid item xs={12}>
+                <Typography
+                    className="usd"
+                    variant="h1"
+                    component="h2"
+                    sx={{ color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}
+                    onClick={() => {
+                        handleConnect();
+                        // handleConnect().arrow();
+                    }}
+                >
+                    {maticValue ? maticValue.slice(0, 5) : 0} MATIC
+                </Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <Typography
+                    className="balance"
+                    variant="body2"
+                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#9e9e9e' }}
+                >
+                    Total Balance
+                </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Typography
+                    className="usd"
+                    variant="h1"
+                    component="h2"
+                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#9e9e9e' }}
+                    onClick={() => {
+                        handleConnect();
+                        // handleConnect().arrow();
+                    }}
+                >
+                    {balanceValue ? balanceValue : 0} USD
+                </Typography>
+            </Grid>
         </>
     );
 };

@@ -71,7 +71,7 @@ const MetaMaskSection = () => {
                 dispatch({
                     type: SNACKBAR_OPEN,
                     open: true,
-                    message: 'Success',
+                    message: 'Wallet Connected',
                     variant: 'alert',
                     alertSeverity: 'success'
                 });
