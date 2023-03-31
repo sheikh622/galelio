@@ -1,6 +1,8 @@
 import { Grid, Button, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import rolex from 'assets/images/bmwlogo.png';
+import logodark from 'assets/images/logodark.png';
+import logolight from 'assets/images/logolight.png';
 import '@fontsource/public-sans';
 import discord from 'assets/images/companypageIcons/discord.png';
 import etherscan from 'assets/images/companypageIcons/etherscan.png';
@@ -37,8 +39,9 @@ const CompanyPage = () => {
                         <Grid item xs={12} md={3} sx={{ paddingRight: '1rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                                 <div style={{ paddingTop: '-25px' }}>
-                                    <img
-                                        src={rolex}
+                                {theme.palette.mode === 'dark' ? (   
+                                <img
+                                        src={logodark}
                                         style={{
                                             borderRadius: '100px',
                                             marginTop: '-5px',
@@ -48,6 +51,21 @@ const CompanyPage = () => {
                                             border: '3px solid #2196f3'
                                         }}
                                     />
+                                )
+                                :
+                                (
+                                    <img
+                                    src={logolight}
+                                    style={{
+                                        borderRadius: '100px',
+                                        marginTop: '-5px',
+                                        objectFit: 'cover',
+                                        height: '92px',
+                                        width: '92px',
+                                        border: '3px solid #2196f3'
+                                    }}
+                                />
+                                )}
                                 </div>
 
                                 <div className="font-company-page">

@@ -13,11 +13,12 @@ const Starting = Loadable(lazy(() => import('views/pages/user/landingPage')));
 const Marketplace = Loadable(lazy(() => import('views/pages/user/marketplace')));
 const ProductDetails = Loadable(lazy(() => import('views/pages/user/productDetails')));
 const DeliveryDashboard = Loadable(lazy(() => import('views/pages/user/deliveryDashboard')));
-//Old Routing
+//static page routes
 
 const Profile = Loadable(lazy(() => import('views/pages/staticCode/creatorProfile')));
 const CompanyPage = Loadable(lazy(() => import('views/pages/staticCode/companyPage')));
 const BMWPage = Loadable(lazy(() => import('views/pages/staticCode/BMWPage')));
+const Tracking = Loadable(lazy(()=> import('views/pages/trackingTool')))
 
 
 // ==============================|| market  ROUTING ||============================== //
@@ -92,6 +93,10 @@ const UserRoutes = {
         {
             path: '/*',
             element: <LandingPage />
+        },
+        {
+            path: '/tracking',
+            element: <Tracking />
         }
     ]
 };
