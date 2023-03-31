@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import Activity from './component/activity';
+import Product from './component/productView';
 import { useParams } from 'react-router-dom';
 import { getnftData } from 'redux/landingPage/actions';
 const TrackingTool = () => {
@@ -29,6 +30,9 @@ const TrackingTool = () => {
                     <Grid container-fluid>
                         <Grid item md={12} xs={12}>
                             <Grid container>
+                                <Grid item md={12} xs={12}>
+                                    <Product />
+                                </Grid>
                                 <Grid item md={12} xs={12}>
                                     <Activity />
                                 </Grid>
