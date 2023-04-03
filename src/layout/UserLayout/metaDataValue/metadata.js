@@ -18,10 +18,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import MetaMask from 'shared/metaMaskModal';
 
 export default function MetaData() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [metamask, setMetamask] = useState(false);
 
     const user = useSelector((state) => state.auth.user);
     const customization = useSelector((state) => state.customization);
@@ -94,7 +96,9 @@ export default function MetaData() {
             onClose={handleMenuClose}
         >
             <MenuItem
-            // onClick={handleLogout}
+            onClick={() => {
+                setMetamask(true);
+            }}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 212 189">
                     <g fill="none" fill-rule="evenodd">
@@ -166,7 +170,8 @@ export default function MetaData() {
                         </g>
                     </g>
                 </svg>
-                <Typography className="MenuItem-style" variant="h2" sx={{ color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}>
+                <Typography className="MenuItem-style" variant="h2"
+                 sx={{ color: theme.palette.mode === 'dark' ? '#fff' : '#000' }}>
                     MetaMask
                 </Typography>
                 <DoneIcon sx={{ color: 'green' }} />
@@ -235,6 +240,8 @@ export default function MetaData() {
 
     const list = (anchor) => (
         <>
+        <MetaMask open={metamask} setOpen={setMetamask} />
+
             <Box
                 sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 400 }}
                 role="presentation"

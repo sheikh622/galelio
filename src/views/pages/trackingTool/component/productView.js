@@ -5,7 +5,7 @@ import { CardMedia, Grid, Typography, Button, Alert, InputLabel, Select, FormCon
 
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
-import watch from 'assets/images/watch3.png';
+import bmw from 'assets/images/bmw.png';
 import { gridSpacing } from 'store/constant';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,7 +34,7 @@ const Product = ({ nftList }) => {
                     <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
                         <CardMedia
                             component="img"
-                            image={watch}
+                            image={bmw}
                             sx={{ minheight: 'auto', maxHeight: '570px', background: 'transparent', overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
@@ -55,10 +55,10 @@ const Product = ({ nftList }) => {
                                                 </Grid>
                                                 <Grid item xs zeroMinWidth component={RouterLink} sx={{ textDecoration: 'none' }} to="/BMW">
                                                     <Typography align="left" fontWeight={600} variant="h2" className="brand">
-                                                        Jacob & Co
+                                                        BMW
                                                     </Typography>
                                                     <Typography align="left" variant="h3" className="creator">
-                                                        Brand
+                                                        Maker
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
@@ -70,16 +70,17 @@ const Product = ({ nftList }) => {
                                                 color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                 variant="h3"
                                             >
-                                                Luxury Stainless Watch
+                                                BMW XM
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lobortis facilisis tortor, ut
-                                                molestie. In rhoncus aliquam dui, vitae sollicitudin justo, cursus maecenas. Lorem ipsum
-                                                dolor sit amet, consectetur adipiscing elit. Lobortis facilisis tortor, ut molestie. In
-                                                rhoncus aliquam dui, vitae sollicitudin justo, cursus maecenas. In rhoncus aliquam dui,
-                                                vitae sollicitudin justo, cursus maecenas.
+                                                Newly developed M HYBRID drive, an extravagant design and the progressive luxury ambience in
+                                                the interior of the BMW XM combine to form a reinterpretation of the Sports Activity Vehicle
+                                                (SAV) vehicle concept in the high-performance segment. The BMW XM is the highlight of the
+                                                model offensive in the brand's anniversary year and at the same time the first original BMW
+                                                M automobile since the BMW M1. Precisely set accents in the exterior design of the
+                                                high-performance SAV are reminiscent of the legendary mid-engine sports car.
                                             </Typography>
                                         </Grid>
 
