@@ -53,7 +53,7 @@ const trackAtribute = () => {
                                 <TableBody>
                                     {rows.map((row) => (
                                         <TableRow key={row.id}>
-                                            <TableCell sx={{ border: 'none' }}>Attribute</TableCell>
+                                            <TableCell className='atributes' sx={{ border: 'none' }}>Attribute</TableCell>
                                             <TableCell sx={{ border: 'none' }}></TableCell>
 
                                             <TableCell sx={{ float: 'right', border: 'none' }}>
@@ -86,7 +86,7 @@ const trackAtribute = () => {
                                 <TableBody>
                                     {rows.map((row) => (
                                         <TableRow key={row.id}>
-                                            <TableCell sx={{ border: 'none' }}>History 1</TableCell>
+                                            <TableCell className='atributes' sx={{ border: 'none' }}>History 1</TableCell>
                                             <TableCell sx={{ border: 'none' }}></TableCell>
 
                                             <TableCell sx={{ float: 'right', border: 'none' }}>
@@ -119,7 +119,7 @@ const trackAtribute = () => {
                                 <TableBody>
                                     {rows.map((row) => (
                                         <TableRow key={row.id}>
-                                            <TableCell sx={{ border: 'none' }}>History 2</TableCell>
+                                            <TableCell className='atributes' sx={{ border: 'none' }}>History 2</TableCell>
                                             <TableCell sx={{ border: 'none' }}></TableCell>
 
                                             <TableCell sx={{ float: 'right', border: 'none' }}>
@@ -152,7 +152,7 @@ const trackAtribute = () => {
                                 <TableBody>
                                     {rows.map((row) => (
                                         <TableRow key={row.id}>
-                                            <TableCell sx={{ border: 'none' }}>History 3</TableCell>
+                                            <TableCell className='atributes' sx={{ border: 'none' }}>History 3</TableCell>
                                             <TableCell sx={{ border: 'none' }}></TableCell>
 
                                             <TableCell sx={{ float: 'right', border: 'none' }}>
