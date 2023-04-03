@@ -1684,7 +1684,6 @@ text-align: center;
     }
     .new-width {
         width: 215px;
-        border:2px solid red
     }
     .feature {
         margin-right: 32px;
@@ -1899,4 +1898,48 @@ text-align: center;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
+}
+
+// tracking page >>>>>>
+.atributes{
+    font-family: 'Public Sans';
+font-style: normal;
+font-weight: 400;
+// font-size: 15px;
+text-align: left;
+// padding: 16px;
+}
+.box-attribute{
+    width: 94%;
+}
+.select-attribute{
+    background: #181C1F;
+    border-radius: 4px;
+    width: 660px;
+    height: 52px; 
+}
+.menu-open{
+    background: #181C1F;
+    border-radius: 1px  !important;
+    width: 674px !important;
+    // padding: 28px;
+    // border: 2px solid red; 
+    border-radius: 3px !important;
+}
+.map{
+    margin-left: 27px;
+    margin-top: -70px;
+    width: auto;
+    height: 582px;
+    object-fit: cover;
+}
+@media only screen and (min-width: 0px)  and (max-width: 1200px) {
+    .map{
+        margin-left: 0px;
+        margin-top: 0px;
+        width: 100%;
+        height: 382px;
+        object-fit: cover;
+    }
+
 }
