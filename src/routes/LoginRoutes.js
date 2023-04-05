@@ -13,7 +13,8 @@ const SocialLogin = Loadable(lazy(() => import('views/auth/socialLogin')));
 const ChangePassword = Loadable(lazy(() => import('shared/changePassword/component/ChangePassword')));
 // const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
 const Starting = Loadable(lazy(() => import('views/pages/user/landingPage')));
-
+const TrackNft = Loadable(lazy(() => import('views/pages/TrackNFT/TrackNFT')));
+const Tracking = Loadable(lazy(()=> import('views/pages/trackingTool')));
 // ==============================|| AUTH ROUTING ||============================== //
 
 const LoginRoutes = {
@@ -64,6 +65,14 @@ const LoginRoutes = {
         {
             path: '/socialLogin',
             element: <SocialLogin />
+        },
+        {
+            path: '/tracknft',
+            element: <TrackNft/>
+        },
+        {
+            path: '/tracking',
+            element: <Tracking />
         }
     ]
 };

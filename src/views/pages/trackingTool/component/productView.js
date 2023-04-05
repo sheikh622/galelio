@@ -117,13 +117,20 @@ const Product = ({ nftList }) => {
                                     </MenuItem> */}
 
                                                         <MenuItem
-                                                        // component={redirect}
-                                                        // to={option.fieldValue}
-                                                        // key={option.fieldValue}
-                                                        // value={option.fieldValue}
-                                                        // onClick={useNavigate(option.fieldValue)}
+                                                            // component={redirect}
+                                                            // to={option.fieldValue}
+                                                            // key={option.fieldValue}
+                                                            // value={option.fieldValue}
+                                                            // onClick={useNavigate(option.fieldValue)}
+                                                            onClick={() => {
+                                                                // useNavigate(option.fieldValue)
+                                                                window.open(
+                                                                    'https://galileoprotocol.infura-ipfs.io/ipfs/QmSEuPTp42X6uLCSBg5V2RMrd8Fwrke3xzuKJqfFkJ9sy2',
+                                                                    '_blank'
+                                                                );
+                                                            }}
                                                         >
-                                                            PROOF OF AUTHENTICITY
+                                                            PROOF
                                                         </MenuItem>
                                                     </Select>
                                                 </FormControl>
