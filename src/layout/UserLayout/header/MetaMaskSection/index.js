@@ -25,7 +25,7 @@ const MetaMaskSection = () => {
         const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
         console.log('response',response);
         const provider = ethers.getDefaultProvider("https://polygon-mumbai.g.alchemy.com/v2/Wk2k1fN6Gv2KG4f7474ABGxpmhQrZKFM");
-        const balance=await  provider.getBalance(response[0]);
+        const balance= await  provider?.getBalance(response[0]);
         console.log(balance)
         const value= ethers.utils.formatEther(balance);
         console.log(value, 'value')
