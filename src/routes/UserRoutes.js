@@ -5,6 +5,7 @@ import UserGuard from './RouteGuard/UserGuard';
 import UserLayout from 'layout/UserLayout';
 import NavMotion from 'layout/NavMotion';
 import Loadable from 'ui-component/Loadable';
+// import TrackNFT from 'views/pages/TrackNFT/TrackNFT';
 //New Routing
 const ComingSoon = Loadable(lazy(() => import('views/pages/staticCode/comingSoon/ComingSoon')));
 // const Starting = Loadable(lazy(() => import('views/pages/local/startingPage')));
@@ -36,6 +37,7 @@ const UserRoutes = {
             path: '/home',
             element: <LandingPage />
         },
+       
         {
             path: '/',
             element: <Starting />
