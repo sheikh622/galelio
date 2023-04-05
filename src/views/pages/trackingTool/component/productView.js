@@ -6,6 +6,7 @@ import { CardMedia, Grid, Typography, Button, Alert, InputLabel, Select, FormCon
 import React, { useEffect } from 'react';
 import Avatar from 'ui-component/extended/Avatar';
 import bmw from 'assets/images/bmw.png';
+import bmwProductlogo from 'assets/images/bmwProductlogo.png';
 import { gridSpacing } from 'store/constant';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,12 +45,12 @@ const Product = ({ nftList }) => {
                             <Grid container>
                                 <Grid item md={12} sm={12}>
                                     <Grid container spacing={2}>
-                                        <Grid mt={4} ml={2} item xs={12}>
+                                        <Grid ml={2} item xs={12}>
                                             <Grid container spacing={2} alignItems="center">
                                                 <Grid item>
                                                     <Avatar
                                                         alt="User 1"
-                                                        src={nftList?.nft?.Brand?.image}
+                                                        src={bmwProductlogo}
                                                         sx={{ width: 56, height: 56, objectFit: 'fill' }}
                                                     />
                                                 </Grid>
