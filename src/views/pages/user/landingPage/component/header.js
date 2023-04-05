@@ -85,6 +85,7 @@ const Header = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
+                                            display: { xs: 'none', md: 'none' } ,
                                             fontFamily: 'Public Sans !important',
                                             fontStyle: 'normal !important',
                                             fontWeight: '600',
@@ -92,12 +93,12 @@ const Header = () => {
                                             fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
                                             lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
 
-                                            color: '#000'
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
                                         }}
                                     >
-                                       The Future of 
+                                    We Rule The World In 
                                         <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
-                                        Ownership!
+                                        Tokenomics
                                         </Box>
                                     </Typography>
                                 </motion.div>
@@ -117,10 +118,11 @@ const Header = () => {
                                         variant="h4"
                                         component="div"
                                         color="inherit"
-                                        sx={{
-                                            color: '#000',
+                                        sx={{ display: { xs: 'none', md: 'none' } ,
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
                                             fontFamily: 'Public Sans  !important',
                                             fontStyle: 'normal',
+
 
                                             textTransform: 'capitalize  !important',
                                             fontSize: { xs: '1rem', md: '27px', lg: '27px' },
@@ -128,7 +130,7 @@ const Header = () => {
                                             lineHeight: 1.4
                                         }}
                                     >
-                                      Unlock the Value of Physical Assets with Tokenisation
+                                    Find lots of cool works to buy, sell or collect here
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -148,7 +150,7 @@ const Header = () => {
                                             <Grid
                                                 container
                                                 spacing={2}
-                                                sx={{ justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
+                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
                                             >
                                                 <Grid item>
                                                     <AnimateButton>
@@ -172,7 +174,7 @@ const Header = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
                         <Box
                             sx={{
                                 width: '290px',
@@ -197,7 +199,7 @@ const Header = () => {
             </Container>
         </Grid>
         </Grid>
-        <Grid  item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
+        <Grid  item md={12} xs={12} className="mainBanner2" sx={{ border: '2px solid transparent' }}>
         <Grid container-fluid>
             <Container>
                 <Grid
@@ -226,6 +228,7 @@ const Header = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
+                                            display: { xs: 'none', md: 'none' } ,
                                             fontFamily: 'Public Sans !important',
                                             fontStyle: 'normal !important',
                                             fontWeight: '600',
@@ -233,12 +236,12 @@ const Header = () => {
                                             fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
                                             lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
 
-                                            color: '#000'
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
                                         }}
                                     >
-                                       The Future of 
-                                        <Box component="span" sx={{ ml: 2, color:'yellow' }}>
-                                        Ownership!
+                                    We Rule The World In 
+                                        <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
+                                        Tokenomics
                                         </Box>
                                     </Typography>
                                 </motion.div>
@@ -258,10 +261,11 @@ const Header = () => {
                                         variant="h4"
                                         component="div"
                                         color="inherit"
-                                        sx={{
-                                            color: '#000',
+                                        sx={{ display: { xs: 'none', md: 'none' } ,
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
                                             fontFamily: 'Public Sans  !important',
                                             fontStyle: 'normal',
+
 
                                             textTransform: 'capitalize  !important',
                                             fontSize: { xs: '1rem', md: '27px', lg: '27px' },
@@ -269,7 +273,7 @@ const Header = () => {
                                             lineHeight: 1.4
                                         }}
                                     >
-                                      Unlock the Value of Physical Assets with Tokenisation
+                                    Find lots of cool works to buy, sell or collect here
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -289,7 +293,7 @@ const Header = () => {
                                             <Grid
                                                 container
                                                 spacing={2}
-                                                sx={{ justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
+                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
                                             >
                                                 <Grid item>
                                                     <AnimateButton>
@@ -313,7 +317,7 @@ const Header = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
                         <Box
                             sx={{
                                 width: '290px',
@@ -338,7 +342,7 @@ const Header = () => {
             </Container>
         </Grid>
         </Grid>
-        <Grid  item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
+        <Grid  item md={12} xs={12} className="mainBanner3" sx={{ border: '2px solid transparent' }}>
         <Grid container-fluid>
             <Container>
                 <Grid
@@ -367,6 +371,7 @@ const Header = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
+                                            display: { xs: 'none', md: 'none' } ,
                                             fontFamily: 'Public Sans !important',
                                             fontStyle: 'normal !important',
                                             fontWeight: '600',
@@ -374,12 +379,12 @@ const Header = () => {
                                             fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
                                             lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
 
-                                            color: '#000'
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
                                         }}
                                     >
-                                       The Future of 
-                                        <Box component="span" sx={{ ml: 2, color:'#ff7961' }}>
-                                        Ownership!
+                                    We Rule The World In 
+                                        <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
+                                        Tokenomics
                                         </Box>
                                     </Typography>
                                 </motion.div>
@@ -399,10 +404,11 @@ const Header = () => {
                                         variant="h4"
                                         component="div"
                                         color="inherit"
-                                        sx={{
-                                            color: '#000',
+                                        sx={{ display: { xs: 'none', md: 'none' } ,
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
                                             fontFamily: 'Public Sans  !important',
                                             fontStyle: 'normal',
+
 
                                             textTransform: 'capitalize  !important',
                                             fontSize: { xs: '1rem', md: '27px', lg: '27px' },
@@ -410,7 +416,7 @@ const Header = () => {
                                             lineHeight: 1.4
                                         }}
                                     >
-                                      Unlock the Value of Physical Assets with Tokenisation
+                                    Find lots of cool works to buy, sell or collect here
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -430,7 +436,7 @@ const Header = () => {
                                             <Grid
                                                 container
                                                 spacing={2}
-                                                sx={{ justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
+                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
                                             >
                                                 <Grid item>
                                                     <AnimateButton>
@@ -454,7 +460,7 @@ const Header = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
                         <Box
                             sx={{
                                 width: '290px',
@@ -479,7 +485,7 @@ const Header = () => {
             </Container>
         </Grid>
         </Grid>
-        <Grid  item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
+        <Grid  item md={12} xs={12} className="mainBanner4" sx={{ border: '2px solid transparent' }}>
         <Grid container-fluid>
             <Container>
                 <Grid
@@ -508,6 +514,7 @@ const Header = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
+                                            display: { xs: 'none', md: 'none' } ,
                                             fontFamily: 'Public Sans !important',
                                             fontStyle: 'normal !important',
                                             fontWeight: '600',
@@ -515,12 +522,12 @@ const Header = () => {
                                             fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
                                             lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
 
-                                            color: '#000'
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
                                         }}
                                     >
-                                       The Future of 
-                                        <Box component="span" sx={{ ml: 2, color:'green' }}>
-                                        Ownership!
+                                    We Rule The World In 
+                                        <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
+                                        Tokenomics
                                         </Box>
                                     </Typography>
                                 </motion.div>
@@ -540,10 +547,11 @@ const Header = () => {
                                         variant="h4"
                                         component="div"
                                         color="inherit"
-                                        sx={{
-                                            color: '#000',
+                                        sx={{ display: { xs: 'none', md: 'none' } ,
+                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
                                             fontFamily: 'Public Sans  !important',
                                             fontStyle: 'normal',
+
 
                                             textTransform: 'capitalize  !important',
                                             fontSize: { xs: '1rem', md: '27px', lg: '27px' },
@@ -551,7 +559,7 @@ const Header = () => {
                                             lineHeight: 1.4
                                         }}
                                     >
-                                      Unlock the Value of Physical Assets with Tokenisation
+                                    Find lots of cool works to buy, sell or collect here
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -571,7 +579,7 @@ const Header = () => {
                                             <Grid
                                                 container
                                                 spacing={2}
-                                                sx={{ justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
+                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
                                             >
                                                 <Grid item>
                                                     <AnimateButton>
@@ -595,7 +603,7 @@ const Header = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
                         <Box
                             sx={{
                                 width: '290px',
