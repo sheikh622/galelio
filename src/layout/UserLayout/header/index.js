@@ -170,13 +170,13 @@ export default function Header() {
                     Delivery Dashboard
                 </MenuItem>
             )}
-            <MenuItem
+            {/* <MenuItem
                 onClick={() => {
                     setMetamask(true);
                 }}
             >
                 Wallet Connect
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );

@@ -103,18 +103,20 @@ const Properties = ({  nftList }) => {
                                                     <Grid item xs={12}>
                                                         <Tooltip placement="right" title={item.fieldName}>
                                                             <Typography className="pbackground encap-fieldName" variant="h3">
-                                                                {item.fieldName}
+                                                                {item?.fieldName.slice(0, 12)}
                                                             </Typography>
                                                         </Tooltip>
                                                     </Grid>
                                                     <Grid item xs={12}>
-                                                        <Typography
+                                                    <Tooltip placement="bottom" title={item?.fieldValue}>   
+                                                    <Typography
                                                             color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                             className="centerText encapPropertry"
                                                             variant="h3"
                                                         >
-                                                            {item?.fieldValue}{' '}
+                                                            {item?.fieldValue.slice(0, 12)}{' '}
                                                         </Typography>
+                                                        </Tooltip>
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <Typography
@@ -122,11 +124,11 @@ const Properties = ({  nftList }) => {
                                                             className="plight"
                                                             variant="body2"
                                                         >
-                                                            {item?.Proofs[0].proof ? (
+                                                            {item?.Proofs[0]?.proof ? (
                                                                 <span
                                                                     onClick={() => {
                                                                         // useNavigate(option.fieldValue)
-                                                                        window.open(item?.Proofs[0].proof, '_blank');
+                                                                        window.open(item?.Proofs[0]?.proof, '_blank');
                                                                     }}
                                                                     style={{
                                                                         cursor: 'pointer',
