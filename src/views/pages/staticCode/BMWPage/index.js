@@ -14,6 +14,10 @@ import star from "assets/images/companypageIcons/star.png";
 import twitter from "assets/images/companypageIcons/twitter.png";
 import warn from "assets/images/companypageIcons/warn.png";
 import styles from "./companypage.module.css";
+import bmw1 from "../../../../assets/images/1.jpg";
+import bmw2 from "../../../../assets/images/2.jpg";
+import bmw3 from "../../../../assets/images/3.jpg";
+import bmw4 from "../../../../assets/images/4.jpg";
 
 import NFTS from "views/pages/user/marketplace/component/nfts";
 import BmwCard from "views/pages/user/commonComponent/BmwCard";
@@ -22,32 +26,28 @@ const CompanyPage = () => {
   const cardData = [
     {
       title: "BMW-07",
-      image:
-        "https://images.unsplash.com/photo-1568844293986-8d0400bd4745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Ym13JTIwY2Fyc3xlbnwwfHwwfHw%3D&w=1000&q=80",
+      image: bmw1,
       price: "$200",
     },
     {
       title: "BMW-09",
-      image:
-        "https://www.shutterstock.com/image-illustration/kazakhstan-almaty-january-20-2020-260nw-1626510850.jpg",
+      image: bmw2,
       price: "$500",
     },
-    {
-      title: "BMW-02",
-      image:
-        "https://images.unsplash.com/photo-1568844293986-8d0400bd4745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Ym13JTIwY2Fyc3xlbnwwfHwwfHw%3D&w=1000&q=80",
-      price: "$200",
-    },
+    // {
+    //   title: "BMW-02",
+    //   image:
+    //     "https://images.unsplash.com/photo-1568844293986-8d0400bd4745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Ym13JTIwY2Fyc3xlbnwwfHwwfHw%3D&w=1000&q=80",
+    //   price: "$200",
+    // },
     {
         title: "BMW-06",
-        image:
-          "https://www.shutterstock.com/image-illustration/kazakhstan-almaty-january-20-2020-260nw-1626510850.jpg",
+        image: bmw3,
         price: "$800",
       },
       {
         title: "BMW-09",
-        image:
-          "https://images.unsplash.com/photo-1568844293986-8d0400bd4745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Ym13JTIwY2Fyc3xlbnwwfHwwfHw%3D&w=1000&q=80",
+        image: bmw4,
         price: "$200",
       },
   ];
