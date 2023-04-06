@@ -21,7 +21,7 @@ const BmwCard = ({ item }) => {
       sm={6}
       xs={12}
       onClick={() => {
-        navigate("/productDetails/" + data.id, {});
+        // navigate("/productDetails/" + data.id, {});
       }}
       sx={{
         color: theme.palette.mode === "dark" ? "white" : "black",
