@@ -19,7 +19,7 @@ const DeliveryDashboard = Loadable(lazy(() => import('views/pages/user/deliveryD
 const Profile = Loadable(lazy(() => import('views/pages/staticCode/creatorProfile')));
 const CompanyPage = Loadable(lazy(() => import('views/pages/staticCode/companyPage')));
 const BMWPage = Loadable(lazy(() => import('views/pages/staticCode/BMWPage')));
-const Tracking = Loadable(lazy(()=> import('views/pages/trackingTool')));
+// const Tracking = Loadable(lazy(()=> import('views/pages/trackingTool')));
 // const TrackNft = Loadable(lazy(() => import('views/pages/TrackNFT/TrackNFT')));
 
 
@@ -97,10 +97,10 @@ const UserRoutes = {
             path: '/*',
             element: <LandingPage />
         },
-        {
-            path: '/tracking',
-            element: <Tracking />
-        },
+        // {
+        //     path: '/tracking',
+        //     element: <Tracking />
+        // },
         // {
         //     path: '/tracknft',
         //     element: <TrackNft/>

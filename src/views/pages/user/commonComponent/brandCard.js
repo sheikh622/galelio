@@ -56,11 +56,11 @@ const BrandCard = ({ data, brands }) => {
                         <Grid container>
                             <Grid item xs={8}  className='encap' sx={{ textAlign: 'left' }}>
                                 <span className='cardHeading' style={{ fontSize: '130%' }}> {data?.name}</span>
-                              {/*   <Grid className="overflow Creationstyling" 
+                                 <Grid className="overflow Creationstyling" 
                                 style={{ marginTop: '5%',
                                 color: theme.palette.mode === 'dark' ? ' #a99d9d ' : '#404040', }}>
-                                     20 Creators
-                                </Grid> */}
+                                     {data?.nftCount > 1? data?.nftCount +' '+ 'Items':  data?.nftCount +' '+ 'Item'} 
+                                </Grid> 
                             </Grid>
                         </Grid>
                     </CardContent>

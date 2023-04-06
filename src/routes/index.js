@@ -6,19 +6,19 @@ import SubAdminRoutes from './SubAdminRoutes';
 import BrandAdminRoutes from './BrandAdminRoutes';
 import UserRoutes from './UserRoutes';
 import LoginRoutes from './LoginRoutes';
-
+import TrackingRoutes from './TrackingRoute';
 export default function ThemeRoutes() {
     const userData = useSelector((state) => state.auth);
 
     if (userData.user && userData.user.role == 'Super Admin') {
-        return useRoutes([SuperAdminRoutes , UserRoutes]);
+        return useRoutes([SuperAdminRoutes , UserRoutes , TrackingRoutes]);
     } else if (userData.user && userData.user.role == 'Admin') {
-        return useRoutes([SubAdminRoutes , UserRoutes ]);
+        return useRoutes([SubAdminRoutes , UserRoutes , TrackingRoutes ]);
     } else if (userData.user && userData.user.role == 'Brand Admin') {
-        return useRoutes([BrandAdminRoutes , UserRoutes]);
+        return useRoutes([BrandAdminRoutes , UserRoutes , TrackingRoutes]);
     } else if (userData.user && userData.user.role == 'User') {
-        return useRoutes([UserRoutes, LoginRoutes]);
+        return useRoutes([UserRoutes, LoginRoutes , TrackingRoutes]);
     } else {
-        return useRoutes([UserRoutes, LoginRoutes]);
+        return useRoutes([UserRoutes, LoginRoutes , TrackingRoutes]);
     }
 }

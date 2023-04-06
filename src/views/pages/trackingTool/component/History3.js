@@ -81,7 +81,9 @@ const history3 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                     </Typography>
                                     <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' }}>
                                         {' '}
-                                        {user.walletAddress.slice(0, 5)+ '...' + user.walletAddress.slice(38, 42)}
+                                        {user?.walletAddress? 
+                                            user?.walletAddress.slice(0, 5)+ '...' + user?.walletAddress.slice(38, 42)
+                                           : 'Connect Wallet'}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={2} className="doc-property" sx={{}}>
