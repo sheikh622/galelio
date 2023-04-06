@@ -175,7 +175,7 @@ export const Icons = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="20" height="20" fill="#F5F5F5" />
+      <rect width="20" height="20" fill="none" />
       <g clip-path="url(#clip0_0_1)">
         <rect
           x="-62"
@@ -183,7 +183,7 @@ export const Icons = {
           width="1440"
           height="2071"
           rx="8"
-          fill="#010101"
+          fill="none"
         />
         <g filter="url(#filter0_d_0_1)">
           <rect
@@ -192,7 +192,7 @@ export const Icons = {
             width="84"
             height="653"
             rx="4"
-            fill="#181C1F"
+            fill="none"
           />
         </g>
         <g clip-path="url(#clip1_0_1)">

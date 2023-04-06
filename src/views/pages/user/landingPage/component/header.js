@@ -45,7 +45,7 @@ const Header = () => {
         showDots={true}
         // ssr={true} // means to render carousel on server-side.
         infinite={true}
-        autoPlay={true}
+        autoPlay={false}
         autoPlaySpeed={2000}
         keyBoardControl={true}
         // customTransition="all .5"
