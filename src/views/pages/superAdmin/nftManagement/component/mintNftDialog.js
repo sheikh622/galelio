@@ -581,16 +581,16 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     size="small"
                                     onClick={() => {
                                         if (!loader) {
-                                            if (walletAddress == undefined) {
-                                                setOpen(false);
-                                                toast.error('Connect Metamask');
-                                            } else {
+                                            // if (walletAddress == undefined) {
+                                            //     setOpen(false);
+                                            //     toast.error('Connect Metamask');
+                                            // } else {
                                                 if (nftData.mintType == 'directMint') {
                                                     handleDirectMint();
                                                 } else if (nftData.mintType == 'lazyMint') {
                                                     handleLazyMint();
                                                 }
-                                            }
+                                            // }
                                         }
                                     }}
                                 >
