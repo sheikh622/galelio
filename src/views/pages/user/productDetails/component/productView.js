@@ -15,7 +15,9 @@ import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink,  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import { useState } from 'react';
 import { buyNft, resellNft, redeemNft, getNftBuyer, addDeliveryNft, changeTokenId } from 'redux/nftManagement/actions';
 // import ResellDialog from "./resellDialog"
@@ -634,9 +636,11 @@ const PropertiesView = ({  nftList }) => {
                                                     item
                                                     xs
                                                     zeroMinWidth
-                                                    component={RouterLink}
+                                                    onClick={() => {
+                                                        navigate('/BMW/' + nftList?.nft?.Brand?.id );
+                                                    }}
                                                     sx={{ textDecoration: 'none' }}
-                                                    to="/BMW"
+                                                    
                                                 >
                                                     <Typography align="left" fontWeight={600} variant="h2" className="brand">
                                                         {nftList?.nft?.Brand?.name}

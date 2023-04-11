@@ -21,7 +21,7 @@ const SideBar = () => {
     const navigate = useNavigate();
     const [color] = useState('#2196f3');
     const [pathName, setPathName] = useState('');
-    console.log('***************************', Icons);
+    // console.log('***************************', Icons);
     const location = useLocation();
     useEffect(() => {
         setPathName(location.pathname);
@@ -400,7 +400,6 @@ const SideBar = () => {
                 <Grid
                     item
                     sx={{
-                       
                         paddingLeft: '0 ! important',
                         textAlign: 'center',
                         cursor: 'pointer'
