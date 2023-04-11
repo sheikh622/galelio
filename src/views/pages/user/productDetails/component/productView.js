@@ -637,7 +637,7 @@ const PropertiesView = ({  nftList }) => {
                                                     xs
                                                     zeroMinWidth
                                                     onClick={() => {
-                                                        navigate('/BMW/' + nftList?.nft?.Brand?.id );
+                                                        navigate('/brand/' + nftList?.nft?.Brand?.id );
                                                     }}
                                                     sx={{ textDecoration: 'none' }}
                                                     

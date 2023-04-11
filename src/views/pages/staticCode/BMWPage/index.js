@@ -63,7 +63,9 @@ const CompanyPage = () => {
 
                                 <div >
                                     <h1 className='font-company-page'>{row?.name}</h1>
-                                    <h3 sx={{color:' #CDCDCD'}} className='location-style' >{row?.location}</h3>
+                                    <Tooltip placement="bottom" sx={{cursor:'pointer'}} title={row?.location}> 
+                                    <h3 sx={{color:' #CDCDCD' }} className='location-style' >{row?.location.slice(0, 16)}</h3>
+                                    </Tooltip>
                                 </div>
                             </div>
                         </Grid>
