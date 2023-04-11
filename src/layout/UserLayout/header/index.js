@@ -32,7 +32,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 import MetaMaskSection from './MetaMaskSection';
 import { Helmet } from 'react-helmet';
-import MetaMask from 'shared/metaMaskModal';
+import MetaMask from 'shared/metaMaskwithBalance';
 import { useEffect } from 'react';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -341,8 +341,13 @@ export default function Header() {
                                 </IconButton>
 
                                 {user?.walletAddress && (
-                                    <IconButton size="large" aria-label="" color="inherit" sx={{ marginTop: '5px' }}>
-                                        <MetaData sx={{ color: '#4dabf5' }} />
+                                    <IconButton size="large" aria-label="" color="inherit" sx={{}}>
+                                        <AccountBalanceWalletIcon
+                                            onClick={() => {
+                                                setMetamask(true);
+                                            }}
+                                            sx={{ color: '#4dabf5' }}
+                                        />
                                     </IconButton>
                                 )}
 

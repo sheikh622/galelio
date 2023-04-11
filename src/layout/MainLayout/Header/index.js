@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
-
+import { useState } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase , Button} from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+
+import { Avatar, Box, ButtonBase, Button } from '@mui/material';
 import MetaMaskSection from './MetaMaskSection';
 import { useNavigate } from 'react-router-dom';
+import MetaMask from 'shared/metaMaskwithBalance';
 
 // project imports
 import LogoSection from '../LogoSection';
@@ -14,7 +18,7 @@ import MobileSection from './MobileSection';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
 import { useSelector, useDispatch } from 'react-redux';
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet';
 // assets
 import { IconMenu2 } from '@tabler/icons';
 
@@ -23,14 +27,17 @@ import { IconMenu2 } from '@tabler/icons';
 const Header = ({ handleLeftDrawerToggle }) => {
     const theme = useTheme();
     const navigate = useNavigate();
+    const [metamask, setMetamask] = useState(false);
 
     const user = useSelector((state) => state.auth.user);
     return (
         <>
             {/* logo & toggler button */}
+            <MetaMask open={metamask} setOpen={setMetamask} />
+
             <Box
                 sx={{
-                    backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}`,                
+                    backgroundColor: `${theme.palette.mode === 'dark' ? '#181C1F' : 'white'}`,
                     height: '4em',
                     paddingTop: '1em',
                     width: 200,
@@ -41,11 +48,10 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     }
                 }}
             >
-            <Helmet>
-            <meta charSet="utf-8" />
-            <title> Galileo Dashboard</title>
-           
-        </Helmet>
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title> Galileo Dashboard</title>
+                </Helmet>
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     {/* <img style={{width: '100px' }} src={logo} alt="Admin Panel" /> */}
                     {/* <p style={{  fontStyle: 'oblique', fontWeight: 800, color: 'cadetblue' }}>
@@ -54,9 +60,14 @@ const Header = ({ handleLeftDrawerToggle }) => {
 
                     <LogoSection />
                 </Box>
-               <ButtonBase sx={{ display:{md:'block', lg:'none' , xs:'block' , sm:'block', } , 
-               marginTop:{md:'0', lg:'0' , xs:'-15px' , sm:'-15px'},
-                borderRadius: '', overflow: 'hidden' }}>
+                <ButtonBase
+                    sx={{
+                        display: { md: 'block', lg: 'none', xs: 'block', sm: 'block' },
+                        marginTop: { md: '0', lg: '0', xs: '-15px', sm: '-15px' },
+                        borderRadius: '',
+                        overflow: 'hidden'
+                    }}
+                >
                     <Avatar
                         variant="rounded"
                         sx={{
@@ -85,8 +96,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin') && user?.role != 'User' && user != null && (
                 <Box>
                     <Button
-                        sx={{ marginRight: '10px' ,
-                         display:{xs:'block', lg:'block'}}}
+                        sx={{ marginRight: '10px', display: { xs: 'block', lg: 'block' } }}
                         variant="outlined"
                         onClick={() => {
                             navigate('/home');
@@ -96,7 +106,17 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     </Button>
                 </Box>
             )}
-         {/*    <Box sx={{ display: { xs:'none',sm: 'block', marginRight: '10px' } }}>
+            {user?.walletAddress && (
+                <IconButton size="large" aria-label="" color="inherit" sx={{}}>
+                    <AccountBalanceWalletIcon
+                        onClick={() => {
+                            setMetamask(true);
+                        }}
+                        sx={{ color: '#4dabf5' }}
+                    />
+                </IconButton>
+            )}
+            {/*    <Box sx={{ display: { xs:'none',sm: 'block', marginRight: '10px' } }}>
                 <MetaMaskSection />
             </Box> */}
             {/* live customization & localization */}

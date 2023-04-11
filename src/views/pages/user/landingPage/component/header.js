@@ -2,30 +2,31 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useTheme, styled } from '@mui/material/styles';
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
+import '@fontsource/public-sans';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 import widget1 from 'assets/images/watch.png';
 import { useSelector } from 'react-redux';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 1
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 1
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 1
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
+    superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 1
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 1
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 1
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+    }
 };
 const HeaderAnimationImage = styled('img')({
     maxWidth: '100%',
@@ -38,40 +39,340 @@ const Header = () => {
     const theme = useTheme();
 
     return (
-        <Carousel responsive={responsive}   
-        // swipeable={true}
-        // draggable={false}
-        arrows={false}
-        showDots={true}
-        // ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        autoPlay={false}
-        autoPlaySpeed={2000}
-        keyBoardControl={true}
-        // customTransition="all .5"
-        transitionDuration={500}
-        containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        // deviceType={this.props.deviceType}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px">
-
-        <Grid  item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
-        <Grid container-fluid>
-            <Container>
-                <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="space-between"
-                    spacing={gridSpacing}
-                    sx={{ mt: { xs: 10, sm: 6, md: 4 }, mb: { xs: 2.5, md: 10 } }}
-                >
-                    <Grid item xs={12} md={8}>
+        <Carousel
+            responsive={responsive}
+            // swipeable={true}
+            // draggable={false}
+            arrows={false}
+            showDots={true}
+            // ssr={true} // means to render carousel on server-side.
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={2000}
+            keyBoardControl={true}
+            // customTransition="all .5"
+            transitionDuration={500}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={['tablet', 'mobile']}
+            // deviceType={this.props.deviceType}
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item-padding-40-px"
+        >
+            <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
+                <Grid container-fluid>
+                    <Container>
                         <Grid
                             container
+                            alignItems="center"
+                            justifyContent="space-between"
                             spacing={gridSpacing}
-                            sx={{ pr: 10, [theme.breakpoints.down('lg')]: { pr: 0, textAlign: 'center' } }}
+                            sx={{ mt: { xs: 10, sm: 6, md: 11 }, mb: { xs: 2.5, md: 10 } }}
                         >
+                            <Grid item xs={12} md={8}>
+                                <Grid item xs={12}>
+                                    <motion.div
+                                        initial={{ opacity: 0, translateY: 550 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30
+                                        }}
+                                    >
+                                        <Typography
+                                            variant="h1"
+                                            sx={{
+                                                fontFamily: 'Public Sans !important',
+                                                fontStyle: 'normal !important',
+                                                fontWeight: '600',
+
+                                                fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '81px' },
+                                                lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
+
+                                                color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
+                                            }}
+                                        >
+                                        Your passport to luxury
+                                        </Typography>
+                                    </motion.div>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <motion.div
+                                        initial={{ opacity: 0, translateY: 550 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30,
+                                            delay: 0.2
+                                        }}
+                                    >
+                                        <Typography
+                                            variant="h3"
+                                            component="div"
+                                            color="inherit"
+                                            sx={{
+                                                color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
+                                                fontFamily: 'Public Sans  !important',
+                                                fontStyle: 'normal',
+
+                                                textTransform: 'capitalize  !important',
+                                                fontSize: { xs: '1rem', md: '27px', lg: '27px' },
+                                                fontWeight: 400,
+                                                mt: { xs: 2, sm: 4, md: 5 },
+                                                lineHeight: { xs: 1.4, sm: 1, md: 1.4, lg: '36px' }
+                                            }}
+                                        >
+                                        Experience high-end assets through tokenisation
+                                        </Typography>
+                                    </motion.div>
+                                </Grid>
+                                <Grid item xs={12} sx={{ my: 3.25 }}>
+                                    <motion.div
+                                        initial={{ opacity: 0, translateY: 550 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30,
+                                            delay: 0.4
+                                        }}
+                                    >
+                                        
+                                            <>
+                                                <Grid
+                                                    container
+                                                    sx={{
+                                                        justifyContent: 'flex-start'
+                                                    }}
+                                                >
+                                                    <Grid item>
+                                                        <AnimateButton>
+                                                            <Button
+                                                                className="create"
+                                                                component={RouterLink}
+                                                                to="/"
+                                                                size="large"
+                                                                variant="contained"
+                                                                sx={{ color: '#ffffff', mt: { xs: 1, sm: 1.5, md: 2.5 } }}
+                                                            >
+                                                                Create Yours
+                                                            </Button>
+                                                        </AnimateButton>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <AnimateButton>
+                                                            <Button
+                                                                className="trackRout"
+                                                                component={RouterLink}
+                                                                to="/tracknft"
+                                                                size="large"
+                                                                variant="contained"
+                                                                sx={{
+                                                                    color: '#ffffff',
+                                                                    mt: { xs: 1, sm: 1.5, md: 2.5 },
+                                                                    ml: { xs: 0, sm: 1.5, md: 2.5 }
+                                                                }}
+                                                            >
+                                                                Track your asset
+                                                            </Button>
+                                                        </AnimateButton>
+                                                    </Grid>
+                                                </Grid>
+                                            </>
+                                        
+                                    </motion.div>
+                                </Grid>
+                            </Grid>
+
+                            <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
+                                <Box
+                                    sx={{
+                                        width: '290px',
+                                        animation: '10s slideY linear infinite'
+                                    }}
+                                >
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30,
+                                            delay: 0.2
+                                        }}
+                                    >
+                                        <HeaderAnimationImage src={widget1} alt="watch" />
+                                    </motion.div>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Grid>
+            </Grid>
+            <Grid item md={12} xs={12} className="mainBanner2" sx={{ border: '2px solid transparent' }}>
+                <Grid container-fluid>
+                    <Container>
+                        <Grid
+                            container
+                            alignItems="center"
+                            justifyContent="space-between"
+                            spacing={gridSpacing}
+                            sx={{ mt: { xs: 10, sm: 6, md: 11 }, mb: { xs: 2.5, md: 10 } }}
+                        >
+                            <Grid item xs={12} md={8}>
+                                <Grid item xs={12}>
+                                    <motion.div
+                                        initial={{ opacity: 0, translateY: 550 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30
+                                        }}
+                                    >
+                                        <Typography
+                                            variant="h1"
+                                            sx={{
+                                                fontFamily: 'Public Sans !important',
+                                                fontStyle: 'normal !important',
+                                                fontWeight: '600',
+
+                                                fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
+                                                lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
+
+                                                color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
+                                            }}
+                                        >
+                                            Exploring The Digital Frontier
+                                        </Typography>
+                                    </motion.div>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <motion.div
+                                        initial={{ opacity: 0, translateY: 550 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30,
+                                            delay: 0.2
+                                        }}
+                                    >
+                                        <Typography
+                                            variant="h3"
+                                            component="div"
+                                            color="inherit"
+                                            sx={{
+                                                color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
+                                                fontFamily: 'Public Sans  !important',
+                                                fontStyle: 'normal',
+
+                                                textTransform: 'capitalize  !important',
+                                                fontSize: { xs: '1rem', md: '27px', lg: '27px' },
+                                                fontWeight: 400,
+                                                mt: { xs: 2, sm: 4, md: 5 },
+                                                lineHeight: { xs: 1.4, sm: 1, md: 1.4, lg: '36px' }
+                                            }}
+                                        >
+                                            Pioneering a new age of innovation.
+                                        </Typography>
+                                    </motion.div>
+                                </Grid>
+                                <Grid item xs={12} sx={{ my: 3.25 }}>
+                                    <motion.div
+                                        initial={{ opacity: 0, translateY: 550 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30,
+                                            delay: 0.4
+                                        }}
+                                    >
+                                        {(token == null || undefined) && (
+                                            <>
+                                                <Grid
+                                                    container
+                                                    sx={{
+                                                        justifyContent: 'flex-start'
+                                                    }}
+                                                >
+                                                    <Grid item>
+                                                        <AnimateButton>
+                                                            <Button
+                                                                className="create"
+                                                                component={RouterLink}
+                                                                to="/"
+                                                                size="large"
+                                                                variant="contained"
+                                                                sx={{ color: '#ffffff', mt: { xs: 1, sm: 1.5, md: 2.5 } }}
+                                                            >
+                                                                Create Yours
+                                                            </Button>
+                                                        </AnimateButton>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <AnimateButton>
+                                                            <Button
+                                                                className="trackRout"
+                                                                component={RouterLink}
+                                                                to="/tracknft"
+                                                                size="large"
+                                                                variant="contained"
+                                                                sx={{
+                                                                    color: '#ffffff',
+                                                                    mt: { xs: 1, sm: 1.5, md: 2.5 },
+                                                                    ml: { xs: 0, sm: 1.5, md: 2.5 }
+                                                                }}
+                                                            >
+                                                                Track your asset
+                                                            </Button>
+                                                        </AnimateButton>
+                                                    </Grid>
+                                                </Grid>
+                                            </>
+                                        )}
+                                    </motion.div>
+                                </Grid>
+                            </Grid>
+
+                            <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
+                                <Box
+                                    sx={{
+                                        width: '290px',
+                                        animation: '10s slideY linear infinite'
+                                    }}
+                                >
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 150,
+                                            damping: 30,
+                                            delay: 0.2
+                                        }}
+                                    >
+                                        <HeaderAnimationImage src={widget1} alt="watch" />
+                                    </motion.div>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Grid>
+            </Grid>
+            <Grid item md={12} xs={12} className="mainBanner3" sx={{ border: '2px solid transparent' }}>
+            <Grid container-fluid>
+                <Container>
+                    <Grid
+                        container
+                        alignItems="center"
+                        justifyContent="space-between"
+                        spacing={gridSpacing}
+                        sx={{ mt: { xs: 10, sm: 6, md: 11 }, mb: { xs: 2.5, md: 10 } }}
+                    >
+                        <Grid item xs={12} md={7}>
                             <Grid item xs={12}>
                                 <motion.div
                                     initial={{ opacity: 0, translateY: 550 }}
@@ -85,21 +386,18 @@ const Header = () => {
                                     <Typography
                                         variant="h1"
                                         sx={{
-                                            display: { xs: 'none', md: 'none' } ,
                                             fontFamily: 'Public Sans !important',
                                             fontStyle: 'normal !important',
                                             fontWeight: '600',
 
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
-                                            lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
+                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '81px' },
+                                            lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
 
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
+                                            color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
                                         }}
                                     >
-                                    We Rule The World In 
-                                        <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
-                                        Tokenomics
-                                        </Box>
+                                    Building The 
+                                    Future
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -115,22 +413,22 @@ const Header = () => {
                                     }}
                                 >
                                     <Typography
-                                        variant="h4"
+                                        variant="h3"
                                         component="div"
                                         color="inherit"
-                                        sx={{ display: { xs: 'none', md: 'none' } ,
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
+                                        sx={{
+                                            color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
                                             fontFamily: 'Public Sans  !important',
                                             fontStyle: 'normal',
-
 
                                             textTransform: 'capitalize  !important',
                                             fontSize: { xs: '1rem', md: '27px', lg: '27px' },
                                             fontWeight: 400,
-                                            lineHeight: 1.4
+                                            mt: { xs: 2, sm: 4, md: 5 },
+                                            lineHeight: { xs: 1.4, sm: 1, md: 1.4, lg: '36px' }
                                         }}
                                     >
-                                    Find lots of cool works to buy, sell or collect here
+                                    Creating a world of innovation and exploration
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -149,20 +447,39 @@ const Header = () => {
                                         <>
                                             <Grid
                                                 container
-                                                spacing={2}
-                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
+                                                sx={{
+                                                    justifyContent: 'flex-start'
+                                                }}
                                             >
                                                 <Grid item>
                                                     <AnimateButton>
                                                         <Button
                                                             className="create"
                                                             component={RouterLink}
-                                                            to="/login"
+                                                            to="/"
                                                             size="large"
                                                             variant="contained"
-                                                            color="secondary"
+                                                            sx={{ color: '#ffffff', mt: { xs: 1, sm: 1.5, md: 2.5 } }}
                                                         >
-                                                            Create Your's
+                                                            Create Yours
+                                                        </Button>
+                                                    </AnimateButton>
+                                                </Grid>
+                                                <Grid item>
+                                                    <AnimateButton>
+                                                        <Button
+                                                            className="trackRout"
+                                                            component={RouterLink}
+                                                            to="/tracknft"
+                                                            size="large"
+                                                            variant="contained"
+                                                            sx={{
+                                                                color: '#ffffff',
+                                                                mt: { xs: 1, sm: 1.5, md: 2.5 },
+                                                                ml: { xs: 0, sm: 1.5, md: 2.5 }
+                                                            }}
+                                                        >
+                                                            Track your asset
                                                         </Button>
                                                     </AnimateButton>
                                                 </Grid>
@@ -172,9 +489,161 @@ const Header = () => {
                                 </motion.div>
                             </Grid>
                         </Grid>
+
+                        <Grid item xs={12} md={5} sx={{ display: { xs: 'none', md: 'none' } }}>
+                            <Box
+                                sx={{
+                                    width: '290px',
+                                    animation: '10s slideY linear infinite'
+                                }}
+                            >
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{
+                                        type: 'spring',
+                                        stiffness: 150,
+                                        damping: 30,
+                                        delay: 0.2
+                                    }}
+                                >
+                                    <HeaderAnimationImage src={widget1} alt="watch" />
+                                </motion.div>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </Grid>
+        </Grid>
+        <Grid item md={12} xs={12} className="mainBanner4" sx={{ border: '2px solid transparent' }}>
+        <Grid container-fluid>
+            <Container>
+                <Grid
+                    container
+                    alignItems="center"
+                    justifyContent="space-between"
+                    spacing={gridSpacing}
+                    sx={{ mt: { xs: 10, sm: 6, md: 11 }, mb: { xs: 2.5, md: 10 } }}
+                >
+                    <Grid item xs={12} md={7}>
+                        <Grid item xs={12}>
+                            <motion.div
+                                initial={{ opacity: 0, translateY: 550 }}
+                                animate={{ opacity: 1, translateY: 0 }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 150,
+                                    damping: 30
+                                }}
+                            >
+                                <Typography
+                                    variant="h1"
+                                    sx={{
+                                        fontFamily: 'Public Sans !important',
+                                        fontStyle: 'normal !important',
+                                        fontWeight: '600',
+
+                                        fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '81px' },
+                                        lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
+
+                                        color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
+                                    }}
+                                >
+                                Digital
+                                Ownership
+                                </Typography>
+                            </motion.div>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <motion.div
+                                initial={{ opacity: 0, translateY: 550 }}
+                                animate={{ opacity: 1, translateY: 0 }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 150,
+                                    damping: 30,
+                                    delay: 0.2
+                                }}
+                            >
+                                <Typography
+                                    variant="h3"
+                                    component="div"
+                                    color="inherit"
+                                    sx={{
+                                        color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
+                                        fontFamily: 'Public Sans  !important',
+                                        fontStyle: 'normal',
+
+                                        textTransform: 'capitalize  !important',
+                                        fontSize: { xs: '1rem', md: '27px', lg: '27px' },
+                                        fontWeight: 400,
+                                        mt: { xs: 2, sm: 4, md: 5 },
+                                        lineHeight: { xs: 1.4, sm: 1, md: 1.4, lg: '36px' }
+                                    }}
+                                >
+                                Empowering collectors with pNFTs
+                                </Typography>
+                            </motion.div>
+                        </Grid>
+                        <Grid item xs={12} sx={{ my: 3.25 }}>
+                            <motion.div
+                                initial={{ opacity: 0, translateY: 550 }}
+                                animate={{ opacity: 1, translateY: 0 }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 150,
+                                    damping: 30,
+                                    delay: 0.4
+                                }}
+                            >
+                            
+                                    <>
+                                        <Grid
+                                            container
+                                            sx={{
+                                                justifyContent: 'flex-start'
+                                            }}
+                                        >
+                                            <Grid item>
+                                                <AnimateButton>
+                                                    <Button
+                                                        className="create"
+                                                        component={RouterLink}
+                                                        to="/"
+                                                        size="large"
+                                                        variant="contained"
+                                                        sx={{ color: '#ffffff', mt: { xs: 1, sm: 1.5, md: 2.5 } }}
+                                                    >
+                                                        Create Yours
+                                                    </Button>
+                                                </AnimateButton>
+                                            </Grid>
+                                            <Grid item>
+                                                <AnimateButton>
+                                                    <Button
+                                                        className="trackRout"
+                                                        component={RouterLink}
+                                                        to="/tracknft"
+                                                        size="large"
+                                                        variant="contained"
+                                                        sx={{
+                                                            color: '#ffffff',
+                                                            mt: { xs: 1, sm: 1.5, md: 2.5 },
+                                                            ml: { xs: 0, sm: 1.5, md: 2.5 }
+                                                        }}
+                                                    >
+                                                        Track your asset
+                                                    </Button>
+                                                </AnimateButton>
+                                            </Grid>
+                                        </Grid>
+                                    </>
+                              
+                            </motion.div>
+                        </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
+                    <Grid item xs={12} md={5} sx={{ display: { xs: 'none', md: 'none' } }}>
                         <Box
                             sx={{
                                 width: '290px',
@@ -198,436 +667,7 @@ const Header = () => {
                 </Grid>
             </Container>
         </Grid>
-        </Grid>
-        <Grid  item md={12} xs={12} className="mainBanner2" sx={{ border: '2px solid transparent' }}>
-        <Grid container-fluid>
-            <Container>
-                <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="space-between"
-                    spacing={gridSpacing}
-                    sx={{ mt: { xs: 10, sm: 6, md: 4 }, mb: { xs: 2.5, md: 10 } }}
-                >
-                    <Grid item xs={12} md={8}>
-                        <Grid
-                            container
-                            spacing={gridSpacing}
-                            sx={{ pr: 10, [theme.breakpoints.down('lg')]: { pr: 0, textAlign: 'center' } }}
-                        >
-                            <Grid item xs={12}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h1"
-                                        sx={{
-                                            display: { xs: 'none', md: 'none' } ,
-                                            fontFamily: 'Public Sans !important',
-                                            fontStyle: 'normal !important',
-                                            fontWeight: '600',
-
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
-                                            lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
-
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
-                                        }}
-                                    >
-                                    We Rule The World In 
-                                        <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
-                                        Tokenomics
-                                        </Box>
-                                    </Typography>
-                                </motion.div>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30,
-                                        delay: 0.2
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h4"
-                                        component="div"
-                                        color="inherit"
-                                        sx={{ display: { xs: 'none', md: 'none' } ,
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
-                                            fontFamily: 'Public Sans  !important',
-                                            fontStyle: 'normal',
-
-
-                                            textTransform: 'capitalize  !important',
-                                            fontSize: { xs: '1rem', md: '27px', lg: '27px' },
-                                            fontWeight: 400,
-                                            lineHeight: 1.4
-                                        }}
-                                    >
-                                    Find lots of cool works to buy, sell or collect here
-                                    </Typography>
-                                </motion.div>
-                            </Grid>
-                            <Grid item xs={12} sx={{ my: 3.25 }}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30,
-                                        delay: 0.4
-                                    }}
-                                >
-                                    {(token == null || undefined) && (
-                                        <>
-                                            <Grid
-                                                container
-                                                spacing={2}
-                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
-                                            >
-                                                <Grid item>
-                                                    <AnimateButton>
-                                                        <Button
-                                                            className="create"
-                                                            component={RouterLink}
-                                                            to="/login"
-                                                            size="large"
-                                                            variant="contained"
-                                                            color="secondary"
-                                                        >
-                                                            Create Your's
-                                                        </Button>
-                                                    </AnimateButton>
-                                                </Grid>
-                                            </Grid>
-                                        </>
-                                    )}
-                                </motion.div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
-                        <Box
-                            sx={{
-                                width: '290px',
-                                animation: '10s slideY linear infinite'
-                            }}
-                        >
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{
-                                    type: 'spring',
-                                    stiffness: 150,
-                                    damping: 30,
-                                    delay: 0.2
-                                }}
-                            >
-                                <HeaderAnimationImage src={widget1} alt="watch" />
-                            </motion.div>
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Container>
-        </Grid>
-        </Grid>
-        <Grid  item md={12} xs={12} className="mainBanner3" sx={{ border: '2px solid transparent' }}>
-        <Grid container-fluid>
-            <Container>
-                <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="space-between"
-                    spacing={gridSpacing}
-                    sx={{ mt: { xs: 10, sm: 6, md: 4 }, mb: { xs: 2.5, md: 10 } }}
-                >
-                    <Grid item xs={12} md={8}>
-                        <Grid
-                            container
-                            spacing={gridSpacing}
-                            sx={{ pr: 10, [theme.breakpoints.down('lg')]: { pr: 0, textAlign: 'center' } }}
-                        >
-                            <Grid item xs={12}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h1"
-                                        sx={{
-                                            display: { xs: 'none', md: 'none' } ,
-                                            fontFamily: 'Public Sans !important',
-                                            fontStyle: 'normal !important',
-                                            fontWeight: '600',
-
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
-                                            lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
-
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
-                                        }}
-                                    >
-                                    We Rule The World In 
-                                        <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
-                                        Tokenomics
-                                        </Box>
-                                    </Typography>
-                                </motion.div>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30,
-                                        delay: 0.2
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h4"
-                                        component="div"
-                                        color="inherit"
-                                        sx={{ display: { xs: 'none', md: 'none' } ,
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
-                                            fontFamily: 'Public Sans  !important',
-                                            fontStyle: 'normal',
-
-
-                                            textTransform: 'capitalize  !important',
-                                            fontSize: { xs: '1rem', md: '27px', lg: '27px' },
-                                            fontWeight: 400,
-                                            lineHeight: 1.4
-                                        }}
-                                    >
-                                    Find lots of cool works to buy, sell or collect here
-                                    </Typography>
-                                </motion.div>
-                            </Grid>
-                            <Grid item xs={12} sx={{ my: 3.25 }}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30,
-                                        delay: 0.4
-                                    }}
-                                >
-                                    {(token == null || undefined) && (
-                                        <>
-                                            <Grid
-                                                container
-                                                spacing={2}
-                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
-                                            >
-                                                <Grid item>
-                                                    <AnimateButton>
-                                                        <Button
-                                                            className="create"
-                                                            component={RouterLink}
-                                                            to="/login"
-                                                            size="large"
-                                                            variant="contained"
-                                                            color="secondary"
-                                                        >
-                                                            Create Your's
-                                                        </Button>
-                                                    </AnimateButton>
-                                                </Grid>
-                                            </Grid>
-                                        </>
-                                    )}
-                                </motion.div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
-                        <Box
-                            sx={{
-                                width: '290px',
-                                animation: '10s slideY linear infinite'
-                            }}
-                        >
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{
-                                    type: 'spring',
-                                    stiffness: 150,
-                                    damping: 30,
-                                    delay: 0.2
-                                }}
-                            >
-                                <HeaderAnimationImage src={widget1} alt="watch" />
-                            </motion.div>
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Container>
-        </Grid>
-        </Grid>
-        <Grid  item md={12} xs={12} className="mainBanner4" sx={{ border: '2px solid transparent' }}>
-        <Grid container-fluid>
-            <Container>
-                <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="space-between"
-                    spacing={gridSpacing}
-                    sx={{ mt: { xs: 10, sm: 6, md: 4 }, mb: { xs: 2.5, md: 10 } }}
-                >
-                    <Grid item xs={12} md={8}>
-                        <Grid
-                            container
-                            spacing={gridSpacing}
-                            sx={{ pr: 10, [theme.breakpoints.down('lg')]: { pr: 0, textAlign: 'center' } }}
-                        >
-                            <Grid item xs={12}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h1"
-                                        sx={{
-                                            display: { xs: 'none', md: 'none' } ,
-                                            fontFamily: 'Public Sans !important',
-                                            fontStyle: 'normal !important',
-                                            fontWeight: '600',
-
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
-                                            lineHeight: { xs: '1', sm: '1', md: '84px', lg: '84px' },
-
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'
-                                        }}
-                                    >
-                                    We Rule The World In 
-                                        <Box component="span" sx={{ ml: 2, color: theme.palette.primary.dark }}>
-                                        Tokenomics
-                                        </Box>
-                                    </Typography>
-                                </motion.div>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30,
-                                        delay: 0.2
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h4"
-                                        component="div"
-                                        color="inherit"
-                                        sx={{ display: { xs: 'none', md: 'none' } ,
-                                            color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'black',
-                                            fontFamily: 'Public Sans  !important',
-                                            fontStyle: 'normal',
-
-
-                                            textTransform: 'capitalize  !important',
-                                            fontSize: { xs: '1rem', md: '27px', lg: '27px' },
-                                            fontWeight: 400,
-                                            lineHeight: 1.4
-                                        }}
-                                    >
-                                    Find lots of cool works to buy, sell or collect here
-                                    </Typography>
-                                </motion.div>
-                            </Grid>
-                            <Grid item xs={12} sx={{ my: 3.25 }}>
-                                <motion.div
-                                    initial={{ opacity: 0, translateY: 550 }}
-                                    animate={{ opacity: 1, translateY: 0 }}
-                                    transition={{
-                                        type: 'spring',
-                                        stiffness: 150,
-                                        damping: 30,
-                                        delay: 0.4
-                                    }}
-                                >
-                                    {(token == null || undefined) && (
-                                        <>
-                                            <Grid
-                                                container
-                                                spacing={2}
-                                                sx={{ display: { xs: 'none', md: 'none' } , justifyContent: { xs: 'center', md: 'center', lg: 'flex-start' } }}
-                                            >
-                                                <Grid item>
-                                                    <AnimateButton>
-                                                        <Button
-                                                            className="create"
-                                                            component={RouterLink}
-                                                            to="/login"
-                                                            size="large"
-                                                            variant="contained"
-                                                            color="secondary"
-                                                        >
-                                                            Create Your's
-                                                        </Button>
-                                                    </AnimateButton>
-                                                </Grid>
-                                            </Grid>
-                                        </>
-                                    )}
-                                </motion.div>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'none' } }}>
-                        <Box
-                            sx={{
-                                width: '290px',
-                                animation: '10s slideY linear infinite'
-                            }}
-                        >
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{
-                                    type: 'spring',
-                                    stiffness: 150,
-                                    damping: 30,
-                                    delay: 0.2
-                                }}
-                            >
-                                <HeaderAnimationImage src={widget1} alt="watch" />
-                            </motion.div>
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Container>
-        </Grid>
-        </Grid>
+    </Grid>
         </Carousel>
     );
 };

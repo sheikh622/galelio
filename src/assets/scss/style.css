@@ -1648,7 +1648,7 @@
 .font-company-page {
   font-family: "Public Sans";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400 !important;
 }
 
 .des-font {

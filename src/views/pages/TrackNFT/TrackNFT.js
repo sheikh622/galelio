@@ -50,7 +50,7 @@ const TrackNFT = () => {
                             <input className="trackInput" placeholder="GAL-BMW-1234" />
                             <Button
                                 sx={{ alignSelf: 'center !important' }}
-                                className="create"
+                                className="createTrack"
                                 size="small"
                                 variant="contained"
                                 color="secondary"

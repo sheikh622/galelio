@@ -90,7 +90,7 @@ const UserRoutes = {
             element: <CompanyPage />
         },
         {
-            path: '/BMW',
+            path: '/BMW/:id',
             element: <BMWPage />
         },
         {
