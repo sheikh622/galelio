@@ -83,7 +83,7 @@ const MetaMaskSection = () => {
     return (
         <>
             <Button
-                variant="contained"
+                variant="outlined"
                 onClick={() => {
                     handleConnect();
                 }}

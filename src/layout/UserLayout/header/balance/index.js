@@ -96,7 +96,7 @@ const Balance = () => {
                 <Typography
                     className="balance"
                     variant="body2"
-                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#9e9e9e' }}
+                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#6d6e72'}}
                 >
                     Total Balance
                 </Typography>
@@ -107,7 +107,7 @@ const Balance = () => {
                     className="usd"
                     variant="h1"
                     component="h2"
-                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#9e9e9e' }}
+                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#6d6e72' }}
                     onClick={() => {
                         handleConnect();
                         // handleConnect().arrow();

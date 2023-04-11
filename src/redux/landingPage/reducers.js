@@ -1,9 +1,10 @@
 import produce from 'immer';
-import { GET_ALL_LANDING_PAGE_DATA_SUCCESS , GET_NFT_DATA_SUCCESS} from './constants';
+import { GET_ALL_LANDING_PAGE_DATA_SUCCESS , GET_NFT_DATA_SUCCESS , BMW_SUCCESS} from './constants';
 
 const INITIAL_STATE = {
     landingPageData: [],
-    nft:[]
+    nft:[],
+    bmwData:[]
 };
 
 const landingPageReducer = produce((draft, action) => {
@@ -13,6 +14,9 @@ const landingPageReducer = produce((draft, action) => {
             break;
         case GET_NFT_DATA_SUCCESS:
             draft.nft = action.payload;
+            break;
+        case BMW_SUCCESS:
+            draft.bmwData = action.payload;
             break;
 
         default:

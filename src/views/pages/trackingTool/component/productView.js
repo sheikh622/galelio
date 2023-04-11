@@ -32,7 +32,7 @@ const Product = ({ nftList }) => {
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
                 <Grid container justifyContent="center" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
-                    <Grid item md={6} sm={12} component={RouterLink} to="/companyPage">
+                    <Grid item md={6} sm={12}>
                         <CardMedia
                             component="img"
                             image={bmw}
@@ -54,7 +54,7 @@ const Product = ({ nftList }) => {
                                                         sx={{ width: 56, height: 56, objectFit: 'fill' }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs zeroMinWidth component={RouterLink} sx={{ textDecoration: 'none' }} to="/BMW">
+                                                <Grid item xs zeroMinWidth  sx={{ textDecoration: 'none' }}>
                                                     <Typography align="left" fontWeight={600} variant="h2" className="brand">
                                                         BMW
                                                     </Typography>

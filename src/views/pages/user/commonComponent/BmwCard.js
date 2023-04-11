@@ -44,23 +44,23 @@ const BmwCard = ({ item }) => {
               component="img"
               height="200"
               sx={{ objectFit: "scale-down" }}
-              image={item.image}
+              image={item?.asset}
             />
             <CardContent sx={{ padding: "6%" }}>
               <Grid container>
-                <Grid item xs={8} className="encap" sx={{ textAlign: "left" }}>
+                <Grid item xs={8} className="encap" sx={{ textAlign: "left",  textTransform:'capitalize' }}>
                   <span
                     className="cardHeading encap"
                     style={{ fontSize: "100%" }}
                   >
                 
-                    {item.title}
+                  {item?.name}
                   </span>
                   <div
                     className="overflow brandName"
-                    style={{ marginTop: "5%", color: "#656565" }}
+                    style={{ marginTop: "5%", color: "#656565" , textTransform:'capitalize' }}
                   >
-                    {item.title}
+                  {item?.type}
                   </div>
                 </Grid>
                 <Grid item xs={4} sx={{ background: "" }}>
@@ -89,7 +89,7 @@ const BmwCard = ({ item }) => {
                 >
                   <span sx={{ float: "left" }}>Current Price :</span>
                   <span sx={{ marginLeft: "2%" }}>
-                    <b>{item.price}</b>
+                    <b>{item?.currencyType + ' ' + item?.price}</b>
                   </span>
                 </Grid>
               </Grid>
