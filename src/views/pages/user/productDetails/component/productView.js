@@ -37,7 +37,7 @@ import { setLoader } from 'redux/auth/actions';
 const PropertiesView = ({  nftList }) => {
     // console.log('nft from product view', nft);
 
-    console.log('nftList from product view', nftList?.nft?.NFTTokens[0]?.id);
+    // console.log('nftList from product view', nftList?.nft?.NFTTokens[0]?.id);
     const dispatch = useDispatch();
     const [resell, setResell] = useState(false);
     const [bought, setBought] = useState(false);
