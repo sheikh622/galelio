@@ -157,7 +157,7 @@ console.log('addr',addr);
            const contractAddress = brandCategoryData.contractAddress;
            const NftAddr = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
            let price = ethers.utils.parseEther(formik.values.profitPercentage.toString())
-           await (await NftAddr.setfee(price).catch((error) => {
+           await (await NftAddr.setFee(formik.values.profitPercentage).catch((error) => {
             setOpen(false);
             setLoader(false);
             toast.error(error.reason);

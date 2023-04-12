@@ -261,11 +261,19 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 setOpen(false);
                             })
                         ).wait();
-                        console.log('im here at 111');
+                       
+                        console.log('im here at 264');
+
+                        console.log('mintedNFT',mintedNFT);
                         transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                         const id = parseInt(mintedNFT.events[0].args[2]);
                         console.log('id', id);
-                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+
+                        let serialId = await nft.serialid(id);
+
+                        console.log('serialId', serialId);
+                        
+                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                         await (
                             await marketplaceAddr
                                 .makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress)
@@ -273,6 +281,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     toast.error(error.reason);
                                     setOpen(false);
                                     setLoader(false);
+                                    console.log('error',error);
                                 })
                         ).wait();
     
@@ -314,6 +323,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 setLoader(false);
                             })
                         ).wait();
+
+                        
     
                         transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
     
@@ -323,7 +334,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                             myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
                             counter = counter + 2;
                         }
-                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
     
                         await (
                             await marketplaceAddr
@@ -334,6 +345,26 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     setLoader(false);
                                 })
                         ).wait();
+
+                        let serialIdArray = []
+
+                        myNftTokenIdArray.map(async(id)=>{
+
+                        
+                            let serialId = await nft.serialid(id);
+
+
+                            serialIdArray.push(serialId)
+
+                        })
+
+                      
+
+                       
+
+                        console.log('serialId', serialId);
+                        
+
     
                         nftTokens.map((data, index) => {
                             tokenIdArray.push({
@@ -581,16 +612,13 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     size="small"
                                     onClick={() => {
                                         if (!loader) {
-                                            if (walletAddress == undefined) {
-                                                setOpen(false);
-                                                toast.error('Connect Metamask');
-                                            } else {
+                                       
                                                 if (nftData.mintType == 'directMint') {
                                                     handleDirectMint();
                                                 } else if (nftData.mintType == 'lazyMint') {
                                                     handleLazyMint();
                                                 }
-                                            }
+                                            
                                         }
                                     }}
                                 >

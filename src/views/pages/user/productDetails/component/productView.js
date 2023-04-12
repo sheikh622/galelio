@@ -195,7 +195,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
 
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     console.log('price', price);
                     console.log('marketplace', MarketplaceAddress.address);
 
@@ -294,7 +294,7 @@ const PropertiesView = ({  nftList }) => {
                     };
                     console.log(voucher, 'voucher');
                     let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
-                    const token = new ethers.Contract(erc20Address, Erc20, signer);
+                    const token = new ethers.Contract(erc20Address, Erc20.abi, signer);
                     // const signature = await signer._signTypedData(domain, types, voucher);
                     // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
                     //console.log(verifyAddr);
@@ -329,9 +329,17 @@ const PropertiesView = ({  nftList }) => {
                         let mintedNFT = await (
                             await nfts.buyNft(voucher, nftList?.nft?.minterAddress, nftList?.nft?.requesterAddress)
                         ).wait();
-                        const id = parseInt(mintedNFT.events[0]?.address);
+                        const id = parseInt(mintedNFT.events[0].args[2]);
                         console.log('mintedNFT', mintedNFT);
                         console.log('id', id);
+
+                   
+                        let serialId = await nfts.serialid(id);
+
+                        console.log('serialId', serialId);
+
+
+
                         setLazyTokenId(id.toString());
                         dispatch(
                             changeTokenId({
@@ -379,7 +387,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
 
                     const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
 
                     await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
                     await (await marketplace.resellItem(tokenId, contractAddress, rrprice))
@@ -430,7 +438,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     console.log('signer', signer);
                     const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     console.log('MARKETPLACE', marketplace);
                     console.log(
                         'erc20Address, tokenId, contractAddress, rrprice,buyer',
@@ -487,7 +495,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     console.log('signer', signer);
 
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     console.log('marketplace', marketplace);
 
                     console.log('directmint redeem tokenId', tokenId);
@@ -544,7 +552,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     // console.log("tokenid",nft.NFTTokens[0].tokenId)
                     // console.log("tokenid",typeof nft.NFTTokens[0].tokenId)
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     let nftPrice = nftList?.nft?.price.toString();
                     let rrprice = ethers.utils.parseEther(nftPrice);
                     console.log('rrprice.toString()', rrprice.toString());

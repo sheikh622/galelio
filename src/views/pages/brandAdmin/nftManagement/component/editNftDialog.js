@@ -153,7 +153,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
             let file = values.images[0].image;
             let isFile = file instanceof File;
 
-            let perviousUploadedItems = fileDataArray.filter((data) => {
+            let previousUploadedItems = fileDataArray.filter((data) => {
                 if (typeof data.fieldValue === 'string') return data;
             });
 
@@ -185,7 +185,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         metaDataArray: fieldDataArray,
                         fileNameArray: fileNameArray,
                         fileArray: fileArray,
-                        perviousUploadedItems: perviousUploadedItems,
+                        previousUploadedItems: previousUploadedItems,
                         type: type,
                         page: page,
                         limit: limit,

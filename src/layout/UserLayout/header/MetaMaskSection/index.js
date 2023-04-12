@@ -80,7 +80,7 @@ const MetaMaskSection = () => {
             console.log('No crypto wallet found. Please install it.');
             // toast.error('No crypto wallet found. Please install it.');
         }
-    };
+    };  
 
     useEffect(() => {
         // setbalanceValue(value)
