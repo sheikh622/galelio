@@ -34,24 +34,24 @@ const TrackNFT = () => {
         //     await factoryAddr.serials("GALGNS1")
         // )?.wait();
 
-        let res = await factoryAddr.serials("GALGNC1");
+        let res = await factoryAddr.serials(serialNo);
 
         console.log('res',res);
 
-        // let address = res[0].toLowerCase()
-        // address = `"${address}"`
-        // let tokenId = parseInt(res[1]._hex)
+        let address = res[0].toLowerCase()
+        address = `"${address}"`
+        let tokenId = parseInt(res[1]._hex)
 
         // console.log('res?._tokenId?',res);
-        // tokenId=  tokenId.toString()
+        tokenId=  tokenId.toString()
 
-        // tokenId= `"${tokenId}"`
+        tokenId= `"${tokenId}"`
 
         // let address = `"0x4600b6a0f068ae1283ed68792ff3f0a085b3f0ef"`;
         // let tokenId = `"1"`;
 
-        // console.log('address', address);
-        // console.log('tokenId', tokenId);
+        console.log('address', address);
+        console.log('tokenId', tokenId);
        
         // console.log('resTokenId', resTokenId);
 
