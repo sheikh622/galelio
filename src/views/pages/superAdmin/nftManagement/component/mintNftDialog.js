@@ -261,11 +261,11 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 setOpen(false);
                             })
                         ).wait();
-                        console.log('im here at 111');
+                        console.log('im here at 264');
                         transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                         const id = parseInt(mintedNFT.events[0].args[2]);
                         console.log('id', id);
-                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                         await (
                             await marketplaceAddr
                                 .makeItem(erc20Address, id, contractAddress, price, nftData.requesterAddress)
@@ -273,6 +273,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     toast.error(error.reason);
                                     setOpen(false);
                                     setLoader(false);
+                                    console.log('error',error);
                                 })
                         ).wait();
     
@@ -323,7 +324,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                             myNftTokenIdArray.push(mintedNFT.events[counter].args[2].toString());
                             counter = counter + 2;
                         }
-                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                        const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
     
                         await (
                             await marketplaceAddr
@@ -581,16 +582,13 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     size="small"
                                     onClick={() => {
                                         if (!loader) {
-                                            // if (walletAddress == undefined) {
-                                            //     setOpen(false);
-                                            //     toast.error('Connect Metamask');
-                                            // } else {
+                                       
                                                 if (nftData.mintType == 'directMint') {
                                                     handleDirectMint();
                                                 } else if (nftData.mintType == 'lazyMint') {
                                                     handleLazyMint();
                                                 }
-                                            // }
+                                            
                                         }
                                     }}
                                 >

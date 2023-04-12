@@ -40,7 +40,9 @@ const TrackNFT = () => {
 
         let address = res[0].toLowerCase()
         address = `"${address}"`
-        let tokenId = parseInt(res._tokenId._hex)
+        let tokenId = parseInt(res?._tokenId?._hex)
+
+        // console.log('res?._tokenId?',res);
         tokenId=  tokenId.toString()
 
         tokenId= `"${tokenId}"`
