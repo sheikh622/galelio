@@ -292,7 +292,7 @@ const PropertiesView = ({  nftList }) => {
                     };
                     console.log(voucher, 'voucher');
                     let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
-                    const token = new ethers.Contract(erc20Address, Erc20, signer);
+                    const token = new ethers.Contract(erc20Address, Erc20.abi, signer);
                     // const signature = await signer._signTypedData(domain, types, voucher);
                     // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
                     //console.log(verifyAddr);
@@ -327,9 +327,17 @@ const PropertiesView = ({  nftList }) => {
                         let mintedNFT = await (
                             await nfts.buyNft(voucher, nftList?.nft?.minterAddress, nftList?.nft?.requesterAddress)
                         ).wait();
-                        const id = parseInt(mintedNFT.events[0]?.address);
+                        const id = parseInt(mintedNFT.events[0].args[2]);
                         console.log('mintedNFT', mintedNFT);
                         console.log('id', id);
+
+                   
+                        let serialId = await nfts.serialid(id);
+
+                        console.log('serialId', serialId);
+
+
+
                         setLazyTokenId(id.toString());
                         dispatch(
                             changeTokenId({

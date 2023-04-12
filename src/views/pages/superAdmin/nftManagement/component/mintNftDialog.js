@@ -261,10 +261,18 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 setOpen(false);
                             })
                         ).wait();
+                       
                         console.log('im here at 264');
+
+                        console.log('mintedNFT',mintedNFT);
                         transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                         const id = parseInt(mintedNFT.events[0].args[2]);
                         console.log('id', id);
+
+                        let serialId = await nft.serialid(id);
+
+                        console.log('serialId', serialId);
+                        
                         const marketplaceAddr = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                         await (
                             await marketplaceAddr
@@ -315,6 +323,8 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 setLoader(false);
                             })
                         ).wait();
+
+                        
     
                         transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
     
@@ -335,6 +345,26 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     setLoader(false);
                                 })
                         ).wait();
+
+                        let serialIdArray = []
+
+                        myNftTokenIdArray.map(async(id)=>{
+
+                        
+                            let serialId = await nft.serialid(id);
+
+
+                            serialIdArray.push(serialId)
+
+                        })
+
+                      
+
+                       
+
+                        console.log('serialId', serialId);
+                        
+
     
                         nftTokens.map((data, index) => {
                             tokenIdArray.push({
