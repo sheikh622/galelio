@@ -15,7 +15,7 @@ import FactoryAddress from 'contractAbi/Factory-address.json';
 import { ethers, utils } from 'ethers';
 const axios = require('axios');
 
-let graphQLURL = 'https://api.studio.thegraph.com/query/44351/factory-graph2/14';
+let graphQLURL =  "https://api.studio.thegraph.com/query/44351/factory-graph2/16";
 
 const TrackNFT = () => {
     const [serialNo, setSerialNo] = useState("")
@@ -65,33 +65,44 @@ const TrackNFT = () => {
                         'X-Requested-With': 'XMLHttpRequest'
                     },
                     query: `{
-                          galileoProtocolDeployeds(first: 5) {
-                              id
-                              _mintingContract
-                              blockNumber
-                              blockTimestamp
-                            }
-                            roleAdminChangeds(first: 5) {
-                              id
-                              role
-                              previousAdminRole
-                              newAdminRole
-                            }
-                             handleMints(where: {collections: ${address}, _tokenId: ${tokenId}}, orderBy: blockTimestamp,){ 
-                              id 
-                              _minter
-                              _tokenId 
-                              blockTimestamp 
-                            }
-                            handleUpdateUris(where: {collections: ${address}, _tokenId: ${tokenId}}, orderBy: blockTimestamp,){ 
-                              id 
-                              _tokenId
-                              _tokenURI
-                              _updator
-                              blockTimestamp 
-                            }
-                          }
-                          `
+                        galileoProtocolDeployeds(first: 5) {
+                            id
+                            _mintingContract
+                            blockNumber
+                            blockTimestamp
+                        }
+                        handleUpdateUris(where:{collections:${address}, tokenId:${tokenId}}){
+                            newTokenURI
+                            oldTokenURI
+                            blockTimestamp
+                        }
+                        handleUpdatedBulkUris(where:{collections:${address}}){
+                            newTokenURI
+                            oldTokenURI
+                            blockTimestamp
+                        }
+                        handleMints(where:{collections:${address}, tokenId:${tokenId}}){
+                            minter
+                            tokenId
+                            blockTimestamp
+                        }
+                        handleMintBulks(where:{collections:${address}}){
+                            minter
+                            blockTimestamp
+                        }
+                        transfers(where:{collections:${address}, from_not:"0x0000000000000000000000000000000000000000" },, orderBy: blockTimestamp){
+                            to
+                            from
+                            tokenId
+                            blockTimestamp
+                        }
+                        transferMultipleNfts(where:{collections:${address}, from_not:"0x0000000000000000000000000000000000000000", tokenIDs:["1"] }){
+                            to
+                            from
+                            tokenIDs
+                            blockTimestamp
+                        }
+                    }`,
                 });
                 console.log('Query result: \n', result.data);
             } catch (err) {
