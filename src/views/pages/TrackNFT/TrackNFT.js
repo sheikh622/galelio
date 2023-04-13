@@ -29,6 +29,7 @@ const TrackNFT = () => {
         const signer = provider.getSigner();
         const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
         console.log('factoryAddr', factoryAddr);
+        
 
         // let res = await (
         //     await factoryAddr.serials("GALGNS1")
