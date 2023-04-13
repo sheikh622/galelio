@@ -17,6 +17,8 @@ const axios = require('axios');
 
 let graphQLURL =  "https://api.studio.thegraph.com/query/44351/factory-graph2/16";
 
+let graphQLURL2 = "https://api.studio.thegraph.com/query/44351/galelio-marketplace/3"
+
 const TrackNFT = () => {
     const [serialNo, setSerialNo] = useState("")
     const navigate = useNavigate();
@@ -111,6 +113,54 @@ const TrackNFT = () => {
         };
 
         main();
+
+
+        const main2 = async () => {
+            try {
+              const result = await axios.post(graphQLURL2, {
+                query: `{
+                  offeredSingles(where:{tokenAddress:${address}, tokenId:${tokenId}}) {
+                    to
+                    from
+                    price
+                    blockTimestamp
+                  }
+                  offeredMultiples(where:{tokenAddress:${address}, tokenId:["2"]}) {
+                    to
+                    from
+                    price
+                    blockTimestamp
+                  }
+                  deLists(where:{tokenAddress:${address}, _tokenId:${tokenId}}){
+                    _to
+                    _tokenId
+                    tokenAddress
+                    blockTimestamp
+                  }
+                  boughts(where:{tokenAddress:${address}, tokenId:${tokenId}}) {
+                    to
+                    from
+                    price
+                    blockTimestamp
+                  }
+                  resells(where:{tokenAddress:${address}, tokenId:${tokenId}}){
+                    to
+                    from
+                    price
+                    blockTimestamp
+                  }
+                  
+                }`,
+              });
+              console.log("Query result from marketplace: \n", result.data);
+            } catch (err) {
+              console.log(err);
+            }
+          };
+
+
+          main2()
+
     };
 
     return (
