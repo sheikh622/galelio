@@ -21,6 +21,7 @@ function* getNftDataRequest({ payload }) {
     try {
         const response = yield axios.get(`/nft/${payload.id}`);
         yield put(getnftDataSuccess(response.data.data));
+        console.log(response, 'response=>nft???')
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }

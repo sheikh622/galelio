@@ -57,6 +57,10 @@ const UserRoutes = {
             element: <ComingSoon />
         },
         {
+            path: '/Nfts',
+            element: <ComingSoon />
+        },
+        {
             path: '/downloads',
             element: <ComingSoon />
         },

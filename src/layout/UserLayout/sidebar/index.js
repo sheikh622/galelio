@@ -214,7 +214,7 @@ const SideBar = () => {
                 <Grid
                     item
                     sx={{ mt: 1, paddingLeft: '0 ! important', textAlign: 'center', cursor: 'pointer' }}
-                    onClick={() => navigate('/bookmarks')}
+                    onClick={() => navigate('/Nfts')}
                 >
                     <Box className="sideLine Gap" sx={{ display: 'flex', gap: { xl: '31px', md: '21px', lg: '29px', xl: '31px' } }}>
                         <Box
@@ -224,12 +224,12 @@ const SideBar = () => {
                                 width: { xl: '12px', md: '9px' },
                                 padding: '3px',
                                 background:
-                                    pathName == '/bookmarks' ? 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)' : 'transparent',
+                                    pathName == '/Nfts' ? 'linear-gradient(138.3deg, #2F53FF -0.85%, #2FC1FF 131.63%)' : 'transparent',
                                 borderRadius: '0px 5px 5px 0px'
                             }}
                         ></Box>
                         <Tooltip className="fontsize" title="Coming Soon" placement="right" arrow>
-                            <span style={{ color: `${pathName == '/bookmarks' ? color : ''}`, alignSelf: 'center' }}>{Icons.nft}</span>
+                            <span style={{ color: `${pathName == '/Nfts' ? color : ''}`, alignSelf: 'center' }}>{Icons.nft}</span>
                         </Tooltip>
                     </Box>
                 </Grid>
