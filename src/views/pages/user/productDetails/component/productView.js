@@ -35,7 +35,7 @@ import { setLoader } from 'redux/auth/actions';
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({  nftList }) => {
-    // console.log('nft from product view', nft);
+    // console.log('nft from product view', nftList.nft.NFTTokens);
 
     // console.log('nftList from product view', nftList?.nft?.NFTTokens[0]?.id);
     const dispatch = useDispatch();
@@ -354,6 +354,7 @@ const PropertiesView = ({  nftList }) => {
                                 nftToken: nftList?.nft?.NFTTokens[0].id,
                                 buyerAddress: mintedNFT.from,
                                 contractAddress: contractAddress,
+                                serialId: serialId,
                                 buyNftResolve: buyNftResolve
                             })
                         );
@@ -727,23 +728,57 @@ const PropertiesView = ({  nftList }) => {
                                                     </Select>
                                                 </FormControl>
                                             </Box>
-                                            {/*     // <TextField
-                                        //     sx={{ borderRadius: '4px' }}
-                                        //     className="select"
-                                        //     fullWidth
-                                        //     id="standard-select-currency"
-                                        //     select
-                                        //     lable='PROOF OF AUTHENTICITY'
-                                        //     value={fieldValue}
-                                        //     onChange={(e) => setFieldValue(e.target.value)}
-                                        // >
-                                        
-                                        //     {nft?.NFTMetaFiles.map((option) => (
-                                        //         <MenuItem key={option.fieldValue} value={option.fieldValue}>
-                                        //             {option.fieldName}
-                                        //         </MenuItem>
-                                        //     ))}
-                                        // </TextField> */}
+                                   
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
+                                                <FormControl
+                                                    sx={{
+                                                        background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
+                                                        color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
+                                                        padding: '10px 10px 10px 10px',
+                                                        borderRadius: '4px'
+                                                    }}
+                                                    fullWidth
+                                                >
+                                                    <Select
+                                                        variant="standard"
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        value={age}
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        displayEmpty
+                                                        renderValue={(selected) => {
+                                                            if (selected.length === 0) {
+                                                                return <em className="fontfamily">Serial Id :</em>;
+                                                            }
+
+                                                            return selected.join(', ');
+                                                        }}
+                                                    >
+                                                        {/* <MenuItem disabled value="">
+                                      <em>aiman</em>
+                                    </MenuItem> */}
+                                                        {nftList?.nft?.NFTTokens.map((option) => (
+                                                            <MenuItem
+                                                                // component={redirect}
+                                                                // to={option.fieldValue}
+                                                                // key={option.fieldValue}
+                                                                // value={option.fieldValue}
+                                                                // onClick={useNavigate(option.fieldValue)}
+                                                                onClick={() => {
+                                                                    // useNavigate(option.fieldValue)
+                                                                    // window.open(option.serialId, '_blank');
+                                                                }}
+                                                            >
+                                                                {option.serialId? option.serialId : 'No Serial Id'}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
+                                            </Box>
+                                   
                                         </Grid>
                                         {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid

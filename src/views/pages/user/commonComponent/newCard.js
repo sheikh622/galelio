@@ -1,12 +1,14 @@
 import { useTheme } from '@mui/material/styles';
-import { Card, Grid, CardActionArea, CardContent, Divider } from '@mui/material';
+import { Card, Grid, CardActionArea, CardContent, Divider , Select, FormControl, MenuItem} from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import { useNavigate } from 'react-router-dom';
+import attribute from 'views/pages/trackingTool/component/attribute';
 
 const NewCard = ({ data, nfts }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-//  console.log(data.id,'data.id======>');
+ console.log(data.NFTTokens
+    ,'nfts.id======>');
     return (
         <Grid
             item
@@ -33,13 +35,7 @@ const NewCard = ({ data, nfts }) => {
             xl={nfts && nfts?.length > 5 ? 12 : 2}
             sm={nfts && nfts?.length > 5 ? 12 : 3}
            
-            onClick={() => {
-                navigate('/productDetails/' + data.id, {
-                    state: {
-                        nft: data
-                    }
-                });
-            }}
+       
         >
             <Card className='new-width'
                 sx={{
@@ -55,7 +51,13 @@ const NewCard = ({ data, nfts }) => {
                 }}
             >
                 <CardActionArea>
-                    <CardMedia component="img" height="200" sx={{objectFit:'scale-down'}}   image={data.asset} />
+                    <CardMedia      onClick={() => {
+                        navigate('/productDetails/' + data.id, {
+                            state: {
+                                nft: data
+                            }
+                        });
+                    }} component="img" height="200" sx={{objectFit:'scale-down'}}   image={data.asset} />
                     <CardContent  style={{ padding: '6%' ,  }}>
                         <Grid container >
                             <Grid item className='encap' xs={8} sx={{ textAlign: 'left' }}>
@@ -69,6 +71,53 @@ const NewCard = ({ data, nfts }) => {
                                 <span className='newCreator' style={{ fontSize: '110%', float: 'right', color: '#878787' }}>
                                     Brand
                                 </span>
+                            </Grid>
+                        </Grid>
+                        <Grid mt={1} container >
+                            <Grid item className='encap' xs={8} sx={{ textAlign: 'left' }}>
+                                <span  className='newCreator' style={{ fontSize: '110%',  color: '#878787' }}> Serial Id:  </span>
+                              
+                            </Grid>
+                            <Grid mt={-2} item xs={4} sx={{ background: '' }}>
+                            <FormControl
+                            sx={{
+                                background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
+                                color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
+                                padding: '10px 10px 10px 10px',
+                                borderRadius: '4px'
+                            }}
+                            fullWidth
+                        >
+                            <Select
+                                variant="standard"
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                // value={age}
+                                // onChange={handleChange}
+                                fullWidth
+                                displayEmpty
+                             
+                            >
+                            {data?.NFTTokens.map((data)=>( 
+                                <MenuItem
+                                    // component={redirect}
+                                    // to={option.fieldValue}
+                                    // key={option.fieldValue}
+                                    // value={option.fieldValue}
+                                    // onClick={useNavigate(option.fieldValue)}
+                                    onClick={() => {
+                                        // useNavigate(option.fieldValue)
+                                        // window.open(option.serialId, '_blank');
+                                    }}
+                                >
+                                {data?.serialId ? data?.serialId+',' : 'No serial Id'}
+                                </MenuItem>
+                                )  )
+                            }
+                            </Select>
+                        </FormControl>
+
+                          
                             </Grid>
                         </Grid>
 

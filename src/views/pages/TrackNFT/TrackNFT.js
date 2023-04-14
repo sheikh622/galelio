@@ -15,9 +15,9 @@ import FactoryAddress from 'contractAbi/Factory-address.json';
 import { ethers, utils } from 'ethers';
 const axios = require('axios');
 
-let graphQLURL =  "https://api.studio.thegraph.com/query/44351/factory-graph2/16";
+let graphQLURL =  "https://api.studio.thegraph.com/query/44351/factory-graph2/17";
 
-let graphQLURL2 = "https://api.studio.thegraph.com/query/44351/galelio-marketplace/3"
+let graphQLURL2 = "https://api.studio.thegraph.com/query/44351/galelio-marketplace/6"
 
 const TrackNFT = () => {
     const [serialNo, setSerialNo] = useState("")
