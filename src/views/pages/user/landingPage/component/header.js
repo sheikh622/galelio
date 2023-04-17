@@ -290,7 +290,7 @@ const Header = () => {
                                             delay: 0.4
                                         }}
                                     >
-                                        {(token == null || undefined) && (
+                                       
                                             <>
                                                 <Grid
                                                     container
@@ -332,7 +332,7 @@ const Header = () => {
                                                     </Grid>
                                                 </Grid>
                                             </>
-                                        )}
+                                     
                                     </motion.div>
                                 </Grid>
                             </Grid>
@@ -443,7 +443,7 @@ const Header = () => {
                                         delay: 0.4
                                     }}
                                 >
-                                    {(token == null || undefined) && (
+                                    
                                         <>
                                             <Grid
                                                 container
@@ -485,7 +485,7 @@ const Header = () => {
                                                 </Grid>
                                             </Grid>
                                         </>
-                                    )}
+                                
                                 </motion.div>
                             </Grid>
                         </Grid>

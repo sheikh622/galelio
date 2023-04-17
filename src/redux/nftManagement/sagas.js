@@ -275,6 +275,7 @@ function* buyNftRequest({ payload }) {
             nftId: payload.nftId,
             nftToken: payload.nftToken,
             buyerAddress: payload.buyerAddress,
+            serialId: payload.serialId,
             contractAddress: payload.contractAddress,
             status: 'Buy'
         };

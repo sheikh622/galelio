@@ -35,7 +35,7 @@ import { setLoader } from 'redux/auth/actions';
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const PropertiesView = ({  nftList }) => {
-    // console.log('nft from product view', nft);
+    // console.log('nft from product view', nftList.nft.NFTTokens);
 
     // console.log('nftList from product view', nftList?.nft?.NFTTokens[0]?.id);
     const dispatch = useDispatch();
@@ -195,7 +195,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     const address = signer.getAddress();
 
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     console.log('price', price);
                     console.log('marketplace', MarketplaceAddress.address);
 
@@ -294,7 +294,7 @@ const PropertiesView = ({  nftList }) => {
                     };
                     console.log(voucher, 'voucher');
                     let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
-                    const token = new ethers.Contract(erc20Address, Erc20, signer);
+                    const token = new ethers.Contract(erc20Address, Erc20.abi, signer);
                     // const signature = await signer._signTypedData(domain, types, voucher);
                     // const verifyAddr = ethers.utils.verifyTypedData(domain, types, voucher, signature);
                     //console.log(verifyAddr);
@@ -329,9 +329,17 @@ const PropertiesView = ({  nftList }) => {
                         let mintedNFT = await (
                             await nfts.buyNft(voucher, nftList?.nft?.minterAddress, nftList?.nft?.requesterAddress)
                         ).wait();
-                        const id = parseInt(mintedNFT.events[0]?.address);
+                        const id = parseInt(mintedNFT.events[0].args[2]);
                         console.log('mintedNFT', mintedNFT);
                         console.log('id', id);
+
+                   
+                        let serialId = await nfts.serialid(id);
+
+                        console.log('serialId', serialId);
+
+
+
                         setLazyTokenId(id.toString());
                         dispatch(
                             changeTokenId({
@@ -346,6 +354,7 @@ const PropertiesView = ({  nftList }) => {
                                 nftToken: nftList?.nft?.NFTTokens[0].id,
                                 buyerAddress: mintedNFT.from,
                                 contractAddress: contractAddress,
+                                serialId: serialId,
                                 buyNftResolve: buyNftResolve
                             })
                         );
@@ -379,7 +388,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
 
                     const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
 
                     await (await nfts.approve(MarketplaceAddress.address, tokenId)).wait();
                     await (await marketplace.resellItem(tokenId, contractAddress, rrprice))
@@ -430,7 +439,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     console.log('signer', signer);
                     const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     console.log('MARKETPLACE', marketplace);
                     console.log(
                         'erc20Address, tokenId, contractAddress, rrprice,buyer',
@@ -487,7 +496,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     console.log('signer', signer);
 
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     console.log('marketplace', marketplace);
 
                     console.log('directmint redeem tokenId', tokenId);
@@ -544,7 +553,7 @@ const PropertiesView = ({  nftList }) => {
                     const signer = provider.getSigner();
                     // console.log("tokenid",nft.NFTTokens[0].tokenId)
                     // console.log("tokenid",typeof nft.NFTTokens[0].tokenId)
-                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi, signer);
+                    const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
                     let nftPrice = nftList?.nft?.price.toString();
                     let rrprice = ethers.utils.parseEther(nftPrice);
                     console.log('rrprice.toString()', rrprice.toString());
@@ -719,23 +728,57 @@ const PropertiesView = ({  nftList }) => {
                                                     </Select>
                                                 </FormControl>
                                             </Box>
-                                            {/*     // <TextField
-                                        //     sx={{ borderRadius: '4px' }}
-                                        //     className="select"
-                                        //     fullWidth
-                                        //     id="standard-select-currency"
-                                        //     select
-                                        //     lable='PROOF OF AUTHENTICITY'
-                                        //     value={fieldValue}
-                                        //     onChange={(e) => setFieldValue(e.target.value)}
-                                        // >
-                                        
-                                        //     {nft?.NFTMetaFiles.map((option) => (
-                                        //         <MenuItem key={option.fieldValue} value={option.fieldValue}>
-                                        //             {option.fieldName}
-                                        //         </MenuItem>
-                                        //     ))}
-                                        // </TextField> */}
+                                   
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
+                                                <FormControl
+                                                    sx={{
+                                                        background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
+                                                        color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
+                                                        padding: '10px 10px 10px 10px',
+                                                        borderRadius: '4px'
+                                                    }}
+                                                    fullWidth
+                                                >
+                                                    <Select
+                                                        variant="standard"
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        value={age}
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        displayEmpty
+                                                        renderValue={(selected) => {
+                                                            if (selected.length === 0) {
+                                                                return <em className="fontfamily">Serial Id :</em>;
+                                                            }
+
+                                                            return selected.join(', ');
+                                                        }}
+                                                    >
+                                                        {/* <MenuItem disabled value="">
+                                      <em>aiman</em>
+                                    </MenuItem> */}
+                                                        {nftList?.nft?.NFTTokens.map((option) => (
+                                                            <MenuItem
+                                                                // component={redirect}
+                                                                // to={option.fieldValue}
+                                                                // key={option.fieldValue}
+                                                                // value={option.fieldValue}
+                                                                // onClick={useNavigate(option.fieldValue)}
+                                                                onClick={() => {
+                                                                    // useNavigate(option.fieldValue)
+                                                                    // window.open(option.serialId, '_blank');
+                                                                }}
+                                                            >
+                                                                {option.serialId? option.serialId : 'No Serial Id'}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
+                                            </Box>
+                                   
                                         </Grid>
                                         {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid
