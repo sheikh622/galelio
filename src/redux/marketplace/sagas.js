@@ -62,7 +62,7 @@ function* trackingToolRequest({payload}) {
             }`,
         });
         // yield put(getTrackSuccess(response.data.data));
-        console.log('success========>', response);
+        // console.log('success========>', response);
         console.log('Query result: \n , success ', response.data);
     } catch (error) {
         // yield sagaErrorHandler(error.response.data.data);
