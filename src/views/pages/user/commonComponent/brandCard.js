@@ -12,6 +12,7 @@ const BrandCard = ({ data, brands }) => {
             sx={{
                 color: theme.palette.mode === 'dark' ? 'white' : 'black',
                 textDecoration: 'none',
+             
                 ml: {
                     xs: brands && brands?.length > 5 ? 4 : 0,
                     sm: brands && brands?.length > 5 ? 2 : 0,
