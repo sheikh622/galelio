@@ -4,6 +4,7 @@ import '@fontsource/public-sans';
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import galileoLogo from '../../../assets/images/galileo-white.png';
@@ -11,9 +12,11 @@ import { padding } from '@mui/system';
 import music from '../../../assets/vedio.mp4';
 import { useNavigate } from 'react-router-dom';
 import FactoryAbi from 'contractAbi/Factory.json';
+import { getTrack } from 'redux/marketplace/actions';
 import FactoryAddress from 'contractAbi/Factory-address.json';
 import { ethers, utils } from 'ethers';
 const axios = require('axios');
+
 
 let graphQLURL =  "https://api.studio.thegraph.com/query/44351/factory-graph2/17";
 
@@ -22,7 +25,7 @@ let graphQLURL2 = "https://api.studio.thegraph.com/query/44351/galelio-marketpla
 const TrackNFT = () => {
     const [serialNo, setSerialNo] = useState("")
     const navigate = useNavigate();
-
+const dispatch = useDispatch();
     const searchSerial = async () => {
 
         console.log('serialNo',serialNo);
@@ -43,7 +46,7 @@ const TrackNFT = () => {
 
         let address = res[0].toLowerCase()
         address = `"${address}"`
-        let tokenId = parseInt(res[1]._hex)
+        let tokenId = parseInt(res[1]._hex);
 
         // console.log('res?._tokenId?',res);
         tokenId=  tokenId.toString()
@@ -55,8 +58,15 @@ const TrackNFT = () => {
 
         console.log('address', address);
         console.log('tokenId', tokenId);
+        // dispatch(
+        //     getTrack({
+        //         address :address,
+        //         tokenId: tokenId
+        //     })
+        // );
        
         // console.log('resTokenId', resTokenId);
+
 
         const main = async () => {
             try {
@@ -213,6 +223,8 @@ const TrackNFT = () => {
                                     // navigate('/tracking');
 
                                     searchSerial();
+                                  
+                                
                                 }}
                             >
                                 Track

@@ -69,7 +69,7 @@ const FeaturedCreators = ({ brands }) => {
                             color={theme.palette.mode === 'dark' ? '#FFFFFF' : 'black'}
                             className="fontfigma"
                             variant="h2"
-                            mt={4}
+                            mt={8}
                             component="div"
                             sx={{
                                 textAlign: { xs: 'center', md: 'left', sm: 'center' },
@@ -106,6 +106,7 @@ const FeaturedCreators = ({ brands }) => {
             ) : (
                 <Grid
                     mt={4}
+                   
                     container
 
                     sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}

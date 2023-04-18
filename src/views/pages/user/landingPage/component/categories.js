@@ -295,6 +295,7 @@ const Categories = ({ categories }) => {
                     ) : (
                         <Grid
                             mt={0}
+                            mb={-3}
                             container
                             spacing={2}
                             sx={{ justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left', xl: 'left' } }}
