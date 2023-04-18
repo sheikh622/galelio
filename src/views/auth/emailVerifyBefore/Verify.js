@@ -187,7 +187,7 @@ const VerifyEmail = ({ token, ...others }) => {
                         <Grid xs={12} sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#6d6e72' }}>
                             <Typography className="wallet-select" variant="h3">
                             Please check your email account , the verification email has been sent to you.
-                                {/*   <b>{user.email}</b>{' '} */}
+                                 <b>{user?.email}</b>{' '} 
                             </Typography>
                         </Grid>{' '}
                         {/*  <AnimateButton>
@@ -204,29 +204,14 @@ const VerifyEmail = ({ token, ...others }) => {
                         </AnimateButton> */}
                         {refresh == false ? (
                             <Grid mt={2} xs={12}>
-                                <Grid xs={12} md={12} sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#6d6e72' }}>
-                                    <Box>
-                                        {' '}
-                                        <AnimateButton>
-                                            <Button
-                                                className="signbuttonMarket"
-                                                fullWidth
-                                                size="large"
-                                                variant="outlined"
-                                                color="secondary"
-                                            >
-                                                Resend({seconds})
-                                            </Button>
-                                        </AnimateButton>
-                                    </Box>
-                                </Grid>
+                       
                                 <Grid xs={12} md={1}></Grid>
                                 <Grid xs={12} md={12}>
-                                    {seconds == 0 && (
+                                   
                                         <Box>
-                                            <Grid mt={1} xs={12} md={12}>
+                                          {/*   <Grid mt={1} xs={12} md={12}>
                                                 <Button className="ReEnterEmail" variant="text" sx={{}}>
-                                                    Re-Enter Signup information?
+                                                     Edit  Signup information?
                                                 </Button>
                                                 <Switch
                                                     checked={checked}
@@ -234,10 +219,10 @@ const VerifyEmail = ({ token, ...others }) => {
 
                                                     // inputProps={{ 'aria-label': 'controlled' }}
                                                 />
-                                            </Grid>
-                                            {changeEmail == true && checked == true && (
+                                            </Grid> */}
+                                        {/*     {changeEmail == true && checked == true && ( */}
                                                 <Box>
-                                                    <InputLabel
+                                                 {/*    <InputLabel
                                                         sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
                                                         className="authFont"
                                                         htmlFor="outlined-adornment-email-login"
@@ -304,13 +289,13 @@ const VerifyEmail = ({ token, ...others }) => {
                                                                 {errors.lastName}
                                                             </FormHelperText>
                                                         )}
-                                                    </FormControl>
+                                                    </FormControl> */}
                                                     <InputLabel
                                                         sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
                                                         className="authFont"
                                                         htmlFor="outlined-adornment-email-login"
                                                     >
-                                                        Email
+                                                   Change  Email Address
                                                     </InputLabel>{' '}
                                                     <FormControl
                                                         sx={{ ...theme.typography.customInput }}
@@ -340,143 +325,7 @@ const VerifyEmail = ({ token, ...others }) => {
                                                             </FormHelperText>
                                                         )}
                                                     </FormControl>
-                                                    <InputLabel
-                                                        sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
-                                                        className="authFont"
-                                                        htmlFor="outlined-adornment-password-login"
-                                                    >
-                                                        {' '}
-                                                        Password
-                                                    </InputLabel>
-                                                    <FormControl
-                                                        className="auth-formcontrol"
-                                                        fullWidth
-                                                        error={Boolean(touched.password && errors.password)}
-                                                    >
-                                                        <TextField
-                                                            placeholder="Password"
-                                                            className="textForm"
-                                                            // onChange={(event)=>handelAccount("password",event)}
-                                                            variant="outlined"
-                                                            margin="normal"
-                                                            required
-                                                            fullWidth
-                                                            name="password"
-                                                            type={showPassword ? 'text' : 'password'}
-                                                            id="password"
-                                                            autoComplete="current-password"
-                                                            onBlur={handleBlur}
-                                                            onChange={handleChange}
-                                                            inputProps={{}}
-                                                        />
-                                                        {touched.password && errors.password && (
-                                                            <FormHelperText error id="standard-weight-helper-text-password-login">
-                                                                {errors.password}
-                                                            </FormHelperText>
-                                                        )}
-                                                        <IconButton
-                                                            className="iconvisible"
-                                                            onClick={handleClickShowPassword}
-                                                            onMouseDown={handleMouseDownPassword}
-                                                            aria-label="toggle password visibility"
-                                                            edge="end"
-                                                            size="large"
-                                                        >
-                                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                                        </IconButton>
-                                                    </FormControl>
-                                                    <InputLabel
-                                                        sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
-                                                        className="authFont"
-                                                        htmlFor="outlined-adornment-password-login"
-                                                    >
-                                                        Confirm Password
-                                                    </InputLabel>
-                                                    <FormControl
-                                                        className="auth-formcontrol"
-                                                        fullWidth
-                                                        error={Boolean(touched.confirmPassword && errors.confirmPassword)}
-                                                    >
-                                                        <TextField
-                                                            placeholder="Confirm Password"
-                                                            className="textForm"
-                                                            // onChange={(event)=>handelAccount("password",event)}
-                                                            variant="outlined"
-                                                            margin="normal"
-                                                            required
-                                                            fullWidth
-                                                            value={values.confirmPassword}
-                                                            name="confirmPassword"
-                                                            type={showconfirmPassword ? 'text' : 'password'}
-                                                            id="password"
-                                                            autoComplete="current-password"
-                                                            onBlur={handleBlur}
-                                                            onChange={handleChange}
-                                                            inputProps={{}}
-                                                        />
-
-                                                        <IconButton
-                                                            className="iconvisible"
-                                                            onClick={handleClickShowconfirmPassword}
-                                                            onMouseDown={handleMouseDownconfirmPassword}
-                                                            aria-label="toggle password visibility"
-                                                            edge="end"
-                                                            size="large"
-                                                        >
-                                                            {showconfirmPassword ? <Visibility /> : <VisibilityOff />}
-                                                        </IconButton>
-                                                        {touched.confirmPassword && errors.confirmPassword && (
-                                                            <FormHelperText error id="standard-weight-helper-text-password-login">
-                                                                {errors.confirmPassword}
-                                                            </FormHelperText>
-                                                        )}
-                                                    </FormControl>
-                                                    {/* <div>* Password should be 8 characters long containing 1 Uppercase, 1 Numeric and 1 special character</div> */}
-                                                    <InputLabel
-                                                        sx={{ color: theme.palette.mode === 'dark' ? 'white' : '#404040' }}
-                                                        className="authFont"
-                                                        htmlFor="outlined-adornment-email-login"
-                                                    >
-                                                        Delivery Address
-                                                    </InputLabel>
-                                                    <FormControl
-                                                        sx={{ ...theme.typography.customInput }}
-                                                        className="auth-formcontrol"
-                                                        fullWidth
-                                                        error={Boolean(touched.address && errors.address)}
-                                                    >
-                                                        <TextField
-                                                            placeholder="Delivery Address"
-                                                            className="textForm"
-                                                            // onChange={(event)=>handelAccount("password",event)}
-                                                            variant="outlined"
-                                                            margin="normal"
-                                                            required
-                                                            fullWidth
-                                                            type="address"
-                                                            value={values.address}
-                                                            name="address"
-                                                            onBlur={handleBlur}
-                                                            onChange={handleChange}
-                                                            // helperText="Some important text"
-                                                            inputProps={{}}
-                                                        />
-                                                        {touched.address && errors.address && (
-                                                            <FormHelperText error id="standard-weight-helper-text-name-login">
-                                                                {errors.address}
-                                                            </FormHelperText>
-                                                        )}
-                                                    </FormControl>
-                                                    <Button
-                                                        variant="contained"
-                                                        onClick={() => {
-                                                            handleConnect();
-                                                        }}
-                                                    >
-                                                        {walletAddress
-                                                            ? walletAddress.slice(0, 5) + '...' + walletAddress.slice(38, 42)
-                                                            : 'Connect with wallet'}
-                                                    </Button>
+                                                 
                                                     {errors.submit && (
                                                         <Box sx={{ mt: 3 }}>
                                                             <FormHelperText error>{errors.submit}</FormHelperText>
@@ -499,9 +348,9 @@ const VerifyEmail = ({ token, ...others }) => {
                                                         </AnimateButton>
                                                     </Box>
                                                 </Box>
-                                            )}
+                                          {/*   )} */}
                                         </Box>
-                                    )}
+                                   
                                 </Grid>
                             </Grid>
                         ) : (

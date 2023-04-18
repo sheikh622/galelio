@@ -121,7 +121,7 @@ const NewCard = ({ data, nfts }) => {
                             </Grid>
                         </Grid>
 
-                        <Divider sx={{ mt: 2, mb: 2 }} />
+                        <Divider sx={{ mt: 1, mb: 1}} />
                         <Grid>
                             <Grid item md={12} xs={12} className="overflow" sx={{ marginTop: { xs: '10px', md: '0' } }}>
                                 <span style={{ float: 'left' }}>Current Price :</span>

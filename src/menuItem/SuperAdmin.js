@@ -2,6 +2,7 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { FormattedMessage } from 'react-intl';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import PaymentsIcon from '@mui/icons-material/Payments';
 // assets
 import {
     IconDashboard,
@@ -30,7 +31,8 @@ const icons = {
     IconBuildingStore,
     IconCurrencyEthereum,
     DashboardIcon,
-    AccountCircleIcon
+    AccountCircleIcon,
+    PaymentsIcon
 };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
@@ -73,6 +75,14 @@ const superAdminMenu = {
             type: 'item',
             icon: icons.IconBuildingStore,
             url: '/brands',
+            breadcrumbs: false
+        },
+        {
+            id: 'configurations',
+            title:'Configurations',
+            type: 'item',
+            icon: icons.PaymentsIcon,
+            url: 'fees',
             breadcrumbs: false
         }
     ]
