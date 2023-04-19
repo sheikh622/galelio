@@ -9,14 +9,32 @@ import Header from 'layout/UserLayout/header';
 import Sidebar from 'layout/UserLayout/sidebar';
 import Footer from 'layout/UserLayout/footer';
 import TrackAtribute from './component/trackAtribute';
+import { getTrack } from 'redux/marketplace/actions';
 import { useParams } from 'react-router-dom';
 import { getnftData } from 'redux/landingPage/actions';
+
 const TrackingTool = () => {
     const theme = useTheme();
     const location = useLocation();
     const dispatch = useDispatch();
-
-    // console.log(nftList, 'nftList=>');
+    const serialId = useParams().token;
+    const tokenId = location.state?.tokenId;
+    const address = location.state?.address;
+    console.log('serialId', serialId );
+    console.log(' tokenId', location.state?.tokenId);
+    console.log(' address', location.state?.address);
+  useEffect(() => {
+            console.log('run');
+            dispatch(
+                getTrack({
+                    serialId:serialId,
+                    tokenId:`${tokenId}`,
+                    address:address
+                
+                })
+            );
+        }, []);
+   
     return (
         <>
             <Grid

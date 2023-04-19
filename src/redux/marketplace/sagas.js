@@ -1,7 +1,7 @@
 import axios from '../../utils/axios';
-import { all, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, fork, put, takeLatest ,select } from 'redux-saga/effects';
 import { makeSelectAuthToken } from 'store/Selector';
-import { GET_ALL_MARKETPLACE_CATEGORIES, GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY,GET_ALL_SIMILAR_PRODUCTS,TRACKING_TOOL_SUCCESS  } from './constants';
+import { GET_ALL_MARKETPLACE_CATEGORIES, GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY,GET_ALL_SIMILAR_PRODUCTS,TRACKING_TOOL  } from './constants';
 import { getAllMarketplaceCategoriesSuccess, getAllMarketplaceNftsByCategorySuccess,getAllSimilarProductsSuccess ,getTrackSuccess
      } from './actions';
 import { sagaErrorHandler } from '../../shared/helperMethods/sagaErrorHandler';
@@ -12,25 +12,30 @@ import { setNotification } from '../../shared/helperMethods/setNotification';
 
 
 function* trackingToolRequest({payload}) {
-    const formData = new FormData();
-    formData.append('serialId', payload.serialId);
-    formData.append('tokenId', payload.tokenId);
-    formData.append('address', payload.address);
- 
+    
     try {
+        let data = {
+            serialId: payload.serialId,
+            tokenId: payload.tokenId,
+            address: payload.address
+        };
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`/nft/trackNFT`, formData, headers);
-        yield put(getTrackSuccess(response.data.data));
-        console.log(response,'response');
+        const response = yield axios.post(`/nft/trackNFT`, headers , data);
         // yield setNotification('success', response.data.message);
+        yield put(getTrackSuccess(response.data.data));
+
+       console.log(response,'success')
     } catch (error) {
-        yield sagaErrorHandler(error.response.data.data);
+       console.log(error,'error')
+        // yield sagaErrorHandler(error.response.data.data);
     }
+
 }
 
 export function* watchTrackingTool() {
-    yield takeLatest(TRACKING_TOOL_SUCCESS, trackingToolRequest);
+    yield takeLatest(TRACKING_TOOL, trackingToolRequest);
 }
+
 function* getAllSimilarProductsRequest({payload}) {
     try {
         const response = yield axios.get(
