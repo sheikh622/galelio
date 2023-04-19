@@ -6,7 +6,7 @@ import axioss from 'axios';
 // export const API_URL = 'http://localhost:3000/api/v1/'; //local
 // export const API_URL = 'https://app.galileoprotocol.io/api/v1/';
 // export const API_URL = 'https://demo.galileoprotocol.io/api/v1/';
-// export const API_URL = 'http://192.168.1.193:4000/api/v1/'; //zain
+export const API_URL = 'http://192.168.1.193:4000/api/v1/'; //zain
 // export const API_URL = 'http://192.168.1.190:4000/api/v1/'; //talha
 // export const API_URL = 'http://192.168.1.190/api/v1/'; //talha
 export const API_URL = 'https://3aca-182-178-193-104.ngrok-free.app/api/v1/'; //zain
