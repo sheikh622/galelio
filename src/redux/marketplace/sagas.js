@@ -2,7 +2,7 @@ import axios from '../../utils/axios';
 import { all, fork, put, takeLatest } from 'redux-saga/effects';
 import { makeSelectAuthToken } from 'store/Selector';
 import { GET_ALL_MARKETPLACE_CATEGORIES, GET_ALL_MARKETPLACE_NFTS_BY_CATEGORY,GET_ALL_SIMILAR_PRODUCTS,TRACKING_TOOL_SUCCESS  } from './constants';
-import { getAllMarketplaceCategoriesSuccess, getAllMarketplaceNftsByCategorySuccess,getAllSimilarProductsSuccess ,
+import { getAllMarketplaceCategoriesSuccess, getAllMarketplaceNftsByCategorySuccess,getAllSimilarProductsSuccess ,getTrackSuccess
      } from './actions';
 import { sagaErrorHandler } from '../../shared/helperMethods/sagaErrorHandler';
 import { setNotification } from '../../shared/helperMethods/setNotification';
@@ -12,62 +12,19 @@ import { setNotification } from '../../shared/helperMethods/setNotification';
 
 
 function* trackingToolRequest({payload}) {
+    const formData = new FormData();
+    formData.append('serialId', payload.serialId);
+    formData.append('tokenId', payload.tokenId);
+    formData.append('address', payload.address);
+ 
     try {
-        const Axios = require('axios');
-        let graphQLURL =  "https://api.studio.thegraph.com/query/44351/factory-graph2/17";
-        const response = yield Axios.post(graphQLURL, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',     
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            query: `{
-                galileoProtocolDeployeds(first: 5) {
-                    id
-                    _mintingContract
-                    blockNumber
-                    blockTimestamp
-                }
-                handleUpdateUris(where:{collections:${payload.address}, tokenId:${payload.tokenId}}){
-                    newTokenURI
-                    oldTokenURI
-                    blockTimestamp
-                }
-                handleUpdatedBulkUris(where:{collections:${payload.address}}){
-                    newTokenURI
-                    oldTokenURI
-                    blockTimestamp
-                }
-                handleMints(where:{collections:${payload.address}, tokenId:${payload.tokenId}}){
-                    minter
-                    tokenId
-                    blockTimestamp
-                }
-                handleMintBulks(where:{collections:${payload.address}}){
-                    minter
-                    blockTimestamp
-                }
-                transfers(where:{collections:${payload.address}, from_not:"0x0000000000000000000000000000000000000000" },, orderBy: blockTimestamp){
-                    to
-                    from
-                    tokenId
-                    blockTimestamp
-                }
-                transferMultipleNfts(where:{collections:${payload.address}, from_not:"0x0000000000000000000000000000000000000000", tokenIDs:["1"] }){
-                    to
-                    from
-                    tokenIDs
-                    blockTimestamp
-                }
-            }`,
-        });
-        // yield put(getTrackSuccess(response.data.data));
-        // console.log('success========>', response);
-        console.log('Query result: \n , success ', response.data);
+        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.post(`/nft/trackNFT`, formData, headers);
+        yield put(getTrackSuccess(response.data.data));
+        console.log(response,'response');
+        // yield setNotification('success', response.data.message);
     } catch (error) {
-        // yield sagaErrorHandler(error.response.data.data);
-        console.log('error');
-
+        yield sagaErrorHandler(error.response.data.data);
     }
 }
 
