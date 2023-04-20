@@ -25,7 +25,7 @@ const TrackingRoutes = {
     ),
     children: [
         {
-            path: '/tracking',
+            path: '/tracking/:token',
             element: <Tracking />
         },
         {
