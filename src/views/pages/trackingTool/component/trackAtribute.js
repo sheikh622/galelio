@@ -8,8 +8,9 @@ import History1 from './history1';
 import History3 from './History3';
 import Attribute from './attribute';
 
-const trackAtribute = () => {
+const trackAtribute = ({tracking}) => {
     const theme = useTheme();
+    console.log(tracking, 'marketplaceNfts in track Attribute');
     const basicData = [
         {
             id: 'basic1',
@@ -54,7 +55,7 @@ const trackAtribute = () => {
             <Grid container>
                 <Grid item xs={12} sm={6} md={6} sx={{ padding: '0 15px 0 02px' }}>
                     <Grid item xs={12} md={12}>
-                        <Attribute  data={basicData}/>
+                        <Attribute tracking={tracking}  data={basicData}/>
                     </Grid>
                     <Grid mt={2} item xs={12} md={12}>
                         <History1  data={history1}/>

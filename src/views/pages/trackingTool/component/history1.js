@@ -9,6 +9,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import { useSelector, useDispatch } from 'react-redux';
+import { Pagination } from '@mui/material';
 
 // assets
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -30,6 +31,22 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
     useEffect(() => {
         setExpanded(defaultExpandedId);
     }, [defaultExpandedId]);
+    const cardData = [
+        { id: 1, title: 'Card 1', content: 'Content for Card 1' },
+        { id: 2, title: 'Card 2', content: 'Content for Card 2' },
+        { id: 3, title: 'Card 3', content: 'Content for Card 3' },
+        { id: 4, title: 'Card 4', content: 'Content for Card 4' },
+        { id: 5, title: 'Card 5', content: 'Content for Card 5' },
+        { id: 6, title: 'Card 6', content: 'Content for Card 6' },
+        { id: 7, title: 'Card 7', content: 'Content for Card 7' },
+        { id: 8, title: 'Card 8', content: 'Content for Card 8' },
+        { id: 9, title: 'Card 9', content: 'Content for Card 9' },
+      ];
+    const cardsPerPage = 3;
+    const [currentPage, setCurrentPage] = useState(1);
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -112,6 +129,7 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                     height: { md: '160px' }
                                 }}
                             >
+                            {currentCards.map((card) => (
                                 <Grid item xs={12} md={4}>
                                     <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
                                         <CardContent sx={{ padding: '18px 12px' }}>
@@ -144,81 +162,13 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                     </Card>
                                 </Grid>
 
-                                <Grid item xs={12} md={4} sx={{ mt: { xs: 1, md: 0 } }}>
-                                    <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
-                                        <CardContent sx={{ padding: '18px 12px' }}>
-                                            <Grid item xs={12} className="tick" sx={{ m: 1 }}>
-                                                <img src={tick} />
-                                            </Grid>
-                                            <p className="Engine"> Model</p>
-                                            <Typography
-                                                variant="h6"
-                                                className="V8"
-                                                sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                            >
-                                                BMW XM
-                                            </Typography>
-                                            <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
-                                                Auto - Manual
-                                            </p>
-                                            <Grid item xs={12} className="document" sx={{ m: 1 }}>
-                                                       {theme.palette.mode === 'dark' ? (
-                                                    <Box>
-                                                        <Doc />
-                                                    </Box>
-                                                ) : (
-                                                    <Box>
-                                                        <DocLight />
-                                                    </Box>
-                                                )}
-                                            </Grid>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-
-                                <Grid item xs={12} md={4} sx={{ mt: { xs: 1, md: 0 } }}>
-                                    <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
-                                        <CardContent sx={{ padding: '18px 12px' }}>
-                                            <Grid item xs={12} className="tick" sx={{ m: 1 }}>
-                                                <img src={tick} />
-                                            </Grid>
-                                            <p className="Engine"> Chassis</p>
-                                            <Typography
-                                                variant="h6"
-                                                className="V8"
-                                                sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                            >
-                                                BMWXM321
-                                            </Typography>
-                                            <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
-                                                31-03-23
-                                            </p>
-                                            <Grid item xs={12} className="document" sx={{ m: 1 }}>
-                                                       {theme.palette.mode === 'dark' ? (
-                                                    <Box>
-                                                        <Doc />
-                                                    </Box>
-                                                ) : (
-                                                    <Box>
-                                                        <DocLight />
-                                                    </Box>
-                                                )}
-                                            </Grid>
-                                        </CardContent>
-                                        <Grid item xs={12} className="document" sx={{ m: 1 }}>
-                                                   {theme.palette.mode === 'dark' ? (
-                                                    <Box>
-                                                        <Doc />
-                                                    </Box>
-                                                ) : (
-                                                    <Box>
-                                                        <DocLight />
-                                                    </Box>
-                                                )}
-                                        </Grid>
-                                    </Card>
-                                </Grid>
+                                ))}
                             </Grid>
+                            <Pagination
+                            count={Math.ceil(cardData.length / cardsPerPage)}
+                            onChange={(event, value) => setCurrentPage(value)}
+                            page={currentPage}
+                          />
                         </MuiAccordionDetails>
                     </MuiAccordion>
                 ))}
