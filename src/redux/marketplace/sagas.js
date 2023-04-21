@@ -19,12 +19,12 @@ function* trackingToolRequest({payload}) {
             tokenId: payload.tokenId,
             address: payload.address
         };
-        const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(`/nft/trackNFT`, headers , data);
+        // const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
+        const response = yield axios.post(`/nft/trackNFT` , data);
         // yield setNotification('success', response.data.message);
         yield put(getTrackSuccess(response.data.data));
 
-       console.log(response,'success')
+       console.log(response.data.data,'success')
     } catch (error) {
        console.log(error,'error')
         // yield sagaErrorHandler(error.response.data.data);

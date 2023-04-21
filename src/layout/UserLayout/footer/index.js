@@ -103,6 +103,9 @@ const Footer = () => {
                             <Grid className={styles.serviceLink}>
                                 <span className={styles.link}>Privacy Policy</span>
                             </Grid>
+                            <Grid className={styles.serviceLink}>
+                                <span className={styles.link}>Fees & Taxes</span>
+                            </Grid>
                         </Grid>
                     </Grid>
 
