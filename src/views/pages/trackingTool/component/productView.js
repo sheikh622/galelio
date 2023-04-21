@@ -35,7 +35,7 @@ const Product = ({ tracking }) => {
                     <Grid item md={6} sm={12}>
                         <CardMedia
                             component="img"
-                            image={tracking.nft?.asset? tracking.nft?.asset : bmw}
+                            image={tracking.nft?.asset? tracking.nft?.asset : 'loading..!'}
                             sx={{ minheight: 'auto', maxHeight: '570px', background: 'transparent', overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
@@ -76,7 +76,7 @@ const Product = ({ tracking }) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                                {tracking?.nft?.description? tracking?.nft?.description : "Newly Developed M HYBRID Drive, An Extravagant Design And The Progressive Luxury Ambience In The Interior Of The BMW XM Combine To Form A Reinterpretation Of The Sports Activity Vehicle (SAV) Vehicle Concept In The High-Performance Segment. The BMW XM Is The Highlight Of The Model Offensive In The Brand's Anniversary Year And At The Same Time The First Original BMW M Automobile Since The BMW M1. Precisely Set Accents In The Exterior Design Of The High-Performance SAV Are Reminiscent Of The Legendary Mid-Engine Sports Car."   }
+                                                {tracking?.nft?.description? tracking?.nft?.description : "NFT"   }
                                             </Typography>
                                         </Grid>
 

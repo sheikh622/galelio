@@ -88,11 +88,17 @@ const history3 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                 </Grid>
                                 <Grid item xs={2} className="doc-property" sx={{}}>
                                     {theme.palette.mode === 'dark' ? (
-                                        <Box className="doc-heading">
+                                        <Box className="doc-heading"    onClick={() => {
+             
+                                            window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                        }}>
                                             <Doc />
                                         </Box>
                                     ) : (
-                                        <Box className="doc-heading">
+                                        <Box className="doc-heading"    onClick={() => {
+             
+                                            window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                        }}>
                                             <DocLight />
                                         </Box>
                                     )}
@@ -129,11 +135,17 @@ const history3 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                             </p>
                                             <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                                 {theme.palette.mode === 'dark' ? (
-                                                    <Box>
+                                                    <Box    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}>
                                                         <Doc />
                                                     </Box>
                                                 ) : (
-                                                    <Box>
+                                                    <Box    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}> 
                                                         <DocLight />
                                                     </Box>
                                                 )}
@@ -161,11 +173,18 @@ const history3 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                             </p>
                                             <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                                 {theme.palette.mode === 'dark' ? (
-                                                    <Box>
+                                                    <Box
+                                                    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}>
                                                         <Doc />
                                                     </Box>
                                                 ) : (
-                                                    <Box>
+                                                    <Box    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}>
                                                         <DocLight />
                                                     </Box>
                                                 )}
@@ -193,11 +212,17 @@ const history3 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                             </p>
                                             <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                                 {theme.palette.mode === 'dark' ? (
-                                                    <Box>
+                                                    <Box    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}>
                                                         <Doc />
                                                     </Box>
                                                 ) : (
-                                                    <Box>
+                                                    <Box    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}>
                                                         <DocLight />
                                                     </Box>
                                                 )}
@@ -205,11 +230,17 @@ const history3 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                         </CardContent>
                                         <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                             {theme.palette.mode === 'dark' ? (
-                                                <Box>
+                                                <Box    onClick={() => {
+             
+                                                    window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                }}>
                                                     <Doc />
                                                 </Box>
                                             ) : (
-                                                <Box>
+                                                <Box    onClick={() => {
+             
+                                                    window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                }}>
                                                     <DocLight />
                                                 </Box>
                                             )}
