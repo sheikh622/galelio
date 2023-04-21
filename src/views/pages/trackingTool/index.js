@@ -12,10 +12,13 @@ import TrackAtribute from './component/trackAtribute';
 import { getTrack } from 'redux/marketplace/actions';
 import { useParams } from 'react-router-dom';
 import { getnftData } from 'redux/landingPage/actions';
+import { useNavigate } from 'react-router-dom';
 
 const TrackingTool = () => {
     const theme = useTheme();
     const location = useLocation();
+    const navigate = useNavigate();
+
     const dispatch = useDispatch();
     const serialId = useParams().token;
     const tokenId = location.state?.tokenId;
@@ -31,7 +34,8 @@ const TrackingTool = () => {
                 getTrack({
                     serialId:serialId,
                     tokenId:`${tokenId}`,
-                    address:address
+                    address:address,
+                    navigate: navigate
                 
                 })
             );
