@@ -21,13 +21,16 @@ function* trackingToolRequest({payload}) {
         };
         // const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/nft/trackNFT` , data);
-        // yield setNotification('success', response.data.message);
+        yield setNotification('success', response.data.message);
         yield put(getTrackSuccess(response.data.data));
 
        console.log(response.data.data,'success')
     } catch (error) {
        console.log(error,'error')
-        // yield sagaErrorHandler(error.response.data.data);
+        yield sagaErrorHandler(error.response.data.data);
+        if(error.response.data.data){
+            payload.navigate('/home'); 
+        }
     }
 
 }

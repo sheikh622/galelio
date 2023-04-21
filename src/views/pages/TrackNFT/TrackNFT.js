@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import '@fontsource/public-sans';
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Typography , CircularProgress} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularStatic from 'views/auth/verifyEmail/circularbar';
 
@@ -81,7 +81,7 @@ const TrackNFT = () => {
         console.log('tokenId', tokenId);
     };
     if (seconds == 0) {
-        if(token != undefined){
+        if(token != undefined && token != '0'){
         navigate('/tracking/' + serialNo, {
             state: {
                 tokenId: token,
@@ -140,14 +140,14 @@ const TrackNFT = () => {
                                     sx={{ alignSelf: 'center !important' }}
                                     className="createTrack"
                                     size="small"
-                                    variant="contained"
-                                    color="secondary"
+                                    variant="outlined"
+                                   
                                     onClick={() => {
                                         setSeconds(6);
                                         searchSerial();
                                     }}
                                 >
-                                    Tracking...({seconds})
+                                  <CircularProgress/>
                                 </Button>
                             ) : (
                                 <Button
