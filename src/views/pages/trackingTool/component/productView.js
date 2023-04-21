@@ -15,9 +15,9 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const Product = ({ nftList }) => {
+const Product = ({ tracking }) => {
     const dispatch = useDispatch();
-
+    console.log(tracking, 'marketplaceNfts in product view');
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
@@ -35,7 +35,7 @@ const Product = ({ nftList }) => {
                     <Grid item md={6} sm={12}>
                         <CardMedia
                             component="img"
-                            image={bmw}
+                            image={tracking.nft?.asset}
                             sx={{ minheight: 'auto', maxHeight: '570px', background: 'transparent', overflow: 'hidden', cursor: 'Pointer' }}
                         />
                     </Grid>
@@ -50,16 +50,16 @@ const Product = ({ nftList }) => {
                                                 <Grid item>
                                                     <Avatar
                                                         alt="User 1"
-                                                        src={bmwProductlogo}
+                                                        src={tracking?.nft?.Brand?.image}
                                                         sx={{ width: 56, height: 56, objectFit: 'fill' }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs zeroMinWidth  sx={{ textDecoration: 'none' }}>
+                                                <Grid item xs zeroMinWidth sx={{ textDecoration: 'none' }}>
                                                     <Typography align="left" fontWeight={600} variant="h2" className="brand">
-                                                        BMW
+                                                        {tracking?.nft?.Brand?.name}
                                                     </Typography>
                                                     <Typography align="left" variant="h3" className="creator">
-                                                        Maker
+                                                        Brand
                                                     </Typography>
                                                 </Grid>
                                             </Grid>
@@ -71,17 +71,12 @@ const Product = ({ nftList }) => {
                                                 color={theme.palette.mode === 'dark' ? 'white' : 'black'}
                                                 variant="h3"
                                             >
-                                                BMW XM
+                                                {tracking?.nft?.name}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
-                                                Newly developed M HYBRID drive, an extravagant design and the progressive luxury ambience in
-                                                the interior of the BMW XM combine to form a reinterpretation of the Sports Activity Vehicle
-                                                (SAV) vehicle concept in the high-performance segment. The BMW XM is the highlight of the
-                                                model offensive in the brand's anniversary year and at the same time the first original BMW
-                                                M automobile since the BMW M1. Precisely set accents in the exterior design of the
-                                                high-performance SAV are reminiscent of the legendary mid-engine sports car.
+                                                {tracking?.nft?.description}
                                             </Typography>
                                         </Grid>
 
@@ -116,22 +111,21 @@ const Product = ({ nftList }) => {
                                       <em>aiman</em>
                                     </MenuItem> */}
 
-                                                        <MenuItem
-                                                            // component={redirect}
-                                                            // to={option.fieldValue}
-                                                            // key={option.fieldValue}
-                                                            // value={option.fieldValue}
-                                                            // onClick={useNavigate(option.fieldValue)}
-                                                            onClick={() => {
-                                                                // useNavigate(option.fieldValue)
-                                                                window.open(
-                                                                    'https://galileoprotocol.infura-ipfs.io/ipfs/QmSEuPTp42X6uLCSBg5V2RMrd8Fwrke3xzuKJqfFkJ9sy2',
-                                                                    '_blank'
-                                                                );
-                                                            }}
-                                                        >
-                                                            PROOF
-                                                        </MenuItem>
+                                    {tracking?.nft?.NFTMetaFiles.map((option) => (
+                                        <MenuItem
+                                            // component={redirect}
+                                            // to={option.fieldValue}
+                                            // key={option.fieldValue}
+                                            // value={option.fieldValue}
+                                            // onClick={useNavigate(option.fieldValue)}
+                                            onClick={() => {
+                                                // useNavigate(option.fieldValue)
+                                                window.open(option.fieldValue, '_blank');
+                                            }}
+                                        >
+                                            {option.fieldName}
+                                        </MenuItem>
+                                    ))}
                                                     </Select>
                                                 </FormControl>
                                             </Box>

@@ -3,6 +3,8 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
+import moment from 'moment';
+
 import '@fontsource/public-sans';
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
@@ -11,7 +13,9 @@ import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
-const Activity = () => {
+const Activity = ({tracking}) => {
+    console.log(tracking?.afterMarketplaceHistory,'transfers');
+   
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -196,11 +200,127 @@ const Activity = () => {
                                             </TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    {itemData.map((item) => (
+                                    {tracking?.beforeMarketplaceHistory?.handleMints.map((item) => (
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.title}
+                                                Mint
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                 
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                   null
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                    {item.minter.slice(0, 5) + '...' + item.minter.slice(38, 42)}
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                {Date(item.blockTimestamp).slice(0, 15)}
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    ))}
+                                    {tracking?.beforeMarketplaceHistory?.handleMintBulks.map((item) => (
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                Mint
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                             
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                    null
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                    {item.minter.slice(0, 5) + '...' + item.minter.slice(38, 42)}
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                {Date(item.blockTimestamp).slice(0, 15)}
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    ))}
+                                    {tracking?.afterMarketplaceHistory?.offeredSingles.map((item) => (
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                List
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                    {item.price.slice(0, 5)}
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                    {item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                    {item.to.slice(0, 5) + '...' + item.to.slice(38, 42)}
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                {Date(item.blockTimestamp).slice(0, 15)}
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    ))}
+                                    {tracking?.afterMarketplaceHistory?.offeredMultiples.map((item) => (
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                List
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                    {item.price.slice(0, 5)}
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                    {item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
+                                                </TableCell>
+                                                <TableCell
+                                                    className="activityTable"
+                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    align="center"
+                                                >
+                                                    {item.to.slice(0, 5) + '...' + item.to.slice(38, 42)}
+                                                </TableCell>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                {Date(item.blockTimestamp).slice(0, 15)}
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
+                                    ))}
+                                    {tracking?.beforeMarketplaceHistory?.transfers.map((item) => (
+                                        <TableBody>
+                                            <TableRow>
+                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                Transfer
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
                                                     {item.price}
@@ -210,21 +330,22 @@ const Activity = () => {
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    {item.from}
+                                                    {item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    {item.to}
+                                                    {item.to.slice(0, 5) + '...' + item.to.slice(38, 42)}
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.days}
+                                                {Date(item.blockTimestamp).slice(0, 15)}
                                                 </TableCell>
                                             </TableRow>
                                         </TableBody>
                                     ))}
+                                    
                                 </Table>
                             </TableContainer>
                         </MainCard>

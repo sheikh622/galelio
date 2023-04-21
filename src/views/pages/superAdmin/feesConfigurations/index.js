@@ -16,27 +16,31 @@ import { useState } from 'react';
 // ==============================|| TEXTFIELD PAGE ||============================== //
 
 const Configuration = () => {
-    const [marketFee, setMarketFee] = useState(0);
-    const [recieverAddress, setRecieverAddress] = useState("");
+    const [marketFee, setMarketFee] = useState('');
+    const [recieverAddress, setRecieverAddress] = useState('');
 
-    const marketplaceFeeFunc = async () => {
+    const marketplaceFeeFunc = async (e) => {
+        e.preventDefault();
         console.log('marketFee', marketFee);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const address = await signer.getAddress();
         const nft = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-        
+
         await (await nft.setFee(marketFee)).wait();
+        setMarketFee('');
     };
 
-    const recieverAddressFunc = async () => {
+    const recieverAddressFunc = async (e) => {
+        e.preventDefault();
         console.log('recieverAddress', recieverAddress);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const address = await signer.getAddress();
         const nft = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
-        
+
         await (await nft.setAddress(recieverAddress)).wait();
+        setRecieverAddress('');
     };
 
     return (
@@ -45,55 +49,57 @@ const Configuration = () => {
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={6}>
                         <SubCard title="Enter Marketplace Fee">
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        onChange={(e) => {
-                                            console.log('e.target.event', e.target.value);
-                                            setMarketFee(e.target.value);
-                                        }}
-                                        fullWidth
-                                        id="filled-basic"
-                                        type="number"
-                                        InputProps={{
-                                            inputProps: { min: 0 }
-                                        }}
-                                        label="Marketplace Fee"
-                                        variant="standard"
-                                    />
+                            <form onSubmit={marketplaceFeeFunc}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            value={marketFee}
+                                            onChange={(e) => {
+                                                console.log('e.target.event', e.target.value);
+                                                setMarketFee(e.target.value);
+                                            }}
+                                            fullWidth
+                                            id="filled-basic"
+                                            type="number"
+                                            InputProps={{
+                                                inputProps: { min: 0 }
+                                            }}
+                                            label="Marketplace Fee"
+                                            variant="standard"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Button type="submit" variant="contained">
+                                            Submit
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Button
-                                        variant="contained"
-                                        onClick={() => {
-                                            marketplaceFeeFunc();
-                                        }}
-                                    >
-                                        Submit
-                                    </Button>
-                                </Grid>
-                            </Grid>
+                            </form>
                         </SubCard>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <SubCard title="Receiver Address">
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
-                                    <TextField fullWidth id="filled" label="Receiver Address" variant="standard" 
-                                    onChange={(e)=>{
-                                        setRecieverAddress(e.target.value)
-                                    }}  
-                                    
-                                    />
+                            <form onSubmit={recieverAddressFunc}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            value={recieverAddress}
+                                            fullWidth
+                                            id="filled"
+                                            label="Receiver Address"
+                                            variant="standard"
+                                            onChange={(e) => {
+                                                setRecieverAddress(e.target.value);
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Button variant="contained" type="submit">
+                                            Submit
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Button variant="contained"
-                                    onClick={()=>{
-                                        recieverAddressFunc()
-                                    }}
-                                    >Submit</Button>
-                                </Grid>
-                            </Grid>
+                            </form>
                         </SubCard>
                     </Grid>
                 </Grid>

@@ -23,6 +23,8 @@ const TrackingTool = () => {
     console.log('serialId', serialId );
     console.log(' tokenId', location.state?.tokenId);
     console.log(' address', location.state?.address);
+    const marketplaceNfts = useSelector((state) => state.marketplaceReducer.trackNft);
+    console.log(' marketplaceNfts', marketplaceNfts);
   useEffect(() => {
             console.log('run');
             dispatch(
@@ -116,13 +118,13 @@ const TrackingTool = () => {
                             <Grid item md={12} xs={12}>
                                 <Grid container>
                                     <Grid item md={12} xs={12}>
-                                        <Product />
+                                        <Product tracking={marketplaceNfts}/>
                                     </Grid>
                                      <Grid item md={12} xs={12}>
-                            <TrackAtribute />
+                            <TrackAtribute tracking={marketplaceNfts} />
                         </Grid> 
                                     <Grid item md={12} xs={12}>
-                                        <Activity />
+                                        <Activity tracking={marketplaceNfts} />
                                     </Grid>
                                 </Grid>
                             </Grid>

@@ -23,8 +23,8 @@ import { ethers, utils } from 'ethers';
 const TrackNFT = () => {
     const [serialNo, setSerialNo] = useState('');
     const [success, setSuccess] = useState(false);
-    const [token, setToken] = useState('');
-    const [addres, setAddres] = useState('');
+    const [token, setToken] = useState();
+    const [addres, setAddres] = useState();
     const [seconds, setSeconds] = useState();
     const dispatch = useDispatch();
 
@@ -58,20 +58,20 @@ const TrackNFT = () => {
         console.log('res', res);
 
         let address = res[0].toLowerCase();
-        address = `"${address}"`;
+        address = address;
         setAddres(address);
         let tokenId = parseInt(res[1]._hex);
 
         console.log('res?._tokenId?', res);
         tokenId = tokenId.toString();
 
-        tokenId = `"${tokenId}"`;
-        if (tokenId == `"0"`) {
+        tokenId = tokenId;
+        if (tokenId == '0') {
             toast.error('Invalid serial Id!');
             console.log('Invalid serial Id!');
         } else {
             // setSuccess(true);
-            console.log(seconds);
+            // console.log(seconds);
         }
         setToken(tokenId);
         // let address = `"0x4600b6a0f068ae1283ed68792ff3f0a085b3f0ef"`;
@@ -81,6 +81,7 @@ const TrackNFT = () => {
         console.log('tokenId', tokenId);
     };
     if (seconds == 0) {
+        if(token != undefined){
         navigate('/tracking/' + serialNo, {
             state: {
                 tokenId: token,
@@ -88,6 +89,11 @@ const TrackNFT = () => {
             }
         });
     }
+    else {
+        toast.error('Could not get the tracking page!');
+    }
+}
+    
 
     return (
         <Stack position={'relative'} sx={{ height: '100vh', overflow: 'hidden' }}>
@@ -136,8 +142,12 @@ const TrackNFT = () => {
                                     size="small"
                                     variant="contained"
                                     color="secondary"
+                                    onClick={() => {
+                                        setSeconds(6);
+                                        searchSerial();
+                                    }}
                                 >
-                                    Tracking... {seconds}
+                                    Tracking...({seconds})
                                 </Button>
                             ) : (
                                 <Button
@@ -147,7 +157,7 @@ const TrackNFT = () => {
                                     variant="contained"
                                     color="secondary"
                                     onClick={() => {
-                                        setSeconds(10);
+                                        setSeconds(6);
                                         searchSerial();
                                     }}
                                 >
