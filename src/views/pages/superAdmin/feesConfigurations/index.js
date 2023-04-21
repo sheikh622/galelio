@@ -1,11 +1,13 @@
 // material-ui
-import { Grid, TextField, Button } from '@mui/material';
+import { Grid, TextField, Button , CircularProgress } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import NFTAbi from 'contractAbi/NFT.json';
 import MarketplaceAbi from 'contractAbi/Marketplace.json';
 import MarketplaceAddress from 'contractAbi/Marketplace-address.json';
@@ -16,11 +18,14 @@ import { useState } from 'react';
 // ==============================|| TEXTFIELD PAGE ||============================== //
 
 const Configuration = () => {
+    const [loader, setLoader] = useState(false);
+    const [loaderAddress, setLoaderAddress] = useState(false);
     const [marketFee, setMarketFee] = useState('');
     const [recieverAddress, setRecieverAddress] = useState('');
 
     const marketplaceFeeFunc = async (e) => {
         e.preventDefault();
+        setLoader(true);
         console.log('marketFee', marketFee);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -29,10 +34,13 @@ const Configuration = () => {
 
         await (await nft.setFee(marketFee)).wait();
         setMarketFee('');
+        toast.success('successfully Submit');
+        setLoader(false);
     };
 
     const recieverAddressFunc = async (e) => {
         e.preventDefault();
+        setLoaderAddress(true)
         console.log('recieverAddress', recieverAddress);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -40,7 +48,10 @@ const Configuration = () => {
         const nft = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
 
         await (await nft.setAddress(recieverAddress)).wait();
+
         setRecieverAddress('');
+        toast.success('successfully Submit');
+        setLoaderAddress(false)
     };
 
     return (
@@ -68,11 +79,21 @@ const Configuration = () => {
                                             variant="standard"
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <Button type="submit" variant="contained">
-                                            Submit
-                                        </Button>
-                                    </Grid>
+                                    {loader==false?  
+                                         <Grid item xs={12}>
+                                    <Button type="submit" variant="contained">
+                                        Submit
+                                    </Button>
+                                </Grid>
+                            :
+                            <Grid item xs={12}>
+                            <Button>
+                               <CircularProgress/>
+                            </Button>
+                        </Grid>
+                        }
+                                  
+                                   
                                 </Grid>
                             </form>
                         </SubCard>
@@ -93,11 +114,19 @@ const Configuration = () => {
                                             }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <Button variant="contained" type="submit">
-                                            Submit
-                                        </Button>
-                                    </Grid>
+                                    {loaderAddress==false?  
+                                        <Grid item xs={12}>
+                                   <Button type="submit" variant="contained">
+                                       Submit
+                                   </Button>
+                               </Grid>
+                           :
+                           <Grid item xs={12}>
+                           <Button>
+                              <CircularProgress/>
+                           </Button>
+                       </Grid>
+                       }
                                 </Grid>
                             </form>
                         </SubCard>
