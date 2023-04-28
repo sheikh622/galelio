@@ -23,7 +23,7 @@ import doc from 'assets/images/doc.png';
 const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
-    console.log(tracking.nft?.NFTMetaData, 'tracking in attribute');
+    console.log(tracking.nft?.NFTMetaData, 'tracking in attribute=========>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -138,9 +138,9 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                     <Grid item xs={12} md={4}>
                                         <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
                                             <CardContent sx={{ padding: '18px 12px' }}>
-                                                <Grid item xs={12} className="tick" sx={{ m: 1 }}>
+                                               {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                     <img src={tick} />
-                                                </Grid>
+                                                </Grid> */}
                                                 <p className="Engine"> {item?.fieldName}</p>
                                                 <Typography
                                                     variant="h6"

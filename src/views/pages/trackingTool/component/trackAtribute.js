@@ -7,10 +7,14 @@ import History2 from './history2';
 import History1 from './history1';
 import History3 from './History3';
 import Attribute from './attribute';
+import { Pagination } from '@mui/material';
 
 const trackAtribute = ({tracking}) => {
     const theme = useTheme();
     console.log(tracking, 'marketplaceNfts in track Attribute');
+   
+    // console.log("tracking", tracking);
+  
     const basicData = [
         {
             id: 'basic1',
@@ -49,6 +53,11 @@ const trackAtribute = ({tracking}) => {
         setAnchorEl(null);
         setSelectedRow(null);
     };
+    const cardsPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const currentCards = tracking?.historyArray?.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '0 15px' }}>
@@ -57,15 +66,22 @@ const trackAtribute = ({tracking}) => {
                     <Grid item xs={12} md={12}>
                         <Attribute tracking={tracking}  data={basicData}/>
                     </Grid>
-                    <Grid mt={2} item xs={12} md={12}>
-                        <History1  data={history1}/>
+                    {tracking!=undefined && tracking?.historyArray && currentCards.map((card) => (
+                   <Grid mt={2} mb={2} item xs={12} md={12}>
+                        <History1  tracking={card?.historyArray} Proof={card?.proofOfAuthenticityArray} data={history1} history={card.historyNo}/>
                     </Grid>
-                    <Grid mt={2} item xs={12} md={12}>
-                        <History2  data={history2}/>
+                    ))}
+                    <Pagination
+                    count={Math.ceil(tracking?.historyArray?.length / cardsPerPage)}
+                    onChange={(event, value) => setCurrentPage(value)}
+                    page={currentPage}
+                  />
+                  {/*   <Grid mt={2} item xs={12} md={12}>
+                        <History2   tracking={tracking} data={history2}/>
                     </Grid>
-                    <Grid mt={2} item xs={12} md={12}>
-                        <History3  data={history3}/>
-                    </Grid>
+                  <Grid mt={2} item xs={12} md={12}>
+                        <History3   tracking={tracking} data={history3}/>
+                    </Grid> */}
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
                     <img className="map" src={map} />

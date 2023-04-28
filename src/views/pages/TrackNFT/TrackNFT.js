@@ -1,10 +1,11 @@
 import { Box, Grid, Stack } from '@mui/material';
 import { useEffect } from 'react';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import '@fontsource/public-sans';
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import { Typography , CircularProgress} from '@mui/material';
+import { Typography, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularStatic from 'views/auth/verifyEmail/circularbar';
 
@@ -43,7 +44,12 @@ const TrackNFT = () => {
 
     const searchSerial = async () => {
         console.log('serialNo', serialNo);
-        setSuccess(true);
+        if (serialNo == '') {
+            setSuccess(false);
+            toast.error('Please enter valid serial Id');
+            console.log('Invalid serial Id!');
+        }
+
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
@@ -66,9 +72,9 @@ const TrackNFT = () => {
         tokenId = tokenId.toString();
 
         tokenId = tokenId;
-        if (tokenId == '0') {
-            toast.error('Invalid serial Id!');
-            console.log('Invalid serial Id!');
+        if (tokenId == '0' && serialNo != '') {
+            toast.error('Incorrect serial Id!');
+            console.log('Incorrect serial Id!');
         } else {
             // setSuccess(true);
             // console.log(seconds);
@@ -79,21 +85,22 @@ const TrackNFT = () => {
         // const dispatch = useDispatch();
         console.log('address', address);
         console.log('tokenId', tokenId);
+        setSuccess(true);
     };
     if (seconds == 0) {
-        if(token != undefined && token != '0'){
-        navigate('/tracking/' + serialNo, {
-            state: {
-                tokenId: token,
-                address: addres
-            }
-        });
+        if (token != undefined && token != '0') {
+            navigate('/tracking/' + serialNo, {
+                state: {
+                    tokenId: token,
+                    address: addres
+                }
+            });
+        } else {
+            // if (serialNo != '') {
+            // toast.error('Could not [get the tracking page!');
+            // }
+        }
     }
-    else {
-        toast.error('Could not get the tracking page!');
-    }
-}
-    
 
     return (
         <Stack position={'relative'} sx={{ height: '100vh', overflow: 'hidden' }}>
@@ -130,24 +137,23 @@ const TrackNFT = () => {
                         <Box className="trackBox">
                             <input
                                 className="trackInput"
-                                placeholder="GAL-BMW-1234"
+                                placeholder="Serial Id"
                                 onChange={(e) => {
                                     setSerialNo(e.target.value);
                                 }}
                             />
-                            {success == true ? (
+                            {success == true && token != '0' ? (
                                 <Button
                                     sx={{ alignSelf: 'center !important' }}
                                     className="createTrack"
                                     size="small"
                                     variant="outlined"
-                                   
                                     onClick={() => {
                                         setSeconds(6);
                                         searchSerial();
                                     }}
                                 >
-                                  <CircularProgress/>
+                                    <CircularProgress />
                                 </Button>
                             ) : (
                                 <Button
@@ -165,7 +171,25 @@ const TrackNFT = () => {
                                 </Button>
                             )}
                         </Box>
-                        <Grid container justifyContent="center" sx={{ width: '50%', m: '15px auto ' }}></Grid>
+                        <Grid container justifyContent="center">
+                            <Typography
+                                variant="h4"
+                                mt={-1}
+                                mb={1}
+                                sx={{
+                                    fontFamily: 'Public Sans !important',
+                                    fontStyle: 'normal !important',
+                                    fontWeight: '600',
+                                    textAlign: 'center',
+                                    fontSize: { xs: '12px', sm: '15px', md: '15px', lg: '15px' },
+                                    // lineHeight: { xs: '1', sm: '1', md: '33px', lg: '33px' },
+
+                                    color: '#2fc1ff'
+                                }}
+                            >
+                                {success == true && token != '0' ? 'Please wait for tracking...' : ''}
+                            </Typography>
+                        </Grid>
                         <Box>
                             <Typography
                                 variant="h4"

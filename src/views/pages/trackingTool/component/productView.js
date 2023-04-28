@@ -17,7 +17,7 @@ import { useState } from 'react';
 
 const Product = ({ tracking }) => {
     const dispatch = useDispatch();
-    console.log(tracking, 'marketplaceNfts in product view');
+    // console.log(tracking, 'marketplaceNfts in product view');
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
