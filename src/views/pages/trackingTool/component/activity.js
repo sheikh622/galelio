@@ -208,7 +208,7 @@ const Activity = ({tracking}) => {
                                     </TableHead>
                                     {/* {currentCards?.map((item) => (
                                     <> */}
-                                    {tracking?.beforeMarketplaceHistory?.handleMints.map((item) => (
+                                    {/* {tracking?.beforeMarketplaceHistory?.handleMints.map((item) => (
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
@@ -323,29 +323,32 @@ const Activity = ({tracking}) => {
                                                 </TableCell>
                                             </TableRow>
                                         </TableBody>
-                                    ))}
-                                    {tracking?.beforeMarketplaceHistory?.transfers.map((item) => (
+                                    ))} */}
+                                    {tracking?.activity?.map((item) => (
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                Transfer
+                                                {item.event}
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.price}
+                                            
+
+                                                    {item.event == "List" || "Bought" || "Resell" ? item.price : " "}
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    {item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
+
+                                                    {item.event !== "Mint" && "Mint Bulk" ? item.from.slice(0, 5) + '...' + item.from.slice(38, 42): " "}
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    {item.to.slice(0, 5) + '...' + item.to.slice(38, 42)}
+                                                    {item.event !== "Mint" && "Mint Bulk" ? item.to.slice(0, 5) + '...' + item.to.slice(38, 42): " "}
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
                                                 {Date(item.blockTimestamp).slice(0, 15)}
