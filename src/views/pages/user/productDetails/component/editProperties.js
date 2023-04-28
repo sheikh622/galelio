@@ -78,16 +78,39 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
     });
 
     const formik = useFormik({
+        
         enableReinitialize: true,
         initialValues: { firstName: metadata, lastName: value, file: '' },
         // brandAdminData,
         validationSchema,
         onSubmit: async (values) => {
+            let fileUrl ="";
             // console.log(values, 'allll data');
             setLoader(true);
 
             setTimeout(() => {
                 const singleNft = async () => {
+
+                    let data = values.file
+                  
+
+                    // const uploadToIPFS = async (data) => {
+                        const fileResult = await client.add(data);
+                    //     return `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`
+
+                    //     // console.log("fileUrlfrom result", fileUrl)
+                    //   }
+
+
+                    let fileUrl = `https://galileoprotocol.infura-ipfs.io/ipfs/${fileResult.path}`
+                  
+
+                    
+                      
+                      
+
+                      
+                      
 
 
                     let image = nftList.nft.ipfsUrl;
@@ -114,11 +137,14 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
 
                     attributes.push(
                         {
-                            fieldName: values.firstName,
-                            fieldValue: values.lastName,
+                            trait_type: values.firstName,
+                            value: values.lastName,
+                            proof: fileUrl
                         }
                     )
 
+
+                    console.log("attributes", attributes)
 
                     const result = await client.add(
                         JSON.stringify({
@@ -135,6 +161,11 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
                             external_url
                         })
                     );
+                    console.log("result ipfs", result);
+
+                    const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
+
+                    console.log("tokenUri after result", tokenUri);
 
 
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -143,7 +174,7 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
                     const nft = new ethers.Contract(nftList?.nft?.contractAddress, NFTAbi.abi, signer);
                     await (
                         // await nft.updateUri(nftList.nft?.NFTTokens[0].tokenId, nftList.nft?.tokenUri).catch((error) => {
-                        await nft.updateUri(nftList.nft?.NFTTokens[0].tokenId, result).catch((error) => {
+                        await nft.updateUri(nftList.nft?.NFTTokens[0].tokenId, tokenUri).catch((error) => {
                             toast.error(error.reason);
                             //  setLoader(false);
                             //  setOpen(false);
