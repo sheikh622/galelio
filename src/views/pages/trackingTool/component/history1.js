@@ -15,14 +15,18 @@ import { Pagination } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Doc from './doc';
 import DocLight from './docLight';
+import SelectDocument from './selectDocument';
 import tick from 'assets/images/tick.png';
 import doc from 'assets/images/doc.png';
 // ==============================|| ACCORDION ||============================== //
 
-const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }) => {
+const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, tracking,blockTimestamp, history ,updater, Proof}) => {
     const theme = useTheme();
-    const user = useSelector((state) => state.auth.user);
+    const [propertiesOpen, setPropertiesOpen] = useState(false);
 
+    
+    const user = useSelector((state) => state.auth.user);
+    // console.log(updater, 'updater==============>>>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -31,24 +35,20 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
     useEffect(() => {
         setExpanded(defaultExpandedId);
     }, [defaultExpandedId]);
-    const cardData = [
-        { id: 1, title: 'Card 1', content: 'Content for Card 1' },
-        { id: 2, title: 'Card 2', content: 'Content for Card 2' },
-        { id: 3, title: 'Card 3', content: 'Content for Card 3' },
-        { id: 4, title: 'Card 4', content: 'Content for Card 4' },
-        { id: 5, title: 'Card 5', content: 'Content for Card 5' },
-        { id: 6, title: 'Card 6', content: 'Content for Card 6' },
-        { id: 7, title: 'Card 7', content: 'Content for Card 7' },
-        { id: 8, title: 'Card 8', content: 'Content for Card 8' },
-        { id: 9, title: 'Card 9', content: 'Content for Card 9' },
-      ];
+    // const cardData = tracking && tracking?.historyArray && tracking?.historyArray[0]?.historyArray;
     const cardsPerPage = 3;
     const [currentPage, setCurrentPage] = useState(1);
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard);
+    const currentCards = tracking.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
+        <>
+        <SelectDocument
+        setOpen={setPropertiesOpen}
+        open={propertiesOpen}
+        Proof={Proof}
+        />
         <Box sx={{ width: '100%' }}>
             {data &&
                 data.map((item) => (
@@ -64,9 +64,9 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                         <MuiAccordionSummary
                             expandIcon={expandIcon || expandIcon === false ? expandIcon : <ExpandMoreIcon sx={{ color: '#2F53FF' }} />}
                             className="atributes"
-                            sx={{ color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'grey.800',  }}
+                            sx={{ color: theme.palette.mode === 'dark' ? '#FFFFFF' : 'grey.800' }}
                         >
-                            {item.title}
+                            History {history}
                         </MuiAccordionSummary>
                         <MuiAccordionDetails>
                             <Grid
@@ -85,7 +85,7 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                         className="property-date"
                                         sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#000' }}
                                     >
-                                        Date: 25/03/2023
+                                        Date: {Date(blockTimestamp).slice(0, 15)}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -98,30 +98,31 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                     </Typography>
                                     <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' }}>
                                         {' '}
-                                        {user?.walletAddress? 
-                                            user?.walletAddress.slice(0, 5)+ '...' + user?.walletAddress.slice(38, 42)
-                                           : 'Connect Wallet'}
-
+                                        {updater
+                                            ? updater.slice(0, 5) + '...' + updater.slice(38, 42)
+                                            : '0'}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={2} className="doc-property" sx={{}}>
-                                {theme.palette.mode === 'dark' ? ( 
-                                    <Box className="doc-heading" 
-                                    onClick={() => {
-             
-                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                    }}>
-                                       <Doc/>
-                                       </Box>)
-                                       :
-                                       (
-                                        <Box className="doc-heading"    onClick={() => {
-             
-                                            window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                        }}>
-                                        <DocLight/>
-                                       </Box> 
-                                       )}
+                                    {theme.palette.mode === 'dark' ? (
+                                        <Box
+                                            className="doc-heading"
+                                            onClick={() => {
+                                                setPropertiesOpen(true);
+                                            }}
+                                        >
+                                            <Doc />
+                                        </Box>
+                                    ) : (
+                                        <Box
+                                            className="doc-heading"
+                                            onClick={() => {
+                                                setPropertiesOpen(true);
+                                            }}
+                                        >
+                                            <DocLight />
+                                        </Box>
+                                    )}
                                 </Grid>
                             </Grid>
                             <Grid
@@ -136,56 +137,64 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                     height: { md: '160px' }
                                 }}
                             >
-                            {currentCards.map((card) => (
-                                <Grid item xs={12} md={4}>
-                                    <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
-                                        <CardContent sx={{ padding: '18px 12px' }}>
-                                            <Grid item xs={12} className="tick" sx={{ m: 1 }}>
+                                {currentCards?.map((card) => (
+                                    <Grid item xs={12} md={4}>
+                                        <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
+                                            <CardContent sx={{ padding: '18px 12px' }}>
+                                                {/* <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                 <img src={tick} />
-                                            </Grid>
-                                            <p className="Engine"> Engine</p>
-                                            <Typography
-                                                variant="h6"
-                                                className="V8"
-                                                sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                            >
-                                                V8 petrol engine
-                                            </Typography>
-                                            <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
-                                                2023
-                                            </p>
-                                            <Grid item xs={12} className="document" sx={{ m: 1 }}>
-                                                       {theme.palette.mode === 'dark' ? (
-                                                    <Box    onClick={() => {
-             
-                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                                    }}>
-                                                        <Doc />
-                                                    </Box>
-                                                ) : (
-                                                    <Box    onClick={() => {
-             
-                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                                    }}>
-                                                        <DocLight />
-                                                    </Box>
-                                                )}
-                                            </Grid>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-
+                                            </Grid> */}
+                                                <p className="Engine"> {card.trait_type}</p>
+                                                <Typography
+                                                    variant="h6"
+                                                    className="V8"
+                                                    sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
+                                                >
+                                                    {card.value}
+                                                </Typography>
+                                                <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
+                                                    2023
+                                                </p>
+                                                <Grid item xs={12} className="document" sx={{ m: 1 }}>
+                                                    {theme.palette.mode === 'dark' ? (
+                                                        <Box
+                                                            onClick={() => {
+                                                                window.open(
+                                                                 card?.proof?  card?.proof :  'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                    '_blank'
+                                                                );
+                                                            }}
+                                                        >
+                                                            <Doc />
+                                                        </Box>
+                                                    ) : (
+                                                        <Box
+                                                            onClick={() => {
+                                                                window.open(
+                                                                    card?.proof?  card?.proof : 'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                    '_blank'
+                                                                );
+                                                            }}
+                                                        >
+                                                            <DocLight />
+                                                        </Box>
+                                                    )}
+                                                </Grid>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
                                 ))}
                             </Grid>
                             <Pagination
-                            count={Math.ceil(cardData.length / cardsPerPage)}
-                            onChange={(event, value) => setCurrentPage(value)}
-                            page={currentPage}
-                          />
+                                count={Math.ceil(tracking.length / cardsPerPage)}
+                                onChange={(event, value) => setCurrentPage(value)}
+                                page={currentPage}
+                            />
                         </MuiAccordionDetails>
                     </MuiAccordion>
                 ))}
         </Box>
+        </>
     );
 };
 

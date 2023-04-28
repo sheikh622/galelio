@@ -8,22 +8,19 @@ import { MenuItem, Menu, Card, CardContent } from '@mui/material';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import { useSelector, useDispatch } from 'react-redux';
 import { Pagination } from '@mui/material';
 
 // assets
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useSelector, useDispatch } from 'react-redux';
 
-import tick from 'assets/images/tick.png';
-import Doc from './doc';
-import DocLight from './docLight';
+
 // ==============================|| ACCORDION ||============================== //
 
-const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle ,tracking}) => {
+const serialId = ({ data, defaultExpandedId = null, expandIcon, square, toggle , serial}) => {
     const theme = useTheme();
-    var index = 1;
     const user = useSelector((state) => state.auth.user);
-    // console.log(tracking?.historyArray[0]?.historyArray,'tracking in history2');
+
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -32,19 +29,13 @@ const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle ,
     useEffect(() => {
         setExpanded(defaultExpandedId);
     }, [defaultExpandedId]);
-    // const cardData = tracking && tracking?.historyArray && tracking?.historyArray[0]?.historyArray;
-    const cardsPerPage = 3;
-    const [currentPage, setCurrentPage] = useState(1);
-    const indexOfLastCard = currentPage * cardsPerPage;
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-    // const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard);
-
+ 
     return (
         <Box sx={{ width: '100%' }}>
             {data &&
                 data.map((item) => (
                     <MuiAccordion
-                        m={3}
+                        
                         key={item.id}
                         defaultExpanded={!item.disabled && item.defaultExpand}
                         expanded={(!toggle && !item.disabled && item.expanded) || (toggle && expanded === item.id)}
@@ -59,7 +50,19 @@ const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle ,
                         >
                             {item.title}
                         </MuiAccordionSummary>
-                        <MuiAccordionDetails>
+                        {serial.map((data)=>( 
+                        <Grid item xs={12} >
+                        <Typography
+                                        variant="body"
+                                        className="property-date"
+                                        sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#000' }}
+                                    >
+                            {data?.serialId ? data?.serialId+',' : 'No serial Id'}
+                            </Typography>
+                        </Grid>
+                        )  )
+                    }
+                       {/*  <MuiAccordionDetails>
                             <Grid
                                 item
                                 container
@@ -124,31 +127,37 @@ const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle ,
                                     height: { md: '160px' }
                                 }}
                             >
-                            {tracking?.historyArray && tracking?.historyArray[index]?.historyArray.map((card) => (
+                            {currentCards.map((card) => (
                                 <Grid item xs={12} md={4}>
                                     <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
                                         <CardContent sx={{ padding: '18px 12px' }}>
                                             <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                 <img src={tick} />
                                             </Grid>
-                                            <p className="Engine"> {card.trait_type}</p>
+                                            <p className="Engine"> Engine</p>
                                             <Typography
                                                 variant="h6"
                                                 className="V8"
                                                 sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
                                             >
-                                               {card.value}
+                                                V8 petrol engine
                                             </Typography>
                                             <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
                                                 2023
                                             </p>
                                             <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                                 {theme.palette.mode === 'dark' ? (
-                                                    <Box>
+                                                    <Box    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}>
                                                         <Doc />
                                                     </Box>
                                                 ) : (
-                                                    <Box>
+                                                    <Box    onClick={() => {
+             
+                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
+                                                    }}> 
                                                         <DocLight />
                                                     </Box>
                                                 )}
@@ -158,21 +167,21 @@ const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle ,
                                 </Grid>
 
                                 ))}
-                            
+                              
                             </Grid>
-                     {/*        <Pagination
+                            <Pagination
                             count={Math.ceil(cardData.length / cardsPerPage)}
                             onChange={(event, value) => setCurrentPage(value)}
                             page={currentPage}
-                          /> */}
-                        </MuiAccordionDetails>
+                          />
+                        </MuiAccordionDetails> */}
                     </MuiAccordion>
                 ))}
         </Box>
     );
 };
 
-history2.propTypes = {
+serialId.propTypes = {
     data: PropTypes.array,
     defaultExpandedId: PropTypes.string,
     expandIcon: PropTypes.object,
@@ -180,4 +189,4 @@ history2.propTypes = {
     toggle: PropTypes.bool
 };
 
-export default history2;
+export default serialId;

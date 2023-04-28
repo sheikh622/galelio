@@ -58,7 +58,7 @@ const Header = () => {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
         >
-            <Grid item md={12} xs={12} className="mainBackground" sx={{ border: '2px solid transparent' }}>
+            <Grid item md={12} xs={12} className="mainBanner3" sx={{ border: '2px solid transparent' }}>
                 <Grid container-fluid>
                     <Container>
                         <Grid
@@ -515,7 +515,7 @@ const Header = () => {
                 </Container>
             </Grid>
         </Grid>
-        <Grid item md={12} xs={12} className="mainBanner4" sx={{ border: '2px solid transparent' }}>
+        <Grid item md={12} xs={12} className="mainBanner2" sx={{ border: '2px solid transparent' }}>
         <Grid container-fluid>
             <Container>
                 <Grid

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
+import { Pagination } from '@mui/material';
 
 import '@fontsource/public-sans';
 import SubCard from 'ui-component/cards/SubCard';
@@ -14,7 +15,7 @@ import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHe
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
 const Activity = ({tracking}) => {
-    console.log(tracking?.afterMarketplaceHistory,'transfers');
+    // console.log(tracking?.afterMarketplaceHistory,'transfers');
    
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -82,6 +83,11 @@ const Activity = ({tracking}) => {
         }
     ];
     const [search, setSearch] = useState('');
+    const cardsPerPage = 3;
+    const [currentPage, setCurrentPage] = useState(1);
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const currentCards = itemData.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
         <>
@@ -200,6 +206,8 @@ const Activity = ({tracking}) => {
                                             </TableCell>
                                         </TableRow>
                                     </TableHead>
+                                    {/* {currentCards?.map((item) => (
+                                    <> */}
                                     {tracking?.beforeMarketplaceHistory?.handleMints.map((item) => (
                                         <TableBody>
                                             <TableRow>
@@ -214,7 +222,7 @@ const Activity = ({tracking}) => {
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                   null
+                                                   0
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
@@ -243,7 +251,7 @@ const Activity = ({tracking}) => {
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    null
+                                                    0
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
@@ -345,8 +353,14 @@ const Activity = ({tracking}) => {
                                             </TableRow>
                                         </TableBody>
                                     ))}
-                                    
+                                  {/*   </>
+                                    ))} */}
                                 </Table>
+                           {/*      <Pagination
+                                count={Math.ceil(currentCards.length / cardsPerPage)}
+                                onChange={(event, value) => setCurrentPage(value)}
+                                page={currentPage}
+                              /> */} 
                             </TableContainer>
                         </MainCard>
                     </Grid>

@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid, Typography , Divider } from '@mui/material';
+import { Grid, Typography, Divider } from '@mui/material';
 import Activity from './component/activity';
 import Product from './component/productView';
 import Header from 'layout/UserLayout/header';
@@ -13,34 +13,53 @@ import { getTrack } from 'redux/marketplace/actions';
 import { useParams } from 'react-router-dom';
 import { getnftData } from 'redux/landingPage/actions';
 import { useNavigate } from 'react-router-dom';
+import { setLoader } from 'redux/auth/actions';
+import Stack from '@mui/material/Stack';
 
+import LinearProgress from '@mui/material/LinearProgress';
 const TrackingTool = () => {
     const theme = useTheme();
     const location = useLocation();
     const navigate = useNavigate();
+    const [progress, setProgress] = useState(0);
 
+    useEffect(() => {
+      const timer = setInterval(() => {
+        setProgress((oldProgress) => {
+          if (oldProgress === 100) {
+            return 0;
+          }
+          const diff = Math.random() * 10;
+          return Math.min(oldProgress + diff, 100);
+        });
+      }, 500);
+  
+      return () => {
+        clearInterval(timer);
+      };
+    }, []);
     const dispatch = useDispatch();
     const serialId = useParams().token;
     const tokenId = location.state?.tokenId;
     const address = location.state?.address;
-    console.log('serialId', serialId );
+    console.log('serialId', serialId);
     console.log(' tokenId', location.state?.tokenId);
     console.log(' address', location.state?.address);
     const marketplaceNfts = useSelector((state) => state.marketplaceReducer.trackNft);
-    console.log(' marketplaceNfts', marketplaceNfts);
-  useEffect(() => {
-            console.log('run');
-            dispatch(
-                getTrack({
-                    serialId:serialId,
-                    tokenId:`${tokenId}`,
-                    address:address,
-                    navigate: navigate
-                
-                })
-            );
-        }, []);
-   
+    console.log(' marketplaceNfts>>>>', marketplaceNfts?.nft?.Brand?.image);
+    useEffect(() => {
+        console.log('run');
+        dispatch(setLoader(true));
+        dispatch(
+            getTrack({
+                serialId: serialId,
+                tokenId: `${tokenId}`,
+                address: address,
+                navigate: navigate
+            })
+        );
+    }, []);
+
     return (
         <>
             <Grid
@@ -101,7 +120,9 @@ const TrackingTool = () => {
                         color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                     }}
                 >
-                    <Grid item md={12} xs={12} lg={12}>
+                {marketplaceNfts?.nft?.Brand?.image?
+                    (
+                        <Grid item md={12} xs={12} lg={12}>
                         <Grid item xs={12} lg={12} md={12}>
                             <Grid container spacing={2} sx={{ mb: 2 }}>
                                 <Grid item xs={12}>
@@ -122,11 +143,11 @@ const TrackingTool = () => {
                             <Grid item md={12} xs={12}>
                                 <Grid container>
                                     <Grid item md={12} xs={12}>
-                                        <Product tracking={marketplaceNfts}/>
+                                        <Product tracking={marketplaceNfts} />
                                     </Grid>
-                                     <Grid item md={12} xs={12}>
-                            <TrackAtribute tracking={marketplaceNfts} />
-                        </Grid> 
+                                    <Grid item md={12} xs={12}>
+                                        <TrackAtribute tracking={marketplaceNfts} />
+                                    </Grid>
                                     <Grid item md={12} xs={12}>
                                         <Activity tracking={marketplaceNfts} />
                                     </Grid>
@@ -134,6 +155,18 @@ const TrackingTool = () => {
                             </Grid>
                         </Grid>
                     </Grid>
+                    )
+                    :
+                    (
+                        <Stack m={5} sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+                      {/*   <LinearProgress color="secondary" />
+                        <LinearProgress color="success" /> */}
+                        <LinearProgress color="secondary" variant="determinate" value={progress} />
+                      </Stack>
+                    )
+                }
+
+              
                 </Grid>
             </Grid>
 
