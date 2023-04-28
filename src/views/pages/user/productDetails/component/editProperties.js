@@ -32,10 +32,23 @@ import { updateProperty } from 'redux/brand/actions';
 // assets
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
-import { create } from 'ipfs-http-client';
 import { API_URL } from 'utils/axios';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
+import { create } from 'ipfs-http-client';
+const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
+const projectSecret = 'a09de1e8b20292cd87460290de554003';
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+
+
+const client = create({
+    host: 'ipfs.infura.io',
+    port: 5001,
+    protocol: 'https',
+    headers: {
+        authorization: auth
+    }
+});
 
 // slide animation
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
@@ -49,7 +62,7 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
     const nftid = nftList?.nft?.id;
     const [file, setFile] = useState('');
     // console.log('nftid==========??', nftid);
-    const user = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state?.auth?.user);
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -65,22 +78,103 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
     });
 
     const formik = useFormik({
+        
         enableReinitialize: true,
         initialValues: { firstName: metadata, lastName: value, file: '' },
         // brandAdminData,
         validationSchema,
         onSubmit: async (values) => {
+            let fileUrl ="";
             // console.log(values, 'allll data');
             setLoader(true);
 
             setTimeout(() => {
                 const singleNft = async () => {
+
+                    let data = values.file
+                  
+
+                    // const uploadToIPFS = async (data) => {
+                        const fileResult = await client.add(data);
+                    //     return `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`
+
+                    //     // console.log("fileUrlfrom result", fileUrl)
+                    //   }
+
+
+                    let fileUrl = `https://galileoprotocol.infura-ipfs.io/ipfs/${fileResult.path}`
+                  
+
+                    
+                      
+                      
+
+                      
+                      
+
+
+                    let image = nftList.nft.ipfsUrl;
+                    let price = nftList.nft.price;
+                    let name = nftList.nft.name;
+                    let description = nftList.nft.description;
+                    let projectName = 'Galelio';
+                    // let mintedDate = nftList.nft.;
+                    let categoryName = nftList.nft.Category.name;
+                    let brandName = nftList.nft.Brand.name;
+                    let metaData = nftList.nft.NFTMetaData;
+                    let poa = nftList.nft.NFTMetaFiles;
+                    let external_url = nftList.nft.NFTMetaFiles[0].fieldValue;
+            
+                    let attributes = [];
+
+                
+                    for (let i = 0; i < nftList.nft.NFTMetaData.length; i++) {
+                        attributes.push({
+                            trait_type: nftList.nft.NFTMetaData[i].fieldName,
+                            value: nftList.nft.NFTMetaData[i].fieldValue
+                        });
+                    }
+
+                    attributes.push(
+                        {
+                            trait_type: values.firstName,
+                            value: values.lastName,
+                            proof: fileUrl
+                        }
+                    )
+
+
+                    console.log("attributes", attributes)
+
+                    const result = await client.add(
+                        JSON.stringify({
+                            projectName,
+                            brandName,
+                            categoryName,
+                            image,
+                            name,
+                            description,
+                            price,
+                            // mintedDate,
+                            attributes,
+                            poa,
+                            external_url
+                        })
+                    );
+                    console.log("result ipfs", result);
+
+                    const tokenUri = `https://galileoprotocol.infura-ipfs.io/ipfs/${result.path}`;
+
+                    console.log("tokenUri after result", tokenUri);
+
+
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const signer = provider.getSigner();
                     const address = await signer.getAddress();
                     const nft = new ethers.Contract(nftList?.nft?.contractAddress, NFTAbi.abi, signer);
                     await (
-                        await nft.updateUri(nftList.nft?.NFTTokens[0].tokenId, nftList.nft?.tokenUri).catch((error) => {
+                        // await nft.updateUri(nftList.nft?.NFTTokens[0].tokenId, nftList.nft?.tokenUri).catch((error) => {
+                        await nft.updateUri(nftList.nft?.NFTTokens[0].tokenId, tokenUri).catch((error) => {
                             toast.error(error.reason);
                             //  setLoader(false);
                             //  setOpen(false);

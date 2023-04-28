@@ -117,6 +117,9 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                         transactionHash = `https://goerli.etherscan.io/tx/${mintedNFT.transactionHash}`;
                         const id = parseInt(mintedNFT.events[0].args[2]);
                         console.log('id', id);
+                        let serialId = await nft.serialid(id);
+                        console.log('serialId', serialId);
+
                         let myNftTokenIdArray = [];
                         myNftTokenIdArray.push(id);
 
@@ -184,7 +187,15 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 setOpen(false);
                                 setLoader(false);
                             })
-                        ).wait();
+                        ).wait();`
+                        `
+                        let myNftSerialIdArray = [];
+                        for (let i = 0; i < myNftTokenIdArray.length; i++) {
+                            let serialId = await nft.serialid(myNftTokenIdArray[i]);
+                            myNftSerialIdArray.push(serialId);
+
+                        }
+                        console.log("serialIdArray",myNftSerialIdArray);
 
                         nftTokens.map((data, index) => {
                             tokenIdArray.push({
