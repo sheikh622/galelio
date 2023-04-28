@@ -20,8 +20,10 @@ import {
     ADD_DELIVERY_NFT,
     CHANGE_TOKEN_ID,
     GET_EDITED_NFT_DATA,
-    UPDATE_NFT_DYNAMIC_METADATA
-    
+    UPDATE_NFT_DYNAMIC_METADATA,
+    ADD_SBTTOKEN,
+    GET_ALL_SBTTOKEN_SUCCESS,
+    GET_ALL_SBTTOKEN
 } from './constants';
 
 export const updateNftDynamicMetaData = (data) => {
@@ -178,6 +180,24 @@ export const mintNft = (data) => {
 export const rejectNft = (data) => {
     return {
         type: REJECT_NFT,
+        payload: data
+    };
+};
+export const addSbtToken = (data) => {
+    return {
+        type: ADD_SBTTOKEN,
+        payload: data
+    };
+};
+export const getsbtToken = (data) => {
+    return {
+        type: GET_NFT_BUYER,
+        payload: data
+    };
+};
+export const getsbtTokenSuccess = (data) => {
+    return {
+        type: GET_NFT_BUYER_SUCCESS,
         payload: data
     };
 };

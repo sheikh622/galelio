@@ -21,3 +21,6 @@ export const GET_NFT_BUYER_SUCCESS = 'nft_buyer_success';
 export const ADD_DELIVERY_NFT = 'add_delivery_nft';
 export const CHANGE_TOKEN_ID = 'change_token_id';
 export const REQUEST_CHANGE_NFT = 'request_change_nft'; 
+export const ADD_SBTTOKEN = 'add_SbtToken';
+export const GET_ALL_SBTTOKEN = 'get_all_sbtToken';
+export const GET_ALL_SBTTOKEN_SUCCESS = 'get_all_sbtToken_success';

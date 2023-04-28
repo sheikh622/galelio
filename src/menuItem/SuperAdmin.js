@@ -79,12 +79,20 @@ const superAdminMenu = {
         },
         {
             id: 'configurations',
-            title:'Configurations',
+            title: 'Configurations',
             type: 'item',
             icon: icons.PaymentsIcon,
             url: 'fees',
             breadcrumbs: false
-        }
+        },
+        {
+            id: 'sbtToken',
+            title: 'SbtToken',
+            type: 'item',
+            icon: icons.IconBuildingStore,
+            url: '/sbtToken',
+            breadcrumbs: false
+        },
     ]
 };
 
