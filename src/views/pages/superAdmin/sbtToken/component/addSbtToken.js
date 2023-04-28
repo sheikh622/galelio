@@ -136,9 +136,9 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
     };
 
     const validationSchema = Yup.object({
-        nftName: Yup.string().required('NFT Name is required!').max(60, 'NFT Name can not exceed 60 characters'),
+        tokenName: Yup.string().required('NFT Name is required!').max(60, 'NFT Name can not exceed 60 characters'),
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
-        nftDescription: Yup.string()
+        Symbol: Yup.string()
             .required('NFT Description is required!')
             .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
         directBuyerAddress:
@@ -161,8 +161,8 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            nftName: '',
-            nftDescription: '',
+            tokenName: '',
+            Symbol: '',
             directBuyerAddress: '',
             status: '',
             images: [],
@@ -199,10 +199,10 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                     //         metaDataArray: fieldDataArray,
                     //         fileNameArray: fileNameArray,
                     //         fileArray: fileArray,
-                    //         name: values.nftName,
+                    //         name: values.tokenName,
                     //         price: values.status,
-                    //         description: values.nftDescription,
-                    //         description: values.Address,
+                    //         brandSymbol: values.Symbol,
+                    //         address: values.Address,
                     //         directBuyerAddress: values.directBuyerAddress ? values.directBuyerAddress : '',
                     //         currencyType: type,
                     //         quantity: values.images[0].quantity,
@@ -348,14 +348,14 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                             <Grid xs={4} md={4} lg={4}>
                                 <TextField
                                     className="textfieldStyle"
-                                    id="nftName"
-                                    name="nftName"
+                                    id="tokenName"
+                                    name="tokenName"
                                     label="Name"
                                     fullWidth
-                                    value={formik.values.nftName}
+                                    value={formik.values.tokenName}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.nftName && Boolean(formik.errors.nftName)}
-                                    helperText={formik.touched.nftName && formik.errors.nftName}
+                                    error={formik.touched.tokenName && Boolean(formik.errors.tokenName)}
+                                    helperText={formik.touched.tokenName && formik.errors.tokenName}
                                     autoComplete="given-name"
                                     variant="standard"
                                 />
@@ -376,17 +376,17 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                                     variant="standard"
                                 />
                             </Grid>
-                            <Grid xs={12} mt={1}>
+                            <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
-                                    id="nftDescription"
-                                    name="nftDescription"
-                                    label="Description"
+                                    id="Symbol"
+                                    name="Symbol"
+                                    label="Symbol"
                                     fullWidth
-                                    value={formik.values.nftDescription}
+                                    value={formik.values.Symbol}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.nftDescription && Boolean(formik.errors.nftDescription)}
-                                    helperText={formik.touched.nftDescription && formik.errors.nftDescription}
+                                    error={formik.touched.Symbol && Boolean(formik.errors.Symbol)}
+                                    helperText={formik.touched.Symbol && formik.errors.Symbol}
                                     autoComplete="given-name"
                                     variant="standard"
                                 />
