@@ -130,7 +130,7 @@ const TrackNFT = () => {
                         <Box className="trackBox">
                             <input
                                 className="trackInput"
-                                placeholder="GAL-BMW-1234"
+                                // placeholder="GAL-BMW-1234"
                                 onChange={(e) => {
                                     setSerialNo(e.target.value);
                                 }}
