@@ -20,21 +20,13 @@ import tick from 'assets/images/tick.png';
 import doc from 'assets/images/doc.png';
 // ==============================|| ACCORDION ||============================== //
 
-const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, tracking, history , Proof}) => {
+const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, tracking,blockTimestamp, history ,updater, Proof}) => {
     const theme = useTheme();
     const [propertiesOpen, setPropertiesOpen] = useState(false);
 
-    var index = 0;
-
-    //     for (let Value = 0; Value < history; ){
-    //         Value = Value;
-    //         Value = Value - 1;
-
-    //     }
-    //  console.log(Value, 'Value')
-    var indexValue = history - 1;
+    
     const user = useSelector((state) => state.auth.user);
-    // console.log(tracking, 'indexValue');
+    // console.log(updater, 'updater==============>>>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -93,7 +85,7 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, 
                                         className="property-date"
                                         sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#000' }}
                                     >
-                                        Date: 25/03/2023
+                                        Date: {Date(blockTimestamp).slice(0, 15)}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -106,9 +98,9 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, 
                                     </Typography>
                                     <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' }}>
                                         {' '}
-                                        {user?.walletAddress
-                                            ? user?.walletAddress.slice(0, 5) + '...' + user?.walletAddress.slice(38, 42)
-                                            : 'Connect Wallet'}
+                                        {updater
+                                            ? updater.slice(0, 5) + '...' + updater.slice(38, 42)
+                                            : '0'}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={2} className="doc-property" sx={{}}>

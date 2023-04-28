@@ -23,7 +23,7 @@ import doc from 'assets/images/doc.png';
 const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
-    console.log(tracking.nft?.NFTMetaData, 'tracking in attribute=========>');
+    // console.log(tracking.nft.createdAt , 'tracking in attribute=========>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -75,7 +75,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                         className="property-date"
                                         sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#000' }}
                                     >
-                                        Date: 25/03/2023
+                                        Date: {Date(tracking?.nft?.createdAt).slice(0, 15)}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -88,9 +88,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                     </Typography>
                                     <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' }}>
                                         {' '}
-                                        {user?.walletAddress
-                                            ? user?.walletAddress.slice(0, 5) + '...' + user?.walletAddress.slice(38, 42)
-                                            : 'Connect Wallet'}
+                                        {Date(tracking?.nft?.updatedAt).slice(0, 15)}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={2} className="doc-property" sx={{}}>
