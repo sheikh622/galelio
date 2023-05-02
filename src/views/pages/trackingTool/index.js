@@ -42,14 +42,14 @@ const TrackingTool = () => {
     const serialId = useParams().token;
     const tokenId = location.state?.tokenId;
     const address = location.state?.address;
-    console.log('serialId', serialId);
-    console.log(' tokenId', location.state?.tokenId);
-    console.log(' address', location.state?.address);
+    // console.log('serialId', serialId);
+    // console.log(' tokenId', location.state?.tokenId);
+    // console.log(' address', location.state?.address);
     const marketplaceNfts = useSelector((state) => state.marketplaceReducer.trackNft);
-    console.log(' marketplaceNfts>>>>', marketplaceNfts?.nft?.Brand?.image);
+    // console.log(' marketplaceNfts>>>>', marketplaceNfts?.nft?.Brand?.image);
     useEffect(() => {
         console.log('run');
-        dispatch(setLoader(true));
+        // dispatch(setLoader(true));
         dispatch(
             getTrack({
                 serialId: serialId,

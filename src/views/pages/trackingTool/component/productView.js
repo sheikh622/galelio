@@ -100,11 +100,11 @@ const Product = ({ tracking }) => {
                                                         fullWidth
                                                         displayEmpty
                                                         renderValue={(selected) => {
-                                                            if (selected.length === 0) {
+                                                            if (selected?.length === 0) {
                                                                 return <em className="fontfamily">PROOF OF AUTHENTICITY</em>;
                                                             }
 
-                                                            return selected.join(', ');
+                                                            return selected?.join(', ');
                                                         }}
                                                     >
                                                         {/* <MenuItem disabled value="">
@@ -120,10 +120,10 @@ const Product = ({ tracking }) => {
                                             // onClick={useNavigate(option.fieldValue)}
                                             onClick={() => {
                                                 // useNavigate(option.fieldValue)
-                                                window.open(option.fieldValue, '_blank');
+                                                window.open(option?.fieldValue, '_blank');
                                             }}
                                         >
-                                            {option.fieldName}
+                                            {option?.fieldName}
                                         </MenuItem>
                                     ))}
                                                     </Select>

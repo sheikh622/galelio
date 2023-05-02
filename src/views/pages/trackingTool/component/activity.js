@@ -14,9 +14,9 @@ import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
-const Activity = ({tracking}) => {
+const Activity = ({ tracking }) => {
     // console.log(tracking?.afterMarketplaceHistory,'transfers');
-   
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -28,12 +28,7 @@ const Activity = ({tracking}) => {
         }
     };
 
-    const names = [
-        'Sales',
-        'Listings',
-        'Offers',
-        'Transfers',
-    ];
+    const names = ['Sales', 'Listings', 'Offers', 'Transfers'];
 
     function getStyles(name, personName) {
         return {
@@ -103,8 +98,7 @@ const Activity = ({tracking}) => {
                                 component="div"
                                 sx={{ textAlign: { xs: 'center', md: 'center', sm: 'center' }, textTransform: 'capitalize' }}
                             >
-                            Metadatas and ownership Activity
-                               
+                                Metadatas and ownership Activity
                             </Typography>
                         </Grid>
                     </Grid>
@@ -125,7 +119,7 @@ const Activity = ({tracking}) => {
                                                     color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
                                                     padding: '10px 10px 10px 10px',
                                                     border: '2px solid #CDCDCD',
-                                                    borderRadius:'4px'
+                                                    borderRadius: '4px'
                                                 }}
                                                 fullWidth
                                             >
@@ -328,42 +322,41 @@ const Activity = ({tracking}) => {
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {item.event}
+                                                    {item.event}
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                            
-
-                                                    {item.event == "List" || "Bought" || "Resell" ? item.price : " "}
+                                                    {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-
-                                                    {item.event !== "Mint" && "Mint Bulk" ? item.from.slice(0, 5) + '...' + item.from.slice(38, 42): " "}
+                                                    {item?.event !== 'Mint' && 'Mint Bulk' ? item?.from : ' '}
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    {item.event !== "Mint" && "Mint Bulk" ? item.to.slice(0, 5) + '...' + item.to.slice(38, 42): " "}
+                                                    {item.event !== 'Mint' && 'Mint Bulk'
+                                                        ? item.to?.slice(0, 5) + '...' + item.to?.slice(38, 42)
+                                                        : ' '}
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {Date(item.blockTimestamp).slice(0, 15)}
+                                                    {Date(item.blockTimestamp).slice(0, 15)}
                                                 </TableCell>
                                             </TableRow>
                                         </TableBody>
                                     ))}
-                                  {/*   </>
+                                    {/*   </>
                                     ))} */}
                                 </Table>
-                           {/*      <Pagination
+                                {/*      <Pagination
                                 count={Math.ceil(currentCards.length / cardsPerPage)}
                                 onChange={(event, value) => setCurrentPage(value)}
                                 page={currentPage}
-                              /> */} 
+                              /> */}
                             </TableContainer>
                         </MainCard>
                     </Grid>

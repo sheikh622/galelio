@@ -15,7 +15,7 @@ import Erc20 from '../../../../../contractAbi/Erc20.json';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link as RouterLink,  } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
@@ -34,7 +34,7 @@ import { setLoader } from 'redux/auth/actions';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const PropertiesView = ({  nftList }) => {
+const PropertiesView = ({ nftList }) => {
     // console.log('nft from product view', nftList.nft.NFTTokens);
 
     // console.log('nftList from product view', nftList?.nft?.NFTTokens[0]?.id);
@@ -101,7 +101,7 @@ const PropertiesView = ({  nftList }) => {
                             variant="standard"
                             // value={rprice}
                             onChange={(e) => {
-                                rprice = e.target.value;
+                                rprice = e.target?.value;
                             }}
                             InputProps={{ inputProps: { min: 0 } }}
                         />
@@ -200,22 +200,19 @@ const PropertiesView = ({  nftList }) => {
                     console.log('marketplace', MarketplaceAddress.address);
 
                     const token = new ethers.Contract(erc20Address, Erc20.abi, signer);
-                   // await (await token.approve(MarketplaceAddress.address, price)).wait();
+                    // await (await token.approve(MarketplaceAddress.address, price)).wait();
 
+                    let balance = await token.balanceOf(address);
+                    if (balance < price.toString()) {
+                        toast.error('Insufficient Balance');
+                    }
+                    let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
+                    console.log('hy');
 
-                   let balance= await token.balanceOf(address);
-                   if(balance < price.toString())
-                   {
-                    toast.error("Insufficient Balance")
-                   }
-                   let approvalAmount = await token.allowance(address,MarketplaceAddress.address);
-                   console.log("hy")
-    
-                  let approvePrice = ethers.utils.parseEther('1000000');
-                  if (approvalAmount.toString() < price.toString()) {
-                      await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
-                  }
-                
+                    let approvePrice = ethers.utils.parseEther('1000000');
+                    if (approvalAmount.toString() < price.toString()) {
+                        await (await token.approve(MarketplaceAddress.address, approvePrice)).wait();
+                    }
 
                     // -------------
                     // let approvalAmount = await token.allowance(address, MarketplaceAddress.address);
@@ -240,12 +237,12 @@ const PropertiesView = ({  nftList }) => {
                             );
                         })
                         .catch((error) => {
-                            console.log('error',error);
+                            console.log('error', error);
                             setLoader(false);
                             toast.error(error.reason);
                         });
                 } catch (error) {
-                    console.log('error',error);
+                    console.log('error', error);
                     setLoader(false);
                     toast.error(error.reason);
                 }
@@ -305,25 +302,23 @@ const PropertiesView = ({  nftList }) => {
                     // if (approvalAmount.toString() < nft.price.toString()) {
                     //     await (await token.approve(contractAddress, approvePrice)).wait();
                     // }
-                   // await (await token.approve(contractAddress, '100000000000000000000000000000000000000')).wait();
+                    // await (await token.approve(contractAddress, '100000000000000000000000000000000000000')).wait();
                     console.log(voucher, 'voucher');
                     console.log(nftList?.nft?.minterAddress);
                     console.log(erc20Address);
 
                     console.log(nftList?.nft?.requesterAddress);
 
-                let balance= await token.balanceOf(address);
-                   if(balance < voucher.price)
-                   {
-                    toast.error("Insufficient Balance")
-                   }
-                   let approvalAmount = await token.allowance(address,contractAddress);
-                   
-    
-                  let approvePrice = ethers.utils.parseEther('1000000');
-                  if (approvalAmount.toString() <  voucher.price) {
-                      await (await token.approve(contractAddress, approvePrice)).wait();
-                  }
+                    let balance = await token.balanceOf(address);
+                    if (balance < voucher.price) {
+                        toast.error('Insufficient Balance');
+                    }
+                    let approvalAmount = await token.allowance(address, contractAddress);
+
+                    let approvePrice = ethers.utils.parseEther('1000000');
+                    if (approvalAmount.toString() < voucher.price) {
+                        await (await token.approve(contractAddress, approvePrice)).wait();
+                    }
 
                     try {
                         let mintedNFT = await (
@@ -333,12 +328,9 @@ const PropertiesView = ({  nftList }) => {
                         console.log('mintedNFT', mintedNFT);
                         console.log('id', id);
 
-                   
                         let serialId = await nfts.serialid(id);
 
                         console.log('serialId', serialId);
-
-
 
                         setLazyTokenId(id.toString());
                         dispatch(
@@ -407,14 +399,14 @@ const PropertiesView = ({  nftList }) => {
                             toast.success('NFT is Resold');
                         })
                         .catch((error) => {
-                            console.log('error',error);
+                            console.log('error', error);
                             toast.error(error.reason);
                         });
                 } catch (error) {
                     setResellLoader(false);
                     toast.error(error.reason);
                     setOpen(false);
-                    console.log('error',error);
+                    console.log('error', error);
                 }
             } else if (nftList?.nft?.mintType == 'lazyMint') {
                 try {
@@ -646,10 +638,9 @@ const PropertiesView = ({  nftList }) => {
                                                     xs
                                                     zeroMinWidth
                                                     onClick={() => {
-                                                        navigate('/brand/' + nftList?.nft?.Brand?.id );
+                                                        navigate('/brand/' + nftList?.nft?.Brand?.id);
                                                     }}
                                                     sx={{ textDecoration: 'none' }}
-                                                    
                                                 >
                                                     <Typography align="left" fontWeight={600} variant="h2" className="brand">
                                                         {nftList?.nft?.Brand?.name}
@@ -700,11 +691,11 @@ const PropertiesView = ({  nftList }) => {
                                                         fullWidth
                                                         displayEmpty
                                                         renderValue={(selected) => {
-                                                            if (selected.length === 0) {
+                                                            if (selected?.length === 0) {
                                                                 return <em className="fontfamily">PROOF OF AUTHENTICITY</em>;
                                                             }
 
-                                                            return selected.join(', ');
+                                                            return selected?.join(', ');
                                                         }}
                                                     >
                                                         {/* <MenuItem disabled value="">
@@ -718,17 +709,16 @@ const PropertiesView = ({  nftList }) => {
                                                                 // value={option.fieldValue}
                                                                 // onClick={useNavigate(option.fieldValue)}
                                                                 onClick={() => {
-                                                                    // useNavigate(option.fieldValue)
-                                                                    window.open(option.fieldValue, '_blank');
+                                                                    // useNavigate(option?.fieldValue)
+                                                                    window.open(option?.fieldValue, '_blank');
                                                                 }}
                                                             >
-                                                                {option.fieldName}
+                                                                {option?.fieldName}
                                                             </MenuItem>
                                                         ))}
                                                     </Select>
                                                 </FormControl>
                                             </Box>
-                                   
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
@@ -750,35 +740,22 @@ const PropertiesView = ({  nftList }) => {
                                                         fullWidth
                                                         displayEmpty
                                                         renderValue={(selected) => {
-                                                            if (selected.length === 0) {
+                                                            if (selected?.length === 0) {
                                                                 return <em className="fontfamily">Serial Id :</em>;
                                                             }
 
-                                                            return selected.join(', ');
+                                                            return selected?.join(', ');
                                                         }}
                                                     >
-                                                        {/* <MenuItem disabled value="">
-                                      <em>aiman</em>
-                                    </MenuItem> */}
                                                         {nftList?.nft?.NFTTokens.map((option) => (
-                                                            <MenuItem
-                                                                // component={redirect}
-                                                                // to={option.fieldValue}
-                                                                // key={option.fieldValue}
-                                                                // value={option.fieldValue}
-                                                                // onClick={useNavigate(option.fieldValue)}
-                                                                onClick={() => {
-                                                                    // useNavigate(option.fieldValue)
-                                                                    // window.open(option.serialId, '_blank');
-                                                                }}
-                                                            >
-                                                                {option.serialId? option.serialId : 'No Serial Id'}
+                                                            <MenuItem   onClick={() => {
+                                                                option?.serialId &&  navigate('/tracknft');
+                                                            }}>{option?.serialId ? option?.serialId : 'No Serial Id'} 
                                                             </MenuItem>
                                                         ))}
                                                     </Select>
                                                 </FormControl>
                                             </Box>
-                                   
                                         </Grid>
                                         {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid
