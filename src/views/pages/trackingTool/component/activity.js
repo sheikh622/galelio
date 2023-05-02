@@ -332,7 +332,8 @@ const Activity = ({ tracking }) => {
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    {item?.event !== 'Mint' && 'Mint Bulk' ? item?.from : ' '}
+
+                                                    {item.event == "Mint" && "Mint Bulk" ? item.minter.slice(0, 5) + '...' + item.minter.slice(38, 42): item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
