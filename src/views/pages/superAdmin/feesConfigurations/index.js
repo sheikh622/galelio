@@ -25,7 +25,12 @@ const Configuration = () => {
 
     const marketplaceFeeFunc = async (e) => {
         e.preventDefault();
-        setLoader(true);
+        if(marketFee !=''){
+            setLoader(true);
+        }else{
+            console.log('redy');
+            toast.error('Market fee is required!');
+        }
         console.log('marketFee', marketFee);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -36,11 +41,18 @@ const Configuration = () => {
         setMarketFee('');
         toast.success('successfully Submit');
         setLoader(false);
+        
     };
 
     const recieverAddressFunc = async (e) => {
         e.preventDefault();
-        setLoaderAddress(true)
+       
+        if(recieverAddress !=''){
+            setLoaderAddress(true);
+        }else{
+            console.log('redy');
+            toast.error('Address is required!');
+        }
         console.log('recieverAddress', recieverAddress);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
