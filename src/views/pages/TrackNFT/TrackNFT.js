@@ -107,9 +107,11 @@ const TrackNFT = () => {
             console.log('Invalid serial Id!');
         }
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
+        //  const provider = new ethers.providers.Web3Provider(window.ethereum);
+        //  const signer = provider.getSigner();
+        //const signer="0x6f3B51bd5B67F3e5bca2fb32796215A796B79651";
+        const provider= new ethers.providers.JsonRpcProvider("https://polygon-mumbai.g.alchemy.com/v2/Wk2k1fN6Gv2KG4f7474ABGxpmhQrZKFM");
+        const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, provider);
         console.log('factoryAddr', factoryAddr);
 
         // let res = await (
@@ -162,6 +164,8 @@ const TrackNFT = () => {
         }
     }
   
+
+
 
     return (
         <Stack position={'relative'} sx={{ height: '100vh', overflow: 'hidden' }}>

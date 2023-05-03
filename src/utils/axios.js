@@ -3,7 +3,7 @@ import axioss from 'axios';
 
 
 // export const API_URL = 'http://192.168.3.146:4000/api/v1/'; //dawood
-// export const API_URL = 'http://localhost:3000/api/v1/'; //local
+// export const API_URL = 'http://localhost:4000/api/v1/'; //local
 // export const API_URL = 'https://app.galileoprotocol.io/api/v1/';
 // export const API_URL = 'https://demo.galileoprotocol.io/api/v1/';
 export const API_URL = 'http://192.168.0.79:4000/api/v1/'; //zain
