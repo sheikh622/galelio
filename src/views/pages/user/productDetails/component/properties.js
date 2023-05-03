@@ -154,11 +154,11 @@ const Properties = ({  nftList }) => {
                                                             }}
                                                             onClick={() => {
                                                                 setPropertiesOpen(true);
-                                                                setMetadata(item.fieldName);
-                                                                setValue(item.fieldValue);
-                                                                setEditable(item.isEditable);
-                                                                setProofRequired(item.proofRequired);
-                                                                setId(item.id);
+                                                                setMetadata(item?.fieldName);
+                                                                setValue(item?.fieldValue);
+                                                                setEditable(item?.isEditable);
+                                                                setProofRequired(item?.proofRequired);
+                                                                setId(item?.id);
                                                             }}
                                                         />
                                                     </Tooltip>

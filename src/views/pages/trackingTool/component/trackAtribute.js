@@ -76,11 +76,12 @@ const trackAtribute = ({ tracking }) => {
                                 />
                             </Grid>
                         ))}
-                    <Pagination
+                   {tracking?.historyArray?.length > 1 && <Pagination
                         count={Math.ceil(tracking?.historyArray?.length / cardsPerPage)}
                         onChange={(event, value) => setCurrentPage(value)}
                         page={currentPage}
                     />
+                   }
                     {/*   <Grid mt={2} item xs={12} md={12}>
                         <History2   tracking={tracking} data={history2}/>
                     </Grid>
