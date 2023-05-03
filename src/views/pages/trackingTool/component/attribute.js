@@ -23,7 +23,7 @@ import doc from 'assets/images/doc.png';
 const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
-    console.log(tracking.nft?.NFTMetaData.length , 'tracking.nft?.NFTMetaData.length=========>');
+    // console.log(tracking.nft?.NFTMetaData.length , 'tracking.nft?.NFTMetaData.length=========>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);

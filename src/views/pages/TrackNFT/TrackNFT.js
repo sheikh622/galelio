@@ -100,7 +100,7 @@ const TrackNFT = () => {
     } */}
     const searchSerial = async () => {
         console.log('serialNo', serialNo);
-        
+        setSuccess(true);
         if (serialNo == '') {
             setSuccess(false);
             toast.error('Please enter valid serial Id');
@@ -147,7 +147,7 @@ const TrackNFT = () => {
         // const dispatch = useDispatch();
         console.log('address', address);
         console.log('tokenId', tokenId);
-        setSuccess(true);
+      
     };
     
     if (seconds == 0) {
@@ -214,11 +214,12 @@ const TrackNFT = () => {
                                     size="small"
                                     variant="outlined"
                                     onClick={() => {
-                                        setSeconds(6);
+                                        setSeconds(3);
                                         searchSerial();
                                     }}
                                 >
-                                    <CircularProgress />
+                                    <CircularProgress sx={{    width: '30px !important',
+                                    height: '30px  !important' , color:'#ffff'}} />
                                 </Button>
                             ) : (
                                 <Button
