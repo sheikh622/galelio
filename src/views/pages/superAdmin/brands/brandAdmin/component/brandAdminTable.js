@@ -149,7 +149,6 @@ const BrandAdminTable = ({ addUpdateOpen, setAddUpdateOpen, search, page, limit,
                                                                 <BlockIcon sx={{ fontSize: '1.5rem' }} />
                                                             </IconButton>
                                                         </Tooltip>
-
                                                         <Tooltip placement="top" title="Edit">
                                                             <IconButton
                                                                 className="color"

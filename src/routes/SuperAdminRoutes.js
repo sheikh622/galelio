@@ -17,6 +17,7 @@ const NftManagement = Loadable(lazy(() => import('views/pages/superAdmin/nftMana
 const Category = Loadable(lazy(() => import('views/pages/brandAdmin/brandCategory')));
 const Fees = Loadable(lazy(() => import('views/pages/superAdmin/feesConfigurations')));
 const SbtToken = Loadable(lazy(() => import('views/pages/superAdmin/sbtToken/sbtToken')));
+const SbtView = Loadable(lazy(() => import('views/pages/superAdmin/sbtToken/component/sbtView')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -74,7 +75,11 @@ const SuperAdminRoutes = {
             path: '/sbtToken',
             element: <SbtToken />
         },
-        
+        {
+            path: '/sbtToken/view',
+            element: <SbtView />
+        },
+
     ]
 };
 

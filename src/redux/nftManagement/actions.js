@@ -78,7 +78,7 @@ export const getAllNftSuccessSuperAdmin = (data) => {
         payload: data
     };
 };
-export const getAllNftSuccessUser= (data) => {
+export const getAllNftSuccessUser = (data) => {
     return {
         type: GET_ALL_NFT_USER_SUCCESS,
         payload: data
@@ -183,7 +183,7 @@ export const rejectNft = (data) => {
         payload: data
     };
 };
-export const addSbtToken = (data) => {
+export const addSBTToken = (data) => {
     return {
         type: ADD_SBTTOKEN,
         payload: data
@@ -191,13 +191,13 @@ export const addSbtToken = (data) => {
 };
 export const getsbtToken = (data) => {
     return {
-        type: GET_NFT_BUYER,
+        type: GET_ALL_SBTTOKEN,
         payload: data
     };
 };
 export const getsbtTokenSuccess = (data) => {
     return {
-        type: GET_NFT_BUYER_SUCCESS,
+        type: GET_ALL_SBTTOKEN_SUCCESS,
         payload: data
     };
 };

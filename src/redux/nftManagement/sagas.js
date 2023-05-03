@@ -537,36 +537,33 @@ export function* watchRejectNft() {
     yield takeLatest(REJECT_NFT, rejectNftRequest);
 }
 function* addSbtTokenSaga({ payload }) {
-
+    console.log("000000000000", payload)
     const formData = new FormData();
-    formData.append('asset', payload.asset);
-    formData.append('name', payload.name);
-    formData.append('requesterAddress', payload.requesterAddress);
-    formData.append('contractAddress', payload.contractAddress);
-    formData.append('price', payload.price);
-    formData.append('currencyType', payload.currencyType);
-    formData.append('description', payload.description);
-    formData.append('directBuyerAddress', payload.directBuyerAddress);
-    formData.append('isDirectTransfer', payload.isDirectTransfer);
-    formData.append('categoryId', payload.categoryId);
-    formData.append('quantity', payload.quantity);
-    formData.append('metaData', JSON.stringify(payload.metaDataArray));
-    formData.append('mintType', payload.mintType);
-    formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
-    for (let i = 0; i < payload.fileArray.length; i++) {
-        formData.append('fileArray', payload.fileArray[i]);
-    }
+    // formData.append('asset', payload.asset);
+    formData.append('tokenName', payload.tokenName);
+    formData.append('address', payload.address);
+    formData.append('brandSymbol', payload.brandSymbol);
+    formData.append('metaData', JSON.stringify(payload.metaData));
+    // formData.append('fieldName', payload.fieldName);
+    // formData.append('fieldValue', payload.fieldValue);
+    // formData.append('description', payload.description);
+    // formData.append('directBuyerAddress', payload.directBuyerAddress);
+    // formData.append('isDirectTransfer', payload.isDirectTransfer);
+    // formData.append('categoryId', payload.categoryId);
+    // formData.append('quantity', payload.quantity);
+    // formData.append('metaData', JSON.stringify(payload.metaDataArray));
+    // formData.append('mintType', payload.mintType);
+    // formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
+    // for (let i = 0; i < payload.fileArray.length; i++) {
+    //     formData.append('fileArray', payload.fileArray[i]);
+    // }
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.post(``, formData, headers);
+        const response = yield axios.post(`/addsoulbound`, formData, headers);
         // yield put(
-        //     getAllNft({
-        //         categoryId: payload.categoryId,
-        //         search: payload.search,
+        //     getsbtToken({
         //         page: payload.page,
         //         limit: payload.limit,
-        //         type: payload.type,
-        //         brandId: payload.brandId
         //     })
         // );
         payload.handleClose();
@@ -582,7 +579,7 @@ export function* watchTokenSaga() {
 function* getsbtTokenSaga({ payload }) {
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
-        const response = yield axios.get();
+        const response = yield axios.get(`/getsoulbound?page=${payload.page}&size=${payload.limit}`, headers);
 
         yield put(getsbtTokenSuccess(response.data.data));
 

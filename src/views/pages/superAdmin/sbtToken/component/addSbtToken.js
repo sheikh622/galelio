@@ -1,7 +1,6 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tooltip from '@mui/material/Tooltip';
-
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -30,7 +29,7 @@ import { useDropzone } from 'react-dropzone';
 import { Switch } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
-// import { addNft } from 'redux/nftManagement/actions';
+import { addSBTToken } from 'redux/nftManagement/actions';
 import { fData } from 'utils/formatNumber';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -48,7 +47,7 @@ import SBTAbi from "contractAbi/SBT.json";
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 
-export default function addSbtToken({ open, setOpen }) {
+export default function addSbtToken({ open, setOpen, nftList }) {
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.auth.user);
 
@@ -89,6 +88,9 @@ export default function addSbtToken({ open, setOpen }) {
     };
 
     const validationSchema = Yup.object({
+        SBTName: Yup.string()
+            .required('Address is required!')
+            .max(1000, 'Invalid address can not exceed 1000 characters'),
         symbol: Yup.string()
             .required('Symbol required')
             .typeError('Invalid Symbol'),
@@ -96,20 +98,25 @@ export default function addSbtToken({ open, setOpen }) {
         Address: Yup.string()
             .required('Address is required!')
             .max(1000, 'Invalid address can not exceed 1000 characters')
+        // fieldName: Yup.string()
+        //     .required('fieldName is required!')
+        //     .max(1000, 'fieldName can not exceed 1000 characters'),
+        // fieldValue: Yup.string()
+        //     .required('fieldValue is required!')
+        //     .max(1000, 'fieldValue can not exceed 1000 characters')
     });
-
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
+            SBTName: '',
             symbol: '',
             Address: ''
+            // fieldName: '',
+            // fieldValue: ''
         },
         validationSchema,
         onSubmit: async (values) => {
-
-
             console.log("values", values)
-
             fieldDataArray.unshift({
                 "fieldName": "Validtype",
                 "fieldValue": "true"
@@ -129,29 +136,49 @@ export default function addSbtToken({ open, setOpen }) {
 
             const sbt = new ethers.Contract(SBTAddress.address, SBTAbi.abi, signer);
 
-            var output = fieldDataArray.map(function(obj) {
-                return Object.keys(obj).sort().map(function(key) { 
-                  return obj[key];
+
+            console.log("svt", sbt);
+
+            var output = fieldDataArray.map(function (obj) {
+                return Object.keys(obj).sort().map(function (key) {
+                    return obj[key];
                 });
-              });
-
-
+            });
             console.log("tuple", values.SBTName, values.symbol, output, values.Address);
-            console.log("tuple array",output );
-
-
-          
+            console.log("tuple array", output);
             let safeMint = await (
                 await sbt.safeMint(values.SBTName, values.symbol, output, values.Address).catch((error) => {
                     console.log(error);
                 })
             ).wait();
-            
+
             const tokenId = parseInt(safeMint.events[0].args[2])
 
 
             console.log("tokenId", tokenId);
             console.log("safeMint", safeMint)
+
+            //  toast.success(``);
+            console.log('This is a valid wallet address');
+            dispatch(
+                addSBTToken({
+                    // categoryId: data.CategoryId,
+                    tokenName: values.SBTName,
+                    address: values.Address,
+                    brandSymbol: values.symbol,
+                    metaData: fieldDataArray,
+                    // fieldValue: fieldDataArray,
+                    // type: nftType,
+                    // page: page,
+                    // limit: limit,
+                    // search: search,
+                    // categoryId: data.CategoryId,
+                    // requesterAddress: user.walletAddress,
+                    // contractAddress: data.contractAddress,
+                    handleClose: handleClose,
+                })
+            );
+            // console.log('Address INVALID');
 
         }
     });
@@ -242,6 +269,10 @@ export default function addSbtToken({ open, setOpen }) {
                                     id="Address"
                                     name="Address"
                                     label="Address"
+                                    type="number"
+                                    InputProps={{
+                                        inputProps: { min: 0 }
+                                    }}
                                     fullWidth
                                     value={formik.values.Address}
                                     onChange={formik.handleChange}
@@ -262,7 +293,7 @@ export default function addSbtToken({ open, setOpen }) {
                                             ...fieldDataArray,
                                             {
                                                 fieldName: '',
-                                                fieldValue:'',
+                                                fieldValue: '',
                                             }
                                         ]);
                                     }}
