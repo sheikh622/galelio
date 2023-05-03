@@ -114,7 +114,7 @@ const TrackingTool = () => {
                     md={11}
                     lg={11}
                     sx={{
-                        ml: { md: -2 },
+                        ml: { md: -2 }, mt:0.4,
                         display: { xs: 'block', sm: 'block', md: 'flex', lg: 'flex' },
                         background: 'tranparent',
                         color: theme.palette.mode === 'dark' ? 'white' : '#404040'
@@ -123,7 +123,7 @@ const TrackingTool = () => {
                 {marketplaceNfts?.nft?.Brand?.image?
                     (
                         <Grid item md={12} xs={12} lg={12}>
-                        <Grid item xs={12} lg={12} md={12}>
+                       {/*  <Grid item xs={12} lg={12} md={12}>
                             <Grid container spacing={2} sx={{ mb: 2 }}>
                                 <Grid item xs={12}>
                                     <Typography
@@ -138,7 +138,7 @@ const TrackingTool = () => {
                                     </Typography>
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                         <Grid container-fluid>
                             <Grid item md={12} xs={12}>
                                 <Grid container>

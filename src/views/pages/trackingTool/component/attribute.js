@@ -23,7 +23,7 @@ import doc from 'assets/images/doc.png';
 const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
-    // console.log(tracking.nft.createdAt , 'tracking in attribute=========>');
+    console.log(tracking.nft?.NFTMetaData.length , 'tracking.nft?.NFTMetaData.length=========>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -91,7 +91,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                         {Date(tracking?.nft?.updatedAt).slice(0, 15)}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={2} className="doc-property" sx={{}}>
+                               {/*  <Grid item xs={2} className="doc-property" sx={{}}>
                                     {theme.palette.mode === 'dark' ? (
                                         <Box
                                             className="doc-heading"
@@ -117,7 +117,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                             <DocLight />
                                         </Box>
                                     )}
-                                </Grid>
+                                </Grid> */}
                             </Grid>
 
                             <Grid
@@ -187,11 +187,12 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                     </Grid>
                                 ))}
                             </Grid>
-                            <Pagination
+                           {tracking.nft?.NFTMetaData.length > 3 && <Pagination
                                 count={Math.ceil(tracking.nft?.NFTMetaData.length / cardsPerPage)}
                                 onChange={(event, value) => setCurrentPage(value)}
                                 page={currentPage}
                             />
+                           }
                         </MuiAccordionDetails>
                     </MuiAccordion>
                 ))}

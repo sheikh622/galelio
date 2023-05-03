@@ -78,7 +78,7 @@ const Configuration = () => {
                                         <TextField
                                             value={marketFee}
                                             onChange={(e) => {
-                                                console.log('e.target.event', e.target.value);
+                                                // console.log('e.target.event', e.target.value);
                                                 setMarketFee(e.target.value);
                                             }}
                                             fullWidth

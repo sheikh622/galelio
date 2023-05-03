@@ -26,7 +26,7 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, 
 
     
     const user = useSelector((state) => state.auth.user);
-    // console.log(updater, 'updater==============>>>');
+    console.log(tracking.length, 'tracking.length==============>>>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -185,11 +185,13 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, 
                                     </Grid>
                                 ))}
                             </Grid>
+                           { tracking.length > 1 &&
                             <Pagination
                                 count={Math.ceil(tracking.length / cardsPerPage)}
                                 onChange={(event, value) => setCurrentPage(value)}
                                 page={currentPage}
                             />
+                           }
                         </MuiAccordionDetails>
                     </MuiAccordion>
                 ))}
