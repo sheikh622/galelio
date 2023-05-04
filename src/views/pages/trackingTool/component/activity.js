@@ -196,6 +196,7 @@ const Activity = ({ tracking }) => {
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 From
                                             </TableCell>
+
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 To{' '}
                                             </TableCell>
@@ -364,28 +365,26 @@ const Activity = ({ tracking }) => {
 
                                                 <TableCell
                                                     className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF'  , cursor:'pointer'}}
+                                                    sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
                                                     align="center"
                                                     onClick={() => {
-                                                        window.open(
-                                                            `https://mumbai.polygonscan.com/address/${item?.minter}`,
-                                                            '_blank'
-                                                        );
+                                                        window.open(`https://mumbai.polygonscan.com/address/${item?.from? item?.from : item?.minter}`, '_blank');
                                                     }}
                                                 >
-                                                    {item?.minter ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42) : ''}
+                                                    {item?.from
+                                                        ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
+                                                        : item?.minter
+                                                        ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42)
+                                                        : ''}
                                                 </TableCell>
+
                                                 <TableCell
                                                     className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' , cursor:'pointer'}}
+                                                    sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
                                                     align="center"
                                                     onClick={() => {
-                                                        window.open(
-                                                            `https://mumbai.polygonscan.com/address/${item?.to}`,
-                                                            '_blank'
-                                                        );
+                                                        window.open(`https://mumbai.polygonscan.com/address/${item?.to}`, '_blank');
                                                     }}
-                                                   
                                                 >
                                                     {item?.to ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42) : ''}
                                                 </TableCell>

@@ -113,7 +113,7 @@ const Balance = () => {
                         // handleConnect().arrow();
                     }}
                 >
-                    {balanceValue ? balanceValue : 0} USD
+                    {balanceValue ? balanceValue : 0} USDT
                 </Typography>
             </Grid>
         </>
