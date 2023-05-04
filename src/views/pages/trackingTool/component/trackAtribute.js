@@ -68,11 +68,11 @@ const trackAtribute = ({ tracking }) => {
                             <Grid mt={2} mb={2} item xs={12} md={12}>
                                 <History1
                                     tracking={card?.historyArray}
-                                    updater={card.updator}
-                                    blockTimestamp={card.blockTimestamp}
+                                    updater={card?.updator}
+                                    blockTimestamp={card?.blockTimestamp}
                                     Proof={card?.proofOfAuthenticityArray}
                                     data={history1}
-                                    history={card.historyNo}
+                                    history={card?.historyNo}
                                 />
                             </Grid>
                         ))}
