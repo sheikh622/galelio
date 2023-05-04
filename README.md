@@ -40,13 +40,14 @@ Super Admin, Admin, Brand Admin, User
 
 ### Tech Stack
 
+#### Frontend: React + Redux with Material UI
 #### Backend : Node.js (Express.js)
 #### Database: PostgreSql + Sequelize
 #### Language: JavaScript
 
 ### How to Run
 
-#### 1- Have Node.js and Postgres database installed
-#### 2- Run "npm install"
-#### 3- Run "npm run db:reset" for database creation
-#### 4- Run "npm start" to start the backend
+#### 1- Have Node.js installed
+#### 2- Run "npm install --legacy-peer-deps"
+#### 3- Run "npm start"
+
