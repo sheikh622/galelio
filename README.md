@@ -5,9 +5,8 @@ Galileo Protocol aims to create a world where everything gets tokenised. A world
 Galileo Network enables luxury brands to combat counterfeiting by accompanying their authentic, original, high-value, and quality products with immutable pNFTs, proving their ownership, condition, and origin on the blockchain.  
 
 
-<p align="center">
-  <img src="https://demo.galileoprotocol.io/static/media/galileo.0c691f45.png"/>
-</p>
+
+  ![alt text](https://demo.galileoprotocol.io/static/media/galileo.0c691f45.png)
 
 
 
@@ -22,11 +21,30 @@ To get started with Galileo Protocol, check out our https://www.galileoprotocol.
 
 Follow us on social media to stay updated with the latest news and developments:
 
-https://img.shields.io/badge/Twitter-%40GalileoProtocol-blue?logo=twitter](https://twitter.com/GalileoProtocol)
-https://img.shields.io/badge/LinkedIn-Galileo%20Protocol-blue?logo=linkedin](https://www.linkedin.com/company/galileo-protocol/)
-https://img.shields.io/badge/Medium-%40GalileoProtocol-blue?logo=medium](https://medium.com/@GalileoProtocol)
-https://img.shields.io/badge/Telegram-Galileo%20Protocol%20Official%20Group-blue?logo=telegram](https://t.me/GalileoProtocol)
+![https://twitter.com/GalileoProtocol](https://img.shields.io/badge/Twitter-%40GalileoProtocol-blue?logo=twitter)
+
+![https://www.linkedin.com/company/galileo-protocol/](https://img.shields.io/badge/LinkedIn-Galileo%20Protocol-blue?logo=linkedin)
+
+![https://medium.com/@GalileoProtocol](https://img.shields.io/badge/Medium-%40GalileoProtocol-blue?logo=medium)
+
+![(\https://t.me/GalileoProtocol](https://img.shields.io/badge/Telegram-Galileo%20Protocol%20Official%20Group-blue?logo=telegram)
 
 
 
 ## Getting Started with the repo
+
+#### Roles:
+Super Admin, Admin, Brand Admin, User
+
+### Tech Stack
+
+#### Backend : Node.js (Express.js)
+#### Database: PostgreSql + Sequelize
+#### Language: JavaScript
+
+### How to Run
+
+#### 1- Have Node.js and Postgres database installed
+#### 2- Run "npm install"
+#### 3- Run "npm run db:reset" for database creation
+#### 4- Run "npm start" to start the backend
