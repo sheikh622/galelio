@@ -187,6 +187,7 @@ const PropertiesView = ({ nftList }) => {
         console.log('address', address);
         console.log('tokenId', tokenId);
         // if (token != undefined && token != '0') {
+            
         navigate('/tracking/' + serialId, {
             state: {
                 tokenId: tokenId,
