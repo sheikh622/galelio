@@ -187,8 +187,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 setOpen(false);
                                 setLoader(false);
                             })
-                        ).wait();`
-                        `
+                        ).wait();
                         let myNftSerialIdArray = [];
                         for (let i = 0; i < myNftTokenIdArray.length; i++) {
                             let serialId = await nft.serialid(myNftTokenIdArray[i]);
@@ -204,7 +203,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                 isDirectTransfer: nftData.isDirectTransfer,
                                 nftId: nftData.id,
                                 id: data.id,
-                                serialId: serialId[index],
+                                serialId: myNftSerialIdArray[index],
                                 tokenId: myNftTokenIdArray[index]
                             });
                         });
