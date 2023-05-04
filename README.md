@@ -33,6 +33,8 @@ Follow us on social media to stay updated with the latest news and developments:
 
 ## Getting Started with the repo
 
+## Repo: Galileo Frontend
+
 #### Roles:
 Super Admin, Admin, Brand Admin, User
 
