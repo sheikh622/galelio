@@ -5,6 +5,7 @@ import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
 import { Pagination } from '@mui/material';
+import Avatar from 'ui-component/extended/Avatar';
 
 import '@fontsource/public-sans';
 import SubCard from 'ui-component/cards/SubCard';
@@ -15,7 +16,7 @@ import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHe
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
 const Activity = ({ tracking }) => {
-    // console.log(tracking?.afterMarketplaceHistory,'transfers');
+    console.log(tracking?.activity, 'ACTIVITY=====================>>>');
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -187,6 +188,9 @@ const Activity = ({ tracking }) => {
                                                 Event{' '}
                                             </TableCell>
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                Brand Name{' '}
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Price{' '}
                                             </TableCell>
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
@@ -324,28 +328,69 @@ const Activity = ({ tracking }) => {
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
                                                     {item.event}
                                                 </TableCell>
+                                                {item?.brandImage ? (
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', display: 'flex' }}
+                                                        align="center"
+                                                    >
+                                                        <Grid item lg={2}></Grid>
+                                                        <Grid item lg={2}>
+                                                            <Avatar alt="" src={item?.brandImage} />
+                                                        </Grid>
+                                                        <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                            {item?.brandImage ? item?.brandName : ''}
+                                                        </Grid>
+                                                    </TableCell>
+                                                ) : (
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', display: 'flex' }}
+                                                        align="center"
+                                                    >
+                                                        <Grid item lg={2}></Grid>
+                                                        <Grid item lg={2}>
+                                                            <Avatar sx={{ bgcolor: 'transparent', color: 'transparent' }}>b</Avatar>
+                                                        </Grid>
+                                                        <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                            {item?.brandImage ? item?.brandName : ''}
+                                                        </Grid>
+                                                    </TableCell>
+                                                )}
+
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
                                                     {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
                                                 </TableCell>
+
                                                 <TableCell
                                                     className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    sx={{ fontSize: '15px', color: '#2194FF'  , cursor:'pointer'}}
                                                     align="center"
+                                                    onClick={() => {
+                                                        window.open(
+                                                            `https://mumbai.polygonscan.com/address/${item?.minter}`,
+                                                            '_blank'
+                                                        );
+                                                    }}
                                                 >
-
-                                                    {item.event == "Mint" && "Mint Bulk" ? item.minter.slice(0, 5) + '...' + item.minter.slice(38, 42): item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
+                                                    {item?.minter ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42) : ''}
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    sx={{ fontSize: '15px', color: '#2194FF' , cursor:'pointer'}}
                                                     align="center"
+                                                    onClick={() => {
+                                                        window.open(
+                                                            `https://mumbai.polygonscan.com/address/${item?.to}`,
+                                                            '_blank'
+                                                        );
+                                                    }}
+                                                   
                                                 >
-                                                    {item.event !== 'Mint' && 'Mint Bulk'
-                                                        ? item.to?.slice(0, 5) + '...' + item.to?.slice(38, 42)
-                                                        : ' '}
+                                                    {item?.to ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42) : ''}
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {Date(item.blockTimestamp).slice(0, 15)}
+                                                    {Date(item?.blockTimestamp).slice(0, 15)}
                                                 </TableCell>
                                             </TableRow>
                                         </TableBody>

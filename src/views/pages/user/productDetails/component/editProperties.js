@@ -192,9 +192,9 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
                                     NFTTokenId: nftList.nft?.NFTTokens[0].id,
                                     NftId: nftid,
                                     nftid: nftid,
-                                    fieldName: values.firstName,
-                                    fieldValue: values.lastName,
-                                    file: values.file,
+                                    fieldName: values?.firstName,
+                                    fieldValue: values?.lastName,
+                                    file: values?.file,
                                     // navigate: navigate,
                                     handleClose: handleClose
                                 })
