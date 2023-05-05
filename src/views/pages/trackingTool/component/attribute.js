@@ -20,10 +20,10 @@ import tick from 'assets/images/tick.png';
 import doc from 'assets/images/doc.png';
 // ==============================|| ACCORDION ||============================== //
 
-const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle , serialId }) => {
+const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
-    // console.log(tracking.nft?.requesterAddress, 'tracking.nft=========>');
+    console.log(tracking.nft?.requesterAddress, 'tracking.nft=========>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -151,7 +151,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                                     className="V8"
                                                     sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
                                                 >
-                                                    {serialId}
+                                                    {item?.fieldValue}
                                                 </Typography>
                                                 {/*   <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
                                                     2023
