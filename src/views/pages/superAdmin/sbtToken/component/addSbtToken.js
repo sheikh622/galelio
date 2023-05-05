@@ -89,7 +89,7 @@ export default function addSbtToken({ open, setOpen, nftList }) {
 
     const validationSchema = Yup.object({
         SBTName: Yup.string()
-            .required('Address is required!')
+            .required('Name is required!')
             .max(1000, 'Invalid address can not exceed 1000 characters'),
         symbol: Yup.string()
             .required('Symbol required')
@@ -151,30 +151,17 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                     console.log(error);
                 })
             ).wait();
-
             const tokenId = parseInt(safeMint.events[0].args[2])
-
-
             console.log("tokenId", tokenId);
             console.log("safeMint", safeMint)
-
             //  toast.success(``);
             console.log('This is a valid wallet address');
             dispatch(
                 addSBTToken({
-                    // categoryId: data.CategoryId,
                     tokenName: values.SBTName,
                     address: values.Address,
                     brandSymbol: values.symbol,
                     metaData: fieldDataArray,
-                    // fieldValue: fieldDataArray,
-                    // type: nftType,
-                    // page: page,
-                    // limit: limit,
-                    // search: search,
-                    // categoryId: data.CategoryId,
-                    // requesterAddress: user.walletAddress,
-                    // contractAddress: data.contractAddress,
                     handleClose: handleClose,
                 })
             );
@@ -182,8 +169,6 @@ export default function addSbtToken({ open, setOpen, nftList }) {
 
         }
     });
-
-
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
@@ -201,19 +186,11 @@ export default function addSbtToken({ open, setOpen, nftList }) {
         array[index].fieldValue = value;
         setFieldDataArray(array);
     };
-
-
-
     const handleRemoveField = (index) => {
         let array = [...fieldDataArray];
         array.splice(index, 1);
         setFieldDataArray(array);
     };
-
-
-
-
-
     return (
         <>
             <Dialog
@@ -269,10 +246,10 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                                     id="Address"
                                     name="Address"
                                     label="Address"
-                                    type="number"
-                                    InputProps={{
-                                        inputProps: { min: 0 }
-                                    }}
+                                    // type="number"
+                                    // InputProps={{
+                                    //     inputProps: { min: 0 }
+                                    // }}
                                     fullWidth
                                     value={formik.values.Address}
                                     onChange={formik.handleChange}

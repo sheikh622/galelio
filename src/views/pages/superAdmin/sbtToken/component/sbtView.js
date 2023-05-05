@@ -1,328 +1,150 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { gridSpacing } from 'store/constant';
+import { forwardRef, useState } from 'react';
+
+// material-ui
+import { AppBar, DialogActions, Button, Dialog, CardMedia, Divider, Grid, IconButton, ListItemText, ListItemButton, List, Slide, Toolbar, Typography, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Pagination, Menu, MenuItem, TextField, Box } from '@mui/material';
-import {
-    Divider,
-    Typography,
-    IconButton,
-    Grid,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    Button,
-    TableRow,
-    Tooltip,
-    Stack,
-    CircularProgress
-} from '@mui/material';
-import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-import MainCard from 'ui-component/cards/MainCard';
-// import Token from './component/addSbtToken';
-// import { getsbtToken } from '../../../../redux/nftManagement/actions';
-// import Nftcard from './component/NftCard';
+
+// assets
+import CloseIcon from '@mui/icons-material/Close';
+
+// slide animation
+const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 import { Switch } from '@mui/material';
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { ethers, utils } from 'ethers';
+import SBTAddress from "contractAbi/SBT-address.json";
+import SBTAbi from "contractAbi/SBT.json";
+// ===============================|| UI DIALOG - FULL SCREEN ||=============================== //
 
-const typeArray = [
-    {
-        value: 'all',
-        label: "All NFT'S"
-    },
-    {
-        value: 'directMint',
-        label: 'Minted NFTS'
-    },
-    {
-        value: 'lazyMint',
-        label: "Lazy Minted NFT'S"
-    },
-    {
-        value: 'waiting',
-        label: 'Waiting For approval'
-    },
-    {
-        value: 'draft',
-        label: 'Draft NFTS'
-    },
-    {
-        value: 'rejected',
-        label: 'Rejected NFTS'
-    }
-];
-
-const sbtView = () => {
+export default function DetailsDialog({ open, setOpen, sbtTable, details }) {
     const theme = useTheme();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const dispatch = useDispatch();
-
-    const user = useSelector((state) => state.auth.user);
-    const [type, setType] = useState('all');
-    const [search, setSearch] = useState('');
-    const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(12);
-    const [open, setOpen] = useState();
-    const [addNftOpen, setAddNftOpen] = useState(false);
-    const [loader, setLoader] = useState(true);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    console.log(details.SoulBoundMetas, 'details====================?')
+    const handleClickOpen = () => {
+        setOpen(true);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
-        setLoader(false);
+        setOpen(false);
     };
-    const handleType = (event) => {
-        setType(event.target.value);
-        setLimit(12);
-        setSearch('');
-        setPage(1);
+    const [checked, setChecked] = useState(true);
+    const [check, setCheck] = useState(true);
+
+    const status = [
+        {
+            name: 'Name:',
+            // value: nftData?.name
+        },
+        {
+            name: 'Status:',
+            // value: nftData?.status
+        },
+        {
+            name: 'Description:',
+            // value: nftData?.description
+        },
+
+    ];
+    // const walletadded = (event, index) => {
+    //     // setWallettoggle(true);
+    //     setChecked(event.target.checked);
+    //     {event.target.checked==false&&(console.log("workinggggg"))}
+    //     console.log("-----------------------",event.target.checked);
+    // };
+    // console.log("43", checked)
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const sbt = new ethers.Contract(SBTAddress.address, SBTAbi.abi, signer);
+
+    async function myFunction() {
+        return
+        // changeStatus(
+        //     address to,
+        //     uint256 _tokenId,
+        //     bool _status
+        // )
     };
-    const [checked, setChecked] = useState();
-    const nftList = useSelector((state) => state.nftReducer.sbtList);
-    const sbtTable = useSelector((state) => state.nftReducer.sbtList?.soul);
-    const sbt = useSelector((state) => state.nftReducer.sbtList?.soul?.rows?.SoulBoundMetas
-    );
-
-    // useEffect(() => {
-    //     dispatch(
-    //         getsbtToken({
-    //             // categoryId: location.state.data.CategoryId,
-    //             // search: search,
-    //             page: page,
-    //             limit: limit,
-    //             // type: type,
-    //             // brandId: user.BrandId,
-    //             handleClose: handleClose
-    //         })
-    //     );
-    // }, [page, limit]);
-
     return (
-        <>
-            {/* <Token
-                open={addNftOpen}
-                setOpen={setAddNftOpen}
-                data={location?.state?.data}
-                search={search}
-                page={page}
-                limit={limit}
-                nftType={type}
-                nftList={nftList}
-            /> */}
-            <MainCard
-                className='Adminheading'
+        <div>
 
-                title={
-                    <Grid container spacing={4} >
-                        <Grid item xs={12} lg={10} >
-                            <Typography variant="h1" component="h2" className='headingcard' sx={{
-                                marginTop: '10px',
-                                fontWeight: 600, color: '#000', marginLeft: { lg: '-20px', md: '-20px' },
-                                background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                                color: theme.palette.mode === 'dark' ? 'white' : '#404040'
-                            }}>
-
-                                Token Listing
-                            </Typography>
-                        </Grid>
-
-                        <Grid item xs={12} lg={2} >
-                            <Button className='buttonSize' sx={{ float: { md: 'right', lg: 'right' } }}
-                                variant="contained"
-                                size="large"
-                                onClick={() => {
-                                    navigate('/SbtToken');
-                                }}
-                            >
-                                Back
-                            </Button>
-                        </Grid>
-                    </Grid>}
-                content={false}
-            ></MainCard>
-            <MainCard
-                className="Adminheading"
-
-                // title={
-                //     <Grid container sx={{ display: 'flex' }}>
-                //         <Grid item md={8} xs={12}>
-                //             <Typography
-                //                 variant="h1"
-                //                 component="h2"
-                //                 className="headingcard"
-                //                 sx={{
-                //                     fontWeight: 600, color: theme.palette.mode === 'dark' ? '#fff' : '#000',
-                //                     marginLeft: { lg: '-20px', md: '-20px' },
-                //                 }}
-                //             >
-                //                Sbt Token
-                //             </Typography>
-                //         </Grid>
-                //         {/* <Grid item md={4} xs={12}>
-                //             <Button
-                //                 className="buttonSize"
-                //                 sx={{ float: { xs: 'left', md: 'right' }, marginTop: { xs: "10px", md: "0px" } }}
-                //                 variant="contained"
-                //                 size="large"
-                //                 onClick={() => {
-                //                     navigate('/categories');
-                //                 }}
-                //             >
-                //                 Back
-                //             </Button>
-                //         </Grid> */}
-                //     </Grid>
-
-                // }
-
-                content={false}
-            ></MainCard>
-            <MainCard
-                className="yellow tableShadow"
-                title={
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} lg={8}>
-                            <Typography className="mainheading" variant="h1" component="h2"
-                                sx={{ marginLeft: { lg: '48px', md: '48px' }, marginTop: { md: "6px" } }}>
-                                Sbt Token
-                            </Typography>
-                        </Grid>
-                        {/* <Grid item xs={6} lg={2}>
-                            <TextField
-                                className="selectField selectstyle"
-                                id="outlined-select-budget"
-                                select
-                                fullWidth
-                                value={type}
-                                onChange={handleType}
-                                variant="standard"
-                            >
-                                {typeArray.map((option, index) => (
-                                    <MenuItem key={index} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid> */}
-                    </Grid>
-                }
-                content={false}
-            >
-                <Grid container>
-                    {/* {(nftList && nftList.nfts && nftList.nfts.rows && nftList.nfts.rows != undefined) ? (
-                        <> */}
-                    {/* { nftList.nfts.rows.length > 0?(
-                        <> */}
-                    {' '}
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}></TableCell>
-                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                    Token Name
-                                </TableCell>
-                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                    Symbol
-                                </TableCell>
-                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                    Address
-                                </TableCell>
-                                {/* <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                    Status
-                                </TableCell> */}
-                                <TableCell align="center" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                    Actions
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
+            <Dialog fullScreen open={open}
+                onClose={handleClose}
+                TransitionComponent={Transition}>
+                {/*    <IconButton float="left" color="inherit" onClick={handleClose} aria-label="close" size="large">
+                    <CloseIcon />
+                </IconButton> */}
+                <DialogActions sx={{ pr: 2.5, pt: 2.5, cursor: "pointer" }}>
+                    <Button className='buttonSize' size='large' sx={{ color: theme.palette.error.dark }} onClick={handleClose} color="secondary">
+                        <CloseIcon />
+                    </Button>
+                </DialogActions>
+                {details.SoulBoundMetas &&
+                    details.SoulBoundMetas.map((nft, index) => {
+                        return (
+                            <Grid container sx={{ pr: 2.5, pl: 2.5, pt: 2.5 }}>
+                                <Grid item xs={12} md={8} lg={8} sx={{ pr: 2.5 }}>
+                                    <List>
+                                        <ListItemButton>
+                                            <ListItemText
+                                                primary={<Typography variant="subtitle1" className='font-in-detail'>Field Name</Typography>}
+                                                secondary={<Typography variant="caption" className='font-in-detail' sx={{ textTransform: 'capitalize' }}>{nft.fieldName}</Typography>}
+                                            />
+                                            <ListItemButton>
+                                                <ListItemText
+                                                    primary={<Typography variant="subtitle1" className='font-in-detail'>Field Value</Typography>}
+                                                    secondary={<Typography variant="caption" className='font-in-detail'>{nft.fieldValue ? nft.fieldValue : "null"}</Typography>}
+                                                />
+                                                {nft?.fieldValue == 'true' ?
+                                                    <ListItemButton>
+                                                        <ListItemText
+                                                            primary={<Typography variant="subtitle1" className='font-in-detail'>Toggle</Typography>}
+                                                            secondary={<Typography variant="caption" className='font-in-detail' sx={{ textTransform: 'capitalize' }}>
+                                                                <Tooltip
+                                                                    className="fontsize"
+                                                                    title="SBT"
+                                                                    placement="top"
+                                                                    arrow
+                                                                >
+                                                                    <Switch
+                                                                        // value={nft?.fieldValue == true ? checked : false}
+                                                                        checked={nft?.fieldValue == 'true' && checked}
+                                                                        onChange={(e) => {
+                                                                            setChecked(e.target.checked);
+                                                                            if (e.target.checked == false) {
+                                                                                alert("workingggg")
+                                                                                // myFunction();
+                                                                            }
+                                                                            // else{
+                                                                            //     alert("not workinggggggg");
+                                                                            // }
+                                                                        }}
+                                                                    />
+                                                                </Tooltip>
+                                                            </Typography>
+                                                            }
+                                                        />
+                                                    </ListItemButton> :
+                                                    <></>
+                                                }
 
 
-                        <TableBody sx={{ padding: '10px' }}>
-                            {sbtTable?.rows &&
-                                sbtTable?.rows.map((nft, index) => {
-                                    return (
-                                        // <Grid item xs={12} sm={6} md={4} lg={3}>
-                                        //     <Nftcard
-                                        //        nftList={nft}
-                                        //         className="tableShadow"
-                                        //     // nftData={nft}
-                                        //     // categoryId={location.state.data.CategoryId}
-                                        //     // search={search}
-                                        //     // page={page}
-                                        //     // limit={limit}
-                                        //     // type={type}
-                                        //     />
-                                        // </Grid>
-                                        <>
-                                            <TableRow>
-                                                <TableCell
-                                                    align="left"
-                                                    className="tableName"
-                                                    sx={{ textTransform: 'capitalize' }}
-                                                ></TableCell>
-                                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
-                                                    {nft.tokenName}
-                                                </TableCell>
-                                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
-                                                    {nft.brandSymbol}
-                                                </TableCell>
-                                                <TableCell align="left" className="tableName">
-                                                    {nft.address.slice(0, 5) + '...' + nft.address.slice(38, 42)}
-                                                </TableCell >
-                                                <TableCell align="left" className="tableName">
-                                                    <Stack direction="row" justifyContent="center" alignItems="center">
-                                                        <Tooltip
-                                                            className="fontsize"
-                                                            title="SBT"
-                                                            placement="top"
-                                                            arrow
-                                                        >
-                                                            <Switch
-                                                                value={true}
-                                                                defaultChecked
-                                                                // checked={checked}
-                                                                onChange={(e) => setChecked(false)}
-                                                            // inputProps={{ 'aria-label': 'controlled' }}
-                                                            />
-                                                        </Tooltip>
-                                                    </Stack>
-                                                </TableCell>
-                                            </TableRow>
+                                            </ListItemButton>
+                                        </ListItemButton>
+                                        <Divider />
+                                    </List>
+                                </Grid>
+                                <Grid item xs={12} md={4} lg={4}>
+                                    <CardMedia
 
-                                        </>
-
-                                    );
-                                })}
-                        </TableBody>
-                    </Table>
-                    <Grid item xs={12} sx={{ p: 3 }}>
-                        <Grid container justifyContent="center" spacing={gridSpacing}>
-                            <Grid item>
-                                <Pagination
-                                    page={page}
-                                    color="primary"
-                                    showFirstButton
-                                    showLastButton
-                                    count={nftList && nftList.pages}
-                                    onChange={(event, newPage) => {
-                                        setPage(newPage);
-                                    }}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-
-                </Grid>
-            </MainCard>
-        </>
+                                        component="img"
+                                        // image={nftData?.asset}
+                                        sx={{
+                                            minheight: 'auto', maxHeight: '570px',
+                                            overflow: 'hidden', cursor: 'Pointer'
+                                        }}
+                                    />
+                                </Grid></Grid>
+                        );
+                    })}
+            </Dialog>
+        </div>
     );
-};
-
-export default sbtView;
+}

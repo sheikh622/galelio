@@ -28,7 +28,7 @@ import Nftcard from './component/NftCard';
 import { Switch } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Avatar from 'ui-component/extended/Avatar';
-
+import DetailsDialog from './component/sbtView'
 const typeArray = [
     {
         value: 'all',
@@ -86,8 +86,10 @@ const sbtToken = () => {
         setPage(1);
     };
     const [checked, setChecked] = useState();
+    const [details, setDetails] = useState('');
     const nftList = useSelector((state) => state.nftReducer.sbtList);
     const sbtTable = useSelector((state) => state.nftReducer.sbtList?.soul);
+    console.log(sbtTable, 'sbtTable');
     const sbt = useSelector((state) => state.nftReducer.sbtList?.soul?.rows?.SoulBoundMetas
     );
 
@@ -104,9 +106,17 @@ const sbtToken = () => {
             })
         );
     }, [page, limit]);
+    const [DetailsNftOpen, setDetailsNftOpen] = useState(false);
+
 
     return (
         <>
+            <DetailsDialog
+                open={DetailsNftOpen}
+                setOpen={setDetailsNftOpen}
+                details={details}
+            // sbtTable={sbtTable}
+            />
             <Token
                 open={addNftOpen}
                 setOpen={setAddNftOpen}
@@ -220,9 +230,9 @@ const sbtToken = () => {
                                 {/* <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
                                     Status
                                 </TableCell> */}
-                                <TableCell align="center" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                {/* <TableCell align="center" className="Tableheading" sx={{ borderBottom: 'none' }}>
                                     Actions
-                                </TableCell>
+                                </TableCell> */}
                             </TableRow>
                         </TableHead>
 
@@ -259,9 +269,12 @@ const sbtToken = () => {
                                                         cursor: "pointer"
 
                                                     }}>
-                                                    <Grid item lg={6}>
+                                                    <Grid item lg={2}>
                                                         <Avatar alt="Brand Image" src={nft.image} sx={{}} onClick={() => {
-                                                            navigate('/sbtToken/view');
+                                                            // navigate('/sbtToken/view');
+                                                            setDetailsNftOpen(true);
+                                                            setDetails(nft);
+
                                                         }} />
                                                     </Grid>
                                                     {nft.tokenName}
@@ -272,7 +285,7 @@ const sbtToken = () => {
                                                 <TableCell align="left" className="tableName">
                                                     {nft.address.slice(0, 5) + '...' + nft.address.slice(38, 42)}
                                                 </TableCell >
-                                                <TableCell align="left" className="tableName">
+                                                {/* <TableCell align="left" className="tableName">
                                                     <Stack direction="row" justifyContent="center" alignItems="center">
                                                         <Tooltip
                                                             className="fontsize"
@@ -294,14 +307,14 @@ const sbtToken = () => {
                                                                 aria-label="detail"
                                                                 size="medium"
                                                                 onClick={() => {
-                                                                    navigate('/sbtToken/view');
+                                                                    setDetailsNftOpen(true)
                                                                 }}
                                                             >
                                                                 <AccountCircleIcon sx={{ fontSize: '1.5rem' }} />
                                                             </IconButton>
                                                         </Tooltip>
                                                     </Stack>
-                                                </TableCell>
+                                                </TableCell> */}
                                             </TableRow>
 
                                         </>

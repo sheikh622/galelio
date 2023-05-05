@@ -10,6 +10,7 @@ import {
     getAllNftSuccessSuperAdmin,
     getNftBuyerSuccess,
     getsbtTokenSuccess,
+    getsbtToken
 } from './actions';
 import {
     GET_ALL_NFT,
@@ -544,29 +545,18 @@ function* addSbtTokenSaga({ payload }) {
     formData.append('address', payload.address);
     formData.append('brandSymbol', payload.brandSymbol);
     formData.append('metaData', JSON.stringify(payload.metaData));
-    // formData.append('fieldName', payload.fieldName);
-    // formData.append('fieldValue', payload.fieldValue);
-    // formData.append('description', payload.description);
-    // formData.append('directBuyerAddress', payload.directBuyerAddress);
-    // formData.append('isDirectTransfer', payload.isDirectTransfer);
-    // formData.append('categoryId', payload.categoryId);
-    // formData.append('quantity', payload.quantity);
-    // formData.append('metaData', JSON.stringify(payload.metaDataArray));
-    // formData.append('mintType', payload.mintType);
-    // formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
-    // for (let i = 0; i < payload.fileArray.length; i++) {
-    //     formData.append('fileArray', payload.fileArray[i]);
-    // }
+
     try {
         const headers = { headers: { Authorization: `Bearer ${yield select(makeSelectAuthToken())}` } };
         const response = yield axios.post(`/addsoulbound`, formData, headers);
-        // yield put(
-        //     getsbtToken({
-        //         page: payload.page,
-        //         limit: payload.limit,
-        //     })
-        // );
-        payload.handleClose();
+        yield put(
+            getsbtToken({
+                page: payload.page,
+                limit: payload.limit,
+            })
+        );
+        payload.setAddNftOpen(false);
+        // payload.handleClose();   
         yield setNotification('success', response.data.message);
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
