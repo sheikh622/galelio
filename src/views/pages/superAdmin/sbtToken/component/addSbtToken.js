@@ -148,8 +148,6 @@ export default function addSbtToken({ open, setOpen }) {
             ).wait();
             
             const tokenId = parseInt(safeMint.events[0].args[2])
-
-
             console.log("tokenId", tokenId);
             console.log("safeMint", safeMint)
 
