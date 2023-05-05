@@ -187,6 +187,7 @@ const PropertiesView = ({ nftList }) => {
         console.log('address', address);
         console.log('tokenId', tokenId);
         // if (token != undefined && token != '0') {
+
         navigate('/tracking/' + serialId, {
             state: {
                 tokenId: tokenId,
@@ -733,26 +734,25 @@ const PropertiesView = ({ nftList }) => {
                                             <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
                                                 <FormControl
                                                     sx={{
-                                                        background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
+                                                       
                                                         color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
-                                                        padding: '10px 10px 10px 10px',
+                                                     
                                                         borderRadius: '4px'
                                                     }}
                                                     fullWidth
                                                 >
-                                                    <InputLabel id="demo-simple-select-label">PROOF OF AUTHENTICITY</InputLabel>
+                                                    <InputLabel id="demo-simple-select-label">
+                                                        PROOF OF AUTHENTICITY
+                                                    </InputLabel>
                                                     <Select
                                                         variant="standard"
-                                                        labelId="demo-simple-select-label"
+                                                        // labelId="demo-simple-select-label"
                                                         id="demo-simple-select"
                                                         value={age}
-                                                        // label="Age"
                                                         onChange={handleChange}
                                                         fullWidth
                                                         inputProps={{ 'aria-label': 'Without label' }}
-
                                                     // displayEmpty
-
                                                     >
                                                         {nftList?.nft?.NFTMetaFiles.map((option) => (
                                                             <MenuItem
@@ -762,7 +762,6 @@ const PropertiesView = ({ nftList }) => {
                                                                 }}
                                                             >
                                                                 {option?.fieldName}</MenuItem>
-
                                                         ))}
                                                     </Select>
                                                 </FormControl>
@@ -775,7 +774,7 @@ const PropertiesView = ({ nftList }) => {
                                                         <InputLabel id="demo-simple-select-label">Serial Id :</InputLabel>
                                                         <Select
                                                             variant="standard"
-                                                            labelId="demo-simple-select-label"
+                                                            // labelId="demo-simple-select-label"
                                                             id="demo-simple-select"
                                                             value={age}
                                                             // label="Age"
