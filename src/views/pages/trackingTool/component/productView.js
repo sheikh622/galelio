@@ -82,9 +82,9 @@ const Product = ({ tracking }) => {
                                             <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
                                                 <FormControl
                                                     sx={{
-                                                        background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
+                                                      
                                                         color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
-                                                        padding: '10px 10px 10px 10px',
+                                                       
                                                         borderRadius: '4px'
                                                     }}
                                                     fullWidth
