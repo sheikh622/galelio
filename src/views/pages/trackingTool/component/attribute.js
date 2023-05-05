@@ -23,7 +23,7 @@ import doc from 'assets/images/doc.png';
 const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
-    // console.log(tracking.nft?.NFTMetaData.length , 'tracking.nft?.NFTMetaData.length=========>');
+    console.log(tracking.nft?.requesterAddress, 'tracking.nft=========>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -84,14 +84,20 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                         className="property-update"
                                         sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#000' }}
                                     >
-                                        Updated by:
+                                        Created by:
                                     </Typography>
-                                    <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' }}>
+                                    <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' , cursor:'pointer' }} 
+                                    onClick={() => {
+                                        window.open(`https://mumbai.polygonscan.com/address/${tracking.nft?.requesterAddress}`, '_blank');
+                                    }}
+                                    >
                                         {' '}
-                                        {Date(tracking?.nft?.updatedAt).slice(0, 15)}
+                                        {tracking.nft?.requesterAddress?.slice(0, 5) +
+                                            '...' +
+                                            tracking.nft?.requesterAddress?.slice(38, 42)}
                                     </Typography>
                                 </Grid>
-                               {/*  <Grid item xs={2} className="doc-property" sx={{}}>
+                                {/*  <Grid item xs={2} className="doc-property" sx={{}}>
                                     {theme.palette.mode === 'dark' ? (
                                         <Box
                                             className="doc-heading"
@@ -136,7 +142,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                     <Grid item xs={12} md={4}>
                                         <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
                                             <CardContent sx={{ padding: '18px 12px' }}>
-                                               {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
+                                                {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                     <img src={tick} />
                                                 </Grid> */}
                                                 <p className="Engine"> {item?.fieldName}</p>
@@ -147,10 +153,10 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                                 >
                                                     {item?.fieldValue}
                                                 </Typography>
-                                                <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
+                                                {/*   <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
                                                     2023
-                                                </p>
-                                                <Grid item xs={12} className="document" sx={{ m: 1 }}>
+                                                </p> */}
+                                                {/*  <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                                     {theme.palette.mode === 'dark' ? (
                                                         <Box
                                                             onClick={() => {
@@ -181,18 +187,19 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                                             <DocLight />
                                                         </Box>
                                                     )}
-                                                </Grid>
+                                                </Grid> */}
                                             </CardContent>
                                         </Card>
                                     </Grid>
                                 ))}
                             </Grid>
-                           {tracking.nft?.NFTMetaData.length > 3 && <Pagination
-                                count={Math.ceil(tracking.nft?.NFTMetaData.length / cardsPerPage)}
-                                onChange={(event, value) => setCurrentPage(value)}
-                                page={currentPage}
-                            />
-                           }
+                            {tracking.nft?.NFTMetaData.length > 3 && (
+                                <Pagination
+                                    count={Math.ceil(tracking.nft?.NFTMetaData.length / cardsPerPage)}
+                                    onChange={(event, value) => setCurrentPage(value)}
+                                    page={currentPage}
+                                />
+                            )}
                         </MuiAccordionDetails>
                     </MuiAccordion>
                 ))}
