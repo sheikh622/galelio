@@ -15,8 +15,11 @@ import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
+import { ethers } from 'ethers';
 const Activity = ({ tracking }) => {
-    console.log(tracking?.activity, 'ACTIVITY=====================>>>');
+//    let index=1;
+//    let price = ethers.utils.formatEther(tracking?.activity[index].price)
+//     console.log(price , 'price=====================>>>');
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -187,9 +190,9 @@ const Activity = ({ tracking }) => {
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Event{' '}
                                             </TableCell>
-                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                          {/*   <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Brand Name{' '}
-                                            </TableCell>
+                                            </TableCell> */}
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Price{' '}
                                             </TableCell>
@@ -329,7 +332,7 @@ const Activity = ({ tracking }) => {
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
                                                     {item.event}
                                                 </TableCell>
-                                                {item?.brandImage ? (
+                                       {/*          {item?.brandImage ? (
                                                     <TableCell
                                                         className="activityTable"
                                                         sx={{ fontSize: '15px', display: 'flex' }}
@@ -357,7 +360,7 @@ const Activity = ({ tracking }) => {
                                                             {item?.brandImage ? item?.brandName : ''}
                                                         </Grid>
                                                     </TableCell>
-                                                )}
+                                                )} */}
 
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
                                                     {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
