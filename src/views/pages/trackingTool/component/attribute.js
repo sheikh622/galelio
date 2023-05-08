@@ -20,7 +20,7 @@ import tick from 'assets/images/tick.png';
 import doc from 'assets/images/doc.png';
 // ==============================|| ACCORDION ||============================== //
 
-const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
+const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle , serialId }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
     console.log(tracking.nft?.requesterAddress, 'tracking.nft=========>');
@@ -32,7 +32,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
     useEffect(() => {
         setExpanded(defaultExpandedId);
     }, [defaultExpandedId]);
-    const cardsPerPage = 3;
+    const cardsPerPage = 4;
     const [currentPage, setCurrentPage] = useState(1);
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -144,9 +144,9 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                     height: { md: '160px' }
                                 }}
                             >
-                                {currentCards?.map((item) => (
+                                {tracking.nft?.NFTMetaData?.map((item) => (
                                     <>
-                                        {item?.fieldName == 'Serial ID' && (
+                                        {item?.fieldName == 'Serial ID' && item?.fieldValue == serialId &&  (
                                             <Grid item xs={12} md={4}>
                                                 <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
                                                     <CardContent sx={{ padding: '18px 12px' }}>
