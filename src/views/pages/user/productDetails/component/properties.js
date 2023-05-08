@@ -15,7 +15,7 @@ import { gridSpacing } from 'store/constant';
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
 const Properties = ({  nftList }) => {
-    // console.log(nftList?.nft?.id, 'properties==>');
+    console.log("nftList", nftList);
     const theme = useTheme();
     const [propertiesOpen, setPropertiesOpen] = useState(false);
     const [metadata, setMetadata] = useState('');
@@ -103,7 +103,7 @@ const Properties = ({  nftList }) => {
                                                     <Grid item xs={12}>
                                                         <Tooltip placement="right" title={item.fieldName}>
                                                             <Typography className="pbackground encap-fieldName" variant="h3">
-                                                                {item?.fieldName.slice(0, 12)}
+                                                                {item?.fieldName?.slice(0, 12)}
                                                             </Typography>
                                                         </Tooltip>
                                                     </Grid>
@@ -114,7 +114,7 @@ const Properties = ({  nftList }) => {
                                                             className="centerText encapPropertry"
                                                             variant="h3"
                                                         >
-                                                            {item?.fieldValue.slice(0, 12)}{' '}
+                                                            {item?.fieldValue?.slice(0, 12)}{' '}
                                                         </Typography>
                                                         </Tooltip>
                                                     </Grid>
