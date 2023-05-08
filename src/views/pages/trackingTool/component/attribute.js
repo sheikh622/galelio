@@ -32,7 +32,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
     useEffect(() => {
         setExpanded(defaultExpandedId);
     }, [defaultExpandedId]);
-    const cardsPerPage = 4;
+    const cardsPerPage = 3;
     const [currentPage, setCurrentPage] = useState(1);
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -144,7 +144,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                     height: { md: '160px' }
                                 }}
                             >
-                                {tracking.nft?.NFTMetaData?.map((item) => (
+                                {currentCards?.map((item) => (
                                     <>
                                         {item?.fieldName == 'Serial ID' && item?.fieldValue == serialId &&  (
                                             <Grid item xs={12} md={4}>
