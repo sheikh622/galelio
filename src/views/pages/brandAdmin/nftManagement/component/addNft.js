@@ -49,6 +49,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const typeArray = [
@@ -57,7 +62,28 @@ const typeArray = [
         label: 'USDT'
     }
 ];
+const dropdown = [
+    {
+        value: "Text",
+        label: "Text",
+    },
+    {
+        value: "Number",
+        label: "Number",
+    },
+    {
+        value: "Date",
+        label: "Date",
+    },
+    {
+        value: "Location",
+        label: "Location",
+    }
 
+
+
+
+]
 export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
@@ -75,12 +101,19 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     };
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [type, setType] = useState('USDT');
+    const [drop, setDrop] = useState('Text');
     const [loader, setLoader] = useState(false);
     const [fileDataArray, setFileDataArray] = useState([]);
     const [isDirectTransfer, setIsDirectTransfer] = useState(false);
     const [wallettoggle, setWallettoggle] = useState(false);
     const handleType = (event) => {
         setType(event.target.value);
+    };
+    const metadataDropDown = (event) => {
+
+        setDrop(event.target.value);
+        setAge(event.target.value);
+        setFieldShow(event.target.value);
     };
     const [checked, setChecked] = useState(false);
     // const [value, setValue] = useState(dayjs('2022-04-17'));
@@ -337,7 +370,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         array.splice(index, 1);
         setFileDataArray(array);
     };
-
+    console.log("55555555555555555555", fieldDataArray);
     return (
         <>
             <Dialog fullScreen
@@ -511,27 +544,44 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
 
                         {fieldDataArray.length != 0 && (
                             <>
-                                <FormControl sx={{ m: 3, minWidth: 140 }}>
-                                    <Select
-                                        value={age}
-                                        onChange={handleDropDown}
-                                        displayEmpty
-                                        inputProps={{ 'aria-label': 'Without label' }}
-                                    >
-                                        {/* <MenuItem value={10}>
-                                            <em>Text</em>
-                                        </MenuItem> */}
-                                        <MenuItem value="Text">Text</MenuItem>
-                                        <MenuItem value="Number">Number</MenuItem>
-                                        <MenuItem value="Date">Date</MenuItem>
-                                        <MenuItem value="Location">Location</MenuItem>
 
-                                    </Select>
-                                </FormControl>
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5} md={3}>
+                                            <Grid xs={5} md={3}>
+                                                <TextField
+                                                    sx={{ m: 6, width: "80%", borderRadius: "2%" }} className='w-100'
+                                                    // className="textfieldStyle"
+                                                    variant="filled"
+                                                    id="outlined-select-budget"
+                                                    select
+                                                    fullWidth
+                                                    value={drop}
+                                                    onChange={metadataDropDown}
+                                                >
+                                                    {dropdown.map((option, index) => (
+                                                        <MenuItem key={index} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
+                                            </Grid>
+                                            {/* <Grid item xs={5} md={3}>
+                                                <FormControl sx={{ m: 2, width: "80%", borderRadius: "2%" }} className='w-100'>
+                                                    <Select
+                                                        value={age}
+                                                        onChange={handleDropDown}
+                                                        displayEmpty
+                                                        inputProps={{ 'aria-label': 'Without label' }}
+                                                    >
+                                                        <MenuItem value="Text">Text</MenuItem>
+                                                        <MenuItem value="Number">Number</MenuItem>
+                                                        <MenuItem value="Date">Date</MenuItem>
+                                                        <MenuItem value="Location">Location</MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </Grid> */}
+                                            <Grid item xs={2} md={2}>
                                                 <TextField
                                                     id="field_name"
                                                     className="textfieldStyle"
@@ -546,7 +596,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 />
                                             </Grid>
                                             {fieldShow == "Text" && (
-                                                <Grid item xs={5} md={3}>
+                                                <Grid item xs={2} md={2}>
 
                                                     <TextField
                                                         className="textfieldStyle"
@@ -562,9 +612,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     />
                                                 </Grid>
                                             )}
-
                                             {fieldShow == "Number" && (
-                                                <Grid item xs={5} md={3}>
+                                                <Grid item xs={2} md={2}>
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="Number"
@@ -581,22 +630,22 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             )}
                                             {fieldShow == "Date" && (
                                                 <>
-                                                    {/* <Grid item xs={5} md={3} className="my-2 w-100"> */}
-                                                    < LocalizationProvider dateAdapter={AdapterDayjs} >
-                                                        <DemoContainer components={['DatePicker']} >
-                                                            <DatePicker label="Basic date picker" />
-                                                        </DemoContainer>
-                                                    </LocalizationProvider >
-                                                    {/* </Grid> */}
+                                                    <Grid item xs={5} md={3} className="my-2 w-100">
+                                                        < LocalizationProvider dateAdapter={AdapterDayjs} >
+                                                            <DemoContainer components={['DatePicker']} >
+                                                                <DatePicker label="Basic date picker" />
+                                                            </DemoContainer>
+                                                        </LocalizationProvider >
+                                                    </Grid>
                                                 </>
                                             )}
                                             {fieldShow == "Location" && (
-                                                <Grid item xs={5} md={3}>
+                                                <Grid item xs={2} md={2}>
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="location"
                                                         name="location"
-                                                        label="Location"
+                                                        label="Postal Code"
                                                         value={data.fieldValue}
                                                         onChange={(e) => {
                                                             handleFieldValueChange(e.target.value, index);
@@ -604,9 +653,24 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         variant="standard"
                                                         fullWidth
                                                     />
+                                                    <FormControlLabel required control={<Checkbox />} label="check" />
                                                 </Grid>
+
                                             )}
-                                            <Grid item xs={2} mt={2} md={3}>
+                                            {fieldShow == "Location" && (
+                                                <Grid item xs={2} md={2} sx={{ m: 2, width: "50%", borderRadius: "2%" }}>
+                                                    <PhoneInput
+                                                         className='phoneInput'
+                                                        country={'pk'}
+                                                        value={this?.state?.phone}
+                                                    // onChange={phone => this.setState({ phone })}
+                                                    />
+                                                </Grid>
+
+                                            )}
+
+
+                                            <Grid item xs={4} mt={2} md={2}>
 
                                                 <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
                                                     <Switch
@@ -642,7 +706,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
                                             </Grid>
-                                            <Grid item xs={2} mt={2} md={3}></Grid>
                                         </>
                                     ))}
                                 </Grid >
