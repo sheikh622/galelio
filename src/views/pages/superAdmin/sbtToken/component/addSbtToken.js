@@ -39,7 +39,6 @@ import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
 import { DataArraySharp } from '@mui/icons-material';
-
 import { ethers, utils } from 'ethers';
 import SBTAddress from "contractAbi/SBT-address.json";
 import SBTAbi from "contractAbi/SBT.json";
@@ -58,7 +57,7 @@ export default function addSbtToken({ open, setOpen, nftList }) {
 
     ]);
     const [loader, setLoader] = useState(false);
-
+    const [uploadedImages, setUploadedImages] = useState([]);
 
 
     const handleError = (fieldDataArray, values) => {
@@ -110,7 +109,8 @@ export default function addSbtToken({ open, setOpen, nftList }) {
         initialValues: {
             SBTName: '',
             symbol: '',
-            Address: ''
+            Address: '',
+            images: []
             // fieldName: '',
             // fieldValue: ''
         },
@@ -162,6 +162,7 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                     address: values.Address,
                     brandSymbol: values.symbol,
                     metaData: fieldDataArray,
+                    asset: values.images[0].image,
                     handleClose: handleClose,
                 })
             );
@@ -174,6 +175,8 @@ export default function addSbtToken({ open, setOpen, nftList }) {
         formik.resetForm();
         setFieldDataArray([]);
         setLoader(false);
+        setUploadedImages([]);
+
     };
 
     const handleFieldNameChange = (value, index) => {
@@ -191,6 +194,29 @@ export default function addSbtToken({ open, setOpen, nftList }) {
         array.splice(index, 1);
         setFieldDataArray(array);
     };
+    // const handleDrop = useCallback(
+    //     (acceptedFiles) => {
+    //         let newUploadedImages = [...uploadedImages];
+    //         acceptedFiles.map(async (acceptedFile) => {
+    //             let data = { image: acceptedFile, quantity: 1 };
+    //             newUploadedImages = [...newUploadedImages, data];
+    //         });
+    //         formik.setFieldValue('images', newUploadedImages);
+    //         setUploadedImages(newUploadedImages);
+    //     },
+
+    //     [formik.setFieldValue, uploadedImages]
+    // );
+    // const handleRemoveFile = (file, index) => {
+    //     const newFiles = [...formik.values.images];
+    //     newFiles.splice(index, 1);
+    //     setUploadedImages(newFiles);
+    //     formik.setFieldValue('images', newFiles);
+    // };
+    // const { getRootProps, getInputProps, isDragActive, isDragReject, isDragAccept } = useDropzone({
+    //     accept: '.jpeg,.png,.jpg,.gif',
+    //     onDrop: handleDrop
+    // });
     return (
         <>
             <Dialog
@@ -387,7 +413,75 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                                 </Grid>
                             </>
                         )}
+                        {/* {uploadedImages.length !== 1 && (
+                            <Grid
+                                sx={{ background: '#c5cbe9', borderRadius: '5px', paddingBottom: '2rem', paddingTop: '2rem' }}
+                                item
+                                lg={12}
+                                mt={10}
+                            >
+                                <div className={clsx('dropZoneContainer', 'xyz')}>
+                                    <div
+                                        className={clsx('dropZone', {
+                                            isDragActive: isDragActive,
+                                            isDragAccept: isDragAccept,
+                                            isDragReject: isDragReject
+                                        })}
+                                        {...getRootProps()}
+                                    >
+                                        <input {...getInputProps()} />
 
+                                        <Grid container direction="column">
+                                            <Box
+                                                textAlign="center"
+                                                component="img"
+                                                alt="Select File"
+                                                src={UploadImage}
+                                                sx={{ height: 60 }}
+                                            />
+
+                                            <Box mt={4} textAlign="center" sx={{ ml: { md: 0 } }}>
+                                                <Typography variant="subtitle" sx={{ color: 'grey', textAlign: 'center' }}>
+                                                    Drop your image or&nbsp;
+                                                    <Link underline="always">browse</Link>.&nbsp;
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                    </div>
+                                </div>
+                            </Grid>
+                        )} */}
+                        {/* <Grid item lg={12} mt={3}>
+                            <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
+                                <AnimatePresence>
+                                    {formik.values.images &&
+                                        formik.values.images.map((file, index) => (
+                                            <ListItem key={file.image.name} component={motion.div} className="listItem">
+                                                <ListItemIcon>
+                                                    <Icon icon={fileFill} width={32} height={32} />
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={file.image.name ? file.image.name : ''}
+                                                    primaryTypographyProps={{
+                                                        variant: 'h3'
+                                                    }}
+                                                />
+                                                {mintType == 'directMint' && (
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                )}
+                                                <IconButton
+                                                    color="error"
+                                                    edge="end"
+                                                    size="small"
+                                                    onClick={() => handleRemoveFile(file.image, index)}
+                                                >
+                                                    <Icon icon={closeFill} width={28} height={28} />
+                                                </IconButton>
+                                            </ListItem>
+                                        ))}
+                                </AnimatePresence>
+                            </List>
+                        </Grid> */}
                     </form>
                     <Grid container>
                         <DialogActions>
