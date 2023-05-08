@@ -16,7 +16,7 @@ export default function Form(){
     // Important! Always set the container height explicitly
     <div className="map" style={{ border: '2px solid #2F53FF' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "" }}
+      bootstrapURLKeys={{ key: "" }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
