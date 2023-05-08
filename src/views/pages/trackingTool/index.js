@@ -146,7 +146,7 @@ const TrackingTool = () => {
                                         <Product tracking={marketplaceNfts} />
                                     </Grid>
                                     <Grid item md={12} xs={12}>
-                                        <TrackAtribute tracking={marketplaceNfts} />
+                                        <TrackAtribute tracking={marketplaceNfts} serialId={serialId} />
                                     </Grid>
                                     <Grid item md={12} xs={12}>
                                         <Activity tracking={marketplaceNfts} />

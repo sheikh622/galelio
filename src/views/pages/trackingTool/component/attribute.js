@@ -20,7 +20,7 @@ import tick from 'assets/images/tick.png';
 import doc from 'assets/images/doc.png';
 // ==============================|| ACCORDION ||============================== //
 
-const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
+const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle , serialId }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
     console.log(tracking.nft?.requesterAddress, 'tracking.nft=========>');
@@ -86,10 +86,16 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                     >
                                         Created by:
                                     </Typography>
-                                    <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' , cursor:'pointer' }} 
-                                    onClick={() => {
-                                        window.open(`https://mumbai.polygonscan.com/address/${tracking.nft?.requesterAddress}`, '_blank');
-                                    }}
+                                    <Typography
+                                        variant="body"
+                                        className="property-update"
+                                        sx={{ color: '#2F92FF !important', cursor: 'pointer' }}
+                                        onClick={() => {
+                                            window.open(
+                                                `https://mumbai.polygonscan.com/address/${tracking.nft?.requesterAddress}`,
+                                                '_blank'
+                                            );
+                                        }}
                                     >
                                         {' '}
                                         {tracking.nft?.requesterAddress?.slice(0, 5) +
@@ -139,24 +145,26 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                 }}
                             >
                                 {currentCards?.map((item) => (
-                                    <Grid item xs={12} md={4}>
-                                        <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
-                                            <CardContent sx={{ padding: '18px 12px' }}>
-                                                {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
+                                    <>
+                                        {item?.fieldName == 'Serial ID' && item?.fieldValue == serialId &&  (
+                                            <Grid item xs={12} md={4}>
+                                                <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
+                                                    <CardContent sx={{ padding: '18px 12px' }}>
+                                                        {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                     <img src={tick} />
                                                 </Grid> */}
-                                                <p className="Engine"> {item?.fieldName}</p>
-                                                <Typography
-                                                    variant="h6"
-                                                    className="V8"
-                                                    sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                                >
-                                                    {item?.fieldValue}
-                                                </Typography>
-                                                {/*   <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
+                                                        <p className="Engine"> {item?.fieldName}</p>
+                                                        <Typography
+                                                            variant="h6"
+                                                            className="V8"
+                                                            sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
+                                                        >
+                                                            {item?.fieldValue}
+                                                        </Typography>
+                                                        {/*   <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
                                                     2023
                                                 </p> */}
-                                                {/*  <Grid item xs={12} className="document" sx={{ m: 1 }}>
+                                                        {/*  <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                                     {theme.palette.mode === 'dark' ? (
                                                         <Box
                                                             onClick={() => {
@@ -188,9 +196,69 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                                         </Box>
                                                     )}
                                                 </Grid> */}
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
+                                                    </CardContent>
+                                                </Card>
+                                            </Grid>
+                                        )}
+                                    </>
+                                ))}
+                                {currentCards?.map((item) => (
+                                    <>
+                                        {item?.fieldName != 'Serial ID' && (
+                                            <Grid item xs={12} md={4}>
+                                                <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
+                                                    <CardContent sx={{ padding: '18px 12px' }}>
+                                                        {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
+                                                    <img src={tick} />
+                                                </Grid> */}
+                                                        <p className="Engine"> {item?.fieldName}</p>
+                                                        <Typography
+                                                            variant="h6"
+                                                            className="V8"
+                                                            sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
+                                                        >
+                                                            {item?.fieldValue}
+                                                        </Typography>
+                                                        {/*   <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
+                                                    2023
+                                                </p> */}
+                                                        {/*  <Grid item xs={12} className="document" sx={{ m: 1 }}>
+                                                    {theme.palette.mode === 'dark' ? (
+                                                        <Box
+                                                            onClick={() => {
+                                                                window.open(
+                                                                    'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                    '_blank'
+                                                                );
+                                                            }}
+                                                        >
+                                                            <Doc
+                                                                onClick={() => {
+                                                                    window.open(
+                                                                        'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                        '_blank'
+                                                                    );
+                                                                }}
+                                                            />
+                                                        </Box>
+                                                    ) : (
+                                                        <Box
+                                                            onClick={() => {
+                                                                window.open(
+                                                                    'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                    '_blank'
+                                                                );
+                                                            }}
+                                                        >
+                                                            <DocLight />
+                                                        </Box>
+                                                    )}
+                                                </Grid> */}
+                                                    </CardContent>
+                                                </Card>
+                                            </Grid>
+                                        )}
+                                    </>
                                 ))}
                             </Grid>
                             {tracking.nft?.NFTMetaData.length > 3 && (

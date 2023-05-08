@@ -3,13 +3,14 @@ import { Grid } from '@mui/material';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import map from 'assets/images/map.png';
+import Form from './googleMap';
 import History2 from './history2';
 import History1 from './history1';
 import History3 from './History3';
 import Attribute from './attribute';
 import { Pagination } from '@mui/material';
 
-const trackAtribute = ({ tracking }) => {
+const trackAtribute = ({ tracking , serialId }) => {
     const theme = useTheme();
     // console.log(tracking, 'marketplaceNfts in track Attribute');
 
@@ -60,7 +61,7 @@ const trackAtribute = ({ tracking }) => {
             <Grid container>
                 <Grid item xs={12} sm={6} md={6} sx={{ padding: '0 15px 0 02px' }}>
                     <Grid item xs={12} md={12}>
-                        <Attribute tracking={tracking} data={basicData} />
+                        <Attribute tracking={tracking} data={basicData} serialId={serialId}/>
                     </Grid>
                     {tracking != undefined &&
                         tracking?.historyArray &&
@@ -90,7 +91,7 @@ const trackAtribute = ({ tracking }) => {
                     </Grid> */}
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
-                    <img className="map" src={map} />
+                    <Form/>
                 </Grid>
             </Grid>
         </Grid>
