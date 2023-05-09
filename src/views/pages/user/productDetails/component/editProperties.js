@@ -69,9 +69,9 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
     // console.log(metadata, 'metadata', value, 'value');
     const validationSchema = Yup.object({
         // isUpdate: Yup.boolean().default(isUpdate),
-        firstName: Yup.string().required('First Name is required!').max(16, 'First Name can not exceed 16 characters'),
+        firstName: Yup.string().required('First Name is required!').max(25, 'First Name can not exceed 20 characters'),
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid First name'),
-        lastName: Yup.string().required('Last Name is required!').max(16, 'Last Name can not exceed 16 characters')
+        lastName: Yup.string().required('Last Name is required!').max(25, 'Last Name can not exceed 20 characters')
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
         // file: Yup.mixed().required('File is required!')
         // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid Last name'),
@@ -259,7 +259,7 @@ export default function Edit({ open, setOpen, metadata, value,  id, editable, pr
                                         className="field"
                                         id="firstName"
                                         name="firstName"
-                                        value={formik.values.firstName}
+                                        value={metadata}
                                         onChange={formik.handleChange}
                                         error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                                         helperText={formik.touched.firstName && formik.errors.firstName}

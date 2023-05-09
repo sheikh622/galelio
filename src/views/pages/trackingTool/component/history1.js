@@ -4,7 +4,7 @@ import '@fontsource/public-sans';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Grid, Typography } from '@mui/material';
-import { MenuItem, Menu, Card, CardContent } from '@mui/material';
+import { MenuItem, Menu, Card, CardContent , Tooltip } from '@mui/material';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -140,14 +140,18 @@ const history1 = ({ data, defaultExpandedId = null, expandIcon, square, toggle, 
                                                     {/* <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                 <img src={tick} />
                                             </Grid> */}
-                                                    <p className="Engine"> {card.trait_type}</p>
-                                                    <Typography
+                                            <Tooltip sx={{}} placement="top" title={card?.trait_type}>
+                                              <p className="Engine"> {card.trait_type.slice(0,7)}</p>
+                                              </Tooltip>
+                                                    <Tooltip sx={{}} placement="bottom" title={card?.value}>
+                                                      <Typography
                                                         variant="h6"
                                                         className="V8"
-                                                        sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
+                                                        sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' , cursor:'pointer'}}
                                                     >
-                                                        {card.value}
+                                                        {card.value.slice(0,7)}
                                                     </Typography>
+                                                    </Tooltip>
                                                {/*      <p
                                                         className="y2023"
                                                         sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}
