@@ -45,9 +45,10 @@ import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import DatePicker from "react-multi-date-picker";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -99,6 +100,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFieldShow(event.target.value);
 
     };
+    const [value, setValue] = useState(new Date());
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [type, setType] = useState('USDT');
     const [drop, setDrop] = useState('Text');
@@ -110,7 +112,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setType(event.target.value);
     };
     const metadataDropDown = (event) => {
-
+console
         setDrop(event.target.value);
         setAge(event.target.value);
         setFieldShow(event.target.value);
@@ -149,7 +151,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             isValid = false;
             toast.error('Proof of Authenticity is required');
         }
-
+console.log("fileDataArray000000000000000000000000",fileDataArray);
         //    else (fileDataArray.length > 0) {
         console.log('im here 2');
         fileDataArray.map((array) => {
@@ -328,6 +330,16 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         // setFieldDataArray(array);
         // console.log(event.target.checked,'value==============?')
     };
+    const handleSelect = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = [...fieldDataArray];
+        array[index].type = event.target?.value;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
     const handleproof = (event, index) => {
         // setChecked(event.target.checked);
         let array = [...fieldDataArray];
@@ -438,7 +450,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-
                             <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
@@ -454,7 +465,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-
                             <Grid xs={4} md={4} lg={4} mt={1.5}>
                                 <TextField
                                     className="textfieldStyle"
@@ -531,6 +541,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             {
                                                 fieldName: '',
                                                 fieldValue: '',
+                                                type:"Text",
                                                 isEditable: false,
                                                 proofRequired: false
                                             }
@@ -556,8 +567,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     id="outlined-select-budget"
                                                     select
                                                     fullWidth
-                                                    value={drop}
-                                                    onChange={metadataDropDown}
+                                                    value={data.type}
+                                                    onChange={(e) => {
+                                                        handleSelect(e, index);
+                                                    }}
+                                                    // value={drop}
+                                                    // onChange={metadataDropDown}
                                                 >
                                                     {dropdown.map((option, index) => (
                                                         <MenuItem key={index} value={option.value}>
@@ -595,8 +610,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     fullWidth
                                                 />
                                             </Grid>
-                                            {fieldShow == "Text" && (
-                                                <Grid item xs={2} md={2}>
+                                            {data.type == "Text" && (
+                                                <Grid item xs={3} md={3}>
 
                                                     <TextField
                                                         className="textfieldStyle"
@@ -612,34 +627,31 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     />
                                                 </Grid>
                                             )}
-                                            {fieldShow == "Number" && (
-                                                <Grid item xs={2} md={2}>
+                                            {data.type == "Number" && (
+                                                <Grid item xs={3} md={3}>
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="Number"
                                                         name="Number"
                                                         label="Number"
                                                         value={data.fieldValue}
-                                                        onChange={(e) => {
-                                                            handleFieldValueChange(e.target.value, index);
-                                                        }}
+                                                        // onChange={(e) => {
+                                                        //     handleFieldValueChange(e.target.value, index);
+                                                        // }}
                                                         variant="standard"
                                                         fullWidth
                                                     />
                                                 </Grid>
                                             )}
-                                            {fieldShow == "Date" && (
+                                            {data.type == "Date" && (
                                                 <>
-                                                    <Grid item xs={5} md={3} className="my-2 w-100">
-                                                        < LocalizationProvider dateAdapter={AdapterDayjs} >
-                                                            <DemoContainer components={['DatePicker']} >
-                                                                <DatePicker label="Basic date picker" />
-                                                            </DemoContainer>
-                                                        </LocalizationProvider >
+                                                    <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }} >
+                                                        <DatePicker value={value} onChange={setValue} />
+
                                                     </Grid>
                                                 </>
                                             )}
-                                            {fieldShow == "Location" && (
+                                            {data.type == "Location" && (
                                                 <Grid item xs={2} md={2}>
                                                     <TextField
                                                         className="textfieldStyle"
@@ -657,20 +669,19 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 </Grid>
 
                                             )}
-                                            {fieldShow == "Location" && (
+                                            {data.type == "Location" && (
                                                 <Grid item xs={2} md={2} sx={{ m: 2, width: "50%", borderRadius: "2%" }}>
                                                     <PhoneInput
-                                                         className='phoneInput'
+                                                        className='phoneInput'
                                                         country={'pk'}
                                                         value={this?.state?.phone}
                                                     // onChange={phone => this.setState({ phone })}
                                                     />
                                                 </Grid>
-
                                             )}
 
 
-                                            <Grid item xs={4} mt={2} md={2}>
+                                            <Grid item xs={2} mt={2} md={2}>
 
                                                 <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
                                                     <Switch
@@ -818,7 +829,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 </div>
                             </Grid>
                         )}
-
                         <Grid item lg={12} mt={3}>
                             <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
                                 <AnimatePresence>
