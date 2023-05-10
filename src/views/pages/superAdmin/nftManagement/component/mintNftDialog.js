@@ -14,6 +14,7 @@ import { Buffer } from 'buffer';
 import MarketplaceAbi from '../../../../../contractAbi/Marketplace.json';
 import MarketplaceAddress from '../../../../../contractAbi/Marketplace-address.json';
 import BLOCKCHAIN from '../../../../../constants';
+import { SNACKBAR_OPEN } from 'store/actions';
 import { Oval } from 'react-loader-spinner';
 const projectId = '2GGvNmnqRYjnz7iJU9Kn6Nnw97C';
 const projectSecret = 'a09de1e8b20292cd87460290de554003';
@@ -269,7 +270,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                         let mintedNFT = await (
                             await nft.mint(tokenUri, erc20Address, price, nftData.requesterAddress).catch((error) => {
                                 console.log(error)
-                                toast.error(error.reason);
+                                // toast.error(error.reason);
                                 setLoader(false);
                                 setOpen(false);
                             })
@@ -657,6 +658,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     variant="contained"
                                     size="small"
                                     onClick={() => {
+                                        checkWallet();
                                         if (!loader) {
                                             if (nftData.mintType == 'directMint') {
                                                 handleDirectMint();
