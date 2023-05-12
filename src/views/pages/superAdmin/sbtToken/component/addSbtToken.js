@@ -41,50 +41,36 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
 import { DataArraySharp } from '@mui/icons-material';
 
+import { ethers, utils } from 'ethers';
+import SBTAddress from "contractAbi/SBT-address.json";
+import SBTAbi from "contractAbi/SBT.json";
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-const typeArray = [
-    {
-        value: 'USDT',
-        label: 'USDT'
-    }
-];
 
-export default function addSbtToken({ open, setOpen, data, search, page, limit, nftType }) {
+export default function addSbtToken({ open, setOpen }) {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
-    const [mintType, setMintType] = useState('directMint');
+    // const user = useSelector((state) => state.auth.user);
 
-    const [uploadedImages, setUploadedImages] = useState([]);
 
-    const [fieldDataArray, setFieldDataArray] = useState([]);
-    const [type, setType] = useState('USDT');
+    const [fieldDataArray, setFieldDataArray] = useState([
+
+
+
+    ]);
     const [loader, setLoader] = useState(false);
-    const [fileDataArray, setFileDataArray] = useState([]);
-    const [isDirectTransfer, setIsDirectTransfer] = useState(false);
-    const [wallettoggle, setWallettoggle] = useState(false);
-    const handleType = (event) => {
-        setType(event.target.value);
-    };
-    const [checked, setChecked] = useState(false);
 
-    const handleError = (fieldDataArray, fileDataArray, values) => {
-        // console.log('im in handle error');
+
+
+    const handleError = (fieldDataArray, values) => {
+
         let isValid = true;
-        // console.log('fieldDataArray', fieldDataArray);
-        // console.log('fileDataArray', fileDataArray);
-        // console.log('values', values);
+
 
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
         }
-        if (checked == true) {
-            // isValid = false;
-            // toast.error('Wallet address is required');
-        }
-
-        // else  (fieldDataArray.length > 0) {
 
         fieldDataArray.map((array) => {
             if (array.fieldName == '') {
@@ -95,42 +81,9 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                 toast.error(`Metadata value cannot be empty`);
             }
         });
-        // }
-        if (fileDataArray.length == 0) {
-            isValid = false;
-            toast.error('Proof of Authenticity is required');
-        }
 
-        //    else (fileDataArray.length > 0) {
-        console.log('im here 2');
-        fileDataArray.map((array) => {
-            if (array.fieldName == '') {
-                isValid = false;
-                toast.error(`File name field is mandatory`);
-            } else if (array.fieldValue == null) {
-                isValid = false;
-                toast.error(`Attach proof of authenticity`);
-            } else if (array.fieldValue?.size / 1000000 > 5) {
-                isValid = false;
-                toast.error(`Please attach a less than 5 mb proof of authenticity`);
-            }
-        });
-        // }
+        console.log('im here');
 
-        if (values.images.length == 0) {
-            toast.error('Please upload a NFT Image');
-            isValid = false;
-        } else if (values.images[0].image.size / 1000000 > 5) {
-            toast.error('Please upload a image less than 5 mb');
-            isValid = false;
-        } else if (values.images[0].image.name.split('.').pop() !== 'jpg' && values.images[0].image.name.split('.').pop() !== 'png') {
-            toast.error('Upload the files with these extensions: jpg, png, gif');
-            isValid = false;
-        } else if (parseInt(values.images[0].quantity) <= 0) {
-            toast.error('NFT Quantity should be atleast one');
-            isValid = false;
-        }
-        console.log(values.images, 'values.images.length');
 
         return isValid;
     };
@@ -169,27 +122,23 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
             Address: ''
         },
         validationSchema,
-        onSubmit: (values) => {
-            // console.log('values', values);
+        onSubmit: async (values) => {
 
-            let fileArray = fileDataArray.map((data) => {
-                return data.fieldValue;
-            });
-            let fileNameArray = fileDataArray.map((data) => {
-                return data.fieldName;
-            });
 
-            let isValid = handleError(fieldDataArray, fileDataArray, values);
-            // console.log('isValid', isValid);
+            console.log("values", values)
 
-            if (isValid == true) {
-                var WAValidator = require('wallet-address-validator');
+            fieldDataArray.unshift({
+                "fieldName": "Validtype",
+                "fieldValue": "true"
+            },
+                {
+                    "fieldName": "Date",
+                    "fieldValue": Date.now().toString()
+                }
+            )
 
-                var valid = WAValidator.validate(values.directBuyerAddress, 'ETH');
-                if (valid || values.directBuyerAddress == '') {
-                    //  toast.success(``);
+            console.log("fieldDataArray", fieldDataArray)
 
-                    console.log('This is a valid wallet address');
 
                     setLoader(true);
                     // dispatch(
@@ -219,48 +168,19 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                     //         isDirectTransfer: values.directBuyerAddress == '' ? false : true
                     //     })
                     // );
-                } else toast.error(`Wallet Address invalid !`);
+                }
                 // console.log('Address INVALID');
-            }
-        }
+            
+        
     });
 
-    const hasFile = formik.values.images.length > 0;
 
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
-        setMintType('directMint');
-        setType('USDT');
-        setUploadedImages([]);
         setFieldDataArray([]);
         setLoader(false);
-        setFileDataArray([]);
     };
-    const handleDrop = useCallback(
-        (acceptedFiles) => {
-            let newUploadedImages = [...uploadedImages];
-            acceptedFiles.map(async (acceptedFile) => {
-                let data = { image: acceptedFile, quantity: 1 };
-                newUploadedImages = [...newUploadedImages, data];
-            });
-            formik.setFieldValue('images', newUploadedImages);
-            setUploadedImages(newUploadedImages);
-        },
-
-        [formik.setFieldValue, uploadedImages]
-    );
-    const handleRemoveFile = (file, index) => {
-        const newFiles = [...formik.values.images];
-        newFiles.splice(index, 1);
-        setUploadedImages(newFiles);
-        formik.setFieldValue('images', newFiles);
-    };
-
-    const { getRootProps, getInputProps, isDragActive, isDragReject, isDragAccept } = useDropzone({
-        accept: '.jpeg,.png,.jpg,.gif',
-        onDrop: handleDrop
-    });
 
     const handleFieldNameChange = (value, index) => {
         let array = [...fieldDataArray];
@@ -273,58 +193,17 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
         setFieldDataArray(array);
     };
 
-    const handleChange = (event, index) => {
-        // setChecked(event.target.checked);
-        let array = [...fieldDataArray];
-        array[index].isEditable = event.target?.checked;
-        setFieldDataArray(array);
-        // let array = [...fieldDataArray];
-        // [...checked] = value;
-        // setFieldDataArray(array);
-        // console.log(event.target.checked,'value==============?')
-    };
-    const handleproof = (event, index) => {
-        // setChecked(event.target.checked);
-        let array = [...fieldDataArray];
-        array[index].proofRequired = event.target?.checked;
-        setFieldDataArray(array);
-        // let array = [...fieldDataArray];
-        // [...checked] = value;
-        // setFieldDataArray(array);
-        // console.log(event.target.checked,'value==============?')
-    };
 
-    const walletadded = (event, index) => {
-        setWallettoggle(true);
-        setChecked(event.target.checked);
 
-        // let array = [...fieldDataArray];
-        // [...checked] = value;
-        // setFieldDataArray(array);
-        // console.log(event.target.checked,'value==============?')
-    };
     const handleRemoveField = (index) => {
         let array = [...fieldDataArray];
         array.splice(index, 1);
         setFieldDataArray(array);
     };
 
-    const handleFileFieldNameChange = (value, index) => {
-        let array = [...fileDataArray];
-        array[index].fieldName = value;
-        setFileDataArray(array);
-    };
-    const handleFileFieldValueChange = (value, index) => {
-        let array = [...fileDataArray];
-        array[index].fieldValue = value;
-        setFileDataArray(array);
-    };
 
-    const handleFileRemoveField = (index) => {
-        let array = [...fileDataArray];
-        array.splice(index, 1);
-        setFileDataArray(array);
-    };
+
+
 
     return (
         <>
@@ -364,11 +243,11 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                             <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
-                                    id="Status"
-                                    name="Status"
-                                    label="Status"
+                                    id="symbol"
+                                    name="symbol"
+                                    label="Symbol"
                                     fullWidth
-                                    value={formik.values.status}
+                                    value={formik.values.symbol}
                                     onChange={formik.handleChange}
                                     error={formik.touched.status && Boolean(formik.errors.status)}
                                     helperText={formik.touched.status && formik.errors.status}
@@ -406,28 +285,7 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                                     variant="standard"
                                 />
                             </Grid>
-                            {mintType == 'directMint' && (
-                                <>
-                                    {wallettoggle == true && checked == true && (
-                                        <Grid xs={12} mt={1}>
-                                            <TextField
-                                                className="textfieldStyle"
-                                                id="directBuyerAddress"
-                                                name="directBuyerAddress"
-                                                label="Wallet Address"
-                                                placeholder="wallet Address"
-                                                fullWidth
-                                                value={formik.values.directBuyerAddress}
-                                                onChange={formik.handleChange}
-                                                error={formik.touched.directBuyerAddress && Boolean(formik.errors.directBuyerAddress)}
-                                                helperText={formik.touched.directBuyerAddress && formik.errors.directBuyerAddress}
-                                                autoComplete=""
-                                                variant="standard"
-                                            />
-                                        </Grid>
-                                    )}
-                                </>
-                            )}
+
                             <Grid xs={12} mt={2}>
                                 <Button
                                     className="fieldbutton"
@@ -438,9 +296,7 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                                             ...fieldDataArray,
                                             {
                                                 fieldName: '',
-                                                fieldValue: '',
-                                                isEditable: false,
-                                                proofRequired: false
+                                                fieldValue:'',
                                             }
                                         ]);
                                     }}
@@ -453,7 +309,61 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                         {fieldDataArray.length != 0 && (
                             <>
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
-                                    {fieldDataArray.map((data, index) => (
+                                    {fieldDataArray.length == 1
+
+                                        &&
+                                        <>
+
+
+                                            {fieldDataArray.slice(2).map((data, index) => (
+                                                <>
+                                                    <Grid item xs={5} md={3}>
+                                                        <TextField
+                                                            id="field_name"
+                                                            className="textfieldStyle"
+                                                            name="field_name"
+                                                            label="Metadata Name"
+                                                            value={data.fieldName}
+                                                            onChange={(e) => {
+                                                                handleFieldNameChange(e.target.value, index);
+                                                            }}
+                                                            variant="standard"
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+
+                                                    <Grid item xs={5} md={3}>
+                                                        <TextField
+                                                            className="textfieldStyle"
+                                                            id="field_value"
+                                                            name="field_value"
+                                                            label="Metadata Value"
+                                                            value={data.fieldValue}
+                                                            onChange={(e) => {
+                                                                handleFieldValueChange(e.target.value, index);
+                                                            }}
+                                                            variant="standard"
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={2} mt={2} md={3}>
+                                                        <IconButton
+                                                            color="error"
+                                                            edge="end"
+                                                            size="small"
+                                                            onClick={() => {
+                                                                handleRemoveField(index);
+                                                            }}
+                                                        >
+                                                            <Icon icon={closeFill} width={28} height={28} />
+                                                        </IconButton>
+                                                    </Grid>
+                                                    <Grid item xs={2} mt={2} md={3}></Grid>
+                                                </>
+                                            ))}
+                                        </>
+                                    }
+                                    {fieldDataArray?.map((data, index) => (
                                         <>
                                             <Grid item xs={5} md={3}>
                                                 <TextField
@@ -499,6 +409,7 @@ export default function addSbtToken({ open, setOpen, data, search, page, limit, 
                                             <Grid item xs={2} mt={2} md={3}></Grid>
                                         </>
                                     ))}
+
                                 </Grid>
                             </>
                         )}

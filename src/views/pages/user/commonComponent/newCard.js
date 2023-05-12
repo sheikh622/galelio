@@ -67,13 +67,13 @@ const NewCard = ({ data, nfts }) => {
                                     {data.Brand.name}
                                 </div>
                             </Grid>
-                            <Grid item xs={4} sx={{ background: '' }}>
+                        {/*     <Grid item xs={4} sx={{ background: '' }}>
                                 <span className='newCreator' style={{ fontSize: '110%', float: 'right', color: '#878787' }}>
                                     Brand
                                 </span>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
-                        <Grid mt={1} container >
+                     {/*    <Grid mt={1} container >
                             <Grid item className='encap' xs={8} sx={{ textAlign: 'left' }}>
                                 <span  className='newCreator' style={{ fontSize: '110%',  color: '#878787' }}> Serial Id:  </span>
                               
@@ -119,7 +119,7 @@ const NewCard = ({ data, nfts }) => {
 
                           
                             </Grid>
-                        </Grid>
+                        </Grid> */}
 
                         <Divider sx={{ mt: 1, mb: 1}} />
                         <Grid>

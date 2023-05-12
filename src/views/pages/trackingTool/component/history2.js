@@ -8,6 +8,7 @@ import { MenuItem, Menu, Card, CardContent } from '@mui/material';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import { Pagination } from '@mui/material';
 
 // assets
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -18,10 +19,11 @@ import Doc from './doc';
 import DocLight from './docLight';
 // ==============================|| ACCORDION ||============================== //
 
-const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }) => {
+const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle ,tracking}) => {
     const theme = useTheme();
+    var index = 1;
     const user = useSelector((state) => state.auth.user);
-
+    // console.log(tracking?.historyArray[0]?.historyArray,'tracking in history2');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -30,6 +32,12 @@ const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
     useEffect(() => {
         setExpanded(defaultExpandedId);
     }, [defaultExpandedId]);
+    // const cardData = tracking && tracking?.historyArray && tracking?.historyArray[0]?.historyArray;
+    const cardsPerPage = 3;
+    const [currentPage, setCurrentPage] = useState(1);
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    // const currentCards = cardData.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -116,19 +124,20 @@ const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                     height: { md: '160px' }
                                 }}
                             >
+                            {tracking?.historyArray && tracking?.historyArray[index]?.historyArray.map((card) => (
                                 <Grid item xs={12} md={4}>
                                     <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
                                         <CardContent sx={{ padding: '18px 12px' }}>
                                             <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                 <img src={tick} />
                                             </Grid>
-                                            <p className="Engine"> Engine</p>
+                                            <p className="Engine"> {card.trait_type}</p>
                                             <Typography
                                                 variant="h6"
                                                 className="V8"
                                                 sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
                                             >
-                                                V8 petrol engine
+                                               {card.value}
                                             </Typography>
                                             <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
                                                 2023
@@ -148,93 +157,14 @@ const history2 = ({ data, defaultExpandedId = null, expandIcon, square, toggle }
                                     </Card>
                                 </Grid>
 
-                                <Grid item xs={12} md={4} sx={{ mt: { xs: 1, md: 0 } }}>
-                                    <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
-                                        <CardContent sx={{ padding: '18px 12px' }}>
-                                            <Grid item xs={12} className="tick" sx={{ m: 1 }}>
-                                                <img src={tick} />
-                                            </Grid>
-                                            <p className="Engine"> Model</p>
-                                            <Typography
-                                                variant="h6"
-                                                className="V8"
-                                                sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                            >
-                                                BMW XM
-                                            </Typography>
-                                            <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
-                                                Auto - Manual
-                                            </p>
-                                            <Grid item xs={12} className="document" sx={{ m: 1 }}>
-                                                {theme.palette.mode === 'dark' ? (
-                                                    <Box    onClick={() => {
-             
-                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                                    }}>
-                                                        <Doc />
-                                                    </Box>
-                                                ) : (
-                                                    <Box    onClick={() => {
-             
-                                                        window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                                    }}>
-                                                        <DocLight />
-                                                    </Box>
-                                                )}
-                                            </Grid>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-
-                                <Grid item xs={12} md={4} sx={{ mt: { xs: 1, md: 0 } }}>
-                                    <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
-                                        <CardContent sx={{ padding: '18px 12px' }}>
-                                            <Grid item xs={12} className="tick" sx={{ m: 1 }}>
-                                                <img src={tick} />
-                                            </Grid>
-                                            <p className="Engine"> Chassis</p>
-                                            <Typography
-                                                variant="h6"
-                                                className="V8"
-                                                sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                            >
-                                                BMWXM321
-                                            </Typography>
-                                            <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
-                                                31-03-23
-                                            </p>
-                                            <Grid item xs={12} className="document" sx={{ m: 1 }}>
-                                                {theme.palette.mode === 'dark' ? (
-                                                    <Box>
-                                                        <Doc />
-                                                    </Box>
-                                                ) : (
-                                                    <Box>
-                                                        <DocLight />
-                                                    </Box>
-                                                )}
-                                            </Grid>
-                                        </CardContent>
-                                        <Grid item xs={12} className="document" sx={{ m: 1 }}>
-                                            {theme.palette.mode === 'dark' ? (
-                                                <Box    onClick={() => {
-             
-                                                    window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                                }}>
-                                                    <Doc />
-                                                </Box>
-                                            ) : (
-                                                <Box    onClick={() => {
-             
-                                                    window.open('https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf', '_blank');
-                                                }}>
-                                                    <DocLight />
-                                                </Box>
-                                            )}
-                                        </Grid>
-                                    </Card>
-                                </Grid>
+                                ))}
+                            
                             </Grid>
+                     {/*        <Pagination
+                            count={Math.ceil(cardData.length / cardsPerPage)}
+                            onChange={(event, value) => setCurrentPage(value)}
+                            page={currentPage}
+                          /> */}
                         </MuiAccordionDetails>
                     </MuiAccordion>
                 ))}

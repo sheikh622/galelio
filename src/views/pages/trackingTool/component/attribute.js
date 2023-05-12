@@ -4,8 +4,8 @@ import '@fontsource/public-sans';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Grid, Typography } from '@mui/material';
-import { MenuItem, Menu, Card, CardContent } from '@mui/material';
+import { Box, Grid, Typography ,  } from '@mui/material';
+import { MenuItem, Menu, Card, CardContent , Tooltip} from '@mui/material';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -20,10 +20,10 @@ import tick from 'assets/images/tick.png';
 import doc from 'assets/images/doc.png';
 // ==============================|| ACCORDION ||============================== //
 
-const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle }) => {
+const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, square, toggle , serialId }) => {
     const theme = useTheme();
     const user = useSelector((state) => state.auth.user);
-    console.log(tracking.nft?.NFTMetaData, 'tracking in attribute');
+    console.log(tracking.nft?.requesterAddress, 'tracking.nft=========>');
     const [expanded, setExpanded] = useState(null);
     const handleChange = (panel) => (event, newExpanded) => {
         if (toggle) setExpanded(newExpanded ? panel : false);
@@ -75,7 +75,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                         className="property-date"
                                         sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#000' }}
                                     >
-                                        Date: 25/03/2023
+                                        Date: {Date(tracking?.nft?.createdAt).slice(0, 15)}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -84,16 +84,26 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                         className="property-update"
                                         sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#000' }}
                                     >
-                                        Updated by:
+                                        Created by:
                                     </Typography>
-                                    <Typography variant="body" className="property-update" sx={{ color: '#2F92FF !important' }}>
+                                    <Typography
+                                        variant="body"
+                                        className="property-update"
+                                        sx={{ color: '#2F92FF !important', cursor: 'pointer' }}
+                                        onClick={() => {
+                                            window.open(
+                                                `https://mumbai.polygonscan.com/address/${tracking.nft?.requesterAddress}`,
+                                                '_blank'
+                                            );
+                                        }}
+                                    >
                                         {' '}
-                                        {user?.walletAddress
-                                            ? user?.walletAddress.slice(0, 5) + '...' + user?.walletAddress.slice(38, 42)
-                                            : 'Connect Wallet'}
+                                        {tracking.nft?.requesterAddress?.slice(0, 5) +
+                                            '...' +
+                                            tracking.nft?.requesterAddress?.slice(38, 42)}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={2} className="doc-property" sx={{}}>
+                                {/*  <Grid item xs={2} className="doc-property" sx={{}}>
                                     {theme.palette.mode === 'dark' ? (
                                         <Box
                                             className="doc-heading"
@@ -119,7 +129,7 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                             <DocLight />
                                         </Box>
                                     )}
-                                </Grid>
+                                </Grid> */}
                             </Grid>
 
                             <Grid
@@ -135,24 +145,26 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                 }}
                             >
                                 {currentCards?.map((item) => (
-                                    <Grid item xs={12} md={4}>
-                                        <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
-                                            <CardContent sx={{ padding: '18px 12px' }}>
-                                                <Grid item xs={12} className="tick" sx={{ m: 1 }}>
+                                    <>
+                                        {item?.fieldName == 'Serial ID' && item?.fieldValue == serialId &&  (
+                                            <Grid item xs={12} md={4}>
+                                                <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
+                                                    <CardContent sx={{ padding: '18px 12px' }}>
+                                                        {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
                                                     <img src={tick} />
-                                                </Grid>
-                                                <p className="Engine"> {item?.fieldName}</p>
-                                                <Typography
-                                                    variant="h6"
-                                                    className="V8"
-                                                    sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
-                                                >
-                                                    {item?.fieldValue}
-                                                </Typography>
-                                                <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
+                                                </Grid> */}
+                                                        <p className="Engine"> {item?.fieldName}</p>
+                                                        <Typography
+                                                            variant="h6"
+                                                            className="V8"
+                                                            sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' }}
+                                                        >
+                                                            {item?.fieldValue}
+                                                        </Typography>
+                                                        {/*   <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
                                                     2023
-                                                </p>
-                                                <Grid item xs={12} className="document" sx={{ m: 1 }}>
+                                                </p> */}
+                                                        {/*  <Grid item xs={12} className="document" sx={{ m: 1 }}>
                                                     {theme.palette.mode === 'dark' ? (
                                                         <Box
                                                             onClick={() => {
@@ -183,17 +195,82 @@ const attribute = ({ tracking, data, defaultExpandedId = null, expandIcon, squar
                                                             <DocLight />
                                                         </Box>
                                                     )}
-                                                </Grid>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
+                                                </Grid> */}
+                                                    </CardContent>
+                                                </Card>
+                                            </Grid>
+                                        )}
+                                    </>
+                                ))}
+                                {currentCards?.map((item) => (
+                                    <>
+                                        {item?.fieldName != 'Serial ID' && (
+                                            <Grid item xs={12} md={4}>
+                                                <Card className="card-style" sx={{ border: '2px solid #2F53FF' }}>
+                                                    <CardContent sx={{ padding: '18px 12px' }}>
+                                                        {/*  <Grid item xs={12} className="tick" sx={{ m: 1 }}>
+                                                    <img src={tick} />
+                                                </Grid> */}
+                                                <Tooltip  placement="top" title={item?.fieldName}>
+                                                    <p className="Engine"> {item?.fieldName.slice(0,7)}</p>
+                                                    </Tooltip>
+                                                        <Tooltip sx={{}} placement="bottom" title={item?.fieldValue}> 
+                                                        <Typography
+                                                            variant="h6"
+                                                            className="V8"
+                                                            sx={{ color: theme.palette.mode === 'dark' ? '#ffff' : 'black' , cursor:'pointer'}}
+                                                        >
+                                                        {item?.fieldValue.slice(0,7)}  
+                                                        </Typography></Tooltip>
+                                                        {/*   <p className="y2023" sx={{ color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'black' }}>
+                                                    2023
+                                                </p> */}
+                                                        {/*  <Grid item xs={12} className="document" sx={{ m: 1 }}>
+                                                    {theme.palette.mode === 'dark' ? (
+                                                        <Box
+                                                            onClick={() => {
+                                                                window.open(
+                                                                    'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                    '_blank'
+                                                                );
+                                                            }}
+                                                        >
+                                                            <Doc
+                                                                onClick={() => {
+                                                                    window.open(
+                                                                        'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                        '_blank'
+                                                                    );
+                                                                }}
+                                                            />
+                                                        </Box>
+                                                    ) : (
+                                                        <Box
+                                                            onClick={() => {
+                                                                window.open(
+                                                                    'https://galileoprotocol.infura-ipfs.io/ipfs/QmZVFGoTeZqNMRZjQQpHegDpJ8xqgE8fMv138ULMbfkkhf',
+                                                                    '_blank'
+                                                                );
+                                                            }}
+                                                        >
+                                                            <DocLight />
+                                                        </Box>
+                                                    )}
+                                                </Grid> */}
+                                                    </CardContent>
+                                                </Card>
+                                            </Grid>
+                                        )}
+                                    </>
                                 ))}
                             </Grid>
-                            <Pagination
-                                count={Math.ceil(tracking.nft?.NFTMetaData.length / cardsPerPage)}
-                                onChange={(event, value) => setCurrentPage(value)}
-                                page={currentPage}
-                            />
+                            {tracking.nft?.NFTMetaData.length > 3 && (
+                                <Pagination
+                                    count={Math.ceil(tracking.nft?.NFTMetaData.length / cardsPerPage)}
+                                    onChange={(event, value) => setCurrentPage(value)}
+                                    page={currentPage}
+                                />
+                            )}
                         </MuiAccordionDetails>
                     </MuiAccordion>
                 ))}

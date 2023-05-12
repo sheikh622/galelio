@@ -1750,6 +1750,7 @@ body {
 .activityTable {
     font-family: 'Public Sans';
     font-style: normal;
+    text-transform: capitalize;
 }
 
 .newCreator {
@@ -1789,7 +1790,7 @@ body {
     }
 
     .cate-width {
-        width: 210px;
+        width: 193px;
     }
 
     .new-margin {
@@ -1797,14 +1798,14 @@ body {
         margin-left: 9px;
     }
     .new-width {
-        width: 215px;
+        width: 193px;
     }
     .feature {
         margin-right: 32px;
         margin-left: 0px;
     }
     .feature-width {
-        width: 215px;
+        width: 193px;
     }
     .footersocalIcons {
         margin-right: 25px;
@@ -2198,6 +2199,7 @@ color: #CDCDCD;
     margin-top: -94px;
     width: auto;
     height: 560px;
+    // border:2px solid blue;
     object-fit: cover;
 }
 @media only screen and (min-width: 0px) and (max-width: 768px) {
@@ -2252,8 +2254,8 @@ color: #CDCDCD;
 
 .card-style {
     border-radius: 4px !important;
-    width: 185px;
-    height: 133.5px;
+    width: 172px;
+    height: 140.5px;
     position: relative;
 }
 .Engine {
@@ -2264,7 +2266,7 @@ color: #CDCDCD;
     line-height: 16px;
     text-align: center;
     text-transform: capitalize;
-
+    cursor:pointer;
     color: #2194ff;
 }
 .V8 {

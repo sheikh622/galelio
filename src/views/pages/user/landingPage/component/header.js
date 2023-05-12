@@ -86,13 +86,13 @@ const Header = () => {
                                                 fontStyle: 'normal !important',
                                                 fontWeight: '600',
 
-                                                fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '81px' },
+                                                fontSize: { xs: '2.25rem', sm: '3rem', md: '75px', lg: '75px' },
                                                 lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
 
                                                 color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
                                             }}
                                         >
-                                        Your passport to luxury
+                                        Exploring The Digital Frontier
                                         </Typography>
                                     </motion.div>
                                 </Grid>
@@ -123,7 +123,7 @@ const Header = () => {
                                                 lineHeight: { xs: 1.4, sm: 1, md: 1.4, lg: '36px' }
                                             }}
                                         >
-                                        Experience high-end assets through tokenisation
+                                        Pioneering a new age of innovation.
                                         </Typography>
                                     </motion.div>
                                 </Grid>
@@ -238,7 +238,7 @@ const Header = () => {
                                                 fontStyle: 'normal !important',
                                                 fontWeight: '600',
 
-                                                fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '78px' },
+                                                fontSize: { xs: '2.25rem', sm: '3rem', md: '75px', lg: '75px' },
                                                 lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
 
                                                 color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
@@ -390,14 +390,13 @@ const Header = () => {
                                             fontStyle: 'normal !important',
                                             fontWeight: '600',
 
-                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '81px' },
+                                            fontSize: { xs: '2.25rem', sm: '3rem', md: '67px', lg: '67px' },
                                             lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
 
                                             color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
                                         }}
                                     >
-                                    Building The 
-                                    Future
+                                    Exploring The Digital Frontier
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -428,7 +427,7 @@ const Header = () => {
                                             lineHeight: { xs: 1.4, sm: 1, md: 1.4, lg: '36px' }
                                         }}
                                     >
-                                    Creating a world of innovation and exploration
+                                    Pioneering a new age of innovation.
                                     </Typography>
                                 </motion.div>
                             </Grid>
@@ -543,14 +542,13 @@ const Header = () => {
                                         fontStyle: 'normal !important',
                                         fontWeight: '600',
 
-                                        fontSize: { xs: '2.25rem', sm: '3rem', md: '78px', lg: '81px' },
+                                        fontSize: { xs: '2.25rem', sm: '3rem', md: '67px', lg: '67px' },
                                         lineHeight: { xs: '1.2', sm: '1', md: '84px', lg: '86px' },
 
                                         color: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff'
                                     }}
                                 >
-                                Digital
-                                Ownership
+                                Exploring The Digital Frontier
                                 </Typography>
                             </motion.div>
                         </Grid>
@@ -581,7 +579,7 @@ const Header = () => {
                                         lineHeight: { xs: 1.4, sm: 1, md: 1.4, lg: '36px' }
                                     }}
                                 >
-                                Empowering collectors with pNFTs
+                                Pioneering a new age of innovation.
                                 </Typography>
                             </motion.div>
                         </Grid>
