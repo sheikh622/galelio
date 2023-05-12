@@ -44,7 +44,7 @@ import { DataArraySharp } from '@mui/icons-material';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -55,6 +55,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { Country, State, City } from 'country-state-city';
+import Select from 'react-select';
+
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const typeArray = [
@@ -100,7 +103,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFieldShow(event.target.value);
 
     };
-    const [value, setValue] = useState(new Date());
+    const [value, setValue] = useState();
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [type, setType] = useState('USDT');
     const [drop, setDrop] = useState('Text');
@@ -111,8 +114,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const handleType = (event) => {
         setType(event.target.value);
     };
+    console.log("************************************", value);
     const metadataDropDown = (event) => {
-console
+        console
         setDrop(event.target.value);
         setAge(event.target.value);
         setFieldShow(event.target.value);
@@ -151,9 +155,7 @@ console
             isValid = false;
             toast.error('Proof of Authenticity is required');
         }
-console.log("fileDataArray000000000000000000000000",fileDataArray);
         //    else (fileDataArray.length > 0) {
-        console.log('im here 2');
         fileDataArray.map((array) => {
             if (array.fieldName == '') {
                 isValid = false;
@@ -218,7 +220,7 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
         },
         validationSchema,
         onSubmit: (values) => {
-            // console.log('values', values);
+            console.log('values', values);
 
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
@@ -236,9 +238,7 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
                 var valid = WAValidator.validate(values.directBuyerAddress, 'ETH');
                 if (valid || values.directBuyerAddress == '') {
                     //  toast.success(``);
-
                     console.log('This is a valid wallet address');
-
                     setLoader(true);
                     dispatch(
                         addNft({
@@ -273,7 +273,7 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
     });
 
     const hasFile = formik.values.images.length > 0;
-
+    const [selectedCode, setSelectedCode] = useState("");
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
@@ -382,7 +382,24 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
         array.splice(index, 1);
         setFileDataArray(array);
     };
+    const [phoneNumber, setPhoneNumber] = useState("");
+
+    const [selectedDates, setSelectedDates] = useState([]);
     console.log("55555555555555555555", fieldDataArray);
+
+    function toggleCheckboxes(checkbox) {
+        // get all checkboxes
+        var checkboxes = document.querySelectorAll(input[type = checkbox]);
+
+        // loop through each checkbox
+        checkboxes.forEach(function (item) {
+            // uncheck all checkboxes except the one that was clicked
+            if (item !== checkbox) {
+                item.checked = false;
+            }
+        });
+    }
+
     return (
         <>
             <Dialog fullScreen
@@ -541,7 +558,9 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
                                             {
                                                 fieldName: '',
                                                 fieldValue: '',
-                                                type:"Text",
+                                                type: "Text",
+                                                date: "",
+                                                phone: phoneNumber,
                                                 isEditable: false,
                                                 proofRequired: false
                                             }
@@ -571,8 +590,8 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
                                                     onChange={(e) => {
                                                         handleSelect(e, index);
                                                     }}
-                                                    // value={drop}
-                                                    // onChange={metadataDropDown}
+                                                // value={drop}
+                                                // onChange={metadataDropDown}
                                                 >
                                                     {dropdown.map((option, index) => (
                                                         <MenuItem key={index} value={option.value}>
@@ -635,9 +654,9 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
                                                         name="Number"
                                                         label="Number"
                                                         value={data.fieldValue}
-                                                        // onChange={(e) => {
-                                                        //     handleFieldValueChange(e.target.value, index);
-                                                        // }}
+                                                        onChange={(e) => {
+                                                            handleFieldValueChange(e.target.value, index);
+                                                        }}
                                                         variant="standard"
                                                         fullWidth
                                                     />
@@ -646,8 +665,10 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
                                             {data.type == "Date" && (
                                                 <>
                                                     <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }} >
-                                                        <DatePicker value={value} onChange={setValue} />
-
+                                                        <DatePicker style={{ paddingLeft: "35px", paddingTop: "2px" }} label="Select date" value={value}
+                                                            // onChange={(e) => setValue(e)}
+                                                            onChange={(date) => setSelectedDates([...selectedDates, date])}
+                                                        />
                                                     </Grid>
                                                 </>
                                             )}
@@ -665,22 +686,39 @@ console.log("fileDataArray000000000000000000000000",fileDataArray);
                                                         variant="standard"
                                                         fullWidth
                                                     />
-                                                    <FormControlLabel required control={<Checkbox />} label="check" />
+                                                    <input type="checkbox" id="checkbox1" onchange={toggleCheckboxes} />
                                                 </Grid>
 
                                             )}
                                             {data.type == "Location" && (
+                                                // <Grid item xs={2} md={2} sx={{ m: 2, width: "50%", borderRadius: "2%" }}>
+                                                //     <PhoneInput
+                                                //         country={"us"}
+                                                //         value={phoneNumber}
+                                                //         onChange={setPhoneNumber}
+                                                //     />
+                                                // </Grid>
                                                 <Grid item xs={2} md={2} sx={{ m: 2, width: "50%", borderRadius: "2%" }}>
-                                                    <PhoneInput
-                                                        className='phoneInput'
-                                                        country={'pk'}
-                                                        value={this?.state?.phone}
-                                                    // onChange={phone => this.setState({ phone })}
+
+                                                    <Select
+                                                        // styles={style}
+                                                        // className="selectFieldDesign"
+                                                        options={Country?.getAllCountries()}
+                                                        getOptionLabel={(options) => {
+                                                            return options["name"];
+                                                        }}
+                                                        getOptionValue={(options) => {
+                                                            return options["name"];
+                                                        }}
+                                                        value={selectedCode}
+                                                        onChange={(item) => {
+                                                            formik.setFieldValue("country", item?.phonecode);
+                                                            setSelectedCode(item.phonecode);
+                                                            // console.log("45678iop",item.phonecode);
+                                                        }}
                                                     />
                                                 </Grid>
                                             )}
-
-
                                             <Grid item xs={2} mt={2} md={2}>
 
                                                 <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
