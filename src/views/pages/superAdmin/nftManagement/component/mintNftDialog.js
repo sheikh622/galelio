@@ -557,6 +557,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
         };
         //const prices = ethers.utils.parseEther(price.toString());
         const voucher = { uri, price, token };
+     
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -567,7 +568,7 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
 
         const nfts = new ethers.Contract(contractAddress, NFTAbi.abi, signer);
         let validatorAddress = '0x6f3b51bd5b67f3e5bca2fb32796215a796b79651';
-
+     
         // await await nfts.lazyMint(
         //     validatorAddress,
         //     voucher,
@@ -658,9 +659,10 @@ export default function MintNftDialog({ open, setOpen, page, limit, search, load
                                     variant="contained"
                                     size="small"
                                     onClick={() => {
-                                        checkWallet();
+                                        
                                         if (!loader) {
                                             if (nftData.mintType == 'directMint') {
+                                                checkWallet();
                                                 handleDirectMint();
                                             } else if (nftData.mintType == 'lazyMint') {
                                                 handleLazyMint();
