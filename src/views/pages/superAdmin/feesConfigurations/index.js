@@ -1,5 +1,6 @@
 // material-ui
 import { Grid, TextField, Button , CircularProgress } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -14,23 +15,59 @@ import MarketplaceAddress from 'contractAbi/Marketplace-address.json';
 import Erc20 from 'contractAbi/Erc20.json';
 import { ethers, utils } from 'ethers';
 import { useState } from 'react';
+import { SNACKBAR_OPEN } from 'store/actions';
 
 // ==============================|| TEXTFIELD PAGE ||============================== //
 
 const Configuration = () => {
+    const dispatch = useDispatch();
+
     const [loader, setLoader] = useState(false);
+    const user = useSelector((state) => state.auth.user);
+
     const [loaderAddress, setLoaderAddress] = useState(false);
     const [marketFee, setMarketFee] = useState('');
     const [recieverAddress, setRecieverAddress] = useState('');
-
+    const checkWallet = async () => {
+       
+    };
     const marketplaceFeeFunc = async (e) => {
         e.preventDefault();
         if(marketFee !=''){
-            setLoader(true);
+            const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
+            let connectWallet = await ethereum._metamask.isUnlocked();
+    
+            if ((window.ethereum && connectWallet) == false) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'No crypto wallet found. Please connect one',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
+            else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Please connect your registered Wallet Address',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('Please connect your registered Wallet Address');
+               
+            } else {
+                setLoader(true);
+            }
+            
         }else{
             console.log('redy');
             toast.error('Market fee is required!');
         }
+      
+     
         console.log('marketFee', marketFee);
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -48,7 +85,34 @@ const Configuration = () => {
         e.preventDefault();
        
         if(recieverAddress !=''){
-            setLoaderAddress(true);
+            const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
+            let connectWallet = await ethereum._metamask.isUnlocked();
+    
+            if ((window.ethereum && connectWallet) == false) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'No crypto wallet found. Please connect one',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
+            else if (utils?.getAddress(response[0]) !== user.walletAddress) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Please connect your registered Wallet Address',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('Please connect your registered Wallet Address');
+               
+            } else {
+                setLoaderAddress(true);
+            }
+           
         }else{
             console.log('redy');
             toast.error('Address is required!');
@@ -72,7 +136,7 @@ const Configuration = () => {
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={6}>
                         <SubCard title="Enter Marketplace Fee">
-                            <form onSubmit={marketplaceFeeFunc}>
+                            <form  onSubmit={marketplaceFeeFunc}>
                                 <Grid container spacing={3}>
                                     <Grid item xs={12}>
                                         <TextField
@@ -93,7 +157,7 @@ const Configuration = () => {
                                     </Grid>
                                     {loader==false?  
                                          <Grid item xs={12}>
-                                    <Button type="submit" variant="contained">
+                                    <Button  type="submit" variant="contained">
                                         Submit
                                     </Button>
                                 </Grid>
