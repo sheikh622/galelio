@@ -47,7 +47,6 @@ import FormControl from '@mui/material/FormControl';
 // import Select, { SelectChangeEvent } from '@mui/material/Select';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import DatePicker from "react-multi-date-picker";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import FormGroup from '@mui/material/FormGroup';
@@ -222,6 +221,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         onSubmit: (values) => {
             console.log('values', values);
 
+
+            let arrayData = fieldDataArray.map((item) => {
+                return { ...item, phone: item?.phone?.value }
+            })
+            // console.log({ arrayData })
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
             });
@@ -244,7 +248,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         addNft({
                             categoryId: data.CategoryId,
                             mintType: mintType,
-                            metaDataArray: fieldDataArray,
+                            metaDataArray: arrayData,
                             fileNameArray: fileNameArray,
                             fileArray: fileArray,
                             name: values.nftName,
@@ -273,7 +277,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     });
 
     const hasFile = formik.values.images.length > 0;
-    const [selectedCode, setSelectedCode] = useState("");
+    const [selectedCode, setSelectedCode] = useState('');
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
@@ -283,6 +287,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFieldDataArray([]);
         setLoader(false);
         setFileDataArray([]);
+        // setSelectedCode([]);
+
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {
@@ -386,23 +392,36 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
 
     const [selectedDates, setSelectedDates] = useState([]);
     console.log("55555555555555555555", fieldDataArray);
+    const [selectedId, setSelectedId] = useState('');
 
-    function toggleCheckboxes(checkbox) {
-        // get all checkboxes
-        var checkboxes = document.querySelectorAll(input[type = checkbox]);
+    const checkboxes = [
+        { id: 1, label: 'Option 1' },
+        { id: 2, label: 'Option 2' },
+        { id: 3, label: 'Option 3' },
+        { id: 4, label: 'Option 4' },
+    ];
+    // const handleCheckboxChange = (event, id) => {
+    //     if (event.target.checked) {
+    //         setSelectedId(id);
+    //     } else {
+    //         setSelectedId('');
+    //     }
+    // }; 
 
-        // loop through each checkbox
-        checkboxes.forEach(function (item) {
-            // uncheck all checkboxes except the one that was clicked
-            if (item !== checkbox) {
-                item.checked = false;
+
+    const handleCheckboxChange = (index) => {
+        const updatedCheckboxes = fieldDataArray.map((item, i) => {
+            if (i === index) {
+                return { ...item, postalRequired: true };
             }
+            return { ...item, postalRequired: false };
         });
-    }
-
+        setFieldDataArray([...updatedCheckboxes]);
+    };
     return (
         <>
-            <Dialog fullScreen
+            <Dialog
+                fullScreen
                 open={open}
                 // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
@@ -558,11 +577,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             {
                                                 fieldName: '',
                                                 fieldValue: '',
-                                                type: "Text",
-                                                date: "",
-                                                phone: phoneNumber,
+                                                type: 'Text',
+                                                date: new Date(),
+                                                CountryCode: phoneNumber,
                                                 isEditable: false,
-                                                proofRequired: false
+                                                proofRequired: false,
+                                                postalRequired: false,
+                                                postalCode: "",
                                             }
                                         ]);
                                     }}
@@ -571,16 +592,17 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 </Button>
                             </Grid>
                         </Grid>
-
+                        {/* {checkboxes.map((item) => (
+                            <> */}
                         {fieldDataArray.length != 0 && (
                             <>
-
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
                                             <Grid xs={5} md={3}>
                                                 <TextField
-                                                    sx={{ m: 6, width: "80%", borderRadius: "2%" }} className='w-100'
+                                                    sx={{ m: 6, width: '80%', borderRadius: '2%' }}
+                                                    className="w-100"
                                                     // className="textfieldStyle"
                                                     variant="filled"
                                                     id="outlined-select-budget"
@@ -600,21 +622,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     ))}
                                                 </TextField>
                                             </Grid>
-                                            {/* <Grid item xs={5} md={3}>
-                                                <FormControl sx={{ m: 2, width: "80%", borderRadius: "2%" }} className='w-100'>
-                                                    <Select
-                                                        value={age}
-                                                        onChange={handleDropDown}
-                                                        displayEmpty
-                                                        inputProps={{ 'aria-label': 'Without label' }}
-                                                    >
-                                                        <MenuItem value="Text">Text</MenuItem>
-                                                        <MenuItem value="Number">Number</MenuItem>
-                                                        <MenuItem value="Date">Date</MenuItem>
-                                                        <MenuItem value="Location">Location</MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </Grid> */}
                                             <Grid item xs={2} md={2}>
                                                 <TextField
                                                     id="field_name"
@@ -629,9 +636,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     fullWidth
                                                 />
                                             </Grid>
-                                            {data.type == "Text" && (
+                                            {data.type == 'Text' && (
                                                 <Grid item xs={3} md={3}>
-
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="field_value"
@@ -646,7 +652,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     />
                                                 </Grid>
                                             )}
-                                            {data.type == "Number" && (
+                                            {data.type == 'Number' && (
                                                 <Grid item xs={3} md={3}>
                                                     <TextField
                                                         className="textfieldStyle"
@@ -662,17 +668,29 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     />
                                                 </Grid>
                                             )}
-                                            {data.type == "Date" && (
+                                            {data.type == 'Date' && (
                                                 <>
-                                                    <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }} >
-                                                        <DatePicker style={{ paddingLeft: "35px", paddingTop: "2px" }} label="Select date" value={value}
+                                                    <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }}>
+                                                        <DatePicker
+                                                            style={{ paddingLeft: '35px', paddingTop: '2px' }}
+                                                            label="Select date"
+                                                            value={data.date}
                                                             // onChange={(e) => setValue(e)}
-                                                            onChange={(date) => setSelectedDates([...selectedDates, date])}
+                                                            onChange={(date) => {
+
+                                                                console.log({date})
+                                                                // setSelectedDates([...selectedDates, date])
+                                                            
+                                                                let data = fieldDataArray[index];
+                                                                data.date = date;
+                                                                fieldDataArray[index] = data;
+                                                                setFieldDataArray([...fieldDataArray]);
+                                                            }}
                                                         />
                                                     </Grid>
                                                 </>
                                             )}
-                                            {data.type == "Location" && (
+                                            {data.type == 'Location' && (
                                                 <Grid item xs={2} md={2}>
                                                     <TextField
                                                         className="textfieldStyle"
@@ -686,41 +704,49 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         variant="standard"
                                                         fullWidth
                                                     />
-                                                    <input type="checkbox" id="checkbox1" onchange={toggleCheckboxes} />
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={fieldDataArray[index].postalRequired}
+                                                        onChange={() => handleCheckboxChange(index)}
+                                                    />
                                                 </Grid>
-
                                             )}
-                                            {data.type == "Location" && (
-                                                // <Grid item xs={2} md={2} sx={{ m: 2, width: "50%", borderRadius: "2%" }}>
-                                                //     <PhoneInput
-                                                //         country={"us"}
-                                                //         value={phoneNumber}
-                                                //         onChange={setPhoneNumber}
-                                                //     />
-                                                // </Grid>
-                                                <Grid item xs={2} md={2} sx={{ m: 2, width: "50%", borderRadius: "2%" }}>
-
+                                            {data.type == 'Location' && (
+                                                <Grid item xs={2} md={2} sx={{ m: 2, width: '50%', borderRadius: '2%' }}>
                                                     <Select
                                                         // styles={style}
                                                         // className="selectFieldDesign"
+                                                        // label={selectedCode}
+                                                        placeholder="select the Country"
                                                         options={Country?.getAllCountries()}
                                                         getOptionLabel={(options) => {
-                                                            return options["name"];
+                                                            return options['name'] ? options['name'] : options['label'];
                                                         }}
                                                         getOptionValue={(options) => {
-                                                            return options["name"];
+                                                            return options['name'] ? options['name'] : options['value'];
                                                         }}
-                                                        value={selectedCode}
+                                                        value={
+                                                            fieldDataArray[index]?.phone?.value
+                                                                ? {
+                                                                    value: fieldDataArray[index]?.phone?.value,
+                                                                    label: fieldDataArray[index]?.phone?.label
+                                                                }
+                                                                : ''
+                                                        }
                                                         onChange={(item) => {
-                                                            formik.setFieldValue("country", item?.phonecode);
-                                                            setSelectedCode(item.phonecode);
-                                                            // console.log("45678iop",item.phonecode);
+                                                            console.log({ item });
+                                                            // formik.setFieldValue("country", item?.phonecode);
+                                                            let data = fieldDataArray[index];
+                                                            data.phone = { value: item.phonecode, label: item.name };
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
+
+                                                            // setSelectedCode({value:item.phonecode, label: item.name});
                                                         }}
                                                     />
                                                 </Grid>
                                             )}
                                             <Grid item xs={2} mt={2} md={2}>
-
                                                 <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
                                                     <Switch
                                                         value={data?.isEditable}
@@ -757,9 +783,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             </Grid>
                                         </>
                                     ))}
-                                </Grid >
+                                </Grid>
                             </>
                         )}
+                        {/* </>
+                        ))} */}
                         <Grid container>
                             <Grid xs={12} mt={2}>
                                 <Button
@@ -955,7 +983,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         )}
                     </DialogActions>
                 </Grid>
-            </Dialog >
+            </Dialog>
         </>
     );
 }
