@@ -220,8 +220,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         validationSchema,
         onSubmit: (values) => {
             console.log('values', values);
-
-
             let arrayData = fieldDataArray.map((item) => {
                 return { ...item, phone: item?.phone?.value }
             })
