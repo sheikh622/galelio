@@ -14,8 +14,8 @@ import { gridSpacing } from 'store/constant';
 
 // =============================|| LANDING - FEATURE PAGE ||============================= //
 
-const Properties = ({  nftList }) => {
-    // console.log(nftList?.nft?.id, 'properties==>');
+const Properties = ({ nftList }) => {
+    // console.log(nftList?.nft?.NFTMetaData, 'properties==========================================>');
     const theme = useTheme();
     const [propertiesOpen, setPropertiesOpen] = useState(false);
     const [metadata, setMetadata] = useState('');
@@ -67,7 +67,6 @@ const Properties = ({  nftList }) => {
                 setOpen={setPropertiesOpen}
                 metadata={metadata}
                 value={value}
-              
                 editable={editable}
                 proofRequired={proofRequired}
             />
@@ -94,77 +93,158 @@ const Properties = ({  nftList }) => {
                             <Grid container justifyContent="left" spacing={gridSpacing} sx={{ textAlign: 'center' }}>
                                 {nftList?.nft?.NFTMetaData?.map((item) => (
                                     <>
-                                        <Grid item md={2} lg={2} xs={6} sm={2}>
-                                            <SubCard
-                                                className="property propertyShadow postion-property"
-                                                sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
-                                            >
-                                                <Grid container justifyContent="center" spacing={2} className="postion-fields ">
-                                                    <Grid item xs={12}>
-                                                        <Tooltip placement="right" title={item.fieldName}>
-                                                            <Typography className="pbackground encap-fieldName" variant="h3">
-                                                                {item?.fieldName.slice(0, 12)}
-                                                            </Typography>
-                                                        </Tooltip>
-                                                    </Grid>
-                                                    <Grid item xs={12}>
-                                                    <Tooltip placement="bottom" title={item?.fieldValue}>   
-                                                    <Typography
-                                                            color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                                            className="centerText encapPropertry"
-                                                            variant="h3"
-                                                        >
-                                                            {item?.fieldValue.slice(0, 12)}{' '}
-                                                        </Typography>
-                                                        </Tooltip>
-                                                    </Grid>
-                                                    <Grid item xs={12}>
-                                                        <Typography
-                                                            // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
-                                                            className="plight"
-                                                            variant="body2"
-                                                        >
-                                                            {item?.Proofs[0]?.proof ? (
-                                                                <span
-                                                                    onClick={() => {
-                                                                        // useNavigate(option.fieldValue)
-                                                                        window.open(item?.Proofs[0]?.proof, '_blank');
-                                                                    }}
-                                                                    style={{
-                                                                        cursor: 'pointer',
-                                                                        color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray',
-                                                                        textDecoration: 'underline'
-                                                                    }}
+                                        {item.fieldName == 'Serial ID' && (
+                                            <Grid item md={2} lg={2} xs={6} sm={2}>
+                                                <SubCard
+                                                    className="property propertyShadow postion-property"
+                                                    sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
+                                                >
+                                                    <Grid container justifyContent="center" spacing={2} className="postion-fields ">
+                                                        <Grid item xs={12}>
+                                                            <Tooltip placement="right" title={item.fieldName}>
+                                                                <Typography className="pbackground encap-fieldName" variant="h3">
+                                                                    {item?.fieldName.slice(0, 12)}
+                                                                </Typography>
+                                                            </Tooltip>
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            <Tooltip placement="bottom" title={item?.fieldValue}>
+                                                                <Typography
+                                                                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                                    className="centerText encapPropertry"
+                                                                    variant="h3"
                                                                 >
-                                                                    Proof of metadata
-                                                                </span>
-                                                            ) : (
-                                                                <span style={{ color: 'transparent' }}>no proof</span>
-                                                            )}
-                                                        </Typography>
+                                                                    {item?.fieldValue.slice(0, 12)}{' '}
+                                                                </Typography>
+                                                            </Tooltip>
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            <Typography
+                                                                // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                                className="plight"
+                                                                variant="body2"
+                                                            >
+                                                                {item?.Proofs[0]?.proof ? (
+                                                                    <span
+                                                                        onClick={() => {
+                                                                            // useNavigate(option.fieldValue)
+                                                                            window.open(item?.Proofs[0]?.proof, '_blank');
+                                                                        }}
+                                                                        style={{
+                                                                            cursor: 'pointer',
+                                                                            color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray',
+                                                                            textDecoration: 'underline'
+                                                                        }}
+                                                                    >
+                                                                        Proof of metadata
+                                                                    </span>
+                                                                ) : (
+                                                                    <span style={{ color: 'transparent' }}>no proof</span>
+                                                                )}
+                                                            </Typography>
+                                                        </Grid>
                                                     </Grid>
-                                                </Grid>
 
-                                                {buyerNft?.status == 'Redeem' && item?.isEditable == true && (
-                                                    <Tooltip placement="right" title="Edit Properties" className="postion-icon">
-                                                        <ModeEditIcon
-                                                            sx={{
-                                                                color: theme.palette.mode === 'dark' ? '#bde2f0' : '#000',
-                                                                float: 'right'
-                                                            }}
-                                                            onClick={() => {
-                                                                setPropertiesOpen(true);
-                                                                setMetadata(item.fieldName);
-                                                                setValue(item.fieldValue);
-                                                                setEditable(item.isEditable);
-                                                                setProofRequired(item.proofRequired);
-                                                                setId(item.id);
-                                                            }}
-                                                        />
-                                                    </Tooltip>
-                                                )}
-                                            </SubCard>
-                                        </Grid>
+                                                    {buyerNft?.status == 'Redeem' && item?.isEditable == true && (
+                                                        <Tooltip placement="right" title="Edit Properties" className="postion-icon">
+                                                            <ModeEditIcon
+                                                                sx={{
+                                                                    color: theme.palette.mode === 'dark' ? '#bde2f0' : '#000',
+                                                                    float: 'right'
+                                                                }}
+                                                                onClick={() => {
+                                                                    setPropertiesOpen(true);
+                                                                    setMetadata(item?.fieldName);
+                                                                    setValue(item?.fieldValue);
+                                                                    setEditable(item?.isEditable);
+                                                                    setProofRequired(item?.proofRequired);
+                                                                    setId(item?.id);
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                                </SubCard>
+                                            </Grid>
+                                        )}
+                                     
+                                    </>
+                                ))}
+                                {nftList?.nft?.NFTMetaData?.map((item) => (
+                                    <>
+                                        {item.fieldName != 'Serial ID' && (
+                                            <Grid item md={2} lg={2} xs={6} sm={2}>
+                                                <SubCard
+                                                    className="property propertyShadow postion-property"
+                                                    sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#fff' }}
+                                                >
+                                                    <Grid container justifyContent="center" spacing={2} className="postion-fields ">
+                                                        <Grid item xs={12}>
+                                                            <Tooltip placement="right" title={item.fieldName}>
+                                                                <Typography className="pbackground encap-fieldName" variant="h3">
+                                                                    {item?.fieldName.slice(0, 12)}
+                                                                </Typography>
+                                                            </Tooltip>
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            <Tooltip placement="bottom" title={item?.fieldValue}>
+                                                                <Typography
+                                                                    color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                                    className="centerText encapPropertry"
+                                                                    variant="h3"
+                                                                >
+                                                                    {item?.fieldValue.slice(0, 12)}{' '}
+                                                                </Typography>
+                                                            </Tooltip>
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            <Typography
+                                                                // color={theme.palette.mode === 'dark' ? 'white' : 'black'}
+                                                                className="plight"
+                                                                variant="body2"
+                                                            >
+                                                                {item?.Proofs[0]?.proof ? (
+                                                                    <span
+                                                                        onClick={() => {
+                                                                            // useNavigate(option.fieldValue)
+                                                                            window.open(item?.Proofs[0]?.proof, '_blank');
+                                                                        }}
+                                                                        style={{
+                                                                            cursor: 'pointer',
+                                                                            color: theme.palette.mode === 'dark' ? '#CDCDCD' : 'darkgray',
+                                                                            textDecoration: 'underline'
+                                                                        }}
+                                                                    >
+                                                                        Proof of metadata
+                                                                    </span>
+                                                                ) : (
+                                                                    <span style={{ color: 'transparent' }}>no proof</span>
+                                                                )}
+                                                            </Typography>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    {buyerNft?.status == 'Redeem' && item?.isEditable == true && (
+                                                        <Tooltip placement="right" title="Edit Properties" className="postion-icon">
+                                                            <ModeEditIcon
+                                                                sx={{
+                                                                    color: theme.palette.mode === 'dark' ? '#bde2f0' : '#000',
+                                                                    float: 'right'
+                                                                }}
+                                                                onClick={() => {
+                                                                    setPropertiesOpen(true);
+                                                                    setMetadata(item?.fieldName);
+                                                                    setValue(item?.fieldValue);
+                                                                    setEditable(item?.isEditable);
+                                                                    setProofRequired(item?.proofRequired);
+                                                                    setId(item?.id);
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                                </SubCard>
+                                            </Grid>
+                                        )}
+                                     
                                     </>
                                 ))}
                             </Grid>

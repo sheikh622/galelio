@@ -8,7 +8,7 @@ import { Button } from '@mui/material';
 import { Typography, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularStatic from 'views/auth/verifyEmail/circularbar';
-
+import { SNACKBAR_OPEN } from 'store/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TextField from '@material-ui/core/TextField';
@@ -20,14 +20,16 @@ import FactoryAbi from 'contractAbi/Factory.json';
 import { getTrack } from 'redux/marketplace/actions';
 import FactoryAddress from 'contractAbi/Factory-address.json';
 import { ethers, utils } from 'ethers';
-
+import { setWallet } from 'redux/auth/actions';
 const TrackNFT = () => {
     const [serialNo, setSerialNo] = useState('');
+    const [rest, setRest] = useState('');
     const [success, setSuccess] = useState(false);
     const [token, setToken] = useState();
     const [addres, setAddres] = useState();
     const [seconds, setSeconds] = useState();
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
         let interval = null;
@@ -41,9 +43,64 @@ const TrackNFT = () => {
     }, [seconds]);
 
     const navigate = useNavigate();
+    const [walletAddress, setWalletAddress] = useState();
+   {/*  const handleConnect = async () => {
+        const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
+        if (response) {
+            if (!window.ethereum) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'No crypto wallet found. Please install it.',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('No crypto wallet found. Please install it.');
+                // toast.error('No crypto wallet found. Please install it.');
+            }
 
+          
+            else if (utils?.getAddress(response[0]) !== user?.walletAddress) {
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'Please connect your registered Wallet Address',
+                    variant: 'alert',
+                    alertSeverity: 'info'
+                });
+                console.log('Please connect your registered Wallet Address');
+                setWalletAddress();
+            } else {
+                const address = utils?.getAddress(response[0]);
+                setWalletAddress(address);
+                dispatch({
+                    type: SNACKBAR_OPEN,
+                    open: true,
+                    message: 'wallet connected',
+                    variant: 'alert',
+                    alertSeverity: 'success'
+                });
+            }
+        } else {
+            console.log('No crypto wallet found. Please install it.');
+            // toast.error('No crypto wallet found. Please install it.');
+        }
+    }; */}
+
+   {/*  useEffect(() => {
+        dispatch(setWallet(walletAddress));
+        handleConnect();
+    }, [walletAddress]);
+
+    if (window.ethereum) {
+        window.ethereum.on('accountsChanged', function (accounts) {
+           
+            handleConnect();
+        });
+    } */}
     const searchSerial = async () => {
         console.log('serialNo', serialNo);
+        setSuccess(true);
         if (serialNo == '') {
             setSuccess(false);
             toast.error('Please enter valid serial Id');
@@ -60,10 +117,13 @@ const TrackNFT = () => {
         // let res = await (
         //     await factoryAddr.serials("GALGNS1")
         // )?.wait();
-
         let res = await factoryAddr.serials(serialNo);
-
-        console.log('res', res);
+        setRest(res);
+        console.log('res', rest);
+        // if (rest == '') {
+        //     toast.error('Could not get the token!');
+        //     }
+     
 
         let address = res[0].toLowerCase();
         address = address;
@@ -87,8 +147,9 @@ const TrackNFT = () => {
         // const dispatch = useDispatch();
         console.log('address', address);
         console.log('tokenId', tokenId);
-        setSuccess(true);
+      
     };
+    
     if (seconds == 0) {
         if (token != undefined && token != '0') {
             navigate('/tracking/' + serialNo, {
@@ -98,11 +159,11 @@ const TrackNFT = () => {
                 }
             });
         } else {
-            // if (serialNo != '') {
-            // toast.error('Could not [get the tracking page!');
-            // }
+          
+          
         }
     }
+  
 
 
 
@@ -153,11 +214,12 @@ const TrackNFT = () => {
                                     size="small"
                                     variant="outlined"
                                     onClick={() => {
-                                        setSeconds(6);
+                                        setSeconds(3);
                                         searchSerial();
                                     }}
                                 >
-                                    <CircularProgress />
+                                    <CircularProgress sx={{    width: '30px !important',
+                                    height: '30px  !important' , color:'#ffff'}} />
                                 </Button>
                             ) : (
                                 <Button
@@ -168,6 +230,7 @@ const TrackNFT = () => {
                                     color="secondary"
                                     onClick={() => {
                                         setSeconds(6);
+                                        // handleConnect();
                                         searchSerial();
                                     }}
                                 >
