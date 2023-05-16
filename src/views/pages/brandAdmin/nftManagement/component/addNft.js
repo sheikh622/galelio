@@ -168,7 +168,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         },
         validationSchema,
         onSubmit: (values) => {
-            // console.log('values', values);
+            console.log('values*************', values);
 
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;

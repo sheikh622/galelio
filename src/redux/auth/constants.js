@@ -8,6 +8,7 @@ export const BRAND_DASHBOARD = 'brand_dashboard';
 export const BRAND_DASHBOARD_SUCCESS = 'brand_dashboard_success';
 export const SIGN_UP = 'sign_up';
 export const SIGN_UP_SUCCESS = 'sign_up_success';
+export const UPDATE_EMAIL = 'UPDATE_EMAIL';
 export const SIGN_UP_SOCIAL = 'sign_up_social';
 export const SIGN_UP_SOCIAL_SUCCESS = 'sign_up_social_success';
 export const SET_LOADER = 'SET_LOADER';

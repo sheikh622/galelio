@@ -19,7 +19,7 @@ import { ethers } from 'ethers';
 const Activity = ({ tracking }) => {
     //    let index=1;
     //    let price = ethers.utils.formatEther(tracking?.activity[index].price)
-        console.log(  tracking?.activity[0] , 'price=====================>>>');
+        // console.log(  tracking?.activity[0] , 'price=====================>>>');
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;

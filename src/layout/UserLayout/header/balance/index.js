@@ -10,6 +10,8 @@ import { Button } from '@mui/material';
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 import { setWallet } from '../../../../redux/auth/actions';
+import Erc20 from '../../../../contractAbi/Erc20.json';
+import BLOCKCHAIN from '../../../../../src/constants';
 
 const convert = new CryptoConvert(/*options?*/);
 
@@ -17,7 +19,7 @@ const Balance = () => {
     const theme = useTheme();
 
     const user = useSelector((state) => state.auth.user);
-    console.log('user.walletAddress', user?.walletAddress);
+    // console.log('user.walletAddress', user?.walletAddress);
     const dispatch = useDispatch();
     const [walletAddress, setWalletAddress] = useState();
     // const [bvalue, setBvalue] = useState(0);
@@ -26,14 +28,30 @@ const Balance = () => {
 
     const handleConnect = async () => {
         const response = await window?.ethereum?.request({ method: 'eth_requestAccounts' });
-        console.log('response', response);
-        const provider = ethers.getDefaultProvider('https://polygon-mumbai.g.alchemy.com/v2/Wk2k1fN6Gv2KG4f7474ABGxpmhQrZKFM');
-        const balance = await provider?.getBalance(response[0]);
-        console.log(balance);
-        const value = ethers.utils?.formatEther(balance);
-        console.log(value, 'value');
-        setMaticValue(value);
-        // let val;
+        const maticprovider = ethers.getDefaultProvider('https://polygon-mumbai.g.alchemy.com/v2/Wk2k1fN6Gv2KG4f7474ABGxpmhQrZKFM');
+        const maticbalance = await maticprovider?.getBalance(response[0]);
+        console.log(maticbalance);
+        const maticvalue = ethers.utils?.formatEther(maticbalance);
+        console.log(maticvalue, 'value');
+        setMaticValue(maticvalue);
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const address = signer.getAddress();
+        let erc20Address = BLOCKCHAIN.ERC20;
+
+        const token = new ethers.Contract(erc20Address, Erc20.abi, signer);
+
+        let balance = await token.balanceOf(address);
+        let value = utils.formatEther(balance);
+        console.log(value, 'balance********** ');
+        setbalanceValue(value);
+
+        {
+            /*  const maticvalue = ethers.utils?.formatEther(balance);
+        console.log(maticvalue, 'value***yy');
+        setMaticValue(maticvalue);
+       // let val;
         // const arrow = async ()=>{
 
         await convert.ready(); //Wait for the initial cache to load
@@ -42,7 +60,8 @@ const Balance = () => {
         console.log(bvalue, 'val===');
 
         // }
-        setbalanceValue(bvalue);
+        setbalanceValue(bvalue); */
+        }
         // console.log(bvalue,'val===???????????????????')
         if (response) {
             if (!window.ethereum) {
@@ -74,7 +93,7 @@ const Balance = () => {
         });
     }
 
-    console.log('balanceValue', balanceValue);
+    // console.log('balanceValue', balanceValue);
 
     return (
         <>
@@ -96,7 +115,7 @@ const Balance = () => {
                 <Typography
                     className="balance"
                     variant="body2"
-                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#6d6e72'}}
+                    sx={{ textAlign: 'center', color: theme.palette.mode === 'dark' ? '#CDCDCD' : '#6d6e72' }}
                 >
                     Total Balance
                 </Typography>
@@ -113,7 +132,7 @@ const Balance = () => {
                         // handleConnect().arrow();
                     }}
                 >
-                    {balanceValue ? balanceValue : 0} USDT
+                    {balanceValue ? balanceValue.slice(0, 10) : 0} USDT {/*  {balanceValue ? balanceValue : 0} USDT */}
                 </Typography>
             </Grid>
         </>

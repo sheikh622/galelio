@@ -16,7 +16,7 @@ import TextField from '@material-ui/core/TextField';
 import '@fontsource/source-sans-pro';
 import '@fontsource/public-sans';
 import { ethers, utils } from 'ethers';
-import { signup, setLoader } from 'redux/auth/actions';
+import { signup, setLoader , updateEmail } from 'redux/auth/actions';
 import { setWallet } from 'redux/auth/actions';
 import { SNACKBAR_OPEN } from 'store/actions';
 // third party
@@ -33,7 +33,7 @@ const VerifyEmail = ({ token, ...others }) => {
     // console.log(token, 'token=>');
     const loader = useSelector((state) => state.auth.loader);
     const user = useSelector((state) => state.auth.user);
-    console.log(user, 'user===========>>');
+    // console.log(user.id, 'user===========>>');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
@@ -104,7 +104,7 @@ const VerifyEmail = ({ token, ...others }) => {
                 enableReinitialize
                 initialValues={{
                    
-                    email: user?.email ? user?.email : '',
+                    email:'',
                  
                 }}
                 validationSchema={Yup.object().shape({
@@ -113,7 +113,7 @@ const VerifyEmail = ({ token, ...others }) => {
                    
                 })}
                 onSubmit={async (values) => {
-                    console.log(values, 'values==============>>>');
+                    // console.log(values, 'values==============>>>');
 
                     // if (walletAddress == '') {
                     //     dispatch({
@@ -124,18 +124,13 @@ const VerifyEmail = ({ token, ...others }) => {
                     //         alertSeverity: 'info'
                     //     });
                     // }
-                    // await dispatch(setLoader(true));
-                    // dispatch(
-                    //     signup({
-                    //         firstName: user?.firstName,
-                    //         lastName: user.lastName,
-                    //         email: values.email,
-                    //         password: user.password,
-                    //         walletAddress: walletAddress,
-                    //         address: user?.address,
-                    //         navigate: navigate
-                    //     })
-                    // );
+                    await dispatch(
+                        updateEmail({
+                            id: user.id,
+                            email: values.email,
+                          
+                        })
+                    );
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
