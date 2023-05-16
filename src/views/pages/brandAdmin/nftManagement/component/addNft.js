@@ -223,7 +223,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             let arrayData = fieldDataArray.map((item) => {
                 return { ...item, phone: item?.phone?.value }
             })
-            // console.log({ arrayData })
+            console.log(arrayData, 'array***********')
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
             });
@@ -246,7 +246,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         addNft({
                             categoryId: data.CategoryId,
                             mintType: mintType,
-                            metaDataArray: arrayData,
+                            metaDataArray: fieldDataArray,
                             fileNameArray: fileNameArray,
                             fileArray: fileArray,
                             name: values.nftName,
@@ -273,7 +273,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             }
         }
     });
-
+    console.log("23333333333333333", fieldDataArray)
     const hasFile = formik.values.images.length > 0;
     const [selectedCode, setSelectedCode] = useState('');
     const handleClose = () => {
@@ -387,32 +387,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFileDataArray(array);
     };
     const [phoneNumber, setPhoneNumber] = useState("");
-
-    const [selectedDates, setSelectedDates] = useState([]);
-    console.log("55555555555555555555", fieldDataArray);
-    const [selectedId, setSelectedId] = useState('');
-
-    const checkboxes = [
-        { id: 1, label: 'Option 1' },
-        { id: 2, label: 'Option 2' },
-        { id: 3, label: 'Option 3' },
-        { id: 4, label: 'Option 4' },
-    ];
-    // const handleCheckboxChange = (event, id) => {
-    //     if (event.target.checked) {
-    //         setSelectedId(id);
-    //     } else {
-    //         setSelectedId('');
-    //     }
-    // }; 
-
-
+    const [postalCode, setPostalCode] = useState("");
     const handleCheckboxChange = (index) => {
         const updatedCheckboxes = fieldDataArray.map((item, i) => {
             if (i === index) {
-                return { ...item, postalRequired: true };
+                return { ...item, primaryLocation: true };
             }
-            return { ...item, postalRequired: false };
+            return { ...item, primaryLocation: false };
         });
         setFieldDataArray([...updatedCheckboxes]);
     };
@@ -577,11 +558,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 fieldValue: '',
                                                 type: 'Text',
                                                 date: new Date(),
-                                                CountryCode: phoneNumber,
+                                                countryCode: data?.phone?.value,
                                                 isEditable: false,
                                                 proofRequired: false,
-                                                postalRequired: false,
-                                                postalCode: "",
+                                                primaryLocation: false,
+                                                postalCode: postalCode,
                                             }
                                         ]);
                                     }}
@@ -676,9 +657,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                             // onChange={(e) => setValue(e)}
                                                             onChange={(date) => {
 
-                                                                console.log({date})
+                                                                console.log({ date })
                                                                 // setSelectedDates([...selectedDates, date])
-                                                            
+
                                                                 let data = fieldDataArray[index];
                                                                 data.date = date;
                                                                 fieldDataArray[index] = data;
@@ -692,10 +673,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                 <Grid item xs={2} md={2}>
                                                     <TextField
                                                         className="textfieldStyle"
-                                                        id="location"
-                                                        name="location"
+                                                        id="Postal Code"
+                                                        name="Postal Code   "
                                                         label="Postal Code"
-                                                        value={data.fieldValue}
+                                                        value={data.postalCode}
                                                         onChange={(e) => {
                                                             handleFieldValueChange(e.target.value, index);
                                                         }}
@@ -704,7 +685,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     />
                                                     <input
                                                         type="checkbox"
-                                                        checked={fieldDataArray[index].postalRequired}
+                                                        checked={fieldDataArray[index].primaryLocation}
                                                         onChange={() => handleCheckboxChange(index)}
                                                     />
                                                 </Grid>
@@ -732,10 +713,11 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                                 : ''
                                                         }
                                                         onChange={(item) => {
-                                                            console.log({ item });
                                                             // formik.setFieldValue("country", item?.phonecode);
                                                             let data = fieldDataArray[index];
-                                                            data.phone = { value: item.phonecode, label: item.name };
+                                                            let value = item.isoCode;
+                                                            data.phone = { value: item.isoCode, label: item.name };
+                                                            data.countryCode= value;
                                                             fieldDataArray[index] = data;
                                                             setFieldDataArray([...fieldDataArray]);
 
