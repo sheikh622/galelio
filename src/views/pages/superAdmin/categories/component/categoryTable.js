@@ -52,7 +52,7 @@ const CategoryTable = ({ categoryList, page, limit, search, setAddUpdateOpen, se
             ) : (
                 <>
 
-                {categoryList.categories !== undefined || categoryList.categories?.length > 0 ? (
+                {categoryList?.categories !== undefined || categoryList.categories?.length > 0 ? (
                 <Table>
                     <TableHead>
                     <TableRow>

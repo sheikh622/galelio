@@ -5,6 +5,7 @@ import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
 import { Pagination } from '@mui/material';
+import Avatar from 'ui-component/extended/Avatar';
 
 import '@fontsource/public-sans';
 import SubCard from 'ui-component/cards/SubCard';
@@ -14,9 +15,12 @@ import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
-const Activity = ({tracking}) => {
-    // console.log(tracking?.afterMarketplaceHistory,'transfers');
-   
+import { ethers } from 'ethers';
+const Activity = ({ tracking }) => {
+    //    let index=1;
+    //    let price = ethers.utils.formatEther(tracking?.activity[index].price)
+        console.log(  tracking?.activity[0] , 'price=====================>>>');
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -28,12 +32,7 @@ const Activity = ({tracking}) => {
         }
     };
 
-    const names = [
-        'Sales',
-        'Listings',
-        'Offers',
-        'Transfers',
-    ];
+    // const names = ['Sales', 'Listings', 'Offers', 'Transfers'];
 
     function getStyles(name, personName) {
         return {
@@ -41,16 +40,36 @@ const Activity = ({tracking}) => {
         };
     }
     const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
-
+    const [personName, setPersonName] = React.useState('Filter');
+    const names = [
+        {
+            label: 'Filter',
+            value: 'Filter'
+        },
+        {
+            label: 'List',
+            value: 'List'
+        },
+        {
+            label: 'Mint',
+            value: 'Mint'
+        },
+        {
+            label: 'Mint Bulk',
+            value: 'Mint Bulk'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
+            label: 'Transfer Muliple',
+            value: 'Transfer Muliple'
+        }
+    ];
     const handleChange = (event) => {
-        const {
-            target: { value }
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value
-        );
+        setPersonName(event.target.value);
+        // console.log(personName , 'personName==========');
     };
     const itemData = [
         {
@@ -103,8 +122,7 @@ const Activity = ({tracking}) => {
                                 component="div"
                                 sx={{ textAlign: { xs: 'center', md: 'center', sm: 'center' }, textTransform: 'capitalize' }}
                             >
-                            Metadatas and ownership Activity
-                               
+                                Metadatas and ownership Activity
                             </Typography>
                         </Grid>
                     </Grid>
@@ -125,7 +143,7 @@ const Activity = ({tracking}) => {
                                                     color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
                                                     padding: '10px 10px 10px 10px',
                                                     border: '2px solid #CDCDCD',
-                                                    borderRadius:'4px'
+                                                    borderRadius: '4px'
                                                 }}
                                                 fullWidth
                                             >
@@ -136,49 +154,24 @@ const Activity = ({tracking}) => {
                                                     value={personName}
                                                     onChange={handleChange}
                                                     // input={<OutlinedInput />}
-                                                    renderValue={(selected) => {
-                                                        if (selected.length === 0) {
-                                                            return <em className="fontfamily">filter</em>;
-                                                        }
 
-                                                        return selected.join(', ');
-                                                    }}
-                                                    MenuProps={MenuProps}
                                                     inputProps={{ 'aria-label': 'Without label' }}
                                                 >
                                                     {/* <MenuItem disabled value="">
                                           <em>aiman</em>
                                         </MenuItem> */}
                                                     {names.map((name) => (
-                                                        <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                                                            {name}
+                                                        <MenuItem
+                                                            key={name.label}
+                                                            value={name?.value}
+                                                            style={getStyles(name, personName, theme)}
+                                                        >
+                                                            {name.value}
                                                         </MenuItem>
                                                     ))}
                                                 </Select>
                                             </FormControl>
                                         </div>
-                                        {/*    <FormControl  sx={{ background:theme.palette.mode === 'dark' ? '#181C1F'
-                                        : '#d9d9d9',color:theme.palette.mode === 'dark' ? '#ffff'
-                                        : 'black', border: '2px solid #CDCDCD' , borderRadius:'4px'}} fullWidth>
-                                            <InputLabel className='activityTable'  sx={{color:'#CDCDCD'}} id="age-select">Filter</InputLabel>
-                                            <Select
-                                            variant='standard'
-                                                fullWidth
-                                                labelId="age-select"
-                                                id="age"
-                                                name="age"
-                                                // defaultValue={formik.values.age}
-                                                // onChange={formik.handleChange}
-                                                label="Age"
-                                            >
-                                                <MenuItem value="">
-                                                    <em className='activityTable' >Filter</em>
-                                                </MenuItem>
-                                                <MenuItem value={10}>Ten</MenuItem>
-                                                <MenuItem value={20}>Twenty</MenuItem>
-                                                <MenuItem value={30}>Thirty</MenuItem>
-                                            </Select>
-                                        </FormControl> */}
                                     </Grid>
                                 </Grid>
                             }
@@ -192,12 +185,16 @@ const Activity = ({tracking}) => {
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Event{' '}
                                             </TableCell>
+                                            {/*   <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                Brand Name{' '}
+                                            </TableCell> */}
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Price{' '}
                                             </TableCell>
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 From
                                             </TableCell>
+
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 To{' '}
                                             </TableCell>
@@ -206,164 +203,179 @@ const Activity = ({tracking}) => {
                                             </TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    {/* {currentCards?.map((item) => (
-                                    <> */}
-                                    {/* {tracking?.beforeMarketplaceHistory?.handleMints.map((item) => (
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                Mint
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                 
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                   0
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.minter.slice(0, 5) + '...' + item.minter.slice(38, 42)}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {Date(item.blockTimestamp).slice(0, 15)}
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    ))}
-                                    {tracking?.beforeMarketplaceHistory?.handleMintBulks.map((item) => (
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                Mint
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                             
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    0
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.minter.slice(0, 5) + '...' + item.minter.slice(38, 42)}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {Date(item.blockTimestamp).slice(0, 15)}
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    ))}
-                                    {tracking?.afterMarketplaceHistory?.offeredSingles.map((item) => (
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                List
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.price.slice(0, 5)}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.to.slice(0, 5) + '...' + item.to.slice(38, 42)}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {Date(item.blockTimestamp).slice(0, 15)}
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    ))}
-                                    {tracking?.afterMarketplaceHistory?.offeredMultiples.map((item) => (
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                List
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.price.slice(0, 5)}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.to.slice(0, 5) + '...' + item.to.slice(38, 42)}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {Date(item.blockTimestamp).slice(0, 15)}
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    ))} */}
-                                    {tracking?.activity?.map((item) => (
-                                        <TableBody>
-                                            <TableRow>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {item.event}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                            
 
-                                                    {item.event == "List" || "Bought" || "Resell" ? item.price : " "}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
+                                    {tracking?.activity?.length  < 0 ?
+                                        (<TableBody>
+                                       
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                              No  activity found!
+                                            </TableCell>
+                                        </TableBody>)
+                                            : 
+                                            (
+                                        tracking?.activity?.map((item) => (
+                                        <TableBody>
+                                            {personName == item.event ? (
+                                                <TableRow>
+                                                    <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                        {item.event}
+                                                    </TableCell>
+                                                    {/*          {item?.brandImage ? (
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', display: 'flex' }}
+                                                        align="center"
+                                                    >
+                                                        <Grid item lg={2}></Grid>
+                                                        <Grid item lg={2}>
+                                                            <Avatar alt="" src={item?.brandImage} />
+                                                        </Grid>
+                                                        <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                            {item?.brandImage ? item?.brandName : ''}
+                                                        </Grid>
+                                                    </TableCell>
+                                                ) : (
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', display: 'flex' }}
+                                                        align="center"
+                                                    >
+                                                        <Grid item lg={2}></Grid>
+                                                        <Grid item lg={2}>
+                                                            <Avatar sx={{ bgcolor: 'transparent', color: 'transparent' }}>b</Avatar>
+                                                        </Grid>
+                                                        <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                            {item?.brandImage ? item?.brandName : ''}
+                                                        </Grid>
+                                                    </TableCell>
+                                                )} */}
 
-                                                    {item.event == "Mint" && "Mint Bulk" ? item.minter.slice(0, 5) + '...' + item.minter.slice(38, 42): item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.event !== "Mint" && "Mint Bulk" ? item.to.slice(0, 5) + '...' + item.to.slice(38, 42): " "}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {Date(item.blockTimestamp).slice(0, 15)}
-                                                </TableCell>
-                                            </TableRow>
+                                                    <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                        {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
+                                                    </TableCell>
+
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                        align="center"
+                                                        onClick={() => {
+                                                            window.open(
+                                                                `https://mumbai.polygonscan.com/address/${
+                                                                    item?.from ? item?.from : item?.minter
+                                                                }`,
+                                                                '_blank'
+                                                            );
+                                                        }}
+                                                    >
+                                                        {item?.from
+                                                            ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
+                                                            : item?.minter
+                                                            ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42)
+                                                            : ''}
+                                                    </TableCell>
+
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                        align="center"
+                                                        onClick={() => {
+                                                            window.open(`https://mumbai.polygonscan.com/address/${item?.to}`, '_blank');
+                                                        }}
+                                                    >
+                                                        {item?.to ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42) : ''}
+                                                    </TableCell>
+                                                    <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                        {Date(item?.blockTimestamp).slice(0, 15)}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ) : (
+                                                personName == 'Filter' && (
+                                                    <TableRow>
+                                                        <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                            {item.event}
+                                                        </TableCell>
+                                                        {/*          {item?.brandImage ? (
+                                                       <TableCell
+                                                           className="activityTable"
+                                                           sx={{ fontSize: '15px', display: 'flex' }}
+                                                           align="center"
+                                                       >
+                                                           <Grid item lg={2}></Grid>
+                                                           <Grid item lg={2}>
+                                                               <Avatar alt="" src={item?.brandImage} />
+                                                           </Grid>
+                                                           <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                               {item?.brandImage ? item?.brandName : ''}
+                                                           </Grid>
+                                                       </TableCell>
+                                                   ) : (
+                                                       <TableCell
+                                                           className="activityTable"
+                                                           sx={{ fontSize: '15px', display: 'flex' }}
+                                                           align="center"
+                                                       >
+                                                           <Grid item lg={2}></Grid>
+                                                           <Grid item lg={2}>
+                                                               <Avatar sx={{ bgcolor: 'transparent', color: 'transparent' }}>b</Avatar>
+                                                           </Grid>
+                                                           <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                               {item?.brandImage ? item?.brandName : ''}
+                                                           </Grid>
+                                                       </TableCell>
+                                                   )} */}
+
+                                                        <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                            {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
+                                                        </TableCell>
+
+                                                        <TableCell
+                                                            className="activityTable"
+                                                            sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                            align="center"
+                                                            onClick={() => {
+                                                                window.open(
+                                                                    `https://mumbai.polygonscan.com/address/${
+                                                                        item?.from ? item?.from : item?.minter
+                                                                    }`,
+                                                                    '_blank'
+                                                                );
+                                                            }}
+                                                        >
+                                                            {item?.from
+                                                                ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
+                                                                : item?.minter
+                                                                ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42)
+                                                                : ''}
+                                                        </TableCell>
+
+                                                        <TableCell
+                                                            className="activityTable"
+                                                            sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                            align="center"
+                                                            onClick={() => {
+                                                                window.open(`https://mumbai.polygonscan.com/address/${item?.to}`, '_blank');
+                                                            }}
+                                                        >
+                                                            {item?.to ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42) : ''}
+                                                        </TableCell>
+                                                        <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                            {Date(item?.blockTimestamp).slice(0, 15)}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                )
+                                            )}
                                         </TableBody>
+                                        )
                                     ))}
-                                  {/*   </>
+
+                                    {/*   </>
                                     ))} */}
                                 </Table>
-                           {/*      <Pagination
+                                {/*      <Pagination
                                 count={Math.ceil(currentCards.length / cardsPerPage)}
                                 onChange={(event, value) => setCurrentPage(value)}
                                 page={currentPage}
-                              /> */} 
+                              /> */}
                             </TableContainer>
                         </MainCard>
                     </Grid>

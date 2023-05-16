@@ -42,14 +42,14 @@ const TrackingTool = () => {
     const serialId = useParams().token;
     const tokenId = location.state?.tokenId;
     const address = location.state?.address;
-    console.log('serialId', serialId);
-    console.log(' tokenId', location.state?.tokenId);
-    console.log(' address', location.state?.address);
+    // console.log('serialId', serialId);
+    // console.log(' tokenId', location.state?.tokenId);
+    // console.log(' address', location.state?.address);
     const marketplaceNfts = useSelector((state) => state.marketplaceReducer.trackNft);
-    console.log(' marketplaceNfts>>>>', marketplaceNfts?.nft?.Brand?.image);
+    // console.log(' marketplaceNfts>>>>', marketplaceNfts?.nft?.Brand?.image);
     useEffect(() => {
         console.log('run');
-        dispatch(setLoader(true));
+        // dispatch(setLoader(true));
         dispatch(
             getTrack({
                 serialId: serialId,
@@ -114,7 +114,7 @@ const TrackingTool = () => {
                     md={11}
                     lg={11}
                     sx={{
-                        ml: { md: -2 },
+                        ml: { md: -2 }, mt:0.4,
                         display: { xs: 'block', sm: 'block', md: 'flex', lg: 'flex' },
                         background: 'tranparent',
                         color: theme.palette.mode === 'dark' ? 'white' : '#404040'
@@ -123,7 +123,7 @@ const TrackingTool = () => {
                 {marketplaceNfts?.nft?.Brand?.image?
                     (
                         <Grid item md={12} xs={12} lg={12}>
-                        <Grid item xs={12} lg={12} md={12}>
+                       {/*  <Grid item xs={12} lg={12} md={12}>
                             <Grid container spacing={2} sx={{ mb: 2 }}>
                                 <Grid item xs={12}>
                                     <Typography
@@ -138,7 +138,7 @@ const TrackingTool = () => {
                                     </Typography>
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                         <Grid container-fluid>
                             <Grid item md={12} xs={12}>
                                 <Grid container>
@@ -146,7 +146,7 @@ const TrackingTool = () => {
                                         <Product tracking={marketplaceNfts} />
                                     </Grid>
                                     <Grid item md={12} xs={12}>
-                                        <TrackAtribute tracking={marketplaceNfts} />
+                                        <TrackAtribute tracking={marketplaceNfts} serialId={serialId} />
                                     </Grid>
                                     <Grid item md={12} xs={12}>
                                         <Activity tracking={marketplaceNfts} />
