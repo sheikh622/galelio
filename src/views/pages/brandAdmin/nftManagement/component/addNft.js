@@ -223,7 +223,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         onSubmit: (values) => {
             console.log('values', values);
             let arrayData = fieldDataArray.map((item) => {
-                return { ...item, phone: item?.phone?.value }
+                const { phone, ...obj } = item;
+                return obj;
+                // return { ...item, phone: item?.phone?.value }
             })
             console.log(arrayData, 'array***********')
             let fileArray = fileDataArray.map((data) => {
@@ -401,6 +403,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     };
     const [startDate, setStartDate] = useState(new Date());
     console.log(startDate, 'startDate**********************************');
+    console.log(fieldDataArray, 'fieldDataArray**********************************');
     return (
         <>
             <Dialog
@@ -593,7 +596,20 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     fullWidth
                                                     value={data.display_type}
                                                     onChange={(e) => {
+                                                        console.log({e})
                                                         handleSelect(e, index);
+                                                        if(e.target.value === 'Date'){
+                                                            let data = fieldDataArray[index];
+                                                            data.value = new Date();
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
+                                                        }else {
+                                                            let data = fieldDataArray[index];
+                                                            data.value = '';
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
+
+                                                        }
                                                     }}
                                                 // value={drop}
                                                 // onChange={metadataDropDown}
@@ -656,6 +672,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }}>
                                                         <DatePicker
                                                             showIcon
+                                                            label="Select date"
                                                             selected={data.value}
                                                             value={data.value}
                                                             onChange={(e) => {
@@ -675,7 +692,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         }} /> */}
                                                         {/* <DatePicker
                                                             style={{ paddingLeft: '35px', paddingTop: '2px' }}
-                                                            label="Select date"
                                                             value={data.value}
                                                             // onChange={(e) => {
                                                             //     handleFieldValueChange(e.target.value, index);
@@ -698,7 +714,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="Postal Code"
-                                                        name="Postal Code   "
+                                                        name="Postal Code"
                                                         label="Postal Code"
                                                         value={data.postalCode}
                                                         onChange={(e) => {
