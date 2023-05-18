@@ -61,7 +61,6 @@ const sbtToken = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
-
     const user = useSelector((state) => state.auth.user);
     const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
@@ -74,7 +73,6 @@ const sbtToken = () => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-
     const handleClose = () => {
         setAnchorEl(null);
         setLoader(false);
@@ -227,12 +225,6 @@ const sbtToken = () => {
                                 <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
                                     Address
                                 </TableCell>
-                                {/* <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                    Status
-                                </TableCell> */}
-                                {/* <TableCell align="center" className="Tableheading" sx={{ borderBottom: 'none' }}>
-                                    Actions
-                                </TableCell> */}
                             </TableRow>
                         </TableHead>
 
@@ -241,18 +233,6 @@ const sbtToken = () => {
                             {sbtTable?.rows &&
                                 sbtTable?.rows.map((nft, index) => {
                                     return (
-                                        // <Grid item xs={12} sm={6} md={4} lg={3}>
-                                        //     <Nftcard
-                                        //        nftList={nft}
-                                        //         className="tableShadow"
-                                        //     // nftData={nft}
-                                        //     // categoryId={location.state.data.CategoryId}
-                                        //     // search={search}
-                                        //     // page={page}
-                                        //     // limit={limit}
-                                        //     // type={type}
-                                        //     />
-                                        // </Grid>
                                         <>
                                             <TableRow>
                                                 <TableCell
@@ -285,40 +265,8 @@ const sbtToken = () => {
                                                 <TableCell align="left" className="tableName">
                                                     {nft.address.slice(0, 5) + '...' + nft.address.slice(38, 42)}
                                                 </TableCell >
-                                                {/* <TableCell align="left" className="tableName">
-                                                    <Stack direction="row" justifyContent="center" alignItems="center">
-                                                        <Tooltip
-                                                            className="fontsize"
-                                                            title="SBT"
-                                                            placement="top"
-                                                            arrow
-                                                        >
-                                                            <Switch
-                                                                value={true}
-                                                                defaultChecked
-                                                                // checked={checked}
-                                                                onChange={(e) => setChecked(false)}
-                                                            // inputProps={{ 'aria-label': 'controlled' }}
-                                                            />
-                                                        </Tooltip>
-                                                        <Tooltip placement="top" title="View">
-                                                            <IconButton
-                                                                className="color"
-                                                                aria-label="detail"
-                                                                size="medium"
-                                                                onClick={() => {
-                                                                    setDetailsNftOpen(true)
-                                                                }}
-                                                            >
-                                                                <AccountCircleIcon sx={{ fontSize: '1.5rem' }} />
-                                                            </IconButton>
-                                                        </Tooltip>
-                                                    </Stack>
-                                                </TableCell> */}
                                             </TableRow>
-
                                         </>
-
                                     );
                                 })}
                         </TableBody>

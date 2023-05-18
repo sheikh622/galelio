@@ -1,12 +1,9 @@
 import { forwardRef, useState } from 'react';
-
 // material-ui
 import { AppBar, DialogActions, Button, Dialog, CardMedia, Divider, Grid, IconButton, ListItemText, ListItemButton, List, Slide, Toolbar, Typography, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
 // assets
 import CloseIcon from '@mui/icons-material/Close';
-
 // slide animation
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 import { Switch } from '@mui/material';
@@ -21,13 +18,11 @@ export default function DetailsDialog({ open, setOpen, sbtTable, details }) {
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
     const [checked, setChecked] = useState(true);
     const [check, setCheck] = useState(true);
-
     const status = [
         {
             name: 'Name:',
@@ -41,7 +36,6 @@ export default function DetailsDialog({ open, setOpen, sbtTable, details }) {
             name: 'Description:',
             // value: nftData?.description
         },
-
     ];
     // const walletadded = (event, index) => {
     //     // setWallettoggle(true);
@@ -53,7 +47,6 @@ export default function DetailsDialog({ open, setOpen, sbtTable, details }) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const sbt = new ethers.Contract(SBTAddress.address, SBTAbi.abi, signer);
-
     async function myFunction() {
         return
         // changeStatus(
@@ -64,7 +57,6 @@ export default function DetailsDialog({ open, setOpen, sbtTable, details }) {
     };
     return (
         <div>
-
             <Dialog fullScreen open={open}
                 onClose={handleClose}
                 TransitionComponent={Transition}>

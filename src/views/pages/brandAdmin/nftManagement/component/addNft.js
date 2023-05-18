@@ -156,7 +156,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             .typeError('Invalid Price')
         // image: Yup.mixed()
     });
-
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -169,14 +168,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         validationSchema,
         onSubmit: (values) => {
             // console.log('values', values);
-
             let fileArray = fileDataArray.map((data) => {
                 return data.fieldValue;
             });
             let fileNameArray = fileDataArray.map((data) => {
                 return data.fieldName;
             });
-
             let isValid = handleError(fieldDataArray, fileDataArray, values);
             // console.log('isValid', isValid);
 
