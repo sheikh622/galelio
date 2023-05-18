@@ -19,7 +19,7 @@ import { ethers } from 'ethers';
 const Activity = ({ tracking }) => {
     //    let index=1;
     //    let price = ethers.utils.formatEther(tracking?.activity[index].price)
-        // console.log(  tracking?.activity[0] , 'price=====================>>>');
+    // console.log(  tracking?.activity[0] , 'price=====================>>>');
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -204,23 +204,21 @@ const Activity = ({ tracking }) => {
                                         </TableRow>
                                     </TableHead>
 
-                                    {tracking?.activity?.length  < 0 ?
-                                        (<TableBody>
-                                       
-                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
-                                              No  activity found!
-                                            </TableCell>
-                                        </TableBody>)
-                                            : 
-                                            (
-                                        tracking?.activity?.map((item) => (
+                                    {tracking?.activity?.length < 0 ? (
                                         <TableBody>
-                                            {personName == item.event ? (
-                                                <TableRow>
-                                                    <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                        {item.event}
-                                                    </TableCell>
-                                                    {/*          {item?.brandImage ? (
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                No activity found!
+                                            </TableCell>
+                                        </TableBody>
+                                    ) : (
+                                        tracking?.activity?.map((item) => (
+                                            <TableBody>
+                                                {personName == item.event ? (
+                                                    <TableRow>
+                                                        <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                            {item.event}
+                                                        </TableCell>
+                                                        {/*          {item?.brandImage ? (
                                                     <TableCell
                                                         className="activityTable"
                                                         sx={{ fontSize: '15px', display: 'flex' }}
@@ -249,80 +247,6 @@ const Activity = ({ tracking }) => {
                                                         </Grid>
                                                     </TableCell>
                                                 )} */}
-
-                                                    <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                        {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
-                                                    </TableCell>
-
-                                                    <TableCell
-                                                        className="activityTable"
-                                                        sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
-                                                        align="center"
-                                                        onClick={() => {
-                                                            window.open(
-                                                                `https://mumbai.polygonscan.com/address/${
-                                                                    item?.from ? item?.from : item?.minter
-                                                                }`,
-                                                                '_blank'
-                                                            );
-                                                        }}
-                                                    >
-                                                        {item?.from
-                                                            ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
-                                                            : item?.minter
-                                                            ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42)
-                                                            : ''}
-                                                    </TableCell>
-
-                                                    <TableCell
-                                                        className="activityTable"
-                                                        sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
-                                                        align="center"
-                                                        onClick={() => {
-                                                            window.open(`https://mumbai.polygonscan.com/address/${item?.to}`, '_blank');
-                                                        }}
-                                                    >
-                                                        {item?.to ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42) : ''}
-                                                    </TableCell>
-                                                    <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                        {Date(item?.blockTimestamp).slice(0, 15)}
-                                                    </TableCell>
-                                                </TableRow>
-                                            ) : (
-                                                personName == 'Filter' && (
-                                                    <TableRow>
-                                                        <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                            {item.event}
-                                                        </TableCell>
-                                                        {/*          {item?.brandImage ? (
-                                                       <TableCell
-                                                           className="activityTable"
-                                                           sx={{ fontSize: '15px', display: 'flex' }}
-                                                           align="center"
-                                                       >
-                                                           <Grid item lg={2}></Grid>
-                                                           <Grid item lg={2}>
-                                                               <Avatar alt="" src={item?.brandImage} />
-                                                           </Grid>
-                                                           <Grid item lg={6} sx={{ alignSelf: 'center' }}>
-                                                               {item?.brandImage ? item?.brandName : ''}
-                                                           </Grid>
-                                                       </TableCell>
-                                                   ) : (
-                                                       <TableCell
-                                                           className="activityTable"
-                                                           sx={{ fontSize: '15px', display: 'flex' }}
-                                                           align="center"
-                                                       >
-                                                           <Grid item lg={2}></Grid>
-                                                           <Grid item lg={2}>
-                                                               <Avatar sx={{ bgcolor: 'transparent', color: 'transparent' }}>b</Avatar>
-                                                           </Grid>
-                                                           <Grid item lg={6} sx={{ alignSelf: 'center' }}>
-                                                               {item?.brandImage ? item?.brandName : ''}
-                                                           </Grid>
-                                                       </TableCell>
-                                                   )} */}
 
                                                         <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
                                                             {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
@@ -362,11 +286,104 @@ const Activity = ({ tracking }) => {
                                                             {Date(item?.blockTimestamp).slice(0, 15)}
                                                         </TableCell>
                                                     </TableRow>
-                                                )
-                                            )}
-                                        </TableBody>
-                                        )
-                                    ))}
+                                                ) : (
+                                                    personName == 'Filter' && (
+                                                        <TableRow>
+                                                            {item.event == 'Transfer' ? (
+                                                                <Tooltip placement="top" title="Internal Transfer">
+                                                                    <TableCell
+                                                                        className="activityTable"
+                                                                        sx={{ fontSize: '15px' , cursor:'pointer' , }}
+                                                                        align="center"
+                                                                    >
+                                                                        {item.event}
+                                                                    </TableCell>
+                                                                </Tooltip>
+                                                            ) : (
+                                                                <TableCell
+                                                                    className="activityTable"
+                                                                    sx={{ fontSize: '15px' }}
+                                                                    align="center"
+                                                                >
+                                                                    {item.event}
+                                                                </TableCell>
+                                                            )}
+                                                            {/*          {item?.brandImage ? (
+                                                       <TableCell
+                                                           className="activityTable"
+                                                           sx={{ fontSize: '15px', display: 'flex' }}
+                                                           align="center"
+                                                       >
+                                                           <Grid item lg={2}></Grid>
+                                                           <Grid item lg={2}>
+                                                               <Avatar alt="" src={item?.brandImage} />
+                                                           </Grid>
+                                                           <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                               {item?.brandImage ? item?.brandName : ''}
+                                                           </Grid>
+                                                       </TableCell>
+                                                   ) : (
+                                                       <TableCell
+                                                           className="activityTable"
+                                                           sx={{ fontSize: '15px', display: 'flex' }}
+                                                           align="center"
+                                                       >
+                                                           <Grid item lg={2}></Grid>
+                                                           <Grid item lg={2}>
+                                                               <Avatar sx={{ bgcolor: 'transparent', color: 'transparent' }}>b</Avatar>
+                                                           </Grid>
+                                                           <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                               {item?.brandImage ? item?.brandName : ''}
+                                                           </Grid>
+                                                       </TableCell>
+                                                   )} */}
+
+                                                            <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                                {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
+                                                            </TableCell>
+
+                                                            <TableCell
+                                                                className="activityTable"
+                                                                sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                                align="center"
+                                                                onClick={() => {
+                                                                    window.open(
+                                                                        `https://mumbai.polygonscan.com/address/${
+                                                                            item?.from ? item?.from : item?.minter
+                                                                        }`,
+                                                                        '_blank'
+                                                                    );
+                                                                }}
+                                                            >
+                                                                {item?.from
+                                                                    ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
+                                                                    : item?.minter
+                                                                    ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42)
+                                                                    : ''}
+                                                            </TableCell>
+
+                                                            <TableCell
+                                                                className="activityTable"
+                                                                sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                                align="center"
+                                                                onClick={() => {
+                                                                    window.open(
+                                                                        `https://mumbai.polygonscan.com/address/${item?.to}`,
+                                                                        '_blank'
+                                                                    );
+                                                                }}
+                                                            >
+                                                                {item?.to ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42) : ''}
+                                                            </TableCell>
+                                                            <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
+                                                                {Date(item?.blockTimestamp).slice(0, 15)}
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    )
+                                                )}
+                                            </TableBody>
+                                        ))
+                                    )}
 
                                     {/*   </>
                                     ))} */}
