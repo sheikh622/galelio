@@ -1,31 +1,61 @@
-import React from "react";
+import React from 'react';
 import GoogleMapReact from 'google-map-react';
+import { useState } from 'react';
+import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
+const AnyReactComponent = ({ text }) => (
+    <div
+        style={{
+            color: 'red',
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-export default function Form(){
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627
-    },
-    zoom: 11
-  };
-
-  return (
-    // Important! Always set the container height explicitly
-    <div className="map" style={{ border: '2px solid #2F53FF' }}>
-      <GoogleMapReact
-      bootstrapURLKeys={{ key: "" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
-        />
-      </GoogleMapReact>
+            display: 'inline-flex',
+            textAlign: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '100%',
+            transform: 'translate(-50%, -50%)'
+        }}
+    >
+        <LocationOnSharpIcon fontSize="large" />
+        {text}
     </div>
-  );
+);
+
+export default function Form() {
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+    const [lat, setLat] = useState(0.0);
+
+    const [lng, setLng] = useState(0.0);
+    // console.log(lat, "lat***", lng, "lng***");
+    fetch('https://maps.googleapis.com/maps/api/geocode/json?address=US&key=AIzaSyCjiR23tgo8Vecvcuj1WIg3OmUSquGvtD4', requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+            console.log(result.results?.[0], 'result***************');
+            setLat(result.results?.[0].geometry.location.lat);
+            setLng(result.results?.[0].geometry.location.lng);
+        })
+        .catch((error) => console.log('error???????????????????', error));
+    const defaultProps = {
+        center: {
+            lat: lat,
+            lng: lng
+        },
+        zoom: 5
+    };
+    // console.log(defaultProps.center, 'center*******')
+
+    return (
+        // Important! Always set the container height explicitly
+        <div className="map" style={{ border: '2px solid #2F53FF' }}>
+            <GoogleMapReact
+                bootstrapURLKeys={{ key: 'AIzaSyCjiR23tgo8Vecvcuj1WIg3OmUSquGvtD4' }}
+                defaultCenter={defaultProps.center}
+                defaultZoom={defaultProps.zoom}
+            >
+                <AnyReactComponent lat={lat} lng={lng} text={''} />
+            </GoogleMapReact>
+        </div>
+    );
 }
