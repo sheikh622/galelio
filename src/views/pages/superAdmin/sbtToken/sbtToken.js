@@ -157,9 +157,7 @@ const sbtToken = () => {
                 //             </Button>
                 //         </Grid> */}
                 //     </Grid>
-
                 // }
-
                 content={false}
             ></MainCard>
             <MainCard
@@ -227,8 +225,6 @@ const sbtToken = () => {
                                 </TableCell>
                             </TableRow>
                         </TableHead>
-
-
                         <TableBody sx={{ padding: '10px' }}>
                             {sbtTable?.rows &&
                                 sbtTable?.rows.map((nft, index) => {
