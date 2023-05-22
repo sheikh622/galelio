@@ -34,6 +34,10 @@ const typeArray = [
     {
         value: 'rejected',
         label: 'Rejected NFTS'
+    },
+    {
+        value: 'Update Requests',
+        label: 'Update Requests'
     }
 ];
 
@@ -65,7 +69,7 @@ const NftManagement = () => {
         setSearch('');
         setPage(1);
     };
-
+console.log("-----------------",location.state.data.CategoryId)
     useEffect(() => {
         dispatch(
             getAllNft({

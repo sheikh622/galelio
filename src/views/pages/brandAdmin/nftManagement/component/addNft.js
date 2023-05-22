@@ -250,7 +250,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         addNft({
                             categoryId: data.CategoryId,
                             mintType: mintType,
-                            metaDataArray: fieldDataArray,
+                            metaDataArray: arrayData,
                             fileNameArray: fileNameArray,
                             fileArray: fileArray,
                             name: values.nftName,
@@ -684,28 +684,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                                 console.log("3323223", data)
                                                             }}
                                                         />
-                                                        {/* <DatePicker 
-                                                       
-                                                        onChange={(date) => {
-                                                            const [start] = date;
-                                                            console.log("startsssssss",start)
-                                                        }} /> */}
-                                                        {/* <DatePicker
-                                                            style={{ paddingLeft: '35px', paddingTop: '2px' }}
-                                                            value={data.value}
-                                                            // onChange={(e) => {
-                                                            //     handleFieldValueChange(e.target.value, index);
-                                                            // }}
-                                                        // onChange={(e) => setValue(e)}
-                                                        onChange={(date) => {
-                                                            // setSelectedDates([...selectedDates, date])
-                                                            let data = fieldDataArray[index];
-                                                            data.date = date;
-                                                            fieldDataArray[index] = data;
-                                                            setFieldDataArray([...fieldDataArray]);
-                                                            // console.log("111111111111", date?.toDate?.().toString())
-                                                        }}
-                                                        /> */}
                                                     </Grid>
                                                 </>
                                             )}
