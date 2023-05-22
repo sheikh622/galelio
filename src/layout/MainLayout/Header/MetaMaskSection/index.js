@@ -40,6 +40,7 @@ const MetaMaskSection = () => {
             //     console.log('Please change your Chain ID to Goerli');
             //     setWalletAddress()
             // }
+            
             else if (utils?.getAddress(response[0]) !== user.walletAddress) {
                 dispatch({
                     type: SNACKBAR_OPEN,
