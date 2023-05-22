@@ -24,19 +24,19 @@ const TrackingTool = () => {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-      const timer = setInterval(() => {
-        setProgress((oldProgress) => {
-          if (oldProgress === 100) {
-            return 0;
-          }
-          const diff = Math.random() * 10;
-          return Math.min(oldProgress + diff, 100);
-        });
-      }, 500);
-  
-      return () => {
-        clearInterval(timer);
-      };
+        const timer = setInterval(() => {
+            setProgress((oldProgress) => {
+                if (oldProgress === 100) {
+                    return 0;
+                }
+                const diff = Math.random() * 10;
+                return Math.min(oldProgress + diff, 100);
+            });
+        }, 500);
+
+        return () => {
+            clearInterval(timer);
+        };
     }, []);
     const dispatch = useDispatch();
     const serialId = useParams().token;
@@ -114,16 +114,16 @@ const TrackingTool = () => {
                     md={11}
                     lg={11}
                     sx={{
-                        ml: { md: -2 }, mt:0.4,
+                        ml: { md: -2 },
+                        mt: 0.4,
                         display: { xs: 'block', sm: 'block', md: 'flex', lg: 'flex' },
                         background: 'tranparent',
                         color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                     }}
                 >
-                {marketplaceNfts?.nft?.Brand?.image?
-                    (
+                    {marketplaceNfts?.nft?.Brand?.image ? (
                         <Grid item md={12} xs={12} lg={12}>
-                       {/*  <Grid item xs={12} lg={12} md={12}>
+                            {/*  <Grid item xs={12} lg={12} md={12}>
                             <Grid container spacing={2} sx={{ mb: 2 }}>
                                 <Grid item xs={12}>
                                     <Typography
@@ -139,34 +139,29 @@ const TrackingTool = () => {
                                 </Grid>
                             </Grid>
                         </Grid> */}
-                        <Grid container-fluid>
-                            <Grid item md={12} xs={12}>
-                                <Grid container>
-                                    <Grid item md={12} xs={12}>
-                                        <Product tracking={marketplaceNfts} />
-                                    </Grid>
-                                    <Grid item md={12} xs={12}>
-                                        <TrackAtribute tracking={marketplaceNfts} serialId={serialId} />
-                                    </Grid>
-                                    <Grid item md={12} xs={12}>
-                                        <Activity tracking={marketplaceNfts} />
+                            <Grid container-fluid>
+                                <Grid item md={12} xs={12}>
+                                    <Grid container>
+                                        <Grid item md={12} xs={12}>
+                                            <Product tracking={marketplaceNfts} />
+                                        </Grid>
+                                        <Grid item md={12} xs={12}>
+                                            <TrackAtribute tracking={marketplaceNfts} serialId={serialId} />
+                                        </Grid>
+                                        <Grid item md={12} xs={12}>
+                                            <Activity tracking={marketplaceNfts} />
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    )
-                    :
-                    (
+                    ) : (
                         <Stack m={5} sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
-                      {/*   <LinearProgress color="secondary" />
+                            {/*   <LinearProgress color="secondary" />
                         <LinearProgress color="success" /> */}
-                        <LinearProgress color="secondary" variant="determinate" value={progress} />
-                      </Stack>
-                    )
-                }
-
-              
+                            <LinearProgress color="secondary" variant="determinate" value={progress} />
+                        </Stack>
+                    )}
                 </Grid>
             </Grid>
 
