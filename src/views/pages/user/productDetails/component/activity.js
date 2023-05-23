@@ -10,8 +10,19 @@ import { Typography, Grid, Select, InputLabel, FormControl, MenuItem, Divider } 
 import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import FactoryAbi from 'contractAbi/Factory.json';
+import { ethers, utils } from 'ethers';
+import FactoryAddress from 'contractAbi/Factory-address.json';
 import MainCard from 'ui-component/cards/MainCard';
-const Activity = () => {
+const Activity = ({nftList}) => {
+    console.log(nftList?.nft?.NFTTokens?.[0]?.serialId , 'nftList*********');
+    var serialId = nftList?.nft?.NFTTokens?.[0]?.serialId;
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
+    console.log('factoryAddr', factoryAddr);
+    // let res =  factoryAddr.serials(serialId);
+    // console.log(res,'res******')
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {

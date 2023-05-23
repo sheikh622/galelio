@@ -7,7 +7,7 @@ import attribute from 'views/pages/trackingTool/component/attribute';
 const NewCard = ({ data, nfts }) => {
     const theme = useTheme();
     const navigate = useNavigate();
-    console.log(data.NFTTokens, 'nfts.id======>');
+    // console.log(data.NFTTokens, 'nfts.id======>');
     return (
         <Grid
             item
