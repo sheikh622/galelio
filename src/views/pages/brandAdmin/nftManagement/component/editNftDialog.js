@@ -1,6 +1,8 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import Select from 'react-select';
+
 import * as Yup from 'yup';
 import {
     Grid,
@@ -27,6 +29,8 @@ import { Switch } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
 import { editNft } from 'redux/nftManagement/actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,11 +40,9 @@ import QuantitySelector from './quantitySelector';
 import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css";
 import { Country, State, City } from 'country-state-city';
-import Select from 'react-select';
-import { items } from 'store/kanban';
+
+import { values } from 'lodash';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const currencyTypeArray = [
@@ -49,28 +51,7 @@ const currencyTypeArray = [
         label: 'USDT'
     }
 ];
-const dropdown = [
-    {
-        value: "Text",
-        label: "Text",
-    },
-    {
-        value: "Number",
-        label: "Number",
-    },
-    {
-        value: "Date",
-        label: "Date",
-    },
-    {
-        value: "Location",
-        label: "Location",
-    }
 
-
-
-
-]
 export default function EditNftDialog({ nftInfo, categoryId, type, search, page, limit, loader, setLoader, open, setOpen }) {
     const dispatch = useDispatch();
     console.log(nftInfo, 'nftInfo');
@@ -91,10 +72,17 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const handleError = (fieldDataArray, fileDataArray, values) => {
         console.log('im in handle error');
         let isValid = true;
+        // console.log('fieldDataArray', fieldDataArray);
+        // console.log('fileDataArray', fileDataArray);
+        // console.log('values', values);
+
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
         }
+
+        // else  (fieldDataArray.length > 0) {
+
         fieldDataArray.map((array) => {
             if (array.trait_type == '') {
                 isValid = false;
@@ -166,28 +154,39 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     });
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: nftInfo,
+        initialValues: {
+            nftName: '',
+            nftDescription: '',
+            directBuyerAddress: '',
+            nftPrice: 0,
+            images: []
+        },
+
+        //  nftInfo,
         validationSchema,
         onSubmit: (values) => {
+            console.log(values, 'values=========>')
+
             let file = values.images[0].image;
             let isFile = file instanceof File;
+
             let previousUploadedItems = fileDataArray.filter((data) => {
                 if (typeof data.value === 'string') return data;
             });
+
             let newUploadedItems = fileDataArray.filter((data) => {
                 if (typeof data.value !== 'string') return data;
             });
-            let arrayData= fieldDataArray.map((item) => {
-                const {phone, ...obj } =item;
-                return obj;
-            })
+
             let fileArray = newUploadedItems.map((data) => {
                 return data.value;
             });
             let fileNameArray = newUploadedItems.map((data) => {
                 return data.trait_type;
             });
+
             let isValid = handleError(fieldDataArray, fileDataArray, values, isFile);
+
             if (isValid) {
                 dispatch(
                     editNft({
@@ -200,7 +199,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         isFile: isFile,
                         currencyType: currencyType,
                         mintType: mintType,
-                        metaDataArray: arrayData,
+                        metaDataArray: fieldDataArray,
                         fileNameArray: fileNameArray,
                         fileArray: fileArray,
                         previousUploadedItems: previousUploadedItems,
@@ -248,15 +247,20 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         accept: '.jpeg,.png,.jpg,.gif',
         onDrop: handleDrop
     });
+    // const handleFieldNameChange = (value, index) => {
+    //     let array = structuredClone(fieldDataArray);
+    //     // let array = [...fieldDataArray];
+    //     array[index].trait_type = value;
+    //     setFieldDataArray(array);
+    // };
     const handletrait_typeChange = (value, index) => {
-        let array = structuredClone(fieldDataArray);
-        // let array = [...fieldDataArray];
+        let array = [...fieldDataArray];
         array[index].trait_type = value;
         setFieldDataArray(array);
     };
     const handleFieldValueChange = (value, index) => {
-        let array = structuredClone(fieldDataArray);
-        // let array = [...fieldDataArray];
+        // let array = structuredClone(fieldDataArray); after run uncomment this code!!!!
+        let array = [...fieldDataArray];
         array[index].value = value;
         setFieldDataArray(array);
     };
@@ -290,8 +294,13 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         setFieldDataArray(array);
     };
 
-    const handleFiletrait_typeChange = (value, index) => {
+    const handleFileFieldNameChange = (value, index) => {
         let array = structuredClone(fileDataArray);
+        array[index].fieldName = value;
+        setFileDataArray(array);
+    };
+    const handleFiletrait_typeChange = (value, index) => {
+        let array = [...fileDataArray];
         array[index].trait_type = value;
         setFileDataArray(array);
     };
@@ -307,16 +316,54 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         setFileDataArray(array);
     };
 
-    useEffect(() => {
-        setFieldDataArray(nftInfo.fieldDataArray);
-        setFileDataArray(nftInfo.fileDataArray);
-        setMintType(nftInfo.mintType);
-        setCurrencyType(nftInfo.currencyType);
-        setUploadedImages(nftInfo.images);
-    }, [nftInfo]);
+    // useEffect(() => {
+    //     setFieldDataArray(nftInfo.fieldDataArray);
+    //     setFileDataArray(nftInfo.fileDataArray);
+    //     setMintType(nftInfo.mintType);
+    //     setCurrencyType(nftInfo.currencyType);
+    //     setUploadedImages(nftInfo.images);
+    // }, [nftInfo]);
 
     useEffect(() => { }, [fileDataArray]);
 
+    // <<<New edit metadata********************************************************************************                                     ***********>
+    const handleSelect = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = [...fieldDataArray];
+        array[index].display_type = event.target?.value;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+    const dropdown = [
+        {
+            value: "Text",
+            label: "Text",
+        },
+        {
+            value: "Number",
+            label: "Number",
+        },
+        {
+            value: "Date",
+            label: "Date",
+        },
+        {
+            value: "Location",
+            label: "Location",
+        }
+    ]
+    const handleCheckboxChange = (index) => {
+        const updatedCheckboxes = fieldDataArray.map((item, i) => {
+            if (i === index) {
+                return { ...item, primaryLocation: true };
+            }
+            return { ...item, primaryLocation: false };
+        });
+        setFieldDataArray([...updatedCheckboxes]);
+    };
     return (
         <>
             <Dialog
@@ -385,6 +432,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                     variant="standard"
                                 />
                             </Grid>
+
                             <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
@@ -443,17 +491,19 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                         setFieldDataArray([
                                             ...fieldDataArray,
                                             {
-                                                display_type: 'text',
+                                                display_type: 'Text',
                                                 trait_type: '',
                                                 value: '',
-                                                countryCode: data?.phone?.value,
+                                                countryCode: '',
                                                 isEditable: false,
                                                 proofRequired: false,
                                                 primaryLocation: false,
-
                                             }
+
                                         ]);
+                                        console.log("--------------------------------------00", fieldDataArray)
                                     }}
+
                                 >
                                     Add more fields
                                 </Button>
@@ -465,32 +515,32 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                 <Grid container spacing={4} mt={1}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid xs={5} md={3}>
+                                            <Grid xs={3} md={3}>
                                                 <TextField
                                                     sx={{ m: 6, width: '80%', borderRadius: '2%' }}
                                                     className="w-100"
                                                     // className="textfieldStyle"
-                                                    variant="filled"
+                                                    variant="standard"
                                                     id="outlined-select-budget"
                                                     select
                                                     fullWidth
                                                     value={data.display_type}
-                                                // onChange={(e) => {
-                                                //     console.log({ e })
-                                                //     handleSelect(e, index);
-                                                //     if (e.target.value === 'Date') {
-                                                //         let data = fieldDataArray[index];
-                                                //         data.value = new Date();
-                                                //         fieldDataArray[index] = data;
-                                                //         setFieldDataArray([...fieldDataArray]);
-                                                //     } else {
-                                                //         let data = fieldDataArray[index];
-                                                //         data.value = '';
-                                                //         fieldDataArray[index] = data;
-                                                //         setFieldDataArray([...fieldDataArray]);
+                                                    onChange={(e) => {
+                                                        console.log({ e })
+                                                        handleSelect(e, index);
+                                                        if (e.target.value === 'Date') {
+                                                            let data = fieldDataArray[index];
+                                                            data.value = new Date();
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
+                                                        } else {
+                                                            let data = fieldDataArray[index];
+                                                            data.value = '';
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
 
-                                                //     }
-                                                // }}
+                                                        }
+                                                    }}
                                                 // value={drop}
                                                 // onChange={metadataDropDown}
                                                 >
@@ -516,7 +566,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 />
                                             </Grid>
                                             {data.display_type == 'Text' && (
-                                                <Grid item xs={3} md={3}>
+                                                <Grid item xs={2} md={2}>
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="field_value"
@@ -532,7 +582,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 </Grid>
                                             )}
                                             {data.display_type == 'Number' && (
-                                                <Grid item xs={3} md={3}>
+                                                <Grid item xs={2} md={2}>
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="Number"
@@ -549,26 +599,26 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                             )}
                                             {data.display_type == 'Date' && (
                                                 <>
-                                                    {/* <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }}>
-                                                        <DatePicker
+                                                    <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }}>
+                                                        {/* <DatePicker
                                                             showIcon
                                                             label="Select date"
                                                             selected={data.value}
                                                             value={data.value}
-                                                            onChange={(e) => {
-                                                                let data = fieldDataArray[index];
-                                                                data.value = e;
-                                                                fieldDataArray[index] = data;
-                                                                setFieldDataArray([...fieldDataArray]);
-                                                                // setStartDate(startDate);
-                                                                console.log("3323223", data)
-                                                            }}
-                                                        />
-                                                    </Grid> */}
+                                                        onChange={(e) => {
+                                                            let data = fieldDataArray[index];
+                                                            data.value = e;
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
+                                                            // setStartDate(startDate);
+                                                            console.log("3323223", data)
+                                                        }}
+                                                        /> */}
+                                                    </Grid>
                                                 </>
                                             )}
                                             {data.display_type == 'Location' && (
-                                                <Grid item xs={2} md={2}>
+                                                <Grid item xs={2} md={1}>
                                                     <TextField
                                                         className="textfieldStyle"
                                                         id="Postal Code"
@@ -589,12 +639,12 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 </Grid>
                                             )}
                                             {data.display_type == 'Location' && (
-                                                <Grid item xs={2} md={2} sx={{ m: 2, width: '50%', borderRadius: '2%' }}>
+                                                <Grid item xs={2} md={1.5} sx={{ m: 2, width: '45%', borderRadius: '2%' }}>
                                                     <Select
                                                         // styles={style}
                                                         // className="selectFieldDesign"
                                                         // label={selectedCode}
-                                                        placeholder="select the Country"
+                                                        placeholder="select  Country"
                                                         options={Country?.getAllCountries()}
                                                         getOptionLabel={(options) => {
                                                             return options['name'] ? options['name'] : options['label'];
@@ -610,17 +660,17 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                                 }
                                                                 : ''
                                                         }
-                                                        // onChange={(item) => {
-                                                        //     // formik.setFieldValue("country", item?.phonecode);
-                                                        //     let data = fieldDataArray[index];
-                                                        //     let value = item.isoCode;
-                                                        //     data.phone = { value: item.isoCode, label: item.name };
-                                                        //     data.countryCode = value;
-                                                        //     fieldDataArray[index] = data;
-                                                        //     setFieldDataArray([...fieldDataArray]);
+                                                        onChange={(item) => {
+                                                            // formik.setFieldValue("country", item?.phonecode);
+                                                            let data = fieldDataArray[index];
+                                                            let value = item.isoCode;
+                                                            data.phone = { value: item.isoCode, label: item.name };
+                                                            data.countryCode = value;
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
 
-                                                        //     // setSelectedCode({value:item.phonecode, label: item.name});
-                                                        // }}
+                                                            // setSelectedCode({value:item.phonecode, label: item.name});
+                                                        }}
                                                     />
                                                 </Grid>
                                             )}
@@ -659,7 +709,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     <Icon icon={closeFill} width={28} height={28} />
                                                 </IconButton>
                                             </Grid>
-                                            <Grid item xs={2} mt={2} md={3}></Grid>
+                                            <Grid item xs={2} mt={2} md={2}></Grid>
                                         </>
                                     ))}
                                 </Grid>
@@ -694,7 +744,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                         id="field_name"
                                                         name="field_name"
                                                         label="File Name"
-                                                        value={data.trait_type}
+                                                        value={data?.trait_type}
                                                         onChange={(e) => {
                                                             handleFiletrait_typeChange(e.target.value, index);
                                                         }}
@@ -703,10 +753,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     />
                                                 </Grid>
 
-                                                {data?.value?.length > 1 ? (
+                                                {data?.fieldValue?.length > 1 ? (
                                                     <Grid item xs={3} mt={3.5} className="encap" sx={{}}>
-                                                        <a target="_blank" href={data?.value} style={{ color: '#4198e3' }}>
-                                                            {data?.value}
+                                                        <a target="_blank" href={data?.fieldValue} style={{ color: '#4198e3' }}>
+                                                            {data?.fieldValue}
                                                         </a>
                                                     </Grid>
                                                 ) : (
@@ -717,16 +767,17 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                             id="avatar"
                                                             name="avatar"
                                                             accept="image/*,.pdf"
-                                                            // value={data?.trait_type}
+                                                            // value={data?.fieldName}
                                                             onChange={(event) => {
                                                                 handleFileFieldValueChange(event.currentTarget.files[0], index);
                                                             }}
                                                         />
                                                     </Grid>
                                                 )}
-
-                                                {/* <div style={{marginTop:"3%", marginLeft:"2%"}}><b>Previous file: </b><a target="_blank" href={data.value}>{data.value}</a></div> */}
-                                                <Grid item xs={2} mt={2}>
+                                                {/* 
+                                                {/ <div style={{marginTop:"3%", marginLeft:"2%"}}><b>Previous file: </b > <a target="_blank" href={data.fieldValue}>{data.fieldValue}</a>
+                                                </div > /} */}
+                                                < Grid item xs={2} mt={2} >
                                                     <IconButton
                                                         color="error"
                                                         edge="end"
@@ -819,7 +870,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                             </AnimatePresence>
                         </List>
                     </form>
-                </DialogContent>
+                </DialogContent >
                 <Divider />
                 <Grid container>
                     <DialogActions>
@@ -854,7 +905,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                         </AnimateButton>
                     </DialogActions>
                 </Grid>
-            </Dialog>
+            </Dialog >
         </>
     );
 }
