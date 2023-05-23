@@ -275,7 +275,7 @@ export default function MetaData() {
                                             <Balance />
                                         </Grid>
                                         <Grid item xs={12} textAlign="center" sx={{ marginBottom: { md: '-24px' } }}>
-                                            <Button href="https://uniswap.org/" className="wallet-button" variant="contained" size="large">
+                                            <Button href="https://mumbai.polygonscan.com/" className="wallet-button" variant="contained" size="large">
                                                 Add Funds
                                             </Button>
                                         </Grid>

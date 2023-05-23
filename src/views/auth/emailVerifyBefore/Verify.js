@@ -199,7 +199,7 @@ const VerifyEmail = ({ token, ...others }) => {
                                                     variant="contained"
                                                     color="secondary"
                                                 >
-                                                    Re-Enter
+                                                    Re-Send
                                                 </Button>
                                             </AnimateButton>
                                         </Box>

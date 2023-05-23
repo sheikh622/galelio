@@ -144,7 +144,7 @@ export default function MetaMask({ open, setOpen }) {
                                         <Balance />
                                     </Grid>
                                     <Grid item xs={12} textAlign="center" sx={{ }}>
-                                        <Button href="https://uniswap.org/" className="wallet-button"
+                                        <Button href="https://mumbai.polygonscan.com/" className="wallet-button"
                                          variant="contained" size="large">
                                             Add Funds
                                         </Button>
