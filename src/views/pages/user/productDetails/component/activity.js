@@ -6,23 +6,74 @@ import { useTheme } from '@mui/material/styles';
 import '@fontsource/public-sans';
 import SubCard from 'ui-component/cards/SubCard';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import LinearProgress from '@mui/material/LinearProgress';
 import { Typography, Grid, Select, InputLabel, FormControl, MenuItem, Divider } from '@mui/material';
 import { IconSearch } from '@tabler/icons';
-import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
+import { IconButton, Stack, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { useNavigate } from 'react-router-dom';
+import { getTrack } from 'redux/marketplace/actions';
 import FactoryAbi from 'contractAbi/Factory.json';
 import { ethers, utils } from 'ethers';
 import FactoryAddress from 'contractAbi/Factory-address.json';
 import MainCard from 'ui-component/cards/MainCard';
-const Activity = ({nftList}) => {
-    console.log(nftList?.nft?.NFTTokens?.[0]?.serialId , 'nftList*********');
+import CircularProgress from '@mui/material/CircularProgress';
+const Activity = ({ nftList }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [seconds, setSeconds] = useState(5);
+    useEffect(() => {
+        let interval = null;
+
+        if (seconds > 0) {
+            interval = setInterval(() => {
+                setSeconds((seconds) => seconds - 1);
+            }, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [seconds]);
+    console.log(nftList?.nft?.NFTTokens?.[0]?.serialId, 'nftList*********');
     var serialId = nftList?.nft?.NFTTokens?.[0]?.serialId;
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
-    console.log('factoryAddr', factoryAddr);
-    // let res =  factoryAddr.serials(serialId);
-    // console.log(res,'res******')
+    console.log(seconds, 'seconds');
+    useEffect(() => {
+        if (seconds == 0) {
+            const fetchData = async () => {
+                try {
+                    if (serialId) {
+                        const provider = new ethers.providers.Web3Provider(window.ethereum);
+                        const signer = provider.getSigner();
+                        const factoryAddr = new ethers.Contract(FactoryAddress.address, FactoryAbi.abi, signer);
+                        console.log('factoryAddr', factoryAddr);
+                        let res = await factoryAddr.serials(serialId);
+                        console.log(res, 'res******');
+                        let address = res[0].toLowerCase();
+                        let tokenId = parseInt(res[1]._hex);
+                        console.log(address, 'address');
+
+                        tokenId = tokenId.toString();
+                        console.log('tokenId', tokenId);
+                        dispatch(
+                            getTrack({
+                                serialId: serialId,
+                                tokenId: `${tokenId}`,
+                                address: address,
+                                navigate: navigate
+                            })
+                        );
+                    } else {
+                        console.log('no serial id');
+                    }
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            };
+
+            fetchData();
+        }
+    }, [seconds]);
+
+    const marketplaceNfts = useSelector((state) => state.marketplaceReducer.trackNft);
+    console.log(' marketplaceNfts>>>>', marketplaceNfts?.activity);
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -34,29 +85,42 @@ const Activity = ({nftList}) => {
         }
     };
 
-    const names = [
-        'Sales',
-        'Listings',
-        'Offers',
-        'Transfers',
-    ];
-
     function getStyles(name, personName) {
         return {
             fontWeight: personName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium
         };
     }
     const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
-
+    const [personName, setPersonName] = useState('Filter');
+    const names = [
+        {
+            label: 'Filter',
+            value: 'Filter'
+        },
+        {
+            label: 'List',
+            value: 'List'
+        },
+        {
+            label: 'Mint',
+            value: 'Mint'
+        },
+        {
+            label: 'Mint Bulk',
+            value: 'Mint Bulk'
+        },
+        {
+            label: 'Transfer',
+            value: 'Transfer'
+        },
+        {
+            label: 'Transfer Muliple',
+            value: 'Transfer Muliple'
+        }
+    ];
     const handleChange = (event) => {
-        const {
-            target: { value }
-        } = event;
-        setPersonName(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value
-        );
+        setPersonName(event.target.value);
+        // console.log(personName , 'personName==========');
     };
     const itemData = [
         {
@@ -137,22 +201,19 @@ const Activity = ({nftList}) => {
                                                     value={personName}
                                                     onChange={handleChange}
                                                     // input={<OutlinedInput />}
-                                                    renderValue={(selected) => {
-                                                        if (selected.length === 0) {
-                                                            return <em className="fontfamily">filter</em>;
-                                                        }
 
-                                                        return selected.join(', ');
-                                                    }}
-                                                    MenuProps={MenuProps}
                                                     inputProps={{ 'aria-label': 'Without label' }}
                                                 >
                                                     {/* <MenuItem disabled value="">
-                                          <em>aiman</em>
-                                        </MenuItem> */}
+                                  <em>aiman</em>
+                                </MenuItem> */}
                                                     {names.map((name) => (
-                                                        <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                                                            {name}
+                                                        <MenuItem
+                                                            key={name.label}
+                                                            value={name?.value}
+                                                            style={getStyles(name, personName, theme)}
+                                                        >
+                                                            {name.value}
                                                         </MenuItem>
                                                     ))}
                                                 </Select>
@@ -193,12 +254,14 @@ const Activity = ({nftList}) => {
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Event{' '}
                                             </TableCell>
+
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Price{' '}
                                             </TableCell>
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 From
                                             </TableCell>
+
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 To{' '}
                                             </TableCell>
@@ -207,35 +270,222 @@ const Activity = ({nftList}) => {
                                             </TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    {itemData.map((item) => (
+                                    {seconds != 0 ? (
                                         <TableBody>
-                                            <TableRow>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.title}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.price}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.from}
-                                                </TableCell>
-                                                <TableCell
-                                                    className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
-                                                    align="center"
-                                                >
-                                                    {item.to}
-                                                </TableCell>
-                                                <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.days}
-                                                </TableCell>
-                                            </TableRow>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                <Box sx={{ width: '100%', color: 'grey.500' }}>
+                                                    <LinearProgress />
+                                                </Box>
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                <Box sx={{ width: '100%', color: 'grey.500' }}>
+                                                    <LinearProgress />
+                                                </Box>
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                <Box sx={{ width: '100%', color: 'grey.500' }}>
+                                                    <LinearProgress />
+                                                </Box>
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                <Box sx={{ width: '100%', color: 'grey.500' }}>
+                                                    <LinearProgress />
+                                                </Box>
+                                            </TableCell>
+                                            <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                <Box sx={{ width: '100%', color: 'grey.500' }}>
+                                                    <LinearProgress />
+                                                </Box>
+                                            </TableCell>
                                         </TableBody>
-                                    ))}
+                                    ) : (
+                                        <>
+                                            {marketplaceNfts && marketplaceNfts?.activity?.length < 0 ? (
+                                                <TableBody>
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '18px !important' }}
+                                                        align="center"
+                                                    >
+                                                        No activity found!
+                                                    </TableCell>
+                                                </TableBody>
+                                            ) : (
+                                                marketplaceNfts?.activity?.map((item) => (
+                                                    <TableBody>
+                                                        {personName == item.event ? (
+                                                            <TableRow>
+                                                                <TableCell
+                                                                    className="activityTable"
+                                                                    sx={{ fontSize: '15px' }}
+                                                                    align="center"
+                                                                >
+                                                                    {item.event}
+                                                                </TableCell>
+
+                                                                <TableCell
+                                                                    className="activityTable"
+                                                                    sx={{ fontSize: '15px' }}
+                                                                    align="center"
+                                                                >
+                                                                    {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
+                                                                </TableCell>
+
+                                                                <TableCell
+                                                                    className="activityTable"
+                                                                    sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                                    align="center"
+                                                                    onClick={() => {
+                                                                        window.open(
+                                                                            `https://mumbai.polygonscan.com/address/${
+                                                                                item?.from ? item?.from : item?.minter
+                                                                            }`,
+                                                                            '_blank'
+                                                                        );
+                                                                    }}
+                                                                >
+                                                                    {item?.from
+                                                                        ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
+                                                                        : item?.minter
+                                                                        ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42)
+                                                                        : ''}
+                                                                </TableCell>
+
+                                                                <TableCell
+                                                                    className="activityTable"
+                                                                    sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                                    align="center"
+                                                                    onClick={() => {
+                                                                        window.open(
+                                                                            `https://mumbai.polygonscan.com/address/${item?.to}`,
+                                                                            '_blank'
+                                                                        );
+                                                                    }}
+                                                                >
+                                                                    {item?.to
+                                                                        ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42)
+                                                                        : ''}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    className="activityTable"
+                                                                    sx={{ fontSize: '15px' }}
+                                                                    align="center"
+                                                                >
+                                                                    {Date(item?.blockTimestamp).slice(0, 15)}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        ) : (
+                                                            personName == 'Filter' && (
+                                                                <TableRow>
+                                                                    {item.event == 'Transfer' ? (
+                                                                        <Tooltip placement="top" title="Internal Transfer">
+                                                                            <TableCell
+                                                                                className="activityTable"
+                                                                                sx={{ fontSize: '15px', cursor: 'pointer' }}
+                                                                                align="center"
+                                                                            >
+                                                                                {item.event}
+                                                                            </TableCell>
+                                                                        </Tooltip>
+                                                                    ) : (
+                                                                        <TableCell
+                                                                            className="activityTable"
+                                                                            sx={{ fontSize: '15px' }}
+                                                                            align="center"
+                                                                        >
+                                                                            {item.event}
+                                                                        </TableCell>
+                                                                    )}
+                                                                    {/*          {item?.brandImage ? (
+               <TableCell
+                   className="activityTable"
+                   sx={{ fontSize: '15px', display: 'flex' }}
+                   align="center"
+               >
+                   <Grid item lg={2}></Grid>
+                   <Grid item lg={2}>
+                       <Avatar alt="" src={item?.brandImage} />
+                   </Grid>
+                   <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                       {item?.brandImage ? item?.brandName : ''}
+                   </Grid>
+               </TableCell>
+           ) : (
+               <TableCell
+                   className="activityTable"
+                   sx={{ fontSize: '15px', display: 'flex' }}
+                   align="center"
+               >
+                   <Grid item lg={2}></Grid>
+                   <Grid item lg={2}>
+                       <Avatar sx={{ bgcolor: 'transparent', color: 'transparent' }}>b</Avatar>
+                   </Grid>
+                   <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                       {item?.brandImage ? item?.brandName : ''}
+                   </Grid>
+               </TableCell>
+           )} */}
+
+                                                                    <TableCell
+                                                                        className="activityTable"
+                                                                        sx={{ fontSize: '15px' }}
+                                                                        align="center"
+                                                                    >
+                                                                        {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
+                                                                    </TableCell>
+
+                                                                    <TableCell
+                                                                        className="activityTable"
+                                                                        sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                                        align="center"
+                                                                        onClick={() => {
+                                                                            window.open(
+                                                                                `https://mumbai.polygonscan.com/address/${
+                                                                                    item?.from ? item?.from : item?.minter
+                                                                                }`,
+                                                                                '_blank'
+                                                                            );
+                                                                        }}
+                                                                    >
+                                                                        {item?.from
+                                                                            ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
+                                                                            : item?.minter
+                                                                            ? item?.minter?.slice(0, 5) +
+                                                                              '...' +
+                                                                              item?.minter?.slice(38, 42)
+                                                                            : ''}
+                                                                    </TableCell>
+
+                                                                    <TableCell
+                                                                        className="activityTable"
+                                                                        sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
+                                                                        align="center"
+                                                                        onClick={() => {
+                                                                            window.open(
+                                                                                `https://mumbai.polygonscan.com/address/${item?.to}`,
+                                                                                '_blank'
+                                                                            );
+                                                                        }}
+                                                                    >
+                                                                        {item?.to
+                                                                            ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42)
+                                                                            : ''}
+                                                                    </TableCell>
+                                                                    <TableCell
+                                                                        className="activityTable"
+                                                                        sx={{ fontSize: '15px' }}
+                                                                        align="center"
+                                                                    >
+                                                                        {Date(item?.blockTimestamp).slice(0, 15)}
+                                                                    </TableCell>
+                                                                </TableRow>
+                                                            )
+                                                        )}
+                                                    </TableBody>
+                                                ))
+                                            )}
+                                        </>
+                                    )}
                                 </Table>
                             </TableContainer>
                         </MainCard>
