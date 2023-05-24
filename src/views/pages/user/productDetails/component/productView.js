@@ -41,7 +41,7 @@ import FactoryAddress from 'contractAbi/Factory-address.json';
 const PropertiesView = ({ nftList }) => {
     // console.log('nft from product view', nftList.nft.NFTTokens);
 
-    // console.log('nftList from product view', nftList?.nft?.NFTTokens[0]?.id);
+    console.log('length**************', nftList?.nft?.NFTTokens.length);
     const dispatch = useDispatch();
     const [resell, setResell] = useState(false);
     const [bought, setBought] = useState(false);
@@ -91,7 +91,7 @@ const PropertiesView = ({ nftList }) => {
                 </Button>
                 <Dialog
                     open={open}
-                // onClose={handleClose}
+                    // onClose={handleClose}
                 >
                     <DialogTitle>NFT Resell Price</DialogTitle>
                     <DialogContent>
@@ -665,7 +665,7 @@ const PropertiesView = ({ nftList }) => {
         }
     }, [useSelector, dispatch, resell, bought, redeem, nftList]);
 
-    useEffect(() => { }, []);
+    useEffect(() => {}, []);
     return (
         <Grid container-fluid spacing={gridSpacing} sx={{ margin: '15px' }}>
             <Grid item xs={12}>
@@ -725,25 +725,72 @@ const PropertiesView = ({ nftList }) => {
                                                 {nftList?.nft?.description}{' '}
                                             </Typography>
                                         </Grid>
+
                                         <Grid item xs={12}>
                                             <Typography className="productdescription" variant="body2">
                                                 Total NFTs: {nftList?.nft?.NFTTokens.length}
                                             </Typography>
                                         </Grid>
+                                        {nftList?.nft?.NFTTokens.length == 1 && (
+                                            <Grid item xs={12}>
+                                                {nftList?.nft?.NFTTokens.map((option) => (
+                                                    <Typography
+                                                        onClick={() => {
+                                                            searchSerial(option?.serialId);
+                                                        }}
+                                                        className="productdescription"
+                                                        variant="body2"
+                                                       
+                                                        sx={{ cursor: 'pointer' , color:'#2196f3 !important'}}
+                                                    >
+                                                        {option?.serialId ? option?.serialId : 'No Serial Id'}
+                                                    </Typography>
+                                                ))}
+                                            </Grid>
+                                        )}
+                                        {nftList?.nft?.NFTTokens.length > 1 && (
+                                            <Grid item xs={12}>
+                                                <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
+                                                    <Box sx={{ minWidth: 120 }}>
+                                                        <FormControl fullWidth>
+                                                            <InputLabel id="demo-simple-select-label">Serial Id :</InputLabel>
+                                                            <Select
+                                                                variant="standard"
+                                                                // labelId="demo-simple-select-label"
+                                                                id="demo-simple-select"
+                                                                value={age}
+                                                                // label="Age"
+                                                                onChange={handleChange}
+                                                                fullWidth
+                                                                displayEmpty
+                                                                inputProps={{ 'aria-label': 'Without label' }}
+                                                            >
+                                                                {nftList?.nft?.NFTTokens.map((option) => (
+                                                                    <MenuItem
+                                                                        onClick={() => {
+                                                                            searchSerial(option?.serialId);
+                                                                        }}
+                                                                    >
+                                                                        {option?.serialId ? option?.serialId : 'No Serial Id'}
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </Select>
+                                                        </FormControl>
+                                                    </Box>
+                                                </Box>
+                                            </Grid>
+                                        )}
                                         <Grid item xs={12}>
                                             <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
                                                 <FormControl
                                                     sx={{
-                                                       
                                                         color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
-                                                     
+
                                                         borderRadius: '4px'
                                                     }}
                                                     fullWidth
                                                 >
-                                                    <InputLabel id="demo-simple-select-label">
-                                                        PROOF OF AUTHENTICITY
-                                                    </InputLabel>
+                                                    <InputLabel id="demo-simple-select-label">PROOF OF AUTHENTICITY</InputLabel>
                                                     <Select
                                                         variant="standard"
                                                         // labelId="demo-simple-select-label"
@@ -752,7 +799,7 @@ const PropertiesView = ({ nftList }) => {
                                                         onChange={handleChange}
                                                         fullWidth
                                                         inputProps={{ 'aria-label': 'Without label' }}
-                                                    // displayEmpty
+                                                        // displayEmpty
                                                     >
                                                         {nftList?.nft?.NFTMetaFiles.map((option) => (
                                                             <MenuItem
@@ -761,82 +808,14 @@ const PropertiesView = ({ nftList }) => {
                                                                     window.open(option?.fieldValue, '_blank');
                                                                 }}
                                                             >
-                                                                {option?.fieldName}</MenuItem>
+                                                                {option?.fieldName}
+                                                            </MenuItem>
                                                         ))}
                                                     </Select>
                                                 </FormControl>
                                             </Box>
                                         </Grid>
-                                        <Grid item xs={12}>
-                                            <Box sx={{ borderRadius: '4px', width: '95%', margin: '0 auto', textAlign: 'left' }}>
-                                                <Box sx={{ minWidth: 120 }}>
-                                                    <FormControl fullWidth>
-                                                        <InputLabel id="demo-simple-select-label">Serial Id :</InputLabel>
-                                                        <Select
-                                                            variant="standard"
-                                                            // labelId="demo-simple-select-label"
-                                                            id="demo-simple-select"
-                                                            value={age}
-                                                            // label="Age"
-                                                            onChange={handleChange}
-                                                            fullWidth
-                                                            displayEmpty
-                                                            inputProps={{ 'aria-label': 'Without label' }}
 
-                                                        >
-                                                            {nftList?.nft?.NFTTokens.map((option) => (
-                                                                <MenuItem onClick={() => {
-                                                                    searchSerial(option?.serialId)
-                                                                }}
-                                                                >{option?.serialId ? option?.serialId : 'No Serial Id'}</MenuItem>
-
-                                                            ))}
-                                                        </Select>
-                                                    </FormControl>
-                                                </Box>
-                                                {/* <FormControl
-                                                    sx={{
-                                                        background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9',
-                                                        color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
-                                                        padding: '10px 10px 10px 10px',
-                                                        borderRadius: '4px'
-                                                    }}
-                                                    fullWidth
-                                                >
-                                                    <Select
-                                                        variant="standard"
-                                                        labelId="demo-simple-select-label"
-                                                        id="demo-simple-select"
-                                                        value={age}
-                                                        onChange={handleChange}
-                                                        fullWidth
-                                                        displayEmpty
-                                                        renderValue={(selected) => {
-                                                            if (selected?.length === 0) {
-                                                                return <em className="fontfamily">Serial Id :</em>;
-                                                            }
-
-                                                            return selected?.join(', ');
-                                                        }}
-                                                    >
-                                                        {nftList?.nft?.NFTTokens.map((option) => (
-                                                            <MenuItem onClick={() => {
-                                                                searchSerial(option?.serialId);
-                                                                // option?.serialId && 
-                                                                // navigate('/tracknft/' + serialId
-                                                                //     , {
-                                                                //         state: {
-                                                                //             tokenId: token,
-                                                                //             address: addres
-                                                                //         }
-                                                                //     });
-                                                            }}>{option?.serialId ? option?.serialId : 'No Serial Id'}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl> */}
-                                            </Box>
-                                        </Grid>
                                         {/*  <Grid item mt={2} mb={2} className="timer" xs={12}>
                                             <Grid
                                                 sx={{ background: theme.palette.mode === 'dark' ? '#181C1F' : '#d9d9d9' }}
@@ -922,7 +901,7 @@ const PropertiesView = ({ nftList }) => {
 
                                                 <>
                                                     {(bought == true || nftList?.nft?.isSold == true) &&
-                                                        JSON.stringify(buyerNft) === '{}' ? (
+                                                    JSON.stringify(buyerNft) === '{}' ? (
                                                         <>
                                                             <Grid item md={8} xs={12} sm={12} textAlign="center">
                                                                 <Alert severity="error">
@@ -1058,7 +1037,7 @@ const PropertiesView = ({ nftList }) => {
                     <Grid item md={1} sm={12}></Grid>
                 </Grid>
             </Grid>
-        </Grid >
+        </Grid>
     );
 };
 

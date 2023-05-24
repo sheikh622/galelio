@@ -6,6 +6,7 @@ import {
     RESET_PASSWORD,
     SIGN_UP,
     SIGN_UP_SOCIAL,
+    UPDATE_EMAIL,
     CHANGE_PASSWORD,
     DASHBOARD,
     BRAND_DASHBOARD,
@@ -57,6 +58,22 @@ function* branddashboard({ payload }) {
     } catch (error) {
         yield sagaErrorHandler(error.response.data.data);
     }
+}
+function* updateEmailRequest({ payload }) {
+    let data = {
+        email: payload.email
+    };
+    try {
+        const response = yield axios.put(`auth/signup/email-update?id=${payload.id}`, data);
+
+        yield setNotification('success', response.data.message);
+    } catch (error) {
+        yield sagaErrorHandler(error.response.data.data);
+    }
+}
+
+export function* watchUpdateEmail() {
+    yield takeLatest(UPDATE_EMAIL, updateEmailRequest);
 }
 
 function* signupUserRequest({ payload }) {
@@ -137,10 +154,9 @@ function* verifyRequest({ payload }) {
         const response = yield axios.put(`users/verify/email`, data);
         console.log(response, 'response');
         yield setNotification('success', response?.data?.message);
-        if(data){
-         payload.navigate('/login');
+        if (data) {
+            payload.navigate('/login');
         }
-       
     } catch (error) {
         console.log(error, 'error');
         yield sagaErrorHandler(error.response.data.data);
@@ -203,6 +219,7 @@ export default function* authSaga() {
         fork(watchReset),
 
         fork(watchSignup),
+        fork(watchUpdateEmail),
         fork(watchSocialSignup),
         fork(watchchangePassword),
         fork(watchDashboard),

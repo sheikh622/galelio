@@ -34,6 +34,10 @@ const typeArray = [
     {
         value: 'rejected',
         label: 'Rejected NFTS'
+    },
+    {
+        value: 'Update Requests',
+        label: 'Update Requests'
     }
 ];
 

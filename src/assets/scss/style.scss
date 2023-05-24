@@ -1921,7 +1921,7 @@ body {
         gap: 21px;
     }
 }
-@media only screen and (min-width: 1371px) and (max-width: 1535px) {
+@media only screen and (min-width: 1371px) and (max-width: 1770px) {
     .cate-margin {
         margin-right: 39px;
         margin-left: 0px;
@@ -2254,8 +2254,8 @@ color: #CDCDCD;
 
 .card-style {
     border-radius: 4px !important;
-    width: 172px;
-    height: 140.5px;
+    width: 164px;
+    height: 118.5px;
     position: relative;
 }
 .Engine {
@@ -2319,8 +2319,4 @@ color: #CDCDCD;
     font-size: 12px;
     line-height: 14px;
     text-transform: capitalize;
-}
-.phoneInput input{
-    border:2px solid red;
-    width: 200px !important;
 }

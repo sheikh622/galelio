@@ -246,7 +246,6 @@ function* addNftRequest({ payload }) {
     formData.append('categoryId', payload.categoryId);
     formData.append('quantity', payload.quantity);
     formData.append('metaData', JSON.stringify(payload.metaDataArray));
-    // formData.append('location', JSON.stringify(payload.location));
     formData.append('mintType', payload.mintType);
     formData.append('fileNameArray', JSON.stringify(payload.fileNameArray));
     for (let i = 0; i < payload.fileArray.length; i++) {
@@ -556,8 +555,9 @@ function* addSbtTokenSaga({ payload }) {
                 limit: payload.limit,
             })
         );
-        payload.setAddNftOpen(false);
-        // payload.handleClose();   
+        payload.handleClose();   
+        // payload.setAddNftOpen(false);
+
         console.log('testing');
         yield setNotification('success', response.data.message);
     } catch (error) {

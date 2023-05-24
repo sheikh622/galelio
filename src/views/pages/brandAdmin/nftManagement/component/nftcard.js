@@ -13,7 +13,7 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const theme = useTheme();
-    console.log(nftData,'nftData')
+    // console.log(nftData,'nftData=====================================>>>>>>')
 
     const [openRequestMint, setOpenRequestMint] = useState(false);
     const [editNftOpen, setEditNftOpen] = useState(false);

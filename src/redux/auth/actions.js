@@ -1,6 +1,7 @@
 import {
     LOGIN,
     LOGIN_SUCCESS,
+    UPDATE_EMAIL,
     SIGN_UP,
     SIGN_UP_SUCCESS,
     SIGN_UP_SOCIAL,
@@ -85,6 +86,14 @@ export const signupSuccess = (data) => {
         payload: data
     };
 };
+export const updateEmail = (data) => {
+    return {
+        type: UPDATE_EMAIL,
+        payload: data
+    };
+};
+
+
 export const signupsocial = (data) => {
     return {
         type: SIGN_UP_SOCIAL,

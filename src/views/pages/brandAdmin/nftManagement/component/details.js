@@ -14,7 +14,10 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 export default function DetailsDialog({ open, setOpen, nftData }) {
     const theme = useTheme();
-
+// console.log(
+//     nftData.NFTTokens
+//     , 'nftData in DETAIL********'
+// )
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -110,6 +113,20 @@ export default function DetailsDialog({ open, setOpen, nftData }) {
                             secondary={<Typography variant="caption" className='font-in-detail'  sx={{textTransform:'capitalize'}}>{nftData?.Brand.name}</Typography>}
                         />
                     </ListItemButton>
+                    <Divider />
+                  {nftData.NFTTokens.map((item)=>(
+                    <>
+                    <ListItemButton>
+                    <ListItemText
+                        primary={<Typography variant="subtitle1" className='font-in-detail' >Serial Id</Typography>}
+                        secondary={<Typography variant="caption" className='font-in-detail'  sx={{textTransform:'capitalize'}}>{item?.serialId? item?.serialId : 'No Serial Id' }</Typography>}
+                    />
+                    
+                </ListItemButton>
+                <Divider />
+                </>
+                  ))}
+               
                 </List>
                 </Grid>
                 <Grid item  xs={12} md={4} lg={4}>

@@ -1,7 +1,7 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 import * as Yup from 'yup';
 import {
@@ -23,7 +23,7 @@ import {
     ListItemText,
     Typography,
     IconButton,
-    MenuItem
+    MenuItem ,Select
 } from '@mui/material';
 import { Switch } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
@@ -41,8 +41,8 @@ import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
 import { Country, State, City } from 'country-state-city';
-
-import { values } from 'lodash';
+// import Select from 'react-select';
+import { items } from 'store/kanban';
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const currencyTypeArray = [

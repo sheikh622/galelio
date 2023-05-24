@@ -55,9 +55,9 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                                         Product name{' '}
                                     </TableCell>
                                     {/*   <TableCell   className='Tableheading' sx={{borderBottom:'none'}}>Location</TableCell> */}
-                                    <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                   {/*  <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
                                         Description
-                                    </TableCell>
+                                    </TableCell> */}
 
                                     <TableCell className="Tableheading" sx={{ borderBottom: 'none' }}>
                                         Price
@@ -98,9 +98,9 @@ const DeliveryDashboard = ({ deliveryList, user }) => {
                                                     </Grid>
                                                 </TableCell>
 
-                                                <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
+                                            {/*     <TableCell className="tablecell" sx={{ borderBottom: 'none' }}>
                                                     {row?.Nft.description}
-                                                </TableCell>
+                                                </TableCell> */}
                                                 <TableCell
                                                     className="tablecell"
                                                     sx={{

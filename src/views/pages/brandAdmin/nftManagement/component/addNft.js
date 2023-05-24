@@ -50,11 +50,11 @@ import FormControl from '@mui/material/FormControl';
 // import DatePicker from "react-multi-date-picker";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import PhoneInput from 'react-phone-input-2'
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import FormGroup from '@mui/material/FormGroup';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { Country, State, City } from 'country-state-city';
 import Select from 'react-select';
@@ -594,14 +594,14 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                     fullWidth
                                                     value={data.display_type}
                                                     onChange={(e) => {
-                                                        console.log({e})
+                                                        console.log({ e })
                                                         handleSelect(e, index);
-                                                        if(e.target.value === 'Date'){
+                                                        if (e.target.value === 'Date') {
                                                             let data = fieldDataArray[index];
                                                             data.value = new Date();
                                                             fieldDataArray[index] = data;
                                                             setFieldDataArray([...fieldDataArray]);
-                                                        }else {
+                                                        } else {
                                                             let data = fieldDataArray[index];
                                                             data.value = '';
                                                             fieldDataArray[index] = data;
@@ -699,11 +699,19 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         variant="standard"
                                                         fullWidth
                                                     />
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={fieldDataArray[index].primaryLocation}
-                                                        onChange={() => handleCheckboxChange(index)}
-                                                    />
+                                                    <Tooltip
+                                                        className="fontsize"
+                                                        title="Primary Location"
+                                                        placement="right"
+                                                        arrow
+                                                    >
+                                                        <input
+
+                                                            type="checkbox"
+                                                            checked={fieldDataArray[index].primaryLocation}
+                                                            onChange={() => handleCheckboxChange(index)}
+                                                        />
+                                                    </Tooltip>
                                                 </Grid>
                                             )}
                                             {data.display_type == 'Location' && (
