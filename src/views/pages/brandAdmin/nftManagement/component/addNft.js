@@ -67,16 +67,47 @@ const typeArray = [
         label: 'USDT'
     }
 ];
+const dropdown = [
+    {
+        value: "Text",
+        label: "Text",
+    },
+    {
+        value: "Number",
+        label: "Number",
+    },
+    {
+        value: "Date",
+        label: "Date",
+    },
+    {
+        value: "Location",
+        label: "Location",
+    }
 
+
+
+
+]
 export default function AddNft({ open, setOpen, data, search, page, limit, nftType }) {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const [mintType, setMintType] = useState('directMint');
 
     const [uploadedImages, setUploadedImages] = useState([]);
+    const [age, setAge] = useState('Text');
+    const [fieldShow, setFieldShow] = useState("Text");
+    console.log("999999999999999", fieldShow);
 
+    const handleDropDown = (event) => {
+        setAge(event.target.value);
+        setFieldShow(event.target.value);
+
+    };
+    const [value, setValue] = useState();
     const [fieldDataArray, setFieldDataArray] = useState([]);
     const [type, setType] = useState('USDT');
+    const [drop, setDrop] = useState('Text');
     const [loader, setLoader] = useState(false);
     const [fileDataArray, setFileDataArray] = useState([]);
     const [isDirectTransfer, setIsDirectTransfer] = useState(false);
@@ -84,8 +115,15 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     const handleType = (event) => {
         setType(event.target.value);
     };
+    console.log("************************************", value);
+    const metadataDropDown = (event) => {
+        console
+        setDrop(event.target.value);
+        setAge(event.target.value);
+        setFieldShow(event.target.value);
+    };
     const [checked, setChecked] = useState(false);
-
+    // const [value, setValue] = useState(dayjs('2022-04-17'));
     const handleError = (fieldDataArray, fileDataArray, values) => {
         // console.log('im in handle error');
         let isValid = true;
@@ -118,9 +156,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             isValid = false;
             toast.error('Proof of Authenticity is required');
         }
-
         //    else (fileDataArray.length > 0) {
-        console.log('im here 2');
         fileDataArray.map((array) => {
             if (array.trait_type == '') {
                 isValid = false;
@@ -206,9 +242,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                 var valid = WAValidator.validate(values.directBuyerAddress, 'ETH');
                 if (valid || values.directBuyerAddress == '') {
                     //  toast.success(``);
-
                     console.log('This is a valid wallet address');
-
                     setLoader(true);
                     dispatch(
                         addNft({
@@ -241,9 +275,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             }
         }
     });
-
+    console.log("23333333333333333", fieldDataArray)
     const hasFile = formik.values.images.length > 0;
-
+    const [selectedCode, setSelectedCode] = useState('');
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
@@ -253,6 +287,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFieldDataArray([]);
         setLoader(false);
         setFileDataArray([]);
+        // setSelectedCode([]);
+
     };
     const handleDrop = useCallback(
         (acceptedFiles) => {
@@ -368,7 +404,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
     console.log(fieldDataArray, 'fieldDataArray**********************************');
     return (
         <>
-            <Dialog fullScreen
+            <Dialog
+                fullScreen
                 open={open}
                 // onClose={handleClose}
                 aria-labelledby="form-dialog-title"
@@ -433,8 +470,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-                           
-                            <Grid xs={4}  md={4} lg={4} pl={2} pr={2}>
+                            <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
                                     id="nftPrice"
@@ -449,8 +485,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                     variant="standard"
                                 />
                             </Grid>
-
-                            <Grid  xs={4} md={4} lg={4}  mt={1.5}>
+                            <Grid xs={4} md={4} lg={4} mt={1.5}>
                                 <TextField
                                     className="textfieldStyle"
                                     variant="filled"
@@ -492,7 +527,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                             checked={checked}
                                             onChange={(e) => walletadded(e)}
 
-                                            // inputProps={{ 'aria-label': 'controlled' }}
+                                        // inputProps={{ 'aria-label': 'controlled' }}
                                         />
                                     </Grid>
                                     {wallettoggle == true && checked == true && (
@@ -541,11 +576,12 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 </Button>
                             </Grid>
                         </Grid>
-
+                        {/* {checkboxes.map((item) => (
+                            <> */}
                         {fieldDataArray.length != 0 && (
                             <>
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
-                                    {fieldDataArray.map((data, index) => (
+            {fieldDataArray.map((data, index) => (
                                         <>
                                             <Grid xs={5} md={3}>
                                                 <TextField
@@ -712,7 +748,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         value={data?.isEditable}
                                                         checked={data?.isEditable}
                                                         onChange={(e) => handleChange(e, index)}
-                                                        // inputProps={{ 'aria-label': 'controlled' }}
+                                                    // inputProps={{ 'aria-label': 'controlled' }}
                                                     />
                                                 </Tooltip>
                                                 {data?.isEditable == true && (
@@ -726,27 +762,28 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                             value={data.proofRequired}
                                                             checked={data.proofRequired}
                                                             onChange={(e) => handleproof(e, index)}
-                                                            // inputProps={{ 'aria-label': 'controlled' }}
+                                                        // inputProps={{ 'aria-label': 'controlled' }}
                                                         />
                                                     </Tooltip>
                                                 )}
                                                 <IconButton
-                                                color="error"
-                                                edge="end"
-                                                size="small"
-                                                onClick={() => {
-                                                    handleRemoveField(index);
-                                                }}
-                                            >
-                                                <Icon icon={closeFill} width={28} height={28} />
-                                            </IconButton>
+                                                    color="error"
+                                                    edge="end"
+                                                    size="small"
+                                                    onClick={() => {
+                                                        handleRemoveField(index);
+                                                    }}
+                                                >
+                                                    <Icon icon={closeFill} width={28} height={28} />
+                                                </IconButton>
                                             </Grid>
-                                            <Grid item xs={2} mt={2} md={3}></Grid>
                                         </>
                                     ))}
                                 </Grid>
                             </>
                         )}
+                        {/* </>
+                        ))} */}
                         <Grid container>
                             <Grid xs={12} mt={2}>
                                 <Button
@@ -854,7 +891,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 </div>
                             </Grid>
                         )}
-
                         <Grid item lg={12} mt={3}>
                             <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
                                 <AnimatePresence>
@@ -918,7 +954,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                         onClick={() => {
                                             formik.handleSubmit();
                                         }}
-                                        className="buttons"
+                                     className="buttons"
                                         size="large"
                                         disableElevation
                                     >
