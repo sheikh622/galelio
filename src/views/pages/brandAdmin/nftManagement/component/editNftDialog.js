@@ -503,7 +503,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                         ]);
                                         console.log("--------------------------------------00", fieldDataArray)
                                     }}
-
                                 >
                                     Add more fields
                                 </Button>
