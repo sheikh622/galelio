@@ -23,7 +23,7 @@ import {
     Typography,
     IconButton,
     MenuItem,
-    CircularProgress
+    CircularProgress , Select
 } from '@mui/material';
 
 import { useDropzone } from 'react-dropzone';
@@ -41,6 +41,23 @@ import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
 import { DataArraySharp } from '@mui/icons-material';
+import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import DatePicker from "react-multi-date-picker";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import FormGroup from '@mui/material/FormGroup';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import { Country, State, City } from 'country-state-city';
+// import Select from 'react-select';
 
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
@@ -88,10 +105,10 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         // else  (fieldDataArray.length > 0) {
 
         fieldDataArray.map((array) => {
-            if (array.fieldName == '') {
+            if (array.trait_type == '') {
                 isValid = false;
                 toast.error(`Metadata name cannot be empty`);
-            } else if (array.fieldValue == '') {
+            } else if (array.value == '') {
                 isValid = false;
                 toast.error(`Metadata value cannot be empty`);
             }
@@ -105,13 +122,13 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         //    else (fileDataArray.length > 0) {
         console.log('im here 2');
         fileDataArray.map((array) => {
-            if (array.fieldName == '') {
+            if (array.trait_type == '') {
                 isValid = false;
                 toast.error(`File name field is mandatory`);
-            } else if (array.fieldValue == null) {
+            } else if (array.value == null) {
                 isValid = false;
                 toast.error(`Attach proof of authenticity`);
-            } else if (array.fieldValue?.size / 1000000 > 5) {
+            } else if (array.value?.size / 1000000 > 5) {
                 isValid = false;
                 toast.error(`Please attach a less than 5 mb proof of authenticity`);
             }
@@ -156,7 +173,6 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
             .typeError('Invalid Price')
         // image: Yup.mixed()
     });
-
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -168,15 +184,19 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         },
         validationSchema,
         onSubmit: (values) => {
-            console.log('values*************', values);
-
+            console.log('values', values);
+            let arrayData = fieldDataArray.map((item) => {
+                const { phone, ...obj } = item;
+                return obj;
+                // return { ...item, phone: item?.phone?.value }
+            })
+            console.log(arrayData, 'array***********')
             let fileArray = fileDataArray.map((data) => {
-                return data.fieldValue;
+                return data.value;
             });
             let fileNameArray = fileDataArray.map((data) => {
-                return data.fieldName;
+                return data.trait_type;
             });
-
             let isValid = handleError(fieldDataArray, fileDataArray, values);
             // console.log('isValid', isValid);
 
@@ -194,7 +214,7 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                         addNft({
                             categoryId: data.CategoryId,
                             mintType: mintType,
-                            metaDataArray: fieldDataArray,
+                            metaDataArray: arrayData,
                             fileNameArray: fileNameArray,
                             fileArray: fileArray,
                             name: values.nftName,
@@ -259,14 +279,14 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         onDrop: handleDrop
     });
 
-    const handleFieldNameChange = (value, index) => {
+    const handletrait_typeChange = (value, index) => {
         let array = [...fieldDataArray];
-        array[index].fieldName = value;
+        array[index].trait_type = value;
         setFieldDataArray(array);
     };
     const handleFieldValueChange = (value, index) => {
         let array = [...fieldDataArray];
-        array[index].fieldValue = value;
+        array[index].value = value;
         setFieldDataArray(array);
     };
 
@@ -274,6 +294,16 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         // setChecked(event.target.checked);
         let array = [...fieldDataArray];
         array[index].isEditable = event.target?.checked;
+        setFieldDataArray(array);
+        // let array = [...fieldDataArray];
+        // [...checked] = value;
+        // setFieldDataArray(array);
+        // console.log(event.target.checked,'value==============?')
+    };
+    const handleSelect = (event, index) => {
+        // setChecked(event.target.checked);
+        let array = [...fieldDataArray];
+        array[index].display_type = event.target?.value;
         setFieldDataArray(array);
         // let array = [...fieldDataArray];
         // [...checked] = value;
@@ -306,14 +336,14 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         setFieldDataArray(array);
     };
 
-    const handleFileFieldNameChange = (value, index) => {
+    const handleFiletrait_typeChange = (value, index) => {
         let array = [...fileDataArray];
-        array[index].fieldName = value;
+        array[index].trait_type = value;
         setFileDataArray(array);
     };
     const handleFileFieldValueChange = (value, index) => {
         let array = [...fileDataArray];
-        array[index].fieldValue = value;
+        array[index].value = value;
         setFileDataArray(array);
     };
 
@@ -322,7 +352,20 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
         array.splice(index, 1);
         setFileDataArray(array);
     };
-
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [postalCode, setPostalCode] = useState("");
+    const handleCheckboxChange = (index) => {
+        const updatedCheckboxes = fieldDataArray.map((item, i) => {
+            if (i === index) {
+                return { ...item, primaryLocation: true };
+            }
+            return { ...item, primaryLocation: false };
+        });
+        setFieldDataArray([...updatedCheckboxes]);
+    };
+    const [startDate, setStartDate] = useState(new Date());
+    console.log(startDate, 'startDate**********************************');
+    console.log(fieldDataArray, 'fieldDataArray**********************************');
     return (
         <>
             <Dialog fullScreen
@@ -481,10 +524,15 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                         setFieldDataArray([
                                             ...fieldDataArray,
                                             {
-                                                fieldName: '',
-                                                fieldValue: '',
+                                                display_type: 'Text',
+                                                trait_type: '',
+                                                value: '',
+                                                // date: new Date(),
+                                                countryCode: data?.phone?.value,
                                                 isEditable: false,
-                                                proofRequired: false
+                                                proofRequired: false,
+                                                primaryLocation: false,
+                                                // postalCode: data.postalCode,
                                             }
                                         ]);
                                     }}
@@ -499,37 +547,166 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.map((data, index) => (
                                         <>
-                                            <Grid item xs={5} md={3}>
+                                            <Grid xs={5} md={3}>
+                                                <TextField
+                                                    sx={{ m: 6, width: '80%', borderRadius: '2%' }}
+                                                    className="w-100"
+                                                    // className="textfieldStyle"
+                                                    variant="filled"
+                                                    id="outlined-select-budget"
+                                                    select
+                                                    fullWidth
+                                                    value={data.display_type}
+                                                    onChange={(e) => {
+                                                        console.log({e})
+                                                        handleSelect(e, index);
+                                                        if(e.target.value === 'Date'){
+                                                            let data = fieldDataArray[index];
+                                                            data.value = new Date();
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
+                                                        }else {
+                                                            let data = fieldDataArray[index];
+                                                            data.value = '';
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
+
+                                                        }
+                                                    }}
+                                                // value={drop}
+                                                // onChange={metadataDropDown}
+                                                >
+                                                    {dropdown.map((option, index) => (
+                                                        <MenuItem key={index} value={option.value}>
+                                                            {option.label}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
+                                            </Grid>
+                                            <Grid item xs={2} md={2}>
                                                 <TextField
                                                     id="field_name"
                                                     className="textfieldStyle"
                                                     name="field_name"
                                                     label="Metadata Name"
-                                                    value={data.fieldName}
+                                                    value={data.trait_type}
                                                     onChange={(e) => {
-                                                        handleFieldNameChange(e.target.value, index);
+                                                        handletrait_typeChange(e.target.value, index);
                                                     }}
                                                     variant="standard"
                                                     fullWidth
                                                 />
                                             </Grid>
+                                            {data.display_type == 'Text' && (
+                                                <Grid item xs={3} md={3}>
+                                                    <TextField
+                                                        className="textfieldStyle"
+                                                        id="field_value"
+                                                        name="field_value"
+                                                        label="Text"
+                                                        value={data.value}
+                                                        onChange={(e) => {
+                                                            handleFieldValueChange(e.target.value, index);
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
+                                            )}
+                                            {data.display_type == 'Number' && (
+                                                <Grid item xs={3} md={3}>
+                                                    <TextField
+                                                        className="textfieldStyle"
+                                                        id="Number"
+                                                        name="Number"
+                                                        label="Number"
+                                                        value={data.value}
+                                                        onChange={(e) => {
+                                                            handleFieldValueChange(e.target.value, index);
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
+                                            )}
+                                            {data.display_type == 'Date' && (
+                                                <>
+                                                    <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }}>
+                                                        <DatePicker
+                                                            showIcon
+                                                            label="Select date"
+                                                            selected={data.value}
+                                                            value={data.value}
+                                                            onChange={(e) => {
+                                                                let data = fieldDataArray[index];
+                                                                data.value = e;
+                                                                fieldDataArray[index] = data;
+                                                                setFieldDataArray([...fieldDataArray]);
+                                                                // setStartDate(startDate);
+                                                                console.log("3323223", data)
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                </>
+                                            )}
+                                            {data.display_type == 'Location' && (
+                                                <Grid item xs={2} md={2}>
+                                                    <TextField
+                                                        className="textfieldStyle"
+                                                        id="Postal Code"
+                                                        name="Postal Code"
+                                                        label="Postal Code"
+                                                        value={data.postalCode}
+                                                        onChange={(e) => {
+                                                            handleFieldValueChange(e.target.value, index);
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={fieldDataArray[index].primaryLocation}
+                                                        onChange={() => handleCheckboxChange(index)}
+                                                    />
+                                                </Grid>
+                                            )}
+                                            {data.display_type == 'Location' && (
+                                                <Grid item xs={2} md={2} sx={{ m: 2, width: '50%', borderRadius: '2%' }}>
+                                                    <Select
+                                                        // styles={style}
+                                                        // className="selectFieldDesign"
+                                                        // label={selectedCode}
+                                                        placeholder="select the Country"
+                                                        options={Country?.getAllCountries()}
+                                                        getOptionLabel={(options) => {
+                                                            return options['name'] ? options['name'] : options['label'];
+                                                        }}
+                                                        getOptionValue={(options) => {
+                                                            return options['name'] ? options['name'] : options['value'];
+                                                        }}
+                                                        value={
+                                                            fieldDataArray[index]?.phone?.value
+                                                                ? {
+                                                                    value: fieldDataArray[index]?.phone?.value,
+                                                                    label: fieldDataArray[index]?.phone?.label
+                                                                }
+                                                                : ''
+                                                        }
+                                                        onChange={(item) => {
+                                                            // formik.setFieldValue("country", item?.phonecode);
+                                                            let data = fieldDataArray[index];
+                                                            let value = item.isoCode;
+                                                            data.phone = { value: item.isoCode, label: item.name };
+                                                            data.countryCode = value;
+                                                            fieldDataArray[index] = data;
+                                                            setFieldDataArray([...fieldDataArray]);
 
-                                            <Grid item xs={5} md={3}>
-                                                <TextField
-                                                    className="textfieldStyle"
-                                                    id="field_value"
-                                                    name="field_value"
-                                                    label="Metadata Value"
-                                                    value={data.fieldValue}
-                                                    onChange={(e) => {
-                                                        handleFieldValueChange(e.target.value, index);
-                                                    }}
-                                                    variant="standard"
-                                                    fullWidth
-                                                />
-                                            </Grid>
-                                            <Grid item xs={2} mt={2} md={3}>
-                                              
+                                                            // setSelectedCode({value:item.phonecode, label: item.name});
+                                                        }}
+                                                    />
+                                                </Grid>
+                                            )}
+                                            <Grid item xs={2} mt={2} md={2}>
                                                 <Tooltip className="fontsize" title="Allow update by NFT owner" placement="top" arrow>
                                                     <Switch
                                                         value={data?.isEditable}
@@ -580,8 +757,8 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                         setFileDataArray([
                                             ...fileDataArray,
                                             {
-                                                fieldName: '',
-                                                fieldValue: null
+                                                trait_type: '',
+                                                value: null
                                             }
                                         ]);
                                     }}
@@ -599,9 +776,9 @@ export default function AddNft({ open, setOpen, data, search, page, limit, nftTy
                                                         id="field_name"
                                                         name="field_name"
                                                         label="File Name"
-                                                        value={data.fieldName}
+                                                        value={data.trait_type}
                                                         onChange={(e) => {
-                                                            handleFileFieldNameChange(e.target.value, index);
+                                                            handleFiletrait_typeChange(e.target.value, index);
                                                         }}
                                                         variant="standard"
                                                         fullWidth
