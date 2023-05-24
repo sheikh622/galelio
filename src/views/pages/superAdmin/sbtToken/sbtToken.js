@@ -3,13 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
-import { Button, Grid, Typography, Pagination, Menu, MenuItem, TextField, Box } from '@mui/material';
+import { Pagination, Menu, MenuItem, TextField, Box } from '@mui/material';
+import {
+    Divider,
+    Typography,
+    IconButton,
+    Grid,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    Button,
+    TableRow,
+    Tooltip,
+    Stack,
+    CircularProgress
+} from '@mui/material';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import MainCard from 'ui-component/cards/MainCard';
 import Token from './component/addSbtToken';
-// import { getAllNft } from '../../../../redux/nftManagement/actions';
+import { getsbtToken } from '../../../../redux/nftManagement/actions';
 import Nftcard from './component/NftCard';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Switch } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Avatar from 'ui-component/extended/Avatar';
+import DetailsDialog from './component/sbtView'
 const typeArray = [
     {
         value: 'all',
@@ -42,7 +61,6 @@ const sbtToken = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
-
     const user = useSelector((state) => state.auth.user);
     const [type, setType] = useState('all');
     const [search, setSearch] = useState('');
@@ -55,36 +73,48 @@ const sbtToken = () => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-
     const handleClose = () => {
         setAnchorEl(null);
         setLoader(false);
     };
-    // const handleType = (event) => {
-    //     setType(event.target.value);
-    //     setLimit(12);
-    //     setSearch('');
-    //     setPage(1);
-    // };
+    const handleType = (event) => {
+        setType(event.target.value);
+        setLimit(12);
+        setSearch('');
+        setPage(1);
+    };
+    const [checked, setChecked] = useState();
+    const [details, setDetails] = useState('');
+    const nftList = useSelector((state) => state.nftReducer.sbtList);
+    const sbtTable = useSelector((state) => state.nftReducer.sbtList?.soul);
+    console.log(sbtTable, 'sbtTable');
+    const sbt = useSelector((state) => state.nftReducer.sbtList?.soul?.rows?.SoulBoundMetas
+    );
 
-    // useEffect(() => {
-    //     dispatch(
-    //         getAllNft({
-    //             categoryId: location.state.data.CategoryId,
-    //             search: search,
-    //             page: page,
-    //             limit: limit,
-    //             type: type,
-    //             brandId: user.BrandId,
-    //             handleClose: handleClose
-    //         })
-    //     );
-    // }, [search, page, limit, type]);
+    useEffect(() => {
+        dispatch(
+            getsbtToken({
+                // categoryId: location.state.data.CategoryId,
+                // search: search,
+                page: page,
+                limit: limit,
+                // type: type,
+                // brandId: user.BrandId,
+                handleClose: handleClose
+            })
+        );
+    }, [page, limit]);
+    const [DetailsNftOpen, setDetailsNftOpen] = useState(false);
 
-    const nftList = useSelector((state) => state.nftReducer.nftList);
 
     return (
         <>
+            <DetailsDialog
+                open={DetailsNftOpen}
+                setOpen={setDetailsNftOpen}
+                details={details}
+            // sbtTable={sbtTable}
+            />
             <Token
                 open={addNftOpen}
                 setOpen={setAddNftOpen}
@@ -93,6 +123,7 @@ const sbtToken = () => {
                 page={page}
                 limit={limit}
                 nftType={type}
+                nftList={nftList}
             />
             <MainCard
                 className="Adminheading"
@@ -126,9 +157,7 @@ const sbtToken = () => {
                 //             </Button>
                 //         </Grid> */}
                 //     </Grid>
-
                 // }
-
                 content={false}
             ></MainCard>
             <MainCard
@@ -181,25 +210,63 @@ const sbtToken = () => {
                     {/* { nftList.nfts.rows.length > 0?(
                         <> */}
                     {' '}
-                    <Grid container spacing={gridSpacing} mt={2}
-                        sx={{ padding: "0px 16px" }}>
-                        {/* {nftList.nfts.rows &&
-                            nftList.nfts.rows.map((nft, index) => {
-                                return ( */}
-                        <Grid item xs={12} sm={6} md={4} lg={3}>
-                            <Nftcard
-                                className="tableShadow"
-                                // nftData={nft}
-                                // categoryId={location.state.data.CategoryId}
-                                // search={search}
-                                // page={page}
-                                // limit={limit}
-                                // type={type}
-                            />
-                        </Grid>
-                        {/* );
-                            })} */}
-                    </Grid>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}></TableCell>
+                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                    Token Name
+                                </TableCell>
+                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                    Symbol
+                                </TableCell>
+                                <TableCell align="left" className="Tableheading" sx={{ borderBottom: 'none' }}>
+                                    Address
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody sx={{ padding: '10px' }}>
+                            {sbtTable?.rows &&
+                                sbtTable?.rows.map((nft, index) => {
+                                    return (
+                                        <>
+                                            <TableRow>
+                                                <TableCell
+                                                    align="left"
+                                                    className="tableName"
+                                                    sx={{ textTransform: 'capitalize' }}
+                                                ></TableCell>
+                                                <TableCell align="left" className="tableName"
+                                                    sx={{
+                                                        display: 'flex',
+                                                        borderBottom: 'none',
+                                                        textTransform: 'capitalize',
+                                                        borderBottom: 'none',
+                                                        cursor: "pointer"
+
+                                                    }}>
+                                                    <Grid item lg={2}>
+                                                        <Avatar alt="Brand Image" src={nft.image} sx={{}} onClick={() => {
+                                                            // navigate('/sbtToken/view');
+                                                            setDetailsNftOpen(true);
+                                                            setDetails(nft);
+
+                                                        }} />
+                                                    </Grid>
+                                                    {nft.tokenName}
+                                                </TableCell>
+                                                <TableCell align="left" className="tableName" sx={{ textTransform: 'capitalize' }}>
+                                                    {nft.brandSymbol}
+                                                </TableCell>
+                                                <TableCell align="left" className="tableName">
+                                                    {nft.address.slice(0, 5) + '...' + nft.address.slice(38, 42)}
+                                                </TableCell >
+                                            </TableRow>
+                                        </>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
                     <Grid item xs={12} sx={{ p: 3 }}>
                         <Grid container justifyContent="center" spacing={gridSpacing}>
                             <Grid item>

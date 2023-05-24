@@ -8,11 +8,11 @@ import img from "assets/images/bmw1.png"
 import { useEffect } from 'react';
 import { Switch } from '@mui/material';
 
-const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
+const NftCard = ({ nftData, categoryId, search, page, limit, type, nftList }) => {
     const dispatch = useDispatch();
     const [loader, setLoader] = useState(false);
     const theme = useTheme();
-    // console.log(nftData,'nftData')
+    console.log(nftList?.data, 'nftList================')
 
     const [openRequestMint, setOpenRequestMint] = useState(false);
     const [editNftOpen, setEditNftOpen] = useState(false);
@@ -81,8 +81,8 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                     <Tooltip placement="left" title='aaa'>
                                         <Typography variant="subtitle1" className='fontstyling encap-nft'
                                             sx={{ textDecoration: 'none', textTransform: 'capitalize' }}>
-                                            arslan
-                                            {/* {nftData.name} */}
+                                            {/* arslan */}
+                                            {nftList.tokenName}
                                         </Typography>
                                     </Tooltip>
                                 </Grid>
@@ -98,8 +98,8 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                                 textTransform: 'capitalize'
                                             }}
                                         >
-                                            k
-                                            {/* {nftData.description} */}
+                                            {/* k */}
+                                            {nftList.address}
                                         </Typography>
                                     </Tooltip>
                                 </Grid>
@@ -107,8 +107,9 @@ const NftCard = ({ nftData, categoryId, search, page, limit, type }) => {
                                 <Grid item xs={6}>
                                     <Grid item xs={12}>
                                         <Typography variant="h6" className='fontstyling'>
-                                            15
-                                            {/* {nftData.price} {nftData.currencyType} */}
+                                            {/* 15 */}
+                                            {nftList.brandSymbol}
+
                                         </Typography>
                                     </Grid>
                                     {/* <Grid item xs={12}>
