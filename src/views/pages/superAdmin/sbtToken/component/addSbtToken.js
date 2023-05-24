@@ -1,7 +1,6 @@
 import { forwardRef, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tooltip from '@mui/material/Tooltip';
-
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -30,7 +29,7 @@ import { useDropzone } from 'react-dropzone';
 import { Switch } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@iconify/react';
-// import { addNft } from 'redux/nftManagement/actions';
+import { addSBTToken } from 'redux/nftManagement/actions';
 import { fData } from 'utils/formatNumber';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,7 +39,6 @@ import UploadImage from 'assets/images/icons/image-upload.svg';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import clsx from 'clsx';
 import { DataArraySharp } from '@mui/icons-material';
-
 import { ethers, utils } from 'ethers';
 import SBTAddress from "contractAbi/SBT-address.json";
 import SBTAbi from "contractAbi/SBT.json";
@@ -48,30 +46,18 @@ import SBTAbi from "contractAbi/SBT.json";
 const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 
-export default function addSbtToken({ open, setOpen }) {
+export default function addSbtToken({ open, setOpen, nftList }) {
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.auth.user);
-
-
-    const [fieldDataArray, setFieldDataArray] = useState([
-
-
-
-    ]);
+    const [fieldDataArray, setFieldDataArray] = useState([]);
     const [loader, setLoader] = useState(false);
-
-
-
+    const [uploadedImages, setUploadedImages] = useState([]);
     const handleError = (fieldDataArray, values) => {
-
         let isValid = true;
-
-
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
         }
-
         fieldDataArray.map((array) => {
             if (array.fieldName == '') {
                 isValid = false;
@@ -81,52 +67,40 @@ export default function addSbtToken({ open, setOpen }) {
                 toast.error(`Metadata value cannot be empty`);
             }
         });
-
         console.log('im here');
-
-
         return isValid;
     };
-
     const validationSchema = Yup.object({
-        tokenName: Yup.string().required('NFT Name is required!').max(60, 'NFT Name can not exceed 60 characters'),
-        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT name'),
-        Symbol: Yup.string()
-            .required('NFT Description is required!')
-            .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
-        directBuyerAddress:
-            checked == true &&
-            Yup.string()
-                .required('Wallet address  is required!')
-                // .max(1000, 'Invalid NFT description can not exceed 1000 characters'),
-                .min(26, 'Minimum length 26 character ')
-                .max(42, 'Must be exactly 42 characters'),
-        // .matches(/^[-a-zA-Z0-9-()]+(\s+[-a-zA-Z0-9-()]+)*$/, 'Invalid NFT description'),
-        status: Yup.string()
-            .required('Status required')
-            .typeError('Invalid Status'),
+        SBTName: Yup.string()
+            .required('Name is required!')
+            .max(1000, 'Invalid address can not exceed 1000 characters'),
+        symbol: Yup.string()
+            .required('Symbol required')
+            .typeError('Invalid Symbol'),
         // image: Yup.mixed(),
         Address: Yup.string()
             .required('Address is required!')
             .max(1000, 'Invalid address can not exceed 1000 characters')
+        // fieldName: Yup.string()
+        //     .required('fieldName is required!')
+        //     .max(1000, 'fieldName can not exceed 1000 characters'),
+        // fieldValue: Yup.string()
+        //     .required('fieldValue is required!')
+        //     .max(1000, 'fieldValue can not exceed 1000 characters')
     });
-
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            tokenName: '',
-            Symbol: '',
-            directBuyerAddress: '',
-            status: '',
-            images: [],
-            Address: ''
+            SBTName: '',
+            symbol: '',
+            Address: '',
+            images: []
+            // fieldName: '',
+            // fieldValue: ''
         },
         validationSchema,
         onSubmit: async (values) => {
-
-
             console.log("values", values)
-
             fieldDataArray.unshift({
                 "fieldName": "Validtype",
                 "fieldValue": "true"
@@ -136,52 +110,50 @@ export default function addSbtToken({ open, setOpen }) {
                     "fieldValue": Date.now().toString()
                 }
             )
-
             console.log("fieldDataArray", fieldDataArray)
-
-
-                    setLoader(true);
-                    // dispatch(
-                    //     addNft({
-                    //         categoryId: data.CategoryId,
-                    //         mintType: mintType,
-                    //         metaDataArray: fieldDataArray,
-                    //         fileNameArray: fileNameArray,
-                    //         fileArray: fileArray,
-                    //         name: values.tokenName,
-                    //         price: values.status,
-                    //         brandSymbol: values.Symbol,
-                    //         address: values.Address,
-                    //         directBuyerAddress: values.directBuyerAddress ? values.directBuyerAddress : '',
-                    //         currencyType: type,
-                    //         quantity: values.images[0].quantity,
-                    //         asset: values.images[0].image,
-                    //         type: nftType,
-                    //         page: page,
-                    //         limit: limit,
-                    //         search: search,
-                    //         categoryId: data.CategoryId,
-                    //         requesterAddress: user.walletAddress,
-                    //         contractAddress: data.contractAddress,
-                    //         handleClose: handleClose,
-                    //         brandId: user.BrandId,
-                    //         isDirectTransfer: values.directBuyerAddress == '' ? false : true
-                    //     })
-                    // );
-                }
-                // console.log('Address INVALID');
-            
-        
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const address = await signer.getAddress();
+            const sbt = new ethers.Contract(SBTAddress.address, SBTAbi.abi, signer);
+            console.log("svt", sbt);
+            var output = fieldDataArray.map(function (obj) {
+                return Object.keys(obj).sort().map(function (key) {
+                    return obj[key];
+                });
+            });
+            console.log("tuple", values.SBTName, values.symbol, output, values.Address);
+            console.log("tuple array", output);
+            let safeMint = await (
+                await sbt.safeMint(values.SBTName, values.symbol, output, values.Address).catch((error) => {
+                    console.log(error);
+                })
+            ).wait();
+            const tokenId = parseInt(safeMint.events[0].args[2])
+            console.log("tokenId", tokenId);
+            console.log("safeMint", safeMint)
+            //  toast.success(``);
+            console.log('This is a valid wallet address');
+            dispatch(
+                addSBTToken({
+                    tokenName: values.SBTName,
+                    address: values.Address,
+                    brandSymbol: values.symbol,
+                    metaData: fieldDataArray,
+                    // asset: values.images[0].image,
+                    handleClose: handleClose,
+                })
+            );
+            // console.log('Address INVALID');
+        }
     });
-
-
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
         setFieldDataArray([]);
         setLoader(false);
-    };
+        setUploadedImages([]);
 
+    };
     const handleFieldNameChange = (value, index) => {
         let array = [...fieldDataArray];
         array[index].fieldName = value;
@@ -192,19 +164,34 @@ export default function addSbtToken({ open, setOpen }) {
         array[index].fieldValue = value;
         setFieldDataArray(array);
     };
-
-
-
     const handleRemoveField = (index) => {
         let array = [...fieldDataArray];
         array.splice(index, 1);
         setFieldDataArray(array);
     };
+    // const handleDrop = useCallback(
+    //     (acceptedFiles) => {
+    //         let newUploadedImages = [...uploadedImages];
+    //         acceptedFiles.map(async (acceptedFile) => {
+    //             let data = { image: acceptedFile, quantity: 1 };
+    //             newUploadedImages = [...newUploadedImages, data];
+    //         });
+    //         formik.setFieldValue('images', newUploadedImages);
+    //         setUploadedImages(newUploadedImages);
+    //     },
 
-
-
-
-
+    //     [formik.setFieldValue, uploadedImages]
+    // );
+    // const handleRemoveFile = (file, index) => {
+    //     const newFiles = [...formik.values.images];
+    //     newFiles.splice(index, 1);
+    //     setUploadedImages(newFiles);
+    //     formik.setFieldValue('images', newFiles);
+    // };
+    // const { getRootProps, getInputProps, isDragActive, isDragReject, isDragAccept } = useDropzone({
+    //     accept: '.jpeg,.png,.jpg,.gif',
+    //     onDrop: handleDrop
+    // });
     return (
         <>
             <Dialog
@@ -239,7 +226,6 @@ export default function addSbtToken({ open, setOpen }) {
                                     variant="standard"
                                 />
                             </Grid>
-
                             <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
@@ -276,6 +262,10 @@ export default function addSbtToken({ open, setOpen }) {
                                     id="Address"
                                     name="Address"
                                     label="Address"
+                                    // type="number"
+                                    // InputProps={{
+                                    //     inputProps: { min: 0 }
+                                    // }}
                                     fullWidth
                                     value={formik.values.Address}
                                     onChange={formik.handleChange}
@@ -296,7 +286,7 @@ export default function addSbtToken({ open, setOpen }) {
                                             ...fieldDataArray,
                                             {
                                                 fieldName: '',
-                                                fieldValue:'',
+                                                fieldValue: '',
                                             }
                                         ]);
                                     }}
@@ -310,11 +300,8 @@ export default function addSbtToken({ open, setOpen }) {
                             <>
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.length == 1
-
                                         &&
                                         <>
-
-
                                             {fieldDataArray.slice(2).map((data, index) => (
                                                 <>
                                                     <Grid item xs={5} md={3}>
@@ -413,7 +400,75 @@ export default function addSbtToken({ open, setOpen }) {
                                 </Grid>
                             </>
                         )}
+                        {/* {uploadedImages.length !== 1 && (
+                            <Grid
+                                sx={{ background: '#c5cbe9', borderRadius: '5px', paddingBottom: '2rem', paddingTop: '2rem' }}
+                                item
+                                lg={12}
+                                mt={10}
+                            >
+                                <div className={clsx('dropZoneContainer', 'xyz')}>
+                                    <div
+                                        className={clsx('dropZone', {
+                                            isDragActive: isDragActive,
+                                            isDragAccept: isDragAccept,
+                                            isDragReject: isDragReject
+                                        })}
+                                        {...getRootProps()}
+                                    >
+                                        <input {...getInputProps()} />
 
+                                        <Grid container direction="column">
+                                            <Box
+                                                textAlign="center"
+                                                component="img"
+                                                alt="Select File"
+                                                src={UploadImage}
+                                                sx={{ height: 60 }}
+                                            />
+
+                                            <Box mt={4} textAlign="center" sx={{ ml: { md: 0 } }}>
+                                                <Typography variant="subtitle" sx={{ color: 'grey', textAlign: 'center' }}>
+                                                    Drop your image or&nbsp;
+                                                    <Link underline="always">browse</Link>.&nbsp;
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                    </div>
+                                </div>
+                            </Grid>
+                        )} */}
+                        {/* <Grid item lg={12} mt={3}>
+                            <List disablePadding className={clsx({ list: hasFile })} sx={{ mt: 3 }}>
+                                <AnimatePresence>
+                                    {formik.values.images &&
+                                        formik.values.images.map((file, index) => (
+                                            <ListItem key={file.image.name} component={motion.div} className="listItem">
+                                                <ListItemIcon>
+                                                    <Icon icon={fileFill} width={32} height={32} />
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={file.image.name ? file.image.name : ''}
+                                                    primaryTypographyProps={{
+                                                        variant: 'h3'
+                                                    }}
+                                                />
+                                                {mintType == 'directMint' && (
+                                                    <QuantitySelector formik={formik} fileArray={formik.values.images} index={index} />
+                                                )}
+                                                <IconButton
+                                                    color="error"
+                                                    edge="end"
+                                                    size="small"
+                                                    onClick={() => handleRemoveFile(file.image, index)}
+                                                >
+                                                    <Icon icon={closeFill} width={28} height={28} />
+                                                </IconButton>
+                                            </ListItem>
+                                        ))}
+                                </AnimatePresence>
+                            </List>
+                        </Grid> */}
                     </form>
                     <Grid container>
                         <DialogActions>
