@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
 import { Container, Grid, Link, Typography } from '@mui/material';
@@ -20,6 +22,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MediumIconLight from 'assets/images/icons/medium_icon-light.svg';
 import MediumIconDark from 'assets/images/icons/medium_icon-dark.svg';
 import EmailIcon from '@mui/icons-material/Email';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import styles from './footer.module.css';
 import Divider from '@mui/material/Divider';
 import { makeStyles } from '@mui/styles';
@@ -40,6 +43,7 @@ const Footer = () => {
     const useStyles = makeStyles((theme) => ({}));
     const classes = useStyles();
     const theme = useTheme();
+    const navigate = useNavigate();
     const darkModeColor = '#f3f3f3';
     const lightModeColor = '#404040';
 
@@ -48,7 +52,8 @@ const Footer = () => {
             <FooterWrapper
                 style={{
                     background: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3',
-                    color: theme.palette.mode === 'dark' ? 'white' : '#404040'
+                    color: theme.palette.mode === 'dark' ? 'white' : '#404040',
+                    paddingBottom: '28px'
                 }}
             >
                 <Grid container sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' } }} spacing={gridSpacing}>
@@ -56,9 +61,25 @@ const Footer = () => {
                     {/* <Grid item xs={12} md={1} lg={1} xl={1} sm={12}></Grid> */}
                     <Grid item xs={12} md={3} lg={3} xl={3} sm={12} sx={{ marginTop: { md: '15px' } }}>
                         {theme.palette.mode === 'dark' ? (
-                            <img src={galileoWhite} alt="Galileo White Logo" width="100" />
+                            <img
+                                src={galileoWhite}
+                                onClick={() => {
+                                    navigate('/home');
+                                }}
+                                alt="Galileo White Logo"
+                                width="100"
+                                style={{ cursor: 'pointer' }}
+                            />
                         ) : (
-                            <img src={galileo} alt="Galileo Dark Logo" width="100" />
+                            <img
+                                src={galileo}
+                                onClick={() => {
+                                    navigate('/home');
+                                }}
+                                alt="Galileo Dark Logo"
+                                width="100"
+                                style={{ cursor: 'pointer' }}
+                            />
                         )}
                         <Grid style={{ marginTop: '5%' }}>
                             <span className="footerDownloadTag" style={{ fontWeight: 'bolder' }}>
@@ -68,11 +89,11 @@ const Footer = () => {
 
                         <Grid container sx={{ mt: 3 }}>
                             <Grid item md={12} xs={12} sm={12} lg={4} xl={3} className="footersocalIcons">
-                                <img src={googlePlay} alt="Google Play" width="110" />
+                                <img src={googlePlay} alt="Google Play" title="Coming Soon" width="110" />
                             </Grid>
                             <Grid item md={1} xs={12} lg={1} xl={1} sx={{ display: { xl: 'flex', lg: 'none', md: 'none' } }}></Grid>
                             <Grid item md={12} xs={12} sm={12} lg={7} xl={6}>
-                                <img src={appleStore} alt="Apple Store" width="110" />
+                                <img src={appleStore} alt="Apple Store" title="Coming Soon" width="110" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -82,16 +103,64 @@ const Footer = () => {
                             <h2 className="footerElement">Company</h2>
                         </Grid>
                         <Grid>
-                            <span className={styles.link}>About</span>
+                            <span className={styles.link}>
+                                <a
+                                    href="https://www.galileoprotocol.io/about-us"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                    }}
+                                >
+                                    About
+                                </a>
+                            </span>
                         </Grid>
                         <Grid className={styles.aboutLink}>
-                            <span className={styles.link}>Mission</span>
+                            <span className={styles.link}>
+                                <a
+                                    href="https://www.galileoprotocol.io/about-us#mission"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                    }}
+                                >
+                                    Mission
+                                </a>
+                            </span>
                         </Grid>
                         <Grid className={styles.aboutLink}>
-                            <span className={styles.link}>Team</span>
+                            <span className={styles.link}>
+                                <a
+                                    href="https://www.galileoprotocol.io/about-us#team"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                    }}
+                                >
+                                    Team
+                                </a>
+                            </span>
                         </Grid>
                         <Grid className={styles.aboutLink}>
-                            <span className={styles.link}>Blog</span>
+                            <span className={styles.link}>
+                                <a
+                                    href="https://www.galileoprotocol.io/blog"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                    }}
+                                >
+                                    Blog
+                                </a>
+                            </span>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={2} sm={12}>
@@ -100,16 +169,57 @@ const Footer = () => {
                         </Grid>
                         <Grid>
                             <Grid>
-                                <span className={styles.link}>FAQ</span>
+                                <span className={styles.link}>
+                                    <Link
+                                        href="/faq"
+                                        underline="none"
+                                        textDecoration="none"
+                                        color={theme.palette.mode === 'dark' ? darkModeColor : lightModeColor}
+                                    >
+                                        FAQ
+                                    </Link>
+                                </span>
                             </Grid>
                             <Grid className={styles.serviceLink}>
-                                <span className={styles.link}>Support</span>
+                                <span className={styles.link}>
+                                    <a
+                                        href="https://www.galileoprotocol.io/contact"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        style={{
+                                            textDecoration: 'none',
+                                            color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                        }}
+                                    >
+                                        Support
+                                    </a>
+                                </span>
                             </Grid>
                             <Grid className={styles.serviceLink}>
-                                <span className={styles.link}>Privacy Policy</span>
+                                <span className={styles.link}>
+                                    <Link
+                                        href="/privacy-policy"
+                                        underline="none"
+                                        textDecoration="none"
+                                        color={theme.palette.mode === 'dark' ? darkModeColor : lightModeColor}
+                                        target="_blank"
+                                    >
+                                        Privacy Policy
+                                    </Link>
+                                </span>
                             </Grid>
                             <Grid className={styles.serviceLink}>
-                                <span className={styles.link}>Fees & Taxes</span>
+                                <span className={styles.link}>
+                                    <Link
+                                        href="/fees"
+                                        underline="none"
+                                        textDecoration="none"
+                                        color={theme.palette.mode === 'dark' ? darkModeColor : lightModeColor}
+                                        target="_blank"
+                                    >
+                                        Fees & Taxes
+                                    </Link>
+                                </span>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -129,7 +239,17 @@ const Footer = () => {
                                     }}
                                 >
                                     <LocalPhoneIcon sx={{ height: '1.3rem' }} />
-                                    <span className={styles.contactLink}>(123) 456-7890</span>
+                                    <span className={styles.contactLink}>
+                                        <a
+                                            href="tel:+30 (695) 571 7183"
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                            }}
+                                        >
+                                            +30 (695) 571 7183
+                                        </a>
+                                    </span>
                                 </Grid>
 
                                 <Grid
@@ -141,7 +261,40 @@ const Footer = () => {
                                     }}
                                 >
                                     <EmailIcon sx={{ height: '' }} />
-                                    <span className={styles.contactLink}>galileo@gmail.com</span>
+                                    <span className={styles.contactLink}>
+                                        <a
+                                            href="mailto:hello@galileoprotocol.io"
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                            }}
+                                        >
+                                            hello@galileoprotocol.io
+                                        </a>
+                                    </span>
+                                </Grid>
+                                <Grid
+                                    className={styles.contact}
+                                    style={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        marginTop: '3%'
+                                    }}
+                                >
+                                    <SupportAgentIcon sx={{ height: '' }} />
+                                    <span className={styles.contactLink}>
+                                        <b>SUPPORT</b>
+                                        <br></br>
+                                        <a
+                                            href="mailto:tech_department@galileoprotocol.io"
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                            }}
+                                        >
+                                            tech_department@galileoprotocol.io
+                                        </a>
+                                    </span>
                                 </Grid>
                                 <Grid
                                     className={styles.contact}
@@ -152,7 +305,19 @@ const Footer = () => {
                                     }}
                                 >
                                     <LocationOnIcon sx={{ height: '1.3rem' }} />
-                                    <span className={styles.contactLink}>2972 Westeast Rd. LA, 85400 </span>
+                                    <span className={styles.contactLink}>
+                                        <a
+                                            href="https://goo.gl/maps/yhVhCvgdjYkgZX8A6"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor
+                                            }}
+                                        >
+                                            10 rue du Colisée<br></br>75008 Paris, FRANCE
+                                        </a>
+                                    </span>
                                 </Grid>
                             </Grid>
                         </Grid>
