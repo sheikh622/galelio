@@ -274,6 +274,7 @@ export default function Header() {
                                             }}
                                             alt="Galileo White Logo"
                                             width="100"
+                                            style={{ cursor: 'pointer' }}
                                         />
                                     ) : (
                                         <img
@@ -283,6 +284,7 @@ export default function Header() {
                                             }}
                                             alt="Galileo Dark Logo"
                                             width="100"
+                                            style={{ cursor: 'pointer' }}
                                         />
                                     )}
                                 </Grid>
@@ -334,7 +336,7 @@ export default function Header() {
                                     {(user?.role == 'Admin' || 'Brand Admin' || 'Super Admin' || 'User') &&
                                         (token != null || undefined) && <MetaMaskSection />}
                                 </div> */}
-                                <IconButton size="large" aria-label="" color="inherit">
+                                <IconButton size="large" aria-label="" color="inherit" title="Coming Soon">
                                     <Badge>
                                         <NotificationsIcon sx={{ color: '#4dabf5' }} />
                                     </Badge>
@@ -362,7 +364,7 @@ export default function Header() {
                                     </IconButton>
                                 )} */}
 
-                                <IconButton size="large" aria-label="" color="inherit">
+                                <IconButton size="large" aria-label="" color="inherit" title="Coming Soon">
                                     <ShoppingCartIcon sx={{ color: '#4dabf5' }} />
                                 </IconButton>
                             </Box>
