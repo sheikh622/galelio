@@ -14,8 +14,11 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import TelegramIcon from '@mui/icons-material/Telegram';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import MediumIconLight from 'assets/images/icons/medium_icon-light.svg';
+import MediumIconDark from 'assets/images/icons/medium_icon-dark.svg';
 import EmailIcon from '@mui/icons-material/Email';
 import styles from './footer.module.css';
 import Divider from '@mui/material/Divider';
@@ -37,6 +40,9 @@ const Footer = () => {
     const useStyles = makeStyles((theme) => ({}));
     const classes = useStyles();
     const theme = useTheme();
+    const darkModeColor = '#f3f3f3';
+    const lightModeColor = '#404040';
+
     return (
         <Grid>
             <FooterWrapper
@@ -45,11 +51,10 @@ const Footer = () => {
                     color: theme.palette.mode === 'dark' ? 'white' : '#404040'
                 }}
             >
-                <Grid container sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' },
-                 }} spacing={gridSpacing}>
-                 <Grid item xs={12} md={1} lg={1} xl={1} sm={12} ></Grid>
+                <Grid container sx={{ display: { xs: 'block', sm: 'flex', md: 'flex' } }} spacing={gridSpacing}>
+                    <Grid item xs={12} md={1} lg={1} xl={1} sm={12}></Grid>
                     {/* <Grid item xs={12} md={1} lg={1} xl={1} sm={12}></Grid> */}
-                    <Grid item xs={12} md={3} lg={3} xl={3} sm={12} sx={{marginTop:{md:'15px'}}} >
+                    <Grid item xs={12} md={3} lg={3} xl={3} sm={12} sx={{ marginTop: { md: '15px' } }}>
                         {theme.palette.mode === 'dark' ? (
                             <img src={galileoWhite} alt="Galileo White Logo" width="100" />
                         ) : (
@@ -72,8 +77,8 @@ const Footer = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={2} sm={12}  >
-                        <Grid  >
+                    <Grid item xs={12} md={2} sm={12}>
+                        <Grid>
                             <h2 className="footerElement">Company</h2>
                         </Grid>
                         <Grid>
@@ -89,8 +94,8 @@ const Footer = () => {
                             <span className={styles.link}>Blog</span>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2} sm={12} >
-                        <Grid >
+                    <Grid item xs={12} md={2} sm={12}>
+                        <Grid>
                             <h2 className="footerElement">Service</h2>
                         </Grid>
                         <Grid>
@@ -109,8 +114,8 @@ const Footer = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={2} sm={12}  >
-                        <Grid >
+                    <Grid item xs={12} md={2} sm={12}>
+                        <Grid>
                             <h2 className="">Contact</h2>
                         </Grid>
                         <Grid>
@@ -152,22 +157,67 @@ const Footer = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={2} sm={12}  >
-                        <Grid  >
+                    <Grid item xs={12} md={2} sm={12}>
+                        <Grid>
                             <h2 className="footerElement">Social Media</h2>
                         </Grid>
                         <Grid style={{ marginTop: '2px' }}>
                             <span>
-                                <FacebookIcon />
+                                <a
+                                    href="https://www.facebook.com/galileoprotocol?mibextid=ZbWKwL"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor }}
+                                >
+                                    <FacebookIcon />
+                                </a>
                             </span>
                             <span className={styles.socialLink}>
-                                <TwitterIcon />
+                                <a
+                                    href="https://twitter.com/galileoprotocol?s=21&t=iiPGK-CGsRoR8FDmDVz7Eg"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor }}
+                                >
+                                    <TwitterIcon />
+                                </a>
                             </span>
                             <span className={styles.socialLink}>
-                                <LinkedInIcon />
+                                <a
+                                    href="https://www.linkedin.com/company/galileo-protocol"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor }}
+                                >
+                                    <LinkedInIcon />
+                                </a>
+                            </span>
+                        </Grid>
+                        <Grid style={{ marginTop: '2px' }}>
+                            <span>
+                                <a
+                                    href="https://www.instagram.com/galileoprotocol"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor }}
+                                >
+                                    <InstagramIcon />
+                                </a>
                             </span>
                             <span className={styles.socialLink}>
-                                <InstagramIcon />
+                                <a
+                                    href="https://t.me/galileoprotocolcommunity"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: theme.palette.mode === 'dark' ? darkModeColor : lightModeColor }}
+                                >
+                                    <TelegramIcon />
+                                </a>
+                            </span>
+                            <span className={styles.socialLink}>
+                                <a href="https://medium.com/@galileoprotocol" target="_blank" rel="noopener noreferrer">
+                                    <img src={theme.palette.mode === 'dark' ? MediumIconLight : MediumIconDark} alt="Medium icon" />
+                                </a>
                             </span>
                         </Grid>
                     </Grid>
