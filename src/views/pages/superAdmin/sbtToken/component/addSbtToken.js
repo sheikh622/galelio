@@ -49,15 +49,27 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 export default function addSbtToken({ open, setOpen, nftList }) {
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.auth.user);
-    const [fieldDataArray, setFieldDataArray] = useState([]);
+
+
+    const [fieldDataArray, setFieldDataArray] = useState([
+
+
+
+    ]);
     const [loader, setLoader] = useState(false);
     const [uploadedImages, setUploadedImages] = useState([]);
+
+
     const handleError = (fieldDataArray, values) => {
+
         let isValid = true;
+
+
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
         }
+
         fieldDataArray.map((array) => {
             if (array.fieldName == '') {
                 isValid = false;
@@ -67,9 +79,13 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                 toast.error(`Metadata value cannot be empty`);
             }
         });
+
         console.log('im here');
+
+
         return isValid;
     };
+
     const validationSchema = Yup.object({
         SBTName: Yup.string()
             .required('Name is required!')
@@ -110,12 +126,19 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                     "fieldValue": Date.now().toString()
                 }
             )
+
             console.log("fieldDataArray", fieldDataArray)
+
+
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const address = await signer.getAddress();
+
             const sbt = new ethers.Contract(SBTAddress.address, SBTAbi.abi, signer);
+
+
             console.log("svt", sbt);
+
             var output = fieldDataArray.map(function (obj) {
                 return Object.keys(obj).sort().map(function (key) {
                     return obj[key];
@@ -144,6 +167,7 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                 })
             );
             // console.log('Address INVALID');
+
         }
     });
     const handleClose = () => {
@@ -154,6 +178,7 @@ export default function addSbtToken({ open, setOpen, nftList }) {
         setUploadedImages([]);
 
     };
+
     const handleFieldNameChange = (value, index) => {
         let array = [...fieldDataArray];
         array[index].fieldName = value;
@@ -214,18 +239,18 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                             <Grid xs={4} md={4} lg={4}>
                                 <TextField
                                     className="textfieldStyle"
-                                    id="tokenName"
-                                    name="tokenName"
-                                    label="Name"
+                                    id="SBTName"
+                                    name="SBTName"
+                                    label="SBT Name"
                                     fullWidth
-                                    value={formik.values.tokenName}
+                                    value={formik.values.SBTName}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.tokenName && Boolean(formik.errors.tokenName)}
-                                    helperText={formik.touched.tokenName && formik.errors.tokenName}
-                                    autoComplete="given-name"
+                                    error={formik.touched.SBTName && Boolean(formik.errors.SBTName)}
+                                    helperText={formik.touched.SBTName && formik.errors.SBTName}
                                     variant="standard"
                                 />
                             </Grid>
+
                             <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
                                 <TextField
                                     className="textfieldStyle"
@@ -235,23 +260,8 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                                     fullWidth
                                     value={formik.values.symbol}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.status && Boolean(formik.errors.status)}
-                                    helperText={formik.touched.status && formik.errors.status}
-                                    autoComplete="given-name"
-                                    variant="standard"
-                                />
-                            </Grid>
-                            <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
-                                <TextField
-                                    className="textfieldStyle"
-                                    id="Symbol"
-                                    name="Symbol"
-                                    label="Symbol"
-                                    fullWidth
-                                    value={formik.values.Symbol}
-                                    onChange={formik.handleChange}
-                                    error={formik.touched.Symbol && Boolean(formik.errors.Symbol)}
-                                    helperText={formik.touched.Symbol && formik.errors.Symbol}
+                                    error={formik.touched.symbol && Boolean(formik.errors.symbol)}
+                                    helperText={formik.touched.symbol && formik.errors.symbol}
                                     autoComplete="given-name"
                                     variant="standard"
                                 />
@@ -300,8 +310,11 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                             <>
                                 <Grid container spacing={4} sx={{ mt: 1 }}>
                                     {fieldDataArray.length == 1
+
                                         &&
                                         <>
+
+
                                             {fieldDataArray.slice(2).map((data, index) => (
                                                 <>
                                                     <Grid item xs={5} md={3}>
