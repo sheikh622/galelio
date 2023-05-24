@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { gridSpacing } from 'store/constant';
 import { useTheme } from '@mui/material/styles';
 import moment from 'moment';
+import { Pagination } from '@mui/material';
+import Avatar from 'ui-component/extended/Avatar';
 
 import '@fontsource/public-sans';
 import SubCard from 'ui-component/cards/SubCard';
@@ -13,9 +15,12 @@ import { IconSearch } from '@tabler/icons';
 import { IconButton, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MainCard from 'ui-component/cards/MainCard';
-const Activity = ({tracking}) => {
-    console.log(tracking?.afterMarketplaceHistory,'transfers');
-   
+import { ethers } from 'ethers';
+const Activity = ({ tracking }) => {
+//    let index=1;
+//    let price = ethers.utils.formatEther(tracking?.activity[index].price)
+//     console.log(price , 'price=====================>>>');
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -27,12 +32,7 @@ const Activity = ({tracking}) => {
         }
     };
 
-    const names = [
-        'Sales',
-        'Listings',
-        'Offers',
-        'Transfers',
-    ];
+    const names = ['Sales', 'Listings', 'Offers', 'Transfers'];
 
     function getStyles(name, personName) {
         return {
@@ -82,6 +82,11 @@ const Activity = ({tracking}) => {
         }
     ];
     const [search, setSearch] = useState('');
+    const cardsPerPage = 3;
+    const [currentPage, setCurrentPage] = useState(1);
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const currentCards = itemData.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
         <>
@@ -97,8 +102,7 @@ const Activity = ({tracking}) => {
                                 component="div"
                                 sx={{ textAlign: { xs: 'center', md: 'center', sm: 'center' }, textTransform: 'capitalize' }}
                             >
-                            Metadatas and ownership Activity
-                               
+                                Metadatas and ownership Activity
                             </Typography>
                         </Grid>
                     </Grid>
@@ -119,7 +123,7 @@ const Activity = ({tracking}) => {
                                                     color: theme.palette.mode === 'dark' ? '#ffff' : 'black',
                                                     padding: '10px 10px 10px 10px',
                                                     border: '2px solid #CDCDCD',
-                                                    borderRadius:'4px'
+                                                    borderRadius: '4px'
                                                 }}
                                                 fullWidth
                                             >
@@ -186,12 +190,16 @@ const Activity = ({tracking}) => {
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Event{' '}
                                             </TableCell>
+                                          {/*   <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
+                                                Brand Name{' '}
+                                            </TableCell> */}
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 Price{' '}
                                             </TableCell>
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 From
                                             </TableCell>
+
                                             <TableCell className="activityTable" sx={{ fontSize: '18px !important' }} align="center">
                                                 To{' '}
                                             </TableCell>
@@ -200,7 +208,9 @@ const Activity = ({tracking}) => {
                                             </TableCell>
                                         </TableRow>
                                     </TableHead>
-                                    {tracking?.beforeMarketplaceHistory?.handleMints.map((item) => (
+                                    {/* {currentCards?.map((item) => (
+                                    <> */}
+                                    {/* {tracking?.beforeMarketplaceHistory?.handleMints.map((item) => (
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
@@ -214,7 +224,7 @@ const Activity = ({tracking}) => {
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                   null
+                                                   0
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
@@ -243,7 +253,7 @@ const Activity = ({tracking}) => {
                                                     sx={{ fontSize: '15px', color: '#2194FF' }}
                                                     align="center"
                                                 >
-                                                    null
+                                                    0
                                                 </TableCell>
                                                 <TableCell
                                                     className="activityTable"
@@ -315,38 +325,86 @@ const Activity = ({tracking}) => {
                                                 </TableCell>
                                             </TableRow>
                                         </TableBody>
-                                    ))}
-                                    {tracking?.beforeMarketplaceHistory?.transfers.map((item) => (
+                                    ))} */}
+                                    {tracking?.activity?.map((item) => (
                                         <TableBody>
                                             <TableRow>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                Transfer
+                                                    {item.event}
                                                 </TableCell>
+                                       {/*          {item?.brandImage ? (
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', display: 'flex' }}
+                                                        align="center"
+                                                    >
+                                                        <Grid item lg={2}></Grid>
+                                                        <Grid item lg={2}>
+                                                            <Avatar alt="" src={item?.brandImage} />
+                                                        </Grid>
+                                                        <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                            {item?.brandImage ? item?.brandName : ''}
+                                                        </Grid>
+                                                    </TableCell>
+                                                ) : (
+                                                    <TableCell
+                                                        className="activityTable"
+                                                        sx={{ fontSize: '15px', display: 'flex' }}
+                                                        align="center"
+                                                    >
+                                                        <Grid item lg={2}></Grid>
+                                                        <Grid item lg={2}>
+                                                            <Avatar sx={{ bgcolor: 'transparent', color: 'transparent' }}>b</Avatar>
+                                                        </Grid>
+                                                        <Grid item lg={6} sx={{ alignSelf: 'center' }}>
+                                                            {item?.brandImage ? item?.brandName : ''}
+                                                        </Grid>
+                                                    </TableCell>
+                                                )} */}
+
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                    {item.price}
+                                                    {item?.event == 'List' || 'Bought' || 'Resell' ? item?.price : ' '}
                                                 </TableCell>
+
                                                 <TableCell
                                                     className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
                                                     align="center"
+                                                    onClick={() => {
+                                                        window.open(`https://mumbai.polygonscan.com/address/${item?.from? item?.from : item?.minter}`, '_blank');
+                                                    }}
                                                 >
-                                                    {item.from.slice(0, 5) + '...' + item.from.slice(38, 42)}
+                                                    {item?.from
+                                                        ? item?.from?.slice(0, 5) + '...' + item?.from?.slice(38, 42)
+                                                        : item?.minter
+                                                        ? item?.minter?.slice(0, 5) + '...' + item?.minter?.slice(38, 42)
+                                                        : ''}
                                                 </TableCell>
+
                                                 <TableCell
                                                     className="activityTable"
-                                                    sx={{ fontSize: '15px', color: '#2194FF' }}
+                                                    sx={{ fontSize: '15px', color: '#2194FF', cursor: 'pointer' }}
                                                     align="center"
+                                                    onClick={() => {
+                                                        window.open(`https://mumbai.polygonscan.com/address/${item?.to}`, '_blank');
+                                                    }}
                                                 >
-                                                    {item.to.slice(0, 5) + '...' + item.to.slice(38, 42)}
+                                                    {item?.to ? item?.to?.slice(0, 5) + '...' + item?.to?.slice(38, 42) : ''}
                                                 </TableCell>
                                                 <TableCell className="activityTable" sx={{ fontSize: '15px' }} align="center">
-                                                {Date(item.blockTimestamp).slice(0, 15)}
+                                                    {Date(item?.blockTimestamp).slice(0, 15)}
                                                 </TableCell>
                                             </TableRow>
                                         </TableBody>
                                     ))}
-                                    
+                                    {/*   </>
+                                    ))} */}
                                 </Table>
+                                {/*      <Pagination
+                                count={Math.ceil(currentCards.length / cardsPerPage)}
+                                onChange={(event, value) => setCurrentPage(value)}
+                                page={currentPage}
+                              /> */}
                             </TableContainer>
                         </MainCard>
                     </Grid>

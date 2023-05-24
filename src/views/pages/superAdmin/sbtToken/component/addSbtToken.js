@@ -214,14 +214,15 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                             <Grid xs={4} md={4} lg={4}>
                                 <TextField
                                     className="textfieldStyle"
-                                    id="SBTName"
-                                    name="SBTName"
-                                    label="SBT Name"
+                                    id="tokenName"
+                                    name="tokenName"
+                                    label="Name"
                                     fullWidth
-                                    value={formik.values.SBTName}
+                                    value={formik.values.tokenName}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.SBTName && Boolean(formik.errors.SBTName)}
-                                    helperText={formik.touched.SBTName && formik.errors.SBTName}
+                                    error={formik.touched.tokenName && Boolean(formik.errors.tokenName)}
+                                    helperText={formik.touched.tokenName && formik.errors.tokenName}
+                                    autoComplete="given-name"
                                     variant="standard"
                                 />
                             </Grid>
@@ -234,8 +235,23 @@ export default function addSbtToken({ open, setOpen, nftList }) {
                                     fullWidth
                                     value={formik.values.symbol}
                                     onChange={formik.handleChange}
-                                    error={formik.touched.symbol && Boolean(formik.errors.symbol)}
-                                    helperText={formik.touched.symbol && formik.errors.symbol}
+                                    error={formik.touched.status && Boolean(formik.errors.status)}
+                                    helperText={formik.touched.status && formik.errors.status}
+                                    autoComplete="given-name"
+                                    variant="standard"
+                                />
+                            </Grid>
+                            <Grid xs={4} md={4} lg={4} pl={2} pr={2}>
+                                <TextField
+                                    className="textfieldStyle"
+                                    id="Symbol"
+                                    name="Symbol"
+                                    label="Symbol"
+                                    fullWidth
+                                    value={formik.values.Symbol}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.Symbol && Boolean(formik.errors.Symbol)}
+                                    helperText={formik.touched.Symbol && formik.errors.Symbol}
                                     autoComplete="given-name"
                                     variant="standard"
                                 />
