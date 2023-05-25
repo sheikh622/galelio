@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import React from 'react';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
@@ -14,7 +15,7 @@ import Locales from 'ui-component/Locales';
 import NavigationScroll from 'layout/NavigationScroll';
 // import RTLLayout from 'ui-component/RTLLayout'; 
 import Snackbar from 'ui-component/extended/Snackbar';
-import React from 'react';
+// import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // ==============================|| APP ||============================== //
