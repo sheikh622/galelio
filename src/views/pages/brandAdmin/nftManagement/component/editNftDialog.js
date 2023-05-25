@@ -54,7 +54,6 @@ const currencyTypeArray = [
 
 export default function EditNftDialog({ nftInfo, categoryId, type, search, page, limit, loader, setLoader, open, setOpen }) {
     const dispatch = useDispatch();
-    console.log(nftInfo, 'nftInfo');
     const [mintType, setMintType] = useState('directMint');
     const [currencyType, setCurrencyType] = useState('USDT');
     const [fieldDataArray, setFieldDataArray] = useState([]);
@@ -70,12 +69,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     // };
 
     const handleError = (fieldDataArray, fileDataArray, values) => {
-        console.log('im in handle error');
         let isValid = true;
-        // console.log('fieldDataArray', fieldDataArray);
-        // console.log('fileDataArray', fileDataArray);
-        // console.log('values', values);
-
         if (fieldDataArray.length == 0) {
             isValid = false;
             toast.error('Metadata is required');
@@ -99,12 +93,11 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         }
 
         //    else (fileDataArray.length > 0) {
-        console.log('im here 2');
         fileDataArray.map((array) => {
-            if (array.trait_type == '') {
+            if (array.fieldName == '') {
                 isValid = false;
                 toast.error(`File name field is mandatory`);
-            } else if (array.value == null) {
+            } else if (array.fieldValue == null) {
                 isValid = false;
                 toast.error(`Attach proof of authenticity`);
             } else if (array.value?.size / 1000000 > 5) {
@@ -157,24 +150,23 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         initialValues: nftInfo,
         validationSchema,
         onSubmit: (values) => {
-            console.log(values, 'values=========>');
 
             let file = values.images[0].image;
             let isFile = file instanceof File;
 
             let previousUploadedItems = fileDataArray.filter((data) => {
-                if (typeof data.value === 'string') return data;
+                if (typeof data.fieldValue === 'string') return data;
             });
 
             let newUploadedItems = fileDataArray.filter((data) => {
-                if (typeof data.value !== 'string') return data;
+                if (typeof data.fieldValue !== 'string') return data;
             });
 
             let fileArray = newUploadedItems.map((data) => {
-                return data.value;
+                return data.fieldValue;
             });
             let fileNameArray = newUploadedItems.map((data) => {
-                return data.trait_type;
+                return data.fieldName;
             });
 
             let isValid = handleError(fieldDataArray, fileDataArray, values, isFile);
@@ -267,7 +259,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         // let array = [...fieldDataArray];
         // [...checked] = value;
         // setFieldDataArray(array);
-        // console.log(event.target.checked,'value==============?')
     };
     const handleproof = (event, index) => {
         let array = structuredClone(fieldDataArray);
@@ -278,7 +269,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         // let array = [...fieldDataArray];
         // [...checked] = value;
         // setFieldDataArray(array);
-        // console.log(event.target.checked,'value==============?')
     };
 
     const handleRemoveField = (index) => {
@@ -290,6 +280,11 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
     const handleFileFieldNameChange = (value, index) => {
         let array = structuredClone(fileDataArray);
         array[index].fieldName = value;
+        setFileDataArray(array);
+    };
+    const handleFileFieldValChange = (value, index) => {
+        let array = structuredClone(fileDataArray);
+        array[index].fieldValue = value;
         setFileDataArray(array);
     };
     const handleFiletrait_typeChange = (value, index) => {
@@ -329,7 +324,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
         // let array = [...fieldDataArray];
         // [...checked] = value;
         // setFieldDataArray(array);
-        // console.log(event.target.checked,'value==============?')
     };
     const dropdown = [
         {
@@ -494,7 +488,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                 primaryLocation: false
                                             }
                                         ]);
-                                        console.log('--------------------------------------00', fieldDataArray);
                                     }}
                                 >
                                     Add more fields
@@ -518,7 +511,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                     fullWidth
                                                     value={data.display_type}
                                                     onChange={(e) => {
-                                                        console.log({ e });
                                                         handleSelect(e, index);
                                                         if (e.target.value === 'Date') {
                                                             let data = fieldDataArray[index];
@@ -602,7 +594,6 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                             fieldDataArray[index] = data;
                                                             setFieldDataArray([...fieldDataArray]);
                                                             // setStartDate(startDate);
-                                                            console.log("3323223", data)
                                                         }}
                                                         /> */}
                                                     </Grid>
@@ -716,8 +707,8 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                         setFileDataArray([
                                             ...fileDataArray,
                                             {
-                                                trait_type: '',
-                                                value: null
+                                                fieldName: '',
+                                                fieldValue: null
                                             }
                                         ]);
                                     }}
@@ -735,9 +726,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                         id="field_name"
                                                         name="field_name"
                                                         label="File Name"
-                                                        value={data?.trait_type}
+                                                        value={data?.fieldName}
                                                         onChange={(e) => {
-                                                            handleFiletrait_typeChange(e.target.value, index);
+                                                            handleFileFieldNameChange(e.target.value, index);
                                                         }}
                                                         variant="standard"
                                                         fullWidth
@@ -758,9 +749,9 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                             id="avatar"
                                                             name="avatar"
                                                             accept="image/*,.pdf"
-                                                            // value={data?.fieldName}
+                                                            // value={data?.fieldValue}
                                                             onChange={(event) => {
-                                                                handleFileFieldValueChange(event.currentTarget.files[0], index);
+                                                                handleFileFieldValChange(event.currentTarget.files[0], index);
                                                             }}
                                                         />
                                                     </Grid>
