@@ -54,6 +54,7 @@ const currencyTypeArray = [
 
 export default function EditNftDialog({ nftInfo, categoryId, type, search, page, limit, loader, setLoader, open, setOpen }) {
     const dispatch = useDispatch();
+    console.log("-------------------------------",nftInfo)
     const [mintType, setMintType] = useState('directMint');
     const [currencyType, setCurrencyType] = useState('USDT');
     const [fieldDataArray, setFieldDataArray] = useState([]);
@@ -583,10 +584,10 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                             {data.display_type == 'Date' && (
                                                 <>
                                                     <Grid item xs={2} md={2} className="my-2 w-100" sx={{ margin: 3 }}>
-                                                        {/* <DatePicker
+                                                        <DatePicker
                                                             showIcon
                                                             label="Select date"
-                                                            selected={data.value}
+                                                            // selected={data.value}
                                                             value={data.value}
                                                         onChange={(e) => {
                                                             let data = fieldDataArray[index];
@@ -595,7 +596,7 @@ export default function EditNftDialog({ nftInfo, categoryId, type, search, page,
                                                             setFieldDataArray([...fieldDataArray]);
                                                             // setStartDate(startDate);
                                                         }}
-                                                        /> */}
+                                                        />
                                                     </Grid>
                                                 </>
                                             )}
